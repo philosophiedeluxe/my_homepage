@@ -174,7 +174,7 @@
   h2 {
     font-weight: normal;
     font-family: 'Syncopate', sans-serif;
-    color: rgb(226, 166, 1);
+    color: rgb(226, 166, 1) !important;
   }
   
   h3 {
@@ -340,7 +340,7 @@
 }
 
 .description p {
-  color: rgb(252, 237, 198);
+  color: rgb(253, 247, 231);
   justify-content: center;
   display: flex;
   margin-top: 35px;
