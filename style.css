@@ -94,6 +94,7 @@
   header .header_container_right .content_container {
     flex: 1;
     display: flex;
+    padding-top: 2rem !important;
   }
 
   .link{
