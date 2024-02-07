@@ -102,14 +102,21 @@
 
   a:link, a:visited {
     text-decoration: none;
-    padding-left: 2.5rem;
-    padding-right: 2.5rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
     font-weight: 300;
    }
 
-   #linknav {
+   #linknav_firstline {
     margin-top: 0.5rem !important;
-    margin-bottom: 0px !important;
+    margin-bottom: 0rem !important;
+   }
+
+   #linknav_secondline {
+    margin-top: 0.5rem !important;
+    margin-bottom: 0rem !important;
+    margin-left: 1.5em !important;
+    margin-right: 1.5em !important;
    }
 
   header .header_container_right .vita_social {
@@ -121,7 +128,6 @@
 
   header .header_container_right .impre_daschu {
     display: flex;
-    
     text-decoration: none;
     font-family: 'Syncopate', sans-serif;
   }
