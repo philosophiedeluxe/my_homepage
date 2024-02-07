@@ -22,7 +22,7 @@
     background: linear-gradient(0deg, rgba(65,65,65,1) 0%, rgba(92,91,91,1) 50%, rgba(65,65,65,1) 100%);
     position: relative;
     height: 100vh;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     margin: 0;
     -webkit-font-smoothing: auto;
     -moz-osx-font-smoothing: auto;
@@ -102,21 +102,26 @@
 
   a:link, a:visited {
     text-decoration: none;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
     font-weight: 300;
+   }
+
+   #linknav {
+    margin-top: 0.5rem !important;
+    margin-bottom: 0px !important;
    }
 
   header .header_container_right .vita_social {
     display: flex;
-    gap: 2rem;
+    
     text-decoration: none;
     font-family: 'Syncopate', sans-serif;
   }
 
   header .header_container_right .impre_daschu {
     display: flex;
-    gap: 6rem;
+    
     text-decoration: none;
     font-family: 'Syncopate', sans-serif;
   }
