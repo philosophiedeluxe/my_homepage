@@ -2273,3 +2273,20 @@ div:not(.paperList) .listItem {
 .chapterCard .innerCardFooter > .cardText:last-child {
   float: right;
 }
+
+/* Hide Jellyfin Logo */
+#loginPage .pageTitleWithDefaultLogo {
+  display: none;
+}
+
+#loginPage .pageTitle pageTitleWithLogo {
+  display: none;
+}
+
+.pageTitleWithDefaultLogo {
+  display: none;
+}
+
+.pageTitle pageTitleWithLogo {
+  display: none;
+}
