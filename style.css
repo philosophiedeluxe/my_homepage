@@ -415,7 +415,7 @@ input:checked + label .description {
 
 
 
-/* === NAV & FOOTER – Vollbreite + dynamisches Layout (nur für deinen Markup) === */
+/* === NAV – Vollbreite + dynamisches Layout (nur für deinen Markup) === */
 
 /* NAV – Grundlayout */
 .nav {
@@ -543,40 +543,4 @@ input:checked + label .description {
     display: block;
   }
   .nav-divider { display: none; }
-}
-
-/* FOOTER */
-footer {
-  border-top: 1px solid rgba(255,255,255,.08);
-  margin-top: 2rem;
-  background: rgba(0,0,0,.2);
-}
-footer > .container-wide {
-  width: min(1100px, 94vw);
-  margin-inline: auto;
-  padding-inline: 0.75rem;
-}
-.footer-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  padding: 1rem 0;
-  flex-wrap: wrap;
-}
-.footer-links {
-  list-style: none;
-  display: flex;
-  gap: .75rem 1rem;
-  padding: 0;
-  margin: 0;
-}
-.footer-links a {
-  color: inherit;
-  text-decoration: none;
-  font-weight: 300;
-}
-.footer-links a:hover,
-.footer-links a:focus-visible {
-  text-decoration: underline;
 }
