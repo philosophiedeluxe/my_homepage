@@ -1,10 +1,6 @@
-// nav.js – steuert Mobile/Desktop, Offen/Zu, und "scrolled"
+// app.js – steuert Mobile/Desktop, Offen/Zu und "scrolled" für die Nav
 (function () {
   const BREAKPOINT = 900; // px
-
-  // Jahr im Footer (falls vorhanden)
-  const yearEl = document.getElementById("year");
-  if (yearEl) yearEl.textContent = new Date().getFullYear();
 
   const header = document.querySelector("header");
   const nav    = document.querySelector(".nav");
@@ -23,28 +19,28 @@
     const mobile = mq.matches;
     header.classList.toggle("is-mobile", mobile);
     header.classList.toggle("is-desktop", !mobile);
-    // bei Moduswechsel immer schließen, damit kein „hängender“ Zustand bleibt
+    // beim Moduswechsel schließen, um inkonsistente Zustände zu vermeiden
     setOpen(false);
   }
 
-  // Init + reagieren auf Breakpoint-Wechsel
+  // init + reagieren auf Breakpointwechsel
   applyMode();
   if (mq.addEventListener) mq.addEventListener("change", applyMode);
-  else window.addEventListener("resize", applyMode); // Fallback
+  else window.addEventListener("resize", applyMode);
 
-  // Toggle-Button
+  // Toggle-Klick
   toggle.addEventListener("click", () => {
     const open = toggle.getAttribute("aria-expanded") === "true";
     setOpen(!open);
   });
 
-  // Klick außerhalb schließt
+  // außerhalb klicken -> schließen
   document.addEventListener("click", (e) => {
     if (list.dataset.open !== "true") return;
     if (!e.target.closest(".nav")) setOpen(false);
   });
 
-  // ESC schließt
+  // ESC -> schließen
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
       setOpen(false);
@@ -52,12 +48,12 @@
     }
   });
 
-  // Link-Klick schließt (nur mobil relevant)
+  // Linkklick -> schließen (mobil)
   list.addEventListener("click", (e) => {
     if (e.target.closest("a")) setOpen(false);
   });
 
-  // Header leicht „verdichten“, wenn gescrolled
+  // Header komprimieren beim Scroll
   let ticking = false;
   function onScroll() {
     header.classList.toggle("is-scrolled", window.scrollY > 8);
