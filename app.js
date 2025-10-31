@@ -20,6 +20,7 @@
       "hero.title":      "Ich bin Phil",
       "hero.subtitle":   "Freut mich, dass du da bist!",
       "hero.mail":       "Schreib mir gerne eine Mail",
+      
       "vita.title": "Meine persönliche Entwicklung",
       "vita.subtitle": "\"Ich betrachte meine berufliche Karriere als eine Reise\"",
       "vita.skills": "Kenntnisse:",
@@ -27,6 +28,7 @@
       "vita.apprenticeship": "Ausbildung zum Koch",
       "vita.certificates": "Zertifikate",
       "vita.back": "Zurück zur Startseite, \n... schreib mir wenn dir gefällt was du gelesen hast.",
+      
       "privacy.metaTitle": "Phil Kirchner - Datenschutz",
       "privacy.title": "Datenschutz­erklärung",
       "privacy.overview": "Datenschutz auf einen Blick",
@@ -50,7 +52,13 @@
       "privacy.collectionOnSite": "Datenerfassung auf dieser Website",
       "privacy.request": "12. Anfrage per E-Mail, Telefon oder Telefax",
       "privacy.source": "Quelle:",
-      "privacy.back": "Zurück zur Startseite,\n... liest du dir doch eh nicht wirklich durch"
+      "privacy.back": "Zurück zur Startseite,\n... liest du dir doch eh nicht wirklich durch",
+      
+      "imprint.metaTitle": "Phil Kirchner - Impressum",
+      "imprint.title": "Impressum",
+      "imprint.owner": "Webseitenbetreiber",
+      "imprint.more": "Brauchst du mehr Informationen über mich?",
+      "imprint.back": "Zurück zur Startseite,\n... wenn du alle infos hast die du brauchst"
     },
     en: {
       "nav.vita":        "Resume",
@@ -58,14 +66,16 @@
       "nav.datenschutz": "Privacy",
       "hero.title":      "I’m Phil",
       "hero.subtitle":   "Happy you’re here!",
-      "hero.mail":       "Drop me an email"
+      "hero.mail":       "Drop me an email",
+      
       "vita.title": "My Personal Development",
       "vita.subtitle": "\"I see my professional career as a journey\"",
       "vita.skills": "Skills:",
       "vita.gastro": "Culinary Career - \nMunich Airport Marriott Hotel",
       "vita.apprenticeship": "Apprenticeship as a Cook",
       "vita.certificates": "Certificates",
-      "vita.back": "Back to homepage,\n... drop me a line if you liked what you read."
+      "vita.back": "Back to homepage,\n... drop me a line if you liked what you read.",
+      
       "privacy.metaTitle": "Phil Kirchner - Privacy",
       "privacy.title": "Privacy Policy",
       "privacy.overview": "Privacy at a glance",
@@ -89,7 +99,12 @@
       "privacy.collectionOnSite": "Data collection on this website",
       "privacy.request": "12. Requests by email, phone or fax",
       "privacy.source": "Source:",
-      "privacy.back": "Back to homepage,\n... be honest, you weren’t going to read it anyway"
+      "privacy.back": "Back to homepage,\n... be honest, you weren’t going to read it anyway",
+      "imprint.metaTitle": "Phil Kirchner - Legal Notice",
+      "imprint.title": "Legal Notice",
+      "imprint.owner": "Website owner",
+      "imprint.more": "Need more information about me?",
+      "imprint.back": "Back to homepage,\n... if you’ve got all the info you need"
     }
   };
 
