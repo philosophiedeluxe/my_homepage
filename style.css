@@ -415,136 +415,85 @@ input:checked + label .description {
 
 
 
-/* === NAV: Full-Bleed + korrektes Collapse + mehr rechter Rand === */
+/* === NAV: Immer sichtbar, zweizeilig, horizontal scrollbar im Mobile === */
 
-/* 1) Mehr Rand im Header-Container (nur Kopfzeile, Rest unberührt) */
-header > .container-wide {
-  padding-inline: clamp(20px, 5vw, 64px);
-}
-
-/* 2) Nav als Anker für Full-Bleed-Hintergrund + Grid-Sicherheit */
-.nav{
+/* Vollbreite Topbar liegt auf header, nicht als ::before-Hack */
+header{
   position: sticky;
   top: 0;
   z-index: 999;
-  display: grid;
-  grid-template-columns: auto 1fr; /* Brand | Rest */
-  align-items: center;
-  gap: .5rem 1rem;
-  padding: .65rem 0;
-
-  position: relative;  /* wichtig für ::before */
-  min-width: 0;        /* verhindert Grid-Overflow bei Umbrüchen */
-}
-
-/* 3) Vollbreite Hintergrundleiste – unabhängig vom Container */
-.nav::before{
-  content: "";
-  position: absolute;
-  z-index: -1;
-  inset: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100vw;               /* echte Vollbreite */
   background: rgba(0,0,0,.55);
-  border-bottom: 1px solid rgba(255,255,255,.08);
   -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
+  border-bottom: 1px solid rgba(255,255,255,.08);
 }
 
-/* 4) Desktop-Liste rechtsbündig, mit etwas extra Luft rechts */
-.nav-list{
-  list-style: none;
-  display: flex;
-  gap: .75rem 1rem;
-  align-items: center;
-  padding: 0;
-  margin: 0;
-  justify-self: end;
-  padding-right: clamp(8px, 2vw, 24px); /* extra Rand rechts */
+/* angenehme Innenabstände für die Leiste */
+header > .container-wide{ padding-inline: clamp(20px, 5vw, 64px); }
+
+/* Grundlayout: Brand links, Liste rechts */
+.nav{
+  display:grid;
+  grid-template-columns:auto 1fr;
+  align-items:center;
+  gap:.5rem 1rem;
+  padding:.65rem 0;
+  min-width:0;
 }
+
+/* Links rechtsbündig mit etwas Luft rechts */
+.nav-list{
+  list-style:none;
+  display:flex;
+  gap:.75rem 1rem;
+  align-items:center;
+  margin:0;
+  padding:0;
+  justify-self:end;
+  padding-inline-end:clamp(8px,2vw,24px);
+}
+
 .nav-list a{
-  color: inherit;
-  text-decoration: none;
-  font-weight: 300;
-  padding: .25rem .5rem;
-  border-radius: 6px;
+  color:inherit;
+  text-decoration:none;
+  font-weight:300;
+  padding:.25rem .5rem;
+  border-radius:6px;
 }
 .nav-list a:hover,
-.nav-list a:focus-visible{
-  outline: none;
-  background: rgba(255,255,255,.08);
-}
+.nav-list a:focus-visible{ background:rgba(255,255,255,.08); }
 .nav-divider{ opacity:.6; }
 
-/* 5) Mobile: Liste unter der Leiste, schiebt Layout sauber nach unten */
+/* ===== Mobile: kein Burger, zweite Zeile, horizontal scrollbar ===== */
 @media (max-width: 900px){
-  .nav-toggle { display: inline-flex; }  /* Burger sichtbar */
+  /* Burger AUS */
+  .nav-toggle{ display:none !important; }
+
+  /* Zweizeilig: Brand oben, Links unten */
+  .nav{
+    grid-template-columns:1fr;
+    grid-auto-rows:auto;
+    row-gap:.25rem;
+  }
+
+  /* Liste im Flow, keine Klapp-Animation mehr */
   .nav-list[data-collapsible="true"]{
-    position: static;     /* im Flow -> schiebt Layout */
-    max-height: 0;        /* zu */
-    transition: max-height .3s ease;
+    position:static !important;
+    max-height:none !important;
+    overflow: auto hidden !important;   /* horizontal scrollen */
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    width:100%;
+    white-space: nowrap;                 /* keine Zeilenumbrüche */
+    -webkit-overflow-scrolling: touch;   /* smooth auf iOS */
+    scrollbar-width: none;               /* FF Scrollbar ausblenden */
   }
+  .nav-list[data-collapsible="true"]::-webkit-scrollbar{ display:none; }
 
-  .nav-toggle{ display: inline-flex; }
-
-  /* Die Liste hängt im normalen Flow (kein Overlay), volle Breite */
-  .nav-list[data-collapsible="true"]{
-    grid-column: 1 / -1;
-    position: static;
-    display: grid;
-    gap: 0;
-    width: 100%;
-    box-sizing: border-box;
-
-    /* sanftes Auf-/Zuklappen */
-    max-height: 0;                    /* zu */
-    overflow: hidden;
-    transition: max-height .3s ease;
-
-    background: rgba(0,0,0,.75);
-    border-bottom: 1px solid rgba(255,255,255,.06);
-    box-shadow: 0 12px 24px rgba(0,0,0,.35);
-    padding-block: .25rem;
-  }
-  .nav-list[data-open="true"]{
-    /* groß genug, damit auch bei Layout-Änderungen nichts abgeschnitten wird */
-    max-height: 100dvh;
-  }
-  .nav-list li{ border-top: 1px solid rgba(255,255,255,.06); }
-  .nav-list a{
-    padding: .9rem 1rem;
-    font-size: 1.05rem;
-    display: block;
-  }
-  .nav-divider{ display: none; }
+  .nav-list{ justify-self:start; gap: .5rem .75rem; }
+  .nav-list li{ display:inline-block; border:0 !important; }
+  .nav-list a{ display:inline-block; padding:.5rem .75rem; }
+  .nav-divider{ display:inline-block; }  /* der vertikale Strich bleibt sichtbar */
 }
-
-/* 6) Burger-Button (falls nicht schon vorhanden) */
-.nav-toggle{
-  justify-self: end;
-  display: none;            /* Desktop aus, Mobile an (s.o.) */
-  background: transparent;
-  border: 0;
-  padding: .25rem;
-  border-radius: 6px;
-  color: inherit;
-}
-.nav-toggle:focus-visible{ outline: 2px solid currentColor; }
-.nav-toggle-bar{
-  display: block;
-  width: 26px;
-  height: 2px;
-  margin: 5px 0;
-  background: currentColor;
-}
-
-/* 7) Brand (Kosmetik) */
-.brand{
-  font-family: 'Syncopate', sans-serif;
-  font-size: 1.05rem;
-  letter-spacing: .5px;
-  color: inherit;
-  text-decoration: none;
-}
-
