@@ -1,5 +1,4 @@
-
-// app.js – steuert Mobile/Desktop, Offen/Zu und "scrolled" für die Nav
+// app.js – Nav: Mobile/Desktop, Offen/Zu, Scroll-Lock, Resilienz
 (function () {
   const BREAKPOINT = 900; // px
 
@@ -13,29 +12,36 @@
 
   function setOpen(open) {
     toggle.setAttribute("aria-expanded", String(open));
-    list.dataset.open = open ? "true" : "false";
+    if (open) {
+      list.dataset.open = "true";
+      document.documentElement.classList.add("nav-open");
+    } else {
+      list.dataset.open = "false";
+      document.documentElement.classList.remove("nav-open");
+    }
   }
 
   function applyMode() {
     const mobile = mq.matches;
     header.classList.toggle("is-mobile", mobile);
     header.classList.toggle("is-desktop", !mobile);
-    // beim Moduswechsel schließen, um inkonsistente Zustände zu vermeiden
+    // beim Moduswechsel immer schließen
     setOpen(false);
   }
 
-  // init + reagieren auf Breakpointwechsel
+  // Init + reagieren auf Breakpoint/Orientation
   applyMode();
-  if (mq.addEventListener) mq.addEventListener("change", applyMode);
-  else window.addEventListener("resize", applyMode);
+  (mq.addEventListener ? mq.addEventListener("change", applyMode)
+                       : window.addEventListener("resize", applyMode));
+  window.addEventListener("orientationchange", applyMode);
 
-  // Toggle-Klick
+  // Toggle
   toggle.addEventListener("click", () => {
     const open = toggle.getAttribute("aria-expanded") === "true";
     setOpen(!open);
   });
 
-  // außerhalb klicken -> schließen
+  // Outside click -> schließen (nur wenn offen)
   document.addEventListener("click", (e) => {
     if (list.dataset.open !== "true") return;
     if (!e.target.closest(".nav")) setOpen(false);
@@ -43,31 +49,11 @@
 
   // ESC -> schließen
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      setOpen(false);
-      toggle.focus();
-    }
+    if (e.key === "Escape") { setOpen(false); toggle.focus(); }
   });
 
-  // Linkklick -> schließen (mobil)
+  // Link-Klick -> schließen (mobil)
   list.addEventListener("click", (e) => {
     if (e.target.closest("a")) setOpen(false);
   });
-
-  // Header komprimieren beim Scroll
-  let ticking = false;
-  function onScroll() {
-    header.classList.toggle("is-scrolled", window.scrollY > 8);
-    ticking = false;
-  }
-  window.addEventListener(
-    "scroll",
-    () => {
-      if (!ticking) {
-        requestAnimationFrame(onScroll);
-        ticking = true;
-      }
-    },
-    { passive: true }
-  );
 })();
