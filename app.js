@@ -19,7 +19,14 @@
       "nav.datenschutz": "Datenschutz",
       "hero.title":      "Ich bin Phil",
       "hero.subtitle":   "Freut mich, dass du da bist!",
-      "hero.mail":       "Schreib mir gerne eine Mail"
+      "hero.mail":       "Schreib mir gerne eine Mail",
+      "vita.title": "Meine persönliche Entwicklung",
+      "vita.subtitle": "\"Ich betrachte meine berufliche Karriere als eine Reise\"",
+      "vita.skills": "Kenntnisse:",
+      "vita.gastro": "Gastronomielaufbahn - \nMunich Airport Marriott Hotel",
+      "vita.apprenticeship": "Ausbildung zum Koch",
+      "vita.certificates": "Zertifikate",
+      "vita.back": "Zurück zur Startseite, \n... schreib mir wenn dir gefällt was du gelesen hast.",
     },
     en: {
       "nav.vita":        "Resume",
@@ -28,6 +35,13 @@
       "hero.title":      "I’m Phil",
       "hero.subtitle":   "Happy you’re here!",
       "hero.mail":       "Drop me an email"
+      "vita.title": "My Personal Development",
+      "vita.subtitle": "\"I see my professional career as a journey\"",
+      "vita.skills": "Skills:",
+      "vita.gastro": "Culinary Career - \nMunich Airport Marriott Hotel",
+      "vita.apprenticeship": "Apprenticeship as a Cook",
+      "vita.certificates": "Certificates",
+      "vita.back": "Back to homepage,\n... drop me a line if you liked what you read."
     }
   };
 
