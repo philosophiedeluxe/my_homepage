@@ -414,28 +414,23 @@ input:checked + label .description {
 
 
 
-/* === NAV: Full-Bleed + korrektes Collapse + mehr rechter Rand === */
+/* === NAV: Full-Bleed + 2-zeilig mobil + Verlauf === */
 
-/* 1) Mehr Rand im Header-Container (nur Kopfzeile, Rest unberührt) */
-header > .container-wide {
-  padding-inline: clamp(20px, 5vw, 64px);
-}
+/* Platz & Full-Bleed */
+header > .container-wide { padding-inline: clamp(20px,5vw,64px); }
 
-/* 2) Nav als Anker für Full-Bleed-Hintergrund + Grid-Sicherheit */
 .nav{
-  top: 0;
+  position: relative; /* für ::before */
   z-index: 999;
   display: grid;
-  grid-template-columns: auto 1fr; /* Brand | Rest */
+  grid-template-columns: auto 1fr; /* Desktop: Brand | Liste */
   align-items: center;
   gap: .5rem 1rem;
   padding: .65rem 0;
-
-  position: relative;  /* wichtig für ::before */
-  min-width: 0;        /* verhindert Grid-Overflow bei Umbrüchen */
+  min-width: 0;
 }
 
-/* 3) Vollbreite Hintergrundleiste – mit Verlauf (links ~40% transparenter → rechts opak) */
+/* Verlauf quer über die ganze Viewport-Breite */
 .nav::before{
   content: "";
   position: absolute;
@@ -443,28 +438,26 @@ header > .container-wide {
   inset: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 100vw;                 /* volle Viewport-Breite */
-  background: linear-gradient(
-    90deg,
-    rgba(0,0,0,0.6) 0%,
-    rgba(0,0,0,0.6) 40%,
-    rgba(0,0,0,1)   100%
-  );
+  width: 100vw;
+  background: linear-gradient(90deg,
+    rgba(0,0,0,.6) 0%,
+    rgba(0,0,0,.6) 40%,
+    rgba(0,0,0,1) 100%);
   border-bottom: 1px solid rgba(255,255,255,.08);
   -webkit-backdrop-filter: blur(60px);
   backdrop-filter: blur(60px);
 }
 
-/* 4) Desktop-Liste rechtsbündig, mit etwas extra Luft rechts */
+/* Liste Desktop */
 .nav-list{
   list-style: none;
   display: flex;
   gap: .75rem 1rem;
   align-items: center;
-  padding: 0;
   margin: 0;
+  padding: 0;
   justify-self: end;
-  padding-right: clamp(8px, 2vw, 24px); /* extra Rand rechts */
+  padding-right: clamp(8px,2vw,24px);
 }
 .nav-list a{
   color: inherit;
@@ -474,86 +467,54 @@ header > .container-wide {
   border-radius: 6px;
 }
 .nav-list a:hover,
-.nav-list a:focus-visible{
-  outline: none;
-  background: rgba(255,255,255,.08);
-}
+.nav-list a:focus-visible{ background: rgba(255,255,255,.08); }
 .nav-divider{ opacity:.6; }
 
-/* 5) Mobile: zweizeilig (Brand+Toggle oben, Liste unten) + Collapse mit Verlauf */
+/* Burger standardmäßig verstecken (nur mobil sichtbar) */
+.nav-toggle{ display: none; background: transparent; border: 0; padding: .25rem; border-radius: 6px; color: inherit; }
+.nav-toggle:focus-visible{ outline:2px solid currentColor; }
+.nav-toggle-bar{ display:block; width:26px; height:2px; margin:5px 0; background: currentColor; }
+
+/* ===== MOBILE: 2 Zeilen (Brand+Toggle oben, Liste unten) ===== */
 @media (max-width: 900px){
-  /* 5.1 Nav auf 2 Zeilen spannen */
+  /* 1) Grid-AREAS erzwingen */
   .nav{
     display: grid;
-    grid-template-columns: 1fr auto;       /* Brand | Toggle */
+    grid-template-columns: 1fr auto;
     grid-template-areas:
-      "brand toggle"                        /* Zeile 1 */
-      "list  list";                         /* Zeile 2 */
-    grid-auto-rows: auto;
+      "brand toggle"
+      "list  list";
     row-gap: .25rem;
   }
   .brand{ grid-area: brand; }
   .nav-toggle{ grid-area: toggle; display: inline-flex; }
   .nav-list{ grid-area: list; width: 100%; box-sizing: border-box; }
 
-  /* 5.2 Klappbare Liste im Flow (pusht Layout) – mit gleichem Verlauf */
+  /* 2) Collapsing-Liste im Flow + Verlauf */
   .nav-list[data-collapsible="true"]{
     position: static;
     display: grid;
     gap: 0;
 
-    /* Collapse-Animation */
-    max-height: 0;                    /* zu */
+    max-height: 0;              /* zu */
     overflow: hidden;
     transition: max-height .3s ease;
 
-    /* Verlauf */
-    background: linear-gradient(
-      90deg,
-      rgba(0,0,0,0.6) 0%,
-      rgba(0,0,0,0.6) 40%,
-      rgba(0,0,0,1)   100%
-    );
-
+    background: linear-gradient(90deg,
+      rgba(0,0,0,.6) 0%,
+      rgba(0,0,0,.6) 40%,
+      rgba(0,0,0,1) 100%);
     border-bottom: 1px solid rgba(255,255,255,.06);
     box-shadow: 0 12px 24px rgba(0,0,0,.35);
     padding-block: .25rem;
   }
-
-  /* 5.3 Offen-Zustand (wird via data-open="true" getoggelt) */
-  .nav-list[data-collapsible="true"][data-open="true"]{
-    max-height: 100dvh;
-  }
+  .nav-list[data-collapsible="true"][data-open="true"]{ max-height: 100dvh; }
 
   .nav-list li{ border-top: 1px solid rgba(255,255,255,.06); }
   .nav-list a{ padding: .9rem 1rem; font-size: 1.05rem; display: block; }
   .nav-divider{ display: none; }
 }
 
-/* 6) Burger-Button */
-.nav-toggle{
-  justify-self: end;
-  display: none;            /* Desktop aus, Mobile an (s.o.) */
-  background: transparent;
-  border: 0;
-  padding: .25rem;
-  border-radius: 6px;
-  color: inherit;
-}
-.nav-toggle:focus-visible{ outline: 2px solid currentColor; }
-.nav-toggle-bar{
-  display: block;
-  width: 26px;
-  height: 2px;
-  margin: 5px 0;
-  background: currentColor;
-}
-
-/* 7) Brand (Kosmetik) */
-.brand{
-  font-family: 'Syncopate', sans-serif;
-  font-size: 1.05rem;
-  letter-spacing: .5px;
-  color: inherit;
-  text-decoration: none;
-}
+/* === HARTE Overrides gegen „festgenagelte“ Höhen (blockieren sonst den 2-Zeiler) === */
+body   { min-height: 100vh !important; height: auto !important; }
+header { min-height: 100svh !important; height: auto !important; overflow: visible !important; }
