@@ -1,15 +1,17 @@
-// app.js – I18N (DE/EN) + optionales Nav-Collapse (defensiv verdrahtet)
+// app.js – I18N (DE/EN) + optionales Nav-Collapse (robust, ohne Scope-Falle)
 (function () {
-  const BREAKPOINT   = 900;                 // px
+  const BREAKPOINT   = 900;
   const SUPPORTED    = ["de", "en"];
   const DEFAULT_LANG = "de";
 
-  // --- Selektoren (dürfen auch mal null sein) ---
-  const header = document.querySelector("header");
-  const nav    = document.querySelector(".nav");
-  const toggle = document.querySelector(".nav-toggle");
-  const list   = document.getElementById("primary-nav");
-  const langBtn= document.getElementById("lang-toggle");
+  // --- DOM-Hooks (dürfen null sein) ---
+  const header  = document.querySelector("header");
+  const nav     = document.querySelector(".nav");
+  const toggle  = document.querySelector(".nav-toggle");
+  const list    = document.getElementById("primary-nav");
+  const langBtn = document.getElementById("lang-toggle");
+
+  const hasNav = !!(nav && toggle && list);
 
   // --- I18N Wörterbuch ---
   const I18N = {
@@ -108,6 +110,13 @@
     }
   };
 
+ // --- Nav-Helper: jetzt TOP-LEVEL, damit überall sichtbar ---
+  function setOpen(open){
+    if(!hasNav) return;
+    toggle.setAttribute("aria-expanded", String(open));
+    list.dataset.open = open ? "true" : "false";
+  }
+
   // --- I18N Helpers ---
   function sanitizeLang(l){
     l = (l || "").toLowerCase();
@@ -122,13 +131,18 @@
     const html = document.documentElement;
     html.lang = lang;
     html.setAttribute("data-lang", lang);
+
     document.querySelectorAll("[data-i18n]").forEach(el => {
       const key = el.getAttribute("data-i18n");
       if (!key) return;
       const txt = dict[key];
       if (typeof txt === "string") el.textContent = txt;
     });
-    // ARIA für den Sprachbutton (falls vorhanden)
+
+    // sicherheitshalber auch document.title setzen, falls <title> nicht mitgenommen wurde
+    const titleEl = document.querySelector("title[data-i18n]");
+    if (titleEl) document.title = titleEl.textContent;
+
     if (langBtn){
       langBtn.setAttribute(
         "aria-label",
@@ -152,34 +166,30 @@
     applyTranslations(lang);
   }
 
-  // --- Initiale Sprache setzen (IMMER, unabhängig von der Nav) ---
+  // --- I18N initialisieren ---
   setLang(getInitialLang());
 
-  // --- Sprach-Button verdrahten (falls vorhanden) ---
+  // --- Sprach-Button verdrahten ---
   if (langBtn){
     langBtn.addEventListener("click", (e) => {
       e.preventDefault();
       const current = document.documentElement.getAttribute("data-lang") || DEFAULT_LANG;
       setLang(current === "de" ? "en" : "de");
-      // Mobiles Menü danach schließen (falls vorhanden & offen)
-      if (list && list.dataset.open === "true") setOpen(false);
+      setOpen(false); // Menü ggf. schließen (no-op, wenn keine Nav)
     });
   }
 
-  // =================== Nav-Collapse (optional) ===================
-  if (header && nav && toggle && list){
+  // --- Optional: Nav-Collapse nur, wenn vorhanden ---
+  if (hasNav){
     const mq = window.matchMedia(`(max-width:${BREAKPOINT}px)`);
-
-    function setOpen(open) {
-      toggle.setAttribute("aria-expanded", String(open));
-      list.dataset.open = open ? "true" : "false";
-    }
 
     function applyMode() {
       const mobile = mq.matches;
-      header.classList.toggle("is-mobile", mobile);
-      header.classList.toggle("is-desktop", !mobile);
-      setOpen(false); // Zustand resetten
+      if (header){
+        header.classList.toggle("is-mobile", mobile);
+        header.classList.toggle("is-desktop", !mobile);
+      }
+      setOpen(false);
     }
 
     applyMode();
@@ -197,7 +207,7 @@
     });
 
     document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") { setOpen(false); toggle.focus(); }
+      if (e.key === "Escape") { setOpen(false); toggle && toggle.focus(); }
     });
 
     list.addEventListener("click", (e) => {
