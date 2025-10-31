@@ -435,7 +435,7 @@ header > .container-wide {
   min-width: 0;        /* verhindert Grid-Overflow bei Umbrüchen */
 }
 
-/* 3) Vollbreite Hintergrundleiste – unabhängig vom Container */
+/* 3) Vollbreite Hintergrundleiste – mit Verlauf (links ~40% transparenter → rechts opak) */
 .nav::before{
   content: "";
   position: absolute;
@@ -446,9 +446,9 @@ header > .container-wide {
   width: 100vw;                 /* volle Viewport-Breite */
   background: linear-gradient(
     90deg,
-       rgba(0,0,0,0.6) 0%,
-       rgba(0,0,0,0.6) 10%,
-       rgba(0,0,0,1) 60%);
+    rgba(0,0,0,0.6) 0%,
+    rgba(0,0,0,0.6) 40%,
+    rgba(0,0,0,1)   100%
   );
   border-bottom: 1px solid rgba(255,255,255,.08);
   -webkit-backdrop-filter: blur(60px);
@@ -480,44 +480,47 @@ header > .container-wide {
 }
 .nav-divider{ opacity:.6; }
 
-/* 5) Mobile: Liste unter der Leiste, schiebt Layout sauber nach unten */
-/* Mobile: die aufgeklappte Liste bekommt den gleichen Verlauf */
+/* 5) Mobile: zweizeilig (Brand+Toggle oben, Liste unten) + Collapse mit Verlauf */
 @media (max-width: 900px){
-  /* Brand links, Burger rechts – gehört an .nav, nicht an .nav-list */
+  /* 5.1 Nav auf 2 Zeilen spannen */
   .nav{
-    grid-template-columns: 1fr auto;
+    display: grid;
+    grid-template-columns: 1fr auto;       /* Brand | Toggle */
+    grid-template-areas:
+      "brand toggle"                        /* Zeile 1 */
+      "list  list";                         /* Zeile 2 */
     grid-auto-rows: auto;
+    row-gap: .25rem;
   }
+  .brand{ grid-area: brand; }
+  .nav-toggle{ grid-area: toggle; display: inline-flex; }
+  .nav-list{ grid-area: list; width: 100%; box-sizing: border-box; }
 
-  .nav-toggle{ display: inline-flex; }
-
-  /* EIN Block für die klappbare Liste – mit Verlauf */
+  /* 5.2 Klappbare Liste im Flow (pusht Layout) – mit gleichem Verlauf */
   .nav-list[data-collapsible="true"]{
-    grid-column: 1 / -1;
-    position: static;                 /* pusht das Layout */
+    position: static;
     display: grid;
     gap: 0;
-    width: 100%;
-    box-sizing: border-box;
 
-    /* Klapp-Animation */
+    /* Collapse-Animation */
     max-height: 0;                    /* zu */
     overflow: hidden;
     transition: max-height .3s ease;
 
-    /* Verlauf: links ~40% transparenter → rechts opak */
-    background: linear-gradient(90deg,
-       rgba(0,0,0,0.6) 0%,
-       rgba(0,0,0,0.6) 10%,
-       rgba(0,0,0,1) 60%);
-
+    /* Verlauf */
+    background: linear-gradient(
+      90deg,
+      rgba(0,0,0,0.6) 0%,
+      rgba(0,0,0,0.6) 40%,
+      rgba(0,0,0,1)   100%
+    );
 
     border-bottom: 1px solid rgba(255,255,255,.06);
     box-shadow: 0 12px 24px rgba(0,0,0,.35);
     padding-block: .25rem;
   }
 
-  /* offen */
+  /* 5.3 Offen-Zustand (wird via data-open="true" getoggelt) */
   .nav-list[data-collapsible="true"][data-open="true"]{
     max-height: 100dvh;
   }
@@ -527,7 +530,7 @@ header > .container-wide {
   .nav-divider{ display: none; }
 }
 
-/* 6) Burger-Button (falls nicht schon vorhanden) */
+/* 6) Burger-Button */
 .nav-toggle{
   justify-self: end;
   display: none;            /* Desktop aus, Mobile an (s.o.) */
@@ -554,6 +557,3 @@ header > .container-wide {
   color: inherit;
   text-decoration: none;
 }
-
-
-
