@@ -414,64 +414,44 @@ input:checked + label .description {
 
 
 
+/* === NAV: Full-Bleed + korrektes Collapse + mehr rechter Rand === */
 
-/* === NAV: Vollbreite ohne ::before + sauberes Collapse + mehr rechter Rand === */
-
-/* Vollbreite Leiste direkt am <header> – robust beim Layout-Umbruch */
-header {
-  position: sticky;
-  top: 0;
-  z-index: 999;
-  background: rgba(0,0,0,.55);
-  -webkit-backdrop-filter: blur(6px);
-  backdrop-filter: blur(6px);
-  border-bottom: 1px solid rgba(255,255,255,.08);
-  isolation: isolate; /* eigener Stacking-Context, nix „schneidet“ rein */
-}
-
-/* Mehr Innenabstand (auch rechts) nur für die Kopfzeile */
+/* 1) Mehr Rand im Header-Container (nur Kopfzeile, Rest unberührt) */
 header > .container-wide {
   padding-inline: clamp(20px, 5vw, 64px);
 }
 
-/* NAV-Grundlayout (ohne Full-Bleed-Hack) */
+/* 2) Nav als Anker für Full-Bleed-Hintergrund + Grid-Sicherheit */
 .nav{
+  position: sticky;
+  top: 0;
+  z-index: 999;
   display: grid;
   grid-template-columns: auto 1fr; /* Brand | Rest */
   align-items: center;
   gap: .5rem 1rem;
   padding: .65rem 0;
-  min-width: 0; /* verhindert Überlauf bei Umbrüchen */
+
+  position: relative;  /* wichtig für ::before */
+  min-width: 0;        /* verhindert Grid-Overflow bei Umbrüchen */
 }
 
-/* Den alten ::before-Hintergrund sicher abschalten */
-.nav::before{ content: none !important; }
-
-/* Brand */
-.brand{
-  font-family: 'Syncopate', sans-serif;
-  font-size: 1.05rem;
-  letter-spacing: .5px;
-  color: inherit;
-  text-decoration: none;
+/* 3) Vollbreite Hintergrundleiste – unabhängig vom Container */
+.nav::before{
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;               /* echte Vollbreite */
+  background: rgba(0,0,0,.55);
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
 }
 
-/* Burger */
-.nav-toggle{
-  justify-self: end;
-  display: none; /* Desktop aus, Mobile an */
-  background: transparent;
-  border: 0;
-  padding: .25rem;
-  border-radius: 6px;
-  color: inherit;
-}
-.nav-toggle:focus-visible{ outline: 2px solid currentColor; }
-.nav-toggle-bar{
-  display: block; width: 26px; height: 2px; margin: 5px 0; background: currentColor;
-}
-
-/* Desktop-Liste – mit extra Luft rechts */
+/* 4) Desktop-Liste rechtsbündig, mit etwas extra Luft rechts */
 .nav-list{
   list-style: none;
   display: flex;
@@ -480,7 +460,7 @@ header > .container-wide {
   padding: 0;
   margin: 0;
   justify-self: end;
-  padding-inline-end: clamp(8px, 2vw, 24px);
+  padding-right: clamp(8px, 2vw, 24px); /* extra Rand rechts */
 }
 .nav-list a{
   color: inherit;
@@ -494,25 +474,28 @@ header > .container-wide {
   outline: none;
   background: rgba(255,255,255,.08);
 }
-.nav-divider{ opacity: .6; }
+.nav-divider{ opacity:.6; }
 
-/* Mobile: Liste hängt im Flow und schiebt Content (kein Overlay) */
+/* 5) Mobile: Liste unter der Leiste, schiebt Layout sauber nach unten */
 @media (max-width: 900px){
   .nav{
-    grid-template-columns: 1fr auto; /* Brand links, Burger rechts */
+    grid-template-columns: 1fr auto;   /* Brand links, Burger rechts */
     grid-auto-rows: auto;
   }
+
   .nav-toggle{ display: inline-flex; }
 
+  /* Die Liste hängt im normalen Flow (kein Overlay), volle Breite */
   .nav-list[data-collapsible="true"]{
-    grid-column: 1 / -1;  /* volle Breite */
-    position: static;     /* bleibt im Flow -> schiebt Layout */
+    grid-column: 1 / -1;
+    position: static;
     display: grid;
     gap: 0;
     width: 100%;
     box-sizing: border-box;
 
-    max-height: 0;        /* zu */
+    /* sanftes Auf-/Zuklappen */
+    max-height: 0;                    /* zu */
     overflow: hidden;
     transition: max-height .3s ease;
 
@@ -522,7 +505,8 @@ header > .container-wide {
     padding-block: .25rem;
   }
   .nav-list[data-open="true"]{
-    max-height: 100dvh;   /* auf – genug Platz für alle Links */
+    /* groß genug, damit auch bei Layout-Änderungen nichts abgeschnitten wird */
+    max-height: 100dvh;
   }
   .nav-list li{ border-top: 1px solid rgba(255,255,255,.06); }
   .nav-list a{
@@ -531,4 +515,32 @@ header > .container-wide {
     display: block;
   }
   .nav-divider{ display: none; }
+}
+
+/* 6) Burger-Button (falls nicht schon vorhanden) */
+.nav-toggle{
+  justify-self: end;
+  display: none;            /* Desktop aus, Mobile an (s.o.) */
+  background: transparent;
+  border: 0;
+  padding: .25rem;
+  border-radius: 6px;
+  color: inherit;
+}
+.nav-toggle:focus-visible{ outline: 2px solid currentColor; }
+.nav-toggle-bar{
+  display: block;
+  width: 26px;
+  height: 2px;
+  margin: 5px 0;
+  background: currentColor;
+}
+
+/* 7) Brand (Kosmetik) */
+.brand{
+  font-family: 'Syncopate', sans-serif;
+  font-size: 1.05rem;
+  letter-spacing: .5px;
+  color: inherit;
+  text-decoration: none;
 }
