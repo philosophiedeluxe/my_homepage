@@ -539,7 +539,8 @@ header > .container-wide { padding-inline: clamp(20px,5vw,64px); }
   .nav-divider{ display: none; }
 }
 
-/* === HARTE Overrides gegen „festgenagelte“ Höhen (blockieren sonst den 2-Zeiler) === */
+/* === HARTE Overrides gegen „festgenagelte“ Höhen (blockieren sonst den 2-Zeiler) === 
 body   { min-height: 100vh !important; height: auto !important; }
-header { min-height: 100svh !important; height: auto !important; overflow: visible !important; }
+header { min-height: 100svh !important; height: auto !important; overflow: visible !important; }*/
+
 
