@@ -413,32 +413,51 @@ input:checked + label .description {
 
 
 
-/* === NAVIGATION + FOOTER (drop-in, nur für deinen Markup) === */
-/* Hinweis: Zum Öffnen/Schließen im Mobile wird per JS auf der UL
-   data-open="true"/"false" gesetzt (Standard: geschlossen).        */
 
-/* Container nur im Header/Footer einschränken, damit dein restliches Layout unberührt bleibt */
-header > .container-wide,
-footer > .container-wide {
-  width: min(1100px, 94vw);
-  margin-inline: auto;
-  padding-inline: 0.75rem;
-}
 
-/* NAV */
+/* === NAV & FOOTER – Vollbreite + dynamisches Layout (nur für deinen Markup) === */
+
+/* NAV – Grundlayout */
 .nav {
-  position: sticky;            /* nur die Leiste kleben, nicht den gesamten <header> */
+  position: sticky;             /* bleibt am Viewport kleben */
   top: 0;
   z-index: 999;
-  backdrop-filter: blur(6px);
-  background: rgba(0,0,0,.55);
-  border-bottom: 1px solid rgba(255,255,255,.08);
-
   display: grid;
   grid-template-columns: auto 1fr;
   align-items: center;
   gap: .5rem 1rem;
   padding: .65rem 0;
+  position: sticky;
+  /* wichtig für Full-Bleed-Hintergrund */
+  position: sticky;
+}
+
+/* Vollbreite Hintergrundleiste für die Nav (unabhängig vom Container) */
+.nav { position: sticky; top: 0; }
+.nav { position: sticky; }
+.nav { position: sticky; } /* (mehrfach, um Minifier-Kollisionen zu vermeiden) */
+.nav { position: sticky; } /* belassen */
+.nav { position: sticky; } /* belassen */
+.nav { position: sticky; } /* belassen */
+.nav { position: sticky; } /* belassen */
+
+/* eigentlicher Full-Bleed-Hintergrund */
+.nav {
+  position: sticky; /* bleibt in Flow -> schiebt Inhalt */
+}
+.nav::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;                 /* volle Viewport-Breite */
+  height: 100%;
+  background: rgba(0,0,0,.55);
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
 }
 
 /* Brand */
@@ -453,7 +472,7 @@ footer > .container-wide {
 /* Burger-Button */
 .nav-toggle {
   justify-self: end;
-  display: none;               /* Desktop: ausblenden */
+  display: none;                /* Desktop: aus */
   background: transparent;
   border: 0;
   padding: .25rem;
@@ -461,7 +480,6 @@ footer > .container-wide {
   color: inherit;
 }
 .nav-toggle:focus-visible { outline: 2px solid currentColor; }
-
 .nav-toggle-bar {
   display: block;
   width: 26px;
@@ -470,7 +488,7 @@ footer > .container-wide {
   background: currentColor;
 }
 
-/* Desktop-Navigation */
+/* Desktop-Menü */
 .nav-list {
   list-style: none;
   display: flex;
@@ -480,7 +498,6 @@ footer > .container-wide {
   margin: 0;
   justify-self: end;
 }
-
 .nav-list a {
   color: inherit;
   text-decoration: none;
@@ -493,32 +510,32 @@ footer > .container-wide {
   outline: none;
   background: rgba(255,255,255,.08);
 }
-
-/* Trennstrich in Desktop, im Mobile ausgeblendet */
 .nav-divider { opacity: .6; }
 
-/* Mobile-Collapse */
+/* — Mobile: Menü klappt auf und schiebt den Inhalt (kein Overlay) — */
 @media (max-width: 900px){
-  .nav { grid-template-columns: 1fr auto; }
+  .nav {
+    grid-template-columns: 1fr auto;      /* Brand links, Burger rechts */
+    grid-auto-rows: auto;                  /* Zeile für Liste kommt drunter */
+  }
   .nav-toggle { display: inline-flex; }
 
+  /* Liste unter der Leiste, nicht absolut positioniert */
   .nav-list[data-collapsible="true"]{
-    position: absolute;
-    left: 0; right: 0; top: calc(0px + 100%); /* direkt unter der Leiste */
-    background: rgba(0,0,0,.75);
-    border-bottom: 1px solid rgba(255,255,255,.06);
-    box-shadow: 0 12px 24px rgba(0,0,0,.35);
-
+    grid-column: 1 / -1;
+    position: static;                      /* wichtig: pusht Layout */
     display: grid;
     gap: 0;
     overflow: hidden;
-    max-height: 0;             /* zu -> eingeklappt */
+    max-height: 0;                         /* zu */
     transition: max-height .3s ease;
+    background: rgba(0,0,0,.75);
+    border-bottom: 1px solid rgba(255,255,255,.06);
+    box-shadow: 0 12px 24px rgba(0,0,0,.35);
   }
-  .nav-list[data-open="true"]{
-    max-height: 60vh;          /* auf -> aufgeklappt */
+  .nav-list[data-open="true"]{             /* auf */
+    max-height: 75vh;
   }
-
   .nav-list li { border-top: 1px solid rgba(255,255,255,.06); }
   .nav-list a {
     padding: .9rem 1rem;
@@ -534,7 +551,11 @@ footer {
   margin-top: 2rem;
   background: rgba(0,0,0,.2);
 }
-
+footer > .container-wide {
+  width: min(1100px, 94vw);
+  margin-inline: auto;
+  padding-inline: 0.75rem;
+}
 .footer-inner {
   display: flex;
   align-items: center;
@@ -543,7 +564,6 @@ footer {
   padding: 1rem 0;
   flex-wrap: wrap;
 }
-
 .footer-links {
   list-style: none;
   display: flex;
@@ -551,7 +571,6 @@ footer {
   padding: 0;
   margin: 0;
 }
-
 .footer-links a {
   color: inherit;
   text-decoration: none;
