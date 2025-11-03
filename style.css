@@ -544,3 +544,45 @@ header > .container-wide { padding-inline: clamp(20px,5vw,64px); }
   .nav-list a{ padding: .9rem 1rem; font-size: 1.05rem; display: block; }
   .nav-divider{ display: none; }
 }
+
+/* 0) Saubere Box-Sizing + kein horizontales Scrollen */
+*,*::before,*::after{ box-sizing: border-box; }
+html{ overflow-x: clip; } /* statt hidden: verhindert Jumping bei iOS */
+
+/* 1) Mobile-Viewport-Höhen: weg von 100vh */
+@supports (height: 100svh){
+  body   { min-height: 100svh; }
+  header { min-height: 100svh; height: auto; } /* kein hartes 100vh erzwingen */
+  /* Bildhöhe im Header auf Mobile entspannter */
+  @media (max-width:900px){
+    header .header_container_left img{ height: 70svh; } /* ggf. 60–80svh feinjustieren */
+  }
+}
+
+/* 2) Full-bleed Nav ohne Überbreite: 100vw → 100dvw wenn möglich */
+.nav::before{
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw; /* Fallback */
+}
+@supports (width: 100dvw){
+  .nav::before{ width: 100dvw; } /* echte Visual-Viewport-Breite */
+}
+
+/* 3) Kleinzeug: Glow-Button in der Nav schneidet nichts ab */
+.nav-list{ overflow: visible; }
+.nav .button:before{
+  /* verhindert Mikrometer-Überlauf durch -1.5px Offset */
+  left: -2px;
+  width: calc(100% + 4px);
+}
+
+/* 4) Defensive Max-Breiten für alle Container */
+header > .container-wide,
+.nav,
+#primary-nav,
+.header_container,
+.wrapper,
+.slide_container { max-width: 100%; }
+img,video{ max-width: 100%; height: auto; }
+
