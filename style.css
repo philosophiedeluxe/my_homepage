@@ -304,8 +304,6 @@
     }
 }
 
-.i18n-pre { white-space: pre-line; }
-
 /* styling for the cards */
 .wrapper {
   width: 100% !important; /* Anpassung hier: Breite auf 100% setzen */
@@ -435,6 +433,9 @@ html[data-lang="en"] .lang-btn .lang-de { opacity:.6; }
   .lang-btn { width: 100%; justify-content: center; padding: .9rem 1rem; }
 }
 
+/* Zeilenumbrüche in übersetzten Texten */
+.i18n-pre { white-space: pre-line; }
+
 
 
 
@@ -543,6 +544,7 @@ header > .container-wide { padding-inline: clamp(20px,5vw,64px); }
 /* === HARTE Overrides gegen „festgenagelte“ Höhen (blockieren sonst den 2-Zeiler) === 
 body   { min-height: 100vh !important; height: auto !important; }
 header { min-height: 100svh !important; height: auto !important; overflow: visible !important; }*/
+
 
 
 
