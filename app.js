@@ -84,7 +84,7 @@
       "vita.job1.h4": "Software Developer - <br>Pragmatis GmbH",
       "vita.job2.h4": "Software Developer Internship - <br>Europa Möbel-Verbund",
       "vita.job3.h4": "Apprenticeship IT Specialist (AE) - <br>WBS GROUP",
-      "vita.job4.h4": "Purchasing - <br>Munich Airport Marriott Hotel"
+      "vita.job4.h4": "Purchasing - <br>Munich Airport Marriott Hotel",
 
       "privacy.metaTitle": "Phil Kirchner - Privacy",
       "privacy.title": "Privacy Policy",
