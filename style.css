@@ -199,6 +199,9 @@ a:link, a:visited{ text-decoration:none; padding:0 1.5rem; font-weight:300; }
 }
 .slide_container{
   height:95%; width:100%; display:flex; flex-direction:column; align-items:center; flex-wrap:nowrap;
+  /* hier neue skalierung der Slider */
+  gap:.25rem;
+  min-width:0; 
 }
 .card{
   width:100%; max-width:700px; height:80px; background-size:cover; cursor:pointer; overflow:hidden;
@@ -333,3 +336,4 @@ html[data-lang="en"] .lang-btn .lang-de { opacity:.6; }
 
 /* Horizontalen Überlauf sicher killen (statt clip) */
 html, body { overflow-x: hidden; }
+
