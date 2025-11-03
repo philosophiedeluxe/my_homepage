@@ -13,6 +13,16 @@
 
   const hasNav = !!(nav && toggle && list);
 
+  const nav = document.querySelector('.nav');
+  function setNavHeightVar(){
+    const h = nav ? Math.round(nav.getBoundingClientRect().height) : 56;
+    document.documentElement.style.setProperty('--nav-h', `${h}px`);
+  }
+
+  setNavHeightVar();
+  window.addEventListener('resize', setNavHeightVar);
+  }
+
   // --- I18N Wörterbuch ---
   const I18N = {
     de: {
