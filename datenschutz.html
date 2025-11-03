@@ -26,39 +26,42 @@ Copyright (c) Phil Kirchner Freising, All Rights Reserved
 </head>
 <body>
 
+<body>
   <!-- NAV -->
   <header class="site-header" role="banner">
     <div class="container-wide">
       <nav class="nav" aria-label="Hauptnavigation">
         <a class="brand" href="./index.html">Phil Kirchner</a>
-        <button class="nav-toggle" aria-controls="primary-nav" aria-expanded="false" aria-label="Menü öffnen/ schließen">
+        <button class="nav-toggle" aria-controls="primary-nav" aria-expanded="false"
+                aria-label="Menü öffnen/ schließen">
           <span class="nav-toggle-bar" aria-hidden="true"></span>
           <span class="nav-toggle-bar" aria-hidden="true"></span>
           <span class="nav-toggle-bar" aria-hidden="true"></span>
         </button>
         <ul id="primary-nav" class="nav-list" data-collapsible="true">
           <li><a data-i18n="nav.vita" href="./vita.html">Vita</a></li>
-          <li><a href="https://www.linkedin.com/in/phil-kirchner/">LinkedIn</a></li>
-          <li><a href="https://www.instagram.com/phil.osophie.deluxe/">Instagram</a></li>
+          <li><a href="https://www.linkedin.com/in/phil-kirchner/" rel="noopener noreferrer">LinkedIn</a></li>
+          <li><a href="https://www.instagram.com/phil.osophie.deluxe/" rel="noopener noreferrer">Instagram</a></li>
           <li class="nav-divider" aria-hidden="true">|</li>
           <li><a data-i18n="nav.impressum" href="./impressum.html">Impressum</a></li>
           <li><a data-i18n="nav.datenschutz" href="./datenschutz.html" aria-current="page">Datenschutz</a></li>
-           <!-- Sprachumschalter (ganz außen rechts) -->
           <li class="nav-divider" aria-hidden="true">|</li>
           <li class="lang-switch">
             <button id="lang-toggle" class="lang-btn" type="button"
-              aria-label="Sprache umschalten (Deutsch/Englisch)">
+                    aria-label="Sprache umschalten (Deutsch/Englisch)">
               <span class="lang-de">DE</span><span class="sep">/</span><span class="lang-en">EN</span>
             </button>
           </li>
         </ul>
       </nav>
     </div>
+  </header>
 
+  <!-- HAUPTINHALT -->
+  <main role="main">
     <div class="container">
       <div class="content">
         <div class="privacy_policy">
-
           <h1 data-i18n="privacy.title">Datenschutz&shy;erkl&auml;rung</h1>
           <h3 data-i18n="privacy.overview">Datenschutz auf einen Blick</h3>
 
@@ -126,7 +129,8 @@ Copyright (c) Phil Kirchner Freising, All Rights Reserved
           <p>Die Verarbeitung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO, ...</p>
           <p>Die von Ihnen an uns per Kontaktanfragen &uuml;bersandten Daten verbleiben bei mir, ...</p>
 
-          <p><span data-i18n="privacy.source">Quelle:</span> <a href="https://www.e-recht24.de">https://www.e-recht24.de</a></p>
+          <p><span data-i18n="privacy.source">Quelle:</span>
+             <a href="https://www.e-recht24.de" rel="noopener noreferrer">https://www.e-recht24.de</a></p>
 
           <p></p><p></p>
         </div>
@@ -139,11 +143,12 @@ Copyright (c) Phil Kirchner Freising, All Rights Reserved
 
       </div>
     </div>
-  </header>
+  </main>
 
   <footer></footer>
   <script defer src="./app.js"></script>
 </body>
+
 </html>
 
 
