@@ -13,18 +13,19 @@
 
   const hasNav = !!(nav && toggle && list);
 
-  const nav = document.querySelector('.nav');
+  // --- Nav-Höhe -> CSS-Variable (für 100svh-Layout) ---
   function setNavHeightVar(){
     const h = nav ? Math.round(nav.getBoundingClientRect().height) : 56;
     document.documentElement.style.setProperty('--nav-h', `${h}px`);
   }
-
   setNavHeightVar();
   window.addEventListener('resize', setNavHeightVar);
-  }
+  window.addEventListener('load', setNavHeightVar); // falls Webfonts nachladen
+  // <-- KEINE zusätzliche schließende Klammer hier!
 
   // --- I18N Wörterbuch ---
   const I18N = {
+    // ... dein Dictionary unverändert ...
     de: {
       "nav.vita":        "Vita",
       "nav.impressum":   "Impressum",
