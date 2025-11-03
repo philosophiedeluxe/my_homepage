@@ -197,6 +197,8 @@ a:link, a:visited{ text-decoration:none; padding:0 1.5rem; font-weight:300; }
    Cards (Vita)
    =================================================================== */
 
+:root{ --card-collapsed-h: clamp(64px, 9svh, 96px); }
+
 .wrapper{
   width:100%;
   max-width: min(700px, 100%);
@@ -216,27 +218,61 @@ a:link, a:visited{ text-decoration:none; padding:0 1.5rem; font-weight:300; }
 }
 
 .card{
-  width:100%; max-width:700px; height:80px; background-size:cover; cursor:pointer; overflow:hidden;
-  border-radius:.7rem; margin:1.5px; display:flex; align-items:flex-end;
-  transition:.6s cubic-bezier(.28,-0.03,0,.99); box-shadow:0 10px 30px -5px #3a3a3a; text-align:left;
+  width:100%;
+  max-width:700px;
+  height: var(--card-collapsed-h); /* statt height:80px */
+  overflow:hidden;
+  border-radius:.7rem;
+  margin:2px 0;
+  display:flex;
+  align-items:flex-start;
+  background-size:cover;
+  background-position:center;
+  box-shadow:0 10px 30px -5px #3a3a3a;
+  text-align:left;
+  transition: height .35s cubic-bezier(.28,-0.03,0,.99), box-shadow .25s ease;
 }
-.card > .row{ color:#fff; display:flex; flex-wrap:nowrap; margin-bottom:auto; }
-.card > .row > .description{
-  display:flex; justify-content:center; flex-direction:row; height:90%;
-  opacity:0; transform:translateY(0); transition: all .3s ease .3s; position:relative;
-}
-.description p{
-  color:rgb(253,247,231); display:flex; justify-content:center;
-  margin:35px 10px 0 10px; font-weight:300;
-}
-.description h4{
-  text-transform:uppercase; color:rgb(226,166,1); padding-left:10px; padding-top:35px;
-  writing-mode:vertical-rl; text-orientation:mixed; font-weight:400;
-}
-input{ display:none; }
-input:checked + label{ height:700px; }
-input:checked + label .description{ opacity:1 !important; transform:translateY(0) !important; }
 
+.card > .row{
+  color:#fff; display:flex; flex-wrap:nowrap; width:100%;
+}
+
+/* NIE mehr unsichtbar machen – h4 & p bleiben sichtbar */
+.card > .row > .description{
+  display:flex; flex-direction:row; gap:1rem; width:100%;
+  position:relative;
+  align-items:flex-start;
+  height:auto;                     /* statt 90% */
+  opacity:1 !important;            /* killt altes opacity:0 */
+  transform:none !important;       /* killt alte Translate-Spielchen */
+  transition:none;                 /* keine Fades nötig */
+}
+
+/* h4 schmal, Text flexibel */
+.card .description h4{
+  text-transform:uppercase; color:rgb(226,166,1);
+  writing-mode:vertical-rl; text-orientation:mixed; font-weight:400;
+  padding-left:10px; padding-top:35px;
+  flex:0 0 auto;
+  font-size: clamp(.7rem, 2.2vw, 1rem);
+}
+.card .description p{
+  flex:1 1 auto; min-width:0;
+  margin: 1.25rem .75rem 1rem;
+  font-weight:300;
+  font-size: clamp(.9rem, .85rem + .4vw, 1.05rem);
+  color: rgb(253,247,231);
+}
+
+/* ===== Expand: Höhe nach Inhalt (keine harte Kappe) ===== */
+input{ display:none; }
+input:checked + label{
+  height:auto;               /* wichtiger Teil: wächst auf Inhalts-Höhe */
+  max-height:none;           /* falls irgendwo noch Kappen lauern */
+  box-shadow: 0 16px 38px -5px rgba(0,0,0,.55);
+}
+
+/* Hintergründe je Karte (unverändert) */
 .card[for="c1"]{ background-image:url('./image/img1.jpeg'); }
 .card[for="c2"]{ background-image:url('./image/img2.jpeg'); }
 .card[for="c3"]{ background-image:url('./image/img3.jpeg'); }
@@ -348,4 +384,5 @@ html[data-lang="en"] .lang-btn .lang-de { opacity:.6; }
 
 /* Horizontalen Überlauf sicher killen (statt clip) */
 html, body { overflow-x: hidden; }
+
 
