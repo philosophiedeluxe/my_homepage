@@ -461,16 +461,13 @@ header > .container-wide { padding-inline: clamp(20px,5vw,64px); }
   min-width: 0;
 }
 
-/* Vollbreite Hintergrundleiste – ohne Überbreite */
+/* NAV-Hintergrund ohne Überbreite */
 .nav::before{
   content:"";
-  position:absolute;
-  z-index:-1;
-  top:0;                 /* nur oben/unten pinnen */
-  bottom:0;
-  left:50%;
-  transform:translateX(-50%);
-  width:100vw;           /* Fallback */
+  position:absolute; z-index:-1;
+  top:0; bottom:0; left:50%;
+  transform: translateX(-50%);
+  width:100vw;                                /* Fallback */
   background: linear-gradient(90deg,
     rgba(0,0,0,.6) 0%,
     rgba(0,0,0,.6) 40%,
@@ -481,7 +478,7 @@ header > .container-wide { padding-inline: clamp(20px,5vw,64px); }
 }
 /* Wenn verfügbar: echte Visual-Viewport-Breite nehmen */
 @supports (width: 100dvw){
-  .nav::before{ width: 100dvw; }
+  .nav::before{ width:100dvw; }               /* Visual Viewport Breite */
 }
 
 /* Liste Desktop */
@@ -567,3 +564,4 @@ html{ overflow-x: clip; } /* statt hidden → weniger Jumping auf iOS */
   left: -2px;
   width: calc(100% + 4px);
 }
+
