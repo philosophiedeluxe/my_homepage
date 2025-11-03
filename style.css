@@ -544,16 +544,3 @@ header > .container-wide { padding-inline: clamp(20px,5vw,64px); }
   .nav-list a{ padding: .9rem 1rem; font-size: 1.05rem; display: block; }
   .nav-divider{ display: none; }
 }
-
-/* === HARTE Overrides gegen „festgenagelte“ Höhen (blockieren sonst den 2-Zeiler) === 
-body   { min-height: 100vh !important; height: auto !important; }
-header { min-height: 100svh !important; height: auto !important; overflow: visible !important; }*/
-
-
-
-
-
-
-
-
-
