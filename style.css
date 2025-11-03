@@ -236,25 +236,26 @@ input:checked + label .description{ opacity:1 !important; transform:translateY(0
 header > .container-wide{ padding-inline: clamp(20px,5vw,64px); }
 
 .nav{
-  position: sticky; /* oder fixed/top:0, je nach Wunsch */
-  top: 0;
-  z-index: 10;
-  isolation: isolate;          /* eigener Stacking-Context für z-index */
-  padding-inline: clamp(20px, 5vw, 64px);
+  position: relative;           /* Anker für ::before */
+  z-index: 999;
+  display: grid;
+  grid-template-columns: auto 1fr; /* Desktop: Brand | Liste */
+  align-items: center;
+  gap: .5rem 1rem;
+  padding: .65rem 0;
+  min-width: 0;
 }
 
 /* Full-bleed Hintergrund – ohne horizontales Scrollen */
 .nav::before{
-  content: "";
-  position: absolute;
-  inset: 0;                    /* füllt die Nav-Höhe exakt */
-  /* Full-bleed zu den Viewporträndern, ohne 100vw-Fehler */
-  margin-inline: calc(50% - 50vw);
-  background: linear-gradient(90deg, rgba(0,0,0,.6) 0%, rgba(0,0,0,.6) 40%, rgba(0,0,0,1) 100%);
-  border-bottom: 1px solid rgba(255,255,255,.08);
-  -webkit-backdrop-filter: blur(60px);
-  backdrop-filter: blur(60px);
-  z-index: -1;                 /* hinter dem Nav-Inhalt, dank isolation ok */
+  content:""; position:absolute; z-index:-1; inset:0; left:50%; transform:translateX(-50%);
+  width:100vw; /* Fallback */
+  background: linear-gradient(90deg, rgba(0,0,0,.6) 0%, rgba(0,0,0,.6) 40%, rgb(74 2 80) 100%);
+  border-bottom:1px solid rgba(255,255,255,.08);
+  -webkit-backdrop-filter: blur(60px); backdrop-filter: blur(60px);
+}
+@supports (width: 100dvw){
+  .nav::before{ width:100dvw; } /* Visual Viewport Breite */
 }
 
 /* Desktop-Liste */
@@ -290,7 +291,7 @@ header > .container-wide{ padding-inline: clamp(20px,5vw,64px); }
   .nav-list[data-collapsible="true"]{
     position: static; display:grid; gap:0;
     max-height:0; overflow:hidden; transition:max-height .3s ease;
-    background: linear-gradient(90deg, rgba(0,0,0,.6) 0%, rgba(0,0,0,.6) 40%, rgba(0,0,0,1) 100%);
+    background: linear-gradient(90deg, rgba(0,0,0,.6) 0%, rgba(0,0,0,.6) 40%, rgb(74 2 80) 100%);
     border-bottom:1px solid rgba(255,255,255,.06); box-shadow:0 12px 24px rgba(0,0,0,.35);
     padding-block:.25rem;
   }
@@ -320,4 +321,15 @@ html[data-lang="en"] .lang-btn .lang-de { opacity:.6; }
 }
 
 
+/* Flex-Kinder dürfen schrumpfen */
+.header_container_left,
+.header_container_right { min-width: 0; }
 
+/* Medien laufen nicht über */
+.header_container_left img,
+.header_container_right img,
+.header_container_left video,
+.header_container_right video { max-width: 100%; height: auto; }
+
+/* Horizontalen Überlauf sicher killen (statt clip) */
+html, body { overflow-x: hidden; }
