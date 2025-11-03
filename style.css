@@ -132,6 +132,30 @@ header .header_container_right .content_container{
   :root{ --card-expanded: min(70svh, 680px); }
 }
 
+/* --- LANG SWITCH zurück auf „Plain Link“ --- */
+.lang-switch{ margin-left:.5rem; border:0 !important; }
+
+.lang-btn{
+  all: unset;                      /* alles zurücksetzen */
+  display:inline-flex;
+  align-items:center;
+  gap:.25rem;
+  cursor:pointer;
+  opacity:.9;
+}
+.lang-btn:hover{ opacity:1; text-decoration: underline; }
+.lang-btn .sep{ opacity:.6; margin:0 .25rem; }
+
+/* fette aktive Sprache beibehalten */
+html[data-lang="de"] .lang-btn .lang-de,
+html[data-lang="en"] .lang-btn .lang-en { font-weight:600; }
+
+/* mobil keine Box, kein Trenner von mir */
+@media (max-width:900px){
+  .nav-list .lang-switch{ border-top:0 !important; }
+}
+
+
 /* =========================================================
    Typografie
    ========================================================= */
@@ -202,12 +226,24 @@ a:link,a:visited{ text-decoration:none; padding:0 1.5rem; font-weight:300; }
   display:flex; justify-content:center; flex-direction:row; gap:1rem; width:100%;
   opacity:0; transform:translateY(0); transition: opacity .25s ease .1s; position:relative;
 }
-.description p{
-  color:rgb(253,247,231); margin: 1.25rem .75rem 1rem; font-weight:300;
+.card .description p{
+  opacity:0;
+  max-height:0;
+  overflow:hidden;
+  transition: opacity .25s ease .05s, max-height .25s ease .05s;
 }
 .description h4{
   text-transform:uppercase; color:rgb(226,166,1); padding-left:10px; padding-top:35px;
   writing-mode:vertical-rl; text-orientation:mixed; font-weight:400;
+}
+.card .description{ opacity:1 !important; }
+
+.card{ max-height: var(--card-collapsed); }
+input:checked + label{ max-height: var(--card-expanded); }
+
+input:checked + label .description p{
+  opacity:1;
+  max-height:100rem;
 }
 
 /* Toggle */
@@ -233,3 +269,4 @@ input:checked + label .description{ opacity:1; }
 .header_container_right img,
 .header_container_left video,
 .header_container_right video{ max-width:100%; height:auto; }
+
