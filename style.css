@@ -135,23 +135,33 @@ header .header_container_right .content_container{
    =================================================================== */
 
 .container{
-  display:flex; justify-content:center; align-items:center; text-align:center; height:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  width:100%;
 }
 .container .content{
-  background:#494949; padding:4rem; position:relative; border-radius:7px;
-  transition:.25s all ease-in-out; max-width:700px;
+  background:#494949;
+  padding: clamp(1rem, 4vw, 4rem);
+  position:relative;
+  border-radius:7px;
+  transition:.25s all ease-in-out;
+  max-width: clamp(320px, 92vw, 700px);
+  width:100%;
 }
+
 a, p, .container h1, .container h2, .container h3, .container h4, .container h5, li{
   color: rgb(226,226,226);
   -webkit-font-smoothing:auto; -moz-osx-font-smoothing:auto;
 }
-p{ font-size: clamp(1rem, .9697rem + .1294vw, 1.125rem); font-weight:300; }
+p{ font-size: clamp(.95rem, .9rem + .4vw, 1.125rem); font-weight:300; }
 h1{
-  font-size: clamp(1.875rem, 1.5716rem + 1.2945vw, 3.125rem);
+  font-size: clamp(1.6rem, 1.1rem + 3.2vw, 3.125rem);
   margin: 0 0 .5rem 0; font-weight:400; font-family:'Syncopate', sans-serif;
 }
 h2{ font-weight:400; font-family:'Syncopate', sans-serif; color: rgb(226,166,1) !important; }
-h3{ font-size: clamp(1.5rem, 1.3483rem + .6472vw, 2.125rem); font-weight:400; }
+h3{ font-size: clamp(1.2rem, 1rem + 2vw, 2.125rem); font-weight:400; }
 h1 + h3{ margin-top:0; }
 
 /* Links im Fließtext */
@@ -159,6 +169,88 @@ a:link, a:visited{ text-decoration:none; padding:0 1.5rem; font-weight:300; }
 .link{ font-size: small !important; }
 #linknav_firstline{ margin:.5rem 0 0 0 !important; }
 #linknav_secondline{ margin:.5rem 1.5em 0 1.5em !important; }
+
+/* ===== VITA: Wrapper & Slider – responsive, ohne harte Höhen ===== */
+:root{
+  --card-collapsed: 80px;
+  --card-expanded: clamp(360px, 65svh, 680px);
+}
+
+.wrapper{
+  width:100%;
+  max-width: min(700px, 100%);
+  margin-inline:auto;
+  display:flex;
+  align-items:stretch;
+  justify-content:flex-start;
+}
+
+.slide_container{
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:stretch;
+  gap: .5rem;
+  min-width:0;
+}
+
+.card{
+  width:100%;
+  max-width:700px;
+  max-height: var(--card-collapsed);
+  background-size:cover;
+  background-position:center;
+  cursor:pointer;
+  overflow:hidden;
+  border-radius:.7rem;
+  margin: 1.5px 0;
+  display:flex;
+  align-items:flex-start;
+  box-shadow:0 10px 30px -5px #3a3a3a;
+  text-align:left;
+  transition:
+    max-height .45s cubic-bezier(.28,-0.03,0,.99),
+    box-shadow .25s ease;
+}
+.card > .row{
+  color:#fff; display:flex; flex-wrap:nowrap; width:100%;
+}
+.card > .row > .description{
+  display:flex; justify-content:center; flex-direction:row; gap:1rem; width:100%;
+  position:relative;
+}
+
+/* h4 immer sichtbar, Texte einklappbar */
+.card .description h4{
+  text-transform:uppercase; color:rgb(226,166,1);
+  padding-left:10px; padding-top:35px;
+  writing-mode:vertical-rl; text-orientation:mixed; font-weight:400;
+  font-size: clamp(.7rem, 2.2vw, 1rem);
+}
+.card .description p{
+  color:rgb(253,247,231);
+  margin: 1.25rem .75rem 1rem;
+  font-weight:300;
+  opacity:0; max-height:0; overflow:hidden;
+  transition: opacity .25s ease .05s, max-height .25s ease .05s;
+}
+
+input{ display:none; }
+input:checked + label{
+  max-height: var(--card-expanded);
+  box-shadow: 0 16px 38px -5px rgba(0,0,0,.55);
+}
+input:checked + label .description p{
+  opacity:1; max-height:100rem;
+}
+
+/* Card-BGs */
+.card[for="c1"]{ background-image:url('./image/img1.jpeg'); }
+.card[for="c2"]{ background-image:url('./image/img2.jpeg'); }
+.card[for="c3"]{ background-image:url('./image/img3.jpeg'); }
+.card[for="c4"]{ background-image:url('./image/img4.jpeg'); }
+.card[for="c5"]{ background-image:url('./image/img5.jpeg'); }
+.card[for="c6"]{ background-image:url('./image/img6.jpeg'); }
 
 /* ===================================================================
    Button (Glow)
@@ -344,4 +436,5 @@ html[data-lang="en"] .lang-btn .lang-de { opacity:.6; }
 
 /* Horizontalen Überlauf sicher killen (statt clip) */
 html, body { overflow-x: hidden; }
+
 
