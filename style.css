@@ -444,13 +444,14 @@ html[data-lang="en"] .lang-btn .lang-de { opacity:.6; }
 
 
 
-/* === NAV: Full-Bleed + 2-zeilig mobil + Verlauf === */
+/* === NAV: Full-Bleed + 2-zeilig mobil + Verlauf (bereinigt) === */
 
-/* Platz & Full-Bleed */
+/* Platz im Header-Container */
 header > .container-wide { padding-inline: clamp(20px,5vw,64px); }
 
+/* Basis-Nav */
 .nav{
-  position: relative; /* für ::before */
+  position: relative; /* Anker für ::before */
   z-index: 999;
   display: grid;
   grid-template-columns: auto 1fr; /* Desktop: Brand | Liste */
@@ -460,15 +461,16 @@ header > .container-wide { padding-inline: clamp(20px,5vw,64px); }
   min-width: 0;
 }
 
-/* Verlauf quer über die ganze Viewport-Breite */
+/* Vollbreite Hintergrundleiste – ohne Überbreite */
 .nav::before{
-  content: "";
-  position: absolute;
-  z-index: -1;
-  inset: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100vw;
+  content:"";
+  position:absolute;
+  z-index:-1;
+  top:0;                 /* nur oben/unten pinnen */
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:100vw;           /* Fallback */
   background: linear-gradient(90deg,
     rgba(0,0,0,.6) 0%,
     rgba(0,0,0,.6) 40%,
@@ -476,6 +478,10 @@ header > .container-wide { padding-inline: clamp(20px,5vw,64px); }
   border-bottom: 1px solid rgba(255,255,255,.08);
   -webkit-backdrop-filter: blur(60px);
   backdrop-filter: blur(60px);
+}
+/* Wenn verfügbar: echte Visual-Viewport-Breite nehmen */
+@supports (width: 100dvw){
+  .nav::before{ width: 100dvw; }
 }
 
 /* Liste Desktop */
@@ -488,6 +494,7 @@ header > .container-wide { padding-inline: clamp(20px,5vw,64px); }
   padding: 0;
   justify-self: end;
   padding-right: clamp(8px,2vw,24px);
+  overflow: visible; /* verhindert abgeschnittene Effekte (z.B. Glow) */
 }
 .nav-list a{
   color: inherit;
@@ -507,9 +514,7 @@ header > .container-wide { padding-inline: clamp(20px,5vw,64px); }
 
 /* ===== MOBILE: 2 Zeilen (Brand+Toggle oben, Liste unten) ===== */
 @media (max-width: 900px){
-  /* 1) Grid-AREAS erzwingen */
   .nav{
-    display: grid;
     grid-template-columns: 1fr auto;
     grid-template-areas:
       "brand toggle"
@@ -520,7 +525,7 @@ header > .container-wide { padding-inline: clamp(20px,5vw,64px); }
   .nav-toggle{ grid-area: toggle; display: inline-flex; }
   .nav-list{ grid-area: list; width: 100%; box-sizing: border-box; }
 
-  /* 2) Collapsing-Liste im Flow + Verlauf */
+  /* Collapsing-Liste im Flow + Verlauf */
   .nav-list[data-collapsible="true"]{
     position: static;
     display: grid;
@@ -545,44 +550,20 @@ header > .container-wide { padding-inline: clamp(20px,5vw,64px); }
   .nav-divider{ display: none; }
 }
 
-/* 0) Saubere Box-Sizing + kein horizontales Scrollen */
-*,*::before,*::after{ box-sizing: border-box; }
-html{ overflow-x: clip; } /* statt hidden: verhindert Jumping bei iOS */
+/* === Systemweite Kleinigkeiten für mobiles Layout === */
 
-/* 1) Mobile-Viewport-Höhen: weg von 100vh */
+/* Kein horizontales Scrollen durch 100vw/Glow etc. */
+*,*::before,*::after{ box-sizing: border-box; }
+html{ overflow-x: clip; } /* statt hidden → weniger Jumping auf iOS */
+
+/* 100vh-Probleme vermeiden (Adress-/Toolbars auf Mobile) */
 @supports (height: 100svh){
   body   { min-height: 100svh; }
-  header { min-height: 100svh; height: auto; } /* kein hartes 100vh erzwingen */
-  /* Bildhöhe im Header auf Mobile entspannter */
-  @media (max-width:900px){
-    header .header_container_left img{ height: 70svh; } /* ggf. 60–80svh feinjustieren */
-  }
+  header { min-height: 100svh; height: auto; }
 }
 
-/* 2) Full-bleed Nav ohne Überbreite: 100vw → 100dvw wenn möglich */
-.nav::before{
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100vw; /* Fallback */
-}
-@supports (width: 100dvw){
-  .nav::before{ width: 100dvw; } /* echte Visual-Viewport-Breite */
-}
-
-/* 3) Kleinzeug: Glow-Button in der Nav schneidet nichts ab */
-.nav-list{ overflow: visible; }
+/* Glow-Button in der Nav: minimaler Puffer gegen Überlauf */
 .nav .button:before{
-  /* verhindert Mikrometer-Überlauf durch -1.5px Offset */
   left: -2px;
   width: calc(100% + 4px);
 }
-
-/* 4) Defensive Max-Breiten für alle Container */
-header > .container-wide,
-.nav,
-#primary-nav,
-.header_container,
-.wrapper,
-.slide_container { max-width: 100%; }
-img,video{ max-width: 100%; height: auto; }
-
