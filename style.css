@@ -1,4 +1,3 @@
-
 /* 
        _     _ _                        _     _           _      _                 
  _ __ | |__ (_) |  ___  ___  ___  _ __ | |__ (_) ___   __| | ___| |_   ___  _____  
@@ -134,23 +133,6 @@ header .header_container_right .content_container{
    Container & Typografie
    =================================================================== */
 
-.container{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  width:100%;
-}
-.container .content{
-  background:#494949;
-  padding: clamp(1rem, 4vw, 4rem);
-  position:relative;
-  border-radius:7px;
-  transition:.25s all ease-in-out;
-  max-width: clamp(320px, 92vw, 700px);
-  width:100%;
-}
-
 a, p, .container h1, .container h2, .container h3, .container h4, .container h5, li{
   color: rgb(226,226,226);
   -webkit-font-smoothing:auto; -moz-osx-font-smoothing:auto;
@@ -170,11 +152,50 @@ a:link, a:visited{ text-decoration:none; padding:0 1.5rem; font-weight:300; }
 #linknav_firstline{ margin:.5rem 0 0 0 !important; }
 #linknav_secondline{ margin:.5rem 1.5em 0 1.5em !important; }
 
-/* ===== VITA: Wrapper & Slider – responsive, ohne harte Höhen ===== */
-:root{
-  --card-collapsed: 80px;
-  --card-expanded: clamp(360px, 65svh, 680px);
+/* ===================================================================
+   Button (Glow)
+   =================================================================== */
+
+.button{
+  border:none; outline:none; color:rgb(226,166,1); background:#111; cursor:pointer;
+  position:relative; z-index:0; border-radius:7px; user-select:none; -webkit-user-select:none;
+  touch-action:manipulation; 
+  padding: 1.0rem 1.0rem !important; /* mehr Innenabstand, hart durchsetzen | vertikal A | horizontal B */
+  margin-top:1.4rem; 
+  display:inline-flex; font-weight:300; line-height:1.25; gap:.5rem;
 }
+
+.button:before{    
+  content:"";
+  background:linear-gradient(45deg,#f00,#f70,#ff0,#4f0,#0fd,#02f,#70f,#f0c,#f00);
+  position:absolute; top:-1px; left:-2px; background-size:400%; z-index:-1;
+  filter:blur(2px); -webkit-filter:blur(2px);
+  width:calc(100% + 4px); 
+  height:calc(100% + 2px);
+  animation:glowing-button 25s linear infinite; transition:opacity .3s ease-in-out; border-radius:7px;
+}
+@keyframes glowing-button{
+  0%{ background-position:0 0; } 50%{ background-position:400% 0; } 100%{ background-position:0 0; }
+}
+.button:after{
+  z-index:-1; content:""; position:absolute; inset:0; background:#222; border-radius:7px;
+}
+
+/* Zeilenumbrüche via I18N */
+.i18n-pre, .button.i18n-pre{ white-space: pre-line; }
+
+/* ===================================================================
+   Privacy Box
+   =================================================================== */
+.privacy_policy{
+  margin-top:1rem; max-height:500px; border:1px solid #fff; padding:1.5rem;
+  overflow-y: auto; -ms-overflow-style:none; scrollbar-width:none;
+}
+.privacy_policy::-webkit-scrollbar{ display:none; }
+
+/* ===================================================================
+   Cards (Vita)
+   =================================================================== */
 
 .wrapper{
   width:100%;
@@ -245,86 +266,6 @@ input:checked + label .description p{
 }
 
 /* Card-BGs */
-.card[for="c1"]{ background-image:url('./image/img1.jpeg'); }
-.card[for="c2"]{ background-image:url('./image/img2.jpeg'); }
-.card[for="c3"]{ background-image:url('./image/img3.jpeg'); }
-.card[for="c4"]{ background-image:url('./image/img4.jpeg'); }
-.card[for="c5"]{ background-image:url('./image/img5.jpeg'); }
-.card[for="c6"]{ background-image:url('./image/img6.jpeg'); }
-
-/* ===================================================================
-   Button (Glow)
-   =================================================================== */
-
-.button{
-  border:none; outline:none; color:rgb(226,166,1); background:#111; cursor:pointer;
-  position:relative; z-index:0; border-radius:7px; user-select:none; -webkit-user-select:none;
-  touch-action:manipulation; 
-  padding: 1.0rem 1.0rem !important; /* mehr Innenabstand, hart durchsetzen | vertikal A | horizontal B */
-  margin-top:1.4rem; 
-  display:inline-flex; font-weight:300; line-height:1.25; gap:.5rem;
-}
-
-.button:before{    
-  content:"";
-  background:linear-gradient(45deg,#f00,#f70,#ff0,#4f0,#0fd,#02f,#70f,#f0c,#f00);
-  position:absolute; top:-1px; left:-2px; background-size:400%; z-index:-1;
-  filter:blur(2px); -webkit-filter:blur(2px);
-  width:calc(100% + 4px); 
-  height:calc(100% + 2px);
-  animation:glowing-button 25s linear infinite; transition:opacity .3s ease-in-out; border-radius:7px;
-}
-@keyframes glowing-button{
-  0%{ background-position:0 0; } 50%{ background-position:400% 0; } 100%{ background-position:0 0; }
-}
-.button:after{
-  z-index:-1; content:""; position:absolute; inset:0; background:#222; border-radius:7px;
-}
-
-/* Zeilenumbrüche via I18N */
-.i18n-pre, .button.i18n-pre{ white-space: pre-line; }
-
-/* ===================================================================
-   Privacy Box
-   =================================================================== */
-.privacy_policy{
-  margin-top:1rem; max-height:500px; border:1px solid #fff; padding:1.5rem;
-  overflow-y: auto; -ms-overflow-style:none; scrollbar-width:none;
-}
-.privacy_policy::-webkit-scrollbar{ display:none; }
-
-/* ===================================================================
-   Cards (Vita)
-   =================================================================== */
-
-.wrapper{
-  width:100% !important; height:650px; display:flex; align-items:center; justify-content:center;
-}
-.slide_container{
-  height:95%; width:100%; display:flex; flex-direction:column; align-items:center; flex-wrap:nowrap;
-}
-.card{
-  width:100%; max-width:700px; height:80px; background-size:cover; cursor:pointer; overflow:hidden;
-  border-radius:.7rem; margin:1.5px; display:flex; align-items:flex-end;
-  transition:.6s cubic-bezier(.28,-0.03,0,.99); box-shadow:0 10px 30px -5px #3a3a3a; text-align:left;
-}
-.card > .row{ color:#fff; display:flex; flex-wrap:nowrap; margin-bottom:auto; }
-.card > .row > .description{
-  display:flex; justify-content:center; flex-direction:row; height:90%;
-  opacity:0; transform:translateY(0); transition: all .3s ease .3s; position:relative;
-}
-.description p{
-  color:rgb(253,247,231); display:flex; justify-content:center;
-  margin:35px 10px 0 10px; font-weight:300;
-}
-.description h4{
-  text-transform:uppercase; color:rgb(226,166,1); padding-left:10px; padding-top:35px;
-  writing-mode:vertical-rl; text-orientation:mixed; font-weight:400;
-}
-input{ display:none; }
-input:checked + label{ height:700px; }
-input:checked + label .description{ opacity:1 !important; transform:translateY(0) !important; }
-
 .card[for="c1"]{ background-image:url('./image/img1.jpeg'); }
 .card[for="c2"]{ background-image:url('./image/img2.jpeg'); }
 .card[for="c3"]{ background-image:url('./image/img3.jpeg'); }
@@ -436,5 +377,3 @@ html[data-lang="en"] .lang-btn .lang-de { opacity:.6; }
 
 /* Horizontalen Überlauf sicher killen (statt clip) */
 html, body { overflow-x: hidden; }
-
-
