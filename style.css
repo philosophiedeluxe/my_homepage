@@ -155,7 +155,7 @@ a:link, a:visited{ text-decoration:none; padding:0 1.5rem; font-weight:300; }
 
 .button{
   /* Steuerung des Innenabstands */
-  --pad-y: .9rem;      /* vertikal */
+  --pad-y: 6.9rem;      /* vertikal */
   --pad-x: 4.25rem;    /* horizontal */
 
   border:none; outline:none; color:rgb(226,166,1); background:#111; cursor:pointer;
@@ -326,6 +326,7 @@ html[data-lang="en"] .lang-btn .lang-de { opacity:.6; }
   .lang-switch{ border-top:1px solid rgba(255,255,255,.06); }
   .lang-btn{ width:100%; justify-content:center; padding:.9rem 1rem; }
 }
+
 
 
 
