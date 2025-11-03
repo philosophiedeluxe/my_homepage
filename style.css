@@ -201,7 +201,7 @@ a:link, a:visited{ text-decoration:none; padding:0 1.5rem; font-weight:300; }
 
 .wrapper{
   width:100%;
-  max-width: min(700px, 100%);
+  max-width:min(700px,100%);
   margin-inline:auto;
   display:flex;
   align-items:stretch;
@@ -213,14 +213,15 @@ a:link, a:visited{ text-decoration:none; padding:0 1.5rem; font-weight:300; }
   display:flex;
   flex-direction:column;
   align-items:stretch;
-  gap: .5rem;
+  gap:.5rem;
   min-width:0;
 }
 
+/* Grundzustand: kollabiert auf kompakte Höhe */
 .card{
   width:100%;
   max-width:700px;
-  height: var(--card-collapsed-h); /* statt height:80px */
+  height: var(--card-collapsed-h);
   overflow:hidden;
   border-radius:.7rem;
   margin:2px 0;
@@ -230,55 +231,100 @@ a:link, a:visited{ text-decoration:none; padding:0 1.5rem; font-weight:300; }
   background-position:center;
   box-shadow:0 10px 30px -5px #3a3a3a;
   text-align:left;
-  transition: height .35s cubic-bezier(.28,-0.03,0,.99), box-shadow .25s ease;
+  transition: height .35s cubic-bezier(.28,-0.03,0,.99),
+              box-shadow .25s ease;
 }
 
 .card > .row{
-  color:#fff; display:flex; flex-wrap:nowrap; width:100%;
+  color:#fff;
+  display:flex;
+  flex-wrap:nowrap;
+  width:100%;
 }
 
-/* NIE mehr unsichtbar machen – h4 & p bleiben sichtbar */
+/* Beschreibung sichtbar halten (kein globales opacity:0 mehr) */
 .card > .row > .description{
-  display:flex; flex-direction:row; gap:1rem; width:100%;
+  display:flex;
+  flex-direction:row;
+  gap:1rem;
+  width:100%;
   position:relative;
   align-items:flex-start;
-  height:auto;                     /* statt 90% */
-  opacity:1 !important;            /* killt altes opacity:0 */
-  transform:none !important;       /* killt alte Translate-Spielchen */
-  transition:none;                 /* keine Fades nötig */
+  height:auto;
+  opacity:1 !important;
+  transform:none !important;
+  transition:none;
 }
 
-/* h4 schmal, Text flexibel */
+/* h4 bleibt immer sichtbar (vertikal) */
 .card .description h4{
-  text-transform:uppercase; color:rgb(226,166,1);
-  writing-mode:vertical-rl; text-orientation:mixed; font-weight:400;
-  padding-left:10px; padding-top:35px;
+  text-transform:uppercase;
+  color:rgb(226,166,1);
+  writing-mode:vertical-rl;
+  text-orientation:mixed;
+  font-weight:400;
+  padding-left:10px;
+  padding-top:35px;
   flex:0 0 auto;
   font-size: clamp(.7rem, 2.2vw, 1rem);
 }
+
+/* Texte: eingeklappt verstecken, aufgeklappt zeigen */
+.card .description > :not(h4){
+  /* collapsed */
+  opacity:0;
+  max-height:0;
+  margin:0 !important;
+  padding:0 !important;
+  overflow:hidden;
+  visibility:hidden;
+  transform:translateY(-4px);
+  transition:
+    opacity .2s ease,
+    max-height .2s ease,
+    transform .2s ease,
+    visibility 0s linear .2s; /* nach dem Fade verstecken */
+}
+input:checked + label .description > :not(h4){
+  /* expanded */
+  opacity:1;
+  max-height:100rem;               /* praktisch „auto“ */
+  visibility:visible;
+  transform:none;
+  margin:1.25rem .75rem 1rem !important;
+  padding:0 !important;
+  transition:
+    opacity .25s ease .05s,
+    max-height .25s ease .05s,
+    transform .25s ease .05s,
+    visibility 0s linear 0s;
+}
+
+/* Standard-Textstil (greift im expanded-Zustand) */
 .card .description p{
-  flex:1 1 auto; min-width:0;
-  margin: 1.25rem .75rem 1rem;
+  flex:1 1 auto;
+  min-width:0;
   font-weight:300;
   font-size: clamp(.9rem, .85rem + .4vw, 1.05rem);
-  color: rgb(253,247,231);
+  color:rgb(253,247,231);
 }
 
-/* ===== Expand: Höhe nach Inhalt (keine harte Kappe) ===== */
+/* Expand: Höhe nach Inhalt (keine harte Kappe) */
 input{ display:none; }
 input:checked + label{
-  height:auto;               /* wichtiger Teil: wächst auf Inhalts-Höhe */
-  max-height:none;           /* falls irgendwo noch Kappen lauern */
-  box-shadow: 0 16px 38px -5px rgba(0,0,0,.55);
+  height:auto;
+  max-height:none;
+  box-shadow:0 16px 38px -5px rgba(0,0,0,.55);
 }
 
-/* Hintergründe je Karte (unverändert) */
+/* Hintergründe je Karte */
 .card[for="c1"]{ background-image:url('./image/img1.jpeg'); }
 .card[for="c2"]{ background-image:url('./image/img2.jpeg'); }
 .card[for="c3"]{ background-image:url('./image/img3.jpeg'); }
 .card[for="c4"]{ background-image:url('./image/img4.jpeg'); }
 .card[for="c5"]{ background-image:url('./image/img5.jpeg'); }
 .card[for="c6"]{ background-image:url('./image/img6.jpeg'); }
+
 
 /* ===================================================================
    NAV: Full-Bleed + 2-zeilig mobil + Verlauf
@@ -384,5 +430,6 @@ html[data-lang="en"] .lang-btn .lang-de { opacity:.6; }
 
 /* Horizontalen Überlauf sicher killen (statt clip) */
 html, body { overflow-x: hidden; }
+
 
 
