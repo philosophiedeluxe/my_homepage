@@ -36,7 +36,7 @@
       
       "vita.title": "Meine persönliche Entwicklung",
       "vita.subtitle": "\"Ich betrachte meine berufliche Karriere als eine Reise\"",
-      "vita.skills": "Kenntnisse:",
+      "vita.skills": "Kenntnisse:\n",
       "vita.gastro": "Gastronomielaufbahn - \nMunich Airport Marriott Hotel",
       "vita.certificates": "Zertifikate",
       "vita.back": "Zurück zur Startseite, \n... schreib mir wenn dir gefällt was du gelesen hast.",
@@ -86,7 +86,7 @@
       
       "vita.title": "My Personal Development",
       "vita.subtitle": "\"I see my professional career as a journey\"",
-      "vita.skills": "Skills:",
+      "vita.skills": "Skills:\n",
       "vita.gastro": "Culinary Career - \nMunich Airport Marriott Hotel",
       "vita.certificates": "Certificates",
       "vita.back": "Back to homepage,\n... drop me a line if you liked what you read.",
