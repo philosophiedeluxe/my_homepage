@@ -156,7 +156,7 @@ a:link, a:visited{ text-decoration:none; padding:0 1.5rem; font-weight:300; }
 .button{
   /* Steuerung des Innenabstands */
   --pad-y: .9rem;      /* vertikal */
-  --pad-x: 1.25rem;    /* horizontal */
+  --pad-x: 4.25rem;    /* horizontal */
 
   border:none; outline:none; color:rgb(226,166,1); background:#111; cursor:pointer;
   position:relative; z-index:0; border-radius:7px; user-select:none; -webkit-user-select:none;
@@ -185,6 +185,9 @@ a:link, a:visited{ text-decoration:none; padding:0 1.5rem; font-weight:300; }
 
 /* Zeilenumbrüche via I18N */
 .i18n-pre, .button.i18n-pre{ white-space: pre-line; }
+
+/* .button{ padding: 6rem !important; } */
+
 /* ===================================================================
    Privacy Box
    =================================================================== */
@@ -323,6 +326,7 @@ html[data-lang="en"] .lang-btn .lang-de { opacity:.6; }
   .lang-switch{ border-top:1px solid rgba(255,255,255,.06); }
   .lang-btn{ width:100%; justify-content:center; padding:.9rem 1rem; }
 }
+
 
 
 
