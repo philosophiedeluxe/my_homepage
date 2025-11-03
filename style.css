@@ -86,33 +86,43 @@ header .header_container_left:hover img { filter:none; }
 header .header_container_left:hover::after{ opacity:0; }
 
 header .header_container_right{
-  display:flex; flex-direction:column; justify-content:space-between; align-items:center;
-  text-align:center; line-height:1.4;
-  padding: .5rem  .5rem 1rem;
-  margin-inline: 7px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  line-height:1.4;
+  padding: clamp(.5rem, 1.5vw, 1rem);
+  margin-inline: clamp(4px, 1vw, 7px);
+  min-width: 0;               /* wichtig bei Flex */
 }
 header .header_container_right .content_container{
-  flex:1; display:flex; padding-top:2rem !important;
+  flex:1 1 auto;
+  display:flex;
+  width:100%;
+  max-width:min(960px, 100%);
+  padding-top: clamp(1rem, 3vw, 2rem);
+  margin-inline:auto;
 }
 
 /* Mobile Umschaltung */
 @media (max-width: 900px){
   header .header_container{ grid-template-columns: 1fr; }
 
-  /* Bild nicht mehr auf 80vh festnageln → es füllt den linken Bereich sauber */
   header .header_container_left img{
     position: relative;
     width: 100%;
     height: auto;
-    min-height: 55svh;          /* angenehme Mindesthöhe */
+    min-height: 55svh;
   }
 
   header .header_container_right{
     filter: drop-shadow(0 0 25px rgba(255,255,255,.3));
     padding: 1rem;
   }
+
+  /* Negativabstand begrenzen, damit nichts abgeschnitten wird */
   header .header_container_right .content_container{
-    margin-top: -10rem;         /* dein Effekt bleibt bestehen */
+    margin-top: clamp(-10rem, -12vw, -7rem);
     background: linear-gradient(0deg, #414141 0%, #5c5b5b 50%, #414141 100%);
     z-index: 10;
     padding: 2rem 2rem 0;
@@ -334,3 +344,4 @@ html[data-lang="en"] .lang-btn .lang-de { opacity:.6; }
 
 /* Horizontalen Überlauf sicher killen (statt clip) */
 html, body { overflow-x: hidden; }
+
