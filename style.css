@@ -197,7 +197,7 @@ a:link, a:visited{ text-decoration:none; padding:0 1.5rem; font-weight:300; }
    Cards (Vita)
    =================================================================== */
 
-:root{ --card-collapsed-h: clamp(64px, 9svh, 96px); }
+:root{ --card-collapsed-h: clamp(32px, 4.5svh, 48px); }
 
 .wrapper{
   width:100%;
@@ -269,30 +269,30 @@ a:link, a:visited{ text-decoration:none; padding:0 1.5rem; font-weight:300; }
   font-size: clamp(.7rem, 2.2vw, 1rem);
 }
 
-/* Texte: eingeklappt verstecken, aufgeklappt zeigen */
-.card .description > :not(h4){
-  /* collapsed */
-  opacity:0;
-  max-height:0;
-  margin:0 !important;
-  padding:0 !important;
-  overflow:hidden;
-  visibility:hidden;
-  transform:translateY(-4px);
+/* Eingeklappt: ALLE Kinder (inkl. h4) ausblenden */
+.card .description > *{
+  opacity: 0;
+  max-height: 0;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden;
+  visibility: hidden;
+  transform: translateY(-4px);
   transition:
     opacity .2s ease,
     max-height .2s ease,
     transform .2s ease,
     visibility 0s linear .2s; /* nach dem Fade verstecken */
 }
-input:checked + label .description > :not(h4){
-  /* expanded */
-  opacity:1;
-  max-height:100rem;               /* praktisch „auto“ */
-  visibility:visible;
-  transform:none;
-  margin:1.25rem .75rem 1rem !important;
-  padding:0 !important;
+
+/* Ausgeklappt: wieder anzeigen */
+input:checked + label .description > *{
+  opacity: 1;
+  max-height: 100rem;              /* praktisch “auto” */
+  visibility: visible;
+  transform: none;
+  margin: 1.25rem .75rem 1rem !important;  /* deine Abstände zurück */
+  padding: 0 !important;
   transition:
     opacity .25s ease .05s,
     max-height .25s ease .05s,
@@ -430,6 +430,7 @@ html[data-lang="en"] .lang-btn .lang-de { opacity:.6; }
 
 /* Horizontalen Überlauf sicher killen (statt clip) */
 html, body { overflow-x: hidden; }
+
 
 
 
