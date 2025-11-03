@@ -180,13 +180,8 @@ a:link, a:visited{ text-decoration:none; padding:0 1.5rem; font-weight:300; }
   z-index:-1; content:""; position:absolute; inset:0; background:#222; border-radius:7px;
 }
 
-/* optional: größere Variante schnell aktivierbar */
-.button--lg{ --pad-y: 1.1rem; --pad-x: 1.6rem; }
-
 /* Zeilenumbrüche via I18N */
 .i18n-pre, .button.i18n-pre{ white-space: pre-line; }
-
-/* .button{ padding: 6rem !important; } */
 
 /* ===================================================================
    Privacy Box
@@ -326,6 +321,7 @@ html[data-lang="en"] .lang-btn .lang-de { opacity:.6; }
   .lang-switch{ border-top:1px solid rgba(255,255,255,.06); }
   .lang-btn{ width:100%; justify-content:center; padding:.9rem 1rem; }
 }
+
 
 
 
