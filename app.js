@@ -30,6 +30,10 @@
       "vita.apprenticeship": "Ausbildung zum Koch",
       "vita.certificates": "Zertifikate",
       "vita.back": "Zurück zur Startseite, \n... schreib mir wenn dir gefällt was du gelesen hast.",
+      "vita.job1.h4": "Softwareentwickler - <br>Pragmatis GmbH",
+      "vita.job2.h4": "Praktikum Softwareentwickler - <br>Europa Möbel-Verbund",
+      "vita.job3.h4": "Ausbildung Fachinformatiker AE - <br>WBS GRUPPE",
+      "vita.job4.h4": "Purchasing - <br>Munich Airport Marriott Hotel",
       
       "privacy.metaTitle": "Phil Kirchner - Datenschutz",
       "privacy.title": "Datenschutz­erklärung",
@@ -77,7 +81,11 @@
       "vita.apprenticeship": "Apprenticeship as a Cook",
       "vita.certificates": "Certificates",
       "vita.back": "Back to homepage,\n... drop me a line if you liked what you read.",
-      
+      "vita.job1.h4": "Software Developer - <br>Pragmatis GmbH",
+      "vita.job2.h4": "Software Developer Internship - <br>Europa Möbel-Verbund",
+      "vita.job3.h4": "Apprenticeship IT Specialist (AE) - <br>WBS GROUP",
+      "vita.job4.h4": "Purchasing - <br>Munich Airport Marriott Hotel"
+
       "privacy.metaTitle": "Phil Kirchner - Privacy",
       "privacy.title": "Privacy Policy",
       "privacy.overview": "Privacy at a glance",
@@ -126,31 +134,43 @@
     return DEFAULT_LANG;
   }
 
-  function applyTranslations(lang){
-    const dict = I18N[lang] || {};
-    const html = document.documentElement;
-    html.lang = lang;
-    html.setAttribute("data-lang", lang);
+function applyTranslations(lang){
+  const dict = I18N[lang] || {};
+  const html = document.documentElement;
+  html.lang = lang;
+  html.setAttribute("data-lang", lang);
 
-    document.querySelectorAll("[data-i18n]").forEach(el => {
-      const key = el.getAttribute("data-i18n");
-      if (!key) return;
-      const txt = dict[key];
-      if (typeof txt === "string") el.textContent = txt;
-    });
+  const escapeHtml = (s) =>
+    s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
 
-    // sicherheitshalber auch document.title setzen, falls <title> nicht mitgenommen wurde
-    const titleEl = document.querySelector("title[data-i18n]");
-    if (titleEl) document.title = titleEl.textContent;
+  document.querySelectorAll("[data-i18n], [data-i18n-html]").forEach(el => {
+    const key = el.getAttribute("data-i18n") || el.getAttribute("data-i18n-html");
+    if (!key) return;
+    const txt = dict[key];
+    if (typeof txt !== "string") return;
 
-    if (langBtn){
-      langBtn.setAttribute(
-        "aria-label",
-        lang === "de" ? "Sprache umschalten (Deutsch/Englisch)"
-                      : "Switch language (English/German)"
-      );
+    if (el.hasAttribute("data-i18n-html")) {
+      // sicher rendern: HTML escapen, \n → <br>, Zeilen getrimmt
+      const htmlSafe = escapeHtml(txt)
+        .split("\n").map(s => s.trim()).join("<br>");
+      el.innerHTML = htmlSafe;
+    } else {
+      el.textContent = txt; // Standard: plain text
     }
+  });
+
+  const titleEl = document.querySelector("title[data-i18n]");
+  if (titleEl) document.title = titleEl.textContent;
+
+  if (langBtn){
+    langBtn.setAttribute(
+      "aria-label",
+      lang === "de" ? "Sprache umschalten (Deutsch/Englisch)"
+                    : "Switch language (English/German)"
+    );
   }
+}
+
 
   function getInitialLang(){
     const stored = localStorage.getItem("lang");
