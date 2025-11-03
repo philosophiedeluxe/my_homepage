@@ -409,10 +409,6 @@ input:checked + label .description {
   background-image: url('./image/img6.jpeg');
 }
 
-.card .description{ display:flex; align-items:flex-start; gap:16px; }
-.card .description p{ display:block; margin:0; text-align:left; } /* wichtig */
-.card .description h4{ padding-top:0; }
-
 /* end styling for the cards */
 
 
@@ -551,6 +547,7 @@ header > .container-wide { padding-inline: clamp(20px,5vw,64px); }
 /* === HARTE Overrides gegen „festgenagelte“ Höhen (blockieren sonst den 2-Zeiler) === 
 body   { min-height: 100vh !important; height: auto !important; }
 header { min-height: 100svh !important; height: auto !important; overflow: visible !important; }*/
+
 
 
 
