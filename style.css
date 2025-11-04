@@ -347,7 +347,7 @@ header > .container-wide{ padding-inline: clamp(20px,5vw,64px); }
 .nav::before{
   content:""; position:absolute; z-index:-1; inset:0; left:50%; transform:translateX(-50%);
   width:100vw; /* Fallback */
-  background: linear-gradient(90deg, rgba(0,0,0,.6) 0%, rgba(0,0,0,.6) 40%, rgb(74 2 80) 100%);
+  background: linear-gradient(90deg, rgba(0,0,0,.6) 0%, rgba(0,0,0,.6) 40%, rgb(48 1 52) 100%);
   border-bottom:1px solid rgba(255,255,255,.08);
   -webkit-backdrop-filter: blur(60px); backdrop-filter: blur(60px);
 }
@@ -388,7 +388,7 @@ header > .container-wide{ padding-inline: clamp(20px,5vw,64px); }
   .nav-list[data-collapsible="true"]{
     position: static; display:grid; gap:0;
     max-height:0; overflow:hidden; transition:max-height .3s ease;
-    background: linear-gradient(90deg, rgba(0,0,0,.6) 0%, rgba(0,0,0,.6) 40%, rgb(74 2 80) 100%);
+    background: linear-gradient(90deg, rgba(0,0,0,.6) 0%, rgba(0,0,0,.6) 40%, rgb(48 1 52) 100%);
     border-bottom:1px solid rgba(255,255,255,.06); box-shadow:0 12px 24px rgba(0,0,0,.35);
     padding-block:.25rem;
   }
@@ -430,6 +430,7 @@ html[data-lang="en"] .lang-btn .lang-de { opacity:.6; }
 
 /* Horizontalen Überlauf sicher killen (statt clip) */
 html, body { overflow-x: hidden; }
+
 
 
 
