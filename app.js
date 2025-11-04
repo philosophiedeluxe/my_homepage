@@ -13,6 +13,8 @@
 
   const hasNav = !!(nav && toggle && list);
 
+  const radios = document.querySelectorAll('input[name="slide"]');
+
   // --- Nav-Höhe -> CSS-Variable (für 100svh-Layout) ---
   function setNavHeightVar(){
     const h = nav ? Math.round(nav.getBoundingClientRect().height) : 56;
@@ -202,6 +204,29 @@
       setOpen(false); // Menü ggf. schließen (no-op, wenn keine Nav)
     });
   }
+
+    function setOpenHeight(label){
+    if(!label) return;
+    // volle Inhaltshöhe der Karte, unabhängig vom sichtbaren Ausschnitt
+    const h = label.scrollHeight;
+    // vernünftig deckeln (z.B. 80% Viewport)
+    const cap = Math.round(Math.min(h, window.innerHeight * 0.8));
+    label.style.setProperty('--card-open-h', cap + 'px');
+  }
+
+  // initial + bei Wechsel
+  radios.forEach(r => {
+    const label = r.nextElementSibling;
+    setOpenHeight(label);
+    r.addEventListener('change', () => setOpenHeight(label));
+  });
+
+  // bei Resize neu berechnen
+  window.addEventListener('resize', () => {
+    const checked = document.querySelector('input[name="slide"]:checked');
+    if (checked) setOpenHeight(checked.nextElementSibling);
+  });
+});
 
   // --- Optional: Nav-Collapse nur, wenn vorhanden ---
   if (hasNav){
