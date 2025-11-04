@@ -217,7 +217,7 @@ a:link, a:visited{ text-decoration:none; padding:0 1.5rem; font-weight:300; }
 .card{
   width:100%;
   max-width:700px;
-  max-height: var(--card-collapsed-h);
+  height: var(--card-collapsed-h);
   overflow:hidden;
   border-radius:.7rem;
   margin:2px 0;
@@ -227,9 +227,10 @@ a:link, a:visited{ text-decoration:none; padding:0 1.5rem; font-weight:300; }
   background-position:center;
   box-shadow:0 10px 30px -5px #3a3a3a;
   text-align:left;
-  transition: max-height .75s var(--card-ease), /* smoother */
+
+  transition: height .75s var(--card-ease),
               box-shadow .45s var(--card-ease);
-  will-change: max-height;
+  will-change: height;
 }
 
 .card > .row{
@@ -309,10 +310,9 @@ input:checked + label .description > *{
 /* Expand: Höhe nach Inhalt (keine harte Kappe) */
 input{ display:none; }
 input:checked + label{
-  max-height: var(--card-open-h);
+  height: var(--card-open-h);
   box-shadow:0 16px 38px -5px rgba(0,0,0,.55);
 }
-
 /* Respekt für reduzierte Bewegung */
 @media (prefers-reduced-motion: reduce){
   .card, .card .description > *{ transition:none !important; }
@@ -572,6 +572,7 @@ html, body { overflow-x: hidden; }
     justify-content: center;
   }
 }
+
 
 
 
