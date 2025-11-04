@@ -185,16 +185,11 @@ a:link, a:visited{ text-decoration:none; padding:0 1.5rem; font-weight:300; }
 .i18n-pre, .button.i18n-pre{ white-space: pre-line; }
 
 /* ===================================================================
-   Cards (Vita) – stabil & smooth
+   Cards (Vita)
    =================================================================== */
 
-:root{
-  --card-collapsed-h: clamp(32px, 4.5svh, 48px);
-  --card-expand-max:  clamp(420px, 65svh, 880px);
-  --ease-snap:        cubic-bezier(.22,.61,.36,1);
-}
+:root{ --card-collapsed-h: clamp(32px, 4.5svh, 48px); }
 
-/* Container */
 .wrapper{
   width:100%;
   max-width:min(700px,100%);
@@ -203,6 +198,7 @@ a:link, a:visited{ text-decoration:none; padding:0 1.5rem; font-weight:300; }
   align-items:stretch;
   justify-content:flex-start;
 }
+
 .slide_container{
   width:100%;
   display:flex;
@@ -212,11 +208,11 @@ a:link, a:visited{ text-decoration:none; padding:0 1.5rem; font-weight:300; }
   min-width:0;
 }
 
-/* Card – NICHT mit height:auto arbeiten */
+/* Grundzustand: kollabiert auf kompakte Höhe */
 .card{
   width:100%;
   max-width:700px;
-  max-height: var(--card-collapsed-h);
+  height: var(--card-collapsed-h);
   overflow:hidden;
   border-radius:.7rem;
   margin:2px 0;
@@ -226,11 +222,8 @@ a:link, a:visited{ text-decoration:none; padding:0 1.5rem; font-weight:300; }
   background-position:center;
   box-shadow:0 10px 30px -5px #3a3a3a;
   text-align:left;
-
-  transition:
-    max-height .45s var(--ease-snap),
-    box-shadow .25s var(--ease-snap);
-  will-change: max-height;
+  transition: height .35s cubic-bezier(.28,-0.03,0,.99),
+              box-shadow .25s ease;
 }
 
 .card > .row{
@@ -240,7 +233,7 @@ a:link, a:visited{ text-decoration:none; padding:0 1.5rem; font-weight:300; }
   width:100%;
 }
 
-/* Beschreibung-Container – keine globalen Fades */
+/* Beschreibung sichtbar halten (kein globales opacity:0 mehr) */
 .card > .row > .description{
   display:flex;
   flex-direction:row;
@@ -249,9 +242,12 @@ a:link, a:visited{ text-decoration:none; padding:0 1.5rem; font-weight:300; }
   position:relative;
   align-items:flex-start;
   height:auto;
+  opacity:1 !important;
+  transform:none !important;
+  transition:none;
 }
 
-/* Titel */
+/* h4 bleibt immer sichtbar (vertikal) */
 .card .description h4{
   text-transform:uppercase;
   color:rgb(226,166,1);
@@ -264,7 +260,7 @@ a:link, a:visited{ text-decoration:none; padding:0 1.5rem; font-weight:300; }
   font-size: clamp(.7rem, 2.2vw, 1rem);
 }
 
-/* Collapsed: ALLE Kinder (inkl. h4) ausblenden – ohne Platzbedarf */
+/* Eingeklappt: ALLE Kinder (inkl. h4) ausblenden */
 .card .description > *{
   opacity: 0;
   max-height: 0;
@@ -274,39 +270,42 @@ a:link, a:visited{ text-decoration:none; padding:0 1.5rem; font-weight:300; }
   visibility: hidden;
   transform: translateY(-4px);
   transition:
-    opacity    .18s var(--ease-snap),
-    max-height .35s var(--ease-snap),
-    transform  .28s var(--ease-snap),
-    visibility 0s linear .2s;
+    opacity .2s ease,
+    max-height .2s ease,
+    transform .2s ease,
+    visibility 0s linear .2s; /* nach dem Fade verstecken */
 }
 
-/* Expanded: weich einblenden */
-input{ display:none; }
-input:checked + label{
-  max-height: var(--card-expand-max);
-  box-shadow:0 16px 38px -5px rgba(0,0,0,.55);
-}
+/* Ausgeklappt: wieder anzeigen */
 input:checked + label .description > *{
   opacity: 1;
-  max-height: 100rem;
+  max-height: 100rem;              /* praktisch “auto” */
   visibility: visible;
   transform: none;
-  margin: 1.25rem .75rem 1rem !important;
+  margin: 1.25rem .75rem 1rem !important;  /* deine Abstände zurück */
   padding: 0 !important;
   transition:
-    opacity    .28s var(--ease-snap) .06s,
-    max-height .45s var(--ease-snap) .04s,
-    transform  .34s var(--ease-snap) .04s,
+    opacity .25s ease .05s,
+    max-height .25s ease .05s,
+    transform .25s ease .05s,
     visibility 0s linear 0s;
 }
 
-/* Textstil */
+/* Standard-Textstil (greift im expanded-Zustand) */
 .card .description p{
   flex:1 1 auto;
   min-width:0;
   font-weight:300;
   font-size: clamp(.9rem, .85rem + .4vw, 1.05rem);
   color:rgb(253,247,231);
+}
+
+/* Expand: Höhe nach Inhalt (keine harte Kappe) */
+input{ display:none; }
+input:checked + label{
+  height:auto;
+  max-height:none;
+  box-shadow:0 16px 38px -5px rgba(0,0,0,.55);
 }
 
 /* Hintergründe je Karte */
@@ -316,13 +315,6 @@ input:checked + label .description > *{
 .card[for="c4"]{ background-image:url('./image/img4.jpeg'); }
 .card[for="c5"]{ background-image:url('./image/img5.jpeg'); }
 .card[for="c6"]{ background-image:url('./image/img6.jpeg'); }
-
-/* Motion-Respect */
-@media (prefers-reduced-motion: reduce){
-  .card, .card .description > *{ transition:none !important; }
-}
-
-
 
 /* ===================================================================
    NAV: Full-Bleed + 2-zeilig mobil + Verlauf
@@ -570,6 +562,7 @@ html, body { overflow-x: hidden; }
     justify-content: center;
   }
 }
+
 
 
 
