@@ -574,17 +574,8 @@ html, body { overflow-x: hidden; }
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* --- Cards: OPEN-Status gewinnt sicher --- */
+.slide_container > input[type="radio"]:checked + label.card{
+  max-height: var(--card-open-h, var(--card-open-fallback)) !important;
+  box-shadow: 0 16px 38px -5px rgba(0,0,0,.55);
+}
