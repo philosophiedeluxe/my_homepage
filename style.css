@@ -448,7 +448,7 @@ html, body { overflow-x: hidden; }
   /* NICHT 100%: stattdessen eine sinnvolle Maximalbreite */
   width: clamp(320px, 92vw, 800px);
   margin-inline: auto;
-  text-align: left;       /* Lesbarkeit */
+  text-align: center;       /* Lesbarkeit */
 }
 
 /* Datenschutz-Seite (enthält .privacy_policy) etwas schmaler für bessere Lesbarkeit */
@@ -459,4 +459,56 @@ html, body { overflow-x: hidden; }
 /* Optional: wenn du :has() nicht willst/kannst, nimm gezielt die Überschrift als Hook */
 .site-header .container > .content:has([data-i18n="imprint.title"]){
   width: clamp(320px, 92vw, 760px);
+}
+
+/* ================================
+   Impressum + Datenschutz: Abstand unter der NAV
+   ================================ */
+
+/* Mehr Top-Spacing nur auf den Legal-Seiten */
+.site-header .container:has(.privacy_policy),
+.site-header .container:has([data-i18n="imprint.title"]) {
+  /* Navi-Höhe + zusätzlicher Luftkissen-Abstand */
+  padding-top: calc(env(safe-area-inset-top) + clamp(48px, 12vh, 180px));
+  padding-bottom: clamp(32px, 8vh, 120px); /* unten auch etwas Luft */
+}
+
+/* Box mittig halten (falls irgendwo 100% Breite greift) */
+.site-header .container:has(.privacy_policy) > .content,
+.site-header .container:has([data-i18n="imprint.title"]) > .content {
+  margin-inline: auto;
+}
+
+/* Sauberes Anscrollen bei Sprungmarken unter Sticky-NAV */
+.site-header .container:has(.privacy_policy) :where(h1,h2,h3)[id],
+.site-header .container:has([data-i18n="imprint.title"]) :where(h1,h2,h3)[id]{
+  scroll-margin-top: calc(var(--nav-h) + 24px);
+}
+
+/* ================================
+   Impressum + Datenschutz: Button zentrieren
+   ================================ */
+
+/* Variante mit :has() – greift nur auf den Legal-Seiten */
+.site-header .container:has(.privacy_policy) > .content p:has(.button),
+.site-header .container:has([data-i18n="imprint.title"]) > .content p:has(.button){
+  display: flex;
+  justify-content: center;
+  margin-top: clamp(16px, 3vh, 32px);
+}
+
+.site-header .container:has(.privacy_policy) .button,
+.site-header .container:has([data-i18n="imprint.title"]) .button{
+  margin-inline: auto;          /* erzwingt horizontale Zentrierung */
+  display: inline-flex;         /* bleibt wie vorher */
+  text-align: center;           /* falls Text umbrecht */
+}
+
+/* Optional: sehr kleine Screens → etwas breiter */
+@media (max-width: 480px){
+  .site-header .container:has(.privacy_policy) .button,
+  .site-header .container:has([data-i18n="imprint.title"]) .button{
+    max-width: 92vw;
+    justify-content: center;
+  }
 }
