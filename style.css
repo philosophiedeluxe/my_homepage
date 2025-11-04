@@ -217,7 +217,7 @@ a:link, a:visited{ text-decoration:none; padding:0 1.5rem; font-weight:300; }
 /* Grundzustand: kollabiert */
 .card{
   width:100%;
-  max-width:700px;
+  max-width:800px;
   min-height: var(--card-collapsed-h);   /* NEU: Mindesthöhe halten */
   max-height: var(--card-collapsed-h);   /* NEU: im zugeklappten Zustand deckeln */
   overflow:hidden;
@@ -581,10 +581,11 @@ html, body { overflow-x: hidden; }
   }
 }
 
-/* --- Cards: OPEN-Status gewinnt sicher --- */
-.slide_container > input[type="radio"]:checked + label.card{
+/* open – am ENDE der CSS, notfalls mit !important */
+input[type="radio"]:checked + label.card{
   max-height: var(--card-open-h, var(--card-open-fallback)) !important;
   box-shadow: 0 16px 38px -5px rgba(0,0,0,.55);
 }
+
 
 
