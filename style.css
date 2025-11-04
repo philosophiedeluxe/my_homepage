@@ -469,7 +469,6 @@ html[data-lang="en"] .lang-btn .lang-de { opacity:.6; }
 @media (max-width:900px){
   /* UL im Grid → Items nach rechts */
   .nav-list{
-    justify-items: end;
     text-align: right;
   }
 /* NEUE AUSRICHTUNG ENDE */
@@ -573,6 +572,7 @@ html, body { overflow-x: hidden; }
     justify-content: center;
   }
 }
+
 
 
 
