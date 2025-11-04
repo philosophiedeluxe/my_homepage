@@ -185,24 +185,16 @@ a:link, a:visited{ text-decoration:none; padding:0 1.5rem; font-weight:300; }
 .i18n-pre, .button.i18n-pre{ white-space: pre-line; }
 
 /* ===================================================================
-   Privacy Box
-   =================================================================== */
-.privacy_policy{
-  margin-top:1rem; max-height:800px; border:1px solid #fff; padding:1.5rem;
-  overflow-y: auto; -ms-overflow-style:none; scrollbar-width:none;
-}
-.privacy_policy::-webkit-scrollbar{ display:none; }
-
-/* ===================================================================
-   Cards (Vita) – smooth accordion
+   Cards (Vita) – stabil & smooth
    =================================================================== */
 
 :root{
   --card-collapsed-h: clamp(32px, 4.5svh, 48px);
-  --card-expand-max:  clamp(420px, 65svh, 880px);   /* Obergrenze fürs Aufklappen */
-  --ease-snap:        cubic-bezier(.22,.61,.36,1);  /* knackig, aber weich */
+  --card-expand-max:  clamp(420px, 65svh, 880px);
+  --ease-snap:        cubic-bezier(.22,.61,.36,1);
 }
 
+/* Container */
 .wrapper{
   width:100%;
   max-width:min(700px,100%);
@@ -211,7 +203,6 @@ a:link, a:visited{ text-decoration:none; padding:0 1.5rem; font-weight:300; }
   align-items:stretch;
   justify-content:flex-start;
 }
-
 .slide_container{
   width:100%;
   display:flex;
@@ -221,11 +212,11 @@ a:link, a:visited{ text-decoration:none; padding:0 1.5rem; font-weight:300; }
   min-width:0;
 }
 
-/* Grundzustand: kollabiert */
+/* Card – NICHT mit height:auto arbeiten */
 .card{
   width:100%;
   max-width:700px;
-  max-height: var(--card-collapsed-h);   /* << statt height */
+  max-height: var(--card-collapsed-h);
   overflow:hidden;
   border-radius:.7rem;
   margin:2px 0;
@@ -236,12 +227,10 @@ a:link, a:visited{ text-decoration:none; padding:0 1.5rem; font-weight:300; }
   box-shadow:0 10px 30px -5px #3a3a3a;
   text-align:left;
 
-  transform: scale(.997);
   transition:
-    max-height .42s var(--ease-snap),
-    transform  .42s var(--ease-snap),
+    max-height .45s var(--ease-snap),
     box-shadow .25s var(--ease-snap);
-  will-change: max-height, transform;
+  will-change: max-height;
 }
 
 .card > .row{
@@ -251,7 +240,7 @@ a:link, a:visited{ text-decoration:none; padding:0 1.5rem; font-weight:300; }
   width:100%;
 }
 
-/* Beschreibung-Container: keine globalen Effekte */
+/* Beschreibung-Container – keine globalen Fades */
 .card > .row > .description{
   display:flex;
   flex-direction:row;
@@ -260,12 +249,9 @@ a:link, a:visited{ text-decoration:none; padding:0 1.5rem; font-weight:300; }
   position:relative;
   align-items:flex-start;
   height:auto;
-  opacity:1 !important;
-  transform:none !important;
-  transition:none;
 }
 
-/* Titel + Inhalte – smooth in/out */
+/* Titel */
 .card .description h4{
   text-transform:uppercase;
   color:rgb(226,166,1);
@@ -278,7 +264,7 @@ a:link, a:visited{ text-decoration:none; padding:0 1.5rem; font-weight:300; }
   font-size: clamp(.7rem, 2.2vw, 1rem);
 }
 
-/* Eingeklappt: ALLE Kinder verstecken (inkl. h4) */
+/* Collapsed: ALLE Kinder (inkl. h4) ausblenden – ohne Platzbedarf */
 .card .description > *{
   opacity: 0;
   max-height: 0;
@@ -288,13 +274,18 @@ a:link, a:visited{ text-decoration:none; padding:0 1.5rem; font-weight:300; }
   visibility: hidden;
   transform: translateY(-4px);
   transition:
-    opacity    .22s var(--ease-snap),
-    max-height .34s var(--ease-snap),
+    opacity    .18s var(--ease-snap),
+    max-height .35s var(--ease-snap),
     transform  .28s var(--ease-snap),
-    visibility 0s linear .24s;
+    visibility 0s linear .2s;
 }
 
-/* Ausgeklappt: zeigen – mit leichtem Delay fürs weichere Gefühl */
+/* Expanded: weich einblenden */
+input{ display:none; }
+input:checked + label{
+  max-height: var(--card-expand-max);
+  box-shadow:0 16px 38px -5px rgba(0,0,0,.55);
+}
 input:checked + label .description > *{
   opacity: 1;
   max-height: 100rem;
@@ -303,13 +294,13 @@ input:checked + label .description > *{
   margin: 1.25rem .75rem 1rem !important;
   padding: 0 !important;
   transition:
-    opacity    .28s var(--ease-snap) .08s,
-    max-height .42s var(--ease-snap) .06s,
-    transform  .34s var(--ease-snap) .06s,
+    opacity    .28s var(--ease-snap) .06s,
+    max-height .45s var(--ease-snap) .04s,
+    transform  .34s var(--ease-snap) .04s,
     visibility 0s linear 0s;
 }
 
-/* Standard-Textstil (greift im expanded-Zustand) */
+/* Textstil */
 .card .description p{
   flex:1 1 auto;
   min-width:0;
@@ -318,15 +309,15 @@ input:checked + label .description > *{
   color:rgb(253,247,231);
 }
 
-/* Expand: weich skaliert + Maxhöhe animiert (kein height:auto mehr) */
-input{ display:none; }
-input:checked + label{
-  max-height: var(--card-expand-max);
-  transform: scale(1);
-  box-shadow:0 16px 38px -5px rgba(0,0,0,.55);
-}
+/* Hintergründe je Karte */
+.card[for="c1"]{ background-image:url('./image/img1.jpeg'); }
+.card[for="c2"]{ background-image:url('./image/img2.jpeg'); }
+.card[for="c3"]{ background-image:url('./image/img3.jpeg'); }
+.card[for="c4"]{ background-image:url('./image/img4.jpeg'); }
+.card[for="c5"]{ background-image:url('./image/img5.jpeg'); }
+.card[for="c6"]{ background-image:url('./image/img6.jpeg'); }
 
-/* Prefers-reduced-motion: Animationen respektieren */
+/* Motion-Respect */
 @media (prefers-reduced-motion: reduce){
   .card, .card .description > *{ transition:none !important; }
 }
