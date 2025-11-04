@@ -194,10 +194,14 @@ a:link, a:visited{ text-decoration:none; padding:0 1.5rem; font-weight:300; }
 .privacy_policy::-webkit-scrollbar{ display:none; }
 
 /* ===================================================================
-   Cards (Vita)
+   Cards (Vita) – smooth accordion
    =================================================================== */
 
-:root{ --card-collapsed-h: clamp(32px, 4.5svh, 48px); }
+:root{
+  --card-collapsed-h: clamp(32px, 4.5svh, 48px);
+  --card-expand-max:  clamp(420px, 65svh, 880px);   /* Obergrenze fürs Aufklappen */
+  --ease-snap:        cubic-bezier(.22,.61,.36,1);  /* knackig, aber weich */
+}
 
 .wrapper{
   width:100%;
@@ -217,11 +221,11 @@ a:link, a:visited{ text-decoration:none; padding:0 1.5rem; font-weight:300; }
   min-width:0;
 }
 
-/* Grundzustand: kollabiert auf kompakte Höhe */
+/* Grundzustand: kollabiert */
 .card{
   width:100%;
   max-width:700px;
-  height: var(--card-collapsed-h);
+  max-height: var(--card-collapsed-h);   /* << statt height */
   overflow:hidden;
   border-radius:.7rem;
   margin:2px 0;
@@ -231,8 +235,13 @@ a:link, a:visited{ text-decoration:none; padding:0 1.5rem; font-weight:300; }
   background-position:center;
   box-shadow:0 10px 30px -5px #3a3a3a;
   text-align:left;
-  transition: height .35s cubic-bezier(.28,-0.03,0,.99),
-              box-shadow .25s ease;
+
+  transform: scale(.997);
+  transition:
+    max-height .42s var(--ease-snap),
+    transform  .42s var(--ease-snap),
+    box-shadow .25s var(--ease-snap);
+  will-change: max-height, transform;
 }
 
 .card > .row{
@@ -242,7 +251,7 @@ a:link, a:visited{ text-decoration:none; padding:0 1.5rem; font-weight:300; }
   width:100%;
 }
 
-/* Beschreibung sichtbar halten (kein globales opacity:0 mehr) */
+/* Beschreibung-Container: keine globalen Effekte */
 .card > .row > .description{
   display:flex;
   flex-direction:row;
@@ -256,7 +265,7 @@ a:link, a:visited{ text-decoration:none; padding:0 1.5rem; font-weight:300; }
   transition:none;
 }
 
-/* h4 bleibt immer sichtbar (vertikal) */
+/* Titel + Inhalte – smooth in/out */
 .card .description h4{
   text-transform:uppercase;
   color:rgb(226,166,1);
@@ -269,7 +278,7 @@ a:link, a:visited{ text-decoration:none; padding:0 1.5rem; font-weight:300; }
   font-size: clamp(.7rem, 2.2vw, 1rem);
 }
 
-/* Eingeklappt: ALLE Kinder (inkl. h4) ausblenden */
+/* Eingeklappt: ALLE Kinder verstecken (inkl. h4) */
 .card .description > *{
   opacity: 0;
   max-height: 0;
@@ -279,24 +288,24 @@ a:link, a:visited{ text-decoration:none; padding:0 1.5rem; font-weight:300; }
   visibility: hidden;
   transform: translateY(-4px);
   transition:
-    opacity .2s ease,
-    max-height .2s ease,
-    transform .2s ease,
-    visibility 0s linear .2s; /* nach dem Fade verstecken */
+    opacity    .22s var(--ease-snap),
+    max-height .34s var(--ease-snap),
+    transform  .28s var(--ease-snap),
+    visibility 0s linear .24s;
 }
 
-/* Ausgeklappt: wieder anzeigen */
+/* Ausgeklappt: zeigen – mit leichtem Delay fürs weichere Gefühl */
 input:checked + label .description > *{
   opacity: 1;
-  max-height: 100rem;              /* praktisch “auto” */
+  max-height: 100rem;
   visibility: visible;
   transform: none;
-  margin: 1.25rem .75rem 1rem !important;  /* deine Abstände zurück */
+  margin: 1.25rem .75rem 1rem !important;
   padding: 0 !important;
   transition:
-    opacity .25s ease .05s,
-    max-height .25s ease .05s,
-    transform .25s ease .05s,
+    opacity    .28s var(--ease-snap) .08s,
+    max-height .42s var(--ease-snap) .06s,
+    transform  .34s var(--ease-snap) .06s,
     visibility 0s linear 0s;
 }
 
@@ -309,21 +318,19 @@ input:checked + label .description > *{
   color:rgb(253,247,231);
 }
 
-/* Expand: Höhe nach Inhalt (keine harte Kappe) */
+/* Expand: weich skaliert + Maxhöhe animiert (kein height:auto mehr) */
 input{ display:none; }
 input:checked + label{
-  height:auto;
-  max-height:none;
+  max-height: var(--card-expand-max);
+  transform: scale(1);
   box-shadow:0 16px 38px -5px rgba(0,0,0,.55);
 }
 
-/* Hintergründe je Karte */
-.card[for="c1"]{ background-image:url('./image/img1.jpeg'); }
-.card[for="c2"]{ background-image:url('./image/img2.jpeg'); }
-.card[for="c3"]{ background-image:url('./image/img3.jpeg'); }
-.card[for="c4"]{ background-image:url('./image/img4.jpeg'); }
-.card[for="c5"]{ background-image:url('./image/img5.jpeg'); }
-.card[for="c6"]{ background-image:url('./image/img6.jpeg'); }
+/* Prefers-reduced-motion: Animationen respektieren */
+@media (prefers-reduced-motion: reduce){
+  .card, .card .description > *{ transition:none !important; }
+}
+
 
 
 /* ===================================================================
@@ -572,6 +579,7 @@ html, body { overflow-x: hidden; }
     justify-content: center;
   }
 }
+
 
 
 
