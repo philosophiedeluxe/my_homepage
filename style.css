@@ -326,6 +326,16 @@ input:checked + label{
 .card[for="c5"]{ background-image:url('./image/img5.jpeg'); }
 .card[for="c6"]{ background-image:url('./image/img6.jpeg'); }
 
+/* beim Messen: alle Limits der Kinder aufheben, keine Animationen */
+label.card.is-measuring .description > *{
+  max-height: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+  transition: none !important;
+}
+
+
 /* ===================================================================
    NAV: Full-Bleed + 2-zeilig mobil + Verlauf
    =================================================================== */
@@ -578,8 +588,9 @@ html, body { overflow-x: hidden; }
   }
 }
 
-/* open – am ENDE platzieren, notfalls mit !important */
+/* GANZ AM ENDE deiner CSS lassen! */
 input[type="radio"]:checked + label.card{
   max-height: var(--card-open-h, var(--card-open-fallback)) !important;
   box-shadow: 0 16px 38px -5px rgba(0,0,0,.55);
 }
+
