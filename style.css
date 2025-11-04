@@ -464,6 +464,34 @@ html[data-lang="en"] .lang-btn .lang-de { opacity:.6; }
   .lang-btn{ width:100%; justify-content:center; padding:.9rem 1rem; }
 }
 
+/* NEUE AUSRICHTUNG START */
+/* Nur MOBIL: Nav-Items rechtsbündig */
+@media (max-width:900px){
+  /* UL im Grid → Items nach rechts */
+  .nav-list{
+    justify-items: end;
+    text-align: right;
+  }
+
+  /* Links sauber rechts ausrichten */
+  .nav-list a{
+    display: block;
+    text-align: right;
+    padding-inline: 1rem;  /* Klickfläche */
+  }
+
+  /* Sprachschalter ebenfalls rechts */
+  .lang-switch{
+    justify-self: end;
+    width: auto !important;
+  }
+  .lang-btn{
+    width: auto !important;
+    justify-content: flex-end;
+  }
+}
+/* NEUE AUSRICHTUNG ENDE */
+
 
 /* ================================
    header Container + Medien 
@@ -563,5 +591,6 @@ html, body { overflow-x: hidden; }
     justify-content: center;
   }
 }
+
 
 
