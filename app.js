@@ -207,36 +207,34 @@
 
 function setOpenHeight(label){
   if (!label) return;
-  const h   = label.scrollHeight;                       // natürliche Inhaltshöhe
-  const cap = Math.round(Math.min(h, window.innerHeight * 0.8)); // Deckel ~80vh
-  label.style.setProperty('--card-open-h', cap + 'px');
-}
+  // kurz auf Fallback zurück, damit die Transition sauber startet
+  label.style.removeProperty('--card-open-h');
 
-// Initial: jedem Label einen Startwert geben
-radios.forEach(r => {
-  const label = r.nextElementSibling;
-  setOpenHeight(label);
-
-  // WICHTIG: nach dem Umschalten erst im nächsten Frame messen
-  r.addEventListener('change', () => {
-    const lbl = r.nextElementSibling;
+  // erst NACH dem Umschalten messen
+  requestAnimationFrame(() => {
     requestAnimationFrame(() => {
-      requestAnimationFrame(() => setOpenHeight(lbl));
+      const h   = label.scrollHeight;                 // echte Inhaltshöhe
+      const cap = Math.round(Math.min(h, window.innerHeight * 0.8)); // Deckel ~80vh
+      label.style.setProperty('--card-open-h', cap + 'px');
     });
   });
-});
-
-// Beim Load den aktuell geöffneten nochmals korrekt setzen
-const initiallyChecked = document.querySelector('input[name="slide"]:checked');
-if (initiallyChecked) {
-  requestAnimationFrame(() => setOpenHeight(initiallyChecked.nextElementSibling));
 }
 
-// Bei Resize nur für die offene Karte neu messen
+// nur bei Wechsel messen
+radios.forEach(r => {
+  r.addEventListener('change', () => setOpenHeight(r.nextElementSibling));
+});
+
+// beim Load NUR die aktuell offene messen
+const initiallyChecked = document.querySelector('input[name="slide"]:checked');
+if (initiallyChecked) setOpenHeight(initiallyChecked.nextElementSibling);
+
+// bei Resize NUR die offene neu messen
 window.addEventListener('resize', () => {
   const checked = document.querySelector('input[name="slide"]:checked');
   if (checked) setOpenHeight(checked.nextElementSibling);
 });
+
 
 
   // --- Optional: Nav-Collapse nur, wenn vorhanden ---
