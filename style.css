@@ -188,7 +188,7 @@ a:link, a:visited{ text-decoration:none; padding:0 1.5rem; font-weight:300; }
    Privacy Box
    =================================================================== */
 .privacy_policy{
-  margin-top:1rem; max-height:500px; border:1px solid #fff; padding:1.5rem;
+  margin-top:1rem; max-height:800px; border:1px solid #fff; padding:1.5rem;
   overflow-y: auto; -ms-overflow-style:none; scrollbar-width:none;
 }
 .privacy_policy::-webkit-scrollbar{ display:none; }
@@ -512,3 +512,4 @@ html, body { overflow-x: hidden; }
     justify-content: center;
   }
 }
+
