@@ -191,7 +191,7 @@ a:link, a:visited{ text-decoration:none; padding:0 1.5rem; font-weight:300; }
 /* Geschmeidiger: nur max-height animieren, nicht height:auto */
 :root{
   --card-collapsed-h: clamp(32px, 4.5svh, 48px);
-  --card-open-h:      clamp(240px, 52svh, 520px); /* vorher 65svh/760px */
+  --card-open-h:      clamp(240px, 52svh, 520px); /* vorher 360px, 65svh, 760px */
   --card-ease:        cubic-bezier(.22,.61,.36,1);
 }
 
@@ -572,6 +572,7 @@ html, body { overflow-x: hidden; }
     justify-content: center;
   }
 }
+
 
 
 
