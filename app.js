@@ -205,38 +205,47 @@
     });
   }
 
-// --- Cards: dynamische Open-Höhe robust setzen ---
+// --- Cards: dynamische Open-Höhe robust setzen (kein Caching-32px mehr) ---
 function recomputeOpenHeight(){
-  // 1) alte Inline-Werte überall entfernen (blockiert sonst die Höhe)
+  // 1) ALLE Karten von alten Inline-Werten befreien, damit Fallback sofort greift
   document.querySelectorAll('label.card').forEach(l => {
     l.style.removeProperty('--card-open-h');
+    l.classList.remove('is-measuring');
   });
 
-  // 2) die aktuell GEÖFFNETE Karte messen und setzen (nach dem Rendern)
+  // 2) aktuell GEÖFFNETE Karte bestimmen
   const checked = document.querySelector('input[name="slide"]:checked');
   if (!checked) return;
-  const lab = checked.nextElementSibling; // direktes Label
+  const lab = checked.nextElementSibling;
+  if (!lab || !lab.classList || !lab.classList.contains('card')) return;
 
-  // doppelte rAF: erst nach CSS-Umschaltung messen
+  // 3) kurz "Messmodus": Kinder nicht mehr begrenzen, dann messen
+  lab.classList.add('is-measuring');
+
+  // doppelte rAF: erst NACH dem Statewechsel + Styles messen
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
-      const h   = lab.scrollHeight;                         // echte Inhaltshöhe
-      const cap = Math.round(Math.min(h, window.innerHeight * 0.8)); // Deckel ~80vh
+      const full = lab.scrollHeight;                            // echte Inhaltshöhe
+      const cap  = Math.round(Math.min(full, window.innerHeight * 0.80)); // ~80vh Deckel
+      // 4) Zielhöhe setzen und Messmodus beenden
       lab.style.setProperty('--card-open-h', cap + 'px');
+      lab.classList.remove('is-measuring');
     });
   });
 }
 
-// nur bei Wechsel neu berechnen
+// Events verdrahten
+const radios = document.querySelectorAll('input[name="slide"]');
 if (radios && radios.length){
   radios.forEach(r => r.addEventListener('change', recomputeOpenHeight));
 }
 
-// beim Load die (vor-)geöffnete Karte korrekt setzen
+// Initial: falls eine Karte vorgewählt ist (c1 checked)
 recomputeOpenHeight();
 
-// bei Resize neu berechnen (nur offene Karte wird gemessen)
+// Resize: offene Karte neu rechnen
 window.addEventListener('resize', recomputeOpenHeight);
+
 
   // --- Optional: Nav-Collapse nur, wenn vorhanden ---
   if (hasNav){
