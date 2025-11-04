@@ -319,6 +319,8 @@ input:checked + label{
   .card, .card .description > *{ transition:none !important; }
 }
 
+input[type="radio"]:checked + label.card{ outline: 2px solid lime; } /* debug */
+
 /* Hintergründe je Karte */
 .card[for="c1"]{ background-image:url('./image/img1.jpeg'); }
 .card[for="c2"]{ background-image:url('./image/img2.jpeg'); }
@@ -584,4 +586,5 @@ html, body { overflow-x: hidden; }
   max-height: var(--card-open-h, var(--card-open-fallback)) !important;
   box-shadow: 0 16px 38px -5px rgba(0,0,0,.55);
 }
+
 
