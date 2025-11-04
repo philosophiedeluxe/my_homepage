@@ -188,7 +188,12 @@ a:link, a:visited{ text-decoration:none; padding:0 1.5rem; font-weight:300; }
    Cards (Vita)
    =================================================================== */
 
-:root{ --card-collapsed-h: clamp(32px, 4.5svh, 48px); }
+/* Geschmeidiger: nur max-height animieren, nicht height:auto */
+:root{
+  --card-collapsed-h: clamp(32px, 4.5svh, 48px);
+  --card-expanded-h: 1200px;                 /* groß genug → Inhalt wird nicht gekappt */
+  --card-ease: cubic-bezier(.22,.61,.36,1);  /* weich */
+}
 
 .wrapper{
   width:100%;
@@ -212,7 +217,7 @@ a:link, a:visited{ text-decoration:none; padding:0 1.5rem; font-weight:300; }
 .card{
   width:100%;
   max-width:700px;
-  height: var(--card-collapsed-h);
+  max-height: var(--card-collapsed-h);       /* <— statt height */
   overflow:hidden;
   border-radius:.7rem;
   margin:2px 0;
@@ -222,8 +227,9 @@ a:link, a:visited{ text-decoration:none; padding:0 1.5rem; font-weight:300; }
   background-position:center;
   box-shadow:0 10px 30px -5px #3a3a3a;
   text-align:left;
-  transition: height .35s cubic-bezier(.28,-0.03,0,.99),
-              box-shadow .25s ease;
+  transition: max-height .6s var(--card-ease), /* <— länger + weicher */
+              box-shadow .35s var(--card-ease);
+  will-change: max-height;
 }
 
 .card > .row{
@@ -270,24 +276,24 @@ a:link, a:visited{ text-decoration:none; padding:0 1.5rem; font-weight:300; }
   visibility: hidden;
   transform: translateY(-4px);
   transition:
-    opacity .2s ease,
-    max-height .2s ease,
-    transform .2s ease,
-    visibility 0s linear .2s; /* nach dem Fade verstecken */
+    opacity    .35s var(--card-ease),
+    max-height .6s  var(--card-ease),
+    transform  .45s var(--card-ease),
+    visibility 0s linear .35s;
 }
 
 /* Ausgeklappt: wieder anzeigen */
 input:checked + label .description > *{
   opacity: 1;
-  max-height: 100rem;              /* praktisch “auto” */
+  max-height: 100rem;
   visibility: visible;
   transform: none;
-  margin: 1.25rem .75rem 1rem !important;  /* deine Abstände zurück */
+  margin: 1.25rem .75rem 1rem !important;
   padding: 0 !important;
   transition:
-    opacity .25s ease .05s,
-    max-height .25s ease .05s,
-    transform .25s ease .05s,
+    opacity    .45s var(--card-ease) .08s,
+    max-height .6s  var(--card-ease) .06s,
+    transform  .45s var(--card-ease) .06s,
     visibility 0s linear 0s;
 }
 
@@ -303,9 +309,13 @@ input:checked + label .description > *{
 /* Expand: Höhe nach Inhalt (keine harte Kappe) */
 input{ display:none; }
 input:checked + label{
-  height:auto;
-  max-height:none;
-  box-shadow:0 16px 38px -5px rgba(0,0,0,.55);
+  max-height: var(--card-expanded-h);        /* <— animierbar */
+  box-shadow: 0 16px 38px -5px rgba(0,0,0,.55);
+}
+
+/* Respekt für reduzierte Bewegung */
+@media (prefers-reduced-motion: reduce){
+  .card, .card .description > *{ transition:none !important; }
 }
 
 /* Hintergründe je Karte */
@@ -562,6 +572,7 @@ html, body { overflow-x: hidden; }
     justify-content: center;
   }
 }
+
 
 
 
