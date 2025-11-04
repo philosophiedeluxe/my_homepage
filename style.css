@@ -229,8 +229,7 @@ a:link, a:visited{ text-decoration:none; padding:0 1.5rem; font-weight:300; }
   background-position:center;
   box-shadow:0 10px 30px -5px #3a3a3a;
   text-align:left;
-  transition: max-height .75s var(--card-ease),
-              box-shadow .45s var(--card-ease);
+  transition: max-height .75s var(--card-ease), box-shadow .45s var(--card-ease);
   will-change: max-height;
 }
 
@@ -318,8 +317,6 @@ input:checked + label{
 @media (prefers-reduced-motion: reduce){
   .card, .card .description > *{ transition:none !important; }
 }
-
-input[type="radio"]:checked + label.card{ outline: 2px solid lime; } /* debug */
 
 /* Hintergründe je Karte */
 .card[for="c1"]{ background-image:url('./image/img1.jpeg'); }
@@ -581,11 +578,11 @@ html, body { overflow-x: hidden; }
   }
 }
 
-/* open – am ENDE der CSS, notfalls mit !important */
+/* open – am ENDE platzieren, notfalls mit !important */
 input[type="radio"]:checked + label.card{
   max-height: var(--card-open-h, var(--card-open-fallback)) !important;
   box-shadow: 0 16px 38px -5px rgba(0,0,0,.55);
 }
 
-
-
+/* optional: Debug-Outline */
+input[type="radio"]:checked + label.card{ outline: 2px solid lime; }
