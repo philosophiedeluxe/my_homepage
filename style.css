@@ -191,8 +191,8 @@ a:link, a:visited{ text-decoration:none; padding:0 1.5rem; font-weight:300; }
 /* Geschmeidiger: nur max-height animieren, nicht height:auto */
 :root{
   --card-collapsed-h: clamp(32px, 4.5svh, 48px);
-  --card-open-h:      clamp(360px, 65svh, 760px); /* Zielhöhe im offenen Zustand */
-  --card-ease:        cubic-bezier(.22,.61,.36,1); /* weich, ohne Gummiband */
+  --card-open-h:      clamp(240px, 52svh, 520px); /* vorher 65svh/760px */
+  --card-ease:        cubic-bezier(.22,.61,.36,1);
 }
 
 .wrapper{
@@ -217,7 +217,7 @@ a:link, a:visited{ text-decoration:none; padding:0 1.5rem; font-weight:300; }
 .card{
   width:100%;
   max-width:700px;
-  height: var(--card-collapsed-h);
+  max-height: var(--card-collapsed-h);
   overflow:hidden;
   border-radius:.7rem;
   margin:2px 0;
@@ -227,10 +227,9 @@ a:link, a:visited{ text-decoration:none; padding:0 1.5rem; font-weight:300; }
   background-position:center;
   box-shadow:0 10px 30px -5px #3a3a3a;
   text-align:left;
-
-  transition: height .75s var(--card-ease),
+  transition: max-height .75s var(--card-ease), /* smoother */
               box-shadow .45s var(--card-ease);
-  will-change: height;
+  will-change: max-height;
 }
 
 .card > .row{
@@ -310,7 +309,7 @@ input:checked + label .description > *{
 /* Expand: Höhe nach Inhalt (keine harte Kappe) */
 input{ display:none; }
 input:checked + label{
-  height: var(--card-open-h);
+  max-height: var(--card-open-h);
   box-shadow:0 16px 38px -5px rgba(0,0,0,.55);
 }
 
@@ -573,6 +572,7 @@ html, body { overflow-x: hidden; }
     justify-content: center;
   }
 }
+
 
 
 
