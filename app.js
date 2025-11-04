@@ -235,7 +235,6 @@ function recomputeOpenHeight(){
 }
 
 // Events verdrahten
-const radios = document.querySelectorAll('input[name="slide"]');
 if (radios && radios.length){
   radios.forEach(r => r.addEventListener('change', recomputeOpenHeight));
 }
