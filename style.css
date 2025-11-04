@@ -211,6 +211,7 @@ a:link, a:visited{ text-decoration:none; padding:0 1.5rem; font-weight:300; }
   align-items:stretch;
   gap:.5rem;
   min-width:0;
+  overflow-anchor: none; /* verhindert Scroll-Jumps beim Auf/Zu */
 }
 
 /* Grundzustand: kollabiert */
@@ -253,7 +254,7 @@ a:link, a:visited{ text-decoration:none; padding:0 1.5rem; font-weight:300; }
   transition:none;
 }
 
-/* h4 bleibt immer sichtbar (vertikal) */
+/* h4 wird im eingeklappten Zustand ebenfalls ausgeblendet */
 .card .description h4{
   text-transform:uppercase;
   color:rgb(226,166,1);
@@ -571,6 +572,7 @@ html, body { overflow-x: hidden; }
     justify-content: center;
   }
 }
+
 
 
 
