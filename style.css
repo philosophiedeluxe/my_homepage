@@ -319,12 +319,6 @@ input:checked + label{
   .card, .card .description > *{ transition:none !important; }
 }
 
-/* --- Cards: OPEN-Status gewinnt sicher --- */
-.slide_container > input[type="radio"]:checked + label.card{
-  max-height: var(--card-open-h, var(--card-open-fallback)) !important;
-  box-shadow: 0 16px 38px -5px rgba(0,0,0,.55);
-}
-
 /* Hintergründe je Karte */
 .card[for="c1"]{ background-image:url('./image/img1.jpeg'); }
 .card[for="c2"]{ background-image:url('./image/img2.jpeg'); }
@@ -578,4 +572,10 @@ html, body { overflow-x: hidden; }
     max-width: 92vw;
     justify-content: center;
   }
+}
+
+/* --- Cards: OPEN-Status gewinnt sicher --- */
+.slide_container > input[type="radio"]:checked + label.card{
+  max-height: var(--card-open-h, var(--card-open-fallback)) !important;
+  box-shadow: 0 16px 38px -5px rgba(0,0,0,.55);
 }
