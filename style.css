@@ -367,12 +367,19 @@ header > .container-wide{ padding-inline: clamp(20px,5vw,64px); }
 .nav-list a:hover, .nav-list a:focus-visible{ background: rgba(255,255,255,.08); }
 .nav-divider{ opacity:.6; }
 
-/* Burger standardmäßig ausblenden; mobil zeigen */
-.nav-toggle{ display:none; background:transparent; border:0; padding:.25rem; border-radius:6px; color:inherit; }
-.nav-toggle:focus-visible{ outline:2px solid currentColor; }
-.nav-toggle-bar{ display:block; width:26px; height:2px; margin:5px 0; background: currentColor; }
+/* Burger standardmäßig ausblenden; mobil zeigen (Icon: Plus → ×) */
+.nav-toggle{
+  display:none;
+  background:transparent;
+  border:0;
+  padding:.25rem;
+  border-radius:6px;
+  color:inherit;
+}
 
-/* Mobil: 2-zeilig + Collapsing-Liste */
+/* alte Hamburger-Striche sicher ausblenden */
+.nav-toggle .nav-toggle-bar{ display:none !important; }
+
 @media (max-width:900px){
   .nav{
     grid-template-columns: 1fr auto;
@@ -382,7 +389,47 @@ header > .container-wide{ padding-inline: clamp(20px,5vw,64px); }
     row-gap:.25rem;
   }
   .brand{ grid-area: brand; }
-  .nav-toggle{ grid-area: toggle; display:inline-flex; }
+
+  /* sichtbarer, klarer Toggle – geschlossen: +, offen: × */
+  .nav-toggle{
+    grid-area: toggle;
+    display:inline-flex;
+    align-items:center; justify-content:center;
+    position:relative;
+    width:42px; height:42px; padding:0;
+    border-radius:10px;
+    background: rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.14);
+    transition: background .2s ease, border-color .2s ease, box-shadow .2s ease;
+  }
+  .nav-toggle:hover{
+    background: rgba(255,255,255,.09);
+    border-color: rgba(255,255,255,.22);
+  }
+  .nav-toggle:focus-visible{
+    outline:2px solid currentColor; outline-offset:2px;
+    box-shadow:0 0 0 6px rgba(255,255,255,.12);
+  }
+  .nav-toggle::before,
+  .nav-toggle::after{
+    content:"";
+    position:absolute; left:50%; top:50%;
+    background: currentColor; border-radius:2px;
+    box-shadow:0 0 12px rgba(255,255,255,.15);
+    transition: transform .22s ease, width .22s ease, height .22s ease, opacity .18s ease;
+  }
+  /* geschlossen: Plus */
+  .nav-toggle::before{ width:22px; height:2px; transform:translate(-50%,-50%); }
+  .nav-toggle::after { width:2px;  height:22px; transform:translate(-50%,-50%); }
+  /* offen: × */
+  .nav-toggle[aria-expanded="true"]{ background: rgba(255,255,255,.1); }
+  .nav-toggle[aria-expanded="true"]::before{
+    width:22px; height:2px; transform:translate(-50%,-50%) rotate(45deg);
+  }
+  .nav-toggle[aria-expanded="true"]::after{
+    width:22px; height:2px; transform:translate(-50%,-50%) rotate(-45deg);
+  }
+
   .nav-list{ grid-area: list; width:100%; box-sizing:border-box; }
 
   .nav-list[data-collapsible="true"]{
@@ -417,6 +464,10 @@ html[data-lang="en"] .lang-btn .lang-de { opacity:.6; }
   .lang-btn{ width:100%; justify-content:center; padding:.9rem 1rem; }
 }
 
+
+/* ================================
+   header Container + Medien 
+   ================================ */
 
 /* Flex-Kinder dürfen schrumpfen */
 .header_container_left,
@@ -512,4 +563,5 @@ html, body { overflow-x: hidden; }
     justify-content: center;
   }
 }
+
 
