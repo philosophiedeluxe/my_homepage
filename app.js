@@ -226,7 +226,6 @@
     const checked = document.querySelector('input[name="slide"]:checked');
     if (checked) setOpenHeight(checked.nextElementSibling);
   });
-});
 
   // --- Optional: Nav-Collapse nur, wenn vorhanden ---
   if (hasNav){
