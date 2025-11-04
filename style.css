@@ -468,10 +468,15 @@ html[data-lang="en"] .lang-btn .lang-de { opacity:.6; }
 /* NEUE AUSRICHTUNG START */
 /* Nur MOBIL: Nav-Items rechtsbündig */
 @media (max-width:900px){
-  /* UL im Grid → Items nach rechts */
   .nav-list{
     text-align: right;
+    justify-items: end;   /* weil die Liste mobil als Grid läuft */
   }
+  .nav-list a{
+    text-align: right;    /* Link-Inhalt auch rechts */
+    display: block;
+  }
+}
 /* NEUE AUSRICHTUNG ENDE */
 
 
@@ -579,3 +584,4 @@ html, body { overflow-x: hidden; }
   max-height: var(--card-open-h, var(--card-open-fallback)) !important;
   box-shadow: 0 16px 38px -5px rgba(0,0,0,.55);
 }
+
