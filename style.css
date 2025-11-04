@@ -472,24 +472,6 @@ html[data-lang="en"] .lang-btn .lang-de { opacity:.6; }
     justify-items: end;
     text-align: right;
   }
-
-  /* Links sauber rechts ausrichten */
-  .nav-list a{
-    display: block;
-    text-align: right;
-    padding-inline: 1rem;  /* Klickfläche */
-  }
-
-  /* Sprachschalter ebenfalls rechts */
-  .lang-switch{
-    justify-self: end;
-    width: auto !important;
-  }
-  .lang-btn{
-    width: auto !important;
-    justify-content: flex-end;
-  }
-}
 /* NEUE AUSRICHTUNG ENDE */
 
 
@@ -591,6 +573,7 @@ html, body { overflow-x: hidden; }
     justify-content: center;
   }
 }
+
 
 
 
