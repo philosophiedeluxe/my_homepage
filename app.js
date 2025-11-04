@@ -34,8 +34,8 @@
       "hero.subtitle":   "Freut mich, dass du da bist!",
       "hero.mail":       "Schreib mir gerne eine Mail",
       
-      "vita.title": "Meine persönliche Entwicklung",
-      "vita.subtitle": "\"Ich betrachte meine berufliche Karriere als eine Reise\"",
+      "vita.title": "Meine persönliche \nEntwicklung",
+      "vita.subtitle": "\"Ich betrachte meine berufliche Karriere \nals eine Reise\"",
       "vita.skills": "Kenntnisse:\n",
       "vita.gastro": "Gastronomielaufbahn - \nMunich Airport Marriott Hotel",
       "vita.certificates": "Zertifikate",
@@ -84,8 +84,8 @@
       "hero.subtitle":   "Happy you’re here!",
       "hero.mail":       "Drop me an email",
       
-      "vita.title": "My Personal Development",
-      "vita.subtitle": "\"I see my professional career as a journey\"",
+      "vita.title": "My Personal \nDevelopment",
+      "vita.subtitle": "\"I see my professional career \nas a journey\"",
       "vita.skills": "Skills:\n",
       "vita.gastro": "Culinary Career - \nMunich Airport Marriott Hotel",
       "vita.certificates": "Certificates",
