@@ -442,11 +442,11 @@ header > .container-wide{ padding-inline: clamp(20px,5vw,64px); }
   /* Breite NAV in Kolabs Zustand */
   .nav-list{ 
          grid-area: list; 
-         width:30%; 
+         width:40%; 
          box-sizing:border-box;
          box-shadow:0 0 0 6px rgba(255,255,255,.12);
          border-radius:20px;
-         
+         padding: 30px;  
   }
 
   .nav-list[data-collapsible="true"]{
@@ -600,5 +600,6 @@ input[type="radio"]:checked + label.card{
   max-height: var(--card-open-h, var(--card-open-fallback)) !important;
   box-shadow: 0 16px 38px -5px rgba(0,0,0,.55);
 }
+
 
 
