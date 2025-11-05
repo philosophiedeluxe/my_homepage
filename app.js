@@ -27,7 +27,6 @@
 
   // --- I18N Wörterbuch ---
   const I18N = {
-    // ... dein Dictionary unverändert ...
     de: {
       "nav.vita":        "Vita",
       "nav.impressum":   "Impressum",
@@ -35,18 +34,59 @@
       "hero.title":      "Ich bin Phil",
       "hero.subtitle":   "Freut mich, dass du da bist!",
       "hero.mail":       "Schreib mir gerne eine Mail",
-      
-      "vita.title": "Meine persönliche \nEntwicklung",
-      "vita.subtitle": "\"Ich betrachte meine berufliche Karriere \nals eine Reise\"",
-      "vita.skills": "Kenntnisse:\n",
-      "vita.gastro": "Gastronomielaufbahn - \nMunich Airport Marriott Hotel",
+  
+      "vita.title":      "Meine persönliche \nEntwicklung",
+      "vita.subtitle":   "\"Ich betrachte meine berufliche Karriere \nals eine Reise\"",
+      "vita.skills":     "Kenntnisse:\n",
+      "vita.gastro":     "Gastronomielaufbahn - <br>Munich Airport Marriott Hotel", // HTML wegen data-i18n-html
       "vita.certificates": "Zertifikate",
-      "vita.back": "Zurück zur Startseite, \n... schreib mir wenn dir gefällt was du gelesen hast.",
-      "vita.job1.h4": "Softwareentwickler - <br>Pragmatis GmbH",
-      "vita.job2.h4": "Praktikum Softwareentwickler - <br>Europa Möbel-Verbund",
-      "vita.job3.h4": "Ausbildung Fachinformatiker AE - <br>WBS GRUPPE",
-      "vita.job4.h4": "Purchasing - <br>Munich Airport Marriott Hotel",
-      
+      "vita.back":       "Zurück zur Startseite, \n... schreib mir wenn dir gefällt was du gelesen hast.",
+      "vita.job1.h4":    "Softwareentwickler - <br>Pragmatis GmbH",
+      "vita.job2.h4":    "Praktikum Softwareentwickler - <br>Europa Möbel-Verbund",
+      "vita.job3.h4":    "Ausbildung Fachinformatiker AE - <br>WBS GRUPPE",
+      "vita.job4.h4":    "Purchasing - <br>Munich Airport Marriott Hotel",
+  
+      // NEU/ergänzt für diese Seite:
+      "vita.metaTitle":  "Phil Kirchner - Softwareentwickler",
+  
+      "vita.job1.p":
+        "Dez. 2023 – Heute<br><br>" +
+        "Neufahrn bei Freising, Bayern, DE<br><br>" +
+        "<strong>Kenntnisse:</strong><br>" +
+        "Oracle APEX · PL/SQL · JavaScript · HTML · Cascading Style Sheets (CSS) · Rest Data Source · Restful Services · Oracle DB",
+  
+      "vita.job2.p":
+        "Sept. 2022 – Apr. 2023<br><br>" +
+        "Fahrenzhausen, Bayern, DE<br><br>" +
+        "<strong>Kenntnisse:</strong><br>" +
+        "Java · SQL · Datenbanken · Git · Kanban · Confluence · JIRA · Teamwork · DBMS · Webentwicklung · Vaadin · MVC-Architektur · Spring Framework · Spring Boot · Unified Modeling Language (UML)",
+  
+      "vita.job3.p":
+        "Aug. 2021 – Juni 2023<br><br>" +
+        "Freising, Bayern, DE<br><br>" +
+        "<strong>Kenntnisse:</strong><br>" +
+        "Objektorientierte Programmierung (OOP) · Software-Entwurfsmuster · Java · SQL · Datenbanken · Agile Methoden · IT-Strategie · DBMS · Green IT · HTML · CSS · Microsoft SQL Server",
+  
+      "vita.job4.p":
+        "Supervisor Einkauf<br>Juni 2016 – Aug. 2021<br><br>" +
+        "Purchasing Agent<br>Juni 2015 – Juni 2016<br><br>" +
+        "Food And Beverage Trainee<br>Feb. 2014 – Juni 2015",
+  
+      "vita.gastro.p":
+        "Chef de Partie<br>Juni 2011 – Feb. 2014<br><br>" +
+        "Demi Chef De Partie<br>Sept. 2007 – Juni 2011<br><br>" +
+        "Commis de cuisine<br>Juli 2006 – Sept. 2007<br><br>" +
+        "Ausbildung zum Koch<br>Sept. 2003 – Juli 2006",
+  
+      "vita.certificates.p":
+        "2021 – 2023<br><br>" +
+        "· EXIN Agile Scrum Master<br>" +
+        "· EXIN Agile Scrum Product Owner<br>" +
+        "· PRINCE2® 6th Edition Foundation in Project Management<br>" +
+        "· PRINCE2® 6th Edition Practitioner in Project Management<br>" +
+        "· ITIL® V4 Foundation",
+  
+      // Datenschutz / Impressum (unverändert aus deinem Snippet)
       "privacy.metaTitle": "Phil Kirchner - Datenschutz",
       "privacy.title": "Datenschutz­erklärung",
       "privacy.overview": "Datenschutz auf einen Blick",
@@ -71,13 +111,14 @@
       "privacy.request": "12. Anfrage per E-Mail, Telefon oder Telefax",
       "privacy.source": "Quelle:",
       "privacy.back": "Zurück zur Startseite,\n... liest du dir doch eh nicht wirklich durch",
-      
+  
       "imprint.metaTitle": "Phil Kirchner - Impressum",
       "imprint.title": "Impressum",
       "imprint.owner": "Webseitenbetreiber",
       "imprint.more": "Brauchst du mehr Informationen über mich?",
       "imprint.back": "Zurück zur Startseite,\n... wenn du alle infos hast die du brauchst"
     },
+  
     en: {
       "nav.vita":        "Resume",
       "nav.impressum":   "Legal Notice",
@@ -85,18 +126,59 @@
       "hero.title":      "I’m Phil",
       "hero.subtitle":   "Happy you’re here!",
       "hero.mail":       "Drop me an email",
-      
-      "vita.title": "My Personal \nDevelopment",
-      "vita.subtitle": "\"I see my professional career \nas a journey\"",
-      "vita.skills": "Skills:\n",
-      "vita.gastro": "Culinary Career - \nMunich Airport Marriott Hotel",
+  
+      "vita.title":      "My Personal \nDevelopment",
+      "vita.subtitle":   "\"I see my professional career \nas a journey\"",
+      "vita.skills":     "Skills:\n",
+      "vita.gastro":     "Culinary Career - <br>Munich Airport Marriott Hotel", // HTML wegen data-i18n-html
       "vita.certificates": "Certificates",
-      "vita.back": "Back to homepage,\n... drop me a line if you liked what you read.",
-      "vita.job1.h4": "Software Developer - <br>Pragmatis GmbH",
-      "vita.job2.h4": "Software Developer Internship - <br>Europa Möbel-Verbund",
-      "vita.job3.h4": "Apprenticeship IT Specialist (AE) - <br>WBS GROUP",
-      "vita.job4.h4": "Purchasing - <br>Munich Airport Marriott Hotel",
-
+      "vita.back":       "Back to homepage,\n... drop me a line if you liked what you read.",
+      "vita.job1.h4":    "Software Developer - <br>Pragmatis GmbH",
+      "vita.job2.h4":    "Software Developer Internship - <br>Europa Möbel-Verbund",
+      "vita.job3.h4":    "Apprenticeship IT Specialist (AE) - <br>WBS GROUP",
+      "vita.job4.h4":    "Purchasing - <br>Munich Airport Marriott Hotel",
+  
+      // NEU/ergänzt für diese Seite:
+      "vita.metaTitle":  "Phil Kirchner - Software Developer",
+  
+      "vita.job1.p":
+        "Dec 2023 – Today<br><br>" +
+        "Neufahrn near Freising, Bavaria, DE<br><br>" +
+        "<strong>Skills:</strong><br>" +
+        "Oracle APEX · PL/SQL · JavaScript · HTML · Cascading Style Sheets (CSS) · REST Data Source · RESTful Services · Oracle DB",
+  
+      "vita.job2.p":
+        "Sep 2022 – Apr 2023<br><br>" +
+        "Fahrenzhausen, Bavaria, DE<br><br>" +
+        "<strong>Skills:</strong><br>" +
+        "Java · SQL · Databases · Git · Kanban · Confluence · JIRA · Teamwork · DBMS · Web development · Vaadin · MVC architecture · Spring Framework · Spring Boot · Unified Modeling Language (UML)",
+  
+      "vita.job3.p":
+        "Aug 2021 – Jun 2023<br><br>" +
+        "Freising, Bavaria, DE<br><br>" +
+        "<strong>Skills:</strong><br>" +
+        "Object-oriented programming (OOP) · Design patterns · Java · SQL · Databases · Agile methods · IT strategy · DBMS · Green IT · HTML · CSS · Microsoft SQL Server",
+  
+      "vita.job4.p":
+        "Purchasing Supervisor<br>Jun 2016 – Aug 2021<br><br>" +
+        "Purchasing Agent<br>Jun 2015 – Jun 2016<br><br>" +
+        "Food and Beverage Trainee<br>Feb 2014 – Jun 2015",
+  
+      "vita.gastro.p":
+        "Chef de Partie<br>Jun 2011 – Feb 2014<br><br>" +
+        "Demi Chef de Partie<br>Sep 2007 – Jun 2011<br><br>" +
+        "Commis de cuisine<br>Jul 2006 – Sep 2007<br><br>" +
+        "Apprenticeship as Cook<br>Sep 2003 – Jul 2006",
+  
+      "vita.certificates.p":
+        "2021 – 2023<br><br>" +
+        "· EXIN Agile Scrum Master<br>" +
+        "· EXIN Agile Scrum Product Owner<br>" +
+        "· PRINCE2® 6th Edition Foundation in Project Management<br>" +
+        "· PRINCE2® 6th Edition Practitioner in Project Management<br>" +
+        "· ITIL® V4 Foundation",
+  
+      // Privacy / Imprint (unverändert aus deinem Snippet)
       "privacy.metaTitle": "Phil Kirchner - Privacy",
       "privacy.title": "Privacy Policy",
       "privacy.overview": "Privacy at a glance",
@@ -121,6 +203,7 @@
       "privacy.request": "12. Requests by email, phone or fax",
       "privacy.source": "Source:",
       "privacy.back": "Back to homepage,\n... be honest, you weren’t going to read it anyway",
+  
       "imprint.metaTitle": "Phil Kirchner - Legal Notice",
       "imprint.title": "Legal Notice",
       "imprint.owner": "Website owner",
@@ -128,6 +211,7 @@
       "imprint.back": "Back to homepage,\n... if you’ve got all the info you need"
     }
   };
+
 
    // --- Nav-Helper: jetzt TOP-LEVEL, damit überall sichtbar ---
     function setOpen(open){
