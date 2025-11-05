@@ -588,26 +588,26 @@ input[type="radio"]:checked + label.card{
 /* =========================================
    Legal-Seiten: Box immer mittig, Text links
    ========================================= */
-.site-header { text-align: initial !important; } /* killt evtl. geerbtes text-align */
-
 .site-header .container{
-  display: flex;
-  justify-content: center;   /* zentriert die Content-Box */
-  align-items: flex-start;
+  display:flex !important;
+  justify-content:center !important;
+  align-items:flex-start !important;
 }
 
 .site-header .container > .content{
   width: clamp(320px, 92vw, 800px);
-  margin-inline: auto;       /* echte Zentrierung */
-  text-align: center !important; /* Fließtext links, überschreibt Leaks */
+  margin-inline: auto !important;     /* echte Zentrierung */
+  text-align: center !important;       /* Text mittig */
 }
 
-/* Überschriften gern zentriert lassen */
-.site-header .container > .content :where(h1,h2,h3){
-  text-align: center;
+/* Sicherheitsnetz: Nav-Ausrichtungen bleiben auf die Nav beschränkt */
+.nav, .nav *{
+  text-align: initial !important;      /* verhindert „Bleeding“ in den Header-Content */
 }
 
-/* Sicherheitsnetz: Nav-Rechtsausrichtung soll NICHT auf Legal-Content „auslaufen“ */
-@media (min-width:0){
-  .nav, .nav * { text-align: initial; } /* nur innerhalb der Nav neutral */
+/* Optional: falls du für mobile/desktop irgendwo Rechtsausrichtung gesetzt hast,
+   NUR innerhalb der Nav gelten lassen: */
+@media (max-width:900px){
+  .nav .nav-list{ text-align:center !important; justify-items:end; }
+  .nav .nav-list a{ text-align:center !important; }
 }
