@@ -585,29 +585,85 @@ input[type="radio"]:checked + label.card{
   box-shadow: 0 16px 38px -5px rgba(0,0,0,.55);
 }
 
-/* =========================================
-   Legal-Seiten: Box immer mittig, Text links
-   ========================================= */
+/* ================================
+   LEGAL (Impressum + Datenschutz)
+   Box mittig, Text links, Headlines zentriert
+   ================================ */
+
+/* Container mittig; keine globale Textzentrierung */
 .site-header .container{
-  display:flex !important;
-  justify-content:center !important;
-  align-items:flex-start !important;
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  text-align: initial; /* NICHT zentral ausrichten */
 }
 
+/* Inhalt: feste Max-Breite + Fließtext links */
 .site-header .container > .content{
   width: clamp(320px, 92vw, 800px);
-  margin-inline: auto !important;     /* echte Zentrierung */
-  text-align: center !important;       /* Text mittig */
+  margin-inline: auto;
+  text-align: center;            /* << wichtig */
 }
 
-/* Sicherheitsnetz: Nav-Ausrichtungen bleiben auf die Nav beschränkt */
-.nav, .nav *{
-  text-align: initial !important;      /* verhindert „Bleeding“ in den Header-Content */
+/* Datenschutz etwas schmaler */
+.site-header .container > .content:has(.privacy_policy){
+  width: clamp(320px, 90vw, 760px);
 }
 
-/* Optional: falls du für mobile/desktop irgendwo Rechtsausrichtung gesetzt hast,
-   NUR innerhalb der Nav gelten lassen: */
-@media (max-width:900px){
-  .nav .nav-list{ text-align:center !important; justify-items:end; }
-  .nav .nav-list a{ text-align:center !important; }
+/* Optional: auch per Titel hooken */
+.site-header .container > .content:has([data-i18n="imprint.title"]){
+  width: clamp(320px, 92vw, 760px);
+}
+
+/* Headlines inhaltlich weiterhin zentriert */
+.site-header .container > .content :where(h1,h2,h3){
+  text-align: center;
+}
+
+/* Abstand unter der NAV nur auf Legal-Seiten */
+.site-header .container:has(.privacy_policy),
+.site-header .container:has([data-i18n="imprint.title"]) {
+  padding-top: calc(env(safe-area-inset-top) + clamp(48px, 12vh, 180px));
+  padding-bottom: clamp(32px, 8vh, 120px);
+}
+
+/* Button im Textblock zentrieren (Legal) */
+.site-header .container:has(.privacy_policy) > .content p:has(.button),
+.site-header .container:has([data-i18n="imprint.title"]) > .content p:has(.button){
+  display: flex;
+  justify-content: center;
+  margin-top: clamp(16px, 3vh, 32px);
+}
+.site-header .container:has(.privacy_policy) .button,
+.site-header .container:has([data-i18n="imprint.title"]) .button{
+  margin-inline: auto;
+  display: inline-flex;
+  text-align: center;
+}
+
+/* ================================
+   NAV-Reset: Rechtsausrichtung NUR mobil
+   ================================ */
+
+/* Desktop (>=901px): explizit neutralisieren */
+@media (min-width: 901px){
+  .nav .nav-list,
+  .nav .nav-list a{
+    text-align: initial !important;   /* killt evtl. geerbtes right */
+  }
+}
+
+/* Mobil (<=900px): darf rechtsbündig sein */
+@media (max-width: 900px){
+  .nav .nav-list{
+    text-align: center;
+    justify-items: end;
+  }
+  .nav .nav-list a{ text-align: right; }
+}
+
+/* Dein Card-Open-Override kann bleiben */
+input[type="radio"]:checked + label.card{
+  max-height: var(--card-open-h, var(--card-open-fallback)) !important;
+  box-shadow: 0 16px 38px -5px rgba(0,0,0,.55);
 }
