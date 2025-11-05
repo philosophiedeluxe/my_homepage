@@ -510,12 +510,12 @@ html[data-lang="de"] .lang-btn .lang-de,
 html[data-lang="en"] .lang-btn .lang-en { font-weight:600; opacity:1; }
 html[data-lang="de"] .lang-btn .lang-en,
 html[data-lang="en"] .lang-btn .lang-de { opacity:.6; }
-/* Nur den Sprach-Eintrag mittig ausrichten */
+/* Nur den Sprach-Eintrag rechts ausrichten */
 @media (max-width:900px){
   .nav-list .lang-switch{
     border-top:1px solid rgba(255,255,255,.06);
-    justify-self: center;      /* statt end */
-    text-align: center;        /* Sicherheit */
+    justify-self: right;      /* statt end */
+    text-align: right;        /* Sicherheit */
     width: 100%;
     padding-top: .5rem;
   }
@@ -630,6 +630,7 @@ input[type="radio"]:checked + label.card{
   max-height: var(--card-open-h, var(--card-open-fallback)) !important;
   box-shadow: 0 16px 38px -5px rgba(0,0,0,.55);
 }
+
 
 
 
