@@ -343,7 +343,7 @@ label.card.is-measuring .description > *{
 header > .container-wide{ padding-inline: clamp(20px,5vw,64px); }
 
 .nav{
-  position: relative;           /* Anker für ::before */
+  position: relative;           /* Anker für ::before + mobiles Panel */
   z-index: 999;
   display: grid;
   grid-template-columns: auto 1fr; /* Desktop: Brand | Liste */
@@ -355,7 +355,8 @@ header > .container-wide{ padding-inline: clamp(20px,5vw,64px); }
 
 /* Full-bleed Hintergrund – ohne horizontales Scrollen */
 .nav::before{
-  content:""; position:absolute; z-index:-1; inset:0; left:50%; transform:translateX(-50%);
+  content:"";
+  position:absolute; z-index:-1; inset:0; left:50%; transform:translateX(-50%);
   width:100vw; /* Fallback */
   background: linear-gradient(90deg, rgba(0,0,0,.6) 0%, rgba(0,0,0,.6) 40%, rgb(48 1 52) 100%);
   border-bottom:1px solid rgba(255,255,255,.08);
@@ -386,25 +387,26 @@ header > .container-wide{ padding-inline: clamp(20px,5vw,64px); }
   border-radius:6px;
   color:inherit;
 }
-
 /* alte Hamburger-Striche sicher ausblenden */
 .nav-toggle .nav-toggle-bar{ display:none !important; }
 
+/* =======================
+   MOBIL: schwebendes Panel
+   ======================= */
 @media (max-width:900px){
+
+  /* nur eine Grid-Zeile: Brand | Toggle */
   .nav{
     grid-template-columns: 1fr auto;
-    grid-template-areas:
-      "brand toggle"
-      "list  list";
-    row-gap:.25rem;
+    grid-template-areas: "brand toggle";
+    row-gap: 0;
   }
   .brand{ grid-area: brand; }
 
-  /* sichtbarer, klarer Toggle – geschlossen: +, offen: × */
+  /* sichtbarer Toggle – geschlossen: +, offen: × */
   .nav-toggle{
     grid-area: toggle;
-    display:inline-flex;
-    align-items:center; justify-content:center;
+    display:inline-flex; align-items:center; justify-content:center;
     position:relative;
     width:42px; height:42px; padding:0;
     border-radius:10px;
@@ -432,68 +434,71 @@ header > .container-wide{ padding-inline: clamp(20px,5vw,64px); }
   .nav-toggle::before{ width:22px; height:2px; transform:translate(-50%,-50%); }
   .nav-toggle::after { width:2px;  height:22px; transform:translate(-50%,-50%); }
   /* offen: × */
-  .nav-toggle[aria-expanded="true"]{ background: rgba(255,255,255,.1); }
+  .nav-toggle[aria-expanded="true"]{ background: rgba(255,255,255,.10); }
   .nav-toggle[aria-expanded="true"]::before{
     width:22px; height:2px; transform:translate(-50%,-50%) rotate(45deg);
   }
   .nav-toggle[aria-expanded="true"]::after{
     width:22px; height:2px; transform:translate(-50%,-50%) rotate(-45deg);
   }
-  /* Breite NAV in Kolabs Zustand */
-  .nav-list{ 
-         grid-area: list; 
-         width:40%; 
-         box-sizing:border-box;
-         box-shadow:0 0 0 6px rgba(255,255,255,.12);
-         border-radius:20px;
-         padding: 30px;  
+
+  /* ▼ SCHWEBENDES PANEL – beeinflusst die Navbar-Höhe NICHT */
+  .nav-list{
+    position: absolute;              /* hängt an .nav */
+    top: calc(100% + 10px);          /* direkt unter der Leiste */
+    right: clamp(8px, 4vw, 24px);
+    left: auto;
+
+    display: grid; gap:0;
+    width: min(420px, 88vw);
+    max-height: 0;                   /* zu */
+    overflow: clip;
+    padding: 0; margin: 0;
+
+    text-align: right;
+    justify-items: end;
+
+    background: linear-gradient(90deg, rgba(0,0,0,.6) 0%, rgba(0,0,0,.6) 40%, rgb(48 1 52) 100%);
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 16px;
+    box-shadow: 0 12px 24px rgba(0,0,0,.35);
+
+    opacity: 0;
+    transform: translateY(-6px);
+    pointer-events: none;            /* keine Klicks solange zu */
+    z-index: 1000;
+
+    transition:
+      max-height .30s ease,
+      opacity    .20s ease,
+      transform  .25s ease,
+      padding    .20s ease;
   }
 
-  .nav-list[data-collapsible="true"]{
-    position: static; display:grid; gap:0;
-    max-height:0; overflow:hidden; transition:max-height .3s ease;
-    background: linear-gradient(90deg, rgba(0,0,0,.6) 0%, rgba(0,0,0,.6) 40%, rgb(48 1 52) 100%);
-    border-bottom:1px solid rgba(255,255,255,.06); box-shadow:0 12px 24px rgba(0,0,0,.35);
-    padding-block:.25rem;
+  /* offen: Panel fährt auf, Navbar bleibt gleich hoch */
+  .nav-list[data-collapsible="true"][data-open="true"]{
+    max-height: calc(100dvh - var(--nav-h) - 20px);
+    padding: .5rem;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
   }
-  .nav-list[data-collapsible="true"][data-open="true"]{ max-height: 100dvh; }
 
   .nav-list li{ border-top:1px solid rgba(255,255,255,.06); }
-  .nav-list a{ padding:.9rem 1rem; font-size:1.05rem; display:block; }
+  .nav-list li:first-child{ border-top:0; }
+  .nav-list a{
+    display:block;
+    padding:.9rem 1rem;
+    font-size:1.05rem;
+    text-align: right;
+    border-radius:6px;
+  }
   .nav-divider{ display:none; }
-}
 
-/* Sprachschalter */
-.lang-switch{ margin-left:.5rem; }
-.lang-btn{
-  display:inline-flex; align-items:center; gap:.25rem;
-  font:inherit; color:inherit; background:transparent; border:1px solid rgba(255,255,255,.18);
-  padding:.25rem .5rem; border-radius:6px; cursor:pointer; opacity:.9;
-}
-.lang-btn:hover,.lang-btn:focus-visible{ background: rgba(255,255,255,.08); outline:none; }
-.lang-btn .sep{ opacity:.6; margin:0 .15rem; }
-html[data-lang="de"] .lang-btn .lang-de,
-html[data-lang="en"] .lang-btn .lang-en { font-weight:600; opacity:1; }
-html[data-lang="de"] .lang-btn .lang-en,
-html[data-lang="en"] .lang-btn .lang-de { opacity:.6; }
-@media (max-width:900px){
+  /* Sprachschalter im Panel */
   .lang-switch{ border-top:1px solid rgba(255,255,255,.06); }
   .lang-btn{ width:100%; justify-content:center; padding:.9rem 1rem; }
 }
-
-/* NEUE AUSRICHTUNG START */
-/* Nur MOBIL: Nav-Items rechtsbündig */
-@media (max-width:900px){
-  .nav-list{
-    text-align: right;
-    justify-items: end;   /* weil die Liste mobil als Grid läuft */
-  }
-  .nav-list a{
-    text-align: right;    /* Link-Inhalt auch rechts */
-    display: block;
-  }
-}
-/* NEUE AUSRICHTUNG ENDE */
 
 
 /* ================================
@@ -600,6 +605,7 @@ input[type="radio"]:checked + label.card{
   max-height: var(--card-open-h, var(--card-open-fallback)) !important;
   box-shadow: 0 16px 38px -5px rgba(0,0,0,.55);
 }
+
 
 
 
