@@ -391,6 +391,42 @@ header > .container-wide{ padding-inline: clamp(20px,5vw,64px); }
 .nav-toggle .nav-toggle-bar{ display:none !important; }
 
 /* =======================
+   Sprach-Schalter – Basis
+   ======================= */
+.lang-switch{ /* li */ }
+.lang-btn{
+  display:inline-flex; align-items:center; gap:.25rem;
+  font:inherit; color:inherit;
+  background:transparent;
+  border:1px solid rgba(255,255,255,.18);
+  padding:.35rem .65rem;
+  border-radius:10px; cursor:pointer; opacity:.95;
+  line-height:1;
+}
+.lang-btn:hover,
+.lang-btn:focus-visible{ background: rgba(255,255,255,.08); outline:none; }
+.lang-btn .sep{ opacity:.6; margin:0 .15rem; }
+html[data-lang="de"] .lang-btn .lang-de,
+html[data-lang="en"] .lang-btn .lang-en { font-weight:600; opacity:1; }
+html[data-lang="de"] .lang-btn .lang-en,
+html[data-lang="en"] .lang-btn .lang-de { opacity:.6; }
+
+/* Desktop: gleicher „Chip“-Look wie im Panel + Abstand nach links */
+@media (min-width:901px){
+  .nav-list .lang-switch{ margin-left: clamp(.25rem,1vw,.75rem); }
+  .nav-list .lang-switch .lang-btn{
+    background: rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.14);
+    box-shadow: 0 0 0 0 rgba(0,0,0,0);
+  }
+  .nav-list .lang-switch .lang-btn:hover,
+  .nav-list .lang-switch .lang-btn:focus-visible{
+    background: rgba(255,255,255,.10);
+    border-color: rgba(255,255,255,.22);
+  }
+}
+
+/* =======================
    MOBIL: schwebendes Panel
    ======================= */
 @media (max-width:900px){
@@ -630,6 +666,7 @@ input[type="radio"]:checked + label.card{
   max-height: var(--card-open-h, var(--card-open-fallback)) !important;
   box-shadow: 0 16px 38px -5px rgba(0,0,0,.55);
 }
+
 
 
 
