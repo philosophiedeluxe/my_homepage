@@ -31,10 +31,25 @@
       "nav.vita":        "Vita",
       "nav.impressum":   "Impressum",
       "nav.datenschutz": "Datenschutz",
+
+      "home.metaTitle":  "Phil Kirchner - Softwareentwickler",
       "hero.title":      "Ich bin Phil",
       "hero.subtitle":   "Freut mich, dass du da bist!",
       "hero.mail":       "Schreib mir gerne eine Mail",
-  
+      "home.intro":
+        "Meine berufliche Reise begann mit meiner Ausbildung zum Koch im Jahr 2003. " +
+        "Über die Jahre habe ich verschiedene Positionen durchlaufen.<br><br>" +
+        "Im Jahr 2011 entschied ich mich für eine Weiterentwicklung meiner Fähigkeiten und übernahm die Verantwortung als Purchasing Agent, " +
+        "bevor ich schließlich von 2016 bis 2021 die Position des Purchasing Supervisors innehatte. " +
+        "Während meiner Zeit in dieser Rolle habe ich Erfahrungen in verschiedenen Bereichen gesammelt.<br><br>" +
+        "Meine Leidenschaft für Technologie führte mich 2023 zu einer Umschulung als Fachinformatiker Anwendungsentwicklung bei der WBS Training in München. " +
+        "Seitdem habe ich meine Fähigkeiten in den Bereichen Agile Scrum Master, Agile Scrum Product Owner und Projektmanagement (PRINCE2®) erweitert. " +
+        "Meine IT-Kenntnisse erstrecken sich über verschiedene Software- und Programmiersprachen wie Java, PL/SQL, JavaScript, Angular und HTML/CSS; " +
+        "außerdem kenne ich mich natürlich auch mit MS Office, Confluence, Jira, IntelliJ IDEA und GitHub aus.<br><br>" +
+        "Abseits meiner beruflichen Tätigkeiten bin ich ein begeisterter Technik-Enthusiast und Filmliebhaber. " +
+        "Mein Interesse an fortschrittlicher Technologie spiegelt sich nicht nur in meiner beruflichen Entwicklung, sondern auch in meiner Freizeit wider.<br><br>" +
+        "Mit diesem Webauftritt möchte ich mich dir vorstellen.<br>",
+      
       "vita.title":      "Meine persönliche \nEntwicklung",
       "vita.subtitle":   "\"Ich betrachte meine berufliche Karriere \nals eine Reise\"",
       "vita.skills":     "Kenntnisse:\n",
@@ -123,9 +138,24 @@
       "nav.vita":        "Resume",
       "nav.impressum":   "Legal Notice",
       "nav.datenschutz": "Privacy",
+
+      "home.metaTitle":  "Phil Kirchner - Software Developer",
       "hero.title":      "I’m Phil",
       "hero.subtitle":   "Happy you’re here!",
       "hero.mail":       "Drop me an email",
+      "home.intro":
+        "My professional journey began with my chef apprenticeship in 2003. " +
+        "Over the years, I have held various positions.<br><br>" +
+        "In 2011, I chose to further develop my skills and took on responsibility as a Purchasing Agent, " +
+        "before serving as Purchasing Supervisor from 2016 to 2021. " +
+        "During that time, I gained experience across different areas.<br><br>" +
+        "My passion for technology led me in 2023 to retrain as an IT Specialist for Application Development at WBS Training in Munich. " +
+        "Since then, I have expanded my skills as an Agile Scrum Master, Agile Scrum Product Owner, and in project management (PRINCE2®). " +
+        "My IT knowledge spans various software and programming languages such as Java, PL/SQL, JavaScript, Angular, and HTML/CSS; " +
+        "I am also comfortable with MS Office, Confluence, Jira, IntelliJ IDEA, and GitHub.<br><br>" +
+        "Outside of work, I am a technology enthusiast and movie lover. " +
+        "My interest in advanced technology is reflected not only in my professional development but also in my spare time.<br><br>" +
+        "With this website, I would like to introduce myself to you.<br>",
   
       "vita.title":      "My Personal \nDevelopment",
       "vita.subtitle":   "\"I see my professional career \nas a journey\"",
