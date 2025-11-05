@@ -439,8 +439,15 @@ header > .container-wide{ padding-inline: clamp(20px,5vw,64px); }
   .nav-toggle[aria-expanded="true"]::after{
     width:22px; height:2px; transform:translate(-50%,-50%) rotate(-45deg);
   }
-
-  .nav-list{ grid-area: list; width:100%; box-sizing:border-box; }
+  /* Breite NAV in Kolabs Zustand */
+  .nav-list{ 
+         grid-area: list; 
+         width:30%; 
+         box-sizing:border-box;
+         box-shadow:0 0 0 6px rgba(255,255,255,.12);
+         border-radius:20px;
+         
+  }
 
   .nav-list[data-collapsible="true"]{
     position: static; display:grid; gap:0;
@@ -593,4 +600,5 @@ input[type="radio"]:checked + label.card{
   max-height: var(--card-open-h, var(--card-open-fallback)) !important;
   box-shadow: 0 16px 38px -5px rgba(0,0,0,.55);
 }
+
 
