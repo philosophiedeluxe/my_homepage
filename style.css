@@ -667,10 +667,30 @@ input[type="radio"]:checked + label.card{
   box-shadow: 0 16px 38px -5px rgba(0,0,0,.55);
 }
 
+/* =========================================
+   Legal-Seiten: Box immer mittig, Text links
+   ========================================= */
+.site-header { text-align: initial !important; } /* killt evtl. geerbtes text-align */
 
+.site-header .container{
+  display: flex;
+  justify-content: center;   /* zentriert die Content-Box */
+  align-items: flex-start;
+}
 
+.site-header .container > .content{
+  width: clamp(320px, 92vw, 800px);
+  margin-inline: auto;       /* echte Zentrierung */
+  text-align: left !important; /* Fließtext links, überschreibt Leaks */
+}
 
+/* Überschriften gern zentriert lassen */
+.site-header .container > .content :where(h1,h2,h3){
+  text-align: center;
+}
 
-
-
+/* Sicherheitsnetz: Nav-Rechtsausrichtung soll NICHT auf Legal-Content „auslaufen“ */
+@media (min-width:0){
+  .nav, .nav * { text-align: initial; } /* nur innerhalb der Nav neutral */
+}
 
