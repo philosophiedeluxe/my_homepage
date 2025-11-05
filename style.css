@@ -450,7 +450,7 @@ header > .container-wide{ padding-inline: clamp(20px,5vw,64px); }
     left: auto;
 
     display: grid; gap:0;
-    width: min(150px, 88vw);
+    width: min(170px, 88vw);
     max-height: 0;                   /* zu */
     overflow: clip;
     padding: 0; 
@@ -462,7 +462,7 @@ header > .container-wide{ padding-inline: clamp(20px,5vw,64px); }
 
     background: linear-gradient(90deg, rgba(0,0,0,.6) 0%, rgba(0,0,0,.6) 40%, rgb(48 1 52) 100%);
     border: 1px solid rgba(255,255,255,.12);
-    border-radius: 16px;
+    border-radius: 10px;
     box-shadow: 0 12px 24px rgba(0,0,0,.35);
 
     opacity: 0;
@@ -497,7 +497,7 @@ header > .container-wide{ padding-inline: clamp(20px,5vw,64px); }
   }
   .nav-divider{ display:none; }
 
-  /* Sprachschalter */
+/* Sprachschalter */
 .lang-switch{ margin-left:.5rem; }
 .lang-btn{
   display:inline-flex; align-items:center; gap:.25rem;
@@ -510,11 +510,21 @@ html[data-lang="de"] .lang-btn .lang-de,
 html[data-lang="en"] .lang-btn .lang-en { font-weight:600; opacity:1; }
 html[data-lang="de"] .lang-btn .lang-en,
 html[data-lang="en"] .lang-btn .lang-de { opacity:.6; }
+/* Nur den Sprach-Eintrag mittig ausrichten */
 @media (max-width:900px){
-  .lang-switch{ border-top:1px solid rgba(255,255,255,.06); }
-  .lang-btn{ width:100%; justify-content:center; padding:.9rem 1rem; }
+  .nav-list .lang-switch{
+    border-top:1px solid rgba(255,255,255,.06);
+    justify-self: center;      /* statt end */
+    text-align: center;        /* Sicherheit */
+    width: 100%;
+    padding-top: .5rem;
+  }
+  .nav-list .lang-switch .lang-btn{
+    width: fit-content;        /* nicht 100% – Button so breit wie Inhalt */
+    margin-inline: auto;       /* horizontal zentrieren */
+    padding: .9rem 1rem;       /* wie zuvor */
+  }
 }
-
 
 /* ================================
    header Container + Medien 
@@ -620,6 +630,7 @@ input[type="radio"]:checked + label.card{
   max-height: var(--card-open-h, var(--card-open-fallback)) !important;
   box-shadow: 0 16px 38px -5px rgba(0,0,0,.55);
 }
+
 
 
 
