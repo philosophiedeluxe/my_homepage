@@ -585,90 +585,27 @@ input[type="radio"]:checked + label.card{
   box-shadow: 0 16px 38px -5px rgba(0,0,0,.55);
 }
 
-/* ================================
-   Impressum + Datenschutz: zentrierte Content-Box
-   ================================ */
+/* Breite/Box */
+.legal .site-header .container { display: flex; justify-content: center; align-items: flex-start; }
+.legal .site-header .container > .content { width: clamp(320px, 92vw, 800px); margin-inline: auto; text-align: center; }
 
-/* Container wirklich mittig ausrichten */
-.site-header .container{
-  display:flex;
-  justify-content:center;
-  align-items:flex-start;
-  text-align:center; /* nur fürs Außenrum, Inhalt setzt gleich auf left */
-}
+.legal--privacy  .site-header .container > .content { width: clamp(320px, 90vw, 760px); }
+.legal--imprint  .site-header .container > .content { width: clamp(320px, 92vw, 760px); }
 
-/* Basisbreite für beide Seiten */
-.site-header .container > .content{
-  /* NICHT 100%: stattdessen eine sinnvolle Maximalbreite */
-  width: clamp(320px, 92vw, 800px);
-  margin-inline: auto;
-  text-align: center;       /* Lesbarkeit */
-}
-
-/* Datenschutz-Seite (enthält .privacy_policy) etwas schmaler für bessere Lesbarkeit */
-.site-header .container > .content:has(.privacy_policy){
-  width: clamp(320px, 90vw, 760px);
-}
-
-/* Optional: wenn du :has() nicht willst/kannst, nimm gezielt die Überschrift als Hook */
-.site-header .container > .content:has([data-i18n="imprint.title"]){
-  width: clamp(320px, 92vw, 760px);
-}
-
-/* ================================
-   Impressum + Datenschutz: Abstand unter der NAV
-   ================================ */
-
-/* Mehr Top-Spacing nur auf den Legal-Seiten */
-.site-header .container:has(.privacy_policy),
-.site-header .container:has([data-i18n="imprint.title"]) {
-  /* Navi-Höhe + zusätzlicher Luftkissen-Abstand */
+/* Abstand unter der NAV */
+.legal--privacy .site-header .container,
+.legal--imprint .site-header .container {
   padding-top: calc(env(safe-area-inset-top) + clamp(48px, 12vh, 180px));
-  padding-bottom: clamp(32px, 8vh, 120px); /* unten auch etwas Luft */
+  padding-bottom: clamp(32px, 8vh, 120px);
 }
 
-/* Box mittig halten (falls irgendwo 100% Breite greift) */
-.site-header .container:has(.privacy_policy) > .content,
-.site-header .container:has([data-i18n="imprint.title"]) > .content {
+/* Button zentrieren – ohne :has() */
+.legal--privacy  .site-header .container .button,
+.legal--imprint  .site-header .container .button {
+  display: inline-flex;
   margin-inline: auto;
+  text-align: center;
+  max-width: 92vw; /* wirkt nur auf sehr kleine Screens */
 }
 
-/* Sauberes Anscrollen bei Sprungmarken unter Sticky-NAV */
-.site-header .container:has(.privacy_policy) :where(h1,h2,h3)[id],
-.site-header .container:has([data-i18n="imprint.title"]) :where(h1,h2,h3)[id]{
-  scroll-margin-top: calc(var(--nav-h) + 24px);
-}
 
-/* ================================
-   Impressum + Datenschutz: Button zentrieren
-   ================================ */
-
-/* Variante mit :has() – greift nur auf den Legal-Seiten */
-.site-header .container:has(.privacy_policy) > .content p:has(.button),
-.site-header .container:has([data-i18n="imprint.title"]) > .content p:has(.button){
-  display: flex;
-  justify-content: center;
-  margin-top: clamp(16px, 3vh, 32px);
-}
-
-.site-header .container:has(.privacy_policy) .button,
-.site-header .container:has([data-i18n="imprint.title"]) .button{
-  margin-inline: auto;          /* erzwingt horizontale Zentrierung */
-  display: inline-flex;         /* bleibt wie vorher */
-  text-align: center;           /* falls Text umbrecht */
-}
-
-/* Optional: sehr kleine Screens → etwas breiter */
-@media (max-width: 480px){
-  .site-header .container:has(.privacy_policy) .button,
-  .site-header .container:has([data-i18n="imprint.title"]) .button{
-    max-width: 92vw;
-    justify-content: center;
-  }
-}
-
-/* GANZ AM ENDE deiner CSS lassen! */
-input[type="radio"]:checked + label.card{
-  max-height: var(--card-open-h, var(--card-open-fallback)) !important;
-  box-shadow: 0 16px 38px -5px rgba(0,0,0,.55);
-}
