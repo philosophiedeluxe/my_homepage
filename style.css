@@ -585,86 +585,29 @@ input[type="radio"]:checked + label.card{
   box-shadow: 0 16px 38px -5px rgba(0,0,0,.55);
 }
 
-/* ================================
-   Impressum + Datenschutz: zentrierte Content-Box
-   ================================ */
+/* =========================================
+   Legal-Seiten: Box immer mittig, Text links
+   ========================================= */
+.site-header { text-align: initial !important; } /* killt evtl. geerbtes text-align */
 
-/* Container wirklich mittig ausrichten */
 .site-header .container{
-  display:flex;
-  justify-content:center;
-  align-items:flex-start;
-  text-align:center; /* nur fürs Außenrum, Inhalt setzt gleich auf left */
-}
-
-/* Basisbreite für beide Seiten */
-.site-header .container > .content{
-  /* NICHT 100%: stattdessen eine sinnvolle Maximalbreite */
-  width: clamp(320px, 92vw, 800px);
-  margin-inline: auto;
-  text-align: center;       /* Lesbarkeit */
-}
-
-/* Datenschutz-Seite (enthält .privacy_policy) etwas schmaler für bessere Lesbarkeit */
-.site-header .container > .content:has(.privacy_policy){
-  width: clamp(320px, 90vw, 760px);
-}
-
-/* Optional: wenn du :has() nicht willst/kannst, nimm gezielt die Überschrift als Hook */
-.site-header .container > .content:has([data-i18n="imprint.title"]){
-  width: clamp(320px, 92vw, 760px);
-}
-
-/* ================================
-   Impressum + Datenschutz: Abstand unter der NAV
-   ================================ */
-
-/* Mehr Top-Spacing nur auf den Legal-Seiten */
-.site-header .container:has(.privacy_policy),
-.site-header .container:has([data-i18n="imprint.title"]) {
-  /* Navi-Höhe + zusätzlicher Luftkissen-Abstand */
-  padding-top: calc(env(safe-area-inset-top) + clamp(48px, 12vh, 180px));
-  padding-bottom: clamp(32px, 8vh, 120px); /* unten auch etwas Luft */
-}
-
-/* Box mittig halten (falls irgendwo 100% Breite greift) */
-.site-header .container:has(.privacy_policy) > .content,
-.site-header .container:has([data-i18n="imprint.title"]) > .content {
-  margin-inline: auto;
-}
-
-/* Sauberes Anscrollen bei Sprungmarken unter Sticky-NAV */
-.site-header .container:has(.privacy_policy) :where(h1,h2,h3)[id],
-.site-header .container:has([data-i18n="imprint.title"]) :where(h1,h2,h3)[id]{
-  scroll-margin-top: calc(var(--nav-h) + 24px);
-}
-
-/* ================================
-   Impressum + Datenschutz: Button zentrieren
-   ================================ */
-
-/* Variante mit :has() – greift nur auf den Legal-Seiten */
-.site-header .container:has(.privacy_policy) > .content p:has(.button),
-.site-header .container:has([data-i18n="imprint.title"]) > .content p:has(.button){
   display: flex;
-  justify-content: center;
-  margin-top: clamp(16px, 3vh, 32px);
+  justify-content: center;   /* zentriert die Content-Box */
+  align-items: flex-start;
 }
 
-.site-header .container:has(.privacy_policy) .button,
-.site-header .container:has([data-i18n="imprint.title"]) .button{
-  margin-inline: auto;          /* erzwingt horizontale Zentrierung */
-  display: inline-flex;         /* bleibt wie vorher */
-  text-align: center;           /* falls Text umbrecht */
+.site-header .container > .content{
+  width: clamp(320px, 92vw, 800px);
+  margin-inline: auto;       /* echte Zentrierung */
+  text-align: center !important; /* Fließtext links, überschreibt Leaks */
 }
 
-/* Optional: sehr kleine Screens → etwas breiter */
-@media (max-width: 480px){
-  .site-header .container:has(.privacy_policy) .button,
-  .site-header .container:has([data-i18n="imprint.title"]) .button{
-    max-width: 92vw;
-    justify-content: center;
-  }
+/* Überschriften gern zentriert lassen */
+.site-header .container > .content :where(h1,h2,h3){
+  text-align: center;
 }
 
-       
+/* Sicherheitsnetz: Nav-Rechtsausrichtung soll NICHT auf Legal-Content „auslaufen“ */
+@media (min-width:0){
+  .nav, .nav * { text-align: initial; } /* nur innerhalb der Nav neutral */
+}
