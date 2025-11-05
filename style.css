@@ -607,5 +607,10 @@ input[type="radio"]:checked + label.card{
   text-align: center;
   max-width: 92vw; /* wirkt nur auf sehr kleine Screens */
 }
+       
+/* direkt hinter deinen .legal-Blocks */
+.legal .site-header { min-height: auto; }
+
+
 
 
