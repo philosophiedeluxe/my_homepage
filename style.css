@@ -615,28 +615,53 @@ input[type="radio"]:checked + label.card{
 }
 
 /* ================================
-   LEGAL HOTFIX: Container mittig, Text links
-   (gewinnt sicher, minimal-invasiv, nur auf Legal-Seiten)
+   LEGAL: Container mittig + Spacing auf .content
    ================================ */
 
+/* Box mittig, Text links */
 body.legal header.site-header > .container{
   display: grid !important;
   place-items: start center !important;
-  width: 100% !important;
-  padding-inline: clamp(16px, 4vw, 40px) !important;
+  width: 100%;
   text-align: initial !important;
 }
+
 body.legal header.site-header > .container > .content{
-  width: min(92vw, 800px) !important;
-  margin-inline: auto !important;
-  text-align: left !important;
+  width: min(92vw, 800px);
+  margin-inline: auto;
+  text-align: left;
+  /* << Abstand unter der NAV: jetzt auf .content, nicht auf .container */
+  padding-top: calc(var(--nav-h) + clamp(48px, 12vh, 180px));
+  padding-bottom: clamp(32px, 8vh, 120px);
 }
+
 /* Datenschutz etwas schmaler */
 body.legal.legal--privacy header.site-header > .container > .content{
-  width: min(90vw, 760px) !important;
+  width: min(90vw, 760px);
 }
-/* Abstand unter der NAV (einheitlich) */
-body.legal header.site-header > .container{
-  padding-top: calc(var(--nav-h) + clamp(48px, 12vh, 180px)) !important;
-  padding-bottom: clamp(32px, 8vh, 120px) !important;
+
+/* ================================
+   LEGAL: Button zentrieren
+   ================================ */
+
+/* mit :has() – nur Absätze mit Button */
+body.legal header.site-header > .container > .content p:has(.button){
+  display: flex;
+  justify-content: center;
+  margin-top: clamp(16px, 3vh, 32px);
+}
+
+/* Fallback ohne :has() – Button selbst mittig ziehen */
+body.legal header.site-header > .container .button{
+  display: inline-flex;
+  margin-inline: auto;
+  text-align: center;
+}
+
+/* sehr kleine Screens */
+@media (max-width: 480px){
+  body.legal header.site-header > .container .button{
+    max-width: 92vw;
+    justify-content: center;
+  }
 }
