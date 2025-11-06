@@ -579,22 +579,6 @@ html[data-lang="en"] .lang-btn .lang-de { opacity:.6; }
 /* Horizontalen Überlauf sicher killen (statt clip) */
 html, body { overflow-x: hidden; }
 
-/* Container spannt volle Breite und zentriert Kind-Box */
-.site-header .container{
-  display: grid;
-  place-items: start center;       /* vertikal: oben, horizontal: mittig */
-  width: 100%;
-  padding-inline: clamp(16px, 4vw, 40px);
-  text-align: initial;             /* keine globale Zentrierung des Textes */
-}
-
-/* Basisbreite der Content-Box: mittig, linksbündiger Text */
-.site-header .container > .content{
-  width: min(92vw, 800px);
-  margin-inline: auto;
-  text-align: center;               /* linksbündiger Text */
-}
-
 /* Datenschutz etwas schmaler (visuelle Lesbarkeit) */
 .site-header .container > .content:has(.privacy_policy){
   width: min(90vw, 760px);
@@ -605,7 +589,27 @@ body.legal--privacy .site-header .container > .content{
   width: min(90vw, 760px);
 }
 
-/* Abstand unter der NAV – ebenfalls mit Fallback */
+/* NEU */
+.site-header .container{
+  display: grid;
+  place-items: start center;    /* oben beginnen, horizontal mittig */
+  width: 100%;
+  padding-inline: clamp(16px, 4vw, 40px);
+  text-align: initial;
+}
+
+/* NEU */
+.site-header .container > .content{
+  width: min(92vw, 800px);
+  margin-inline: auto;
+  text-align: left;
+}
+
+/* Optional: Datenschutz schmaler + Fallback ohne :has() */
+.site-header .container > .content:has(.privacy_policy){ width: min(90vw, 760px); }
+body.legal--privacy .site-header .container > .content{ width: min(90vw, 760px); }
+
+/* Abstand unter der Nav (mit und ohne :has()) */
 .site-header .container:has(.privacy_policy),
 .site-header .container:has([data-i18n="imprint.title"]),
 body.legal--privacy .site-header .container,
