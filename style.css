@@ -585,20 +585,31 @@ header .container{
   text-align: initial;
 }
 
-/* Basisbreite: mittig, Text links */
-.site-header .container > .content,
-header .container > .content{
+/* NEU – Desktop & Mobil verlässlich mittig */
+.site-header .container{
+  display: grid;
+  place-items: start center;      /* oben beginnen, horizontal mittig */
+  width: 100%;
+  padding-inline: clamp(16px, 4vw, 40px);
+  text-align: initial;
+}
+.site-header .container > .content{
   width: min(92vw, 800px);
   margin-inline: auto;
   text-align: left;
 }
 
-/* Datenschutz etwas schmaler – mit und ohne :has() */
-.site-header .container > .content:has(.privacy_policy),
-header .container > .content:has(.privacy_policy),
-body.legal--privacy .site-header .container > .content,
-body.legal--privacy header .container > .content{
-  width: min(90vw, 760px);
+/* Datenschutz etwas schmaler – mit/ohne :has() */
+.site-header .container > .content:has(.privacy_policy){ width: min(90vw, 760px); }
+body.legal--privacy .site-header .container > .content{  width: min(90vw, 760px); }
+
+/* Abstand unter der NAV – mit/ohne :has() */
+.site-header .container:has(.privacy_policy),
+.site-header .container:has([data-i18n="imprint.title"]),
+body.legal--privacy .site-header .container,
+body.legal--imprint .site-header .container{
+  padding-top: calc(var(--nav-h) + clamp(48px, 12vh, 180px));
+  padding-bottom: clamp(32px, 8vh, 120px);
 }
 
 /* Abstand unter der Nav – mit und ohne :has() */
@@ -617,3 +628,4 @@ body.legal--imprint header .container{
 
 .site-header .container, header .container { outline: 2px dashed magenta; }
 .site-header .container > .content, header .container > .content { outline: 2px solid cyan; }
+
