@@ -629,6 +629,7 @@ body.legal header.site-header > .container{
   place-items: start center !important;
   width: 100%;
   text-align: initial !important;
+  padding-top: var(--legal-top-gap) !important;
 }
 
 /* 2) Content-Box: schmal, mittig, Text links, Abstand OBEN/UNTEN */
@@ -652,7 +653,7 @@ body.legal .privacy_policy{ margin: 0; }
 body.legal header.site-header > .container > .content p:has(.button){
   display: flex;
   justify-content: center;
-  margin-top: clamp(16px, 3vh, 32px);
+  padding-top: var(--legal-top-gap) !important;
 }
 /* Fallback, falls :has() fehlt */
 body.legal header.site-header > .container .button{
@@ -668,4 +669,5 @@ body.legal header.site-header > .container .button{
     justify-content: center;
   }
 }
+
 
