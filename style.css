@@ -1,10 +1,10 @@
-/* 
-       _     _ _                        _     _           _      _                 
- _ __ | |__ (_) |  ___  ___  ___  _ __ | |__ (_) ___   __| | ___| |_   ___  _____  
-| '_ \| '_ \| | | / _ \/ __|/ _ \| '_ \| '_ \| |/ _ \ / _` |/ _ \ | | | \ \/ / _ \ 
-| |_) | | | | | || (_) \__ \ (_) | |_) | | | | |  __/| (_| |  __/ | |_| |>  <  __/ 
-| .__/|_| |_|_|_(_)___/|___/\___/| .__/|_| |_|_|\___(_)__,_|\___|_|\__,_/_/\_\___| 
-|_|                              |_|                                               
+/*
+       _     _ _                        _     _           _      _
+ _ __ | |__ (_) |  ___  ___  ___  _ __ | |__ (_) ___   __| | ___| |_   ___  _____
+| '_ \| '_ \| | | / _ \/ __|/ _ \| '_ \| '_ \| |/ _ \ / _` |/ _ \ | | | \ \/ / _ \
+| |_) | | | | | || (_) \__ \ (_) | |_) | | | | |  __/| (_| |  __/ | |_| |>  <  __/
+| .__/|_| |_|_|_(_)___/|___/\___/| .__/|_| |_|_|\___(_)__,_|\___|_|\__,_/_/\_\___|
+|_|                              |_|
 Copyright (c) Phil Kirchner Freising, All Rights Reserved
 */
 
@@ -12,7 +12,7 @@ Copyright (c) Phil Kirchner Freising, All Rights Reserved
    Grundgerüst + Mobile-Viewport-Fixes
    =================================================================== */
 
-:root { 
+:root {
   --nav-h: 56px;               /* wird von JS überschrieben */
 }
 
@@ -159,18 +159,18 @@ a:link, a:visited{ text-decoration:none; padding:0 1.5rem; font-weight:300; }
 .button{
   border:none; outline:none; color:rgb(226,166,1); background:#111; cursor:pointer;
   position:relative; z-index:0; border-radius:7px; user-select:none; -webkit-user-select:none;
-  touch-action:manipulation; 
+  touch-action:manipulation;
   padding: 1.0rem 1.0rem !important; /* mehr Innenabstand, hart durchsetzen | vertikal A | horizontal B */
-  margin-top:1.4rem; 
+  margin-top:1.4rem;
   display:inline-flex; font-weight:300; line-height:1.25; gap:.5rem;
 }
 
-.button:before{    
+.button:before{
   content:"";
   background:linear-gradient(45deg,#f00,#f70,#ff0,#4f0,#0fd,#02f,#70f,#f0c,#f00);
   position:absolute; top:-1px; left:-2px; background-size:400%; z-index:-1;
   filter:blur(2px); -webkit-filter:blur(2px);
-  width:calc(100% + 4px); 
+  width:calc(100% + 4px);
   height:calc(100% + 2px);
   animation:glowing-button 25s linear infinite; transition:opacity .3s ease-in-out; border-radius:7px;
 }
@@ -335,7 +335,6 @@ label.card.is-measuring .description > *{
   transition: none !important;
 }
 
-
 /* ===================================================================
    NAV: Full-Bleed + 2-zeilig mobil + Verlauf
    =================================================================== */
@@ -489,7 +488,7 @@ html[data-lang="en"] .lang-btn .lang-de { opacity:.6; }
     width: min(170px, 88vw);
     max-height: 0;                   /* zu */
     overflow: clip;
-    padding: 0; 
+    padding: 0;
     margin: 0;
     margin-right: -25px;
 
@@ -563,10 +562,10 @@ html[data-lang="en"] .lang-btn .lang-de { opacity:.6; }
 }
 
 /* ================================
-   Legal-Seiten: Container mittig
+   header Container + Medien
    ================================ */
 
-/* Medien-Schutz + kein horizontaler Scroll */
+/* Medien laufen nicht über + kein horizontaler Scroll */
 .header_container_left,
 .header_container_right { min-width: 0; }
 .header_container_left img,
@@ -575,8 +574,9 @@ html[data-lang="en"] .lang-btn .lang-de { opacity:.6; }
 .header_container_right video { max-width: 100%; height: auto; }
 html, body { overflow-x: hidden; }
 
-/* Container: volle Breite, Kind-Box zentrieren */
-.site-header .container{
+/* Container spannt volle Breite und zentriert die Content-Box */
+.site-header .container, /* ODER: header .container */
+header .container{
   display: grid;
   place-items: start center;          /* oben beginnen, horizontal mittig */
   width: 100%;
@@ -584,18 +584,25 @@ html, body { overflow-x: hidden; }
   text-align: initial;
 }
 
-/* Content-Box: schmal & mittig, Text links */
+/* NEU – Desktop & Mobil verlässlich mittig */
+.site-header .container{
+  display: grid;
+  place-items: start center;      /* oben beginnen, horizontal mittig */
+  width: 100%;
+  padding-inline: clamp(16px, 4vw, 40px);
+  text-align: initial;
+}
 .site-header .container > .content{
   width: min(92vw, 800px);
   margin-inline: auto;
-  text-align: center;
+  text-align: left;
 }
 
-/* Datenschutz-Variante etwas schmaler – mit/ohne :has() */
+/* Datenschutz etwas schmaler – mit/ohne :has() */
 .site-header .container > .content:has(.privacy_policy){ width: min(90vw, 760px); }
 body.legal--privacy .site-header .container > .content{  width: min(90vw, 760px); }
 
-/* Abstand unter der NAV – EIN Block reicht */
+/* Abstand unter der NAV – mit/ohne :has() */
 .site-header .container:has(.privacy_policy),
 .site-header .container:has([data-i18n="imprint.title"]),
 body.legal--privacy .site-header .container,
@@ -603,9 +610,3 @@ body.legal--imprint .site-header .container{
   padding-top: calc(var(--nav-h) + clamp(48px, 12vh, 180px));
   padding-bottom: clamp(32px, 8vh, 120px);
 }
-
-
-.site-header .container, header .container { outline: 2px dashed magenta; }
-.site-header .container > .content, header .container > .content { outline: 2px solid cyan; }
-
-
