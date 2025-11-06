@@ -640,7 +640,7 @@ html, body { overflow-x: hidden; }
 /* Variante mit :has() – greift nur auf den Legal-Seiten */
 .site-header .container:has(.privacy_policy) > .content p:has(.button),
 .site-header .container:has([data-i18n="imprint.title"]) > .content p:has(.button){
-  display: flex;
+  display: flex !important;
   justify-content: center !important;
   margin-top: clamp(16px, 3vh, 32px) !important;
 }
@@ -666,4 +666,5 @@ input[type="radio"]:checked + label.card{
   max-height: var(--card-open-h, var(--card-open-fallback)) !important;
   box-shadow: 0 16px 38px -5px rgba(0,0,0,.55) !important;
 }
+
 
