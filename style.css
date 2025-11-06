@@ -636,15 +636,12 @@ body.legal--imprint .site-header .container{
   .site-header .container .button{ max-width: 92vw; }
 }
 
-/* Debug – kurz aktivieren, danach wieder löschen */
-.site-header .container{ outline: 2px dashed magenta; }
-.site-header .container > .content{ outline: 2px solid cyan; }
-
 /* GANZ AM ENDE deiner CSS lassen! */
 input[type="radio"]:checked + label.card{
   max-height: var(--card-open-h, var(--card-open-fallback)) !important;
   box-shadow: 0 16px 38px -5px rgba(0,0,0,.55) !important;
 }
+
 
 
 
