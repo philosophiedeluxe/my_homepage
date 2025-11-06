@@ -580,31 +580,6 @@ html[data-lang="en"] .lang-btn .lang-de { opacity:.6; }
 html, body { overflow-x: hidden; }
 
 /* ================================
-   Impressum + Datenschutz: Button zentrieren (bereinigt)
-   ================================ */
-
-/* Variante mit :has() – greift nur auf den Legal-Seiten */
-body.legal header.site-header .container > .content p:has(.button){
-  display: flex;
-  justify-content: center;
-}
-
-/* Fallback OHNE :has(): Button selbst mittig ziehen */
-body.legal header.site-header .container .button{
-  display: inline-flex;        /* bleibt wie vorher */
-  margin-inline: auto;         /* erzwingt horizontale Zentrierung */
-  text-align: center;          /* falls Button-Text umbrechen muss */
-}
-
-/* Optional: sehr kleine Screens → Button nicht zu schmal */
-@media (max-width: 480px){
-  body.legal header.site-header .container .button{
-    max-width: 92vw;
-    justify-content: center;
-  }
-}
-
-/* ================================
    Cards (unverändert beibehalten)
    ================================ */
 
@@ -617,57 +592,34 @@ input[type="radio"]:checked + label.card{
 /* ================================
    LEGAL: Container mittig + sauberes Spacing
    ================================ */
-
-:root{
-  --legal-top-gap:    calc(var(--nav-h) + clamp(24px, 6vh, 90px));
-  --legal-bottom-gap: clamp(32px, 8vh, 120px);
-}
-
-/* 1) Container zentriert die Content-Box */
+       
+/* Container zentriert die Content-Box */
 body.legal header.site-header > .container{
   display: grid !important;
   place-items: start center !important;
   width: 100%;
   text-align: initial !important;
-  padding-top: var(--legal-top-gap) !important;
+  padding-top: 90px !important;
 }
 
-/* 2) Content-Box: schmal, mittig, Text links, Abstand OBEN/UNTEN */
+/* Content-Box: schmal, mittig, Text links, Abstand OBEN/UNTEN */
 body.legal header.site-header > .container > .content{
   width: min(92vw, 800px);
   margin-inline: auto;
   text-align: left;
-  padding-top: var(--legal-top-gap);
-  padding-bottom: var(--legal-bottom-gap);
+  padding-top: 90px;
+  padding-bottom: 30px;
 }
 
-/* 3) Datenschutz: etwas schmaler */
+/* Datenschutz: etwas schmaler */
 body.legal.legal--privacy header.site-header > .container > .content{
   width: min(90vw, 760px);
 }
 
-/* 4) Sicherheit: kein fixer Außenabstand in der Privacy-Box */
-body.legal .privacy_policy{ margin: 0; }
-
-/* 5) Buttons zentrieren – nur dort, wo ein Button im Absatz steht */
-body.legal header.site-header > .container > .content p:has(.button){
-  display: flex;
-  justify-content: center;
-  padding-top: var(--legal-top-gap) !important;
-}
-/* Fallback, falls :has() fehlt */
-body.legal header.site-header > .container .button{
-  display: inline-flex;
-  margin-inline: auto;
-  text-align: center;
-}
-
-/* 6) Sehr kleine Screens: Button nicht zu schmal */
+/* Sehr kleine Screens: Button nicht zu schmal */
 @media (max-width: 480px){
   body.legal header.site-header > .container .button{
     max-width: 92vw;
     justify-content: center;
   }
 }
-
-
