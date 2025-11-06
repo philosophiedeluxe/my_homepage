@@ -588,39 +588,3 @@ input[type="radio"]:checked + label.card{
   max-height: var(--card-open-h, var(--card-open-fallback)) !important;
   box-shadow: 0 16px 38px -5px rgba(0,0,0,.55);
 }
-
-/* ================================
-   LEGAL: Container mittig + sauberes Spacing
-   ================================ */
-       
-/* Container zentriert die Content-Box */
-body.legal header.site-header > .container{
-  display: grid !important;
-  place-items: start center !important;
-  width: 100%;
-  text-align: initial !important;
-  padding-top: 90px !important;
-}
-
-/* Content-Box: schmal, mittig, Text links, Abstand OBEN/UNTEN */
-body.legal header.site-header > .container > .content{
-  width: min(92vw, 800px);
-  margin-inline: auto;
-  text-align: center;
-  padding-top: 90px;
-  padding-bottom: 30px;
-}
-
-/* Datenschutz: etwas schmaler */
-body.legal.legal--privacy header.site-header > .container > .content{
-  width: min(90vw, 760px);
-}
-
-/* Sehr kleine Screens: Button nicht zu schmal */
-@media (max-width: 480px){
-  body.legal header.site-header > .container .button{
-    max-width: 92vw;
-    justify-content: center;
-  }
-}
-
