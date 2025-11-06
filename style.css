@@ -619,7 +619,7 @@ input[type="radio"]:checked + label.card{
    ================================ */
 
 :root{
-  --legal-top-gap:    calc(var(--nav-h) + clamp(48px, 12vh, 180px));
+  --legal-top-gap:    calc(var(--nav-h) + clamp(24px, 6vh, 90px));
   --legal-bottom-gap: clamp(32px, 8vh, 120px);
 }
 
@@ -668,3 +668,4 @@ body.legal header.site-header > .container .button{
     justify-content: center;
   }
 }
+
