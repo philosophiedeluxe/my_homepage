@@ -587,7 +587,6 @@ html, body { overflow-x: hidden; }
 body.legal header.site-header .container > .content p:has(.button){
   display: flex;
   justify-content: center;
-  margin-top: clamp(16px, 3vh, 32px);
 }
 
 /* Fallback OHNE :has(): Button selbst mittig ziehen */
@@ -641,10 +640,3 @@ body.legal header.site-header > .container{
   padding-top: calc(var(--nav-h) + clamp(48px, 12vh, 180px)) !important;
   padding-bottom: clamp(32px, 8vh, 120px) !important;
 }
-
-/* Debug-Rahmen – kurz aktivieren, dann löschen */
-body.legal header.site-header.is-desktop > .container{ outline: 2px dashed magenta; }
-body.legal header.site-header.is-desktop > .container > .content{ outline: 2px solid cyan; }
-
-
-
