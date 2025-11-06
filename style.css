@@ -589,8 +589,6 @@ html, body { overflow-x: hidden; }
   justify-content:center;
   align-items:flex-start;
   text-align:center;
-           padding: 90px !important;
-           text-align: center !important;
 }
 
 /* Basisbreite für beide Seiten */
@@ -610,6 +608,12 @@ html, body { overflow-x: hidden; }
 .site-header .container > .content:has([data-i18n="imprint.title"]){
   width: clamp(320px, 92vw, 760px);
 }
+
+.site-header .container .content{
+  padding: 90px !important;
+  text-align: center !important;
+}
+
 
 /* ================================
    Impressum + Datenschutz: Abstand unter der NAV
@@ -672,5 +676,6 @@ input[type="radio"]:checked + label.card{
   max-height: var(--card-open-h, var(--card-open-fallback)) !important;
   box-shadow: 0 16px 38px -5px rgba(0,0,0,.55);
 }
+
 
 
