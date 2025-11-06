@@ -563,10 +563,10 @@ html[data-lang="en"] .lang-btn .lang-de { opacity:.6; }
 }
 
 /* ================================
-   header Container + Medien 
+   Legal-Seiten: Container mittig
    ================================ */
 
-/* Medien laufen nicht über + kein horizontaler Scroll */
+/* Medien-Schutz + kein horizontaler Scroll */
 .header_container_left,
 .header_container_right { min-width: 0; }
 .header_container_left img,
@@ -575,9 +575,8 @@ html[data-lang="en"] .lang-btn .lang-de { opacity:.6; }
 .header_container_right video { max-width: 100%; height: auto; }
 html, body { overflow-x: hidden; }
 
-/* Container spannt volle Breite und zentriert die Content-Box */
-.site-header .container, /* ODER: header .container */
-header .container{
+/* Container: volle Breite, Kind-Box zentrieren */
+.site-header .container{
   display: grid;
   place-items: start center;          /* oben beginnen, horizontal mittig */
   width: 100%;
@@ -585,42 +584,22 @@ header .container{
   text-align: initial;
 }
 
-/* NEU – Desktop & Mobil verlässlich mittig */
-.site-header .container{
-  display: grid;
-  place-items: start center;      /* oben beginnen, horizontal mittig */
-  width: 100%;
-  padding-inline: clamp(16px, 4vw, 40px);
-  text-align: initial;
-}
+/* Content-Box: schmal & mittig, Text links */
 .site-header .container > .content{
   width: min(92vw, 800px);
   margin-inline: auto;
   text-align: left;
 }
 
-/* Datenschutz etwas schmaler – mit/ohne :has() */
+/* Datenschutz-Variante etwas schmaler – mit/ohne :has() */
 .site-header .container > .content:has(.privacy_policy){ width: min(90vw, 760px); }
 body.legal--privacy .site-header .container > .content{  width: min(90vw, 760px); }
 
-/* Abstand unter der NAV – mit/ohne :has() */
+/* Abstand unter der NAV – EIN Block reicht */
 .site-header .container:has(.privacy_policy),
 .site-header .container:has([data-i18n="imprint.title"]),
 body.legal--privacy .site-header .container,
 body.legal--imprint .site-header .container{
-  padding-top: calc(var(--nav-h) + clamp(48px, 12vh, 180px));
-  padding-bottom: clamp(32px, 8vh, 120px);
-}
-
-/* Abstand unter der Nav – mit und ohne :has() */
-.site-header .container:has(.privacy_policy),
-.site-header .container:has([data-i18n="imprint.title"]),
-body.legal--privacy .site-header .container,
-body.legal--imprint .site-header .container,
-header .container:has(.privacy_policy),
-header .container:has([data-i18n="imprint.title"]),
-body.legal--privacy header .container,
-body.legal--imprint header .container{
   padding-top: calc(var(--nav-h) + clamp(48px, 12vh, 180px));
   padding-bottom: clamp(32px, 8vh, 120px);
 }
