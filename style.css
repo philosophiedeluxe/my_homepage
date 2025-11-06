@@ -580,101 +580,34 @@ html[data-lang="en"] .lang-btn .lang-de { opacity:.6; }
 html, body { overflow-x: hidden; }
 
 /* ================================
-   Impressum + Datenschutz: zentrierte Content-Box
-   ================================ */
-
-/* Container wirklich mittig ausrichten */
-/* Legal: Container mittig (Grid) */
-.site-header .container{
-  display: grid;
-  place-items: start center;
-  width: 100%;
-  padding-inline: clamp(16px, 4vw, 40px);
-  text-align: initial;
-}
-
-/* Basisbreite für beide Seiten */
-/* Legal: Content-Box schmal & linksbündig */
-.site-header .container > .content{
-  width: min(92vw, 800px);
-  margin-inline: auto;
-  text-align: left;
-}
-/* Datenschutz schmaler */
-.site-header .container > .content:has(.privacy_policy){ width: min(90vw, 760px); }
-/* Fallback ohne :has() */
-body.legal--privacy .site-header .container > .content{  width: min(90vw, 760px); }
-
-/* Abstand unter der NAV – konsolidiert */
-.site-header .container:has(.privacy_policy),
-.site-header .container:has([data-i18n="imprint.title"]),
-body.legal--privacy .site-header .container,
-body.legal--imprint .site-header .container{
-  padding-top: calc(var(--nav-h) + clamp(48px, 12vh, 180px));
-  padding-bottom: clamp(32px, 8vh, 120px);
-}
-
-/* Datenschutz-Seite (enthält .privacy_policy) etwas schmaler für bessere Lesbarkeit */
-.site-header .container > .content:has(.privacy_policy){
-  width: clamp(320px, 90vw, 760px);
-}
-
-/* Optional: wenn du :has() nicht willst/kannst, nimm gezielt die Überschrift als Hook */
-.site-header .container > .content:has([data-i18n="imprint.title"]){
-  width: clamp(320px, 92vw, 760px);
-}
-
-/* ================================
-   Impressum + Datenschutz: Abstand unter der NAV
-   ================================ */
-
-/* Mehr Top-Spacing nur auf den Legal-Seiten */
-.site-header .container:has(.privacy_policy),
-.site-header .container:has([data-i18n="imprint.title"]) {
-  /* Navi-Höhe + zusätzlicher Luftkissen-Abstand */
-  padding-top: calc(env(safe-area-inset-top) + clamp(48px, 12vh, 180px));
-  padding-bottom: clamp(32px, 8vh, 120px); /* unten auch etwas Luft */
-}
-
-/* Box mittig halten (falls irgendwo 100% Breite greift) */
-.site-header .container:has(.privacy_policy) > .content,
-.site-header .container:has([data-i18n="imprint.title"]) > .content {
-  margin-inline: auto;
-}
-
-/* Sauberes Anscrollen bei Sprungmarken unter Sticky-NAV */
-.site-header .container:has(.privacy_policy) :where(h1,h2,h3)[id],
-.site-header .container:has([data-i18n="imprint.title"]) :where(h1,h2,h3)[id]{
-  scroll-margin-top: calc(var(--nav-h) + 24px);
-}
-
-/* ================================
-   Impressum + Datenschutz: Button zentrieren
+   Impressum + Datenschutz: Button zentrieren (bereinigt)
    ================================ */
 
 /* Variante mit :has() – greift nur auf den Legal-Seiten */
-.site-header .container:has(.privacy_policy) > .content p:has(.button),
-.site-header .container:has([data-i18n="imprint.title"]) > .content p:has(.button){
+body.legal header.site-header .container > .content p:has(.button){
   display: flex;
   justify-content: center;
   margin-top: clamp(16px, 3vh, 32px);
 }
 
-.site-header .container:has(.privacy_policy) .button,
-.site-header .container:has([data-i18n="imprint.title"]) .button{
-  margin-inline: auto;          /* erzwingt horizontale Zentrierung */
-  display: inline-flex;         /* bleibt wie vorher */
-  text-align: center;           /* falls Text umbrecht */
+/* Fallback OHNE :has(): Button selbst mittig ziehen */
+body.legal header.site-header .container .button{
+  display: inline-flex;        /* bleibt wie vorher */
+  margin-inline: auto;         /* erzwingt horizontale Zentrierung */
+  text-align: center;          /* falls Button-Text umbrechen muss */
 }
 
-/* Optional: sehr kleine Screens → etwas breiter */
+/* Optional: sehr kleine Screens → Button nicht zu schmal */
 @media (max-width: 480px){
-  .site-header .container:has(.privacy_policy) .button,
-  .site-header .container:has([data-i18n="imprint.title"]) .button{
+  body.legal header.site-header .container .button{
     max-width: 92vw;
     justify-content: center;
   }
 }
+
+/* ================================
+   Cards (unverändert beibehalten)
+   ================================ */
 
 /* GANZ AM ENDE deiner CSS lassen! */
 input[type="radio"]:checked + label.card{
@@ -682,41 +615,29 @@ input[type="radio"]:checked + label.card{
   box-shadow: 0 16px 38px -5px rgba(0,0,0,.55);
 }
 
+/* ================================
+   LEGAL HOTFIX: Container mittig, Text links
+   (gewinnt sicher, minimal-invasiv, nur auf Legal-Seiten)
+   ================================ */
 
-/* HOTFIX: Erzwinge Zentrierung falls alte Regeln noch irgendwo nachgeladen werden */
-body.legal .site-header .container{
-  display: grid !important;
-  place-items: start center !important;
-  text-align: initial !important;
-}
-body.legal .site-header .container > .content{
-  width: min(92vw, 800px) !important;
-  margin-inline: auto !important;
-  text-align: left !important;
-}
-body.legal.legal--privacy .site-header .container > .content{
-  width: min(90vw, 760px) !important;
-}
-
-/* === LEGAL HOTFIX: Container mittig, Text links – gewinnt immer === */
-body.legal header.site-header.is-desktop > .container{
+body.legal header.site-header > .container{
   display: grid !important;
   place-items: start center !important;
   width: 100% !important;
   padding-inline: clamp(16px, 4vw, 40px) !important;
   text-align: initial !important;
 }
-body.legal header.site-header.is-desktop > .container > .content{
+body.legal header.site-header > .container > .content{
   width: min(92vw, 800px) !important;
   margin-inline: auto !important;
   text-align: left !important;
 }
-/* Datenschutz schmaler */
-body.legal.legal--privacy header.site-header.is-desktop > .container > .content{
+/* Datenschutz etwas schmaler */
+body.legal.legal--privacy header.site-header > .container > .content{
   width: min(90vw, 760px) !important;
 }
-/* Abstand unter der Nav */
-body.legal header.site-header.is-desktop > .container{
+/* Abstand unter der NAV (einheitlich) */
+body.legal header.site-header > .container{
   padding-top: calc(var(--nav-h) + clamp(48px, 12vh, 180px)) !important;
   padding-bottom: clamp(32px, 8vh, 120px) !important;
 }
@@ -724,5 +645,6 @@ body.legal header.site-header.is-desktop > .container{
 /* Debug-Rahmen – kurz aktivieren, dann löschen */
 body.legal header.site-header.is-desktop > .container{ outline: 2px dashed magenta; }
 body.legal header.site-header.is-desktop > .container > .content{ outline: 2px solid cyan; }
+
 
 
