@@ -1,10 +1,10 @@
-/*
-       _     _ _                        _     _           _      _
- _ __ | |__ (_) |  ___  ___  ___  _ __ | |__ (_) ___   __| | ___| |_   ___  _____
-| '_ \| '_ \| | | / _ \/ __|/ _ \| '_ \| '_ \| |/ _ \ / _` |/ _ \ | | | \ \/ / _ \
-| |_) | | | | | || (_) \__ \ (_) | |_) | | | | |  __/| (_| |  __/ | |_| |>  <  __/
-| .__/|_| |_|_|_(_)___/|___/\___/| .__/|_| |_|_|\___(_)__,_|\___|_|\__,_/_/\_\___|
-|_|                              |_|
+/* 
+       _     _ _                        _     _           _      _                 
+ _ __ | |__ (_) |  ___  ___  ___  _ __ | |__ (_) ___   __| | ___| |_   ___  _____  
+| '_ \| '_ \| | | / _ \/ __|/ _ \| '_ \| '_ \| |/ _ \ / _` |/ _ \ | | | \ \/ / _ \ 
+| |_) | | | | | || (_) \__ \ (_) | |_) | | | | |  __/| (_| |  __/ | |_| |>  <  __/ 
+| .__/|_| |_|_|_(_)___/|___/\___/| .__/|_| |_|_|\___(_)__,_|\___|_|\__,_/_/\_\___| 
+|_|                              |_|                                               
 Copyright (c) Phil Kirchner Freising, All Rights Reserved
 */
 
@@ -12,7 +12,7 @@ Copyright (c) Phil Kirchner Freising, All Rights Reserved
    Grundgerüst + Mobile-Viewport-Fixes
    =================================================================== */
 
-:root {
+:root { 
   --nav-h: 56px;               /* wird von JS überschrieben */
 }
 
@@ -159,18 +159,18 @@ a:link, a:visited{ text-decoration:none; padding:0 1.5rem; font-weight:300; }
 .button{
   border:none; outline:none; color:rgb(226,166,1); background:#111; cursor:pointer;
   position:relative; z-index:0; border-radius:7px; user-select:none; -webkit-user-select:none;
-  touch-action:manipulation;
+  touch-action:manipulation; 
   padding: 1.0rem 1.0rem !important; /* mehr Innenabstand, hart durchsetzen | vertikal A | horizontal B */
-  margin-top:1.4rem;
+  margin-top:1.4rem; 
   display:inline-flex; font-weight:300; line-height:1.25; gap:.5rem;
 }
 
-.button:before{
+.button:before{    
   content:"";
   background:linear-gradient(45deg,#f00,#f70,#ff0,#4f0,#0fd,#02f,#70f,#f0c,#f00);
   position:absolute; top:-1px; left:-2px; background-size:400%; z-index:-1;
   filter:blur(2px); -webkit-filter:blur(2px);
-  width:calc(100% + 4px);
+  width:calc(100% + 4px); 
   height:calc(100% + 2px);
   animation:glowing-button 25s linear infinite; transition:opacity .3s ease-in-out; border-radius:7px;
 }
@@ -335,6 +335,7 @@ label.card.is-measuring .description > *{
   transition: none !important;
 }
 
+
 /* ===================================================================
    NAV: Full-Bleed + 2-zeilig mobil + Verlauf
    =================================================================== */
@@ -488,7 +489,7 @@ html[data-lang="en"] .lang-btn .lang-de { opacity:.6; }
     width: min(170px, 88vw);
     max-height: 0;                   /* zu */
     overflow: clip;
-    padding: 0;
+    padding: 0; 
     margin: 0;
     margin-right: -25px;
 
@@ -562,51 +563,106 @@ html[data-lang="en"] .lang-btn .lang-de { opacity:.6; }
 }
 
 /* ================================
-   header Container + Medien
+   header Container + Medien 
    ================================ */
 
-/* Medien laufen nicht über + kein horizontaler Scroll */
+/* Flex-Kinder dürfen schrumpfen */
 .header_container_left,
 .header_container_right { min-width: 0; }
+
+/* Medien laufen nicht über */
 .header_container_left img,
 .header_container_right img,
 .header_container_left video,
 .header_container_right video { max-width: 100%; height: auto; }
+
+/* Horizontalen Überlauf sicher killen (statt clip) */
 html, body { overflow-x: hidden; }
 
-/* Container spannt volle Breite und zentriert die Content-Box */
-.site-header .container, /* ODER: header .container */
-header .container{
-  display: grid;
-  place-items: start center;          /* oben beginnen, horizontal mittig */
-  width: 100%;
-  padding-inline: clamp(16px, 4vw, 40px);
-  text-align: initial;
-}
+/* ================================
+   Impressum + Datenschutz: zentrierte Content-Box
+   ================================ */
 
-/* NEU – Desktop & Mobil verlässlich mittig */
+/* Container wirklich mittig ausrichten */
 .site-header .container{
-  display: grid;
-  place-items: start center;      /* oben beginnen, horizontal mittig */
-  width: 100%;
-  padding-inline: clamp(16px, 4vw, 40px);
-  text-align: initial;
+  display:flex !important;
+  justify-content:center !important;
+  align-items:flex-start !important;
+  text-align:center !important; /* nur fürs Außenrum, Inhalt setzt gleich auf left */
 }
+
+/* Basisbreite für beide Seiten */
 .site-header .container > .content{
-  width: min(92vw, 800px);
-  margin-inline: auto;
-  text-align: left;
+  /* NICHT 100%: stattdessen eine sinnvolle Maximalbreite */
+  width: clamp(320px, 92vw, 800px) !important;
+  margin-inline: auto !important;
+  text-align: center !important;       /* Lesbarkeit */
 }
 
-/* Datenschutz etwas schmaler – mit/ohne :has() */
-.site-header .container > .content:has(.privacy_policy){ width: min(90vw, 760px); }
-body.legal--privacy .site-header .container > .content{  width: min(90vw, 760px); }
+/* Datenschutz-Seite (enthält .privacy_policy) etwas schmaler für bessere Lesbarkeit */
+.site-header .container > .content:has(.privacy_policy){
+  width: clamp(320px, 90vw, 760px) !important;
+}
 
-/* Abstand unter der NAV – mit/ohne :has() */
+/* Optional: wenn du :has() nicht willst/kannst, nimm gezielt die Überschrift als Hook */
+.site-header .container > .content:has([data-i18n="imprint.title"]){
+  width: clamp(320px, 92vw, 760px) !important;
+}
+
+/* ================================
+   Impressum + Datenschutz: Abstand unter der NAV
+   ================================ */
+
+/* Mehr Top-Spacing nur auf den Legal-Seiten */
 .site-header .container:has(.privacy_policy),
-.site-header .container:has([data-i18n="imprint.title"]),
-body.legal--privacy .site-header .container,
-body.legal--imprint .site-header .container{
-  padding-top: calc(var(--nav-h) + clamp(48px, 12vh, 180px));
-  padding-bottom: clamp(32px, 8vh, 120px);
+.site-header .container:has([data-i18n="imprint.title"]) {
+  /* Navi-Höhe + zusätzlicher Luftkissen-Abstand */
+  padding-top: calc(env(safe-area-inset-top) + clamp(48px, 12vh, 180px)) !important;
+  padding-bottom: clamp(32px, 8vh, 120px) !important; /* unten auch etwas Luft */
+}
+
+/* Box mittig halten (falls irgendwo 100% Breite greift) */
+.site-header .container:has(.privacy_policy) > .content,
+.site-header .container:has([data-i18n="imprint.title"]) > .content {
+  margin-inline: auto !important;
+}
+
+/* Sauberes Anscrollen bei Sprungmarken unter Sticky-NAV */
+.site-header .container:has(.privacy_policy) :where(h1,h2,h3)[id],
+.site-header .container:has([data-i18n="imprint.title"]) :where(h1,h2,h3)[id]{
+  scroll-margin-top: calc(var(--nav-h) + 24px) !important;
+}
+
+/* ================================
+   Impressum + Datenschutz: Button zentrieren
+   ================================ */
+
+/* Variante mit :has() – greift nur auf den Legal-Seiten */
+.site-header .container:has(.privacy_policy) > .content p:has(.button),
+.site-header .container:has([data-i18n="imprint.title"]) > .content p:has(.button){
+  display: flex;
+  justify-content: center !important;
+  margin-top: clamp(16px, 3vh, 32px) !important;
+}
+
+.site-header .container:has(.privacy_policy) .button,
+.site-header .container:has([data-i18n="imprint.title"]) .button{
+  margin-inline: auto !important;          /* erzwingt horizontale Zentrierung */
+  display: inline-flex !important;         /* bleibt wie vorher */
+  text-align: center !important;           /* falls Text umbrecht */
+}
+
+/* Optional: sehr kleine Screens → etwas breiter */
+@media (max-width: 480px){
+  .site-header .container:has(.privacy_policy) .button,
+  .site-header .container:has([data-i18n="imprint.title"]) .button{
+    max-width: 92vw !important;
+    justify-content: center !important;
+  }
+}
+
+/* GANZ AM ENDE deiner CSS lassen! */
+input[type="radio"]:checked + label.card{
+  max-height: var(--card-open-h, var(--card-open-fallback)) !important;
+  box-shadow: 0 16px 38px -5px rgba(0,0,0,.55) !important;
 }
