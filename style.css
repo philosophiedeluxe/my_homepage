@@ -697,3 +697,32 @@ body.legal .site-header .container > .content{
 body.legal.legal--privacy .site-header .container > .content{
   width: min(90vw, 760px) !important;
 }
+
+/* === LEGAL HOTFIX: Container mittig, Text links – gewinnt immer === */
+body.legal header.site-header.is-desktop > .container{
+  display: grid !important;
+  place-items: start center !important;
+  width: 100% !important;
+  padding-inline: clamp(16px, 4vw, 40px) !important;
+  text-align: initial !important;
+}
+body.legal header.site-header.is-desktop > .container > .content{
+  width: min(92vw, 800px) !important;
+  margin-inline: auto !important;
+  text-align: left !important;
+}
+/* Datenschutz schmaler */
+body.legal.legal--privacy header.site-header.is-desktop > .container > .content{
+  width: min(90vw, 760px) !important;
+}
+/* Abstand unter der Nav */
+body.legal header.site-header.is-desktop > .container{
+  padding-top: calc(var(--nav-h) + clamp(48px, 12vh, 180px)) !important;
+  padding-bottom: clamp(32px, 8vh, 120px) !important;
+}
+
+/* Debug-Rahmen – kurz aktivieren, dann löschen */
+body.legal header.site-header.is-desktop > .container{ outline: 2px dashed magenta; }
+body.legal header.site-header.is-desktop > .container > .content{ outline: 2px solid cyan; }
+
+
