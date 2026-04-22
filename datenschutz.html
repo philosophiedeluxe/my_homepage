@@ -14,6 +14,16 @@
   <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0">  --> 
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title data-i18n="privacy.metaTitle">Phil Kirchner - Datenschutz</title>
+  <meta name="description" data-i18n-content="privacy.metaDescription" content="Datenschutzerklärung der Website von Phil Kirchner mit Informationen zur Datenverarbeitung.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="de_DE">
+  <meta property="og:title" data-i18n-content="privacy.ogTitle" content="Phil Kirchner - Datenschutz">
+  <meta property="og:description" data-i18n-content="privacy.ogDescription" content="Informationen zu Datenschutz, Rechtsgrundlagen und Betroffenenrechten.">
+  <meta property="og:image" content="./image/iconic.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" data-i18n-content="privacy.ogTitle" content="Phil Kirchner - Datenschutz">
+  <meta name="twitter:description" data-i18n-content="privacy.ogDescription" content="Informationen zu Datenschutz, Rechtsgrundlagen und Betroffenenrechten.">
+  <meta name="twitter:image" content="./image/iconic.jpg">
   <link rel="stylesheet" href="./style.css">
 
   <link rel="icon" type="image/gif" href="./image/iconstar.gif">
@@ -24,18 +34,19 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400&display=swap" rel="stylesheet">
 </head>
 <body class="legal legal--privacy">
+  <a class="skip-link" href="#main-content" data-i18n="nav.skip">Zum Hauptinhalt springen</a>
 
   <!-- NAV --> 
   <header class="site-header" role="banner">
     <div class="container-wide">
       <nav class="nav" aria-label="Hauptnavigation">
         <a class="brand" href="./index.html">Phil Kirchner</a>
-        <button class="nav-toggle" aria-controls="primary-nav" aria-expanded="false"
-                aria-label="Menü öffnen/ schließen">
+        <button class="nav-toggle" aria-controls="primary-nav" aria-expanded="false" data-i18n-aria-label="nav.toggleLabel" aria-label="Menü öffnen oder schließen">
           <span class="nav-toggle-bar" aria-hidden="true"></span>
           <span class="nav-toggle-bar" aria-hidden="true"></span>
           <span class="nav-toggle-bar" aria-hidden="true"></span>
         </button>
+
         <ul id="primary-nav" class="nav-list" data-collapsible="true">
           <li><a data-i18n="nav.vita" href="./vita.html">Vita</a></li>
           <li><a href="https://www.linkedin.com/in/phil-kirchner/" rel="noopener noreferrer">LinkedIn</a></li>
@@ -43,11 +54,12 @@
           <li class="nav-divider" aria-hidden="true">|</li>
           <li><a data-i18n="nav.impressum" href="./impressum.html">Impressum</a></li>
           <li><a data-i18n="nav.datenschutz" href="./datenschutz.html" aria-current="page">Datenschutz</a></li>
+               
           <!-- Sprachumschalter (ganz außen rechts) -->
           <li class="nav-divider" aria-hidden="true">|</li>
           <li class="lang-switch">
             <button id="lang-toggle" class="lang-btn" type="button"
-                    aria-label="Sprache umschalten (Deutsch/Englisch)">
+              data-i18n-aria-label="lang.toggleLabel" aria-label="Sprache umschalten (Deutsch/Englisch)">
               <span class="lang-de">DE</span><span class="sep">/</span><span class="lang-en">EN</span>
             </button>
           </li>
@@ -55,7 +67,7 @@
       </nav>
     </div>
 
-    <div class="container">
+    <main class="container" id="main-content">
       <div class="content">
         <div class="privacy_policy">
 
@@ -143,7 +155,7 @@
                
       </div>
      </div>
-    </div>
+    </main>
   </header>
 
   <footer></footer>

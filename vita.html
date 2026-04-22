@@ -15,7 +15,16 @@ Copyright (c) Phil Kirchner Freising, All Rights Reserved
   <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0">  --> 
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title data-i18n="vita.metaTitle">Phil Kirchner - Softwareentwickler</title>
-  <meta name="description" content="It´s me">
+  <meta name="description" data-i18n-content="vita.metaDescription" content="Vita von Phil Kirchner mit beruflicher Entwicklung, Stationen und Zertifikaten.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="de_DE">
+  <meta property="og:title" data-i18n-content="vita.ogTitle" content="Phil Kirchner - Vita">
+  <meta property="og:description" data-i18n-content="vita.ogDescription" content="Beruflicher Werdegang, Kenntnisse und Zertifikate im Überblick.">
+  <meta property="og:image" content="./image/iconic.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" data-i18n-content="vita.ogTitle" content="Phil Kirchner - Vita">
+  <meta name="twitter:description" data-i18n-content="vita.ogDescription" content="Beruflicher Werdegang, Kenntnisse und Zertifikate im Überblick.">
+  <meta name="twitter:image" content="./image/iconic.jpg">
   <link rel="stylesheet" href="./style.css">
 
   <link rel="icon" type="image/gif" href="./image/iconstar.gif">
@@ -26,11 +35,12 @@ Copyright (c) Phil Kirchner Freising, All Rights Reserved
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400&display=swap" rel="stylesheet">
 </head>
 <body>
+  <a class="skip-link" href="#main-content" data-i18n="nav.skip">Zum Hauptinhalt springen</a>
   <header>
     <div class="container-wide">
       <nav class="nav" aria-label="Hauptnavigation">
-        <a class="brand" href="./index.html" aria-current="page">Phil Kirchner</a>
-        <button class="nav-toggle" aria-controls="primary-nav" aria-expanded="false" aria-label="Menü öffnen/ schließen">
+        <a class="brand" href="./index.html">Phil Kirchner</a>
+        <button class="nav-toggle" aria-controls="primary-nav" aria-expanded="false" data-i18n-aria-label="nav.toggleLabel" aria-label="Menü öffnen oder schließen">
           <span class="nav-toggle-bar" aria-hidden="true"></span>
           <span class="nav-toggle-bar" aria-hidden="true"></span>
           <span class="nav-toggle-bar" aria-hidden="true"></span>
@@ -38,16 +48,17 @@ Copyright (c) Phil Kirchner Freising, All Rights Reserved
 
         <ul id="primary-nav" class="nav-list" data-collapsible="true">
           <li><a data-i18n="nav.vita" href="./vita.html" aria-current="page">Vita</a></li>
-          <li><a href="https://www.linkedin.com/in/phil-kirchner/">LinkedIn</a></li>
-          <li><a href="https://www.instagram.com/phil.osophie.deluxe/">Instagram</a></li>
+          <li><a href="https://www.linkedin.com/in/phil-kirchner/" rel="noopener noreferrer">LinkedIn</a></li>
+          <li><a href="https://www.instagram.com/phil.osophie.deluxe/" rel="noopener noreferrer">Instagram</a></li>
           <li class="nav-divider" aria-hidden="true">|</li>
           <li><a data-i18n="nav.impressum" href="./impressum.html">Impressum</a></li>
           <li><a data-i18n="nav.datenschutz" href="./datenschutz.html">Datenschutz</a></li>
-           <!-- Sprachumschalter (ganz außen rechts) -->
+               
+          <!-- Sprachumschalter (ganz außen rechts) -->
           <li class="nav-divider" aria-hidden="true">|</li>
           <li class="lang-switch">
             <button id="lang-toggle" class="lang-btn" type="button"
-              aria-label="Sprache umschalten (Deutsch/Englisch)">
+              data-i18n-aria-label="lang.toggleLabel" aria-label="Sprache umschalten (Deutsch/Englisch)">
               <span class="lang-de">DE</span><span class="sep">/</span><span class="lang-en">EN</span>
             </button>
           </li>
@@ -55,7 +66,7 @@ Copyright (c) Phil Kirchner Freising, All Rights Reserved
       </nav>
     </div>
 
-    <div class="header_container">
+    <main class="header_container" id="main-content">
       <div class="header_container_left">
         <img src="./image/iconic.jpg" alt="Portrait von Phil Kirchner">
       </div>
@@ -185,7 +196,7 @@ Copyright (c) Phil Kirchner Freising, All Rights Reserved
           </div>
         </div>
       </div>
-    </div>
+    </main>
   </header>
 
   <footer></footer>

@@ -1,0 +1,21 @@
+{
+  "name": "my_homepage",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "format": "prettier --write \"*.{html,css,js,json,md}\" \"i18n/*.json\"",
+    "format:check": "prettier --check \"*.{html,css,js,json,md}\" \"i18n/*.json\"",
+    "lint:js": "eslint app.js",
+    "lint:css": "stylelint style.css",
+    "lint:html": "htmlhint \"*.html\"",
+    "lint": "npm run lint:js && npm run lint:css && npm run lint:html",
+    "layout:sync": "node scripts/sync-nav.mjs"
+  },
+  "devDependencies": {
+    "eslint": "^9.25.1",
+    "htmlhint": "^1.6.3",
+    "prettier": "^3.5.3",
+    "stylelint": "^16.17.0",
+    "stylelint-config-standard": "^37.0.0"
+  }
+}
