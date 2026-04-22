@@ -14,7 +14,17 @@ Copyright (c) Phil Kirchner Freising, All Rights Reserved
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0">  --> 
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title data-i18n="vita.metaTitle">Phil Kirchner - Softwareentwickler</title>
+  <title data-i18n="imprint.metaTitle">Phil Kirchner - Impressum</title>
+  <meta name="description" data-i18n-content="imprint.metaDescription" content="Impressum der Website von Phil Kirchner mit Kontaktdaten und Anbieterkennzeichnung.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="de_DE">
+  <meta property="og:title" data-i18n-content="imprint.ogTitle" content="Phil Kirchner - Impressum">
+  <meta property="og:description" data-i18n-content="imprint.ogDescription" content="Rechtliche Angaben und Kontaktdaten des Websitebetreibers.">
+  <meta property="og:image" content="./image/iconic.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" data-i18n-content="imprint.ogTitle" content="Phil Kirchner - Impressum">
+  <meta name="twitter:description" data-i18n-content="imprint.ogDescription" content="Rechtliche Angaben und Kontaktdaten des Websitebetreibers.">
+  <meta name="twitter:image" content="./image/iconic.jpg">
   <link rel="stylesheet" href="./style.css">
 
   <link rel="icon" type="image/gif" href="./image/iconstar.gif">
@@ -25,29 +35,32 @@ Copyright (c) Phil Kirchner Freising, All Rights Reserved
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400&display=swap" rel="stylesheet">
 </head>
 <body class="legal legal--imprint">
+  <a class="skip-link" href="#main-content" data-i18n="nav.skip">Zum Hauptinhalt springen</a>
 
   <!-- NAV -->
   <header class="site-header" role="banner">
     <div class="container-wide">
       <nav class="nav" aria-label="Hauptnavigation">
         <a class="brand" href="./index.html">Phil Kirchner</a>
-        <button class="nav-toggle" aria-controls="primary-nav" aria-expanded="false" aria-label="Menü öffnen/ schließen">
+        <button class="nav-toggle" aria-controls="primary-nav" aria-expanded="false" data-i18n-aria-label="nav.toggleLabel" aria-label="Menü öffnen oder schließen">
           <span class="nav-toggle-bar" aria-hidden="true"></span>
           <span class="nav-toggle-bar" aria-hidden="true"></span>
           <span class="nav-toggle-bar" aria-hidden="true"></span>
         </button>
+
         <ul id="primary-nav" class="nav-list" data-collapsible="true">
           <li><a data-i18n="nav.vita" href="./vita.html">Vita</a></li>
-          <li><a href="https://www.linkedin.com/in/phil-kirchner/">LinkedIn</a></li>
-          <li><a href="https://www.instagram.com/phil.osophie.deluxe/">Instagram</a></li>
+          <li><a href="https://www.linkedin.com/in/phil-kirchner/" rel="noopener noreferrer">LinkedIn</a></li>
+          <li><a href="https://www.instagram.com/phil.osophie.deluxe/" rel="noopener noreferrer">Instagram</a></li>
           <li class="nav-divider" aria-hidden="true">|</li>
           <li><a data-i18n="nav.impressum" href="./impressum.html" aria-current="page">Impressum</a></li>
           <li><a data-i18n="nav.datenschutz" href="./datenschutz.html">Datenschutz</a></li>
-           <!-- Sprachumschalter (ganz außen rechts) -->
+               
+          <!-- Sprachumschalter (ganz außen rechts) -->
           <li class="nav-divider" aria-hidden="true">|</li>
           <li class="lang-switch">
             <button id="lang-toggle" class="lang-btn" type="button"
-              aria-label="Sprache umschalten (Deutsch/Englisch)">
+              data-i18n-aria-label="lang.toggleLabel" aria-label="Sprache umschalten (Deutsch/Englisch)">
               <span class="lang-de">DE</span><span class="sep">/</span><span class="lang-en">EN</span>
             </button>
           </li>
@@ -55,7 +68,7 @@ Copyright (c) Phil Kirchner Freising, All Rights Reserved
       </nav>
     </div>
 
-    <div class="container">
+    <main class="container" id="main-content">
       <div class="content">
 
         <h1 data-i18n="imprint.title">Impressum</h1>
@@ -81,7 +94,7 @@ Copyright (c) Phil Kirchner Freising, All Rights Reserved
        </p>
 
       </div>
-    </div>
+    </main>
   </header>
 
   <footer></footer>

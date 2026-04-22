@@ -34,6 +34,29 @@ body{
   -webkit-font-smoothing: auto;
   -moz-osx-font-smoothing: auto;
 }
+
+/* Tastatur-Fokus klar sichtbar */
+:where(a, button, input, textarea, select):focus-visible{
+  outline: 2px solid rgb(226,166,1);
+  outline-offset: 3px;
+}
+
+/* Skip-Link nur beim Fokussieren sichtbar */
+.skip-link{
+  position: absolute;
+  left: 1rem;
+  top: -3rem;
+  z-index: 2000;
+  background: #111;
+  color: rgb(226,166,1);
+  border: 1px solid rgba(255,255,255,.25);
+  border-radius: 6px;
+  padding: .5rem .75rem;
+  transition: top .2s ease;
+}
+.skip-link:focus-visible{
+  top: .75rem;
+}
 @supports (min-height: 100svh){
   body{ min-height: 100svh; }
 }
