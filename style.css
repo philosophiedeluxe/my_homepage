@@ -3,6 +3,7 @@
   --bg: #101114;
   --surface: #171a20;
   --surface-2: #20242c;
+  --band: #151821;
   --text: #f4f1ea;
   --muted: #b8b2a7;
   --line: rgba(244, 241, 234, 0.14);
@@ -14,6 +15,12 @@
   --radius: 8px;
   --max: 1180px;
   --nav-h: 76px;
+  --hero-scroll: 0;
+  --hero-shift-x: 0px;
+  --hero-shift-y: 0px;
+  --hero-scale: 1.02;
+  --hero-saturation: 1;
+  --hero-brightness: 1;
 }
 
 *,
@@ -33,10 +40,7 @@ body {
   margin: 0;
   overflow-x: hidden;
   color: var(--text);
-  background:
-    linear-gradient(135deg, rgba(98, 214, 208, 0.08), transparent 34rem),
-    linear-gradient(315deg, rgba(240, 168, 58, 0.08), transparent 38rem),
-    var(--bg);
+  background: var(--bg);
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   line-height: 1.6;
   text-rendering: optimizeLegibility;
@@ -71,8 +75,14 @@ a:hover {
   z-index: 20;
   background: rgba(16, 17, 20, 0.82);
   border-bottom: 1px solid var(--line);
+  transition: background 180ms ease, box-shadow 180ms ease;
   -webkit-backdrop-filter: blur(18px);
   backdrop-filter: blur(18px);
+}
+
+html[data-scrolled="true"] .site-shell {
+  background: rgba(16, 17, 20, 0.94);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.22);
 }
 
 .nav {
@@ -184,6 +194,19 @@ html[data-lang="en"] .is-en {
   padding-block: clamp(64px, 9vw, 120px);
 }
 
+main > .section:not(.hero),
+main > article.section {
+  background: var(--bg);
+  box-shadow: 0 0 0 100vmax var(--bg);
+  clip-path: inset(0 -100vmax);
+}
+
+main > .section:nth-of-type(even):not(.hero),
+main > article.section {
+  background: var(--band);
+  box-shadow: 0 0 0 100vmax var(--band);
+}
+
 .hero {
   position: relative;
   width: 100%;
@@ -206,21 +229,6 @@ html[data-lang="en"] .is-en {
   pointer-events: none;
 }
 
-.hero::after {
-  content: "";
-  position: absolute;
-  inset: -22%;
-  z-index: 1;
-  background:
-    radial-gradient(circle at 18% 42%, rgba(108, 0, 161, 0.45), transparent 14rem),
-    linear-gradient(115deg, transparent 0%, transparent 42%, rgba(108, 0, 161, 0.28) 48%, rgba(98, 214, 208, 0.18) 51%, transparent 58%, transparent 100%);
-  mix-blend-mode: screen;
-  opacity: 0.42;
-  transform: translate3d(-8%, 0, 0) rotate(0.001deg);
-  animation: hero-signal 10s ease-in-out infinite alternate;
-  pointer-events: none;
-}
-
 .hero-copy {
   position: relative;
   z-index: 2;
@@ -228,14 +236,14 @@ html[data-lang="en"] .is-en {
   min-width: 0;
 }
 
-.hero-copy::before {
-  content: "";
-  width: 64px;
+.hero-signal-line {
+  width: 100%;
   height: 3px;
   display: block;
-  margin-bottom: 26px;
+  margin: 32px 0 18px;
   border-radius: 999px;
   background: linear-gradient(90deg, var(--violet), var(--accent-2));
+  background-size: 180% 100%;
   box-shadow: 0 0 32px var(--violet-soft);
   animation: signal-pulse 2.8s ease-in-out infinite;
 }
@@ -279,6 +287,13 @@ h1 {
     0 0 1px var(--accent-2);
 }
 
+.project-card h3::first-letter,
+.stack-grid h3::first-letter,
+.timeline-item h3::first-letter {
+  color: var(--violet);
+  text-shadow: 0 0 14px rgba(108, 0, 161, 0.42);
+}
+
 h2 {
   max-width: 13ch;
   margin-bottom: 0;
@@ -306,6 +321,10 @@ h3 {
   flex-wrap: wrap;
   gap: 12px;
   margin-top: 32px;
+}
+
+.hero-actions {
+  margin-top: 0;
 }
 
 .button {
@@ -404,6 +423,10 @@ h3 {
   height: 100%;
   object-fit: cover;
   object-position: 68% center;
+  transform: translate3d(var(--hero-shift-x), var(--hero-shift-y), 0) scale(var(--hero-scale));
+  transform-origin: 68% center;
+  filter: saturate(var(--hero-saturation)) brightness(var(--hero-brightness));
+  will-change: transform, filter;
 }
 
 .signal-panel {
@@ -422,7 +445,7 @@ h3 {
 }
 
 .signal-panel span,
-.tag-list li {
+tag-list li {
   display: inline-flex;
   align-items: center;
   min-height: 32px;
@@ -617,34 +640,18 @@ h3 {
   gap: 18px;
 }
 
-@keyframes hero-signal {
-  0% {
-    opacity: 0.24;
-    transform: translate3d(-12%, -2%, 0) rotate(0.001deg);
-  }
-
-  55% {
-    opacity: 0.5;
-  }
-
-  100% {
-    opacity: 0.34;
-    transform: translate3d(8%, 3%, 0) rotate(0.001deg);
-  }
-}
-
 @keyframes signal-pulse {
   0%,
   100% {
     opacity: 0.62;
-    transform: scaleX(0.72);
-    transform-origin: left;
+    background-position: 0% 50%;
+    box-shadow: 0 0 22px rgba(108, 0, 161, 0.34);
   }
 
   50% {
     opacity: 1;
-    transform: scaleX(1);
-    transform-origin: left;
+    background-position: 100% 50%;
+    box-shadow: 0 0 34px var(--violet-soft);
   }
 }
 
