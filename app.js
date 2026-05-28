@@ -31,7 +31,7 @@
 
       "position.eyebrow": "Was mich unterscheidet",
       "position.title": "Ich denke Software nicht nur vom Code aus.",
-      "position.p1": "Vor der IT war ich viele Jahre in Küche, Einkauf und Verantwortung unterwegs. Ich kenne Druck, Übergaben, Prioritäten, Lieferketten, Abstimmungen und die Momente, in denen ein gutes Tool den Unterschied macht.",
+      "position.p1": "Vor der IT war ich viele Jahre in Küche, Einkauf und mit Verantwortung in der Gastronomie unterwegs. Ich kenne Druck, Übergaben, Prioritäten, Lieferketten, Abstimmungen und die Momente, in denen ein gutes Tool den Unterschied macht.",
       "position.p2": "Deshalb interessieren mich besonders Anwendungen, die Prozesse sichtbar machen, Daten sauber führen und Menschen im Arbeitsfluss entlasten.",
 
       "projects.eyebrow": "Projekt-Spotlights",
