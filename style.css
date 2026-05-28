@@ -287,13 +287,6 @@ h1 {
     0 0 1px var(--accent-2);
 }
 
-.project-card h3::first-letter,
-.stack-grid h3::first-letter,
-.timeline-item h3::first-letter {
-  color: var(--violet);
-  text-shadow: 0 0 14px rgba(108, 0, 161, 0.42);
-}
-
 h2 {
   max-width: 13ch;
   margin-bottom: 0;
