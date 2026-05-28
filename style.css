@@ -237,15 +237,26 @@ main > article.section {
 }
 
 .hero-signal-line {
+  position: relative;
   width: 100%;
   height: 3px;
   display: block;
   margin: 32px 0 32px;
   border-radius: 999px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.hero-signal-line::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
   background: linear-gradient(90deg, var(--violet), var(--accent-2));
-  background-size: 180% 100%;
   box-shadow: 0 0 32px var(--violet-soft);
-  animation: signal-pulse 2.8s ease-in-out infinite;
+  transform: scaleX(0);
+  transform-origin: left center;
+  animation: signal-build 3.2s ease-in-out infinite;
 }
 
 .eyebrow {
@@ -636,18 +647,21 @@ h3 {
   gap: 18px;
 }
 
-@keyframes signal-pulse {
-  0%,
-  100% {
-    opacity: 0.62;
-    background-position: 0% 50%;
-    box-shadow: 0 0 22px rgba(108, 0, 161, 0.34);
+@keyframes signal-build {
+  0% {
+    opacity: 0.72;
+    transform: scaleX(0);
   }
 
-  50% {
+  45%,
+  55% {
     opacity: 1;
-    background-position: 100% 50%;
-    box-shadow: 0 0 34px var(--violet-soft);
+    transform: scaleX(1);
+  }
+
+  100% {
+    opacity: 0.72;
+    transform: scaleX(0);
   }
 }
 
