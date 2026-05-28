@@ -19,7 +19,7 @@
       "nav.privacy": "Datenschutz",
 
       "hero.eyebrow": "Softwareentwickler aus Freising",
-      "hero.title": "Ich baue Software mit klarem Kopf, Datenbanknähe und Produktgefühl.",
+      "hero.title": "Ich baue <span class=\"accent-word\">Software</span>, die Prozesse nicht nur digitalisiert, sondern <span class=\"accent-word\">antreibt</span>.",
       "hero.text": "Ich komme aus operativer Verantwortung, habe Einkauf, Prozesse und Teams von innen gesehen und entwickle heute Anwendungen mit Oracle APEX, PL/SQL, JavaScript und Java. Genau diese Mischung macht mich stark: Technik, die nicht nur läuft, sondern im Alltag Sinn ergibt.",
       "hero.mail": "Kontakt aufnehmen",
       "hero.vita": "Vita ansehen",
@@ -31,7 +31,7 @@
 
       "position.eyebrow": "Was mich unterscheidet",
       "position.title": "Ich denke Software nicht nur vom Code aus.",
-      "position.p1": "Vor der IT war ich viele Jahre in Küche, Einkauf und mit Verantwortung in der Gastronomie unterwegs. Ich kenne Druck, Übergaben, Prioritäten, Lieferketten, Abstimmungen und die Momente, in denen ein gutes Tool den Unterschied macht.",
+      "position.p1": "Vor der IT war ich viele Jahre in Küche, Einkauf und Verantwortung unterwegs. Ich kenne Druck, Übergaben, Prioritäten, Lieferketten, Abstimmungen und die Momente, in denen ein gutes Tool den Unterschied macht.",
       "position.p2": "Deshalb interessieren mich besonders Anwendungen, die Prozesse sichtbar machen, Daten sauber führen und Menschen im Arbeitsfluss entlasten.",
 
       "projects.eyebrow": "Projekt-Spotlights",
@@ -82,7 +82,7 @@
       "imprint.note": "Diese Seite ist eine private Portfolio-Homepage.",
 
       "privacy.eyebrow": "Datenschutz",
-      "privacy.title": "Datenschutzerklärung",
+      "privacy.title": "Datenschutz­erklärung",
       "privacy.intro": "Diese Datenschutzerklärung informiert darüber, welche personenbezogenen Daten beim Besuch dieser Portfolio-Website verarbeitet werden.",
       "privacy.controller": "Verantwortliche Stelle",
       "privacy.access": "Zugriffsdaten",
@@ -92,12 +92,12 @@
       "privacy.fonts": "Schriftarten und Analyse",
       "privacy.fonts.text": "Diese Website nutzt Systemschriftarten und verzichtet derzeit auf Analytics, Tracking-Skripte und Cookies.",
       "privacy.links": "Externe Links",
-      "privacy.links.text": "Diese Website verlinkt auf externe Profile, insbesondere LinkedIn und Instagram. Beim Öffnen dieser Links gelten die Datenschutzbestimmungen der jeweiligen Anbieter.",
+      "privacy.links.text": "Diese Website verlinkt auf externe Profile, insbesondere GitHub, LinkedIn und Instagram. Beim Öffnen dieser Links gelten die Datenschutzbestimmungen der jeweiligen Anbieter.",
       "privacy.rights": "Ihre Rechte",
       "privacy.rights.text": "Sie haben im Rahmen der gesetzlichen Bestimmungen Rechte auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit sowie Widerspruch gegen bestimmte Verarbeitungen. Außerdem besteht ein Beschwerderecht bei einer zuständigen Datenschutzaufsichtsbehörde.",
       "privacy.legal": "Rechtsgrundlagen",
       "privacy.legal.text": "Die Verarbeitung erfolgt, soweit einschlägig, auf Grundlage von Art. 6 Abs. 1 DSGVO, insbesondere berechtigtem Interesse an einer sicheren Websitebereitstellung sowie zur Bearbeitung freiwilliger Kontaktanfragen.",
-      "privacy.note": "Hinweis: Diese Erklärung ist bewusst schlank gehalten und muss noch juristisch geprüft werden"
+      "privacy.note": "Hinweis: Diese Erklärung ist bewusst schlank gehalten. Bei zusätzlichem Tracking, Formularen oder Analytics sollte sie vor Veröffentlichung juristisch geprüft und erweitert werden."
     },
 
     en: {
@@ -116,7 +116,7 @@
       "nav.privacy": "Privacy",
 
       "hero.eyebrow": "Software developer from Freising",
-      "hero.title": "I build software with clear thinking, database focus and product sense.",
+      "hero.title": "I build <span class=\"accent-word\">software</span> that does not just digitize work. It <span class=\"accent-word\">drives</span> it.",
       "hero.text": "I come from operational responsibility, have seen purchasing, processes and teams from the inside, and now build applications with Oracle APEX, PL/SQL, JavaScript and Java. That mix is my strength: technology that does not just run, but makes sense in daily work.",
       "hero.mail": "Get in touch",
       "hero.vita": "View resume",
@@ -189,12 +189,12 @@
       "privacy.fonts": "Fonts and analytics",
       "privacy.fonts.text": "This website uses system fonts and currently does not use analytics, tracking scripts or cookies.",
       "privacy.links": "External links",
-      "privacy.links.text": "This website links to external profiles, especially LinkedIn and Instagram. When opening those links, the privacy policies of the respective providers apply.",
+      "privacy.links.text": "This website links to external profiles, especially GitHub, LinkedIn and Instagram. When opening those links, the privacy policies of the respective providers apply.",
       "privacy.rights": "Your rights",
       "privacy.rights.text": "Within the scope of applicable law, you have rights to access, rectification, erasure, restriction of processing, data portability and objection to certain processing. You may also lodge a complaint with a competent supervisory authority.",
       "privacy.legal": "Legal bases",
       "privacy.legal.text": "Processing is based, where applicable, on Art. 6(1) GDPR, especially legitimate interest in providing a secure website and handling voluntary contact requests.",
-      "privacy.note": "Note: This policy is intentionally lean. If tracking tools, forms, or analytics are added, this policy must be legally reviewed and expanded before publication."
+      "privacy.note": "Note: This policy is intentionally lean. If tracking, forms or analytics are added, it should be legally reviewed and expanded before publication."
     }
   };
 
@@ -239,6 +239,11 @@
     document.querySelectorAll("[data-i18n]").forEach((element) => {
       const key = element.dataset.i18n;
       if (dict[key]) element.textContent = dict[key];
+    });
+
+    document.querySelectorAll("[data-i18n-rich]").forEach((element) => {
+      const key = element.dataset.i18nRich;
+      if (dict[key]) element.innerHTML = dict[key];
     });
 
     document.querySelectorAll("[data-i18n-attr]").forEach((element) => {
