@@ -271,7 +271,7 @@ main > article.section {
   box-shadow: 0 0 32px var(--violet-soft);
   transform: scaleX(0);
   transform-origin: left center;
-  animation: signal-build 6.5s ease-in-out infinite;
+  animation: signal-build 3.2s ease-in-out infinite;
 }
 
 .eyebrow {
@@ -819,6 +819,19 @@ h3 {
   .hero-actions,
   .contact-actions {
     display: grid;
+  }
+
+  .hero-actions .button {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .quick-facts,
+  .quick-facts div,
+  .quick-facts dt,
+  .quick-facts dd {
+    text-align: center;
   }
 
   .footer {
