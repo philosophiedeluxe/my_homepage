@@ -12,8 +12,10 @@ Die Homepage ist jetzt eine moderne, statische Portfolio-Seite mit starkem Hero,
 - Vier Hauptseiten: Startseite, Vita, Impressum, Datenschutz.
 - GitHub Pages kompatibel ohne Build-Schritt.
 - Responsives Layout mit mobiler Navigation.
-- Hero mit Hintergrundbild, Verlauf und subtiler Signal-Animation.
+- Hero mit Hintergrundbild, Verlauf und Signal-Linie, die sich von links nach rechts aufbaut und wieder zurueckzieht.
 - Violetter Akzent `#6C00A1` fuer markante Woerter und Interaktion.
+- Einheitlicher technischer Label-Stil fuer Navigation, Quick-Facts, Timeline-Daten und Karten-Kicker.
+- Einheitlicher Akzent-Stil fuer Eyebrow-Zeilen, Sprachumschalter und Brand-Text.
 - SEO-Basics, OpenGraph und JSON-LD fuer die Startseite.
 - Datenschutzfreundlich ohne externe Fonts, Analytics oder Tracking.
 
@@ -27,6 +29,20 @@ Die Homepage ist jetzt eine moderne, statische Portfolio-Seite mit starkem Hero,
 - Google Fonts entfernt.
 - `404.html` und `robots.txt` ergaenzt.
 - Alte Roadmap-Datei umbenannt und aktualisiert.
+
+## Erledigte Feinschliff-Anpassungen am Design
+
+- Unerwuenschte violette Einfaerbung des ersten Buchstabens bei `h3` entfernt.
+- `.eyebrow` gegen ueberschreibende Absatz-Regeln abgesichert, damit Eyebrow-Zeilen auf allen Seiten gleich wirken.
+- Labels `Fokus`, `Stack` und `Arbeitsweise` optisch an die Karten-Kicker wie `Portfolio`, `Business Apps` und `Backend` angepasst.
+- Pulsierende Hero-Signal-Linie durch eine Aufbau-Animation ersetzt: links starten, nach rechts aufbauen, kurz halten, wieder nach links zurueckziehen.
+- Hintergrundflaeche der Hero-Signal-Linie entfernt, damit nur die aktive animierte Linie sichtbar bleibt.
+- Navigationspunkte `Profil`, `Projekte`, `Stack`, `Vita`, `GitHub`, `Impressum` und `Datenschutz` auf den technischen Label-Stil vereinheitlicht.
+- Sprachumschalter `DE / EN` auf den Eyebrow-/Akzent-Stil gebracht und lesbar gehalten.
+- Brand-Mark `PK` an den Navigationsstil angepasst.
+- Brand-Text `Phil Kirchner` an den Sprachumschalter-Stil angepasst.
+- Zertifikats-Ueberschrift auf der Vita-Seite sauber umbrochen, sodass `Projektverstaendnis` vollstaendig in der zweiten Zeile steht.
+- Timeline-Daten auf der Vita-Seite optisch an den Navigationsstil angepasst.
 
 ## Offene sinnvolle naechste Schritte
 
@@ -54,4 +70,6 @@ Die Homepage ist jetzt eine moderne, statische Portfolio-Seite mit starkem Hero,
 - Keine ueberladenen Effekte, keine Marketing-Optik.
 - Animationen nur als ruhige Signatur einsetzen, nicht als Ablenkung.
 - Violett nur als Akzent verwenden, nicht als dominierende Flaeche.
+- Label-Elemente konsistent halten: Navigation, Quick-Facts, Timeline-Daten und Karten-Kicker verwenden denselben technischen Stil.
+- Eyebrow- und Sprach-/Brand-Akzente konsistent halten und nicht durch allgemeine Absatz-Regeln ueberschreiben lassen.
 - Lange deutsche Begriffe immer explizit auf Chrome und Firefox pruefen.
