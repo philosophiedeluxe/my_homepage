@@ -23,11 +23,13 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: calc(var(--nav-h) + 24px);
+  overflow-x: hidden;
 }
 
 body {
   min-height: 100vh;
   margin: 0;
+  overflow-x: hidden;
   color: var(--text);
   background:
     linear-gradient(135deg, rgba(98, 214, 208, 0.08), transparent 34rem),
@@ -183,9 +185,13 @@ html[data-lang="en"] .is-en {
 .hero {
   min-height: calc(100svh - var(--nav-h));
   display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.75fr);
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 420px);
   align-items: center;
-  gap: clamp(32px, 6vw, 88px);
+  gap: clamp(28px, 5vw, 64px);
+}
+
+.hero-copy {
+  min-width: 0;
 }
 
 .eyebrow {
@@ -203,6 +209,7 @@ h2,
 h3,
 p {
   margin-top: 0;
+  overflow-wrap: break-word;
 }
 
 h1,
@@ -213,9 +220,9 @@ h3 {
 }
 
 h1 {
-  max-width: 12ch;
+  max-width: 760px;
   margin-bottom: 24px;
-  font-size: clamp(3.1rem, 8vw, 7.6rem);
+  font-size: clamp(2.7rem, 4.9vw, 4.35rem);
   font-weight: 800;
 }
 
@@ -297,8 +304,15 @@ h3 {
 .quick-facts div,
 .project-card,
 .stack-grid article,
-.timeline-item,
+timeline-item,
 .credential-list li {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(23, 26, 32, 0.76);
+  box-shadow: 0 14px 44px rgba(0, 0, 0, 0.18);
+}
+
+.timeline-item {
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: rgba(23, 26, 32, 0.76);
@@ -440,7 +454,7 @@ h3 {
 }
 
 .page-hero h1 {
-  max-width: 13ch;
+  max-width: 880px;
 }
 
 .timeline {
@@ -614,7 +628,16 @@ h3 {
   }
 
   h1 {
-    font-size: clamp(2.8rem, 16vw, 4.5rem);
+    max-width: 100%;
+    font-size: clamp(2.05rem, 8.4vw, 2.65rem);
+    line-height: 1.08;
+    overflow-wrap: anywhere;
+  }
+
+  .hero-copy,
+  .hero-text {
+    width: 100%;
+    max-width: 100%;
   }
 
   h2 {
