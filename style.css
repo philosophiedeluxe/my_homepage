@@ -103,17 +103,28 @@ html[data-scrolled="true"] .site-shell {
   letter-spacing: 0;
 }
 
+.brand > span:not(.brand-mark) {
+  color: var(--accent);
+  font-family: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
 .brand-mark {
   width: 42px;
   aspect-ratio: 1;
   display: inline-grid;
   place-items: center;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(98, 214, 208, 0.32);
   border-radius: var(--radius);
-  color: var(--accent);
-  background: linear-gradient(135deg, rgba(240, 168, 58, 0.14), rgba(98, 214, 208, 0.08));
+  color: var(--accent-2);
+  background: rgba(98, 214, 208, 0.06);
   font-family: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", monospace;
-  font-size: 0.9rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .nav-list {
@@ -558,9 +569,13 @@ h3 {
 }
 
 .timeline-item time {
-  color: var(--accent);
+  color: var(--accent-2);
   font-family: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", monospace;
-  font-size: 0.9rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.4;
+  text-transform: uppercase;
 }
 
 .credential-list {
