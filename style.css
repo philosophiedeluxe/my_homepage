@@ -300,8 +300,8 @@ h3 {
 }
 
 .hero-text,
-.page-hero p,
-.text-stack p,
+.page-hero p:not(.eyebrow),
+.text-stack p:not(.eyebrow),
 .legal-note {
   max-width: 68ch;
   color: var(--muted);
@@ -394,8 +394,11 @@ h3 {
 }
 
 .quick-facts dt {
-  color: var(--muted);
+  color: var(--accent-2);
+  font-family: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", monospace;
   font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
 }
 
 .quick-facts dd {
@@ -499,9 +502,9 @@ h3 {
 }
 
 .project-card p:not(.project-kicker),
-.stack-grid p,
-.timeline-item p,
-.legal-page p,
+.stack-grid p:not(.eyebrow),
+.timeline-item p:not(.eyebrow),
+.legal-page p:not(.eyebrow),
 .legal-page li {
   color: var(--muted);
 }
