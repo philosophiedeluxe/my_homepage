@@ -97,7 +97,7 @@
       "privacy.rights.text": "Sie haben im Rahmen der gesetzlichen Bestimmungen Rechte auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit sowie Widerspruch gegen bestimmte Verarbeitungen. Außerdem besteht ein Beschwerderecht bei einer zuständigen Datenschutzaufsichtsbehörde.",
       "privacy.legal": "Rechtsgrundlagen",
       "privacy.legal.text": "Die Verarbeitung erfolgt, soweit einschlägig, auf Grundlage von Art. 6 Abs. 1 DSGVO, insbesondere berechtigtem Interesse an einer sicheren Websitebereitstellung sowie zur Bearbeitung freiwilliger Kontaktanfragen.",
-      "privacy.note": "Hinweis: Diese Erklärung ist bewusst schlank gehalten. Bei zusätzlichem Tracking, Formularen oder Analytics sollte sie vor Veröffentlichung juristisch geprüft und erweitert werden."
+      "privacy.note": "Hinweis: Diese Erklärung ist bewusst schlank gehalten und muss noch juristisch geprüft werden"
     },
 
     en: {
@@ -194,7 +194,7 @@
       "privacy.rights.text": "Within the scope of applicable law, you have rights to access, rectification, erasure, restriction of processing, data portability and objection to certain processing. You may also lodge a complaint with a competent supervisory authority.",
       "privacy.legal": "Legal bases",
       "privacy.legal.text": "Processing is based, where applicable, on Art. 6(1) GDPR, especially legitimate interest in providing a secure website and handling voluntary contact requests.",
-      "privacy.note": "Note: This policy is intentionally lean. If tracking, forms or analytics are added, it should be legally reviewed and expanded before publication."
+      "privacy.note": "Note: This policy is intentionally lean. If tracking tools, forms, or analytics are added, this policy must be legally reviewed and expanded before publication."
     }
   };
 
