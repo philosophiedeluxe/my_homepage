@@ -70,7 +70,7 @@
       "vita.job5.title": "Gastronomielaufbahn - Munich Airport Marriott Hotel",
       "vita.job5.text": "Ausbildung zum Koch, Commis de Cuisine, Demi Chef de Partie, Chef de Partie und Food and Beverage Trainee.",
       "vita.cert.eyebrow": "Zertifikate",
-      "vita.cert.title": "Methodik und <span class=\"accent-word\">Projektverständnis</span>",
+      "vita.cert.title": "Methodik und<br><span class=\"accent-word\">Projektverständnis</span>",
       "vita.contact.title": "Wenn das <span class=\"accent-word\">Profil</span> passt, freue ich mich über eine Nachricht.",
       "vita.back": "Zur Startseite",
 
@@ -167,7 +167,7 @@
       "vita.job5.title": "Culinary career - Munich Airport Marriott Hotel",
       "vita.job5.text": "Apprenticeship as cook, Commis de Cuisine, Demi Chef de Partie, Chef de Partie and Food and Beverage Trainee.",
       "vita.cert.eyebrow": "Certificates",
-      "vita.cert.title": "Methods and <span class=\"accent-word\">project understanding</span>",
+      "vita.cert.title": "Methods and<br><span class=\"accent-word\">project understanding</span>",
       "vita.contact.title": "If the <span class=\"accent-word\">profile</span> fits, I would be happy to hear from you.",
       "vita.back": "Back home",
 

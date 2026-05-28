@@ -581,9 +581,16 @@ h3 {
 }
 
 .credential-section .section-heading h2 {
-  max-width: 16ch;
+  max-width: 20ch;
   font-size: clamp(2rem, 4.2vw, 4rem);
-  hyphens: auto;
+  hyphens: none;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+.credential-section .section-heading .accent-word {
+  display: inline-block;
+  white-space: nowrap;
 }
 
 .credential-section .section-heading {
