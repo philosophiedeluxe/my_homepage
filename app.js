@@ -30,12 +30,12 @@
       "facts.mode.value": "Agil & strukturiert",
 
       "position.eyebrow": "Was mich unterscheidet",
-      "position.title": "Ich denke Software nicht nur vom Code aus.",
+      "position.title": "Ich denke <span class=\"accent-word\">Software</span> nicht nur vom Code aus.",
       "position.p1": "Vor der IT war ich viele Jahre in Küche, Einkauf und Verantwortung unterwegs. Ich kenne Druck, Übergaben, Prioritäten, Lieferketten, Abstimmungen und die Momente, in denen ein gutes Tool den Unterschied macht.",
       "position.p2": "Deshalb interessieren mich besonders Anwendungen, die Prozesse sichtbar machen, Daten sauber führen und Menschen im Arbeitsfluss entlasten.",
 
       "projects.eyebrow": "Projekt-Spotlights",
-      "projects.title": "Arbeiten, die zeigen, wie ich denke.",
+      "projects.title": "Arbeiten, die zeigen, wie ich <span class=\"accent-word\">denke</span>.",
       "project.home.title": "Modernisierte persönliche Homepage",
       "project.home.text": "Eine statische, schnelle Portfolio-Seite mit klarer Positionierung, responsivem Layout, DE/EN-Umschaltung und verbessertem SEO-Fundament.",
       "project.apex.title": "Oracle-nahe Anwendungsentwicklung",
@@ -44,21 +44,21 @@
       "project.java.text": "Ausbildung und Praxis mit Java, SQL, Spring Boot, MVC, Vaadin, Git, Jira, Confluence und modellgetriebener Softwareentwicklung.",
 
       "stack.eyebrow": "Kompetenzprofil",
-      "stack.title": "Technik, Methoden und Erfahrung in einem Profil.",
+      "stack.title": "Technik, Methoden und <span class=\"accent-word\">Erfahrung</span> in einem Profil.",
       "stack.dev.title": "Entwicklung",
       "stack.product.title": "Produkt & Prozess",
       "stack.tools.title": "Tools",
 
       "contact.eyebrow": "Nächster Schritt",
-      "contact.title": "Lass uns über Software sprechen, die im echten Betrieb trägt.",
+      "contact.title": "Lass uns über <span class=\"accent-word\">Software</span> sprechen, die im echten Betrieb trägt.",
       "contact.mail": "Mail schreiben",
       "contact.linkedin": "LinkedIn öffnen",
 
       "vita.eyebrow": "Vita",
-      "vita.title": "Eine Laufbahn zwischen Praxis, Verantwortung und Software.",
+      "vita.title": "Eine Laufbahn zwischen Praxis, Verantwortung und <span class=\"accent-word\">Software</span>.",
       "vita.intro": "Meine berufliche Reise begann in der Gastronomie und führte über Einkauf, Prozessverantwortung und Projektarbeit in die Softwareentwicklung. Diese Stationen sind für mich kein Bruch, sondern mein Fundament.",
       "vita.timeline.eyebrow": "Stationen",
-      "vita.timeline.title": "Beruflicher Verlauf",
+      "vita.timeline.title": "Beruflicher <span class=\"accent-word\">Verlauf</span>",
       "vita.job1.title": "Softwareentwickler - Pragmatis GmbH",
       "vita.job1.text": "Neufahrn bei Freising. Entwicklung mit Oracle APEX, PL/SQL, JavaScript, HTML, CSS, REST Data Sources, RESTful Services und Oracle DB.",
       "vita.job2.title": "Praktikum Softwareentwicklung - Europa Möbel-Verbund",
@@ -70,32 +70,32 @@
       "vita.job5.title": "Gastronomielaufbahn - Munich Airport Marriott Hotel",
       "vita.job5.text": "Ausbildung zum Koch, Commis de Cuisine, Demi Chef de Partie, Chef de Partie und Food and Beverage Trainee.",
       "vita.cert.eyebrow": "Zertifikate",
-      "vita.cert.title": "Methodik und Projektverständnis",
-      "vita.contact.title": "Wenn das Profil passt, freue ich mich über eine Nachricht.",
+      "vita.cert.title": "Methodik und <span class=\"accent-word\">Projektverständnis</span>",
+      "vita.contact.title": "Wenn das <span class=\"accent-word\">Profil</span> passt, freue ich mich über eine Nachricht.",
       "vita.back": "Zur Startseite",
 
       "imprint.eyebrow": "Anbieterkennzeichnung",
-      "imprint.title": "Impressum",
-      "imprint.owner": "Webseitenbetreiber",
-      "imprint.contact": "Kontakt",
-      "imprint.responsible": "Verantwortlich für den Inhalt",
+      "imprint.title": "<span class=\"accent-word\">Impressum</span>",
+      "imprint.owner": "Webseiten<span class=\"accent-word\">betreiber</span>",
+      "imprint.contact": "<span class=\"accent-word\">Kontakt</span>",
+      "imprint.responsible": "Verantwortlich für den <span class=\"accent-word\">Inhalt</span>",
       "imprint.note": "Diese Seite ist eine private Portfolio-Homepage.",
 
       "privacy.eyebrow": "Datenschutz",
-      "privacy.title": "Datenschutz­erklärung",
+      "privacy.title": "Datenschutz<span class=\"accent-word\">&shy;erklärung</span>",
       "privacy.intro": "Diese Datenschutzerklärung informiert darüber, welche personenbezogenen Daten beim Besuch dieser Portfolio-Website verarbeitet werden.",
-      "privacy.controller": "Verantwortliche Stelle",
-      "privacy.access": "Zugriffsdaten",
+      "privacy.controller": "Verantwortliche <span class=\"accent-word\">Stelle</span>",
+      "privacy.access": "<span class=\"accent-word\">Zugriffs</span>daten",
       "privacy.access.text": "Beim Aufruf dieser Website können durch den Hosting-Anbieter technisch notwendige Zugriffsdaten verarbeitet werden, zum Beispiel IP-Adresse, Datum und Uhrzeit des Abrufs, Browsertyp, Betriebssystem, Referrer-URL und angeforderte Dateien. Diese Daten dienen der sicheren und fehlerfreien Bereitstellung der Website.",
-      "privacy.contact": "Kontaktaufnahme",
+      "privacy.contact": "<span class=\"accent-word\">Kontakt</span>aufnahme",
       "privacy.contact.text": "Wenn Sie per E-Mail Kontakt aufnehmen, werden die übermittelten Angaben zur Bearbeitung der Anfrage verarbeitet. Die Daten werden nicht ohne Einwilligung weitergegeben.",
-      "privacy.fonts": "Schriftarten und Analyse",
+      "privacy.fonts": "Schriftarten und <span class=\"accent-word\">Analyse</span>",
       "privacy.fonts.text": "Diese Website nutzt Systemschriftarten und verzichtet derzeit auf Analytics, Tracking-Skripte und Cookies.",
-      "privacy.links": "Externe Links",
+      "privacy.links": "Externe <span class=\"accent-word\">Links</span>",
       "privacy.links.text": "Diese Website verlinkt auf externe Profile, insbesondere GitHub, LinkedIn und Instagram. Beim Öffnen dieser Links gelten die Datenschutzbestimmungen der jeweiligen Anbieter.",
-      "privacy.rights": "Ihre Rechte",
+      "privacy.rights": "Ihre <span class=\"accent-word\">Rechte</span>",
       "privacy.rights.text": "Sie haben im Rahmen der gesetzlichen Bestimmungen Rechte auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit sowie Widerspruch gegen bestimmte Verarbeitungen. Außerdem besteht ein Beschwerderecht bei einer zuständigen Datenschutzaufsichtsbehörde.",
-      "privacy.legal": "Rechtsgrundlagen",
+      "privacy.legal": "<span class=\"accent-word\">Rechts</span>grundlagen",
       "privacy.legal.text": "Die Verarbeitung erfolgt, soweit einschlägig, auf Grundlage von Art. 6 Abs. 1 DSGVO, insbesondere berechtigtem Interesse an einer sicheren Websitebereitstellung sowie zur Bearbeitung freiwilliger Kontaktanfragen.",
       "privacy.note": "Hinweis: Diese Erklärung ist bewusst schlank gehalten. Bei zusätzlichem Tracking, Formularen oder Analytics sollte sie vor Veröffentlichung juristisch geprüft und erweitert werden."
     },
@@ -127,12 +127,12 @@
       "facts.mode.value": "Agile & structured",
 
       "position.eyebrow": "What sets me apart",
-      "position.title": "I do not think about software only from the code outward.",
+      "position.title": "I do not think about <span class=\"accent-word\">software</span> only from the code outward.",
       "position.p1": "Before IT, I spent many years in kitchens, purchasing and responsibility. I know pressure, handovers, priorities, supply chains, coordination and the moments when a good tool changes the day.",
       "position.p2": "That is why I care about applications that make processes visible, keep data clean and help people stay in their flow.",
 
       "projects.eyebrow": "Project spotlights",
-      "projects.title": "Work that shows how I think.",
+      "projects.title": "Work that shows how I <span class=\"accent-word\">think</span>.",
       "project.home.title": "Modernized personal homepage",
       "project.home.text": "A static, fast portfolio site with clearer positioning, responsive layout, DE/EN language switching and a stronger SEO foundation.",
       "project.apex.title": "Oracle-centered application development",
@@ -141,21 +141,21 @@
       "project.java.text": "Training and practice with Java, SQL, Spring Boot, MVC, Vaadin, Git, Jira, Confluence and model-driven software development.",
 
       "stack.eyebrow": "Skill profile",
-      "stack.title": "Technology, methods and experience in one profile.",
+      "stack.title": "Technology, methods and <span class=\"accent-word\">experience</span> in one profile.",
       "stack.dev.title": "Development",
       "stack.product.title": "Product & process",
       "stack.tools.title": "Tools",
 
       "contact.eyebrow": "Next step",
-      "contact.title": "Let's talk about software that holds up in real operations.",
+      "contact.title": "Let's talk about <span class=\"accent-word\">software</span> that holds up in real operations.",
       "contact.mail": "Write an email",
       "contact.linkedin": "Open LinkedIn",
 
       "vita.eyebrow": "Resume",
-      "vita.title": "A career between practice, responsibility and software.",
+      "vita.title": "A career between practice, responsibility and <span class=\"accent-word\">software</span>.",
       "vita.intro": "My professional journey began in hospitality and moved through purchasing, process responsibility and project work into software development. These stages are not a break in my story; they are the foundation.",
       "vita.timeline.eyebrow": "Stations",
-      "vita.timeline.title": "Professional path",
+      "vita.timeline.title": "Professional <span class=\"accent-word\">path</span>",
       "vita.job1.title": "Software Developer - Pragmatis GmbH",
       "vita.job1.text": "Neufahrn near Freising. Development with Oracle APEX, PL/SQL, JavaScript, HTML, CSS, REST Data Sources, RESTful Services and Oracle DB.",
       "vita.job2.title": "Software Development Internship - Europa Möbel-Verbund",
@@ -167,32 +167,32 @@
       "vita.job5.title": "Culinary career - Munich Airport Marriott Hotel",
       "vita.job5.text": "Apprenticeship as cook, Commis de Cuisine, Demi Chef de Partie, Chef de Partie and Food and Beverage Trainee.",
       "vita.cert.eyebrow": "Certificates",
-      "vita.cert.title": "Methods and project understanding",
-      "vita.contact.title": "If the profile fits, I would be happy to hear from you.",
+      "vita.cert.title": "Methods and <span class=\"accent-word\">project understanding</span>",
+      "vita.contact.title": "If the <span class=\"accent-word\">profile</span> fits, I would be happy to hear from you.",
       "vita.back": "Back home",
 
       "imprint.eyebrow": "Legal information",
-      "imprint.title": "Legal Notice",
-      "imprint.owner": "Website owner",
-      "imprint.contact": "Contact",
-      "imprint.responsible": "Responsible for content",
+      "imprint.title": "<span class=\"accent-word\">Legal Notice</span>",
+      "imprint.owner": "Website <span class=\"accent-word\">owner</span>",
+      "imprint.contact": "<span class=\"accent-word\">Contact</span>",
+      "imprint.responsible": "Responsible for <span class=\"accent-word\">content</span>",
       "imprint.note": "This page is a private portfolio homepage.",
 
       "privacy.eyebrow": "Privacy",
-      "privacy.title": "Privacy Policy",
+      "privacy.title": "Privacy <span class=\"accent-word\">Policy</span>",
       "privacy.intro": "This privacy policy explains which personal data may be processed when visiting this portfolio website.",
-      "privacy.controller": "Controller",
-      "privacy.access": "Access data",
+      "privacy.controller": "<span class=\"accent-word\">Controller</span>",
+      "privacy.access": "Access <span class=\"accent-word\">data</span>",
       "privacy.access.text": "When this website is accessed, the hosting provider may process technically necessary access data such as IP address, date and time, browser type, operating system, referrer URL and requested files. This data is used to provide the website securely and reliably.",
-      "privacy.contact": "Contact",
+      "privacy.contact": "<span class=\"accent-word\">Contact</span>",
       "privacy.contact.text": "If you contact me by email, the submitted information is processed to handle the request. The data is not shared without consent.",
-      "privacy.fonts": "Fonts and analytics",
+      "privacy.fonts": "Fonts and <span class=\"accent-word\">analytics</span>",
       "privacy.fonts.text": "This website uses system fonts and currently does not use analytics, tracking scripts or cookies.",
-      "privacy.links": "External links",
+      "privacy.links": "External <span class=\"accent-word\">links</span>",
       "privacy.links.text": "This website links to external profiles, especially GitHub, LinkedIn and Instagram. When opening those links, the privacy policies of the respective providers apply.",
-      "privacy.rights": "Your rights",
+      "privacy.rights": "Your <span class=\"accent-word\">rights</span>",
       "privacy.rights.text": "Within the scope of applicable law, you have rights to access, rectification, erasure, restriction of processing, data portability and objection to certain processing. You may also lodge a complaint with a competent supervisory authority.",
-      "privacy.legal": "Legal bases",
+      "privacy.legal": "Legal <span class=\"accent-word\">bases</span>",
       "privacy.legal.text": "Processing is based, where applicable, on Art. 6(1) GDPR, especially legitimate interest in providing a secure website and handling voluntary contact requests.",
       "privacy.note": "Note: This policy is intentionally lean. If tracking, forms or analytics are added, it should be legally reviewed and expanded before publication."
     }
@@ -201,6 +201,9 @@
   const navToggle = document.querySelector(".nav-toggle");
   const navList = document.getElementById("primary-nav");
   const langToggle = document.getElementById("lang-toggle");
+  const root = document.documentElement;
+  const hero = document.querySelector(".hero");
+  let scrollTicking = false;
 
   function sanitizeLang(lang) {
     const value = String(lang || "").toLowerCase();
@@ -300,5 +303,30 @@
     element.textContent = String(new Date().getFullYear());
   });
 
+  function updateScrollState() {
+    const y = window.scrollY || window.pageYOffset || 0;
+    const heroHeight = hero ? Math.max(hero.offsetHeight, 1) : 1;
+    const progress = Math.min(1, Math.max(0, y / heroHeight));
+    root.style.setProperty("--hero-scroll", progress.toFixed(3));
+    root.style.setProperty("--hero-shift-x", `${(-18 * progress).toFixed(2)}px`);
+    root.style.setProperty("--hero-shift-y", `${(34 * progress).toFixed(2)}px`);
+    root.style.setProperty("--hero-scale", (1.02 + 0.045 * progress).toFixed(4));
+    root.style.setProperty("--hero-saturation", (1 - 0.08 * progress).toFixed(4));
+    root.style.setProperty("--hero-brightness", (1 - 0.08 * progress).toFixed(4));
+    root.dataset.scrolled = y > 24 ? "true" : "false";
+    scrollTicking = false;
+  }
+
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (scrollTicking) return;
+      scrollTicking = true;
+      window.requestAnimationFrame(updateScrollState);
+    },
+    { passive: true }
+  );
+
   setLang(getInitialLang());
+  updateScrollState();
 })();
