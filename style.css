@@ -271,7 +271,7 @@ main > article.section {
   box-shadow: 0 0 32px var(--violet-soft);
   transform: scaleX(0);
   transform-origin: left center;
-  animation: signal-build 3.2s ease-in-out infinite;
+  animation: signal-build 4.5s ease-in-out infinite;
 }
 
 .eyebrow {
