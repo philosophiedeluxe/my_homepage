@@ -133,9 +133,12 @@ html[data-scrolled="true"] .site-shell {
   justify-content: center;
   padding: 0 12px;
   border-radius: var(--radius);
-  color: var(--muted);
-  font: inherit;
-  font-size: 0.94rem;
+  color: var(--accent-2);
+  font-family: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   border: 0;
   background: transparent;
   cursor: pointer;
@@ -144,18 +147,20 @@ html[data-scrolled="true"] .site-shell {
 .nav-list a:hover,
 .nav-list a[aria-current="page"],
 .language-toggle:hover {
-  color: var(--text);
-  background: rgba(244, 241, 234, 0.08);
+  color: var(--accent-2);
+  background: rgba(98, 214, 208, 0.08);
 }
 
 .language-toggle {
   gap: 4px;
-  border: 1px solid var(--line);
+  color: var(--accent);
+  border: 1px solid rgba(240, 168, 58, 0.32);
+  background: rgba(240, 168, 58, 0.06);
 }
 
 html[data-lang="de"] .is-de,
 html[data-lang="en"] .is-en {
-  color: var(--accent);
+  color: inherit;
   font-weight: 800;
 }
 
