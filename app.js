@@ -1,494 +1,299 @@
-// app.js – I18N (DE/EN) + optionales Nav-Collapse (robust, ohne Scope-Falle)
 (function () {
-  const BREAKPOINT   = 900;
-  const SUPPORTED    = ["de", "en"];
+  const SUPPORTED_LANGS = ["de", "en"];
   const DEFAULT_LANG = "de";
 
-  // --- DOM-Hooks (dürfen null sein) ---
-  const header  = document.querySelector("header");
-  const nav     = document.querySelector(".nav");
-  const toggle  = document.querySelector(".nav-toggle");
-  const list    = document.getElementById("primary-nav");
-  const langBtn = document.getElementById("lang-toggle");
-
-  const hasNav = !!(nav && toggle && list);
-
-  const radios = document.querySelectorAll('input[name="slide"]');
-
-  // --- Nav-Höhe -> CSS-Variable (für 100svh-Layout) ---
-  function setNavHeightVar(){
-    const h = nav ? Math.round(nav.getBoundingClientRect().height) : 56;
-    document.documentElement.style.setProperty('--nav-h', `${h}px`);
-  }
-  setNavHeightVar();
-  window.addEventListener('resize', setNavHeightVar);
-  window.addEventListener('load', setNavHeightVar); // falls Webfonts nachladen
-  // <-- KEINE zusätzliche schließende Klammer hier!
-
-  // --- I18N Wörterbuch ---
-  const I18N = {
+  const translations = {
     de: {
-      "nav.vita":        "Vita",
-      "nav.impressum":   "Impressum",
-      "nav.datenschutz": "Datenschutz",
-  
-      "home.metaTitle":  "Phil Kirchner - Softwareentwickler",
-      "hero.title":      "Ich bin Phil",
-      "hero.subtitle":   "Freut mich, dass du da bist!",
-      "hero.mail":       "Schreib mir gerne eine Mail",
-      "home.intro":
-        "Meine berufliche Reise begann mit meiner Ausbildung zum Koch im Jahr 2003. " +
-        "Über die Jahre habe ich verschiedene Positionen durchlaufen.<br><br>" +
-        "Im Jahr 2011 entschied ich mich für eine Weiterentwicklung meiner Fähigkeiten und übernahm die Verantwortung als Purchasing Agent, " +
-        "bevor ich schließlich von 2016 bis 2021 die Position des Purchasing Supervisors innehatte. " +
-        "Während meiner Zeit in dieser Rolle habe ich Erfahrungen in verschiedenen Bereichen gesammelt.<br><br>" +
-        "Meine Leidenschaft für Technologie führte mich 2023 zu einer Umschulung als Fachinformatiker Anwendungsentwicklung bei der WBS Training in München. " +
-        "Seitdem habe ich meine Fähigkeiten in den Bereichen Agile Scrum Master, Agile Scrum Product Owner und Projektmanagement (PRINCE2®) erweitert. " +
-        "Meine IT-Kenntnisse erstrecken sich über verschiedene Software- und Programmiersprachen wie Java, PL/SQL, JavaScript, Angular und HTML/CSS; " +
-        "außerdem kenne ich mich natürlich auch mit MS Office, Confluence, Jira, IntelliJ IDEA und GitHub aus.<br><br>" +
-        "Abseits meiner beruflichen Tätigkeiten bin ich ein begeisterter Technik-Enthusiast und Filmliebhaber. " +
-        "Mein Interesse an fortschrittlicher Technologie spiegelt sich nicht nur in meiner beruflichen Entwicklung, sondern auch in meiner Freizeit wider.<br><br>" +
-        "Mit diesem Webauftritt möchte ich mich dir vorstellen.<br>",
-  
-      "vita.title":        "Meine persönliche \nEntwicklung",
-      "vita.subtitle":     "\"Ich betrachte meine berufliche Karriere \nals eine Reise\"",
-      "vita.skills":       "Kenntnisse:\n",
-      "vita.gastro":       "Gastronomielaufbahn - <br>Munich Airport Marriott Hotel",
-      "vita.certificates": "Zertifikate",
-      "vita.back":         "Zurück zur Startseite, \n... schreib mir wenn dir gefällt was du gelesen hast.",
-      "vita.job1.h4":      "Softwareentwickler - <br>Pragmatis GmbH",
-      "vita.job2.h4":      "Praktikum Softwareentwickler - <br>Europa Möbel-Verbund",
-      "vita.job3.h4":      "Ausbildung Fachinformatiker AE - <br>WBS GRUPPE",
-      "vita.job4.h4":      "Purchasing - <br>Munich Airport Marriott Hotel",
-  
-      "vita.metaTitle":    "Phil Kirchner - Softwareentwickler",
-      "vita.job1.p":
-        "Dez. 2023 – Heute<br><br>" +
-        "Neufahrn bei Freising, Bayern, DE<br><br>" +
-        "<strong>Kenntnisse:</strong><br>" +
-        "Oracle APEX · PL/SQL · JavaScript · HTML · Cascading Style Sheets (CSS) · Rest Data Source · Restful Services · Oracle DB",
-      "vita.job2.p":
-        "Sept. 2022 – Apr. 2023<br><br>" +
-        "Fahrenzhausen, Bayern, DE<br><br>" +
-        "<strong>Kenntnisse:</strong><br>" +
-        "Java · SQL · Datenbanken · Git · Kanban · Confluence · JIRA · Teamwork · DBMS · Webentwicklung · Vaadin · MVC-Architektur · Spring Framework · Spring Boot · Unified Modeling Language (UML)",
-      "vita.job3.p":
-        "Aug. 2021 – Juni 2023<br><br>" +
-        "Freising, Bayern, DE<br><br>" +
-        "<strong>Kenntnisse:</strong><br>" +
-        "Objektorientierte Programmierung (OOP) · Software-Entwurfsmuster · Java · SQL · Datenbanken · Agile Methoden · IT-Strategie · DBMS · Green IT · HTML · CSS · Microsoft SQL Server",
-      "vita.job4.p":
-        "Supervisor Einkauf<br>Juni 2016 – Aug. 2021<br><br>" +
-        "Purchasing Agent<br>Juni 2015 – Juni 2016<br><br>" +
-        "Food And Beverage Trainee<br>Feb. 2014 – Juni 2015",
-      "vita.gastro.p":
-        "Chef de Partie<br>Juni 2011 – Feb. 2014<br><br>" +
-        "Demi Chef De Partie<br>Sept. 2007 – Juni 2011<br><br>" +
-        "Commis de cuisine<br>Juli 2006 – Sept. 2007<br><br>" +
-        "Ausbildung zum Koch<br>Sept. 2003 – Juli 2006",
-      "vita.certificates.p":
-        "2021 – 2023<br><br>" +
-        "· EXIN Agile Scrum Master<br>" +
-        "· EXIN Agile Scrum Product Owner<br>" +
-        "· PRINCE2® 6th Edition Foundation in Project Management<br>" +
-        "· PRINCE2® 6th Edition Practitioner in Project Management<br>" +
-        "· ITIL® V4 Foundation",
-  
-      // Datenschutz (Titel + Struktur)
-      "privacy.metaTitle":        "Phil Kirchner - Datenschutz",
-      "privacy.title":            "Datenschutz­erklärung",
-      "privacy.overview":         "Datenschutz auf einen Blick",
-      "privacy.section1":         "1. Allgemeine Hinweise",
-      "privacy.section2":         "2. Datenerfassung auf dieser Website",
-      "privacy.who":              "Wer ist verantwortlich für die Datenerfassung auf dieser Website?",
-      "privacy.howCollect":       "Wie erfasse ich Ihre Daten?",
-      "privacy.whyUse":           "Wofür nutze ich Ihre Daten?",
-      "privacy.rights":           "Welche Rechte haben Sie bezüglich Ihrer Daten?",
-      "privacy.tools":            "3. Analyse-Tools und Tools von Drittanbietern",
-      "privacy.controller":       "4. Hinweis zur verantwortlichen Stelle",
-      "privacy.controllerIntro":  "Die verantwortliche Stelle für die Datenverarbeitung auf dieser Website ist:",
-      "privacy.retention":        "5. Speicherdauer",
-      "privacy.legalBases":       "6. Allgemeine Hinweise zu den Rechtsgrundlagen der Datenverarbeitung",
-      "privacy.withdraw":         "7. Widerruf Ihrer Einwilligung zur Datenverarbeitung",
-      "privacy.objection":        "8. Widerspruchsrecht (Art. 21 DSGVO)",
-      "privacy.complaint":        "9. Beschwerderecht bei der zuständigen Aufsichtsbehörde",
-      "privacy.portability":      "Recht auf Datenübertragbarkeit",
-      "privacy.accessRectifyErase":"10. Auskunft, Löschung und Berichtigung",
-      "privacy.restrict":         "11. Recht auf Einschränkung der Verarbeitung",
-      "privacy.collectionOnSite": "Datenerfassung auf dieser Website",
-      "privacy.request":          "12. Anfrage per E-Mail, Telefon oder Telefax",
-      "privacy.source":           "Quelle:",
-      "privacy.back":             "Zurück zur Startseite,\n... liest du dir doch eh nicht wirklich durch",
-  
-      // Datenschutz – Inhalte/Absätze
-      "privacy.section1.p1":
-        "Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen.",
-      "privacy.who.p":
-        "Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber. Dessen Kontaktdaten finden Sie im Impressum bzw. unten in dieser Erklärung.",
-      "privacy.howCollect.p":
-        "Ihre Daten werden einerseits dadurch erhoben, dass Sie mir diese mitteilen (z. B. per E-Mail). Andere Daten werden beim Besuch der Website automatisch durch IT-Systeme erfasst.",
-      "privacy.whyUse.p":
-        "Ein Teil der Daten wird erhoben, um eine fehlerfreie Bereitstellung der Website zu gewährleisten. Andere Daten können zur Analyse Ihres Nutzerverhaltens verwendet werden.",
-      "privacy.rights.p":
-        "Sie haben das Recht auf unentgeltliche Auskunft über Herkunft, Empfänger und Zweck Ihrer gespeicherten personenbezogenen Daten sowie ein Recht auf Berichtigung, Sperrung oder Löschung.",
-      "privacy.tools.p":
-        "Beim Besuch dieser Website kann Ihr Surf-Verhalten statistisch ausgewertet werden. Das geschieht vor allem mit sogenannten Analyseprogrammen.",
-      "privacy.controllerAddress":
-        "Phil Kirchner<br>Seilerbrücklstr. 22d<br>85354 Freising",
-      "privacy.controllerEmail":
-        "phil.kirchner.999@googlemail.com",
-      "privacy.controllerDef":
-        "Verantwortliche Stelle ist die natürliche oder juristische Person, die allein oder gemeinsam mit anderen über Zwecke und Mittel der Verarbeitung von personenbezogenen Daten entscheidet.",
-      "privacy.retention.p":
-        "Soweit innerhalb dieser Datenschutzerklärung keine speziellere Speicherdauer genannt wurde, verbleiben Ihre personenbezogenen Daten bei mir, bis der Zweck der Datenverarbeitung entfällt oder Sie von Ihren Rechten Gebrauch machen.",
-      "privacy.legalBases.p":
-        "Je nach Einzelfall erfolgt die Verarbeitung auf Grundlage von Art. 6 Abs. 1 DSGVO (Einwilligung, Vertragserfüllung, rechtliche Verpflichtung, berechtigtes Interesse).",
-      "privacy.withdraw.p":
-        "Sie können eine bereits erteilte Einwilligung jederzeit formlos widerrufen. Die Rechtmäßigkeit der bis zum Widerruf erfolgten Verarbeitung bleibt unberührt.",
-      "privacy.objection.p1":
-        "Wenn die Datenverarbeitung auf Grundlage von Art. 6 Abs. 1 lit. e oder f DSGVO erfolgt, haben Sie jederzeit das Recht, aus Gründen, die sich aus Ihrer besonderen Situation ergeben, Widerspruch einzulegen.",
-      "privacy.objection.p2":
-        "Werden Ihre personenbezogenen Daten zur Direktwerbung verarbeitet, haben Sie das Recht, jederzeit Widerspruch gegen die Verarbeitung zum Zwecke derartiger Werbung einzulegen.",
-      "privacy.complaint.p":
-        "Ihnen steht im Falle eines Verstoßes gegen die DSGVO ein Beschwerderecht bei einer Aufsichtsbehörde zu, insbesondere in dem Mitgliedstaat Ihres gewöhnlichen Aufenthalts, Ihres Arbeitsplatzes oder des Orts des mutmaßlichen Verstoßes.",
-      "privacy.portability.p":
-        "Sie haben das Recht, Daten, die ich auf Grundlage Ihrer Einwilligung oder in Erfüllung eines Vertrags verarbeite, an sich oder an einen Dritten in einem gängigen, maschinenlesbaren Format aushändigen zu lassen.",
-      "privacy.accessRectifyErase.p":
-        "Sie haben im Rahmen der geltenden gesetzlichen Bestimmungen das Recht auf Auskunft, Berichtigung, Löschung sowie Einschränkung der Verarbeitung Ihrer personenbezogenen Daten.",
-      "privacy.restrict.pIntro":
-        "Sie haben das Recht, die Einschränkung der Verarbeitung Ihrer personenbezogenen Daten zu verlangen. Dies gilt insbesondere, wenn einer der folgenden Gründe vorliegt:",
-      "privacy.restrict.li1":
-        "Sie bestreiten die Richtigkeit Ihrer gespeicherten personenbezogenen Daten.",
-      "privacy.restrict.li2":
-        "Die Verarbeitung ist unrechtmäßig und Sie lehnen die Löschung ab und verlangen stattdessen die Einschränkung der Nutzung.",
-      "privacy.restrict.li3":
-        "Die Daten werden von mir nicht mehr benötigt, Sie benötigen sie jedoch zur Geltendmachung, Ausübung oder Verteidigung von Rechtsansprüchen.",
-      "privacy.restrict.li4":
-        "Sie haben Widerspruch nach Art. 21 Abs. 1 DSGVO eingelegt; es steht noch nicht fest, wessen Interessen überwiegen.",
-      "privacy.restrict.pOutro":
-        "Wenn die Verarbeitung eingeschränkt wurde, dürfen diese Daten – abgesehen von ihrer Speicherung – nur mit Ihrer Einwilligung oder zur Geltendmachung, Ausübung oder Verteidigung von Rechtsansprüchen verarbeitet werden.",
-      "privacy.request.p1":
-        "Wenn Sie mich per E-Mail, Telefon oder Telefax kontaktieren, werden Ihre Angaben inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage gespeichert.",
-      "privacy.request.p2":
-        "Die Verarbeitung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO, sofern Ihre Anfrage mit der Erfüllung eines Vertrags zusammenhängt oder zur Durchführung vorvertraglicher Maßnahmen erforderlich ist.",
-      "privacy.request.p3":
-        "Die von Ihnen übermittelten Daten verbleiben bei mir, bis der Zweck der Speicherung entfällt oder Sie zur Löschung auffordern. Gesetzliche Aufbewahrungsfristen bleiben unberührt.",
-  
-      // Impressum
-      "imprint.metaTitle": "Phil Kirchner - Impressum",
-      "imprint.title":     "Impressum",
-      "imprint.owner":     "Webseitenbetreiber",
-      "imprint.more":      "Brauchst du mehr Informationen über mich?",
-      "imprint.back":      "Zurück zur Startseite,\n... wenn du alle infos hast die du brauchst"
+      "meta.home.title": "Phil Kirchner - Softwareentwickler",
+      "meta.home.description": "Portfolio von Phil Kirchner: Softwareentwicklung, Oracle APEX, PL/SQL, JavaScript, Java und strukturierte Produktarbeit.",
+      "meta.vita.title": "Phil Kirchner - Vita",
+      "meta.vita.description": "Vita von Phil Kirchner: Softwareentwicklung, Oracle APEX, PL/SQL, Java, Ausbildung, Zertifikate und berufliche Stationen.",
+      "meta.imprint.title": "Phil Kirchner - Impressum",
+      "meta.privacy.title": "Phil Kirchner - Datenschutz",
+
+      "nav.profile": "Profil",
+      "nav.projects": "Projekte",
+      "nav.stack": "Stack",
+      "nav.vita": "Vita",
+      "nav.imprint": "Impressum",
+      "nav.privacy": "Datenschutz",
+
+      "hero.eyebrow": "Softwareentwickler aus Freising",
+      "hero.title": "Ich baue Software mit klarem Kopf, Datenbanknähe und Produktgefühl.",
+      "hero.text": "Ich komme aus operativer Verantwortung, habe Einkauf, Prozesse und Teams von innen gesehen und entwickle heute Anwendungen mit Oracle APEX, PL/SQL, JavaScript und Java. Genau diese Mischung macht mich stark: Technik, die nicht nur läuft, sondern im Alltag Sinn ergibt.",
+      "hero.mail": "Kontakt aufnehmen",
+      "hero.vita": "Vita ansehen",
+      "facts.focus.label": "Fokus",
+      "facts.focus.value": "Business Apps",
+      "facts.stack.label": "Stack",
+      "facts.mode.label": "Arbeitsweise",
+      "facts.mode.value": "Agil & strukturiert",
+
+      "position.eyebrow": "Was mich unterscheidet",
+      "position.title": "Ich denke Software nicht nur vom Code aus.",
+      "position.p1": "Vor der IT war ich viele Jahre in Küche, Einkauf und Verantwortung unterwegs. Ich kenne Druck, Übergaben, Prioritäten, Lieferketten, Abstimmungen und die Momente, in denen ein gutes Tool den Unterschied macht.",
+      "position.p2": "Deshalb interessieren mich besonders Anwendungen, die Prozesse sichtbar machen, Daten sauber führen und Menschen im Arbeitsfluss entlasten.",
+
+      "projects.eyebrow": "Projekt-Spotlights",
+      "projects.title": "Arbeiten, die zeigen, wie ich denke.",
+      "project.home.title": "Modernisierte persönliche Homepage",
+      "project.home.text": "Eine statische, schnelle Portfolio-Seite mit klarer Positionierung, responsivem Layout, DE/EN-Umschaltung und verbessertem SEO-Fundament.",
+      "project.apex.title": "Oracle-nahe Anwendungsentwicklung",
+      "project.apex.text": "Fokus auf Oberflächen, Datenmodelle und Abläufe rund um Oracle APEX, PL/SQL, REST Data Sources und strukturierte Datenhaltung.",
+      "project.java.title": "Java, SQL und saubere Grundarchitektur",
+      "project.java.text": "Ausbildung und Praxis mit Java, SQL, Spring Boot, MVC, Vaadin, Git, Jira, Confluence und modellgetriebener Softwareentwicklung.",
+
+      "stack.eyebrow": "Kompetenzprofil",
+      "stack.title": "Technik, Methoden und Erfahrung in einem Profil.",
+      "stack.dev.title": "Entwicklung",
+      "stack.product.title": "Produkt & Prozess",
+      "stack.tools.title": "Tools",
+
+      "contact.eyebrow": "Nächster Schritt",
+      "contact.title": "Lass uns über Software sprechen, die im echten Betrieb trägt.",
+      "contact.mail": "Mail schreiben",
+      "contact.linkedin": "LinkedIn öffnen",
+
+      "vita.eyebrow": "Vita",
+      "vita.title": "Eine Laufbahn zwischen Praxis, Verantwortung und Software.",
+      "vita.intro": "Meine berufliche Reise begann in der Gastronomie und führte über Einkauf, Prozessverantwortung und Projektarbeit in die Softwareentwicklung. Diese Stationen sind für mich kein Bruch, sondern mein Fundament.",
+      "vita.timeline.eyebrow": "Stationen",
+      "vita.timeline.title": "Beruflicher Verlauf",
+      "vita.job1.title": "Softwareentwickler - Pragmatis GmbH",
+      "vita.job1.text": "Neufahrn bei Freising. Entwicklung mit Oracle APEX, PL/SQL, JavaScript, HTML, CSS, REST Data Sources, RESTful Services und Oracle DB.",
+      "vita.job2.title": "Praktikum Softwareentwicklung - Europa Möbel-Verbund",
+      "vita.job2.text": "Praxis mit Java, SQL, Datenbanken, Git, Kanban, Confluence, Jira, Vaadin, MVC, Spring Framework, Spring Boot und UML.",
+      "vita.job3.title": "Ausbildung Fachinformatiker Anwendungsentwicklung - WBS Gruppe",
+      "vita.job3.text": "Schwerpunkte: OOP, Software-Entwurfsmuster, Java, SQL, Datenbanken, agile Methoden, DBMS, HTML, CSS und Microsoft SQL Server.",
+      "vita.job4.title": "Purchasing - Munich Airport Marriott Hotel",
+      "vita.job4.text": "Purchasing Agent und Purchasing Supervisor mit Verantwortung für Beschaffung, Abstimmung, operative Abläufe und verlässliche Prozesse.",
+      "vita.job5.title": "Gastronomielaufbahn - Munich Airport Marriott Hotel",
+      "vita.job5.text": "Ausbildung zum Koch, Commis de Cuisine, Demi Chef de Partie, Chef de Partie und Food and Beverage Trainee.",
+      "vita.cert.eyebrow": "Zertifikate",
+      "vita.cert.title": "Methodik und Projektverständnis",
+      "vita.contact.title": "Wenn das Profil passt, freue ich mich über eine Nachricht.",
+      "vita.back": "Zur Startseite",
+
+      "imprint.eyebrow": "Anbieterkennzeichnung",
+      "imprint.title": "Impressum",
+      "imprint.owner": "Webseitenbetreiber",
+      "imprint.contact": "Kontakt",
+      "imprint.responsible": "Verantwortlich für den Inhalt",
+      "imprint.note": "Diese Seite ist eine private Portfolio-Homepage.",
+
+      "privacy.eyebrow": "Datenschutz",
+      "privacy.title": "Datenschutzerklärung",
+      "privacy.intro": "Diese Datenschutzerklärung informiert darüber, welche personenbezogenen Daten beim Besuch dieser Portfolio-Website verarbeitet werden.",
+      "privacy.controller": "Verantwortliche Stelle",
+      "privacy.access": "Zugriffsdaten",
+      "privacy.access.text": "Beim Aufruf dieser Website können durch den Hosting-Anbieter technisch notwendige Zugriffsdaten verarbeitet werden, zum Beispiel IP-Adresse, Datum und Uhrzeit des Abrufs, Browsertyp, Betriebssystem, Referrer-URL und angeforderte Dateien. Diese Daten dienen der sicheren und fehlerfreien Bereitstellung der Website.",
+      "privacy.contact": "Kontaktaufnahme",
+      "privacy.contact.text": "Wenn Sie per E-Mail Kontakt aufnehmen, werden die übermittelten Angaben zur Bearbeitung der Anfrage verarbeitet. Die Daten werden nicht ohne Einwilligung weitergegeben.",
+      "privacy.fonts": "Schriftarten und Analyse",
+      "privacy.fonts.text": "Diese Website nutzt Systemschriftarten und verzichtet derzeit auf Analytics, Tracking-Skripte und Cookies.",
+      "privacy.links": "Externe Links",
+      "privacy.links.text": "Diese Website verlinkt auf externe Profile, insbesondere LinkedIn und Instagram. Beim Öffnen dieser Links gelten die Datenschutzbestimmungen der jeweiligen Anbieter.",
+      "privacy.rights": "Ihre Rechte",
+      "privacy.rights.text": "Sie haben im Rahmen der gesetzlichen Bestimmungen Rechte auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit sowie Widerspruch gegen bestimmte Verarbeitungen. Außerdem besteht ein Beschwerderecht bei einer zuständigen Datenschutzaufsichtsbehörde.",
+      "privacy.legal": "Rechtsgrundlagen",
+      "privacy.legal.text": "Die Verarbeitung erfolgt, soweit einschlägig, auf Grundlage von Art. 6 Abs. 1 DSGVO, insbesondere berechtigtem Interesse an einer sicheren Websitebereitstellung sowie zur Bearbeitung freiwilliger Kontaktanfragen.",
+      "privacy.note": "Hinweis: Diese Erklärung ist bewusst schlank gehalten. Bei zusätzlichem Tracking, Formularen oder Analytics sollte sie vor Veröffentlichung juristisch geprüft und erweitert werden."
     },
-  
+
     en: {
-      "nav.vita":        "Resume",
-      "nav.impressum":   "Legal Notice",
-      "nav.datenschutz": "Privacy",
-  
-      "home.metaTitle":  "Phil Kirchner - Software Developer",
-      "hero.title":      "I’m Phil",
-      "hero.subtitle":   "Happy you’re here!",
-      "hero.mail":       "Drop me an email",
-      "home.intro":
-        "My professional journey began with my chef apprenticeship in 2003. " +
-        "Over the years, I have held various positions.<br><br>" +
-        "In 2011, I chose to further develop my skills and took on responsibility as a Purchasing Agent, " +
-        "before serving as Purchasing Supervisor from 2016 to 2021. " +
-        "During that time, I gained experience across different areas.<br><br>" +
-        "My passion for technology led me in 2023 to retrain as an IT Specialist for Application Development at WBS Training in Munich. " +
-        "Since then, I have expanded my skills as an Agile Scrum Master, Agile Scrum Product Owner, and in project management (PRINCE2®). " +
-        "My IT knowledge spans various software and programming languages such as Java, PL/SQL, JavaScript, Angular, and HTML/CSS; " +
-        "I am also comfortable with MS Office, Confluence, Jira, IntelliJ IDEA, and GitHub.<br><br>" +
-        "Outside of work, I am a technology enthusiast and movie lover. " +
-        "My interest in advanced technology is reflected not only in my professional development but also in my spare time.<br><br>" +
-        "With this website, I would like to introduce myself to you.<br>",
-  
-      "vita.title":        "My Personal \nDevelopment",
-      "vita.subtitle":     "\"I see my professional career \nas a journey\"",
-      "vita.skills":       "Skills:\n",
-      "vita.gastro":       "Culinary Career - <br>Munich Airport Marriott Hotel",
-      "vita.certificates": "Certificates",
-      "vita.back":         "Back to homepage,\n... drop me a line if you liked what you read.",
-      "vita.job1.h4":      "Software Developer - <br>Pragmatis GmbH",
-      "vita.job2.h4":      "Software Developer Internship - <br>Europa Möbel-Verbund",
-      "vita.job3.h4":      "Apprenticeship IT Specialist (AE) - <br>WBS GROUP",
-      "vita.job4.h4":      "Purchasing - <br>Munich Airport Marriott Hotel",
-  
-      "vita.metaTitle":    "Phil Kirchner - Software Developer",
-      "vita.job1.p":
-        "Dec 2023 – Today<br><br>" +
-        "Neufahrn near Freising, Bavaria, DE<br><br>" +
-        "<strong>Skills:</strong><br>" +
-        "Oracle APEX · PL/SQL · JavaScript · HTML · Cascading Style Sheets (CSS) · REST Data Source · RESTful Services · Oracle DB",
-      "vita.job2.p":
-        "Sep 2022 – Apr 2023<br><br>" +
-        "Fahrenzhausen, Bavaria, DE<br><br>" +
-        "<strong>Skills:</strong><br>" +
-        "Java · SQL · Databases · Git · Kanban · Confluence · JIRA · Teamwork · DBMS · Web development · Vaadin · MVC architecture · Spring Framework · Spring Boot · Unified Modeling Language (UML)",
-      "vita.job3.p":
-        "Aug 2021 – Jun 2023<br><br>" +
-        "Freising, Bavaria, DE<br><br>" +
-        "<strong>Skills:</strong><br>" +
-        "Object-oriented programming (OOP) · Design patterns · Java · SQL · Databases · Agile methods · IT strategy · DBMS · Green IT · HTML · CSS · Microsoft SQL Server",
-      "vita.job4.p":
-        "Purchasing Supervisor<br>Jun 2016 – Aug 2021<br><br>" +
-        "Purchasing Agent<br>Jun 2015 – Jun 2016<br><br>" +
-        "Food and Beverage Trainee<br>Feb 2014 – Jun 2015",
-      "vita.gastro.p":
-        "Chef de Partie<br>Jun 2011 – Feb 2014<br><br>" +
-        "Demi Chef de Partie<br>Sep 2007 – Jun 2011<br><br>" +
-        "Commis de cuisine<br>Jul 2006 – Sep 2007<br><br>" +
-        "Apprenticeship as Cook<br>Sep 2003 – Jul 2006",
-      "vita.certificates.p":
-        "2021 – 2023<br><br>" +
-        "· EXIN Agile Scrum Master<br>" +
-        "· EXIN Agile Scrum Product Owner<br>" +
-        "· PRINCE2® 6th Edition Foundation in Project Management<br>" +
-        "· PRINCE2® 6th Edition Practitioner in Project Management<br>" +
-        "· ITIL® V4 Foundation",
-  
-      // Privacy
-      "privacy.metaTitle":        "Phil Kirchner - Privacy",
-      "privacy.title":            "Privacy Policy",
-      "privacy.overview":         "Privacy at a glance",
-      "privacy.section1":         "1. General information",
-      "privacy.section2":         "2. Data collection on this website",
-      "privacy.who":              "Who is responsible for data processing on this website?",
-      "privacy.howCollect":       "How do I collect your data?",
-      "privacy.whyUse":           "What do I use your data for?",
-      "privacy.rights":           "What rights do you have regarding your data?",
-      "privacy.tools":            "3. Analytics and third-party tools",
-      "privacy.controller":       "4. Information about the controller",
-      "privacy.controllerIntro":  "The controller responsible for data processing on this website is:",
-      "privacy.retention":        "5. Storage duration",
-      "privacy.legalBases":       "6. Legal bases for processing",
-      "privacy.withdraw":         "7. Withdrawal of your consent",
-      "privacy.objection":        "8. Right to object (Art. 21 GDPR)",
-      "privacy.complaint":        "9. Right to lodge a complaint with a supervisory authority",
-      "privacy.portability":      "Right to data portability",
-      "privacy.accessRectifyErase":"10. Access, erasure and rectification",
-      "privacy.restrict":         "11. Right to restriction of processing",
-      "privacy.collectionOnSite": "Data collection on this website",
-      "privacy.request":          "12. Requests by email, phone or fax",
-      "privacy.source":           "Source:",
-      "privacy.back":             "Back to homepage,\n... be honest, you weren’t going to read it anyway",
-  
-      // Privacy – content
-      "privacy.section1.p1":
-        "The following notes provide a simple overview of what happens to your personal data when you visit this website.",
-      "privacy.who.p":
-        "Data processing on this website is carried out by the website operator. You can find the contact details in the legal notice and below in this policy.",
-      "privacy.howCollect.p":
-        "Some data are collected when you provide them (e.g., by email). Other data are collected automatically by our IT systems when you visit the site.",
-      "privacy.whyUse.p":
-        "Part of the data is collected to ensure the error-free provision of the website. Other data may be used to analyze user behavior.",
-      "privacy.rights.p":
-        "You have the right to receive free information about the origin, recipients, and purpose of your stored personal data and the right to rectification, restriction, or deletion.",
-      "privacy.tools.p":
-        "When visiting this website, your surfing behavior may be statistically evaluated, primarily using analytics tools.",
-      "privacy.controllerAddress":
-        "Phil Kirchner<br>Seilerbrücklstr. 22d<br>85354 Freising",
-      "privacy.controllerEmail":
-        "phil.kirchner.999@googlemail.com",
-      "privacy.controllerDef":
-        "The controller is the natural or legal person who, alone or jointly with others, determines the purposes and means of processing personal data.",
-      "privacy.retention.p":
-        "Unless a more specific storage period is stated, your personal data will remain with me until the purpose of processing no longer applies or you exercise your rights.",
-      "privacy.legalBases.p":
-        "Depending on the case, processing is based on Art. 6(1) GDPR (consent, contract performance, legal obligation, or legitimate interest).",
-      "privacy.withdraw.p":
-        "You may revoke your consent at any time with future effect. The lawfulness of processing prior to the revocation remains unaffected.",
-      "privacy.objection.p1":
-        "If processing is based on Art. 6(1)(e) or (f) GDPR, you have the right to object at any time on grounds relating to your particular situation.",
-      "privacy.objection.p2":
-        "If your personal data are processed for direct marketing, you have the right to object at any time to processing for such marketing.",
-      "privacy.complaint.p":
-        "You have the right to lodge a complaint with a supervisory authority, in particular in the Member State of your habitual residence, place of work, or place of the alleged infringement.",
-      "privacy.portability.p":
-        "You have the right to receive the data processed on the basis of your consent or in performance of a contract in a common, machine-readable format or to have it transmitted to another controller.",
-      "privacy.accessRectifyErase.p":
-        "Within the scope of the applicable legal provisions, you have the right to information, rectification, deletion, and restriction of processing of your personal data.",
-      "privacy.restrict.pIntro":
-        "You have the right to request the restriction of processing of your personal data, in particular if one of the following applies:",
-      "privacy.restrict.li1":
-        "You contest the accuracy of your stored personal data.",
-      "privacy.restrict.li2":
-        "The processing is unlawful and you oppose the erasure of the personal data and request the restriction of their use instead.",
-      "privacy.restrict.li3":
-        "The data are no longer needed by me, but you require them for the establishment, exercise, or defense of legal claims.",
-      "privacy.restrict.li4":
-        "You have objected pursuant to Art. 21(1) GDPR and it has not yet been determined whose interests prevail.",
-      "privacy.restrict.pOutro":
-        "If processing has been restricted, such data may – apart from storage – only be processed with your consent or for the establishment, exercise, or defense of legal claims.",
-      "privacy.request.p1":
-        "If you contact me by email, phone, or fax, the data you provide will be stored for the purpose of processing your request.",
-      "privacy.request.p2":
-        "Processing is based on Art. 6(1)(b) GDPR if your request is related to the performance of a contract or necessary for pre-contractual measures.",
-      "privacy.request.p3":
-        "The data you send will remain with me until the purpose for storage no longer applies or you request deletion. Statutory retention periods remain unaffected.",
-  
-      // Imprint
-      "imprint.metaTitle": "Phil Kirchner - Legal Notice",
-      "imprint.title":     "Legal Notice",
-      "imprint.owner":     "Website owner",
-      "imprint.more":      "Need more information about me?",
-      "imprint.back":      "Back to homepage,\n... if you’ve got all the info you need"
+      "meta.home.title": "Phil Kirchner - Software Developer",
+      "meta.home.description": "Portfolio of Phil Kirchner: software development, Oracle APEX, PL/SQL, JavaScript, Java and structured product thinking.",
+      "meta.vita.title": "Phil Kirchner - Resume",
+      "meta.vita.description": "Resume of Phil Kirchner: software development, Oracle APEX, PL/SQL, Java, education, certificates and professional experience.",
+      "meta.imprint.title": "Phil Kirchner - Legal Notice",
+      "meta.privacy.title": "Phil Kirchner - Privacy",
+
+      "nav.profile": "Profile",
+      "nav.projects": "Projects",
+      "nav.stack": "Stack",
+      "nav.vita": "Resume",
+      "nav.imprint": "Legal Notice",
+      "nav.privacy": "Privacy",
+
+      "hero.eyebrow": "Software developer from Freising",
+      "hero.title": "I build software with clear thinking, database focus and product sense.",
+      "hero.text": "I come from operational responsibility, have seen purchasing, processes and teams from the inside, and now build applications with Oracle APEX, PL/SQL, JavaScript and Java. That mix is my strength: technology that does not just run, but makes sense in daily work.",
+      "hero.mail": "Get in touch",
+      "hero.vita": "View resume",
+      "facts.focus.label": "Focus",
+      "facts.focus.value": "Business apps",
+      "facts.stack.label": "Stack",
+      "facts.mode.label": "Mode",
+      "facts.mode.value": "Agile & structured",
+
+      "position.eyebrow": "What sets me apart",
+      "position.title": "I do not think about software only from the code outward.",
+      "position.p1": "Before IT, I spent many years in kitchens, purchasing and responsibility. I know pressure, handovers, priorities, supply chains, coordination and the moments when a good tool changes the day.",
+      "position.p2": "That is why I care about applications that make processes visible, keep data clean and help people stay in their flow.",
+
+      "projects.eyebrow": "Project spotlights",
+      "projects.title": "Work that shows how I think.",
+      "project.home.title": "Modernized personal homepage",
+      "project.home.text": "A static, fast portfolio site with clearer positioning, responsive layout, DE/EN language switching and a stronger SEO foundation.",
+      "project.apex.title": "Oracle-centered application development",
+      "project.apex.text": "Focus on interfaces, data models and workflows around Oracle APEX, PL/SQL, REST Data Sources and structured data management.",
+      "project.java.title": "Java, SQL and clean fundamentals",
+      "project.java.text": "Training and practice with Java, SQL, Spring Boot, MVC, Vaadin, Git, Jira, Confluence and model-driven software development.",
+
+      "stack.eyebrow": "Skill profile",
+      "stack.title": "Technology, methods and experience in one profile.",
+      "stack.dev.title": "Development",
+      "stack.product.title": "Product & process",
+      "stack.tools.title": "Tools",
+
+      "contact.eyebrow": "Next step",
+      "contact.title": "Let's talk about software that holds up in real operations.",
+      "contact.mail": "Write an email",
+      "contact.linkedin": "Open LinkedIn",
+
+      "vita.eyebrow": "Resume",
+      "vita.title": "A career between practice, responsibility and software.",
+      "vita.intro": "My professional journey began in hospitality and moved through purchasing, process responsibility and project work into software development. These stages are not a break in my story; they are the foundation.",
+      "vita.timeline.eyebrow": "Stations",
+      "vita.timeline.title": "Professional path",
+      "vita.job1.title": "Software Developer - Pragmatis GmbH",
+      "vita.job1.text": "Neufahrn near Freising. Development with Oracle APEX, PL/SQL, JavaScript, HTML, CSS, REST Data Sources, RESTful Services and Oracle DB.",
+      "vita.job2.title": "Software Development Internship - Europa Möbel-Verbund",
+      "vita.job2.text": "Practice with Java, SQL, databases, Git, Kanban, Confluence, Jira, Vaadin, MVC, Spring Framework, Spring Boot and UML.",
+      "vita.job3.title": "Apprenticeship IT Specialist for Application Development - WBS Group",
+      "vita.job3.text": "Focus areas: OOP, software design patterns, Java, SQL, databases, agile methods, DBMS, HTML, CSS and Microsoft SQL Server.",
+      "vita.job4.title": "Purchasing - Munich Airport Marriott Hotel",
+      "vita.job4.text": "Purchasing Agent and Purchasing Supervisor with responsibility for procurement, coordination, operations and reliable processes.",
+      "vita.job5.title": "Culinary career - Munich Airport Marriott Hotel",
+      "vita.job5.text": "Apprenticeship as cook, Commis de Cuisine, Demi Chef de Partie, Chef de Partie and Food and Beverage Trainee.",
+      "vita.cert.eyebrow": "Certificates",
+      "vita.cert.title": "Methods and project understanding",
+      "vita.contact.title": "If the profile fits, I would be happy to hear from you.",
+      "vita.back": "Back home",
+
+      "imprint.eyebrow": "Legal information",
+      "imprint.title": "Legal Notice",
+      "imprint.owner": "Website owner",
+      "imprint.contact": "Contact",
+      "imprint.responsible": "Responsible for content",
+      "imprint.note": "This page is a private portfolio homepage.",
+
+      "privacy.eyebrow": "Privacy",
+      "privacy.title": "Privacy Policy",
+      "privacy.intro": "This privacy policy explains which personal data may be processed when visiting this portfolio website.",
+      "privacy.controller": "Controller",
+      "privacy.access": "Access data",
+      "privacy.access.text": "When this website is accessed, the hosting provider may process technically necessary access data such as IP address, date and time, browser type, operating system, referrer URL and requested files. This data is used to provide the website securely and reliably.",
+      "privacy.contact": "Contact",
+      "privacy.contact.text": "If you contact me by email, the submitted information is processed to handle the request. The data is not shared without consent.",
+      "privacy.fonts": "Fonts and analytics",
+      "privacy.fonts.text": "This website uses system fonts and currently does not use analytics, tracking scripts or cookies.",
+      "privacy.links": "External links",
+      "privacy.links.text": "This website links to external profiles, especially LinkedIn and Instagram. When opening those links, the privacy policies of the respective providers apply.",
+      "privacy.rights": "Your rights",
+      "privacy.rights.text": "Within the scope of applicable law, you have rights to access, rectification, erasure, restriction of processing, data portability and objection to certain processing. You may also lodge a complaint with a competent supervisory authority.",
+      "privacy.legal": "Legal bases",
+      "privacy.legal.text": "Processing is based, where applicable, on Art. 6(1) GDPR, especially legitimate interest in providing a secure website and handling voluntary contact requests.",
+      "privacy.note": "Note: This policy is intentionally lean. If tracking, forms or analytics are added, it should be legally reviewed and expanded before publication."
     }
   };
 
+  const navToggle = document.querySelector(".nav-toggle");
+  const navList = document.getElementById("primary-nav");
+  const langToggle = document.getElementById("lang-toggle");
 
-   // --- Nav-Helper: jetzt TOP-LEVEL, damit überall sichtbar ---
-    function setOpen(open){
-      if(!hasNav) return;
-      toggle.setAttribute("aria-expanded", String(open));
-      list.dataset.open = open ? "true" : "false";
+  function sanitizeLang(lang) {
+    const value = String(lang || "").toLowerCase();
+    if (SUPPORTED_LANGS.includes(value)) return value;
+    if (value.startsWith("en")) return "en";
+    if (value.startsWith("de")) return "de";
+    return DEFAULT_LANG;
+  }
+
+  function getStoredLang() {
+    try {
+      return localStorage.getItem("lang");
+    } catch (error) {
+      return null;
     }
-  
-    // --- I18N Helpers ---
-    function sanitizeLang(l){
-      l = (l || "").toLowerCase();
-      if (SUPPORTED.includes(l)) return l;
-      if (l.startsWith("de")) return "de";
-      if (l.startsWith("en")) return "en";
-      return DEFAULT_LANG;
+  }
+
+  function storeLang(lang) {
+    try {
+      localStorage.setItem("lang", lang);
+    } catch (error) {
+      // Storage can fail in strict privacy modes; the page still works.
     }
-  
-  function applyTranslations(lang){
-    const dict = I18N[lang] || {};
-    const html = document.documentElement;
-    html.lang = lang;
-    html.setAttribute("data-lang", lang);
-  
-    document.querySelectorAll("[data-i18n], [data-i18n-html]").forEach(el => {
-      const key = el.getAttribute("data-i18n") || el.getAttribute("data-i18n-html");
-      if (!key) return;
-      const txt = dict[key];
-      if (typeof txt !== "string") return;
-  
-      if (el.hasAttribute("data-i18n-html")) {
-        // 1) \n -> <br>
-        // 2) Nur <br> als HTML erlauben, alles andere strippen
-        let s = txt.replace(/\n/g, "<br>");
-        s = s.replace(/<(?!br\s*\/?>)[^>]+>/gi, ""); // alle Tags außer <br> entfernen
-        el.innerHTML = s;
-      } else {
-        // Plain Text
-        el.textContent = txt;
-      }
+  }
+
+  function getInitialLang() {
+    const params = new URLSearchParams(window.location.search);
+    return sanitizeLang(getStoredLang() || params.get("lang") || navigator.language || DEFAULT_LANG);
+  }
+
+  function applyTranslations(lang) {
+    const dict = translations[lang] || translations[DEFAULT_LANG];
+    document.documentElement.lang = lang;
+    document.documentElement.dataset.lang = lang;
+
+    document.querySelectorAll("[data-i18n]").forEach((element) => {
+      const key = element.dataset.i18n;
+      if (dict[key]) element.textContent = dict[key];
     });
-  
-    if (langBtn){
-      langBtn.setAttribute(
-        "aria-label",
-        lang === "de" ? "Sprache umschalten (Deutsch/Englisch)"
-                      : "Switch language (English/German)"
-      );
+
+    document.querySelectorAll("[data-i18n-attr]").forEach((element) => {
+      const mappings = element.dataset.i18nAttr.split(",");
+      mappings.forEach((mapping) => {
+        const [attr, key] = mapping.split(":").map((part) => part.trim());
+        if (attr && key && dict[key]) element.setAttribute(attr, dict[key]);
+      });
+    });
+
+    document.title = dict[document.querySelector("title[data-i18n]")?.dataset.i18n] || document.title;
+    if (langToggle) {
+      langToggle.setAttribute("aria-label", lang === "de" ? "Sprache wechseln" : "Switch language");
     }
   }
 
-  function getInitialLang(){
-    const stored = localStorage.getItem("lang");
-    if (stored) return sanitizeLang(stored);
-    const qp = new URLSearchParams(location.search).get("lang");
-    if (qp) return sanitizeLang(qp);
-    return sanitizeLang(navigator.language || navigator.userLanguage || DEFAULT_LANG);
+  function setLang(lang) {
+    const nextLang = sanitizeLang(lang);
+    storeLang(nextLang);
+    applyTranslations(nextLang);
   }
 
-  function setLang(lang){
-    lang = sanitizeLang(lang);
-    localStorage.setItem("lang", lang);
-    applyTranslations(lang);
+  function setNavOpen(open) {
+    if (!navToggle || !navList) return;
+    navToggle.setAttribute("aria-expanded", String(open));
+    navToggle.setAttribute("aria-label", open ? "Menü schließen" : "Menü öffnen");
+    navList.dataset.open = open ? "true" : "false";
+    document.body.classList.toggle("nav-open", open);
   }
 
-  // --- I18N initialisieren ---
-  setLang(getInitialLang());
+  if (navToggle && navList) {
+    navToggle.addEventListener("click", () => {
+      setNavOpen(navToggle.getAttribute("aria-expanded") !== "true");
+    });
 
-  // --- Sprach-Button verdrahten ---
-  if (langBtn){
-    langBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      const current = document.documentElement.getAttribute("data-lang") || DEFAULT_LANG;
+    navList.addEventListener("click", (event) => {
+      if (event.target.closest("a")) setNavOpen(false);
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") setNavOpen(false);
+    });
+  }
+
+  if (langToggle) {
+    langToggle.addEventListener("click", () => {
+      const current = document.documentElement.dataset.lang || DEFAULT_LANG;
       setLang(current === "de" ? "en" : "de");
-      setOpen(false); // Menü ggf. schließen (no-op, wenn keine Nav)
+      setNavOpen(false);
     });
   }
 
-// --- Cards: dynamische Open-Höhe robust setzen (kein Caching-32px mehr) ---
-function recomputeOpenHeight(){
-  // 1) ALLE Karten von alten Inline-Werten befreien, damit Fallback sofort greift
-  document.querySelectorAll('label.card').forEach(l => {
-    l.style.removeProperty('--card-open-h');
-    l.classList.remove('is-measuring');
+  document.querySelectorAll("[data-year]").forEach((element) => {
+    element.textContent = String(new Date().getFullYear());
   });
 
-  // 2) aktuell GEÖFFNETE Karte bestimmen
-  const checked = document.querySelector('input[name="slide"]:checked');
-  if (!checked) return;
-  const lab = checked.nextElementSibling;
-  if (!lab || !lab.classList || !lab.classList.contains('card')) return;
-
-  // 3) kurz "Messmodus": Kinder nicht mehr begrenzen, dann messen
-  lab.classList.add('is-measuring');
-
-  // doppelte rAF: erst NACH dem Statewechsel + Styles messen
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      const full = lab.scrollHeight;                            // echte Inhaltshöhe
-      const cap  = Math.round(Math.min(full, window.innerHeight * 0.80)); // ~80vh Deckel
-      // 4) Zielhöhe setzen und Messmodus beenden
-      lab.style.setProperty('--card-open-h', cap + 'px');
-      lab.classList.remove('is-measuring');
-    });
-  });
-}
-
-// Events verdrahten
-if (radios && radios.length){
-  radios.forEach(r => r.addEventListener('change', recomputeOpenHeight));
-}
-
-// Initial: falls eine Karte vorgewählt ist (c1 checked)
-recomputeOpenHeight();
-
-// Resize: offene Karte neu rechnen
-window.addEventListener('resize', recomputeOpenHeight);
-
-
-  // --- Optional: Nav-Collapse nur, wenn vorhanden ---
-  if (hasNav){
-    const mq = window.matchMedia(`(max-width:${BREAKPOINT}px)`);
-
-    function applyMode() {
-      const mobile = mq.matches;
-      if (header){
-        header.classList.toggle("is-mobile", mobile);
-        header.classList.toggle("is-desktop", !mobile);
-      }
-      setOpen(false);
-    }
-
-    applyMode();
-    (mq.addEventListener ? mq.addEventListener("change", applyMode)
-                         : window.addEventListener("resize", applyMode));
-
-    toggle.addEventListener("click", () => {
-      const open = toggle.getAttribute("aria-expanded") === "true";
-      setOpen(!open);
-    });
-
-    document.addEventListener("click", (e) => {
-      if (list.dataset.open !== "true") return;
-      if (!e.target.closest(".nav")) setOpen(false);
-    });
-
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") { setOpen(false); toggle && toggle.focus(); }
-    });
-
-    list.addEventListener("click", (e) => {
-      if (e.target.closest("a")) setOpen(false);
-    });
-  }
+  setLang(getInitialLang());
 })();

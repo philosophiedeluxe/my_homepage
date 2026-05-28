@@ -1,195 +1,131 @@
 <!DOCTYPE html>
-<!--
-       _     _ _                        _     _           _      _
- _ __ | |__ (_) |  ___  ___  ___  _ __ | |__ (_) ___   __| | ___| |_   ___  _____
-| '_ \| '_ \| | | / _ \/ __|/ _ \| '_ \| '_ \| |/ _ \ / _` |/ _ \ | | | \ \/ / _ \
-| |_) | | | | | || (_) \__ \ (_) | |_) | | | | |  __/| (_| |  __/ | |_| |>  <  __/
-| .__/|_| |_|_|_(_)___/|___/\___/| .__/|_| |_|_|\___(_)__,_|\___|_|\__,_/_/\_\___|
-|_|                              |_|
-Copyright (c) Phil Kirchner Freising, All Rights Reserved
--->
 <html lang="de" data-lang="de">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0">  --> 
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title data-i18n="vita.metaTitle">Phil Kirchner - Softwareentwickler</title>
-  <meta name="description" content="It´s me">
-  <link rel="stylesheet" href="./style.css">
-
+  <title data-i18n="meta.vita.title">Phil Kirchner - Vita</title>
+  <meta name="description" data-i18n-attr="content:meta.vita.description" content="Vita von Phil Kirchner: Softwareentwicklung, Oracle APEX, PL/SQL, Java, Ausbildung, Zertifikate und berufliche Stationen.">
+  <meta name="theme-color" content="#101114">
+  <meta property="og:type" content="profile">
+  <meta property="og:title" data-i18n-attr="content:meta.vita.title" content="Phil Kirchner - Vita">
+  <meta property="og:description" data-i18n-attr="content:meta.vita.description" content="Vita von Phil Kirchner: Softwareentwicklung, Oracle APEX, PL/SQL, Java, Ausbildung, Zertifikate und berufliche Stationen.">
+  <meta property="og:image" content="./image/iconic.jpg">
   <link rel="icon" type="image/gif" href="./image/iconstar.gif">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+  <script defer src="./app.js"></script>
 </head>
 <body>
-  <header>
-    <div class="container-wide">
-      <nav class="nav" aria-label="Hauptnavigation">
-        <a class="brand" href="./index.html" aria-current="page">Phil Kirchner</a>
-        <button class="nav-toggle" aria-controls="primary-nav" aria-expanded="false" aria-label="Menü öffnen/ schließen">
-          <span class="nav-toggle-bar" aria-hidden="true"></span>
-          <span class="nav-toggle-bar" aria-hidden="true"></span>
-          <span class="nav-toggle-bar" aria-hidden="true"></span>
-        </button>
-
-        <ul id="primary-nav" class="nav-list" data-collapsible="true">
-          <li><a data-i18n="nav.vita" href="./vita.html" aria-current="page">Vita</a></li>
-          <li><a href="https://www.linkedin.com/in/phil-kirchner/">LinkedIn</a></li>
-          <li><a href="https://www.instagram.com/phil.osophie.deluxe/">Instagram</a></li>
-          <li class="nav-divider" aria-hidden="true">|</li>
-          <li><a data-i18n="nav.impressum" href="./impressum.html">Impressum</a></li>
-          <li><a data-i18n="nav.datenschutz" href="./datenschutz.html">Datenschutz</a></li>
-           <!-- Sprachumschalter (ganz außen rechts) -->
-          <li class="nav-divider" aria-hidden="true">|</li>
-          <li class="lang-switch">
-            <button id="lang-toggle" class="lang-btn" type="button"
-              aria-label="Sprache umschalten (Deutsch/Englisch)">
-              <span class="lang-de">DE</span><span class="sep">/</span><span class="lang-en">EN</span>
-            </button>
-          </li>
-        </ul>
-      </nav>
-    </div>
-
-    <div class="header_container">
-      <div class="header_container_left">
-        <img src="./image/iconic.jpg" alt="Portrait von Phil Kirchner">
-      </div>
-
-<div class="header_container_right">
-  <div class="content_container">
-    <div class="content">
-
-      <h1 data-i18n="vita.title">Meine persönliche Entwicklung</h1>
-      <h2 data-i18n="vita.subtitle">"Ich betrachte meine berufliche Karriere als eine Reise"</h2>
-
-      <div class="wrapper">
-        <div class="slide_container">
-
-          <input type="radio" name="slide" id="c1" checked>
-          <label for="c1" class="card">
-            <div class="row">
-              <div class="description">
-                <h4 data-i18n-html="vita.job1.h4">Softwareentwickler - <br>Pragmatis GmbH</h4>
-                <p data-i18n-html="vita.job1.p">Dez. 2023 – Heute
-                       <br><br>
-                       Neufahrn bei Freising, Bayern, DE<br><br>
-                       <span data-i18n="vita.skills">Kenntnisse:</span> <br>
-                       Oracle APEX · PL/SQL · JavaScript · HTML ·
-                       Cascading Style Sheets (CSS) · Rest Data Source · Restful Services ·
-                       Oracle DB
-                     </p>
-              </div>
-            </div>
-          </label>
-
-          <input type="radio" name="slide" id="c2">
-          <label for="c2" class="card">
-            <div class="row">
-              <div class="description">
-                <h4 data-i18n-html="vita.job2.h4">Praktikum Softwareentwickler - <br>Europa Möbel-Verbund</h4>
-                <p data-i18n-html="vita.job2.p">Sept. 2022 – Apr. 2023
-                       <br><br>
-                       Fahrenzhausen, Bayern, DE<br><br>
-                       <span data-i18n="vita.skills">Kenntnisse:</span> <br>
-                       Java · SQL · Datenbanken · Git ·
-                       Kanban · Confluence · JIRA · Teamwork ·
-                       DBMS · Webentwicklung · Vaadin · MVC-Architektur ·
-                       Spring Framework · Spring Boot · Unified Modeling Language (UML)
-                     </p>
-              </div>
-            </div>
-          </label>
-
-          <input type="radio" name="slide" id="c3">
-          <label for="c3" class="card">
-            <div class="row">
-              <div class="description">
-                <h4 data-i18n-html="vita.job3.h4">Ausbildung Fachinformatiker AE - <br>WBS GRUPPE</h4>
-                <p data-i18n-html="vita.job3.p">Aug. 2021 – Juni 2023
-                       <br><br>
-                       Freising, Bayern, DE<br><br>
-                       <span data-i18n="vita.skills">Kenntnisse:</span> <br>
-                       Objektorientierte Programmierung (OOP) ·
-                       Software-Entwurfsmuster · Java · SQL · Datenbanken ·
-                       Agile Methoden · IT-Strategie · DBMS · Green IT · HTML ·
-                       Cascading Style Sheets (CSS) · Microsoft SQL Server
-                     </p>
-              </div>
-            </div>
-          </label>
-
-          <input type="radio" name="slide" id="c4">
-          <label for="c4" class="card">
-            <div class="row">
-              <div class="description">
-                <h4 data-i18n-html="vita.job4.h4">Purchasing - <br>Munich Airport Marriott Hotel</h4>
-                <p data-i18n-html="vita.job4.p">Supervisor Einkauf<br>
-                       Juni 2016 – Aug. 2021<br><br>
-                       Purchasing Agent<br>
-                       Juni 2015 – Juni 2016<br><br>
-                       Food And Beverage Trainee<br>
-                       Feb. 2014 – Juni 2015
-                     </p>
-              </div>
-            </div>
-          </label>
-
-          <input type="radio" name="slide" id="c5">
-          <label for="c5" class="card">
-            <div class="row">
-              <div class="description">
-                <h4 data-i18n-html="vita.gastro">Gastronomielaufbahn - <br>Munich Airport Marriott Hotel</h4>
-                <p data-i18n-html="vita.gastro.p">Chef de Partie<br>
-                       Juni 2011 – Feb. 2014<br><br>
-                       Demi Chef De Partie<br>
-                       Sept. 2007 – Juni 2011<br><br>
-                       Commis de cuisine<br>
-                       Juli 2006 – Sept. 2007<br><br>
-                       Ausbildung zum Koch<br>
-                       Sept. 2003 – Juli 2006
-                     </p>
-              </div>
-            </div>
-          </label>
-
-          <input type="radio" name="slide" id="c6">
-          <label for="c6" class="card">
-            <div class="row">
-              <div class="description">
-                <h4 data-i18n="vita.certificates">Zertifikate</h4>
-                <p data-i18n-html="vita.certificates.p">2021 – 2023<br><br>
-                       · EXIN Agile Scrum Master<br>
-                       · EXIN Agile Scrum Product Owner<br>
-                       · PRINCE2® 6th Edition Foundation in Project Management<br>
-                       · PRINCE2® 6th Edition Practitioner in Project Management<br>
-                       · ITIL® V4 Foundation
-                     </p>
-              </div>
-            </div>
-          </label>
-
-              </div>
-            </div>
-
-              <p>
-                <a class="button i18n-pre" data-i18n="vita.back" href="./index.html">
-                  Zurück zur Startseite, ... schreib mir wenn dir gefällt was du gelesen hast.
-                </a>
-              </p>
-
-          </div>
-        </div>
-      </div>
-    </div>
+  <header class="site-shell">
+    <nav class="nav" aria-label="Hauptnavigation">
+      <a class="brand" href="./index.html">
+        <span class="brand-mark" aria-hidden="true">PK</span>
+        <span>Phil Kirchner</span>
+      </a>
+      <button class="nav-toggle" type="button" aria-controls="primary-nav" aria-expanded="false" aria-label="Menü öffnen">
+        <span></span>
+        <span></span>
+      </button>
+      <ul class="nav-list" id="primary-nav">
+        <li><a href="./index.html#profil" data-i18n="nav.profile">Profil</a></li>
+        <li><a href="./index.html#projekte" data-i18n="nav.projects">Projekte</a></li>
+        <li><a href="./index.html#stack" data-i18n="nav.stack">Stack</a></li>
+        <li><a href="./vita.html" data-i18n="nav.vita" aria-current="page">Vita</a></li>
+        <li><a href="./impressum.html" data-i18n="nav.imprint">Impressum</a></li>
+        <li><a href="./datenschutz.html" data-i18n="nav.privacy">Datenschutz</a></li>
+        <li>
+          <button class="language-toggle" type="button" id="lang-toggle" aria-label="Sprache wechseln">
+            <span class="is-de">DE</span>
+            <span aria-hidden="true">/</span>
+            <span class="is-en">EN</span>
+          </button>
+        </li>
+      </ul>
+    </nav>
   </header>
 
-  <footer></footer>
-  <script defer src="./app.js"></script>
+  <main>
+    <section class="page-hero section">
+      <p class="eyebrow" data-i18n="vita.eyebrow">Vita</p>
+      <h1 data-i18n="vita.title">Eine Laufbahn zwischen Praxis, Verantwortung und Software.</h1>
+      <p data-i18n="vita.intro">Meine berufliche Reise begann in der Gastronomie und führte über Einkauf, Prozessverantwortung und Projektarbeit in die Softwareentwicklung. Diese Stationen sind für mich kein Bruch, sondern mein Fundament.</p>
+    </section>
+
+    <section class="section timeline-section" aria-labelledby="timeline-title">
+      <div class="section-heading">
+        <p class="eyebrow" data-i18n="vita.timeline.eyebrow">Stationen</p>
+        <h2 id="timeline-title" data-i18n="vita.timeline.title">Beruflicher Verlauf</h2>
+      </div>
+      <div class="timeline">
+        <article class="timeline-item">
+          <time>Dez. 2023 - Heute</time>
+          <div>
+            <h3 data-i18n="vita.job1.title">Softwareentwickler - Pragmatis GmbH</h3>
+            <p data-i18n="vita.job1.text">Neufahrn bei Freising. Entwicklung mit Oracle APEX, PL/SQL, JavaScript, HTML, CSS, REST Data Sources, RESTful Services und Oracle DB.</p>
+          </div>
+        </article>
+        <article class="timeline-item">
+          <time>Sept. 2022 - Apr. 2023</time>
+          <div>
+            <h3 data-i18n="vita.job2.title">Praktikum Softwareentwicklung - Europa Möbel-Verbund</h3>
+            <p data-i18n="vita.job2.text">Praxis mit Java, SQL, Datenbanken, Git, Kanban, Confluence, Jira, Vaadin, MVC, Spring Framework, Spring Boot und UML.</p>
+          </div>
+        </article>
+        <article class="timeline-item">
+          <time>Aug. 2021 - Juni 2023</time>
+          <div>
+            <h3 data-i18n="vita.job3.title">Ausbildung Fachinformatiker Anwendungsentwicklung - WBS Gruppe</h3>
+            <p data-i18n="vita.job3.text">Schwerpunkte: OOP, Software-Entwurfsmuster, Java, SQL, Datenbanken, agile Methoden, DBMS, HTML, CSS und Microsoft SQL Server.</p>
+          </div>
+        </article>
+        <article class="timeline-item">
+          <time>2015 - 2021</time>
+          <div>
+            <h3 data-i18n="vita.job4.title">Purchasing - Munich Airport Marriott Hotel</h3>
+            <p data-i18n="vita.job4.text">Purchasing Agent und Purchasing Supervisor mit Verantwortung für Beschaffung, Abstimmung, operative Abläufe und verlässliche Prozesse.</p>
+          </div>
+        </article>
+        <article class="timeline-item">
+          <time>2003 - 2015</time>
+          <div>
+            <h3 data-i18n="vita.job5.title">Gastronomielaufbahn - Munich Airport Marriott Hotel</h3>
+            <p data-i18n="vita.job5.text">Ausbildung zum Koch, Commis de Cuisine, Demi Chef de Partie, Chef de Partie und Food and Beverage Trainee.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section credential-section" aria-labelledby="cert-title">
+      <div class="section-heading">
+        <p class="eyebrow" data-i18n="vita.cert.eyebrow">Zertifikate</p>
+        <h2 id="cert-title" data-i18n="vita.cert.title">Methodik und Projektverständnis</h2>
+      </div>
+      <ul class="credential-list">
+        <li>EXIN Agile Scrum Master</li>
+        <li>EXIN Agile Scrum Product Owner</li>
+        <li>PRINCE2 6th Edition Foundation in Project Management</li>
+        <li>PRINCE2 6th Edition Practitioner in Project Management</li>
+        <li>ITIL V4 Foundation</li>
+      </ul>
+    </section>
+
+    <section class="section contact-section" aria-labelledby="vita-contact-title">
+      <div>
+        <p class="eyebrow" data-i18n="contact.eyebrow">Kontakt</p>
+        <h2 id="vita-contact-title" data-i18n="vita.contact.title">Wenn das Profil passt, freue ich mich über eine Nachricht.</h2>
+      </div>
+      <div class="contact-actions">
+        <a class="button button-primary" href="mailto:phil.kirchner.999@googlemail.com" data-i18n="contact.mail">Mail schreiben</a>
+        <a class="button button-secondary" href="./index.html" data-i18n="vita.back">Zur Startseite</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© <span data-year></span> Phil Kirchner</p>
+    <div>
+      <a href="./impressum.html" data-i18n="nav.imprint">Impressum</a>
+      <a href="./datenschutz.html" data-i18n="nav.privacy">Datenschutz</a>
+    </div>
+  </footer>
 </body>
 </html>
-
