@@ -445,7 +445,7 @@ h3 {
 }
 
 .signal-panel span,
-tag-list li {
+.tag-list li {
   display: inline-flex;
   align-items: center;
   min-height: 32px;
