@@ -92,15 +92,29 @@
       "privacy.access.text": "Beim Aufruf dieser Website können durch den Hosting-Anbieter technisch notwendige Zugriffsdaten verarbeitet werden, zum Beispiel IP-Adresse, Datum und Uhrzeit des Abrufs, Browsertyp, Betriebssystem, Referrer-URL und angeforderte Dateien. Diese Daten dienen der sicheren und fehlerfreien Bereitstellung der Website.",
       "privacy.contact": "Kontaktaufnahme",
       "privacy.contact.text": "Wenn Sie per E-Mail Kontakt aufnehmen, werden die übermittelten Angaben zur Bearbeitung der Anfrage verarbeitet. Die Daten werden nicht ohne Einwilligung weitergegeben.",
-      "privacy.fonts": "Schriftarten und Analyse",
-      "privacy.fonts.text": "Diese Website nutzt Systemschriftarten und verzichtet derzeit auf Analytics, Tracking-Skripte und Cookies.",
+      "privacy.fonts": "Cookies und lokale Speicherung",
+      "privacy.fonts.text": "Diese Website nutzt Systemschriftarten und verzichtet auf Analytics und Tracking-Skripte. Die Cookie-Auswahl wird technisch notwendig lokal im Browser gespeichert; optional kann auch die Sprachwahl gespeichert werden.",
       "privacy.links": "Externe Links",
       "privacy.links.text": "Diese Website verlinkt auf externe Profile, insbesondere GitHub, LinkedIn und Instagram. Beim Öffnen dieser Links gelten die Datenschutzbestimmungen der jeweiligen Anbieter.",
       "privacy.rights": "Ihre Rechte",
       "privacy.rights.text": "Sie haben im Rahmen der gesetzlichen Bestimmungen Rechte auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit sowie Widerspruch gegen bestimmte Verarbeitungen. Außerdem besteht ein Beschwerderecht bei einer zuständigen Datenschutzaufsichtsbehörde.",
       "privacy.legal": "Rechtsgrundlagen",
       "privacy.legal.text": "Die Verarbeitung erfolgt, soweit einschlägig, auf Grundlage von Art. 6 Abs. 1 DSGVO, insbesondere berechtigtem Interesse an einer sicheren Websitebereitstellung sowie zur Bearbeitung freiwilliger Kontaktanfragen.",
-      "privacy.note": "Hinweis: Diese Erklärung ist bewusst schlank gehalten. Bei zusätzlichem Tracking, Formularen oder Analytics sollte sie vor Veröffentlichung juristisch geprüft und erweitert werden."
+      "privacy.note": "Hinweis: Diese Erklärung ist bewusst schlank gehalten. Bei zusätzlichem Tracking, Formularen oder Analytics sollte sie vor Veröffentlichung juristisch geprüft und erweitert werden.",
+
+      "cookie.eyebrow": "Datenschutz",
+      "cookie.title": "Cookie-Einstellungen",
+      "cookie.text": "Diese Website nutzt keine Analyse- oder Marketing-Cookies. Du kannst entscheiden, ob deine Sprachwahl zusätzlich zur notwendigen Cookie-Auswahl gespeichert werden darf.",
+      "cookie.necessary.title": "Notwendige Speicherung",
+      "cookie.necessary.text": "Speichert deine Cookie-Auswahl und sorgt dafür, dass die Seite zuverlässig funktioniert.",
+      "cookie.preferences.title": "Komfortspeicherung",
+      "cookie.preferences.text": "Merkt sich deine gewählte Sprache für den nächsten Besuch.",
+      "cookie.acceptAll": "Alle akzeptieren",
+      "cookie.save": "Auswahl speichern",
+      "cookie.necessaryOnly": "Nur notwendige",
+      "cookie.privacy": "Datenschutz ansehen",
+      "cookie.settings": "Cookie-Einstellungen",
+      "cookie.optionsLabel": "Cookie-Kategorien"
     },
 
     en: {
@@ -192,15 +206,29 @@
       "privacy.access.text": "When this website is accessed, the hosting provider may process technically necessary access data such as IP address, date and time, browser type, operating system, referrer URL and requested files. This data is used to provide the website securely and reliably.",
       "privacy.contact": "Contact",
       "privacy.contact.text": "If you contact me by email, the submitted information is processed to handle the request. The data is not shared without consent.",
-      "privacy.fonts": "Fonts and analytics",
-      "privacy.fonts.text": "This website uses system fonts and currently does not use analytics, tracking scripts or cookies.",
+      "privacy.fonts": "Cookies and local storage",
+      "privacy.fonts.text": "This website uses system fonts and does not use analytics or tracking scripts. The cookie choice is stored locally in the browser as technically necessary storage; optionally, the language choice can also be saved.",
       "privacy.links": "External links",
       "privacy.links.text": "This website links to external profiles, especially GitHub, LinkedIn and Instagram. When opening those links, the privacy policies of the respective providers apply.",
       "privacy.rights": "Your rights",
       "privacy.rights.text": "Within the scope of applicable law, you have rights to access, rectification, erasure, restriction of processing, data portability and objection to certain processing. You may also lodge a complaint with a competent supervisory authority.",
       "privacy.legal": "Legal bases",
       "privacy.legal.text": "Processing is based, where applicable, on Art. 6(1) GDPR, especially legitimate interest in providing a secure website and handling voluntary contact requests.",
-      "privacy.note": "Note: This policy is intentionally lean. If tracking, forms or analytics are added, it should be legally reviewed and expanded before publication."
+      "privacy.note": "Note: This policy is intentionally lean. If tracking, forms or analytics are added, it should be legally reviewed and expanded before publication.",
+
+      "cookie.eyebrow": "Privacy",
+      "cookie.title": "Cookie settings",
+      "cookie.text": "This website does not use analytics or marketing cookies. You can decide whether your language choice may be saved in addition to the necessary cookie choice.",
+      "cookie.necessary.title": "Necessary storage",
+      "cookie.necessary.text": "Stores your cookie choice and keeps the website working reliably.",
+      "cookie.preferences.title": "Preference storage",
+      "cookie.preferences.text": "Remembers your selected language for your next visit.",
+      "cookie.acceptAll": "Accept all",
+      "cookie.save": "Save selection",
+      "cookie.necessaryOnly": "Necessary only",
+      "cookie.privacy": "View privacy policy",
+      "cookie.settings": "Cookie settings",
+      "cookie.optionsLabel": "Cookie categories"
     }
   };
 
@@ -210,6 +238,9 @@
   const root = document.documentElement;
   const hero = document.querySelector(".hero");
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const LANG_STORAGE_KEY = "lang";
+  const CONSENT_STORAGE_KEY = "pk-cookie-consent";
+  const CONSENT_VERSION = 1;
   let scrollTicking = false;
 
   function sanitizeLang(lang) {
@@ -222,15 +253,44 @@
 
   function getStoredLang() {
     try {
-      return localStorage.getItem("lang");
+      return localStorage.getItem(LANG_STORAGE_KEY);
     } catch (error) {
       return null;
     }
   }
 
-  function storeLang(lang) {
+  function removeStoredLang() {
     try {
-      localStorage.setItem("lang", lang);
+      localStorage.removeItem(LANG_STORAGE_KEY);
+    } catch (error) {
+      // Storage can fail in strict privacy modes; the page still works.
+    }
+  }
+
+  function getCookieConsent() {
+    try {
+      const value = localStorage.getItem(CONSENT_STORAGE_KEY);
+      if (!value) return null;
+      const consent = JSON.parse(value);
+      if (consent && consent.version === CONSENT_VERSION) return consent;
+    } catch (error) {
+      return null;
+    }
+    return null;
+  }
+
+  function hasPreferenceConsent() {
+    return Boolean(getCookieConsent()?.preferences);
+  }
+
+  function storeLang(lang) {
+    if (!hasPreferenceConsent()) {
+      removeStoredLang();
+      return;
+    }
+
+    try {
+      localStorage.setItem(LANG_STORAGE_KEY, lang);
     } catch (error) {
       // Storage can fail in strict privacy modes; the page still works.
     }
@@ -238,7 +298,8 @@
 
   function getInitialLang() {
     const params = new URLSearchParams(window.location.search);
-    return sanitizeLang(getStoredLang() || params.get("lang") || navigator.language || DEFAULT_LANG);
+    const storedLang = hasPreferenceConsent() ? getStoredLang() : null;
+    return sanitizeLang(storedLang || params.get("lang") || navigator.language || DEFAULT_LANG);
   }
 
   function applyTranslations(lang) {
@@ -274,6 +335,113 @@
     const nextLang = sanitizeLang(lang);
     storeLang(nextLang);
     applyTranslations(nextLang);
+  }
+
+  function saveCookieConsent(preferences) {
+    const consent = {
+      necessary: true,
+      preferences: Boolean(preferences),
+      version: CONSENT_VERSION,
+      updatedAt: new Date().toISOString()
+    };
+
+    try {
+      localStorage.setItem(CONSENT_STORAGE_KEY, JSON.stringify(consent));
+    } catch (error) {
+      // If storage is blocked, the visitor can still use the page.
+    }
+
+    if (consent.preferences) {
+      try {
+        localStorage.setItem(LANG_STORAGE_KEY, document.documentElement.dataset.lang || DEFAULT_LANG);
+      } catch (error) {
+        // Storage can fail in strict privacy modes; the page still works.
+      }
+    } else {
+      removeStoredLang();
+    }
+
+    root.dataset.cookieConsent = "set";
+    hideCookieBanner();
+  }
+
+  function hideCookieBanner() {
+    const banner = document.querySelector("[data-cookie-consent]");
+    if (!banner) return;
+    banner.dataset.visible = "false";
+    window.setTimeout(() => banner.remove(), reduceMotion.matches ? 0 : 220);
+  }
+
+  function openCookieBanner(force = false) {
+    if (!force && getCookieConsent()) return;
+    if (document.querySelector("[data-cookie-consent]")) return;
+
+    const consent = getCookieConsent();
+    const banner = document.createElement("section");
+    banner.className = "cookie-consent";
+    banner.dataset.cookieConsent = "";
+    banner.dataset.visible = "false";
+    banner.setAttribute("role", "dialog");
+    banner.setAttribute("aria-modal", "false");
+    banner.setAttribute("aria-labelledby", "cookie-consent-title");
+    banner.innerHTML = `
+      <div class="cookie-consent__card">
+        <div class="cookie-consent__intro">
+          <p class="eyebrow" data-i18n="cookie.eyebrow">Datenschutz</p>
+          <h2 id="cookie-consent-title" data-i18n="cookie.title">Cookie-Einstellungen</h2>
+          <p data-i18n="cookie.text">Diese Website nutzt keine Analyse- oder Marketing-Cookies. Du kannst entscheiden, ob deine Sprachwahl zusätzlich zur notwendigen Cookie-Auswahl gespeichert werden darf.</p>
+        </div>
+        <div class="cookie-options" data-i18n-attr="aria-label:cookie.optionsLabel" aria-label="Cookie-Kategorien">
+          <label class="cookie-option cookie-option--locked">
+            <input type="checkbox" checked disabled>
+            <span>
+              <strong data-i18n="cookie.necessary.title">Notwendige Speicherung</strong>
+              <small data-i18n="cookie.necessary.text">Speichert deine Cookie-Auswahl und sorgt dafür, dass die Seite zuverlässig funktioniert.</small>
+            </span>
+          </label>
+          <label class="cookie-option">
+            <input type="checkbox" data-cookie-preferences>
+            <span>
+              <strong data-i18n="cookie.preferences.title">Komfortspeicherung</strong>
+              <small data-i18n="cookie.preferences.text">Merkt sich deine gewählte Sprache für den nächsten Besuch.</small>
+            </span>
+          </label>
+        </div>
+        <div class="cookie-consent__actions">
+          <button class="button button-primary" type="button" data-cookie-accept-all data-i18n="cookie.acceptAll">Alle akzeptieren</button>
+          <button class="button button-secondary" type="button" data-cookie-save data-i18n="cookie.save">Auswahl speichern</button>
+          <button class="button button-ghost" type="button" data-cookie-necessary data-i18n="cookie.necessaryOnly">Nur notwendige</button>
+        </div>
+        <a class="cookie-consent__privacy" href="./datenschutz.html" data-i18n="cookie.privacy">Datenschutz ansehen</a>
+      </div>
+    `;
+
+    document.body.appendChild(banner);
+    const preferencesInput = banner.querySelector("[data-cookie-preferences]");
+    preferencesInput.checked = Boolean(consent?.preferences);
+
+    banner.querySelector("[data-cookie-accept-all]").addEventListener("click", () => saveCookieConsent(true));
+    banner.querySelector("[data-cookie-save]").addEventListener("click", () => saveCookieConsent(preferencesInput.checked));
+    banner.querySelector("[data-cookie-necessary]").addEventListener("click", () => saveCookieConsent(false));
+
+    applyTranslations(document.documentElement.dataset.lang || DEFAULT_LANG);
+    window.requestAnimationFrame(() => {
+      banner.dataset.visible = "true";
+    });
+  }
+
+  function addCookieSettingsLink() {
+    const footerLinks = document.querySelector(".footer div");
+    if (!footerLinks || footerLinks.querySelector("[data-cookie-settings]")) return;
+
+    const button = document.createElement("button");
+    button.className = "footer-link-button";
+    button.type = "button";
+    button.dataset.cookieSettings = "";
+    button.dataset.i18n = "cookie.settings";
+    button.textContent = "Cookie-Einstellungen";
+    button.addEventListener("click", () => openCookieBanner(true));
+    footerLinks.appendChild(button);
   }
 
   function setNavOpen(open) {
@@ -365,7 +533,9 @@
     document.querySelectorAll(".reveal-item").forEach((element) => observer.observe(element));
   }
  
+  addCookieSettingsLink();
   setLang(getInitialLang());
   updateScrollState();
   setupScrollReveals();
+  openCookieBanner();
 })();
