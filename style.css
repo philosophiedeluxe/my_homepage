@@ -512,8 +512,7 @@ h3 {
   padding: clamp(20px, 3vw, 28px);
 }
 
-.project-card,
-.stack-grid article {
+.project-card {
   min-height: 330px;
   display: flex;
   flex-direction: column;
@@ -526,6 +525,10 @@ h3 {
   font-size: 0.78rem;
   font-weight: 700;
   text-transform: uppercase;
+}
+
+.stack-grid .project-kicker {
+  color: var(--accent-2);
 }
 
 .project-card p:not(.project-kicker),
