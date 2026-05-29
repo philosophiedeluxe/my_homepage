@@ -50,6 +50,18 @@ body.nav-open {
   overflow: hidden;
 }
 
+
+/* Mobile menu must fully win over the cookie dialog.
+   The cookie card can be visually hidden behind the nav overlay, but it must also be
+   removed from hit testing while the menu is open. */
+body.nav-open .cookie-consent,
+body.nav-open .cookie-consent__card {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
 img {
   display: block;
   max-width: 100%;
@@ -72,7 +84,7 @@ a:hover {
 .site-shell {
   position: sticky;
   top: 0;
-  z-index: 20;
+  z-index: 80;
   background: rgba(16, 17, 20, 0.82);
   border-bottom: 1px solid var(--line);
   transition: background 180ms ease, box-shadow 180ms ease;
@@ -219,6 +231,7 @@ html[data-lang="en"] .is-en {
     border-color 680ms ease,
     background 680ms ease;
   transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
 }
 
 .reveal-ready .reveal-item[data-reveal="left"] {
@@ -487,6 +500,7 @@ h3 {
   transform: translate3d(var(--hero-shift-x), var(--hero-shift-y), 0) scale(var(--hero-scale));
   transform-origin: 68% center;
   filter: saturate(var(--hero-saturation)) brightness(var(--hero-brightness));
+  will-change: transform, filter;
 }
 
 .signal-panel {
@@ -875,8 +889,13 @@ h3 {
   .nav-list {
     position: fixed;
     inset: var(--nav-h) 0 auto;
+    z-index: 90;
     display: grid;
     gap: 0;
+    max-height: calc(100svh - var(--nav-h));
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
     padding: 12px 20px 24px;
     background: rgba(16, 17, 20, 0.97);
     border-bottom: 1px solid var(--line);
