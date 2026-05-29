@@ -532,7 +532,7 @@ h3 {
 }
 
 .project-card p:not(.project-kicker),
-.stack-grid p:not(.eyebrow),
+.stack-grid p:not(.eyebrow):not(.project-kicker),
 .timeline-item p:not(.eyebrow),
 .legal-page p:not(.eyebrow),
 .legal-page li {
