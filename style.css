@@ -797,6 +797,10 @@ h3 {
     max-width: calc(100vw - 28px);
   }
 
+  .hero-copy {
+    margin-inline: auto;
+  }
+
   h2 {
     font-size: clamp(2rem, 10vw, 3rem);
   }
