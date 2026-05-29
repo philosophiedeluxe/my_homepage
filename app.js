@@ -209,7 +209,6 @@
   const langToggle = document.getElementById("lang-toggle");
   const root = document.documentElement;
   const hero = document.querySelector(".hero");
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   let scrollTicking = false;
 
   function sanitizeLang(lang) {
@@ -334,38 +333,6 @@
     { passive: true }
   );
 
-  function addReveal(selector, direction, stagger = false) {
-    document.querySelectorAll(selector).forEach((element, index) => {
-      element.classList.add("reveal-item");
-      element.dataset.reveal = direction;
-      element.style.setProperty("--reveal-delay", stagger ? `${Math.min(index * 90, 270)}ms` : "0ms");
-    });
-  }
-
-  function setupScrollReveals() {
-    if (reduceMotion.matches || !("IntersectionObserver" in window)) return;
-
-    addReveal(".quick-facts > div", "up", true);
-    addReveal(".split-section > div:first-child, .contact-section > div:first-child", "left");
-    addReveal(".split-section .text-stack, .contact-actions", "right");
-    addReveal(".section-heading, .page-hero > *, .legal-page > section, .legal-page > .legal-note", "up");
-    addReveal(".project-card, .stack-grid article, .timeline-item, .credential-list li", "up", true);
-
-    root.classList.add("reveal-ready");
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          entry.target.classList.toggle("is-visible", entry.isIntersecting);
-        });
-      },
-      { rootMargin: "0px 0px -12% 0px", threshold: 0.16 }
-    );
-
-    document.querySelectorAll(".reveal-item").forEach((element) => observer.observe(element));
-  }
-
   setLang(getInitialLang());
   updateScrollState();
-  setupScrollReveals();
 })();
