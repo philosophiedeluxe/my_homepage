@@ -337,7 +337,12 @@
     applyTranslations(nextLang);
   }
 
-  function saveCookieConsent(preferences) {
+  function saveCookieConsent(preferences, event) {
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
     const consent = {
       necessary: true,
       preferences: Boolean(preferences),
@@ -369,12 +374,23 @@
     const banner = document.querySelector("[data-cookie-consent]");
     if (!banner) return;
     banner.dataset.visible = "false";
-    window.setTimeout(() => banner.remove(), reduceMotion.matches ? 0 : 220);
+    window.setTimeout(() => {
+      if (banner.isConnected) banner.hidden = true;
+    }, reduceMotion.matches ? 0 : 220);
   }
 
   function openCookieBanner(force = false) {
     if (!force && getCookieConsent()) return;
-    if (document.querySelector("[data-cookie-consent]")) return;
+    const existingBanner = document.querySelector("[data-cookie-consent]");
+    if (existingBanner) {
+      const preferencesInput = existingBanner.querySelector("[data-cookie-preferences]");
+      if (preferencesInput) preferencesInput.checked = Boolean(getCookieConsent()?.preferences);
+      existingBanner.hidden = false;
+      window.requestAnimationFrame(() => {
+        existingBanner.dataset.visible = "true";
+      });
+      return;
+    }
 
     const consent = getCookieConsent();
     const banner = document.createElement("section");
@@ -420,9 +436,9 @@
     const preferencesInput = banner.querySelector("[data-cookie-preferences]");
     preferencesInput.checked = Boolean(consent?.preferences);
 
-    banner.querySelector("[data-cookie-accept-all]").addEventListener("click", () => saveCookieConsent(true));
-    banner.querySelector("[data-cookie-save]").addEventListener("click", () => saveCookieConsent(preferencesInput.checked));
-    banner.querySelector("[data-cookie-necessary]").addEventListener("click", () => saveCookieConsent(false));
+    banner.querySelector("[data-cookie-accept-all]").addEventListener("click", (event) => saveCookieConsent(true, event));
+    banner.querySelector("[data-cookie-save]").addEventListener("click", (event) => saveCookieConsent(preferencesInput.checked, event));
+    banner.querySelector("[data-cookie-necessary]").addEventListener("click", (event) => saveCookieConsent(false, event));
 
     applyTranslations(document.documentElement.dataset.lang || DEFAULT_LANG);
     window.requestAnimationFrame(() => {
