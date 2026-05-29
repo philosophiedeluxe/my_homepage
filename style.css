@@ -659,9 +659,14 @@ h3 {
 .contact-section {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
-  align-items: center;
+  align-items: end;
   gap: 32px;
   border-top: 1px solid var(--line);
+}
+
+.contact-section .contact-actions {
+  align-self: end;
+  margin-bottom: clamp(4px, 0.8vw, 10px);
 }
 
 .legal-page {
