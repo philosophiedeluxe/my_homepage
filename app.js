@@ -15,6 +15,7 @@
       "nav.projects": "Projekte",
       "nav.stack": "Stack",
       "nav.vita": "Vita",
+      "nav.linkedin": "LinkedIn",
       "nav.imprint": "Impressum",
       "nav.privacy": "Datenschutz",
 
@@ -75,6 +76,7 @@
       "vita.cert.eyebrow": "Zertifikate",
       "vita.cert.title": "Methodik und<br><span class=\"accent-word\">Projektverständnis</span>",
       "vita.contact.title": "Wenn das <span class=\"accent-word\">Profil</span> passt, freue ich mich über eine Nachricht.",
+      "vita.pdf": "Vita als PDF herunterladen",
       "vita.back": "Zur Startseite",
 
       "imprint.eyebrow": "Anbieterkennzeichnung",
@@ -88,19 +90,19 @@
       "privacy.title": "<span class=\"accent-word\">Datenschutzerklärung</span>",
       "privacy.intro": "Diese Datenschutzerklärung informiert darüber, welche personenbezogenen Daten beim Besuch dieser Portfolio-Website verarbeitet werden.",
       "privacy.controller": "Verantwortliche Stelle",
-      "privacy.access": "Zugriffsdaten",
-      "privacy.access.text": "Beim Aufruf dieser Website können durch den Hosting-Anbieter technisch notwendige Zugriffsdaten verarbeitet werden, zum Beispiel IP-Adresse, Datum und Uhrzeit des Abrufs, Browsertyp, Betriebssystem, Referrer-URL und angeforderte Dateien. Diese Daten dienen der sicheren und fehlerfreien Bereitstellung der Website.",
+      "privacy.access": "Hosting und Zugriffsdaten",
+      "privacy.access.text": "Diese Website wird über GitHub Pages bereitgestellt. Beim Besuch können technisch notwendige Zugriffsdaten verarbeitet werden, insbesondere IP-Adresse, Datum und Uhrzeit des Abrufs, Browser- und Geräteinformationen, Referrer-URL sowie angeforderte Dateien. GitHub gibt an, dass IP-Adressen von Besuchern von GitHub-Pages-Websites unabhängig vom Login-Status aus Sicherheitsgründen protokolliert werden. Die Verarbeitung dient der sicheren, stabilen und fehlerfreien Bereitstellung dieser Website.",
       "privacy.contact": "Kontaktaufnahme",
-      "privacy.contact.text": "Wenn Sie per E-Mail Kontakt aufnehmen, werden die übermittelten Angaben zur Bearbeitung der Anfrage verarbeitet. Die Daten werden nicht ohne Einwilligung weitergegeben.",
+      "privacy.contact.text": "Wenn Sie per E-Mail Kontakt aufnehmen, werden die von Ihnen übermittelten Angaben zur Bearbeitung der Anfrage verarbeitet. Dazu gehören insbesondere Ihre E-Mail-Adresse, der Inhalt Ihrer Nachricht und die dabei entstehenden Kommunikationsdaten. Die Daten werden nicht ohne Einwilligung weitergegeben.",
       "privacy.fonts": "Cookies und lokale Speicherung",
-      "privacy.fonts.text": "Diese Website nutzt Systemschriftarten und verzichtet auf Analytics und Tracking-Skripte. Die Cookie-Auswahl wird technisch notwendig lokal im Browser gespeichert; optional kann auch die Sprachwahl gespeichert werden.",
+      "privacy.fonts.text": "Diese Website verwendet Systemschriftarten und verzichtet auf Analytics, Marketing-Cookies und Tracking-Skripte. Zur Anzeige des Cookie-Hinweises wird die getroffene Auswahl lokal im Browser gespeichert. Diese Speicherung ist technisch notwendig, damit die Auswahl nicht bei jedem Seitenaufruf erneut abgefragt wird. Wenn Sie zustimmen, kann zusätzlich die gewählte Sprache lokal gespeichert werden. Sie können die Auswahl jederzeit über den Link „Cookie-Einstellungen“ im Footer ändern.",
       "privacy.links": "Externe Links",
-      "privacy.links.text": "Diese Website verlinkt auf externe Profile, insbesondere GitHub, LinkedIn und Instagram. Beim Öffnen dieser Links gelten die Datenschutzbestimmungen der jeweiligen Anbieter.",
+      "privacy.links.text": "Diese Website verlinkt auf externe Profile und Dienste, insbesondere LinkedIn, GitHub und Instagram. Erst beim Öffnen dieser Links verlassen Sie diese Website; anschließend gelten die Datenschutzbestimmungen der jeweiligen Anbieter.",
       "privacy.rights": "Ihre Rechte",
       "privacy.rights.text": "Sie haben im Rahmen der gesetzlichen Bestimmungen Rechte auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit sowie Widerspruch gegen bestimmte Verarbeitungen. Außerdem besteht ein Beschwerderecht bei einer zuständigen Datenschutzaufsichtsbehörde.",
       "privacy.legal": "Rechtsgrundlagen",
-      "privacy.legal.text": "Die Verarbeitung erfolgt, soweit einschlägig, auf Grundlage von Art. 6 Abs. 1 DSGVO, insbesondere berechtigtem Interesse an einer sicheren Websitebereitstellung sowie zur Bearbeitung freiwilliger Kontaktanfragen.",
-      "privacy.note": "Hinweis: Diese Erklärung ist bewusst schlank gehalten. Bei zusätzlichem Tracking, Formularen oder Analytics sollte sie vor Veröffentlichung juristisch geprüft und erweitert werden.",
+      "privacy.legal.text": "Die Verarbeitung erfolgt, soweit einschlägig, auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO wegen des berechtigten Interesses an einer sicheren und stabilen Websitebereitstellung sowie auf Grundlage von Art. 6 Abs. 1 lit. b oder lit. f DSGVO zur Bearbeitung freiwilliger Kontaktanfragen. Die optionale Speicherung der Sprachwahl erfolgt auf Grundlage Ihrer Einwilligung.",
+      "privacy.note": "Stand: 29. Mai 2026. Diese Erklärung ist bewusst auf den aktuellen Umfang dieser statischen Portfolio-Website beschränkt. Bei zusätzlichem Tracking, Formularen, eingebetteten Inhalten oder Analytics sollte sie vor Veröffentlichung juristisch geprüft und erweitert werden.",
 
       "cookie.eyebrow": "Datenschutz",
       "cookie.title": "Cookie-Einstellungen",
@@ -129,6 +131,7 @@
       "nav.projects": "Projects",
       "nav.stack": "Stack",
       "nav.vita": "Resume",
+      "nav.linkedin": "LinkedIn",
       "nav.imprint": "Legal Notice",
       "nav.privacy": "Privacy",
 
@@ -189,6 +192,7 @@
       "vita.cert.eyebrow": "Certificates",
       "vita.cert.title": "Methods and<br><span class=\"accent-word\">project understanding</span>",
       "vita.contact.title": "If the <span class=\"accent-word\">profile</span> fits, I would be happy to hear from you.",
+      "vita.pdf": "Download resume as PDF",
       "vita.back": "Back home",
 
       "imprint.eyebrow": "Legal information",
@@ -202,19 +206,19 @@
       "privacy.title": "<span class=\"accent-word\">Privacy Policy</span>",
       "privacy.intro": "This privacy policy explains which personal data may be processed when visiting this portfolio website.",
       "privacy.controller": "Controller",
-      "privacy.access": "Access data",
-      "privacy.access.text": "When this website is accessed, the hosting provider may process technically necessary access data such as IP address, date and time, browser type, operating system, referrer URL and requested files. This data is used to provide the website securely and reliably.",
+      "privacy.access": "Hosting and access data",
+      "privacy.access.text": "This website is hosted on GitHub Pages. When visiting it, technically necessary access data may be processed, especially IP address, date and time of access, browser and device information, referrer URL and requested files. GitHub states that IP addresses of visitors to GitHub Pages websites are logged for security purposes, regardless of whether visitors are signed in. This processing serves the secure, stable and reliable delivery of this website.",
       "privacy.contact": "Contact",
-      "privacy.contact.text": "If you contact me by email, the submitted information is processed to handle the request. The data is not shared without consent.",
+      "privacy.contact.text": "If you contact me by email, the information you provide is processed to handle the request. This especially includes your email address, the content of your message and the resulting communication data. The data is not shared without consent.",
       "privacy.fonts": "Cookies and local storage",
-      "privacy.fonts.text": "This website uses system fonts and does not use analytics or tracking scripts. The cookie choice is stored locally in the browser as technically necessary storage; optionally, the language choice can also be saved.",
+      "privacy.fonts.text": "This website uses system fonts and does not use analytics, marketing cookies or tracking scripts. To display the cookie notice, your selected choice is stored locally in the browser. This storage is technically necessary so the choice does not need to be requested again on every page view. If you consent, the selected language can also be stored locally. You can change the choice at any time through the “Cookie settings” link in the footer.",
       "privacy.links": "External links",
-      "privacy.links.text": "This website links to external profiles, especially GitHub, LinkedIn and Instagram. When opening those links, the privacy policies of the respective providers apply.",
+      "privacy.links.text": "This website links to external profiles and services, especially LinkedIn, GitHub and Instagram. Only when opening those links do you leave this website; the privacy policies of the respective providers then apply.",
       "privacy.rights": "Your rights",
       "privacy.rights.text": "Within the scope of applicable law, you have rights to access, rectification, erasure, restriction of processing, data portability and objection to certain processing. You may also lodge a complaint with a competent supervisory authority.",
       "privacy.legal": "Legal bases",
-      "privacy.legal.text": "Processing is based, where applicable, on Art. 6(1) GDPR, especially legitimate interest in providing a secure website and handling voluntary contact requests.",
-      "privacy.note": "Note: This policy is intentionally lean. If tracking, forms or analytics are added, it should be legally reviewed and expanded before publication.",
+      "privacy.legal.text": "Processing is based, where applicable, on Art. 6(1)(f) GDPR due to the legitimate interest in providing a secure and stable website and on Art. 6(1)(b) or (f) GDPR for handling voluntary contact requests. Optional storage of the language choice is based on your consent.",
+      "privacy.note": "Last updated: May 29, 2026. This policy is intentionally limited to the current scope of this static portfolio website. If tracking, forms, embedded content or analytics are added, it should be legally reviewed and expanded before publication.",
 
       "cookie.eyebrow": "Privacy",
       "cookie.title": "Cookie settings",
@@ -378,6 +382,7 @@
 
   function openCookieBanner(force = false) {
     if (!force && getCookieConsent()) return;
+    // Neutral PK-prefixed data attributes avoid generic cookie-consent filters hiding the full page.
     const existingBanner = document.querySelector("[data-pk-consent-banner]");
     if (existingBanner) {
       const preferencesInput = existingBanner.querySelector("[data-pk-consent-preferences]");

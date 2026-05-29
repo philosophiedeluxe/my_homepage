@@ -1,6 +1,6 @@
 # Homepage Roadmap
 
-Stand: 28.05.2026
+Stand: 29.05.2026
 
 ## Kurzfazit
 
@@ -18,12 +18,19 @@ Die Homepage ist jetzt eine moderne, statische Portfolio-Seite mit starkem Hero,
 - Einheitlicher Akzent-Stil fuer Eyebrow-Zeilen, Sprachumschalter und Brand-Text.
 - SEO-Basics, OpenGraph und JSON-LD fuer die Startseite.
 - Datenschutzfreundlich ohne externe Fonts, Analytics oder Tracking.
+- Cookie-Hinweis mit lokaler, neutral benannter Consent-Speicherung und Footer-Link fuer spaetere Aenderungen.
 
 ## Erledigte Verbesserungen
 
 - Alte splitartige Hero-Darstellung durch full-bleed Hintergrundbild ersetzt.
 - Headline geschaerft und als akzentuierter Rich Text umgesetzt.
 - GitHub in Navigation, Footer und Kontaktbereich eingebunden.
+- LinkedIn in Navigation, Hero, Footer und Kontaktbereich prominenter eingebunden.
+- Vita als PDF-Download vorbereitet.
+- Datenschutztext auf GitHub Pages Hosting, lokale Speicherung und externe Profile abgestimmt.
+- `sitemap.xml`, Canonical URLs, absolute OpenGraph-Bilder, Twitter Card Tags und WebSite JSON-LD ergaenzt.
+- Cache-Busting fuer `style.css` und `app.js` eingefuehrt.
+- 404-Seite im gemeinsamen Layout mit Navigation, Footer und klaren Rueckwegen aufgewertet.
 - Uebergrosse Headline-Skalierung korrigiert.
 - Problematische Zeilenumbrueche bei langen deutschen Ueberschriften entschaerft.
 - Google Fonts entfernt.
@@ -50,7 +57,7 @@ Die Homepage ist jetzt eine moderne, statische Portfolio-Seite mit starkem Hero,
 
 - Echte Projektkarten mit Links, Screenshots und GitHub-Repositories fuellen.
 - Optional ein eigenes OpenGraph-Bild fuer Social Sharing erstellen.
-- `sitemap.xml` ergaenzen, sobald die finale URL-Struktur fix ist.
+- Projektkarten mit konkreten Case-Study-Details und sichtbaren Ergebnissen fuellen.
 
 ### Prio B
 
@@ -60,9 +67,20 @@ Die Homepage ist jetzt eine moderne, statische Portfolio-Seite mit starkem Hero,
 
 ### Prio C
 
-- CV als PDF in Deutsch und Englisch anbieten.
+- Optional englische CV-PDF anbieten.
 - Projektsektion um Case Studies erweitern.
 - Medien in WebP/AVIF Varianten optimieren.
+
+## QA-Checkliste nach Aenderungen
+
+- Desktop: Startseite, Vita, Datenschutz, Impressum und 404 visuell pruefen.
+- Mobile: Navigation oeffnen/schliessen, Hero-Buttons, Footer und Cookie-Banner pruefen.
+- Cookie-Auswahl: `Alle akzeptieren`, `Auswahl speichern`, `Nur notwendige` und erneutes Oeffnen ueber Footer testen.
+- Sprachwechsel: DE/EN auf Startseite, Vita und Datenschutz testen.
+- Footer-Links: LinkedIn, GitHub, Impressum, Datenschutz und Cookie-Einstellungen pruefen.
+- Externe Links: LinkedIn und GitHub in neuem Browserkontext pruefen.
+- SEO: Canonical URLs, OpenGraph-Bild, `sitemap.xml`, `robots.txt` und JSON-LD pruefen.
+- Downloads: `Phil_Kirchner_Vita.pdf` aufrufbar und lesbar pruefen.
 
 ## Design-Leitplanken
 

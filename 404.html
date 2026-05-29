@@ -4,19 +4,65 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Phil Kirchner - Seite nicht gefunden</title>
+  <meta name="description" content="Diese Portfolio-Seite wurde nicht gefunden.">
   <meta name="robots" content="noindex">
   <meta name="theme-color" content="#101114">
   <link rel="icon" type="image/gif" href="./image/iconstar.gif">
-  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./style.css?v=20260529-1">
+  <script defer src="./app.js?v=20260529-1"></script>
 </head>
 <body>
+  <header class="site-shell">
+    <nav class="nav" aria-label="Hauptnavigation">
+      <a class="brand" href="./index.html">
+        <span class="brand-mark" aria-hidden="true">PK</span>
+        <span>Phil Kirchner</span>
+      </a>
+      <button class="nav-toggle" type="button" aria-controls="primary-nav" aria-expanded="false" aria-label="Menü öffnen">
+        <span></span>
+        <span></span>
+      </button>
+      <ul class="nav-list" id="primary-nav">
+        <li><a href="./index.html#profil" data-i18n="nav.profile">Profil</a></li>
+        <li><a href="./index.html#projekte" data-i18n="nav.projects">Projekte</a></li>
+        <li><a href="./index.html#stack" data-i18n="nav.stack">Stack</a></li>
+        <li><a href="./vita.html" data-i18n="nav.vita">Vita</a></li>
+        <li><a href="https://www.linkedin.com/in/phil-kirchner/" rel="noopener noreferrer" data-i18n="nav.linkedin">LinkedIn</a></li>
+        <li><a href="https://github.com/philosophiedeluxe" rel="noopener noreferrer">GitHub</a></li>
+        <li><a href="./impressum.html" data-i18n="nav.imprint">Impressum</a></li>
+        <li><a href="./datenschutz.html" data-i18n="nav.privacy">Datenschutz</a></li>
+        <li>
+          <button class="language-toggle" type="button" id="lang-toggle" aria-label="Sprache wechseln">
+            <span class="is-de">DE</span>
+            <span aria-hidden="true">/</span>
+            <span class="is-en">EN</span>
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
   <main>
-    <section class="page-hero section">
+    <section class="page-hero section error-page">
       <p class="eyebrow">404</p>
       <h1>Diese Seite gibt es hier nicht.</h1>
-      <p>Der Link ist entweder veraltet oder die Seite wurde verschoben.</p>
-      <a class="button button-primary" href="./index.html">Zur Startseite</a>
+      <p>Der Link ist entweder veraltet oder die Seite wurde verschoben. Die Startseite, Vita und Kontaktwege sind weiterhin erreichbar.</p>
+      <div class="hero-actions page-actions">
+        <a class="button button-primary" href="./index.html">Zur Startseite</a>
+        <a class="button button-secondary" href="./vita.html" data-i18n="nav.vita">Vita</a>
+        <a class="button button-ghost" href="mailto:phil.kirchner.999@googlemail.com" data-i18n="contact.mail">Mail schreiben</a>
+      </div>
     </section>
   </main>
+
+  <footer class="footer">
+    <p>© <span data-year></span> Phil Kirchner</p>
+    <div>
+      <a href="https://www.linkedin.com/in/phil-kirchner/" rel="noopener noreferrer" data-i18n="nav.linkedin">LinkedIn</a>
+      <a href="https://github.com/philosophiedeluxe" rel="noopener noreferrer">GitHub</a>
+      <a href="./impressum.html" data-i18n="nav.imprint">Impressum</a>
+      <a href="./datenschutz.html" data-i18n="nav.privacy">Datenschutz</a>
+    </div>
+  </footer>
 </body>
 </html>

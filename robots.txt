@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://philosophiedeluxe.github.io/my_homepage/sitemap.xml

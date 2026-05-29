@@ -5,14 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title data-i18n="meta.home.title">Phil Kirchner - Softwareentwickler</title>
   <meta name="description" data-i18n-attr="content:meta.home.description" content="Portfolio von Phil Kirchner: Softwareentwicklung, Oracle APEX, PL/SQL, JavaScript, Java und strukturierte Produktarbeit.">
+  <link rel="canonical" href="https://philosophiedeluxe.github.io/my_homepage/">
   <meta name="theme-color" content="#101114">
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://philosophiedeluxe.github.io/my_homepage/">
   <meta property="og:title" data-i18n-attr="content:meta.home.title" content="Phil Kirchner - Softwareentwickler">
   <meta property="og:description" data-i18n-attr="content:meta.home.description" content="Portfolio von Phil Kirchner: Softwareentwicklung, Oracle APEX, PL/SQL, JavaScript, Java und strukturierte Produktarbeit.">
-  <meta property="og:image" content="./image/iconic.jpg">
+  <meta property="og:image" content="https://philosophiedeluxe.github.io/my_homepage/image/iconic.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" data-i18n-attr="content:meta.home.title" content="Phil Kirchner - Softwareentwickler">
+  <meta name="twitter:description" data-i18n-attr="content:meta.home.description" content="Portfolio von Phil Kirchner: Softwareentwicklung, Oracle APEX, PL/SQL, JavaScript, Java und strukturierte Produktarbeit.">
+  <meta name="twitter:image" content="https://philosophiedeluxe.github.io/my_homepage/image/iconic.jpg">
   <link rel="icon" type="image/gif" href="./image/iconstar.gif">
-  <link rel="stylesheet" href="./style.css">
-  <script defer src="./app.js"></script>
+  <link rel="stylesheet" href="./style.css?v=20260529-1">
+  <script defer src="./app.js?v=20260529-1"></script>
 </head>
 <body>
   <header class="site-shell">
@@ -30,6 +36,7 @@
         <li><a href="#projekte" data-i18n="nav.projects">Projekte</a></li>
         <li><a href="#stack" data-i18n="nav.stack">Stack</a></li>
         <li><a href="./vita.html" data-i18n="nav.vita">Vita</a></li>
+        <li><a href="https://www.linkedin.com/in/phil-kirchner/" rel="noopener noreferrer" data-i18n="nav.linkedin">LinkedIn</a></li>
         <li><a href="https://github.com/philosophiedeluxe" rel="noopener noreferrer">GitHub</a></li>
         <li><a href="./impressum.html" data-i18n="nav.imprint">Impressum</a></li>
         <li><a href="./datenschutz.html" data-i18n="nav.privacy">Datenschutz</a></li>
@@ -53,6 +60,7 @@
         <div class="hero-actions" aria-label="Kontakt und Profil">
           <a class="button button-primary" href="mailto:phil.kirchner.999@googlemail.com" data-i18n="hero.mail">Kontakt aufnehmen</a>
           <a class="button button-secondary" href="./vita.html" data-i18n="hero.vita">Vita ansehen</a>
+          <a class="button button-secondary" href="https://www.linkedin.com/in/phil-kirchner/" rel="noopener noreferrer" data-i18n="contact.linkedin">LinkedIn öffnen</a>
           <a class="button button-ghost" href="https://github.com/philosophiedeluxe" rel="noopener noreferrer">GitHub</a>
         </div>
         <div class="hero-signal-line" aria-hidden="true"></div>
@@ -174,6 +182,7 @@
   <footer class="footer">
     <p>© <span data-year></span> Phil Kirchner</p>
     <div>
+      <a href="https://www.linkedin.com/in/phil-kirchner/" rel="noopener noreferrer" data-i18n="nav.linkedin">LinkedIn</a>
       <a href="https://github.com/philosophiedeluxe" rel="noopener noreferrer">GitHub</a>
       <a href="./impressum.html" data-i18n="nav.imprint">Impressum</a>
       <a href="./datenschutz.html" data-i18n="nav.privacy">Datenschutz</a>
@@ -181,19 +190,35 @@
   </footer>
 
   <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Phil Kirchner",
-      "jobTitle": "Softwareentwickler",
-      "email": "mailto:phil.kirchner.999@googlemail.com",
-      "sameAs": [
-        "https://www.linkedin.com/in/phil-kirchner/",
-        "https://www.instagram.com/phil.osophie.deluxe/",
-        "https://github.com/philosophiedeluxe"
-      ],
-      "knowsAbout": ["Oracle APEX", "PL/SQL", "JavaScript", "Java", "SQL", "Agile Softwareentwicklung"]
-    }
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "@id": "https://philosophiedeluxe.github.io/my_homepage/#phil-kirchner",
+        "name": "Phil Kirchner",
+        "url": "https://philosophiedeluxe.github.io/my_homepage/",
+        "image": "https://philosophiedeluxe.github.io/my_homepage/image/iconic.jpg",
+        "jobTitle": "Softwareentwickler",
+        "email": "mailto:phil.kirchner.999@googlemail.com",
+        "sameAs": [
+          "https://www.linkedin.com/in/phil-kirchner/",
+          "https://www.instagram.com/phil.osophie.deluxe/",
+          "https://github.com/philosophiedeluxe"
+        ],
+        "knowsAbout": ["Oracle APEX", "PL/SQL", "JavaScript", "Java", "SQL", "Agile Softwareentwicklung"]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://philosophiedeluxe.github.io/my_homepage/#website",
+        "name": "Phil Kirchner - Portfolio",
+        "url": "https://philosophiedeluxe.github.io/my_homepage/",
+        "inLanguage": ["de", "en"],
+        "publisher": {
+          "@id": "https://philosophiedeluxe.github.io/my_homepage/#phil-kirchner"
+        }
+      }
+    ]
   </script>
 </body>
 </html>
