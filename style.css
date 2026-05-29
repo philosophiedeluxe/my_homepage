@@ -728,6 +728,11 @@ h3 {
     padding-inline: 12px;
   }
 
+  .language-toggle {
+    width: auto;
+    justify-self: start;
+  }
+
   .split-section,
   .contact-section {
     grid-template-columns: 1fr;
