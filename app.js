@@ -242,18 +242,10 @@
   const root = document.documentElement;
   const hero = document.querySelector(".hero");
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  const isFirefox = /\bFirefox\//.test(navigator.userAgent);
-  const enableHeroScrollEffects = Boolean(hero && !isFirefox && !reduceMotion.matches);
   const LANG_STORAGE_KEY = "lang";
   const CONSENT_STORAGE_KEY = "pk-cookie-consent";
   const CONSENT_VERSION = 1;
   let scrollTicking = false;
-  let lastScrolledState = null;
-  let heroHeight = hero ? Math.max(hero.offsetHeight, 1) : 1;
-
-  if (isFirefox) {
-    root.dataset.browser = "firefox";
-  }
 
   function sanitizeLang(lang) {
     const value = String(lang || "").toLowerCase();
@@ -519,30 +511,16 @@
 
   function updateScrollState() {
     const y = window.scrollY || window.pageYOffset || 0;
-    const isScrolled = y > 24;
-
-    if (lastScrolledState !== isScrolled) {
-      root.dataset.scrolled = isScrolled ? "true" : "false";
-      lastScrolledState = isScrolled;
-    }
-
-    if (enableHeroScrollEffects) {
-      const progress = Math.min(1, Math.max(0, y / heroHeight));
-      root.style.setProperty("--hero-scroll", progress.toFixed(3));
-      root.style.setProperty("--hero-shift-x", `${(-18 * progress).toFixed(2)}px`);
-      root.style.setProperty("--hero-shift-y", `${(34 * progress).toFixed(2)}px`);
-      root.style.setProperty("--hero-scale", (1.02 + 0.045 * progress).toFixed(4));
-      root.style.setProperty("--hero-saturation", (1 - 0.08 * progress).toFixed(4));
-      root.style.setProperty("--hero-brightness", (1 - 0.08 * progress).toFixed(4));
-    }
-
+    const heroHeight = hero ? Math.max(hero.offsetHeight, 1) : 1;
+    const progress = Math.min(1, Math.max(0, y / heroHeight));
+    root.style.setProperty("--hero-scroll", progress.toFixed(3));
+    root.style.setProperty("--hero-shift-x", `${(-18 * progress).toFixed(2)}px`);
+    root.style.setProperty("--hero-shift-y", `${(34 * progress).toFixed(2)}px`);
+    root.style.setProperty("--hero-scale", (1.02 + 0.045 * progress).toFixed(4));
+    root.style.setProperty("--hero-saturation", (1 - 0.08 * progress).toFixed(4));
+    root.style.setProperty("--hero-brightness", (1 - 0.08 * progress).toFixed(4));
+    root.dataset.scrolled = y > 24 ? "true" : "false";
     scrollTicking = false;
-  }
-
-  function refreshHeroMetrics() {
-    if (!hero) return;
-    heroHeight = Math.max(hero.offsetHeight, 1);
-    updateScrollState();
   }
 
   window.addEventListener(
@@ -554,10 +532,6 @@
     },
     { passive: true }
   );
-
-  if (enableHeroScrollEffects) {
-    window.addEventListener("resize", refreshHeroMetrics, { passive: true });
-  }
   
   function addReveal(selector, direction, stagger = false) {
     document.querySelectorAll(selector).forEach((element, index) => {
@@ -573,6 +547,7 @@
     addReveal(".quick-facts > div", "up", true);
     addReveal(".split-section > div:first-child, .contact-section > div:first-child", "left");
     addReveal(".split-section .text-stack, .contact-actions", "right");
+    addReveal(".section-heading, .page-hero > *, .legal-page > section, .legal-page > .legal-note", "up");
     addReveal(".project-card, .stack-grid article, .timeline-item, .credential-list li", "up", true);
 
     root.classList.add("reveal-ready");
@@ -580,16 +555,10 @@
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-
-          entry.target.classList.add("is-visible");
-          window.setTimeout(() => {
-            entry.target.classList.add("is-reveal-complete");
-          }, 900);
-          observer.unobserve(entry.target);
+          entry.target.classList.toggle("is-visible", entry.isIntersecting);
         });
       },
-      { rootMargin: "0px 0px -10% 0px", threshold: 0.12 }
+      { rootMargin: "0px 0px -12% 0px", threshold: 0.16 }
     );
 
     document.querySelectorAll(".reveal-item").forEach((element) => observer.observe(element));
