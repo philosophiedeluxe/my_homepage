@@ -366,24 +366,21 @@
       removeStoredLang();
     }
 
-    root.dataset.cookieConsent = "set";
     hideCookieBanner();
   }
 
   function hideCookieBanner() {
-    const banner = document.querySelector("[data-cookie-consent]");
+    const banner = document.querySelector("[data-pk-consent-banner]");
     if (!banner) return;
+    banner.hidden = true;
     banner.dataset.visible = "false";
-    window.setTimeout(() => {
-      if (banner.isConnected) banner.hidden = true;
-    }, reduceMotion.matches ? 0 : 220);
   }
 
   function openCookieBanner(force = false) {
     if (!force && getCookieConsent()) return;
-    const existingBanner = document.querySelector("[data-cookie-consent]");
+    const existingBanner = document.querySelector("[data-pk-consent-banner]");
     if (existingBanner) {
-      const preferencesInput = existingBanner.querySelector("[data-cookie-preferences]");
+      const preferencesInput = existingBanner.querySelector("[data-pk-consent-preferences]");
       if (preferencesInput) preferencesInput.checked = Boolean(getCookieConsent()?.preferences);
       existingBanner.hidden = false;
       window.requestAnimationFrame(() => {
@@ -395,7 +392,7 @@
     const consent = getCookieConsent();
     const banner = document.createElement("section");
     banner.className = "cookie-consent";
-    banner.dataset.cookieConsent = "";
+    banner.dataset.pkConsentBanner = "";
     banner.dataset.visible = "false";
     banner.setAttribute("role", "dialog");
     banner.setAttribute("aria-modal", "false");
@@ -416,7 +413,7 @@
             </span>
           </label>
           <label class="cookie-option">
-            <input type="checkbox" data-cookie-preferences>
+            <input type="checkbox" data-pk-consent-preferences>
             <span>
               <strong data-i18n="cookie.preferences.title">Komfortspeicherung</strong>
               <small data-i18n="cookie.preferences.text">Merkt sich deine gewählte Sprache für den nächsten Besuch.</small>
@@ -424,21 +421,21 @@
           </label>
         </div>
         <div class="cookie-consent__actions">
-          <button class="button button-primary" type="button" data-cookie-accept-all data-i18n="cookie.acceptAll">Alle akzeptieren</button>
-          <button class="button button-secondary" type="button" data-cookie-save data-i18n="cookie.save">Auswahl speichern</button>
-          <button class="button button-ghost" type="button" data-cookie-necessary data-i18n="cookie.necessaryOnly">Nur notwendige</button>
+          <button class="button button-primary" type="button" data-pk-consent-accept-all data-i18n="cookie.acceptAll">Alle akzeptieren</button>
+          <button class="button button-secondary" type="button" data-pk-consent-save data-i18n="cookie.save">Auswahl speichern</button>
+          <button class="button button-ghost" type="button" data-pk-consent-necessary data-i18n="cookie.necessaryOnly">Nur notwendige</button>
         </div>
         <a class="cookie-consent__privacy" href="./datenschutz.html" data-i18n="cookie.privacy">Datenschutz ansehen</a>
       </div>
     `;
 
     document.body.appendChild(banner);
-    const preferencesInput = banner.querySelector("[data-cookie-preferences]");
+    const preferencesInput = banner.querySelector("[data-pk-consent-preferences]");
     preferencesInput.checked = Boolean(consent?.preferences);
 
-    banner.querySelector("[data-cookie-accept-all]").addEventListener("click", (event) => saveCookieConsent(true, event));
-    banner.querySelector("[data-cookie-save]").addEventListener("click", (event) => saveCookieConsent(preferencesInput.checked, event));
-    banner.querySelector("[data-cookie-necessary]").addEventListener("click", (event) => saveCookieConsent(false, event));
+    banner.querySelector("[data-pk-consent-accept-all]").addEventListener("click", (event) => saveCookieConsent(true, event));
+    banner.querySelector("[data-pk-consent-save]").addEventListener("click", (event) => saveCookieConsent(preferencesInput.checked, event));
+    banner.querySelector("[data-pk-consent-necessary]").addEventListener("click", (event) => saveCookieConsent(false, event));
 
     applyTranslations(document.documentElement.dataset.lang || DEFAULT_LANG);
     window.requestAnimationFrame(() => {
@@ -448,12 +445,12 @@
 
   function addCookieSettingsLink() {
     const footerLinks = document.querySelector(".footer div");
-    if (!footerLinks || footerLinks.querySelector("[data-cookie-settings]")) return;
+    if (!footerLinks || footerLinks.querySelector("[data-pk-consent-settings]")) return;
 
     const button = document.createElement("button");
     button.className = "footer-link-button";
     button.type = "button";
-    button.dataset.cookieSettings = "";
+    button.dataset.pkConsentSettings = "";
     button.dataset.i18n = "cookie.settings";
     button.textContent = "Cookie-Einstellungen";
     button.addEventListener("click", () => openCookieBanner(true));
