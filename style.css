@@ -210,6 +210,40 @@ html[data-lang="en"] .is-en {
   padding-block: clamp(64px, 9vw, 120px);
 }
 
+.reveal-ready .reveal-item {
+  opacity: 0;
+  transform: translate3d(0, 44px, 0);
+  transition:
+    opacity 680ms ease,
+    transform 780ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    border-color 680ms ease,
+    background 680ms ease;
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.reveal-ready .reveal-item[data-reveal="left"] {
+  transform: translate3d(-48px, 18px, 0);
+}
+
+.reveal-ready .reveal-item[data-reveal="right"] {
+  transform: translate3d(48px, 18px, 0);
+}
+
+.reveal-ready .reveal-item.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.reveal-ready .project-card.is-visible,
+.reveal-ready .stack-grid article.is-visible,
+.reveal-ready .timeline-item.is-visible,
+.reveal-ready .credential-list li.is-visible,
+.reveal-ready .quick-facts div.is-visible {
+  border-color: rgba(98, 214, 208, 0.26);
+  background: rgba(23, 26, 32, 0.86);
+}
+
 main > .section:not(.hero),
 main > article.section {
   background: var(--bg);
@@ -307,12 +341,10 @@ h1 {
 }
 
 .accent-word {
-  color: #8d3dff;
-  background: linear-gradient(180deg, #b06cff 0%, #8d3dff 42%, #6c00a1 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: none;
+  color: var(--violet);
+  text-shadow:
+    0 0 18px rgba(108, 0, 161, 0.55),
+    0 0 1px var(--accent-2);
 }
 
 h2 {
@@ -864,5 +896,10 @@ h3 {
     scroll-behavior: auto !important;
     transition: none !important;
     animation: none !important;
+  }
+
+  .reveal-item {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
