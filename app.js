@@ -45,9 +45,12 @@
 
       "stack.eyebrow": "Kompetenzprofil",
       "stack.title": "Technik, Methoden und <span class=\"accent-word\">Erfahrung</span> in einem Profil.",
-      "stack.dev.title": "Entwicklung",
-      "stack.product.title": "Produkt & Prozess",
-      "stack.tools.title": "Tools",
+      "stack.dev.kicker": "Entwicklung",
+      "stack.dev.title": "Business-nahe Anwendungen",
+      "stack.product.kicker": "Produkt & Prozess",
+      "stack.product.title": "Struktur für echte Abläufe",
+      "stack.tools.kicker": "Tools",
+      "stack.tools.title": "Werkzeuge für Lieferung",
 
       "contact.eyebrow": "Nächster Schritt",
       "contact.title": "Lass uns über <span class=\"accent-word\">Software</span> sprechen, die im echten Betrieb trägt.",
@@ -142,9 +145,12 @@
 
       "stack.eyebrow": "Skill profile",
       "stack.title": "Technology, methods and <span class=\"accent-word\">experience</span> in one profile.",
-      "stack.dev.title": "Development",
-      "stack.product.title": "Product & process",
-      "stack.tools.title": "Tools",
+      "stack.dev.kicker": "Development",
+      "stack.dev.title": "Business-focused applications",
+      "stack.product.kicker": "Product & process",
+      "stack.product.title": "Structure for real workflows",
+      "stack.tools.kicker": "Tools",
+      "stack.tools.title": "Tools for delivery",
 
       "contact.eyebrow": "Next step",
       "contact.title": "Let's talk about <span class=\"accent-word\">software</span> that holds up in real operations.",

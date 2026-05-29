@@ -512,7 +512,8 @@ h3 {
   padding: clamp(20px, 3vw, 28px);
 }
 
-.project-card {
+.project-card,
+.stack-grid article {
   min-height: 330px;
   display: flex;
   flex-direction: column;
