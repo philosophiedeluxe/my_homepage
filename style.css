@@ -219,7 +219,6 @@ html[data-lang="en"] .is-en {
     border-color 680ms ease,
     background 680ms ease;
   transition-delay: var(--reveal-delay, 0ms);
-  will-change: opacity, transform;
 }
 
 .reveal-ready .reveal-item[data-reveal="left"] {
@@ -488,7 +487,6 @@ h3 {
   transform: translate3d(var(--hero-shift-x), var(--hero-shift-y), 0) scale(var(--hero-scale));
   transform-origin: 68% center;
   filter: saturate(var(--hero-saturation)) brightness(var(--hero-brightness));
-  will-change: transform, filter;
 }
 
 .signal-panel {
