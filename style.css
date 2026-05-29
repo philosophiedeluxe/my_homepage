@@ -307,10 +307,12 @@ h1 {
 }
 
 .accent-word {
-  color: var(--violet);
-  text-shadow:
-    0 0 18px rgba(108, 0, 161, 0.55),
-    0 0 1px var(--accent-2);
+  color: #8d3dff;
+  background: linear-gradient(180deg, #b06cff 0%, #8d3dff 42%, #6c00a1 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: none;
 }
 
 h2 {
