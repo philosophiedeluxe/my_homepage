@@ -76,7 +76,7 @@
       "vita.cert.eyebrow": "Zertifikate",
       "vita.cert.title": "Methodik und<br><span class=\"accent-word\">Projektverständnis</span>",
       "vita.contact.title": "Wenn das <span class=\"accent-word\">Profil</span> passt, freue ich mich über eine Nachricht.",
-      "vita.pdf": "Vita als PDF herunterladen",
+      "vita.pdf": "Vita als PDF erstellen",
       "vita.back": "Zur Startseite",
 
       "imprint.eyebrow": "Anbieterkennzeichnung",
@@ -192,7 +192,7 @@
       "vita.cert.eyebrow": "Certificates",
       "vita.cert.title": "Methods and<br><span class=\"accent-word\">project understanding</span>",
       "vita.contact.title": "If the <span class=\"accent-word\">profile</span> fits, I would be happy to hear from you.",
-      "vita.pdf": "Download resume as PDF",
+      "vita.pdf": "Create resume PDF",
       "vita.back": "Back home",
 
       "imprint.eyebrow": "Legal information",
@@ -491,6 +491,19 @@
       setNavOpen(false);
     });
   }
+
+  document.querySelectorAll("[data-print-vita]").forEach((button) => {
+    button.addEventListener("click", (event) => {
+      event.preventDefault();
+      const lang = document.documentElement.dataset.lang || DEFAULT_LANG;
+      const previousTitle = document.title;
+      document.title = lang === "en" ? "Phil_Kirchner_Resume" : "Phil_Kirchner_Vita";
+      window.print();
+      window.setTimeout(() => {
+        document.title = previousTitle;
+      }, 250);
+    });
+  });
 
   document.querySelectorAll("[data-year]").forEach((element) => {
     element.textContent = String(new Date().getFullYear());

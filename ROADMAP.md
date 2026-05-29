@@ -26,7 +26,7 @@ Die Homepage ist jetzt eine moderne, statische Portfolio-Seite mit starkem Hero,
 - Headline geschaerft und als akzentuierter Rich Text umgesetzt.
 - GitHub in Navigation, Footer und Kontaktbereich eingebunden.
 - LinkedIn in Navigation, Hero, Footer und Kontaktbereich prominenter eingebunden.
-- Vita als PDF-Download vorbereitet.
+- Vita-PDF dynamisch ueber die Browser-Druckfunktion vorbereitet, damit Inhalt und Sprache aus der aktuellen Vita-Seite kommen.
 - Datenschutztext auf GitHub Pages Hosting, lokale Speicherung und externe Profile abgestimmt.
 - `sitemap.xml`, Canonical URLs, absolute OpenGraph-Bilder, Twitter Card Tags und WebSite JSON-LD ergaenzt.
 - Cache-Busting fuer `style.css` und `app.js` eingefuehrt.
@@ -80,7 +80,7 @@ Die Homepage ist jetzt eine moderne, statische Portfolio-Seite mit starkem Hero,
 - Footer-Links: LinkedIn, GitHub, Impressum, Datenschutz und Cookie-Einstellungen pruefen.
 - Externe Links: LinkedIn und GitHub in neuem Browserkontext pruefen.
 - SEO: Canonical URLs, OpenGraph-Bild, `sitemap.xml`, `robots.txt` und JSON-LD pruefen.
-- Downloads: `Phil_Kirchner_Vita.pdf` aufrufbar und lesbar pruefen.
+- Vita-PDF: Auf DE und EN jeweils `Vita als PDF erstellen` pruefen und im Druckdialog `Als PDF speichern` testen.
 
 ## Design-Leitplanken
 
