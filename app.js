@@ -573,7 +573,6 @@
     addReveal(".quick-facts > div", "up", true);
     addReveal(".split-section > div:first-child, .contact-section > div:first-child", "left");
     addReveal(".split-section .text-stack, .contact-actions", "right");
-    addReveal(".section-heading, .page-hero > *, .legal-page > section, .legal-page > .legal-note", "up");
     addReveal(".project-card, .stack-grid article, .timeline-item, .credential-list li", "up", true);
 
     root.classList.add("reveal-ready");
@@ -581,18 +580,16 @@
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (isFirefox) {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("is-visible");
-              observer.unobserve(entry.target);
-            }
-            return;
-          }
+          if (!entry.isIntersecting) return;
 
-          entry.target.classList.toggle("is-visible", entry.isIntersecting);
+          entry.target.classList.add("is-visible");
+          window.setTimeout(() => {
+            entry.target.classList.add("is-reveal-complete");
+          }, 900);
+          observer.unobserve(entry.target);
         });
       },
-      { rootMargin: "0px 0px -12% 0px", threshold: 0.16 }
+      { rootMargin: "0px 0px -10% 0px", threshold: 0.12 }
     );
 
     document.querySelectorAll(".reveal-item").forEach((element) => observer.observe(element));
