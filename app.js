@@ -246,9 +246,6 @@
   const CONSENT_STORAGE_KEY = "pk-cookie-consent";
   const CONSENT_VERSION = 1;
   let scrollTicking = false;
-  let heroHeight = hero ? Math.max(hero.offsetHeight, 1) : 1;
-  let lastHeroProgress = null;
-  let lastScrolledState = null;
 
   function sanitizeLang(lang) {
     const value = String(lang || "").toLowerCase();
@@ -512,31 +509,17 @@
     element.textContent = String(new Date().getFullYear());
   });
 
-  function updateHeroHeight() {
-    heroHeight = hero ? Math.max(hero.offsetHeight, 1) : 1;
-    lastHeroProgress = null;
-    updateScrollState();
-  }
-
   function updateScrollState() {
     const y = window.scrollY || window.pageYOffset || 0;
+    const heroHeight = hero ? Math.max(hero.offsetHeight, 1) : 1;
     const progress = Math.min(1, Math.max(0, y / heroHeight));
-    const progressKey = progress.toFixed(3);
-    const scrolledState = y > 24 ? "true" : "false";
-
-    if (hero && progressKey !== lastHeroProgress) {
-      hero.style.setProperty("--hero-scroll", progressKey);
-      hero.style.setProperty("--hero-shift-x", `${(-18 * progress).toFixed(2)}px`);
-      hero.style.setProperty("--hero-shift-y", `${(34 * progress).toFixed(2)}px`);
-      hero.style.setProperty("--hero-scale", (1.02 + 0.045 * progress).toFixed(4));
-      lastHeroProgress = progressKey;
-    }
-
-    if (scrolledState !== lastScrolledState) {
-      root.dataset.scrolled = scrolledState;
-      lastScrolledState = scrolledState;
-    }
-
+    root.style.setProperty("--hero-scroll", progress.toFixed(3));
+    root.style.setProperty("--hero-shift-x", `${(-18 * progress).toFixed(2)}px`);
+    root.style.setProperty("--hero-shift-y", `${(34 * progress).toFixed(2)}px`);
+    root.style.setProperty("--hero-scale", (1.02 + 0.045 * progress).toFixed(4));
+    root.style.setProperty("--hero-saturation", (1 - 0.08 * progress).toFixed(4));
+    root.style.setProperty("--hero-brightness", (1 - 0.08 * progress).toFixed(4));
+    root.dataset.scrolled = y > 24 ? "true" : "false";
     scrollTicking = false;
   }
 
@@ -549,8 +532,6 @@
     },
     { passive: true }
   );
-
-  window.addEventListener("resize", updateHeroHeight, { passive: true });
   
   function addReveal(selector, direction, stagger = false) {
     document.querySelectorAll(selector).forEach((element, index) => {
@@ -566,7 +547,7 @@
     addReveal(".quick-facts > div", "up", true);
     addReveal(".split-section > div:first-child, .contact-section > div:first-child", "left");
     addReveal(".split-section .text-stack, .contact-actions", "right");
-    addReveal(".page-hero > *, .legal-page > section, .legal-page > .legal-note", "up");
+    addReveal(".section-heading, .page-hero > *, .legal-page > section, .legal-page > .legal-note", "up");
     addReveal(".project-card, .stack-grid article, .timeline-item, .credential-list li", "up", true);
 
     root.classList.add("reveal-ready");
@@ -574,16 +555,10 @@
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          const element = entry.target;
-          element.classList.add("is-visible");
-          observer.unobserve(element);
-          window.setTimeout(() => {
-            element.classList.add("is-reveal-complete");
-          }, 520);
+          entry.target.classList.toggle("is-visible", entry.isIntersecting);
         });
       },
-      { rootMargin: "0px 0px -8% 0px", threshold: 0.08 }
+      { rootMargin: "0px 0px -12% 0px", threshold: 0.16 }
     );
 
     document.querySelectorAll(".reveal-item").forEach((element) => observer.observe(element));
