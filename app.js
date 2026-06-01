@@ -620,16 +620,35 @@
     });
   }
 
+  function waitForPrintLayout() {
+    const fontsReady = document.fonts?.ready?.catch ? document.fonts.ready.catch(() => null) : Promise.resolve();
+    return fontsReady.then(() => new Promise((resolve) => {
+      window.requestAnimationFrame(() => window.requestAnimationFrame(resolve));
+    }));
+  }
+
   document.querySelectorAll("[data-print-vita]").forEach((button) => {
-    button.addEventListener("click", (event) => {
+    button.addEventListener("click", async (event) => {
       event.preventDefault();
       const lang = document.documentElement.dataset.lang || DEFAULT_LANG;
       const previousTitle = document.title;
-      document.title = lang === "en" ? "Phil_Kirchner_Resume" : "Phil_Kirchner_Vita";
-      window.print();
-      window.setTimeout(() => {
+      let cleanupDone = false;
+
+      function cleanupPrintState() {
+        if (cleanupDone) return;
+        cleanupDone = true;
         document.title = previousTitle;
-      }, 250);
+        document.body.classList.remove("vita-print-mode");
+        window.removeEventListener("afterprint", cleanupPrintState);
+      }
+
+      document.title = lang === "en" ? "Phil_Kirchner_Resume" : "Phil_Kirchner_Vita";
+      document.body.classList.add("vita-print-mode");
+      window.addEventListener("afterprint", cleanupPrintState);
+
+      await waitForPrintLayout();
+      window.print();
+      window.setTimeout(cleanupPrintState, 10000);
     });
   });
 
