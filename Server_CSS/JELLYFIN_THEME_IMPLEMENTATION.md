@@ -89,3 +89,10 @@ Die vorherige aspect-ratio-basierte Verschiebung wurde aus `fixes.css` entfernt.
 - `base.css`
   - verbleibende Jellyfin-Gutters für Library-Karten hart überschrieben.
   - `--jf-card-gap` ist global `0px !important`.
+
+
+## Update: reduzierte Card-Abstände
+
+- `--jf-card-gap` wieder aktiviert, aber auf ca. 30% des ursprünglichen Wertes reduziert.
+- Neuer Wert: `clamp(0.21rem, 0.3vw, 0.38rem)`.
+- Column-Gaps verwenden wieder `var(--jf-card-gap)`; Card-Margins/Paddings bleiben auf 0, damit der Abstand ausschließlich über Grid/Flex-Gap gesteuert wird.

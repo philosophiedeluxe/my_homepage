@@ -40,7 +40,7 @@
   --rounding: 12px;
   --jf-page-pad: clamp(0.75rem, 1.8vw, 2.4rem);
   --jf-row-gap: clamp(0.6rem, 0.75vw, 1rem);
-  --jf-card-gap: 0rem;
+  --jf-card-gap: clamp(0.21rem, 0.3vw, 0.38rem);
 }
 
 .pageTitleWithDefaultLogo,
@@ -148,7 +148,7 @@
 :root {
   --jf-page-pad: clamp(0.75rem, 1.8vw, 2.4rem);
   --jf-row-gap: clamp(0.6rem, 0.75vw, 1rem);
-  --jf-card-gap: 0rem;
+  --jf-card-gap: clamp(0.21rem, 0.3vw, 0.38rem);
 }
 
 .layout-desktop .libraryPage .itemsContainer,
@@ -156,8 +156,8 @@
 .layout-desktop #tvRecommendedPage .itemsContainer,
 .layout-desktop #musicRecommendedPage .itemsContainer,
 .itemsContainer {
-  gap: 0 !important;
-  column-gap: 0 !important;
+  gap: var(--jf-card-gap) !important;
+  column-gap: var(--jf-card-gap) !important;
   row-gap: var(--jf-row-gap) !important;
   scroll-padding-inline: var(--jf-page-pad) !important;
 }
@@ -240,7 +240,7 @@
 :root,
 html,
 body {
-  --jf-card-gap: 0px !important;
+  --jf-card-gap: clamp(0.21rem, 0.3vw, 0.38rem) !important;
 }
 
 .layout-desktop .itemsContainer,
@@ -252,8 +252,8 @@ body {
 .layout-desktop #seriesPage .itemsContainer,
 .layout-desktop #tvRecommendedPage .itemsContainer,
 .layout-desktop #musicRecommendedPage .itemsContainer {
-  gap: 0 !important;
-  column-gap: 0 !important;
+  gap: var(--jf-card-gap) !important;
+  column-gap: var(--jf-card-gap) !important;
   row-gap: var(--jf-row-gap, clamp(0.6rem, 0.75vw, 1rem)) !important;
 }
 
