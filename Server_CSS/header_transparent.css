@@ -1,168 +1,121 @@
-/* Header: legacy behaviour with new transparent/glass effect
-   Reference behaviour:
-   - wide pages use one header unit (68px)
-   - narrower pages use two header units (130px)
-   - tab strip stays in Jellyfin's normal responsive flow instead of absolute positioning
-*/
+.skinHeader-withBackground {
+  background-color: transparent;
+}
+
+:root,
+html,
+body {
+  --jf-header-glass-bg: rgba(7, 8, 11, 0.48);
+  --jf-header-glass-shadow: 0 10px 28px rgba(0, 0, 0, 0.22);
+}
 
 .skinHeader,
-.skinHeader-withBackground,
-.skinHeader-withBackground.skinHeader-blurred,
-.skinHeader-withBackground.skinHeader-blurred.semiTransparent {
-  background-color: rgba(7, 8, 11, 0.38) !important;
-  background-image: linear-gradient(180deg, rgba(10, 11, 16, 0.52), rgba(7, 8, 11, 0.30)) !important;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.20) !important;
+.skinHeader-withBackground {
   transition:
-    background-color var(--jf-motion-med, 240ms) ease,
-    backdrop-filter var(--jf-motion-med, 240ms) ease,
-    box-shadow var(--jf-motion-med, 240ms) ease;
+    background-color var(--jf-motion-med) ease,
+    backdrop-filter var(--jf-motion-med) ease,
+    box-shadow var(--jf-motion-med) ease;
+}
+
+.skinHeader.skinHeader-withBackground,
+.skinHeader.skinHeader-blurred,
+.skinHeader.skinHeader-withBackground.skinHeader-blurred,
+.skinHeader.skinHeader-withBackground.skinHeader-blurred.semiTransparent {
+  background-color: var(--jf-header-glass-bg) !important;
+  box-shadow: var(--jf-header-glass-shadow) !important;
 }
 
 @supports ((backdrop-filter: blur(12px)) or (-webkit-backdrop-filter: blur(12px))) {
-  .skinHeader,
-  .skinHeader-withBackground,
-  .skinHeader-withBackground.skinHeader-blurred,
-  .skinHeader-withBackground.skinHeader-blurred.semiTransparent {
-    -webkit-backdrop-filter: blur(14px) saturate(1.16) !important;
-    backdrop-filter: blur(14px) saturate(1.16) !important;
+  .skinHeader.skinHeader-withBackground,
+  .skinHeader.skinHeader-blurred,
+  .skinHeader.skinHeader-withBackground.skinHeader-blurred,
+  .skinHeader.skinHeader-withBackground.skinHeader-blurred.semiTransparent {
+    -webkit-backdrop-filter: blur(12px) saturate(1.12) !important;
+    backdrop-filter: blur(12px) saturate(1.12) !important;
   }
 }
 
-/* Restore Jellyfin's original responsive tab behaviour.
-   The earlier absolute header tab placement caused the tab strip to slide over #moviesTab
-   and to leave the visible area on narrower widths. */
-.skinHeader:has(.headerTabs.sectionTabs),
-.skinHeader.skinHeader-withBackground.skinHeader-blurred.semiTransparent,
-.skinHeader.skinHeader-blurred.semiTransparent {
-  height: auto !important;
-  min-height: 0 !important;
-  max-height: none !important;
-  overflow: visible !important;
-}
-
-.skinHeader .headerTabs.sectionTabs {
-  position: static !important;
-  inset: auto !important;
-  top: auto !important;
-  right: auto !important;
-  bottom: auto !important;
-  left: auto !important;
-  width: 100% !important;
-  max-width: none !important;
-  height: auto !important;
-  min-height: 0 !important;
-  margin: 0 !important;
-  padding: 0 max(env(safe-area-inset-right), clamp(0.8rem, 2vw, 2.4rem)) 0 max(env(safe-area-inset-left), clamp(0.8rem, 2vw, 2.4rem)) !important;
-  box-sizing: border-box !important;
-  display: block !important;
-  overflow: visible !important;
-  transform: none !important;
-  background: transparent !important;
-}
-
-.skinHeader .headerTabs.sectionTabs > div {
-  position: relative !important;
-  display: block !important;
-  width: 100% !important;
-  max-width: 100% !important;
-  height: auto !important;
-  margin: 0 auto !important;
-  padding: 0 !important;
-  overflow-x: auto !important;
-  overflow-y: hidden !important;
-  scrollbar-width: none !important;
-  -webkit-overflow-scrolling: touch !important;
-  transform: none !important;
-}
-
-.skinHeader .headerTabs.sectionTabs > div::-webkit-scrollbar {
-  display: none !important;
-}
-
-.skinHeader .headerTabs.sectionTabs > div > div {
-  position: relative !important;
-  inset: auto !important;
-  width: max-content !important;
-  min-width: max-content !important;
-  max-width: none !important;
-  height: auto !important;
-  margin: 0 auto !important;
-  padding: 0 !important;
-  display: flex !important;
-  flex-flow: row nowrap !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: clamp(1.05rem, 2.2vw, 3.1rem) !important;
-  white-space: nowrap !important;
-  transform: none !important;
-}
-
-.skinHeader .headerTabs.sectionTabs .emby-tab-button,
-.skinHeader .headerTabs.sectionTabs .emby-button,
-.skinHeader .headerTabs.sectionTabs a,
-.skinHeader .headerTabs.sectionTabs button,
-.skinHeader .headerTabs.sectionTabs #moviesTab {
-  position: relative !important;
-  inset: auto !important;
-  flex: 0 0 auto !important;
-  min-width: max-content !important;
-  margin: 0 !important;
-  transform: none !important;
-}
-
-@media all and (max-width: 52em) {
-  .skinHeader .headerTabs.sectionTabs > div {
-    margin-inline: 0 !important;
-  }
-
-  .skinHeader .headerTabs.sectionTabs > div > div {
-    margin-inline: 0 !important;
-    justify-content: flex-start !important;
-    gap: clamp(1rem, 5vw, 2.25rem) !important;
-  }
-}
-
-/* Legacy page offsets. */
+/* Alte Referenz-Abstaende: einzeilige Headerbar */
 @media all and (min-width: 100em) {
   #indexPage,
   #moviesPage,
-  #tvRecommendedPage,
-  #musicRecommendedPage,
   #tvShowsPage,
   #seriesPage,
-  .libraryPage:not(#itemDetailPage) {
+  #tvRecommendedPage,
+  #musicRecommendedPage {
     margin-top: 68px !important;
     padding-top: 0 !important;
-    overflow-y: auto;
+    overflow-y: scroll;
   }
 }
 
+/* Alte Referenz-Abstaende: zweizeilige Header-/Tab-Kombination */
 @media all and (max-width: 100em) {
   #indexPage,
   #moviesPage,
-  #tvRecommendedPage,
-  #musicRecommendedPage,
   #tvShowsPage,
   #seriesPage,
-  .libraryPage:not(#itemDetailPage) {
+  #tvRecommendedPage,
+  #musicRecommendedPage {
     margin-top: 130px !important;
     padding-top: 0.5em !important;
-    overflow-y: auto;
+    overflow-y: scroll;
   }
-}
-
-.layout-mobile #indexPage,
-.layout-mobile #moviesPage,
-.layout-mobile #tvRecommendedPage,
-.layout-mobile #musicRecommendedPage,
-.layout-mobile #tvShowsPage,
-.layout-mobile #seriesPage,
-.layout-mobile .libraryPage:not(#itemDetailPage) {
-  margin-top: clamp(7.4rem, 15vh, 8.8rem) !important;
-  padding-top: 0.5em !important;
 }
 
 .force-scroll {
   overflow-y: auto;
   overflow-x: auto;
+}
+
+/* Schutz: Header-Regeln duerfen nie direkte Inhalte des Filme-Tabs treffen.
+   Das verhindert, dass der AlphaPicker als Menue-Tab behandelt wird. */
+#moviesTab > .alphaPicker.alphaPicker-fixed.alphaPicker-vertical,
+#moviesPage .alphaPicker.alphaPicker-fixed.alphaPicker-vertical,
+.alphaPicker.alphaPicker-fixed.alphaPicker-vertical.alphabetPicker-right,
+.alphaPicker.alphaPicker-fixed.alphaPicker-vertical.alphaPicker-fixed-right {
+  position: fixed !important;
+  top: 50% !important;
+  right: 0.25rem !important;
+  bottom: auto !important;
+  left: auto !important;
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: calc(100vh - 8rem) !important;
+  margin: 0 !important;
+  padding: 0.25rem 0.15rem !important;
+  display: flex !important;
+  flex-flow: column nowrap !important;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow: visible !important;
+  transform: translateY(-50%) !important;
+  z-index: 1100 !important;
+}
+
+#moviesTab > .alphaPicker.alphaPicker-fixed.alphaPicker-vertical > div,
+#moviesPage .alphaPicker.alphaPicker-fixed.alphaPicker-vertical > div,
+.alphaPicker.alphaPicker-fixed.alphaPicker-vertical.alphabetPicker-right > div,
+.alphaPicker.alphaPicker-fixed.alphaPicker-vertical.alphaPicker-fixed-right > div {
+  position: static !important;
+  inset: auto !important;
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex !important;
+  flex-flow: column nowrap !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0 !important;
+  overflow: visible !important;
+  white-space: nowrap !important;
+  transform: none !important;
 }

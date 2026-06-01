@@ -274,160 +274,6 @@ body {
   margin-right: 0 !important;
 }
 
-/* Header tabs responsive stability v2.
-   The tab strip is kept in its own header row. The scroll content is centered
-   only while it fits; when the viewport gets narrow it becomes left-aligned
-   and horizontally scrollable instead of moving outside the visible area. */
-.layout-desktop .skinHeader:has(.headerTabs.sectionTabs),
-.layout-tv .skinHeader:has(.headerTabs.sectionTabs) {
-  overflow: visible !important;
-  min-height: clamp(7.15rem, 9.25vh, 8.9rem) !important;
-  z-index: 1200 !important;
-}
-
-.layout-desktop .skinHeader .headerTabs.sectionTabs,
-.layout-tv .skinHeader .headerTabs.sectionTabs {
-  position: absolute !important;
-  top: clamp(3.05rem, 4.55vh, 4.05rem) !important;
-  left: 0 !important;
-  right: 0 !important;
-  bottom: auto !important;
-  width: 100% !important;
-  max-width: none !important;
-  height: clamp(2.55rem, 4.15vh, 3.25rem) !important;
-  min-height: clamp(2.55rem, 4.15vh, 3.25rem) !important;
-  margin: 0 !important;
-  padding: 0 clamp(0.85rem, 2.2vw, 2.6rem) !important;
-  box-sizing: border-box !important;
-  display: block !important;
-  overflow: visible !important;
-  transform: none !important;
-  z-index: 4 !important;
-}
-
-.layout-desktop .skinHeader .headerTabs.sectionTabs > div,
-.layout-tv .skinHeader .headerTabs.sectionTabs > div {
-  position: relative !important;
-  display: block !important;
-  width: 100% !important;
-  max-width: min(100%, 72rem) !important;
-  height: 100% !important;
-  margin: 0 auto !important;
-  padding: 0 !important;
-  overflow-x: auto !important;
-  overflow-y: hidden !important;
-  scrollbar-width: none !important;
-  -webkit-overflow-scrolling: touch !important;
-  transform: none !important;
-}
-
-.layout-desktop .skinHeader .headerTabs.sectionTabs > div::-webkit-scrollbar,
-.layout-tv .skinHeader .headerTabs.sectionTabs > div::-webkit-scrollbar {
-  display: none !important;
-}
-
-.layout-desktop .skinHeader .headerTabs.sectionTabs > div > div,
-.layout-tv .skinHeader .headerTabs.sectionTabs > div > div {
-  position: relative !important;
-  inset: auto !important;
-  top: auto !important;
-  left: auto !important;
-  right: auto !important;
-  bottom: auto !important;
-  width: max-content !important;
-  min-width: max-content !important;
-  max-width: none !important;
-  height: 100% !important;
-  margin: 0 auto !important;
-  padding: 0 !important;
-  display: flex !important;
-  flex-flow: row nowrap !important;
-  align-items: center !important;
-  justify-content: flex-start !important;
-  gap: clamp(1.05rem, 2.1vw, 3.25rem) !important;
-  white-space: nowrap !important;
-  transform: none !important;
-}
-
-.layout-desktop .skinHeader .headerTabs.sectionTabs .emby-tab-button,
-.layout-desktop .skinHeader .headerTabs.sectionTabs .emby-button,
-.layout-desktop .skinHeader .headerTabs.sectionTabs a,
-.layout-desktop .skinHeader .headerTabs.sectionTabs button,
-.layout-desktop .skinHeader .headerTabs.sectionTabs #moviesTab,
-.layout-tv .skinHeader .headerTabs.sectionTabs .emby-tab-button,
-.layout-tv .skinHeader .headerTabs.sectionTabs .emby-button,
-.layout-tv .skinHeader .headerTabs.sectionTabs a,
-.layout-tv .skinHeader .headerTabs.sectionTabs button,
-.layout-tv .skinHeader .headerTabs.sectionTabs #moviesTab {
-  position: relative !important;
-  inset: auto !important;
-  top: auto !important;
-  left: auto !important;
-  right: auto !important;
-  bottom: auto !important;
-  flex: 0 0 auto !important;
-  min-width: max-content !important;
-  margin: 0 !important;
-  min-height: 2.35rem !important;
-  line-height: 2.35rem !important;
-  transform: none !important;
-}
-
-.layout-desktop .libraryPage:not(#itemDetailPage),
-.layout-desktop #moviesPage,
-.layout-desktop #tvShowsPage,
-.layout-desktop #seriesPage,
-.layout-desktop #tvRecommendedPage,
-.layout-desktop #musicRecommendedPage {
-  padding-top: clamp(8.35rem, 11.35vh, 10.6rem) !important;
-}
-
-.layout-desktop .libraryPage .viewSettingsContainer,
-.layout-desktop .libraryPage .itemsViewSettingsContainer,
-.layout-desktop .libraryPage .viewControls,
-.layout-desktop .libraryPage .paging,
-.layout-desktop #moviesPage .viewSettingsContainer,
-.layout-desktop #tvShowsPage .viewSettingsContainer,
-.layout-desktop #seriesPage .viewSettingsContainer {
-  position: relative !important;
-  z-index: 1 !important;
-  margin-top: 0 !important;
-}
-
-@media (max-width: 76em) {
-  .layout-desktop .skinHeader:has(.headerTabs.sectionTabs),
-  .layout-tv .skinHeader:has(.headerTabs.sectionTabs) {
-    min-height: clamp(7.45rem, 10.5vh, 9.25rem) !important;
-  }
-
-  .layout-desktop .skinHeader .headerTabs.sectionTabs,
-  .layout-tv .skinHeader .headerTabs.sectionTabs {
-    top: clamp(3.25rem, 5.25vh, 4.45rem) !important;
-    padding-inline: clamp(0.75rem, 1.8vw, 1.4rem) !important;
-  }
-
-  .layout-desktop .skinHeader .headerTabs.sectionTabs > div,
-  .layout-tv .skinHeader .headerTabs.sectionTabs > div {
-    max-width: 100% !important;
-  }
-
-  .layout-desktop .skinHeader .headerTabs.sectionTabs > div > div,
-  .layout-tv .skinHeader .headerTabs.sectionTabs > div > div {
-    margin-inline: 0 !important;
-    gap: clamp(1rem, 4vw, 1.8rem) !important;
-  }
-
-  .layout-desktop .libraryPage:not(#itemDetailPage),
-  .layout-desktop #moviesPage,
-  .layout-desktop #tvShowsPage,
-  .layout-desktop #seriesPage,
-  .layout-desktop #tvRecommendedPage,
-  .layout-desktop #musicRecommendedPage {
-    padding-top: clamp(8.7rem, 13vh, 10.9rem) !important;
-  }
-}
-
-
 /* Final detail logo anchor: always right-aligned directly above the detail ribbon. */
 .layout-desktop #itemDetailPage {
   position: relative !important;
@@ -561,280 +407,125 @@ body {
   box-sizing: border-box !important;
 }
 
-/* Header height compaction: keep only the top control bar inside the semi-transparent header.
-   Header tabs stay visible below it, but no longer sit inside a thick overlay layer. */
+/* Final header restore: old menu behavior with current glass transparency. */
+.skinHeader-withBackground {
+  background-color: transparent;
+}
+
 :root,
 html,
 body {
-  --jf-header-bar-height: clamp(2.8rem, 4.2vh, 3.55rem);
-  --jf-header-tabs-height: clamp(2.35rem, 3.65vh, 2.9rem);
-  --jf-header-tabs-top: calc(var(--jf-header-bar-height) + clamp(0.05rem, 0.35vh, 0.22rem));
-  --jf-header-page-offset: calc(var(--jf-header-bar-height) + var(--jf-header-tabs-height) + clamp(1.05rem, 2.2vh, 1.85rem));
+  --jf-header-glass-bg: rgba(7, 8, 11, 0.48);
+  --jf-header-glass-shadow: 0 10px 28px rgba(0, 0, 0, 0.22);
 }
 
-.layout-desktop .skinHeader.skinHeader-withBackground.skinHeader-blurred.semiTransparent,
-.layout-desktop .skinHeader.skinHeader-blurred.semiTransparent,
-.layout-desktop .skinHeader:has(.headerTabs.sectionTabs),
-.layout-tv .skinHeader.skinHeader-withBackground.skinHeader-blurred.semiTransparent,
-.layout-tv .skinHeader.skinHeader-blurred.semiTransparent,
-.layout-tv .skinHeader:has(.headerTabs.sectionTabs) {
-  height: var(--jf-header-bar-height) !important;
-  min-height: var(--jf-header-bar-height) !important;
-  max-height: var(--jf-header-bar-height) !important;
-  overflow: visible !important;
-  background-color: rgba(7, 8, 11, 0.48) !important;
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22) !important;
-}
-
-.layout-desktop .skinHeader .headerTabs.sectionTabs,
-.layout-tv .skinHeader .headerTabs.sectionTabs {
-  top: var(--jf-header-tabs-top) !important;
-  height: var(--jf-header-tabs-height) !important;
-  min-height: var(--jf-header-tabs-height) !important;
-  padding-inline: clamp(0.85rem, 2.1vw, 2.4rem) !important;
-  background: transparent !important;
-  z-index: 5 !important;
-}
-
-.layout-desktop .skinHeader .headerTabs.sectionTabs > div,
-.layout-tv .skinHeader .headerTabs.sectionTabs > div {
-  width: 100% !important;
-  max-width: min(100%, 72rem) !important;
-  margin-inline: auto !important;
-  overflow-x: auto !important;
-  overflow-y: hidden !important;
-}
-
-.layout-desktop .skinHeader .headerTabs.sectionTabs > div > div,
-.layout-tv .skinHeader .headerTabs.sectionTabs > div > div {
-  width: max-content !important;
-  min-width: max-content !important;
-  margin-inline: auto !important;
-  justify-content: center !important;
-  gap: clamp(1.05rem, 2.1vw, 3.05rem) !important;
-}
-
-.layout-desktop .libraryPage:not(#itemDetailPage),
-.layout-desktop #indexPage,
-.layout-desktop #moviesPage,
-.layout-desktop #tvShowsPage,
-.layout-desktop #seriesPage,
-.layout-desktop #tvRecommendedPage,
-.layout-desktop #musicRecommendedPage {
-  padding-top: var(--jf-header-page-offset) !important;
-}
-
-@media (max-width: 52em) {
-  :root,
-  html,
-  body {
-    --jf-header-page-offset: calc(var(--jf-header-bar-height) + var(--jf-header-tabs-height) + clamp(1.3rem, 2.8vh, 2.1rem));
-  }
-
-  .layout-desktop .skinHeader .headerTabs.sectionTabs,
-  .layout-tv .skinHeader .headerTabs.sectionTabs {
-    padding-left: clamp(0.85rem, 2.2vw, 1.35rem) !important;
-    padding-right: clamp(0.85rem, 2.2vw, 1.35rem) !important;
-  }
-
-  .layout-desktop .skinHeader .headerTabs.sectionTabs > div,
-  .layout-tv .skinHeader .headerTabs.sectionTabs > div {
-    max-width: 100% !important;
-    margin-inline: 0 !important;
-  }
-
-  .layout-desktop .skinHeader .headerTabs.sectionTabs > div > div,
-  .layout-tv .skinHeader .headerTabs.sectionTabs > div > div {
-    margin-inline: 0 !important;
-    justify-content: flex-start !important;
-    gap: clamp(0.95rem, 4vw, 1.75rem) !important;
-  }
-}
-
-
-/* Final merged override: legacy header behaviour + current transparent/glass effect. */
 .skinHeader,
-.skinHeader-withBackground,
-.skinHeader-withBackground.skinHeader-blurred,
-.skinHeader-withBackground.skinHeader-blurred.semiTransparent {
-  background-color: rgba(7, 8, 11, 0.38) !important;
-  background-image: linear-gradient(180deg, rgba(10, 11, 16, 0.52), rgba(7, 8, 11, 0.30)) !important;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.20) !important;
-  height: auto !important;
-  min-height: 0 !important;
-  max-height: none !important;
-  overflow: visible !important;
+.skinHeader-withBackground {
+  transition:
+    background-color var(--jf-motion-med) ease,
+    backdrop-filter var(--jf-motion-med) ease,
+    box-shadow var(--jf-motion-med) ease;
+}
+
+.skinHeader.skinHeader-withBackground,
+.skinHeader.skinHeader-blurred,
+.skinHeader.skinHeader-withBackground.skinHeader-blurred,
+.skinHeader.skinHeader-withBackground.skinHeader-blurred.semiTransparent {
+  background-color: var(--jf-header-glass-bg) !important;
+  box-shadow: var(--jf-header-glass-shadow) !important;
 }
 
 @supports ((backdrop-filter: blur(12px)) or (-webkit-backdrop-filter: blur(12px))) {
-  .skinHeader,
-  .skinHeader-withBackground,
-  .skinHeader-withBackground.skinHeader-blurred,
-  .skinHeader-withBackground.skinHeader-blurred.semiTransparent {
-    -webkit-backdrop-filter: blur(14px) saturate(1.16) !important;
-    backdrop-filter: blur(14px) saturate(1.16) !important;
+  .skinHeader.skinHeader-withBackground,
+  .skinHeader.skinHeader-blurred,
+  .skinHeader.skinHeader-withBackground.skinHeader-blurred,
+  .skinHeader.skinHeader-withBackground.skinHeader-blurred.semiTransparent {
+    -webkit-backdrop-filter: blur(12px) saturate(1.12) !important;
+    backdrop-filter: blur(12px) saturate(1.12) !important;
   }
 }
 
-.skinHeader .headerTabs.sectionTabs {
-  position: static !important;
-  inset: auto !important;
-  width: 100% !important;
-  max-width: none !important;
-  height: auto !important;
-  min-height: 0 !important;
-  margin: 0 !important;
-  padding: 0 max(env(safe-area-inset-right), clamp(0.8rem, 2vw, 2.4rem)) 0 max(env(safe-area-inset-left), clamp(0.8rem, 2vw, 2.4rem)) !important;
-  display: block !important;
-  overflow: visible !important;
-  transform: none !important;
-  background: transparent !important;
-}
-
-.skinHeader .headerTabs.sectionTabs > div {
-  width: 100% !important;
-  max-width: 100% !important;
-  margin: 0 auto !important;
-  overflow-x: auto !important;
-  overflow-y: hidden !important;
-  scrollbar-width: none !important;
-  -webkit-overflow-scrolling: touch !important;
-  transform: none !important;
-}
-
-.skinHeader .headerTabs.sectionTabs > div::-webkit-scrollbar { display: none !important; }
-
-.skinHeader .headerTabs.sectionTabs > div > div {
-  width: max-content !important;
-  min-width: max-content !important;
-  max-width: none !important;
-  margin: 0 auto !important;
-  display: flex !important;
-  flex-flow: row nowrap !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: clamp(1.05rem, 2.2vw, 3.1rem) !important;
-  white-space: nowrap !important;
-  transform: none !important;
-}
-
-@media all and (max-width: 52em) {
-  .skinHeader .headerTabs.sectionTabs > div { margin-inline: 0 !important; }
-  .skinHeader .headerTabs.sectionTabs > div > div {
-    margin-inline: 0 !important;
-    justify-content: flex-start !important;
-    gap: clamp(1rem, 5vw, 2.25rem) !important;
-  }
-}
-
+/* Alte Referenz-Abstaende: einzeilige Headerbar */
 @media all and (min-width: 100em) {
   #indexPage,
   #moviesPage,
-  #tvRecommendedPage,
-  #musicRecommendedPage,
   #tvShowsPage,
   #seriesPage,
-  .libraryPage:not(#itemDetailPage) {
+  #tvRecommendedPage,
+  #musicRecommendedPage {
     margin-top: 68px !important;
     padding-top: 0 !important;
+    overflow-y: scroll;
   }
 }
 
+/* Alte Referenz-Abstaende: zweizeilige Header-/Tab-Kombination */
 @media all and (max-width: 100em) {
   #indexPage,
   #moviesPage,
-  #tvRecommendedPage,
-  #musicRecommendedPage,
   #tvShowsPage,
   #seriesPage,
-  .libraryPage:not(#itemDetailPage) {
+  #tvRecommendedPage,
+  #musicRecommendedPage {
     margin-top: 130px !important;
     padding-top: 0.5em !important;
+    overflow-y: scroll;
   }
 }
 
-.layout-mobile #indexPage,
-.layout-mobile #moviesPage,
-.layout-mobile #tvRecommendedPage,
-.layout-mobile #musicRecommendedPage,
-.layout-mobile #tvShowsPage,
-.layout-mobile #seriesPage,
-.layout-mobile .libraryPage:not(#itemDetailPage) {
-  margin-top: clamp(7.4rem, 15vh, 8.8rem) !important;
-  padding-top: 0.5em !important;
+.force-scroll {
+  overflow-y: auto;
+  overflow-x: auto;
 }
 
-/* Final mobile-app library width fix. */
-:root,
-html,
-body {
-  --jf-mobile-library-index-reserve: clamp(2.1rem, 7.5vw, 3rem);
-  --jf-mobile-library-cols: 2;
-}
-
-.layout-mobile #moviesPage .vertical-wrap.itemsContainer,
-.layout-mobile #tvShowsPage .vertical-wrap.itemsContainer,
-.layout-mobile #seriesPage .vertical-wrap.itemsContainer,
-.layout-mobile .libraryPage:not(#itemDetailPage) .vertical-wrap.itemsContainer {
-  justify-content: flex-start !important;
-  align-content: flex-start !important;
-  gap: var(--jf-row-gap, clamp(0.6rem, 0.75vw, 1rem)) var(--jf-card-gap, clamp(0.21rem, 0.3vw, 0.38rem)) !important;
-  column-gap: var(--jf-card-gap, clamp(0.21rem, 0.3vw, 0.38rem)) !important;
-  row-gap: var(--jf-row-gap, clamp(0.6rem, 0.75vw, 1rem)) !important;
-  padding-left: max(env(safe-area-inset-left), var(--jf-page-pad, 0.75rem)) !important;
-  padding-right: max(env(safe-area-inset-right), var(--jf-mobile-library-index-reserve)) !important;
-  box-sizing: border-box !important;
-}
-
-.layout-mobile #moviesPage .vertical-wrap.itemsContainer > .card,
-.layout-mobile #tvShowsPage .vertical-wrap.itemsContainer > .card,
-.layout-mobile #seriesPage .vertical-wrap.itemsContainer > .card,
-.layout-mobile .libraryPage:not(#itemDetailPage) .vertical-wrap.itemsContainer > .card {
-  flex: 0 0 calc((100% - var(--jf-mobile-library-index-reserve) - ((var(--jf-mobile-library-cols) - 1) * var(--jf-card-gap, 0.35rem))) / var(--jf-mobile-library-cols)) !important;
-  width: calc((100% - var(--jf-mobile-library-index-reserve) - ((var(--jf-mobile-library-cols) - 1) * var(--jf-card-gap, 0.35rem))) / var(--jf-mobile-library-cols)) !important;
+/* Schutz: Header-Regeln duerfen nie direkte Inhalte des Filme-Tabs treffen.
+   Das verhindert, dass der AlphaPicker als Menue-Tab behandelt wird. */
+#moviesTab > .alphaPicker.alphaPicker-fixed.alphaPicker-vertical,
+#moviesPage .alphaPicker.alphaPicker-fixed.alphaPicker-vertical,
+.alphaPicker.alphaPicker-fixed.alphaPicker-vertical.alphabetPicker-right,
+.alphaPicker.alphaPicker-fixed.alphaPicker-vertical.alphaPicker-fixed-right {
+  position: fixed !important;
+  top: 50% !important;
+  right: 0.25rem !important;
+  bottom: auto !important;
+  left: auto !important;
+  width: auto !important;
+  min-width: 0 !important;
   max-width: none !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: calc(100vh - 8rem) !important;
+  margin: 0 !important;
+  padding: 0.25rem 0.15rem !important;
+  display: flex !important;
+  flex-flow: column nowrap !important;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow: visible !important;
+  transform: translateY(-50%) !important;
+  z-index: 1100 !important;
+}
+
+#moviesTab > .alphaPicker.alphaPicker-fixed.alphaPicker-vertical > div,
+#moviesPage .alphaPicker.alphaPicker-fixed.alphaPicker-vertical > div,
+.alphaPicker.alphaPicker-fixed.alphaPicker-vertical.alphabetPicker-right > div,
+.alphaPicker.alphaPicker-fixed.alphaPicker-vertical.alphaPicker-fixed-right > div {
+  position: static !important;
+  inset: auto !important;
+  width: auto !important;
   min-width: 0 !important;
-  box-sizing: border-box !important;
-}
-
-.layout-mobile #moviesPage .vertical-wrap.itemsContainer > .card > .cardBox,
-.layout-mobile #tvShowsPage .vertical-wrap.itemsContainer > .card > .cardBox,
-.layout-mobile #seriesPage .vertical-wrap.itemsContainer > .card > .cardBox,
-.layout-mobile .libraryPage:not(#itemDetailPage) .vertical-wrap.itemsContainer > .card > .cardBox,
-.layout-mobile #moviesPage .vertical-wrap.itemsContainer > .card .cardScalable,
-.layout-mobile #tvShowsPage .vertical-wrap.itemsContainer > .card .cardScalable,
-.layout-mobile #seriesPage .vertical-wrap.itemsContainer > .card .cardScalable,
-.layout-mobile .libraryPage:not(#itemDetailPage) .vertical-wrap.itemsContainer > .card .cardScalable {
-  width: 100% !important;
-  max-width: 100% !important;
-  box-sizing: border-box !important;
-}
-
-@media all and (max-width: 23em) {
-  :root,
-  html,
-  body { --jf-mobile-library-cols: 1; }
-}
-
-/* Final detail children alignment. */
-#itemDetailPage .detailPagePrimaryContent.padded-right #childrenContent,
-#itemDetailPage .detailPagePrimaryContent.padded-right #childrenContent > div,
-#itemDetailPage .detailPagePrimaryContent.padded-right #childrenContent > .itemsContainer,
-#itemDetailPage .detailPagePrimaryContent.padded-right #childrenContent > div.itemsContainer {
-  width: 100% !important;
-  max-width: 100% !important;
-  min-width: 0 !important;
-  box-sizing: border-box !important;
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-}
-
-.layout-desktop #itemDetailPage .detailPagePrimaryContent.padded-right #childrenContent,
-.layout-desktop #itemDetailPage .detailPagePrimaryContent.padded-right #childrenContent > div,
-.layout-desktop #itemDetailPage .detailPagePrimaryContent.padded-right #childrenContent > .itemsContainer,
-.layout-desktop #itemDetailPage .detailPagePrimaryContent.padded-right #childrenContent > div.itemsContainer {
-  width: var(--jf-detail-content-max, 100%) !important;
-  max-width: var(--jf-detail-content-max, 100%) !important;
+  max-width: none !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex !important;
+  flex-flow: column nowrap !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0 !important;
+  overflow: visible !important;
+  white-space: nowrap !important;
+  transform: none !important;
 }

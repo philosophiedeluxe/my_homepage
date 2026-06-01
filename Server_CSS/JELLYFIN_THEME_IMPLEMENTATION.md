@@ -131,9 +131,9 @@ Das Detailposter wurde um ca. 10 Prozentpunkte weiter nach unten gesetzt. Der Ba
 - Seiten-Top-Abstand neu berechnet, damit die Filter-/Toolbar-Zeile nicht mehr vom Header überdeckt wird.
 
 
-## Update: Header legacy behaviour, mobile app card width, children alignment
+## 2026-06-01 - Header Restore v3
 
-- `header_transparent.css`: ältere Header-/Tab-Flow-Logik wiederhergestellt; neue transparente Blur-/Glass-Optik bleibt aktiv.
-- `base.css`: mobile Jellyfin-App bekommt eigene 2-Spalten-Breitenberechnung mit Reserve für den Alphabetindex.
-- `title_banner-logo.css`: `#childrenContent > div` richtet sich an `.detailPagePrimaryContent.padded-right` aus und verliert eigene störende Padding-/Breitenwerte.
-- `jellyfin_custom_css_final.css`: finale Safety-Overrides für zentrale Ein-Datei-Nutzung ergänzt.
+- Die Header-/Menueleisten-Positionierung wurde wieder auf das Verhalten der alten Referenz zurueckgesetzt.
+- Entfernt wurden die kompakte Header-Logik und die direkte Behandlung von `#moviesTab > div`.
+- Der AlphaPicker wird dadurch nicht mehr als Header-Tab formatiert und bleibt wieder als vertikaler Index am rechten Rand.
+- Der semi-transparente Glass-Effekt der neueren Version bleibt erhalten.

@@ -549,33 +549,3 @@
     background-position: right center !important;
   }
 }
-
-
-/* Final detail children alignment.
-   #childrenContent must follow the width of .detailPagePrimaryContent.padded-right instead of expanding by its own padded-right rules. */
-#itemDetailPage .detailPagePrimaryContent.padded-right #childrenContent,
-#itemDetailPage .detailPagePrimaryContent.padded-right #childrenContent > div,
-#itemDetailPage .detailPagePrimaryContent.padded-right #childrenContent > .itemsContainer,
-#itemDetailPage .detailPagePrimaryContent.padded-right #childrenContent > div.itemsContainer {
-  width: 100% !important;
-  max-width: 100% !important;
-  min-width: 0 !important;
-  box-sizing: border-box !important;
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-}
-
-.layout-desktop #itemDetailPage .detailPagePrimaryContent.padded-right #childrenContent,
-.layout-desktop #itemDetailPage .detailPagePrimaryContent.padded-right #childrenContent > div,
-.layout-desktop #itemDetailPage .detailPagePrimaryContent.padded-right #childrenContent > .itemsContainer,
-.layout-desktop #itemDetailPage .detailPagePrimaryContent.padded-right #childrenContent > div.itemsContainer {
-  width: var(--jf-detail-content-max, 100%) !important;
-  max-width: var(--jf-detail-content-max, 100%) !important;
-}
-
-.layout-desktop #itemDetailPage .detailPagePrimaryContent.padded-right #childrenContent > div > .card,
-.layout-desktop #itemDetailPage .detailPagePrimaryContent.padded-right #childrenContent > .itemsContainer > .card {
-  max-width: 100% !important;
-}
