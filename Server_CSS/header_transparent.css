@@ -42,3 +42,101 @@
   overflow-y: auto;
   overflow-x: auto;
 }
+
+/* Final header tab stability: prevent library tabs from sliding over the page tab/view-control row. */
+.layout-desktop .skinHeader,
+.layout-tv .skinHeader {
+  overflow: visible !important;
+  min-height: clamp(3.75rem, 7.4vh, 5.7rem) !important;
+  z-index: 1200 !important;
+}
+
+.layout-desktop .skinHeader .headerTabs.sectionTabs,
+.layout-tv .skinHeader .headerTabs.sectionTabs {
+  position: relative !important;
+  inset: auto !important;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  transform: none !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  min-height: clamp(2.5rem, 4.6vh, 3.35rem) !important;
+  margin: 0 auto !important;
+  padding: 0 clamp(7rem, 12vw, 14rem) !important;
+  box-sizing: border-box !important;
+  overflow: visible !important;
+  z-index: 3 !important;
+}
+
+.layout-desktop .skinHeader .headerTabs.sectionTabs > div,
+.layout-tv .skinHeader .headerTabs.sectionTabs > div {
+  position: relative !important;
+  width: 100% !important;
+  max-width: min(72rem, calc(100vw - clamp(14rem, 24vw, 28rem))) !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  scrollbar-width: none !important;
+}
+
+.layout-desktop .skinHeader .headerTabs.sectionTabs > div::-webkit-scrollbar,
+.layout-tv .skinHeader .headerTabs.sectionTabs > div::-webkit-scrollbar {
+  display: none !important;
+}
+
+.layout-desktop .skinHeader .headerTabs.sectionTabs > div > div,
+.layout-tv .skinHeader .headerTabs.sectionTabs > div > div {
+  position: relative !important;
+  top: auto !important;
+  transform: none !important;
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: clamp(1.35rem, 3vw, 4rem) !important;
+  min-height: clamp(2.5rem, 4.6vh, 3.35rem) !important;
+  white-space: nowrap !important;
+}
+
+.layout-desktop .skinHeader .headerTabs.sectionTabs .emby-tab-button,
+.layout-desktop .skinHeader .headerTabs.sectionTabs .emby-button,
+.layout-desktop .skinHeader .headerTabs.sectionTabs a,
+.layout-desktop .skinHeader .headerTabs.sectionTabs button,
+.layout-desktop .skinHeader .headerTabs.sectionTabs #moviesTab,
+.layout-tv .skinHeader .headerTabs.sectionTabs .emby-tab-button,
+.layout-tv .skinHeader .headerTabs.sectionTabs .emby-button,
+.layout-tv .skinHeader .headerTabs.sectionTabs a,
+.layout-tv .skinHeader .headerTabs.sectionTabs button,
+.layout-tv .skinHeader .headerTabs.sectionTabs #moviesTab {
+  position: relative !important;
+  top: auto !important;
+  transform: none !important;
+  flex: 0 0 auto !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  line-height: 2.35rem !important;
+  min-height: 2.35rem !important;
+}
+
+.layout-desktop .libraryPage:not(#itemDetailPage),
+.layout-desktop #moviesPage,
+.layout-desktop #tvShowsPage,
+.layout-desktop #seriesPage,
+.layout-desktop #tvRecommendedPage,
+.layout-desktop #musicRecommendedPage {
+  padding-top: clamp(7.6rem, 10.5vh, 9.6rem) !important;
+}
+
+.layout-desktop .libraryPage .viewSettingsContainer,
+.layout-desktop .libraryPage .itemsViewSettingsContainer,
+.layout-desktop .libraryPage .viewControls,
+.layout-desktop .libraryPage .paging,
+.layout-desktop #moviesPage .viewSettingsContainer,
+.layout-desktop #tvShowsPage .viewSettingsContainer,
+.layout-desktop #seriesPage .viewSettingsContainer {
+  position: relative !important;
+  z-index: 1 !important;
+  margin-top: clamp(0.25rem, 0.8vh, 0.75rem) !important;
+}

@@ -396,3 +396,41 @@ div[data-role="controlgroup"] a[data-role="button"] {
   margin-left: 0 !important;
   margin-right: 0 !important;
 }
+
+/* Final library gap hard override: remove remaining Jellyfin card gutters. */
+:root,
+html,
+body {
+  --jf-card-gap: 0px !important;
+}
+
+.layout-desktop .itemsContainer,
+.layout-desktop .vertical-wrap.itemsContainer,
+.layout-desktop .vertical-list.itemsContainer,
+.layout-desktop .libraryPage .itemsContainer,
+.layout-desktop #moviesPage .itemsContainer,
+.layout-desktop #tvShowsPage .itemsContainer,
+.layout-desktop #seriesPage .itemsContainer,
+.layout-desktop #tvRecommendedPage .itemsContainer,
+.layout-desktop #musicRecommendedPage .itemsContainer {
+  gap: 0 !important;
+  column-gap: 0 !important;
+  row-gap: var(--jf-row-gap, clamp(0.6rem, 0.75vw, 1rem)) !important;
+}
+
+.layout-desktop .itemsContainer > .card,
+.layout-desktop .vertical-wrap.itemsContainer > .card,
+.layout-desktop .libraryPage .itemsContainer > .card {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.layout-desktop .itemsContainer > .card > .cardBox,
+.layout-desktop .itemsContainer > .card .cardScalable,
+.layout-desktop .itemsContainer > .card .cardPadder,
+.layout-desktop .itemsContainer > .card .cardImageContainer {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}

@@ -493,3 +493,59 @@
     pointer-events: none !important;
   }
 }
+
+/* Final detail logo anchor: always right-aligned directly above the detail ribbon. */
+.layout-desktop #itemDetailPage {
+  position: relative !important;
+  --jf-detail-backdrop-height: clamp(15rem, 31vh, 25rem);
+  --jf-detail-ribbon-height: clamp(4.5rem, 10vh, 7.75rem);
+  --jf-detail-logo-height: clamp(3.15rem, 7.2vh, 6.1rem);
+  --jf-detail-logo-gap: clamp(0.45rem, 1vh, 0.85rem);
+}
+
+.layout-desktop #itemDetailPage .itemBackdrop {
+  height: var(--jf-detail-backdrop-height) !important;
+}
+
+.layout-desktop #itemDetailPage .detailRibbon.padded-left.padded-right {
+  min-height: var(--jf-detail-ribbon-height) !important;
+}
+
+.layout-desktop #itemDetailPage .detailLogo.lazy,
+.layout-desktop #itemDetailPage .detailLogo.lazy.lazy-image-fadein-fast,
+.layout-desktop #itemDetailPage .detailLogo {
+  display: block !important;
+  position: absolute !important;
+  top: max(clamp(3.75rem, 6vh, 5.5rem), calc(var(--jf-detail-backdrop-height) - var(--jf-detail-logo-height) - var(--jf-detail-logo-gap))) !important;
+  right: var(--jf-detail-side-pad, clamp(1.75rem, 2.8vw, 3.7rem)) !important;
+  bottom: auto !important;
+  left: auto !important;
+  width: min(34vw, 32rem) !important;
+  height: var(--jf-detail-logo-height) !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background-position: right center !important;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  z-index: 7 !important;
+  pointer-events: none !important;
+  transform: none !important;
+}
+
+@media (max-width: 72em), (max-height: 46em) {
+  .layout-desktop #itemDetailPage .detailLogo.lazy,
+  .layout-desktop #itemDetailPage .detailLogo.lazy.lazy-image-fadein-fast,
+  .layout-desktop #itemDetailPage .detailLogo {
+    position: absolute !important;
+    top: max(clamp(3.75rem, 6vh, 5.5rem), calc(var(--jf-detail-backdrop-height) - var(--jf-detail-logo-height) - var(--jf-detail-logo-gap))) !important;
+    right: var(--jf-detail-side-pad, var(--jf-page-pad, 1rem)) !important;
+    left: auto !important;
+    bottom: auto !important;
+    width: min(42vw, 28rem) !important;
+    height: var(--jf-detail-logo-height) !important;
+    margin: 0 !important;
+    background-position: right center !important;
+  }
+}

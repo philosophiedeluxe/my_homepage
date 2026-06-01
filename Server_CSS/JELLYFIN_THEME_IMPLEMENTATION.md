@@ -73,3 +73,19 @@ Die vorherige aspect-ratio-basierte Verschiebung wurde aus `fixes.css` entfernt.
 - Der primäre Detailposter bleibt im normalen Scrollfluss und überlappt das Banner um ca. 50 %.
 - Die alte `max-height`-Umschaltung wird durch einen echten Breiten-Breakpoint ersetzt, damit der Poster nicht bei normaler Fensterhöhe verschwindet.
 - `--jf-card-gap` ist auf `0rem` gesetzt; Library-Container verwenden keine horizontale Gap mehr.
+
+## Update: Header-Tabs und Detail-Logo stabilisiert
+
+- `header_transparent.css`
+  - Header-Tabs werden nicht mehr über View-/Tab-Steuerungen geschoben.
+  - `headerTabs.sectionTabs` bekommt eine stabile Zeile mit fester Mindesthöhe, eigener horizontaler Scrollfläche und deaktivierten transform-/top-Verschiebungen.
+  - Library-Seiten erhalten zusätzlichen oberen Abstand, damit Sortierung/Filter/Tab-Inhalte nicht in den Header laufen.
+
+- `title_banner-logo.css`
+  - `detailLogo` wird wieder absolut und rechts ausgerichtet.
+  - Position wird aus Backdrop-Höhe, Logo-Höhe und Abstand berechnet.
+  - Das Logo bleibt unabhängig von Browserbreite direkt oberhalb der Detail-Ribbon-Zeile.
+
+- `base.css`
+  - verbleibende Jellyfin-Gutters für Library-Karten hart überschrieben.
+  - `--jf-card-gap` ist global `0px !important`.
