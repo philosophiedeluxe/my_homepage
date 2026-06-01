@@ -1142,6 +1142,7 @@ h3 {
 .cookie-consent__actions {
   display: grid;
   gap: 8px;
+  margin-left: clamp(18px, 3vw, 32px);
 }
 
 .cookie-consent__actions .button {
@@ -1286,6 +1287,7 @@ h3 {
 
   .cookie-consent__actions {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-left: 0;
   }
 }
 
