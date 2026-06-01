@@ -544,7 +544,7 @@ body {
 .layout-mobile #tvShowsPage .vertical-wrap.itemsContainer,
 .layout-mobile #seriesPage .vertical-wrap.itemsContainer,
 .layout-mobile .libraryPage:not(#itemDetailPage) .vertical-wrap.itemsContainer {
-  justify-content: flex-start !important;
+  justify-content: center !important;
   align-content: flex-start !important;
   gap: var(--jf-row-gap, clamp(0.6rem, 0.75vw, 1rem)) var(--jf-card-gap) !important;
   column-gap: var(--jf-card-gap) !important;
