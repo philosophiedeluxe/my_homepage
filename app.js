@@ -61,6 +61,14 @@
       "vita.eyebrow": "Vita",
       "vita.title": "Eine Laufbahn aus Praxis, Verantwortung und <span class=\"accent-word\">Software</span>.",
       "vita.intro": "Mein beruflicher Weg begann in der Gastronomie und führte über Einkauf, Prozessverantwortung und Projektarbeit in die Softwareentwicklung. Diese Stationen sind für mich kein Bruch, sondern ein Fundament.",
+      "vita.focus.eyebrow": "Heute",
+      "vita.focus.title": "Ich verbinde <span class=\"accent-word\">Entwicklung</span>, Daten und Prozessrealität.",
+      "vita.focus.apps.title": "Business Apps",
+      "vita.focus.apps.text": "Ich entwickle Anwendungen nah am operativen Alltag: Oberflächen, Datenmodelle, Validierungen, Workflows und Integrationen.",
+      "vita.focus.oracle.title": "Oracle-Fokus",
+      "vita.focus.oracle.text": "Oracle APEX, PL/SQL, REST Data Sources und Oracle DB sind mein aktueller Schwerpunkt in der täglichen Entwicklung.",
+      "vita.focus.delivery.title": "Lieferfähigkeit",
+      "vita.focus.delivery.text": "Scrum, Product Ownership, PRINCE2 und ITIL helfen mir, Anforderungen, Umsetzung und Betrieb zusammenzudenken.",
       "vita.timeline.eyebrow": "Stationen",
       "vita.timeline.title": "Beruflicher <span class=\"accent-word\">Verlauf</span>",
       "vita.job1.title": "Softwareentwickler - Pragmatis GmbH",
@@ -75,6 +83,8 @@
       "vita.job5.text": "Ausbildung zum Koch, Commis de Cuisine, Demi Chef de Partie, Chef de Partie und Food and Beverage Trainee.",
       "vita.cert.eyebrow": "Zertifikate",
       "vita.cert.title": "Methodik und<br><span class=\"accent-word\">Projektverständnis</span>",
+      "vita.cert.oracle": "Oracle APEX Cloud Developer Professional",
+      "vita.cert.media": "Ausgewählte Nachweise",
       "vita.contact.title": "Wenn das <span class=\"accent-word\">Profil</span> passt, freue ich mich über eine Nachricht.",
       "vita.pdf": "Vita als PDF erstellen",
       "vita.back": "Zur Startseite",
@@ -106,7 +116,7 @@
 
       "cookie.eyebrow": "Datenschutz",
       "cookie.title": "Cookie-Einstellungen",
-      "cookie.text": "Diese Website nutzt keine Analyse- oder Marketing-Cookies. Du kannst entscheiden, ob deine Sprachwahl zusätzlich zur notwendigen Cookie-Auswahl gespeichert werden darf.",
+      "cookie.text": "Keine Analytics, keine Marketing-Cookies. Optional kann die Sprachwahl gespeichert werden.",
       "cookie.necessary.title": "Notwendige Speicherung",
       "cookie.necessary.text": "Speichert deine Cookie-Auswahl und sorgt dafür, dass die Seite zuverlässig funktioniert.",
       "cookie.preferences.title": "Komfortspeicherung",
@@ -177,6 +187,14 @@
       "vita.eyebrow": "Resume",
       "vita.title": "A career built from hands-on work, responsibility and <span class=\"accent-word\">software</span>.",
       "vita.intro": "My career began in hospitality and moved through purchasing, process responsibility and project work into software development. These stages are not a detour; they are the foundation.",
+      "vita.focus.eyebrow": "Today",
+      "vita.focus.title": "I connect <span class=\"accent-word\">development</span>, data and process reality.",
+      "vita.focus.apps.title": "Business apps",
+      "vita.focus.apps.text": "I build applications close to day-to-day operations: interfaces, data models, validations, workflows and integrations.",
+      "vita.focus.oracle.title": "Oracle focus",
+      "vita.focus.oracle.text": "Oracle APEX, PL/SQL, REST Data Sources and Oracle DB are my current focus in daily development work.",
+      "vita.focus.delivery.title": "Delivery mindset",
+      "vita.focus.delivery.text": "Scrum, Product Ownership, PRINCE2 and ITIL help me connect requirements, implementation and operations.",
       "vita.timeline.eyebrow": "Experience",
       "vita.timeline.title": "Professional <span class=\"accent-word\">path</span>",
       "vita.job1.title": "Software Developer - Pragmatis GmbH",
@@ -191,6 +209,8 @@
       "vita.job5.text": "Apprenticeship as cook, Commis de Cuisine, Demi Chef de Partie, Chef de Partie and Food and Beverage Trainee.",
       "vita.cert.eyebrow": "Certificates",
       "vita.cert.title": "Methods and<br><span class=\"accent-word\">project understanding</span>",
+      "vita.cert.oracle": "Oracle APEX Cloud Developer Professional",
+      "vita.cert.media": "Selected credentials",
       "vita.contact.title": "If the <span class=\"accent-word\">profile</span> fits, I would be happy to hear from you.",
       "vita.pdf": "Create resume PDF",
       "vita.back": "Back home",
@@ -222,7 +242,7 @@
 
       "cookie.eyebrow": "Privacy",
       "cookie.title": "Cookie settings",
-      "cookie.text": "This website does not use analytics or marketing cookies. You can decide whether your language choice may be saved in addition to the necessary cookie choice.",
+      "cookie.text": "No analytics, no marketing cookies. Optionally, your language choice can be saved.",
       "cookie.necessary.title": "Necessary storage",
       "cookie.necessary.text": "Stores your cookie choice and keeps the website working reliably.",
       "cookie.preferences.title": "Preference storage",
@@ -310,7 +330,18 @@
   function getInitialLang() {
     const params = new URLSearchParams(window.location.search);
     const storedLang = hasPreferenceConsent() ? getStoredLang() : null;
-    return sanitizeLang(storedLang || params.get("lang") || navigator.language || DEFAULT_LANG);
+    return sanitizeLang(params.get("lang") || storedLang || navigator.language || DEFAULT_LANG);
+  }
+
+  function updateLangUrl(lang) {
+    if (!("history" in window)) return;
+    const url = new URL(window.location.href);
+    if (lang === DEFAULT_LANG) {
+      url.searchParams.delete("lang");
+    } else {
+      url.searchParams.set("lang", lang);
+    }
+    window.history.replaceState({}, "", url);
   }
 
   function applyTranslations(lang) {
@@ -342,10 +373,11 @@
     }
   }
 
-  function setLang(lang) {
+  function setLang(lang, updateUrl = false) {
     const nextLang = sanitizeLang(lang);
     storeLang(nextLang);
     applyTranslations(nextLang);
+    if (updateUrl) updateLangUrl(nextLang);
   }
 
   function saveCookieConsent(preferences, event) {
@@ -414,24 +446,15 @@
         <div class="cookie-consent__intro">
           <p class="eyebrow" data-i18n="cookie.eyebrow">Datenschutz</p>
           <h2 id="cookie-consent-title" data-i18n="cookie.title">Cookie-Einstellungen</h2>
-          <p data-i18n="cookie.text">Diese Website nutzt keine Analyse- oder Marketing-Cookies. Du kannst entscheiden, ob deine Sprachwahl zusätzlich zur notwendigen Cookie-Auswahl gespeichert werden darf.</p>
+          <p data-i18n="cookie.text">Keine Analytics, keine Marketing-Cookies. Optional kann die Sprachwahl gespeichert werden.</p>
         </div>
-        <div class="cookie-options" data-i18n-attr="aria-label:cookie.optionsLabel" aria-label="Cookie-Kategorien">
-          <label class="cookie-option cookie-option--locked">
-            <input type="checkbox" checked disabled>
-            <span>
-              <strong data-i18n="cookie.necessary.title">Notwendige Speicherung</strong>
-              <small data-i18n="cookie.necessary.text">Speichert deine Cookie-Auswahl und sorgt dafür, dass die Seite zuverlässig funktioniert.</small>
-            </span>
-          </label>
-          <label class="cookie-option">
-            <input type="checkbox" data-pk-consent-preferences>
-            <span>
-              <strong data-i18n="cookie.preferences.title">Komfortspeicherung</strong>
-              <small data-i18n="cookie.preferences.text">Merkt sich deine gewählte Sprache für den nächsten Besuch.</small>
-            </span>
-          </label>
-        </div>
+        <label class="cookie-option cookie-option--compact">
+          <input type="checkbox" data-pk-consent-preferences>
+          <span>
+            <strong data-i18n="cookie.preferences.title">Komfortspeicherung</strong>
+            <small data-i18n="cookie.preferences.text">Merkt sich deine gewählte Sprache für den nächsten Besuch.</small>
+          </span>
+        </label>
         <div class="cookie-consent__actions">
           <button class="button button-primary" type="button" data-pk-consent-accept-all data-i18n="cookie.acceptAll">Alle akzeptieren</button>
           <button class="button button-secondary" type="button" data-pk-consent-save data-i18n="cookie.save">Auswahl speichern</button>
@@ -494,7 +517,7 @@
   if (langToggle) {
     langToggle.addEventListener("click", () => {
       const current = document.documentElement.dataset.lang || DEFAULT_LANG;
-      setLang(current === "de" ? "en" : "de");
+      setLang(current === "de" ? "en" : "de", true);
       setNavOpen(false);
     });
   }
@@ -571,7 +594,7 @@
     addReveal(".split-section > div:first-child, .contact-section > div:first-child", "left");
     addReveal(".split-section .text-stack, .contact-actions", "right");
     addReveal(".section-heading, .page-hero > *, .legal-page > section, .legal-page > .legal-note", "up");
-    addReveal(".project-card, .stack-grid article, .timeline-item, .credential-list li", "up", true);
+    addReveal(".project-card, .stack-grid article, .profile-grid article, .timeline-item, .credential-list li, .certificate-card", "up", true);
 
     root.classList.add("reveal-ready");
 

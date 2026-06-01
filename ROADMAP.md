@@ -21,6 +21,10 @@ Die Homepage ist jetzt eine moderne, statische Portfolio-Seite mit starkem Hero,
 - Cookie-Hinweis mit lokaler, neutral benannter Consent-Speicherung und Footer-Link fuer spaetere Aenderungen.
 - Firefox-freundlicher Performance-Pass fuer Hero-Parallax, Reveal-Animationen, Glas-Effekte und Full-Bleed-Sektionsbaender.
 - Kleinere Hero-Bildvarianten fuer responsive Auslieferung per `srcset`.
+- Eigene Social-Preview-Grafik fuer OpenGraph/Twitter Cards.
+- Vita mit fokussiertem Entwicklerprofil, Oracle-APEX-Zertifikat und Zertifikatsgalerie erweitert.
+- Hreflang-Strategie fuer DE/EN-URLs ueber `?lang=en` ergaenzt.
+- Kleiner lokaler QA-Workflow fuer Syntax, lokale Referenzen, Sitemap und optionale Screenshots ergaenzt.
 
 ## Erledigte Verbesserungen
 
@@ -57,6 +61,7 @@ Die Homepage ist jetzt eine moderne, statische Portfolio-Seite mit starkem Hero,
 - Full-Bleed-Sektionshintergruende von grossen `box-shadow`/`clip-path` Flaechen auf guenstigere Pseudo-Elemente umgestellt.
 - Reveal-Elemente animieren weiterhin beim Rein- und Rausscrollen, damit die Seite beim Zurueckscrollen lebendig bleibt.
 - Die dauerhaft laufende Hero-Signal-Linie nutzt einen statischen Glow statt animiertem Schatten.
+- Cookie-Hinweis kompakter gemacht, damit der erste Hero-Eindruck weniger stark ueberdeckt wird.
 
 ## Offene sinnvolle naechste Schritte
 
