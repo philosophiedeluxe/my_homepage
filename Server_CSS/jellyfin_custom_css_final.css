@@ -427,3 +427,80 @@ body {
     background-position: right center !important;
   }
 }
+
+/* Final library right-edge compaction: the large right blank space is not the card gap;
+   it is leftover flex-row width from Jellyfin's fixed poster card sizing.
+   Cards now use a column-based flex basis so the row consumes the available width
+   while keeping a small gap and reserving room for the alphabet index. */
+:root,
+html,
+body {
+  --jf-card-gap: clamp(0.21rem, 0.3vw, 0.38rem) !important;
+  --jf-library-index-reserve: clamp(1.85rem, 2.15vw, 2.75rem);
+  --jf-library-cols: 4;
+}
+
+@media (min-width: 70em) {
+  :root,
+  html,
+  body { --jf-library-cols: 5; }
+}
+
+@media (min-width: 88em) {
+  :root,
+  html,
+  body { --jf-library-cols: 6; }
+}
+
+@media (min-width: 106em) {
+  :root,
+  html,
+  body { --jf-library-cols: 7; }
+}
+
+@media (min-width: 126em) {
+  :root,
+  html,
+  body { --jf-library-cols: 8; }
+}
+
+@media (min-width: 148em) {
+  :root,
+  html,
+  body { --jf-library-cols: 9; }
+}
+
+.layout-desktop #moviesPage .vertical-wrap.itemsContainer,
+.layout-desktop #tvShowsPage .vertical-wrap.itemsContainer,
+.layout-desktop #seriesPage .vertical-wrap.itemsContainer,
+.layout-desktop .libraryPage:not(#itemDetailPage) .vertical-wrap.itemsContainer {
+  justify-content: flex-start !important;
+  align-content: flex-start !important;
+  gap: var(--jf-row-gap, clamp(0.6rem, 0.75vw, 1rem)) var(--jf-card-gap) !important;
+  column-gap: var(--jf-card-gap) !important;
+  row-gap: var(--jf-row-gap, clamp(0.6rem, 0.75vw, 1rem)) !important;
+}
+
+.layout-desktop #moviesPage .vertical-wrap.itemsContainer > .card,
+.layout-desktop #tvShowsPage .vertical-wrap.itemsContainer > .card,
+.layout-desktop #seriesPage .vertical-wrap.itemsContainer > .card,
+.layout-desktop .libraryPage:not(#itemDetailPage) .vertical-wrap.itemsContainer > .card {
+  flex: 0 0 calc((100% - var(--jf-library-index-reserve) - ((var(--jf-library-cols) - 1) * var(--jf-card-gap))) / var(--jf-library-cols)) !important;
+  width: calc((100% - var(--jf-library-index-reserve) - ((var(--jf-library-cols) - 1) * var(--jf-card-gap))) / var(--jf-library-cols)) !important;
+  max-width: none !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+}
+
+.layout-desktop #moviesPage .vertical-wrap.itemsContainer > .card > .cardBox,
+.layout-desktop #tvShowsPage .vertical-wrap.itemsContainer > .card > .cardBox,
+.layout-desktop #seriesPage .vertical-wrap.itemsContainer > .card > .cardBox,
+.layout-desktop .libraryPage:not(#itemDetailPage) .vertical-wrap.itemsContainer > .card > .cardBox,
+.layout-desktop #moviesPage .vertical-wrap.itemsContainer > .card .cardScalable,
+.layout-desktop #tvShowsPage .vertical-wrap.itemsContainer > .card .cardScalable,
+.layout-desktop #seriesPage .vertical-wrap.itemsContainer > .card .cardScalable,
+.layout-desktop .libraryPage:not(#itemDetailPage) .vertical-wrap.itemsContainer > .card .cardScalable {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}

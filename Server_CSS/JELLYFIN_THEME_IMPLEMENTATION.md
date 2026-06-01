@@ -96,3 +96,11 @@ Die vorherige aspect-ratio-basierte Verschiebung wurde aus `fixes.css` entfernt.
 - `--jf-card-gap` wieder aktiviert, aber auf ca. 30% des ursprünglichen Wertes reduziert.
 - Neuer Wert: `clamp(0.21rem, 0.3vw, 0.38rem)`.
 - Column-Gaps verwenden wieder `var(--jf-card-gap)`; Card-Margins/Paddings bleiben auf 0, damit der Abstand ausschließlich über Grid/Flex-Gap gesteuert wird.
+
+## 2026-06-01 - Library right-edge compaction
+
+- `--jf-card-gap` bleibt als reduzierter Card-Abstand aktiv: `clamp(0.21rem, 0.3vw, 0.38rem)`.
+- Der große freie Bereich rechts wurde nicht durch `gap`, sondern durch feste Jellyfin-Card-Breiten erzeugt.
+- Library-Grids verwenden jetzt eine spaltenbasierte `flex-basis`-Berechnung.
+- Für den Alphabetindex rechts wird ein kleiner Reservebereich über `--jf-library-index-reserve` freigehalten.
+- Karten füllen die verfügbare Breite dynamischer, ohne wieder komplett zusammenzukleben.
