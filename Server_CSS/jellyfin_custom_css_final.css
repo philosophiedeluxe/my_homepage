@@ -15,17 +15,14 @@
 @import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/hoverglow.css');
 @import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/glassy.css');
 
-/* Style backdrop */
 .backdropImage {
   filter: blur(0px) saturate(100%) contrast(100%) brightness(100%);
 }
 
-/* Style PageSecondaryContainer */
 .detailPageSecondaryContainer.padded-bottom-page {
   background-color: rgba(0, 0, 0, 0.8);
 }
 
-/* Login background */
 #loginPage {
   background-image: image-set(
     url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/loginBG.webp') type('image/webp'),
@@ -37,13 +34,11 @@
   background-attachment: fixed !important;
 }
 
-/* Accent and rounding */
 :root {
   --accent: 98, 121, 205;
   --rounding: 12px;
 }
 
-/* Custom logo */
 .pageTitleWithDefaultLogo,
 .pageTitleWithLogo {
   background-image: image-set(

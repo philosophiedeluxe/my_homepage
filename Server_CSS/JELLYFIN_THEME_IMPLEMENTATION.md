@@ -16,12 +16,6 @@
 - Login-Frame dynamisch skaliert und optisch stärker an das restliche Theme angepasst.
 - `prefers-reduced-motion` berücksichtigt.
 
-## Zusätzlich
-
-- WebP-Varianten für Logo- und Login-Assets erzeugt.
-- `login_frame.css` verwendet jetzt `image-set()` mit WebP plus JPG-Fallback.
-- `jellyfin_custom_css_final.css` enthält den vollständigen Jellyfin-Custom-CSS-Block mit optimiertem Logo- und Login-Background.
-
 ## Beibehalten
 
 - Bestehende Import-Struktur.
@@ -38,3 +32,13 @@ Die Datei `dark.css` setzt `--accent` nicht mehr auf Weiß. Dadurch ist der exte
 ```
 
 Die aktive Episodenansicht bleibt `episodes_compactlist.css`. `episodes_grid.css` wurde nur als optionale Alternative verbessert.
+
+
+## 2026-06-01 Detailseiten-Breitenfix
+
+Behoben wurde ein Layoutsprung auf breiten Browserfenstern bei Jellyfin-Detailseiten. Betroffen waren insbesondere:
+
+- `.detailPagePrimaryContent.padded-right`
+- `.detailRibbon.padded-left.padded-right`
+
+Die vorherige aspect-ratio-basierte Verschiebung wurde aus `fixes.css` entfernt. Die Detailseite verwendet jetzt in `title_banner-logo.css` zentrale Layout-Variablen für Posterbreite, Seitenabstand, Content-Abstand und maximale Inhaltsbreite. Dadurch bleiben Poster, Ribbon, Metadaten und Beschreibung auch bei voller Browserbreite stabil ausgerichtet.

@@ -36,23 +36,12 @@
   height: 5em;
 }
 
-/* Accommodate ultrawide aspect ratios */
+/* Detail-page width handling is centralized in title_banner-logo.css.
+   The old aspect-ratio based padding jump has been removed because it pushed
+   detailRibbon/detailPagePrimaryContent too far to the right on wide browsers. */
 @media (min-aspect-ratio: 1.98/1) {
-  .detailImageContainer .card {
-    width: clamp(15rem, 21vw, 24rem) !important;
-  }
-  .detailPagePrimaryContainer,
-  .detailPageContent {
-    padding-left: clamp(22rem, 28.45vw, 34rem) !important;
-  }
-}
-@media (min-aspect-ratio: 2.7/1) {
-  .detailImageContainer .card {
-    width: clamp(12rem, 16vw, 20rem) !important;
-  }
-  .detailPagePrimaryContainer,
-  .detailPageContent {
-    padding-left: clamp(18rem, 23.45vw, 28rem) !important;
+  .layout-desktop #itemDetailPage .detailImageContainer .card {
+    width: var(--jf-detail-poster-width, clamp(15rem, 21vw, 24rem)) !important;
   }
 }
 

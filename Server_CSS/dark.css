@@ -105,10 +105,7 @@ progress::-webkit-progress-value,
 
 /* Login background fallback */
 #loginPage {
-  background-image: image-set(
-    url(https://philosophiedeluxe.github.io/my_homepage/Server_CSS/loginBG.webp) type("image/webp"),
-    url(https://philosophiedeluxe.github.io/my_homepage/Server_CSS/loginBG.jpg) type("image/jpeg")
-  ) !important;
+  background: url(https://i.imgur.com/9vL4iNf.png) !important;
   background-size: cover !important;
 }
 
