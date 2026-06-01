@@ -79,12 +79,9 @@ div[data-role="controlgroup"] a[data-role="button"] {
   margin-top: 4rem;
 }
 
-/* Stop covers from being scrolled on desktop */
-.layout-desktop .detailImageContainer .card {
-  position: fixed !important;
-  top: clamp(5.5rem, 10vh, 8.5rem) !important;
-  width: clamp(12rem, 21vw, 21rem) !important;
-}
+/* Detail posters are positioned in title_banner-logo.css.
+   They must not be fixed; otherwise they remain over episode lists while scrolling. */
+.layout-desktop .detailImageContainer .card,
 .layout-mobile .detailImageContainer .card {
   position: absolute !important;
 }

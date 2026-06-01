@@ -42,3 +42,11 @@ Behoben wurde ein Layoutsprung auf breiten Browserfenstern bei Jellyfin-Detailse
 - `.detailRibbon.padded-left.padded-right`
 
 Die vorherige aspect-ratio-basierte Verschiebung wurde aus `fixes.css` entfernt. Die Detailseite verwendet jetzt in `title_banner-logo.css` zentrale Layout-Variablen für Posterbreite, Seitenabstand, Content-Abstand und maximale Inhaltsbreite. Dadurch bleiben Poster, Ribbon, Metadaten und Beschreibung auch bei voller Browserbreite stabil ausgerichtet.
+
+## Detailseiten-Korrektur: Poster, Logo und Banner
+
+- `base.css`: feste Positionierung des Detail-Posters entfernt. Das Poster scrollt jetzt mit der Detailseite und kann Episodenlisten nicht mehr überdecken.
+- `title_banner-logo.css`: Detail-Poster, Detail-Logo, Ribbon und Primary-Content neu geschichtet. Das Logo setzt keine geerbten `top`-/`right`-/`height`-Werte mehr ein.
+- `title_banner-logo.css`: kompakte Desktop-Breiten blenden das Poster aus und setzen den Inhalt wieder auf volle verfügbare Breite.
+- `dark.css`: Banner-Overlay reduziert, damit das Backdrop-Bild sichtbar bleibt.
+- `jellyfin_custom_css_final.css`: Backdrop-Filter und Detailseiten-Hintergrund entsprechend angepasst.

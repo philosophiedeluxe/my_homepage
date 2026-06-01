@@ -64,14 +64,17 @@ fieldset {
   border-radius: calc(var(--jf-radius) * 0.65);
 }
 
-/* Detail backdrop */
+/* Detail backdrop: cinematic but less opaque so the banner remains visible */
 .layout-desktop .detailRibbon {
-  background: rgba(0,0,0,.22) !important;
+  background: rgba(0,0,0,.12) !important;
+}
+.itemBackdrop {
+  opacity: 1 !important;
 }
 .itemBackdrop::after {
   background:
-    linear-gradient(90deg, rgba(0,0,0,0.86), rgba(0,0,0,0.42) 48%, rgba(0,0,0,0.76)),
-    linear-gradient(180deg, rgba(0,0,0,0.14), rgba(0,0,0,0.88)) !important;
+    linear-gradient(90deg, rgba(0,0,0,0.54), rgba(0,0,0,0.18) 44%, rgba(0,0,0,0.50)),
+    linear-gradient(180deg, rgba(0,0,0,0.04), rgba(0,0,0,0.62)) !important;
 }
 
 /* Homepage, footer player, dialogs */
