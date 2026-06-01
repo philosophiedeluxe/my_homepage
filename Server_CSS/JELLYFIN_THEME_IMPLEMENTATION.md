@@ -57,3 +57,11 @@ Die vorherige aspect-ratio-basierte Verschiebung wurde aus `fixes.css` entfernt.
 - `detailPagePrimaryContainer` uses `flow-root`, so the poster contributes to the layout height and does not cover cast rows, collections or episode grids while scrolling.
 - `detailLogo` is now positioned high on the right side of the detail header with explicit `top/right/height` overrides.
 - The backdrop overlay was reduced and the backdrop image is brightened through `backdropContainer`/`backdropImage` overrides.
+
+
+## Update: spacing and poster/banner overlap
+
+- `--jf-card-gap` reduziert auf `clamp(0.45rem, 0.55vw, 0.85rem)`.
+- `--jf-page-pad` leicht reduziert, damit Medienraster rechts weniger Leerraum erzeugen.
+- Detailposter bleibt im normalen Scrollfluss, wird aber per negativem oberen Margin ca. 50 Prozent in den Banner gezogen.
+- Detail-Logo sitzt oben rechts im Bannerbereich und überschreibt alte `top`-/`right`-/`left`-Werte.

@@ -12,9 +12,9 @@
   --jf-border: 255, 255, 255;
 
   --jf-radius: var(--rounding, 12px);
-  --jf-page-pad: clamp(1rem, 3vw, 4.25rem);
-  --jf-row-gap: clamp(0.8rem, 1vw, 1.35rem);
-  --jf-card-gap: clamp(0.7rem, 1vw, 1.25rem);
+  --jf-page-pad: clamp(0.85rem, 2.35vw, 3.35rem);
+  --jf-row-gap: clamp(0.7rem, 0.85vw, 1.15rem);
+  --jf-card-gap: clamp(0.45rem, 0.55vw, 0.85rem);
   --jf-motion-fast: 150ms;
   --jf-motion-med: 240ms;
   --jf-motion-slow: 420ms;
@@ -167,6 +167,23 @@ div[data-role="controlgroup"] a[data-role="button"] {
 }
 .chapterThumbContainer {
   box-shadow: 0 0 1.9vh #000;
+}
+
+
+/* Library grid spacing: tighter card gaps and less unused right-side space on wide views. */
+.layout-desktop .libraryPage .itemsContainer,
+.layout-desktop #moviesPage .itemsContainer,
+.layout-desktop #tvRecommendedPage .itemsContainer,
+.layout-desktop #musicRecommendedPage .itemsContainer {
+  gap: var(--jf-card-gap) !important;
+}
+
+.layout-desktop .libraryPage .padded-left,
+.layout-desktop .libraryPage .padded-right,
+.layout-desktop #moviesPage .padded-left,
+.layout-desktop #moviesPage .padded-right {
+  padding-left: var(--jf-page-pad) !important;
+  padding-right: var(--jf-page-pad) !important;
 }
 
 /* Dynamic page/card rows */
