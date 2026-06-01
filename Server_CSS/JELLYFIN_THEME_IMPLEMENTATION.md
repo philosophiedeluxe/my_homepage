@@ -104,3 +104,12 @@ Die vorherige aspect-ratio-basierte Verschiebung wurde aus `fixes.css` entfernt.
 - Library-Grids verwenden jetzt eine spaltenbasierte `flex-basis`-Berechnung.
 - Für den Alphabetindex rechts wird ein kleiner Reservebereich über `--jf-library-index-reserve` freigehalten.
 - Karten füllen die verfügbare Breite dynamischer, ohne wieder komplett zusammenzukleben.
+
+
+## Header-Tabs Responsive Fix
+
+- Die starre `max-width: calc(100vw - ...)`-Logik wurde entfernt.
+- Die Header-Tabs liegen wieder in einer eigenen stabilen Header-Zeile.
+- Der innere Tab-Strip ist nur zentriert, solange er in den sichtbaren Bereich passt.
+- Bei schmaleren Fenstern wird der Tab-Strip linksbündig und horizontal scrollbar, statt links/rechts aus dem sichtbaren Bereich zu rutschen.
+- `#moviesTab` und die übrigen Tab-Buttons werden nicht mehr durch transformierte Elterncontainer überlagert.
