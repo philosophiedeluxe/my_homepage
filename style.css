@@ -44,6 +44,10 @@ body.nav-open {
   overflow: hidden;
 }
 
+body.modal-open {
+  overflow: hidden;
+}
+
 
 /* Mobile menu must fully win over the cookie dialog.
    The cookie card can be visually hidden behind the nav overlay, but it must also be
@@ -759,8 +763,6 @@ h3 {
 .oracle-badge-card img {
   width: min(150px, 100%);
   height: auto;
-  border-radius: 50%;
-  background: #f4f1ea;
 }
 
 .oracle-badge-card figcaption {
@@ -780,12 +782,29 @@ h3 {
   overflow: hidden;
 }
 
+.proof-card__preview {
+  width: 100%;
+  display: block;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  background: transparent;
+  cursor: zoom-in;
+}
+
+.proof-card__preview:hover img,
+.proof-card__preview:focus-visible img {
+  transform: scale(1.025);
+}
+
 .proof-card img {
   width: 100%;
   height: 180px;
   object-fit: cover;
   object-position: top center;
   background: #f4f1ea;
+  transition: transform 180ms ease;
 }
 
 .proof-card--oracle img {
@@ -794,7 +813,7 @@ h3 {
   object-position: center;
 }
 
-.proof-card > div {
+.proof-card__body {
   padding: 14px;
 }
 
@@ -810,6 +829,91 @@ h3 {
   font-size: 1rem;
   font-weight: 700;
   line-height: 1.2;
+}
+
+.cert-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 140;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(16, 17, 20, 0.88);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease;
+}
+
+.cert-lightbox[data-open="true"] {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.cert-lightbox__dialog {
+  width: min(100%, 1120px);
+  max-height: calc(100svh - 48px);
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  overflow: hidden;
+  border: 1px solid rgba(98, 214, 208, 0.3);
+  border-radius: var(--radius);
+  background: #101114;
+  box-shadow: var(--shadow);
+}
+
+.cert-lightbox__bar {
+  min-height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 12px 10px 18px;
+  border-bottom: 1px solid var(--line);
+}
+
+.cert-lightbox__title {
+  margin: 0;
+  color: var(--accent-2);
+  font-family: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.cert-lightbox__close {
+  width: 42px;
+  aspect-ratio: 1;
+  display: inline-grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  color: var(--text);
+  background: rgba(244, 241, 234, 0.06);
+  font-size: 1.35rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.cert-lightbox__close:hover {
+  border-color: rgba(98, 214, 208, 0.7);
+  background: rgba(98, 214, 208, 0.08);
+}
+
+.cert-lightbox__stage {
+  min-height: 0;
+  overflow: auto;
+  padding: 18px;
+  background: rgba(244, 241, 234, 0.04);
+}
+
+.cert-lightbox__image {
+  width: auto;
+  max-width: 100%;
+  max-height: calc(100svh - 140px);
+  margin-inline: auto;
+  object-fit: contain;
+  background: #f4f1ea;
 }
 
 .credential-section .section-heading h2 {
@@ -1251,9 +1355,25 @@ h3 {
     grid-template-columns: 1fr;
   }
 
-  .proof-card img,
+  .proof-card__preview img,
   .proof-card--oracle img {
     height: 240px;
+  }
+
+  .cert-lightbox {
+    padding: 12px;
+  }
+
+  .cert-lightbox__dialog {
+    max-height: calc(100svh - 24px);
+  }
+
+  .cert-lightbox__stage {
+    padding: 10px;
+  }
+
+  .cert-lightbox__image {
+    max-height: calc(100svh - 118px);
   }
 
   .hero-actions,

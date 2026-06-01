@@ -512,6 +512,68 @@
     footerLinks.appendChild(button);
   }
 
+  function setupCertificateLightbox() {
+    const triggers = document.querySelectorAll("[data-cert-open]");
+    if (!triggers.length) return;
+
+    const lightbox = document.createElement("div");
+    lightbox.className = "cert-lightbox";
+    lightbox.dataset.open = "false";
+    lightbox.setAttribute("role", "dialog");
+    lightbox.setAttribute("aria-modal", "true");
+    lightbox.setAttribute("aria-labelledby", "cert-lightbox-title");
+    lightbox.innerHTML = `
+      <div class="cert-lightbox__dialog" role="document">
+        <div class="cert-lightbox__bar">
+          <p class="cert-lightbox__title" id="cert-lightbox-title"></p>
+          <button class="cert-lightbox__close" type="button" aria-label="Nachweis schließen">×</button>
+        </div>
+        <div class="cert-lightbox__stage">
+          <img class="cert-lightbox__image" alt="">
+        </div>
+      </div>
+    `;
+
+    document.body.appendChild(lightbox);
+
+    const title = lightbox.querySelector(".cert-lightbox__title");
+    const image = lightbox.querySelector(".cert-lightbox__image");
+    const closeButton = lightbox.querySelector(".cert-lightbox__close");
+    let lastFocus = null;
+
+    function closeLightbox() {
+      lightbox.dataset.open = "false";
+      document.body.classList.remove("modal-open");
+      image.removeAttribute("src");
+      if (lastFocus) lastFocus.focus();
+    }
+
+    function openLightbox(trigger) {
+      lastFocus = trigger;
+      const src = trigger.dataset.certSrc;
+      const certTitle = trigger.dataset.certTitle || trigger.querySelector("img")?.alt || "";
+      image.src = src;
+      image.alt = certTitle;
+      title.textContent = certTitle;
+      lightbox.dataset.open = "true";
+      document.body.classList.add("modal-open");
+      closeButton.focus();
+    }
+
+    triggers.forEach((trigger) => {
+      trigger.addEventListener("click", () => openLightbox(trigger));
+    });
+
+    closeButton.addEventListener("click", closeLightbox);
+    lightbox.addEventListener("click", (event) => {
+      if (event.target === lightbox) closeLightbox();
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && lightbox.dataset.open === "true") closeLightbox();
+    });
+  }
+
   function setNavOpen(open) {
     if (!navToggle || !navList) return;
     navToggle.setAttribute("aria-expanded", String(open));
@@ -631,6 +693,7 @@
   }
  
   addCookieSettingsLink();
+  setupCertificateLightbox();
   setLang(getInitialLang());
   window.addEventListener("resize", measureHero, { passive: true });
   window.addEventListener("orientationchange", measureHero, { passive: true });
