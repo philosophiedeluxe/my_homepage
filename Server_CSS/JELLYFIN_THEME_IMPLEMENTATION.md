@@ -63,7 +63,7 @@ Die vorherige aspect-ratio-basierte Verschiebung wurde aus `fixes.css` entfernt.
 
 - `--jf-card-gap` reduziert auf `clamp(0.45rem, 0.55vw, 0.85rem)`.
 - `--jf-page-pad` leicht reduziert, damit Medienraster rechts weniger Leerraum erzeugen.
-- Detailposter bleibt im normalen Scrollfluss, wird aber per negativem oberen Margin ca. 50 Prozent in den Banner gezogen.
+- Detailposter bleibt im normalen Scrollfluss, wird aber per negativem oberen Margin ca. 40 Prozent in den Banner gezogen.
 - Detail-Logo sitzt oben rechts im Bannerbereich und überschreibt alte `top`-/`right`-/`left`-Werte.
 
 
@@ -113,3 +113,19 @@ Die vorherige aspect-ratio-basierte Verschiebung wurde aus `fixes.css` entfernt.
 - Der innere Tab-Strip ist nur zentriert, solange er in den sichtbaren Bereich passt.
 - Bei schmaleren Fenstern wird der Tab-Strip linksbündig und horizontal scrollbar, statt links/rechts aus dem sichtbaren Bereich zu rutschen.
 - `#moviesTab` und die übrigen Tab-Buttons werden nicht mehr durch transformierte Elterncontainer überlagert.
+
+
+## Detailposter-Vertikalposition
+
+Das Detailposter wurde um ca. 10 Prozentpunkte weiter nach unten gesetzt. Der Banner-Overlap wurde von `-0.50` auf `-0.40` reduziert:
+
+```css
+--jf-detail-poster-overlap: calc(var(--jf-detail-poster-width) * -0.40);
+```
+
+## Header semi-transparent compaction
+
+- `skinHeader-withBackground.skinHeader-blurred.semiTransparent` auf etwa 50% sichtbare Höhe reduziert.
+- Header-Tabs bleiben als eigene Zeile unterhalb der kompakten Header-Bar sichtbar.
+- Tabs werden bei ausreichender Breite wieder zentriert und erst bei schmalen Viewports linksbündig scrollbar.
+- Seiten-Top-Abstand neu berechnet, damit die Filter-/Toolbar-Zeile nicht mehr vom Header überdeckt wird.

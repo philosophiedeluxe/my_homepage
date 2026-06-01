@@ -196,3 +196,92 @@
   }
 }
 
+/* Header height compaction: keep only the top control bar inside the semi-transparent header.
+   Header tabs stay visible below it, but no longer sit inside a thick overlay layer. */
+:root,
+html,
+body {
+  --jf-header-bar-height: clamp(2.8rem, 4.2vh, 3.55rem);
+  --jf-header-tabs-height: clamp(2.35rem, 3.65vh, 2.9rem);
+  --jf-header-tabs-top: calc(var(--jf-header-bar-height) + clamp(0.05rem, 0.35vh, 0.22rem));
+  --jf-header-page-offset: calc(var(--jf-header-bar-height) + var(--jf-header-tabs-height) + clamp(1.05rem, 2.2vh, 1.85rem));
+}
+
+.layout-desktop .skinHeader.skinHeader-withBackground.skinHeader-blurred.semiTransparent,
+.layout-desktop .skinHeader.skinHeader-blurred.semiTransparent,
+.layout-desktop .skinHeader:has(.headerTabs.sectionTabs),
+.layout-tv .skinHeader.skinHeader-withBackground.skinHeader-blurred.semiTransparent,
+.layout-tv .skinHeader.skinHeader-blurred.semiTransparent,
+.layout-tv .skinHeader:has(.headerTabs.sectionTabs) {
+  height: var(--jf-header-bar-height) !important;
+  min-height: var(--jf-header-bar-height) !important;
+  max-height: var(--jf-header-bar-height) !important;
+  overflow: visible !important;
+  background-color: rgba(7, 8, 11, 0.48) !important;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22) !important;
+}
+
+.layout-desktop .skinHeader .headerTabs.sectionTabs,
+.layout-tv .skinHeader .headerTabs.sectionTabs {
+  top: var(--jf-header-tabs-top) !important;
+  height: var(--jf-header-tabs-height) !important;
+  min-height: var(--jf-header-tabs-height) !important;
+  padding-inline: clamp(0.85rem, 2.1vw, 2.4rem) !important;
+  background: transparent !important;
+  z-index: 5 !important;
+}
+
+.layout-desktop .skinHeader .headerTabs.sectionTabs > div,
+.layout-tv .skinHeader .headerTabs.sectionTabs > div {
+  width: 100% !important;
+  max-width: min(100%, 72rem) !important;
+  margin-inline: auto !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+}
+
+.layout-desktop .skinHeader .headerTabs.sectionTabs > div > div,
+.layout-tv .skinHeader .headerTabs.sectionTabs > div > div {
+  width: max-content !important;
+  min-width: max-content !important;
+  margin-inline: auto !important;
+  justify-content: center !important;
+  gap: clamp(1.05rem, 2.1vw, 3.05rem) !important;
+}
+
+.layout-desktop .libraryPage:not(#itemDetailPage),
+.layout-desktop #indexPage,
+.layout-desktop #moviesPage,
+.layout-desktop #tvShowsPage,
+.layout-desktop #seriesPage,
+.layout-desktop #tvRecommendedPage,
+.layout-desktop #musicRecommendedPage {
+  padding-top: var(--jf-header-page-offset) !important;
+}
+
+@media (max-width: 52em) {
+  :root,
+  html,
+  body {
+    --jf-header-page-offset: calc(var(--jf-header-bar-height) + var(--jf-header-tabs-height) + clamp(1.3rem, 2.8vh, 2.1rem));
+  }
+
+  .layout-desktop .skinHeader .headerTabs.sectionTabs,
+  .layout-tv .skinHeader .headerTabs.sectionTabs {
+    padding-left: clamp(0.85rem, 2.2vw, 1.35rem) !important;
+    padding-right: clamp(0.85rem, 2.2vw, 1.35rem) !important;
+  }
+
+  .layout-desktop .skinHeader .headerTabs.sectionTabs > div,
+  .layout-tv .skinHeader .headerTabs.sectionTabs > div {
+    max-width: 100% !important;
+    margin-inline: 0 !important;
+  }
+
+  .layout-desktop .skinHeader .headerTabs.sectionTabs > div > div,
+  .layout-tv .skinHeader .headerTabs.sectionTabs > div > div {
+    margin-inline: 0 !important;
+    justify-content: flex-start !important;
+    gap: clamp(0.95rem, 4vw, 1.75rem) !important;
+  }
+}
