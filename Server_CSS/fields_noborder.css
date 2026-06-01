@@ -39,3 +39,10 @@ progress::-webkit-progress-bar {
 .taskProgressOuter {
   border: 0px solid rgba(255, 255, 255, 0.22);
 }
+
+.emby-input:focus,
+.emby-textarea:focus,
+.emby-select-withcolor:focus {
+  outline: none !important;
+}
+

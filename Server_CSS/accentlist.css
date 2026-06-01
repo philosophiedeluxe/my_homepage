@@ -123,3 +123,24 @@ progress::-webkit-progress-value {
 .css-4yt2of {
   border-right: 1px solid rgba(var(--accent), 0.12);
 }
+
+/* Accent refinement */
+.navMenuOption-selected,
+.css-17c09up.Mui-selected {
+  color: rgb(var(--accent)) !important;
+  background-color: rgba(var(--accent), 0.14) !important;
+}
+.navMenuOption:hover,
+.actionSheetMenuItem:hover,
+.css-17c09up:hover {
+  background-color: rgba(var(--accent), 0.16) !important;
+}
+.emby-checkbox:checked + span + .checkboxOutline,
+.emby-textarea:focus,
+.emby-select-withcolor:focus,
+.emby-input:focus,
+.itemSelectionPanel {
+  border: 1px solid rgba(var(--accent),0.48) !important;
+  box-shadow: 0 0 0 3px rgba(var(--accent),0.10) !important;
+}
+

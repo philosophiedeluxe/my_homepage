@@ -105,3 +105,14 @@ div[data-role="controlgroup"] a[data-role="button"]:last-child {
 #userProfilesPage .cardImage, #userProfilesPage .cardContent {
     border-radius: var(--rounding) var(--rounding) 0 0 !important;
 }
+
+/* Consistent card clipping */
+.cardBox,
+.cardScalable,
+.cardPadder,
+.cardImageContainer,
+.cardImage,
+.visualCardBox {
+  overflow: hidden;
+}
+

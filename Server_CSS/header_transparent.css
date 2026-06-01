@@ -1,32 +1,44 @@
 .skinHeader-withBackground {
-    background-color: transparent;
+  background-color: transparent;
 }
 
-/*Pages the have single unit height taskbar*/
-@media all and (min-width: 100em){
+.skinHeader,
+.skinHeader-withBackground {
+  transition:
+    background-color var(--jf-motion-med) ease,
+    backdrop-filter var(--jf-motion-med) ease,
+    box-shadow var(--jf-motion-med) ease;
+}
+
+/* Header-safe page spacing without fixed margin jumps */
+#indexPage,
+#moviesPage,
+#tvRecommendedPage,
+#musicRecommendedPage {
+  margin-top: 0 !important;
+  padding-top: clamp(4.7rem, 6vh, 6.8rem) !important;
+  overflow-y: auto;
+}
+
+@media all and (max-width: 100em) {
   #indexPage,
   #moviesPage,
   #tvRecommendedPage,
   #musicRecommendedPage {
-    margin-top: 68px;
-    padding-top: 0px !important;
-    overflow-y: scroll;
+    padding-top: clamp(5.9rem, 10vh, 8.4rem) !important;
   }
 }
 
-/*Pages the have two unit height taskbar*/
-@media all and (max-width: 100em){
+@media all and (max-width: 48em) {
   #indexPage,
   #moviesPage,
   #tvRecommendedPage,
   #musicRecommendedPage {
-    margin-top: 130px;
-    padding-top: 0.5em !important;
-    overflow-y: scroll;
+    padding-top: clamp(4.8rem, 11vh, 7rem) !important;
   }
 }
 
 .force-scroll {
-    overflow-y: auto;
-    overflow-x: auto;
+  overflow-y: auto;
+  overflow-x: auto;
 }

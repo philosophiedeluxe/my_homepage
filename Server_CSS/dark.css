@@ -1,47 +1,53 @@
-/*This file contains color and style changes for the dark theme type*/
-:root {--accent: 255, 255, 255;}
-:root {--selection: 120, 120, 120;}
+/* Dark theme layer. Accent is intentionally not reset here so the external Jellyfin override remains authoritative. */
+:root {
+  --selection: 120, 120, 120;
+}
 
-.transcodingProgress > div, .itemProgressBarForeground {
-    background-color: rgba(255,255,255,0.3);
-}
-.playbackProgress > div {
-    background-color: rgba(255,255,255,0.75);
-}
+.backgroundContainer,
 .backgroundContainer.withBackdrop {
-    background-color: rgba(0, 0, 0, 0);
+  background:
+    radial-gradient(circle at top left, rgba(var(--accent), 0.10), transparent 34rem),
+    linear-gradient(180deg, rgba(12, 12, 16, 0.98), rgba(3, 3, 5, 1));
 }
 
-
-/*Some themeing for the dashboard*/
+.transcodingProgress > div,
+.itemProgressBarForeground,
+.playbackProgress > div {
+  background-color: rgba(var(--accent), 0.78) !important;
+}
 
 #user_usage_report_table,
-.detailTable {
-    background: rgba(0,0,0,.5);
+.detailTable,
+.paperList,
+.visualCardBox {
+  background: rgba(var(--jf-panel), 0.58);
+  border: 1px solid rgba(255,255,255,0.06);
 }
 .detailTableBodyRow-shaded {
-    background: #0000 !important;
+  background: transparent !important;
 }
 
 .infoBanner {
-    background: #101010;
+  background: rgba(var(--jf-panel-strong), 0.78);
+  border: 1px solid rgba(255,255,255,0.06);
 }
 .navMenuOptionText {
-    margin-top: 0;
+  margin-top: 0;
 }
 .backgroundProgress > div {
-    background-color: #0000;
+  background-color: transparent;
 }
 
-.visualCardBox, .cardImageContainer {
+.visualCardBox,
+.cardImageContainer {
   box-shadow: none;
 }
 
 .mdl-switch__input:checked + .mdl-switch__label + .mdl-switch__trackContainer > .mdl-switch__track {
-    background: rgba(120, 120, 120, 0.6);
+  background: rgba(var(--accent), 0.42);
 }
 .mdl-switch__input:checked + .mdl-switch__label + .mdl-switch__trackContainer > .mdl-switch__thumb {
-    background: white;
+  background: rgb(var(--accent));
 }
 
 .dashboardSection h3 {
@@ -50,116 +56,110 @@
 .sessionCardFooter {
   border: none;
 }
-.paperList, 
-.visualCardBox {
-  background-color: rgba(0, 0, 0, 0.5);
-}
 .listItem-border {
-  border-color: rgba(255, 255, 255, 0) !important; 
+  border-color: transparent !important;
 }
 fieldset {
-  border: 1px solid rgba(40, 40, 40, 0.8); 
-  border-radius: 0.4em;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: calc(var(--jf-radius) * 0.65);
 }
 
-/*Colors for title_2*/
+/* Detail backdrop */
 .layout-desktop .detailRibbon {
-  background: rgba(0,0,0,.2) !important;
+  background: rgba(0,0,0,.22) !important;
 }
 .itemBackdrop::after {
-  background: rgba(0,0,0,.5) !important;
+  background:
+    linear-gradient(90deg, rgba(0,0,0,0.86), rgba(0,0,0,0.42) 48%, rgba(0,0,0,0.76)),
+    linear-gradient(180deg, rgba(0,0,0,0.14), rgba(0,0,0,0.88)) !important;
 }
 
-
-/*Homepage modifications, transparent footerplayer and fixed sectiontitles*/
+/* Homepage, footer player, dialogs */
 .appfooter {
-	background: rgba(0,0,0,0.9);
+  background: rgba(0,0,0,0.86);
+  border-top: 1px solid rgba(255,255,255,0.08);
 }
 .button-flat:hover {
-	background: rgba(0,0,0,0.4);
+  background: rgba(var(--accent), 0.16);
 }
 
-/*Theme the library scan progress bar*/
-progress {
-  background: rgba(0, 0, 0, 0.5) !important;
-  border: 1px solid rgba(255, 255, 255, 0.22);
+/* Progress bars */
+progress,
+.taskProgressOuter {
+  background: rgba(0, 0, 0, 0.45) !important;
+  border: 1px solid rgba(255,255,255,0.12);
 }
 progress::-webkit-progress-bar {
-  background: rgba(0, 0, 0, 0.5) !important;
-  border: 0px solid rgba(255, 255, 255, 0.22);
+  background: rgba(0, 0, 0, 0.45) !important;
+  border: 0;
 }
-progress::-moz-progress-bar {
-  background-color: rgba(255,255,255,0.75);
-}
-progress::-webkit-progress-value {
-  background-color: rgba(255,255,255,0.75);
-}
-#divRunningTasks span {
-  color: rgba(255,255,255,0.75) !important;
-}
-.taskProgressOuter {
-  background: rgba(0, 0, 0, 0.5) !important;
-  border: 1px solid rgba(255, 255, 255, 0.22);
-}
+progress::-moz-progress-bar,
+progress::-webkit-progress-value,
 .taskProgressInner {
-  background: rgba(255,255,255,0.75) !important;
+  background: rgba(var(--accent), 0.78) !important;
 }
+#divRunningTasks span,
 #scheduledTasksPage span {
-  color: rgba(255,255,255,0.75) !important;
+  color: rgba(var(--jf-text), 0.75) !important;
 }
 
-/*Login background*/
+/* Login background fallback */
 #loginPage {
-  background: url(https://i.imgur.com/9vL4iNf.png) !important; 
+  background-image: image-set(
+    url(https://philosophiedeluxe.github.io/my_homepage/Server_CSS/loginBG.webp) type("image/webp"),
+    url(https://philosophiedeluxe.github.io/my_homepage/Server_CSS/loginBG.jpg) type("image/jpeg")
+  ) !important;
   background-size: cover !important;
 }
 
-/*Make watched icon, footer on chapter thumnails (and other things), and count indicator dark and transparent*/
+/* Indicators */
 .innerCardFooter,
-.countIndicator, 
+.countIndicator,
 .playedIndicator {
-  background: rgba(0,0,0,0.4); 
+  background: rgba(0,0,0,0.44);
   box-shadow: none;
 }
 .countIndicator {
   box-shadow: none;
 }
 
-/*Modify subtitle settings page*/
 .subtitleappearance-preview {
-  background: linear-gradient(140deg,#444,#111) !important;
+  background: linear-gradient(140deg, rgba(var(--accent), .65), #111) !important;
 }
 
-/*Affects blurhash to remove the saturated colors to fit overall look*/
 .blurhash-canvas {
-	filter: opacity(60%) saturate(60%);
+  filter: opacity(64%) saturate(68%);
 }
 
-/*Dash and general UI styling*/
-.navMenuOption-selected, .selectionCommandsPanel {
-    background: #101010 !important;
+/* Dashboard and general UI */
+.navMenuOption-selected,
+.selectionCommandsPanel {
+  background: rgba(var(--accent), 0.16) !important;
+  color: rgb(var(--accent)) !important;
 }
 .mainDrawer {
-    background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.82);
 }
 .raised,
 .fab,
 a[data-role="button"] {
-  background: rgba(40, 40, 40, 0.8) !important;
-	transition: all 0.2s !important;
+  background: rgba(var(--jf-panel), 0.76) !important;
+  border: 1px solid rgba(255,255,255,0.07);
+  transition:
+    transform var(--jf-motion-med) var(--jf-ease),
+    background-color var(--jf-motion-fast) ease,
+    border-color var(--jf-motion-fast) ease,
+    color var(--jf-motion-fast) ease !important;
 }
 .raised:hover,
 .fab:hover,
 .navMenuOption:hover,
 .actionSheetMenuItem:hover {
-  background: rgba(80, 80, 80, 0.8) !important;
+  background: rgba(var(--accent), 0.16) !important;
+  border-color: rgba(var(--accent), 0.34);
 }
 .paper-icon-button-light:hover {
-  background-color: rgba(0, 0, 0, 0.4) !important;
-}
-.navMenuOption-selected,
-.selectionCommandsPanel {
-  background: #101010 !important;
+  background-color: rgba(var(--accent), 0.12) !important;
 }
 
 .paper-icon-button-light:hover,
@@ -173,145 +173,77 @@ a[data-role="button"] {
 .inputLabelFocused,
 .textareaLabelFocused,
 .buttonActive,
-.button-link{
-  color: rgba(120, 120, 120, 0.6) !important;
-}
-progress {
-    background: rgba(0, 0, 0, 0.5) !important;
+.button-link {
+  color: rgb(var(--accent)) !important;
 }
 
-/*Theme syncplay*/
+/* Syncplay */
 .syncPlayIconCircle {
-  color: rgba(255,255,255,1) !important;
+  color: rgb(var(--accent)) !important;
   text-shadow: none !important;
 }
 
-@-webkit-keyframes pulse {
- 0% {
-  -webkit-transform:scale(.95);
-  transform:scale(.95);
-  color:rgba(0,0,0,.7);
-  background:rgba(0,0,0,.3);
-  box-shadow:0 0 0 0 rgba(0,0,0,.3)
- }
- 70% {
-  -webkit-transform:scale(1);
-  transform:scale(1);
-  color:rgba(0,0,0,.6);
-  background:rgba(0,0,0,0);
-  box-shadow:0 0 0 60px rgba(0,0,0,0)
- }
- to {
-  -webkit-transform:scale(.95);
-  transform:scale(.95);
-  color:rgba(0,0,0,.7);
-  background:rgba(0,0,0,.3);
-  box-shadow:0 0 0 0 rgba(0,0,0,0)
- }
-}
 @keyframes pulse {
- 0% {
-  -webkit-transform:scale(.95);
-  transform:scale(.95);
-  color:rgba(0,0,0,.7);
-  background:rgba(0,0,0,.3);
-  box-shadow:0 0 0 0 rgba(0,0,0,.3)
- }
- 70% {
-  -webkit-transform:scale(1);
-  transform:scale(1);
-  color:rgba(0,0,0,.6);
-  background:rgba(0,0,0,0);
-  box-shadow:0 0 0 60px rgba(0,0,0,0)
- }
- to {
-  -webkit-transform:scale(.95);
-  transform:scale(.95);
-  color:rgba(0,0,0,.7);
-  background:rgba(0,0,0,.3);
-  box-shadow:0 0 0 0 rgba(0,0,0,0)
- }
-}
-@-webkit-keyframes infinite-pulse {
- 0% {
-  -webkit-transform:scale(.95);
-  transform:scale(.95);
-  color:rgba(0,0,0,.7);
-  background:rgba(0,0,0,.3);
-  box-shadow:0 0 0 0 rgba(0,0,0,.3)
- }
- 70% {
-  -webkit-transform:scale(1);
-  transform:scale(1);
-  color:rgba(0,0,0,.6);
-  background:rgba(0,0,0,0);
-  box-shadow:0 0 0 60px rgba(0,0,0,0)
- }
- to {
-  -webkit-transform:scale(.95);
-  transform:scale(.95);
-  color:rgba(0,0,0,.7);
-  background:rgba(0,0,0,.3);
-  box-shadow:0 0 0 0 rgba(0,0,0,0)
- }
+  0% {
+    transform: scale(.96);
+    color: rgba(var(--accent), .65);
+    background: rgba(var(--accent), .08);
+    box-shadow: 0 0 0 0 rgba(var(--accent), .26);
+  }
+  70% {
+    transform: scale(1);
+    color: rgba(var(--accent), .9);
+    background: rgba(var(--accent), 0);
+    box-shadow: 0 0 0 36px rgba(var(--accent), 0);
+  }
+  to {
+    transform: scale(.96);
+    color: rgba(var(--accent), .65);
+    background: rgba(var(--accent), .08);
+    box-shadow: 0 0 0 0 rgba(var(--accent), 0);
+  }
 }
 @keyframes infinite-pulse {
- 0% {
-  -webkit-transform:scale(.95);
-  transform:scale(.95);
-  color:rgba(0,0,0,.7);
-  background:rgba(0,0,0,.3);
-  box-shadow:0 0 0 0 rgba(0,0,0,.3)
- }
- 70% {
-  -webkit-transform:scale(1);
-  transform:scale(1);
-  color:rgba(0,0,0,.6);
-  background:rgba(0,0,0,0);
-  box-shadow:0 0 0 60px rgba(0,0,0,0)
- }
- to {
-  -webkit-transform:scale(.95);
-  transform:scale(.95);
-  color:rgba(0,0,0,.7);
-  background:rgba(0,0,0,.3);
-  box-shadow:0 0 0 0 rgba(0,0,0,0)
- }
+  0% {
+    transform: scale(.96);
+    color: rgba(var(--accent), .65);
+    background: rgba(var(--accent), .08);
+    box-shadow: 0 0 0 0 rgba(var(--accent), .26);
+  }
+  70% {
+    transform: scale(1);
+    color: rgba(var(--accent), .9);
+    background: rgba(var(--accent), 0);
+    box-shadow: 0 0 0 36px rgba(var(--accent), 0);
+  }
+  to {
+    transform: scale(.96);
+    color: rgba(var(--accent), .65);
+    background: rgba(var(--accent), .08);
+    box-shadow: 0 0 0 0 rgba(var(--accent), 0);
+  }
 }
 
-/*Colors for loading spinner, placeholders, scroll bars*/
-.mdl-spinner__layer-1 {border-color: rgba(255, 255, 255, 1);}
-.mdl-spinner__layer-2 {border-color: rgba(128, 128, 128, 1);}
-.mdl-spinner__layer-3 {border-color: rgba(40, 40, 40, 1);}
-.mdl-spinner__layer-4 {border-color: rgba(0, 0, 0, 1);}
+/* Spinner, placeholders, scroll bars */
+.mdl-spinner__layer-1 { border-color: rgba(var(--accent), 1); }
+.mdl-spinner__layer-2 { border-color: rgba(var(--accent), .72); }
+.mdl-spinner__layer-3 { border-color: rgba(var(--accent), .38); }
+.mdl-spinner__layer-4 { border-color: rgba(255,255,255,.18); }
 
-::-webkit-scrollbar-track-piece {
-  background-color: #0000;
-}
+::-webkit-scrollbar-track-piece,
 ::-webkit-scrollbar-corner {
-  background-color: #0000;
+  background-color: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(120,120,120,0.6) !important;
-  border-radius: var(--rounding);
+  background: rgba(var(--accent), 0.58) !important;
+  border-radius: var(--jf-radius);
 }
-
 * {
-  scrollbar-color: rgba(120,120,120,0.6) #0000 !important;
+  scrollbar-color: rgba(var(--accent), 0.58) transparent !important;
 }
 
-.defaultCardBackground1 {
-	background-color: #0a0a0a;
-}
-.defaultCardBackground2 {
-	background-color: #141414;
-}
-.defaultCardBackground3 {
-	background-color: #212121;
-}
-.defaultCardBackground4 {
-	background-color: #333333;
-}
-.defaultCardBackground5 {
-	background-color: #666666;
-}
+.defaultCardBackground1 { background-color: #0a0a0d; }
+.defaultCardBackground2 { background-color: #121218; }
+.defaultCardBackground3 { background-color: #1a1b24; }
+.defaultCardBackground4 { background-color: #252634; }
+.defaultCardBackground5 { background-color: #34364a; }

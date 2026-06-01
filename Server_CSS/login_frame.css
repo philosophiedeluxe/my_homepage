@@ -1,38 +1,46 @@
-/*Narrow the login form, size according to display size (bigger on mobile)*/
+/* Login form: dynamic width, centered glass card */
 #loginPage .readOnlyContent,
 #loginPage form {
-  max-width: 22em;
+  max-width: min(88vw, 23rem);
 }
 
 #loginPage .padded-left.padded-right.padded-bottom-page {
-  margin-top: 8em
+  margin: clamp(5rem, 12vh, 8rem) auto 0;
+  padding: clamp(1.2rem, 2vw, 2rem) !important;
+  background: rgba(0, 0, 0, 0.42);
+  width: min(88vw, 26rem);
+  border-radius: var(--jf-radius);
+  border: 1px solid rgba(var(--accent), 0.22);
+  box-shadow:
+    0 24px 70px rgba(0,0,0,.56),
+    0 0 0 1px rgba(255,255,255,.05);
 }
 
-/*Hide "manual" and "forgot" buttons}*/
 #loginPage .raised.cancel.block.btnForgotPassword.emby-button {
-  display: none
+  display: none;
 }
 
-#loginPage .padded-left.padded-right.padded-bottom-page {
-    margin-left: auto;
-    margin-right: auto;
-    background: rgba(0, 0, 0, 0.35);
-    width: 24em;
-    border-radius: var(--rounding);
-}
 #loginPage .squareCard {
-    width: 33%;
+  width: clamp(5.5rem, 33%, 8rem);
 }
 #loginPage form {
-    padding-top: 4em;
+  padding-top: clamp(2rem, 5vh, 4em);
 }
 
-#loginPage .sectionTitle{
-    margin-left: auto !important;
-    margin-right: auto !important;
-    margin-bottom: 1.2em !important;
+#loginPage .sectionTitle {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  margin-bottom: 1.2em !important;
+  text-align: center;
 }
+
 #loginPage {
-  background: url(https://philosophiedeluxe.github.io/my_homepage/Server_CSS/loginBG.jpg) !important; 
+  background-image: image-set(
+    url(https://philosophiedeluxe.github.io/my_homepage/Server_CSS/loginBG.webp) type("image/webp"),
+    url(https://philosophiedeluxe.github.io/my_homepage/Server_CSS/loginBG.jpg) type("image/jpeg")
+  ) !important;
+  background-position: center !important;
   background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-attachment: fixed !important;
 }

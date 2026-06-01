@@ -1,8 +1,43 @@
-:root {--indicator: 0, 164, 220;}
-:root {--selection: 0, 164, 220;}
+/* Core variables and global layout behaviour */
+:root {
+  --accent: 98, 121, 205;
+  --indicator: 0, 164, 220;
+  --selection: 0, 164, 220;
+
+  --jf-bg: 7, 8, 11;
+  --jf-panel: 16, 17, 22;
+  --jf-panel-strong: 24, 25, 32;
+  --jf-text: 238, 239, 244;
+  --jf-muted: 168, 172, 184;
+  --jf-border: 255, 255, 255;
+
+  --jf-radius: var(--rounding, 12px);
+  --jf-page-pad: clamp(1rem, 3vw, 4.25rem);
+  --jf-row-gap: clamp(0.8rem, 1vw, 1.35rem);
+  --jf-card-gap: clamp(0.7rem, 1vw, 1.25rem);
+  --jf-motion-fast: 150ms;
+  --jf-motion-med: 240ms;
+  --jf-motion-slow: 420ms;
+  --jf-ease: cubic-bezier(.2,.8,.2,1);
+  --jf-ease-soft: cubic-bezier(.16,1,.3,1);
+}
 
 .css-4yt2of {
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(var(--jf-bg), 0.28);
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+.pageTitle,
+.sectionTitle,
+.cardText,
+.listItemBodyText {
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .emby-textarea {
@@ -10,15 +45,22 @@
   font-size: 10pt;
 }
 
-.card.show-animation:focus>.cardBox {
-  -webkit-transform:scale(1.1);
-  transform:scale(1.1);
+/* Stable focus instead of layout-breaking oversized scale */
+.card.show-animation:focus > .cardBox,
+.card:focus-within > .cardBox {
+  transform: translateY(-5px) scale(1.045);
+  outline: 2px solid rgba(var(--accent), 0.78);
+  outline-offset: 4px;
+  box-shadow:
+    0 18px 44px rgba(0, 0, 0, 0.48),
+    0 0 0 1px rgba(var(--accent), 0.35),
+    0 0 26px rgba(var(--accent), 0.16);
 }
 
-/*Theme user setting tab buttons*/
+/* Theme user setting tab buttons */
 div[data-role="controlgroup"] a.ui-btn-active {
-  background: rgba(0, 0, 0, 0.5) !important;
-  color: white !important;
+  background: rgba(var(--accent), 0.24) !important;
+  color: rgb(var(--jf-text)) !important;
 }
 
 div[data-role="controlgroup"] a[data-role="button"] {
@@ -26,54 +68,58 @@ div[data-role="controlgroup"] a[data-role="button"] {
   margin: 0 !important;
 }
 
-/*Mobile tweaks*/
+/* Mobile tweaks */
 .layout-mobile .detailPagePrimaryContainer {
-    background: transparent;
+  background: transparent;
 }
 .layout-mobile .adminDrawerLogo {
-    border-bottom: none;
+  border-bottom: none;
 }
 .layout-mobile .itemBackdrop {
-    margin-top: 4rem;
+  margin-top: 4rem;
 }
 
-/*Stop covers from being scrolled on desktop*/
+/* Stop covers from being scrolled on desktop */
 .layout-desktop .detailImageContainer .card {
-    position: fixed !important;
-    top: 10% !important;
+  position: fixed !important;
+  top: clamp(5.5rem, 10vh, 8.5rem) !important;
+  width: clamp(12rem, 21vw, 21rem) !important;
 }
 .layout-mobile .detailImageContainer .card {
-    position: absolute !important;
+  position: absolute !important;
 }
-/*Top "task bar" enlarge text*/
+
+/* Top task bar text */
 .headerTabs.sectionTabs {
-  text-size-adjust: 110%;
-  font-size: 110%;
+  text-size-adjust: 108%;
+  font-size: clamp(0.92rem, 0.7vw + 0.65rem, 1.12rem);
 }
 .pageTitle {
-  margin-top: auto; 
+  margin-top: auto;
   margin-bottom: auto;
 }
 
-/*Theme process progress ring*/
+/* Theme process progress ring */
 .progressring-spiner {
   border-color: rgba(var(--accent));
   border-width: .35em;
 }
 .progressring {
-    margin: .4em;
+  margin: .4em;
 }
 .progressring-bg {
-   display: none;
+  display: none;
 }
 
-/*Theme link color*/
-#itemDetailPage .button-link {color: inherit !important;}
+/* Theme link color */
+#itemDetailPage .button-link {
+  color: inherit !important;
+}
 
-/*Accommodate mobile and align buttons and indicators*/
+/* Accommodate mobile and align buttons and indicators */
 .cardIndicators,
 .listItemIndicators {
-  right: 0.5em; 
+  right: 0.5em;
   top: 0.5em;
 }
 
@@ -82,157 +128,222 @@ div[data-role="controlgroup"] a[data-role="button"] {
   top: 0.5em;
 }
 
-@media all and (min-width: 70em){
-  .cardOverlayFab-primary {
-    background-color: #00000000;
-  }
-  .cardOverlayButtonIcon {
-    background-color: #00000000 !important;
-  }
-  .cardOverlayContainer {
-    background-color: rgba(0, 0, 0, 0.7);
-  }
+.cardOverlayFab-primary,
+.cardOverlayButtonIcon {
+  background-color: transparent !important;
 }
-/* Play button hovering (for low width windows) */
-@media all and (max-width: 70em){
-  .cardOverlayFab-primary {
-    background-color: #00000000;
-  }
-  .cardOverlayButtonIcon {
-    background-color: #00000000 !important;
-  }
-  .cardOverlayContainer {
-    background-color: rgba(0, 0, 0, 0.7);
-  }
+.cardOverlayContainer {
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.72));
+}
+@media all and (max-width: 70em) {
   .cardOverlayButton {
     padding: 0.25em;
   }
 }
 
-/*Media player*/
+/* Media player */
 .nowPlayingPageImage {
   border: none;
 }
 
 .upNextDialog-countdownText {
-  color: white;
+  color: rgba(var(--accent), 0.95);
 }
 
-/*Shrink the mouseover chapter image when scrobbling, still media player*/
 .chapterThumb {
-    height: 14vh;
-    min-width: 14vh;
-	box-shadow: 0 0 1.9vh #000;
+  height: 14vh;
+  min-width: 14vh;
+  box-shadow: 0 0 1.9vh #000;
 }
 .chapterThumbText {
-    font-size: 1em;
+  font-size: 1em;
 }
 .sliderBubble {
-  background: #0000;
+  background: transparent;
+  transform: translate3d(-50%, -108%, 0);
 }
 .chapterThumbTextContainer {
-    right: auto;
-	bottom: 4px;
-	padding: .25em 0.7em;
+  right: auto;
+  bottom: 4px;
+  padding: .25em 0.7em;
 }
 .chapterThumbContainer {
-    box-shadow: 0 0 1.9vh #000;
-}
-.sliderBubble {
-    -webkit-transform: translate3d(-50%,-108%,0);
-    transform: translate3d(-50%,-108%,0);
+  box-shadow: 0 0 1.9vh #000;
 }
 
-/*Narrow margins, theme main page*/
+/* Dynamic page/card rows */
+.padded-left,
+.padded-right,
+.libraryPage .padded-left,
+.libraryPage .padded-right {
+  padding-left: var(--jf-page-pad) !important;
+  padding-right: var(--jf-page-pad) !important;
+}
+
+.itemsContainer {
+  gap: var(--jf-card-gap);
+  scroll-snap-type: x proximity;
+  scroll-padding-inline: var(--jf-page-pad);
+}
+
+.itemsContainer > .card {
+  scroll-snap-align: start;
+}
+
+.itemsContainer > .card > .cardBox,
 .cardBox-bottompadded {
-    margin-bottom: 0.6em !important;
+  margin: 0 !important;
 }
-.itemsContainer > .card > .cardBox {
-    margin-right: 0.8em;
+
+.cardBox,
+.visualCardBox,
+.cardImageContainer,
+.cardContent,
+.cardOverlayContainer,
+.cardPadder {
+  transition:
+    transform var(--jf-motion-med) var(--jf-ease),
+    filter var(--jf-motion-med) var(--jf-ease),
+    box-shadow var(--jf-motion-med) var(--jf-ease),
+    border-color var(--jf-motion-fast) ease,
+    background-color var(--jf-motion-fast) ease;
+  transform-origin: center center;
 }
+
+.card:hover > .cardBox,
+.cardBox:hover {
+  transform: translateY(-5px) scale(1.025);
+  filter: brightness(1.06) saturate(1.08);
+}
+
+.card:hover .cardImage,
+.card:hover .cardImageContainer,
+.card:hover .coveredImage,
+.card:hover .blurhash-canvas {
+  filter: saturate(1.08) contrast(1.04) brightness(1.04);
+}
+
+.cardText,
+.cardText-secondary,
+.listItemBodyText,
+.secondary {
+  line-height: 1.35;
+}
+
 .raised.homeLibraryButton {
-    background: rgba(0, 0, 0, 0.3) !important;
+  min-width: clamp(10rem, 14vw, 15rem);
+  width: auto !important;
+  margin: 0.35em;
+  background: rgba(var(--jf-panel), 0.52) !important;
+  border: 1px solid rgba(var(--jf-border), 0.08);
+  transition:
+    transform var(--jf-motion-med) var(--jf-ease),
+    background-color var(--jf-motion-fast) ease,
+    box-shadow var(--jf-motion-med) var(--jf-ease),
+    border-color var(--jf-motion-fast) ease;
 }
 .raised.homeLibraryButton:hover {
-    background: rgba(0, 0, 0, 0.5) !important;
+  transform: translateY(-2px);
+  background: rgba(var(--accent), 0.18) !important;
+  border-color: rgba(var(--accent), 0.42);
 }
-.raised.homeLibraryButton:hover {transition: filter 0.2s}
-.raised.homeLibraryButton {transition: filter 0.2s}
-.homeLibraryButton {
-    min-width: 12em;
-    margin: 0.4em;
-}
-@media all and (max-width: 26em){
+@media all and (max-width: 26em) {
   .homeLibraryButton {
-    min-width: 45%;
+    min-width: min(45%, 13rem);
     width: auto !important;
   }
 }
-.homeLibraryButton {
-  width: auto !important;
+
+.listItem {
+  padding-left: clamp(0.65rem, 1vw, 1rem);
+  transition:
+    transform var(--jf-motion-fast) var(--jf-ease),
+    background-color var(--jf-motion-fast) ease,
+    box-shadow var(--jf-motion-fast) ease;
 }
 .listItem:hover {
-    transition: 0.2s;
-    background: rgba(0, 0, 0, 0.4);
+  transform: translateX(2px);
+  background: rgba(var(--accent), 0.09);
 }
-.visualCardBox, .cardImageContainer {
-    box-shadow: none;
+
+.visualCardBox,
+.cardImageContainer {
+  box-shadow: none;
 }
 .backgroundProgress > div {
-    background: rgba(0, 0, 0, 0);
+  background: transparent;
 }
 .itemProgressBar {
-    background: rgba(0, 0, 0, 0.25);
+  background: rgba(0, 0, 0, 0.28);
 }
 #divRunningTasks span {
-    color: rgba(255,255,255,0.75) !important;
-}
-.itemsContainer > .card > .cardBox {
-    margin-left: 0.6em !important;
-}
-.itemsContainer > .card > .cardBox {
-    margin-right: 0.8em;
+  color: rgba(var(--jf-text), 0.75) !important;
 }
 
-/*ANIMATIONS*/
-/*Hover background for section title buttons*/
+/* Hover background for section title buttons */
 .button-flat:hover {
-	background: rgba(0, 164, 220, 0.2);
-	color: #00a4dc !important;
+  background: rgba(var(--accent), 0.16);
+  color: rgb(var(--accent)) !important;
 }
 .dashboardSection h3 {
-    margin: .5em .0em .5em .5em;
+  margin: .5em .0em .5em .5em;
 }
 .dashboardSection .sectionTitleTextButton > .material-icons.material-icons {
-    margin-top: .5em;
-    margin-bottom: .5em;
-    margin-right: .2em;
+  margin-top: .5em;
+  margin-bottom: .5em;
+  margin-right: .2em;
 }
 
-/*Rating star, normally yellow*/
+.sectionTitle,
+.sectionTitleTextButton {
+  letter-spacing: -0.015em;
+}
+
+/* Rating star, normally yellow */
 .starIcon {
-    color: rgba(255,255,255,.8);
+  color: rgba(var(--jf-text), .84);
 }
 
-/*Remove background on some icons*/
+/* Remove background on some icons */
 .listItemIcon {
-    background: #0000 !important;
+  background: transparent !important;
 }
 
-/*Remove divider on list items*/
+/* Remove divider on list items */
 .listItem-border {
-    border-color: rgba(255, 255, 255, 0) !important;
+  border-color: transparent !important;
 }
 
-/*Fix footers/headers displaying on small pop-ups*/
+/* Fix footers/headers displaying on small pop-ups */
 .formDialogFooter-clear,
 .formDialogHeader-clear,
 .innerCardFooterClear {
-    background-color: transparent !important;
+  background-color: transparent !important;
 }
 
-/*Theme slider marker style*/
+/* Theme slider marker style */
 .sliderMarker {
   width: 3px;
   border-radius: 2px;
+}
+
+@media (hover: none) {
+  .card:hover > .cardBox,
+  .cardBox:hover,
+  .listItem:hover,
+  .raised.homeLibraryButton:hover {
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.001ms !important;
+  }
 }

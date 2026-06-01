@@ -1,52 +1,59 @@
-/*Size episode preview images in a more compact way*/
-
+/* Responsive episode grid. Optional alternative to episodes_compactlist.css. */
 .childrenItemsContainer.itemsContainer.padded-right.vertical-list {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(clamp(15rem, 22vw, 24rem), 1fr));
+  gap: clamp(0.8rem, 1.2vw, 1.4rem);
+  align-items: start;
 }
 
-@media all and (min-width: 2000px) {
-  .listItemImage-large {
-    height: 9.5vw;
-  }
-}
-
-@media all and (max-width: 2000px) {
-  .childrenItemsContainer.itemsContainer.padded-right.vertical-list {
-    grid-template-columns: 1fr 1fr 1fr;
-  }
-}
-
-@media all and (max-width: 1000px) {
-  .childrenItemsContainer.itemsContainer.padded-right.vertical-list {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-.layout-mobile
-  .childrenItemsContainer.itemsContainer.padded-right.vertical-list {
-  grid-template-columns: 1fr;
+#itemDetailPage .listItem {
+  position: relative;
+  height: fit-content;
+  overflow: hidden;
+  margin-bottom: 0;
+  border-radius: var(--jf-radius);
+  padding: .5em;
+  background: rgba(var(--jf-panel), 0.42);
+  border: 1px solid rgba(255,255,255,0.06);
 }
 
 #itemDetailPage .listItem-content {
-  border-radius: var(--rounding);
+  border-radius: var(--jf-radius);
   overflow: hidden;
-  transition: background 0.15s ease-in-out;
+  transition:
+    background-color var(--jf-motion-fast) ease,
+    transform var(--jf-motion-med) var(--jf-ease),
+    box-shadow var(--jf-motion-med) var(--jf-ease);
   flex-flow: column;
-  -webkit-transition: background 0.15s ease-in-out;
-  -moz-transition: background 0.15s ease-in-out;
-  -ms-transition: background 0.15s ease-in-out;
-  -o-transition: background 0.15s ease-in-out;
+}
+
+#itemDetailPage .listItem:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 34px rgba(0,0,0,.36);
 }
 
 .listItemImage.listItemImage-large {
-  width: 100%;
+  width: 100% !important;
+  height: auto !important;
+  aspect-ratio: 16 / 9;
   margin: 0;
+  object-fit: cover;
 }
 
-.listItem-overview.listItemBodyText {
-  height: 5.5em !important;
+.listItem-overview.listItemBodyText,
+#itemDetailPage .secondary.listItem-overview.listItemBodyText {
+  height: auto !important;
+  max-height: 5.5em;
   font-size: 1em !important;
+  margin: 0;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+}
+
+.layout-mobile .childrenItemsContainer.itemsContainer.padded-right.vertical-list {
+  grid-template-columns: 1fr;
 }
 
 .layout-mobile .listItemImageButton-icon {
@@ -57,29 +64,9 @@
   right: 3em;
 }
 
-#itemDetailPage .listItem {
-  position: relative;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
-  overflow: hidden;
-  margin-bottom: 1.5rem;
-  border-radius: var(--rounding);
-  padding: .5em;
-}
-
-#itemDetailPage .secondary.listItem-overview.listItemBodyText {
-  height: 100%;
-  margin: 0;
-}
-
 .listItem[data-mediatype="Audio"] {
   padding: 0 1em;
-  border-radius: var(--rounding) !important;
-  -webkit-border-radius: var(--rounding) !important;
-  -moz-border-radius: var(--rounding) !important;
-  -ms-border-radius: var(--rounding) !important;
-  -o-border-radius: var(--rounding) !important;
+  border-radius: var(--jf-radius) !important;
 }
 
 .layout-mobile #itemDetailPage .listItemImageButton {
@@ -87,7 +74,6 @@
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
   z-index: -1;
-  -webkit-backdrop-filter: blur(4px);
   backdrop-filter: blur(4px);
   color: white;
 }
@@ -113,13 +99,7 @@
 }
 
 .layout-mobile .listItemBodyText {
-  max-width: 36vw;
-}
-
-@media all and (min-width: 50em) {
-  .layout-mobile .listItemBodyText {
-    max-width: 100%;
-  }
+  max-width: 100%;
 }
 
 .layout-mobile .listItem .playedIndicator {
@@ -127,19 +107,8 @@
   color: rgba(var(--accent));
 }
 
-.layout-mobile .listItemImage {
-  height: 100% !important;
-  width: 100% !important;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  overflow: hidden;
-  border-radius: var(--rounding) !important;
-}
-
-.layout-mobile  .listItemImageButton:hover {
-    transform: scale(1);
+.layout-mobile .listItemImageButton:hover {
+  transform: scale(1);
 }
 
 .layout-mobile .listViewUserDataButtons {
@@ -154,12 +123,8 @@
 }
 
 .layout-mobile #itemDetailPage .listItem-content {
-  -webkit-backdrop-filter: none;
   backdrop-filter: none;
   align-items: flex-start;
-}
-
-.layout-mobile #itemDetailPage .listItem-content {
   background: none !important;
   position: unset;
   color: white;
@@ -170,10 +135,10 @@
   font-size: 1.6em !important;
 }
 .listItemBody.itemAction,
-.listItem-bottomoverview.secondary{
+.listItem-bottomoverview.secondary {
   z-index: 1;
 }
-.listItem-bottomoverview.secondary{
+.listItem-bottomoverview.secondary {
   text-align: justify;
   padding: .5em;
   margin: 0;

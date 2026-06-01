@@ -1,12 +1,13 @@
-/*Alternate itempage*/
-
+/* Detail page: dynamic backdrop and logo alignment */
 .itemBackdrop {
-  height: 31vh !important;
+  height: clamp(15rem, 31vh, 25rem) !important;
   display: inherit;
 }
+
 .detailLogo {
   display: none;
 }
+
 .layout-desktop .detailRibbon {
   margin-top: 0;
   padding-top: .5em;
@@ -14,38 +15,46 @@
 }
 
 .layout-desktop .detailImageContainer .card {
-  top: 18vh;
+  top: clamp(6.25rem, 18vh, 11.5rem);
 }
 
-#itemDetailPage .detailLogo {
-    position: static;
-    margin-left: 32.5%;
-    display: block;
-    -webkit-filter: drop-shadow(0 0 10px rgba(2, 2, 2, 0.75));
-    /*! filter: drop-shadow(0 0 10px rgba(2, 2, 2, 0.75)); */
-    flex-shrink: 0;
-    background-position: 0 50%;
-    margin-top: -18vh;
-    margin-bottom: 2vh;
+.layout-desktop #itemDetailPage .detailLogo {
+  --detail-logo-left: clamp(17rem, 31vw, 34rem);
+  position: relative;
+  display: block;
+  width: min(42vw, 34rem);
+  max-width: calc(100vw - var(--detail-logo-left) - 4rem);
+  min-height: clamp(3.25rem, 7vh, 6.5rem);
+  margin: clamp(0.5rem, 2vh, 1.5rem) 0 clamp(0.8rem, 2vh, 1.4rem) var(--detail-logo-left);
+  background-position: left center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.72));
+  flex-shrink: 0;
+}
+
+@media (min-aspect-ratio: 2.7/1) {
+  .layout-desktop #itemDetailPage .detailLogo {
+    --detail-logo-left: clamp(15rem, 24vw, 29rem);
+  }
 }
 
 .layout-mobile .detailLogo {
-    display: none !important;
+  display: none !important;
 }
 
 #itemDetailPage .itemName.infoText.parentNameLast {
-    display: none;
+  display: none;
 }
 
-.hide+.detailPageWrapperContainer .itemName {
-    display: block !important;
+.hide + .detailPageWrapperContainer .itemName {
+  display: block !important;
 }
 
 .itemName {
-    margin: .5em 0 !important;
+  margin: .5em 0 !important;
 }
 
 .layout-mobile #itemDetailPage .itemName.infoText.parentNameLast {
-    display: block;
+  display: block;
 }
-

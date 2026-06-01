@@ -1,67 +1,62 @@
-/*Enlarge button row on item page, even more on mobile*/
+/* Detail page button row */
 .mainDetailButtons {
-	font-size: 120%;
+  font-size: clamp(1.05rem, 0.75vw + 0.92rem, 1.35rem);
+  gap: clamp(0.35rem, 0.8vw, 0.85rem);
 }
 
-/*Add fixes, start of file*/
-@media all and (min-width: 100em){
+@media all and (min-width: 100em) {
   .button-flat {
     margin: .2em !important;
-    padding: .85em !important;
+    padding: clamp(0.65em, 0.5vw + 0.55em, .85em) !important;
   }
 }
-@media all and (max-width: 100em){
+@media all and (max-width: 100em) {
   .mainDetailButtons {
-    font-size: 155%;
+    font-size: clamp(1.25rem, 1.4vw + 1rem, 1.72rem);
   }
   .detailButton {
-    max-width: 15vw !important;
+    max-width: min(15vw, 4.75rem) !important;
   }
 }
 
-/*Media player*/
-.startTimeText, .endTimeText {
-    width: 3.4em;
-    display: block;
-    text-align: center;
+/* Media player */
+.startTimeText,
+.endTimeText {
+  width: 3.4em;
+  display: block;
+  text-align: center;
 }
 .osdTitle {
   margin-left: 0.5em;
 }
-
 .videoOsdBottom {
-    padding-top: 1em;
+  padding-top: 1em;
 }
-
 .skinHeader-withBackground.osdHeader {
-    height: 5em;
+  height: 5em;
 }
 
-/*Accommodate ultrawide aspect ratios*/
+/* Accommodate ultrawide aspect ratios */
 @media (min-aspect-ratio: 1.98/1) {
   .detailImageContainer .card {
-    width: 21vw !important ;
+    width: clamp(15rem, 21vw, 24rem) !important;
   }
-  .detailPagePrimaryContainer {
-    padding-left: 28.45vw !important;
-  }
+  .detailPagePrimaryContainer,
   .detailPageContent {
-    padding-left: 28.45vw !important;
+    padding-left: clamp(22rem, 28.45vw, 34rem) !important;
   }
 }
 @media (min-aspect-ratio: 2.7/1) {
   .detailImageContainer .card {
-    width: 16vw !important;
+    width: clamp(12rem, 16vw, 20rem) !important;
   }
-  .detailPagePrimaryContainer {
-    padding-left: 23.45vw !important;
-  }
+  .detailPagePrimaryContainer,
   .detailPageContent {
-    padding-left: 23.45vw !important;
+    padding-left: clamp(18rem, 23.45vw, 28rem) !important;
   }
 }
 
-/*Tweak entry field padding and alignment/sizes*/
+/* Entry field padding and alignment/sizes */
 .emby-input,
 .emby-textarea {
   padding: .4em .55em;
@@ -70,44 +65,60 @@
   padding: .35em 1.9em .35em .35em;
 }
 .selectArrow {
-    margin-top: 1.05em;
+  margin-top: 1.05em;
 }
 
-/*Fix weird shevron off centering*/
-.layout-mobile :not(.sectionTitleContainer-cards)>.sectionTitle-cards {
- padding-top:0em;
+/* Section title alignment */
+.layout-mobile :not(.sectionTitleContainer-cards) > .sectionTitle-cards {
+  padding-top: 0;
 }
 .sectionTitle {
-	margin-left: .4em !important;
-	margin-top: .2em !important;
-	margin-bottom: .2em !important;
+  margin-left: clamp(0.25rem, 0.45vw, 0.55rem) !important;
+  margin-top: .2em !important;
+  margin-bottom: .2em !important;
 }
 .sectionTitleTextButton > .material-icons {
-    margin: 0;
+  margin: 0;
 }
 .layout-mobile .sectionTitleTextButton > .material-icons {
-    padding-top: .2em;
+  padding-top: .2em;
 }
 
-/*Fix the UI shifting around*/
+/* Prevent UI shifting */
 .nowPlayingBarCurrentTime {
-    width: 6em;
+  width: 6em;
 }
 .osdTextContainer {
-    margin: 0 !important;
-    margin-top: 0.2em !important;
-    padding-left: 0.5em !important;
-    padding-right: 0.5em !important;
+  margin: 0 !important;
+  margin-top: 0.2em !important;
+  padding-left: 0.5em !important;
+  padding-right: 0.5em !important;
 }
 
-/*Fix top right user icon when using a profile image*/
+/* Top right user icon with profile image */
 .headerUserButtonRound {
   border-radius: 50px !important;
 }
 
-/*Improve some menu alignments*/
+/* Drawer/menu alignments */
+.mainDrawer {
+  width: min(86vw, 22rem);
+  border-right: 1px solid rgba(var(--accent), 0.18);
+}
+.navMenuOption {
+  min-height: 3rem;
+  border-radius: calc(var(--jf-radius) * 0.75);
+  margin-inline: 0.55rem;
+  transition:
+    transform var(--jf-motion-fast) var(--jf-ease),
+    background-color var(--jf-motion-fast) ease,
+    color var(--jf-motion-fast) ease;
+}
+.navMenuOption:hover {
+  transform: translateX(4px);
+}
 .navMenuOptionText {
-    margin-top: 0;
+  margin-top: 0;
 }
 .formDialogHeaderTitle {
   margin-left: 1em;
@@ -117,12 +128,7 @@
 }
 .dialogContentInner {
   padding: .5em 1em 1em;
-  padding-right: 1em;
-  padding-left: 1em;
 }
 .listItem-indexnumberleft {
   margin: 1em;
-}
-.listItem {
-  padding-left: 1em;
 }
