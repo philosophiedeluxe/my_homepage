@@ -487,3 +487,226 @@ body {
   }
 }
 
+/* -------------------------------------------------------------------------
+   Header dimensions restore v2
+   Basis: transparenter/glassy Header bleibt erhalten.
+   Dimensionen: alte Referenz verwendet 68px fuer eine einzeilige Taskbar
+   und 130px fuer die zweizeilige Header-/Tab-Kombination.
+   ------------------------------------------------------------------------- */
+
+:root,
+html,
+body {
+  --jf-header-glass-bg: rgba(7, 8, 11, 0.48);
+  --jf-header-glass-shadow: 0 10px 28px rgba(0, 0, 0, 0.22);
+  --jf-header-old-top-height: 68px;
+  --jf-header-old-tabs-height: 62px;
+  --jf-header-old-total-height: 130px;
+}
+
+.skinHeader.skinHeader-withBackground,
+.skinHeader.skinHeader-blurred,
+.skinHeader.skinHeader-withBackground.skinHeader-blurred,
+.skinHeader.skinHeader-withBackground.skinHeader-blurred.semiTransparent,
+.layout-desktop .skinHeader.skinHeader-withBackground.skinHeader-blurred.semiTransparent,
+.layout-desktop .skinHeader.skinHeader-blurred.semiTransparent,
+.layout-tv .skinHeader.skinHeader-withBackground.skinHeader-blurred.semiTransparent,
+.layout-tv .skinHeader.skinHeader-blurred.semiTransparent {
+  height: auto !important;
+  min-height: var(--jf-header-old-top-height) !important;
+  max-height: none !important;
+  overflow: visible !important;
+  background-color: var(--jf-header-glass-bg) !important;
+  box-shadow: var(--jf-header-glass-shadow) !important;
+}
+
+@supports ((backdrop-filter: blur(12px)) or (-webkit-backdrop-filter: blur(12px))) {
+  .skinHeader.skinHeader-withBackground,
+  .skinHeader.skinHeader-blurred,
+  .skinHeader.skinHeader-withBackground.skinHeader-blurred,
+  .skinHeader.skinHeader-withBackground.skinHeader-blurred.semiTransparent,
+  .layout-desktop .skinHeader.skinHeader-withBackground.skinHeader-blurred.semiTransparent,
+  .layout-desktop .skinHeader.skinHeader-blurred.semiTransparent,
+  .layout-tv .skinHeader.skinHeader-withBackground.skinHeader-blurred.semiTransparent,
+  .layout-tv .skinHeader.skinHeader-blurred.semiTransparent {
+    -webkit-backdrop-filter: blur(12px) saturate(1.12) !important;
+    backdrop-filter: blur(12px) saturate(1.12) !important;
+  }
+}
+
+.layout-desktop .skinHeader:has(.headerTabs.sectionTabs),
+.layout-tv .skinHeader:has(.headerTabs.sectionTabs),
+.skinHeader:has(.headerTabs.sectionTabs) {
+  height: auto !important;
+  min-height: var(--jf-header-old-total-height) !important;
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+#reactRoot > div:nth-child(3) > div.skinHeader.focuscontainer-x.skinHeader-withBackground.skinHeader-blurred > div.flex.align-items-center.flex-grow.headerTop,
+#reactRoot > div:nth-child(3) > div.skinHeader.focuscontainer-x.skinHeader-withBackground.skinHeader-blurred.semiTransparent > div.flex.align-items-center.flex-grow.headerTop,
+.skinHeader .headerTop,
+.skinHeader > .flex.align-items-center.flex-grow.headerTop {
+  position: relative !important;
+  inset: auto !important;
+  top: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+  height: var(--jf-header-old-top-height) !important;
+  min-height: var(--jf-header-old-top-height) !important;
+  max-height: var(--jf-header-old-top-height) !important;
+  margin: 0 !important;
+  transform: none !important;
+  display: flex !important;
+  align-items: center !important;
+  z-index: 6 !important;
+}
+
+#reactRoot > div:nth-child(3) > div.skinHeader.focuscontainer-x.skinHeader-withBackground.skinHeader-blurred > div.headerTabs.sectionTabs,
+#reactRoot > div:nth-child(3) > div.skinHeader.focuscontainer-x.skinHeader-withBackground.skinHeader-blurred.semiTransparent > div.headerTabs.sectionTabs,
+.layout-desktop .skinHeader .headerTabs.sectionTabs,
+.layout-tv .skinHeader .headerTabs.sectionTabs,
+.skinHeader .headerTabs.sectionTabs {
+  position: relative !important;
+  inset: auto !important;
+  top: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+  width: 100% !important;
+  max-width: none !important;
+  height: var(--jf-header-old-tabs-height) !important;
+  min-height: var(--jf-header-old-tabs-height) !important;
+  max-height: var(--jf-header-old-tabs-height) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: block !important;
+  overflow: visible !important;
+  transform: none !important;
+  background: transparent !important;
+  z-index: 5 !important;
+}
+
+#reactRoot > div:nth-child(3) > div.skinHeader.focuscontainer-x.skinHeader-withBackground.skinHeader-blurred > div.headerTabs.sectionTabs > div,
+#reactRoot > div:nth-child(3) > div.skinHeader.focuscontainer-x.skinHeader-withBackground.skinHeader-blurred.semiTransparent > div.headerTabs.sectionTabs > div,
+.layout-desktop .skinHeader .headerTabs.sectionTabs > div,
+.layout-tv .skinHeader .headerTabs.sectionTabs > div,
+.skinHeader .headerTabs.sectionTabs > div {
+  position: relative !important;
+  inset: auto !important;
+  width: 100% !important;
+  max-width: none !important;
+  height: var(--jf-header-old-tabs-height) !important;
+  min-height: var(--jf-header-old-tabs-height) !important;
+  max-height: var(--jf-header-old-tabs-height) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  scrollbar-width: none !important;
+  -webkit-overflow-scrolling: touch !important;
+  transform: none !important;
+}
+
+#reactRoot > div:nth-child(3) > div.skinHeader.focuscontainer-x.skinHeader-withBackground.skinHeader-blurred > div.headerTabs.sectionTabs > div::-webkit-scrollbar,
+#reactRoot > div:nth-child(3) > div.skinHeader.focuscontainer-x.skinHeader-withBackground.skinHeader-blurred.semiTransparent > div.headerTabs.sectionTabs > div::-webkit-scrollbar,
+.layout-desktop .skinHeader .headerTabs.sectionTabs > div::-webkit-scrollbar,
+.layout-tv .skinHeader .headerTabs.sectionTabs > div::-webkit-scrollbar,
+.skinHeader .headerTabs.sectionTabs > div::-webkit-scrollbar {
+  display: none !important;
+}
+
+#reactRoot > div:nth-child(3) > div.skinHeader.focuscontainer-x.skinHeader-withBackground.skinHeader-blurred > div.headerTabs.sectionTabs > div > div,
+#reactRoot > div:nth-child(3) > div.skinHeader.focuscontainer-x.skinHeader-withBackground.skinHeader-blurred.semiTransparent > div.headerTabs.sectionTabs > div > div,
+.layout-desktop .skinHeader .headerTabs.sectionTabs > div > div,
+.layout-tv .skinHeader .headerTabs.sectionTabs > div > div,
+.skinHeader .headerTabs.sectionTabs > div > div {
+  position: relative !important;
+  inset: auto !important;
+  top: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+  width: auto !important;
+  min-width: max-content !important;
+  max-width: none !important;
+  height: var(--jf-header-old-tabs-height) !important;
+  min-height: var(--jf-header-old-tabs-height) !important;
+  max-height: var(--jf-header-old-tabs-height) !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+  display: flex !important;
+  flex-flow: row nowrap !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: normal !important;
+  white-space: nowrap !important;
+  overflow: visible !important;
+  transform: none !important;
+}
+
+#moviesTab,
+#moviesTab > div,
+#moviesTab > div:nth-child(1),
+.layout-desktop .skinHeader .headerTabs.sectionTabs #moviesTab,
+.layout-tv .skinHeader .headerTabs.sectionTabs #moviesTab,
+.skinHeader .headerTabs.sectionTabs .emby-tab-button,
+.skinHeader .headerTabs.sectionTabs .emby-button,
+.skinHeader .headerTabs.sectionTabs a,
+.skinHeader .headerTabs.sectionTabs button {
+  position: relative !important;
+  inset: auto !important;
+  top: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+  flex: 0 0 auto !important;
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  height: auto !important;
+  min-height: var(--jf-header-old-tabs-height) !important;
+  max-height: none !important;
+  margin: 0 !important;
+  line-height: normal !important;
+  transform: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+@media all and (min-width: 100em) {
+  #indexPage,
+  #moviesPage,
+  #tvShowsPage,
+  #seriesPage,
+  #tvRecommendedPage,
+  #musicRecommendedPage,
+  .layout-desktop .libraryPage:not(#itemDetailPage) {
+    margin-top: var(--jf-header-old-top-height) !important;
+    padding-top: 0 !important;
+    overflow-y: scroll;
+  }
+}
+
+@media all and (max-width: 100em) {
+  #indexPage,
+  #moviesPage,
+  #tvShowsPage,
+  #seriesPage,
+  #tvRecommendedPage,
+  #musicRecommendedPage,
+  .layout-desktop .libraryPage:not(#itemDetailPage) {
+    margin-top: var(--jf-header-old-total-height) !important;
+    padding-top: 0.5em !important;
+    overflow-y: scroll;
+  }
+
+  #reactRoot > div:nth-child(3) > div.skinHeader.focuscontainer-x.skinHeader-withBackground.skinHeader-blurred > div.headerTabs.sectionTabs > div > div,
+  #reactRoot > div:nth-child(3) > div.skinHeader.focuscontainer-x.skinHeader-withBackground.skinHeader-blurred.semiTransparent > div.headerTabs.sectionTabs > div > div,
+  .skinHeader .headerTabs.sectionTabs > div > div {
+    margin-inline: 0 !important;
+    justify-content: flex-start !important;
+  }
+}
+
