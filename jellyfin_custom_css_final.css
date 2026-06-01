@@ -1,0 +1,562 @@
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/fixes.css');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/jf_font.css');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/base.css');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/accentlist.css');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/rounding_circlehover.css');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/smallercast.css');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/episodes_compactlist.css');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/header_transparent.css');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/login_frame.css');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/fields_noborder.css');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/indicator_floating.css');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/dark.css');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/title_banner-logo.css');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/floating.css');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/hoverglow.css');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/glassy.css');
+
+.backdropImage {
+  filter: blur(0px) saturate(118%) contrast(106%) brightness(122%) !important;
+  opacity: 1 !important;
+}
+
+.detailPageSecondaryContainer.padded-bottom-page {
+  background-color: rgba(0, 0, 0, 0.56) !important;
+}
+
+#loginPage {
+  background-image: image-set(
+    url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/loginBG.webp') type('image/webp'),
+    url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/loginBG.jpg') type('image/jpeg')
+  ) !important;
+  background-position: center !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-attachment: fixed !important;
+}
+
+:root {
+  --accent: 98, 121, 205;
+  --rounding: 12px;
+  --jf-page-pad: clamp(0.75rem, 1.8vw, 2.4rem);
+  --jf-row-gap: clamp(0.6rem, 0.75vw, 1rem);
+  --jf-card-gap: clamp(0.21rem, 0.3vw, 0.38rem);
+}
+
+.pageTitleWithDefaultLogo,
+.pageTitleWithLogo {
+  background-image: image-set(
+    url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/ServerLogo_long2x_noBG.webp') type('image/webp'),
+    url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/ServerLogo_long2x_noBG.png') type('image/png')
+  );
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: block;
+  width: clamp(12rem, 16vw, 15.625rem);
+  height: clamp(3rem, 4.5vw, 3.75rem);
+}
+
+
+/* Final detail-page safety overrides */
+#reactRoot > .backdropContainer,
+#reactRoot > div.backdropContainer {
+  background: transparent !important;
+  opacity: 1 !important;
+}
+
+#reactRoot > .backdropContainer::before,
+#reactRoot > .backdropContainer::after,
+#reactRoot > div.backdropContainer::before,
+#reactRoot > div.backdropContainer::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  pointer-events: none !important;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.38), rgba(0, 0, 0, 0.12) 42%, rgba(0, 0, 0, 0.48)),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.10), rgba(0, 0, 0, 0.50)) !important;
+}
+
+#reactRoot > .backdropContainer > div,
+#reactRoot > div.backdropContainer > div {
+  opacity: 1 !important;
+  filter: blur(0) saturate(118%) contrast(106%) brightness(122%) !important;
+}
+
+
+/* Final spacing and poster-overlap overrides */
+.layout-desktop .libraryPage .itemsContainer,
+.layout-desktop #moviesPage .itemsContainer,
+.layout-desktop #tvRecommendedPage .itemsContainer,
+.layout-desktop #musicRecommendedPage .itemsContainer {
+  gap: var(--jf-card-gap) !important;
+}
+
+.layout-desktop #itemDetailPage {
+  --jf-detail-side-pad: clamp(1.75rem, 2.8vw, 3.7rem);
+  --jf-detail-poster-width: clamp(17rem, 21.25vw, 25.5rem);
+  --jf-detail-gap: clamp(1.6rem, 3vw, 4.25rem);
+  --jf-detail-poster-overlap: calc(var(--jf-detail-poster-width) * -0.40);
+  --jf-detail-content-left: calc(var(--jf-detail-side-pad) + var(--jf-detail-poster-width) + var(--jf-detail-gap));
+  --jf-detail-content-max: min(60rem, calc(100vw - var(--jf-detail-content-left) - var(--jf-detail-side-pad)));
+}
+
+.layout-desktop #itemDetailPage .detailImageContainer,
+.layout-desktop #itemDetailPage .detailImageContainer.hide-mobile {
+  position: relative !important;
+  float: left !important;
+  width: var(--jf-detail-poster-width) !important;
+  margin: var(--jf-detail-poster-overlap) var(--jf-detail-gap) clamp(1.5rem, 4vh, 2.75rem) var(--jf-detail-side-pad) !important;
+  z-index: 4 !important;
+}
+
+.layout-desktop #itemDetailPage .detailImageContainer .card {
+  position: relative !important;
+  inset: auto !important;
+  width: 100% !important;
+  height: auto !important;
+  margin: 0 !important;
+}
+
+.layout-desktop #itemDetailPage .detailImageContainer .cardBox,
+.layout-desktop #itemDetailPage .detailImageContainer .cardScalable {
+  position: relative !important;
+  width: 100% !important;
+  height: auto !important;
+  aspect-ratio: 2 / 3 !important;
+}
+
+.layout-desktop #itemDetailPage .detailLogo.lazy,
+.layout-desktop #itemDetailPage .detailLogo {
+  position: absolute !important;
+  top: clamp(3.25rem, 5.5vh, 5.25rem) !important;
+  right: var(--jf-detail-side-pad) !important;
+  left: auto !important;
+  bottom: auto !important;
+  width: min(36vw, 34rem) !important;
+  height: clamp(3.25rem, 8vh, 6.25rem) !important;
+  margin: 0 !important;
+  background-position: right center !important;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  z-index: 8 !important;
+}
+
+
+/* Final override: compact library spacing and duplicate poster prevention. */
+:root {
+  --jf-page-pad: clamp(0.75rem, 1.8vw, 2.4rem);
+  --jf-row-gap: clamp(0.6rem, 0.75vw, 1rem);
+  --jf-card-gap: clamp(0.21rem, 0.3vw, 0.38rem);
+}
+
+.layout-desktop .libraryPage .itemsContainer,
+.layout-desktop #moviesPage .itemsContainer,
+.layout-desktop #tvRecommendedPage .itemsContainer,
+.layout-desktop #musicRecommendedPage .itemsContainer,
+.itemsContainer {
+  gap: var(--jf-card-gap) !important;
+  column-gap: var(--jf-card-gap) !important;
+  row-gap: var(--jf-row-gap) !important;
+  scroll-padding-inline: var(--jf-page-pad) !important;
+}
+
+.layout-desktop .libraryPage .padded-left,
+.layout-desktop .libraryPage .padded-right,
+.layout-desktop #moviesPage .padded-left,
+.layout-desktop #moviesPage .padded-right,
+.padded-left,
+.padded-right {
+  padding-left: var(--jf-page-pad) !important;
+  padding-right: var(--jf-page-pad) !important;
+}
+
+.itemsContainer > .card > .cardBox,
+.cardBox-bottompadded {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.layout-desktop #itemDetailPage {
+  --jf-detail-poster-overlap: calc(var(--jf-detail-poster-width) * -0.40);
+}
+
+.layout-desktop #itemDetailPage .detailRibbon .detailImageContainer.hide-desktop,
+.layout-desktop #itemDetailPage .detailRibbon .detailImageContainer.hide-desktop.hide-tv,
+.layout-desktop #itemDetailPage .infoWrapper .detailImageContainer.hide-desktop,
+.layout-desktop #itemDetailPage .infoWrapper .detailImageContainer.hide-desktop.hide-tv {
+  display: none !important;
+  visibility: hidden !important;
+  width: 0 !important;
+  height: 0 !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
+}
+
+@media (min-width: 54.01em) {
+  .layout-desktop #itemDetailPage .detailImageContainer.hide-mobile {
+    display: block !important;
+    visibility: visible !important;
+    float: left !important;
+    clear: left !important;
+    position: relative !important;
+    width: var(--jf-detail-poster-width) !important;
+    height: auto !important;
+    margin: var(--jf-detail-poster-overlap) var(--jf-detail-gap) clamp(1.5rem, 4vh, 2.75rem) var(--jf-detail-side-pad) !important;
+    padding: 0 !important;
+    z-index: 4 !important;
+    pointer-events: auto !important;
+    transform: none !important;
+  }
+
+  .layout-desktop #itemDetailPage .detailImageContainer.hide-mobile .card {
+    display: block !important;
+    visibility: visible !important;
+    position: relative !important;
+    inset: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    margin: 0 !important;
+    transform: none !important;
+  }
+}
+
+@media (max-width: 54em) {
+  .layout-desktop #itemDetailPage .detailImageContainer.hide-mobile,
+  .layout-desktop #itemDetailPage .detailImageContainer.hide-mobile .card {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+}
+
+/* Final library gap hard override: remove remaining Jellyfin card gutters. */
+:root,
+html,
+body {
+  --jf-card-gap: clamp(0.21rem, 0.3vw, 0.38rem) !important;
+}
+
+.layout-desktop .itemsContainer,
+.layout-desktop .vertical-wrap.itemsContainer,
+.layout-desktop .vertical-list.itemsContainer,
+.layout-desktop .libraryPage .itemsContainer,
+.layout-desktop #moviesPage .itemsContainer,
+.layout-desktop #tvShowsPage .itemsContainer,
+.layout-desktop #seriesPage .itemsContainer,
+.layout-desktop #tvRecommendedPage .itemsContainer,
+.layout-desktop #musicRecommendedPage .itemsContainer {
+  gap: var(--jf-card-gap) !important;
+  column-gap: var(--jf-card-gap) !important;
+  row-gap: var(--jf-row-gap, clamp(0.6rem, 0.75vw, 1rem)) !important;
+}
+
+.layout-desktop .itemsContainer > .card,
+.layout-desktop .vertical-wrap.itemsContainer > .card,
+.layout-desktop .libraryPage .itemsContainer > .card {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.layout-desktop .itemsContainer > .card > .cardBox,
+.layout-desktop .itemsContainer > .card .cardScalable,
+.layout-desktop .itemsContainer > .card .cardPadder,
+.layout-desktop .itemsContainer > .card .cardImageContainer {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+/* Header tabs responsive stability v2.
+   The tab strip is kept in its own header row. The scroll content is centered
+   only while it fits; when the viewport gets narrow it becomes left-aligned
+   and horizontally scrollable instead of moving outside the visible area. */
+.layout-desktop .skinHeader:has(.headerTabs.sectionTabs),
+.layout-tv .skinHeader:has(.headerTabs.sectionTabs) {
+  overflow: visible !important;
+  min-height: clamp(7.15rem, 9.25vh, 8.9rem) !important;
+  z-index: 1200 !important;
+}
+
+.layout-desktop .skinHeader .headerTabs.sectionTabs,
+.layout-tv .skinHeader .headerTabs.sectionTabs {
+  position: absolute !important;
+  top: clamp(3.05rem, 4.55vh, 4.05rem) !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: auto !important;
+  width: 100% !important;
+  max-width: none !important;
+  height: clamp(2.55rem, 4.15vh, 3.25rem) !important;
+  min-height: clamp(2.55rem, 4.15vh, 3.25rem) !important;
+  margin: 0 !important;
+  padding: 0 clamp(0.85rem, 2.2vw, 2.6rem) !important;
+  box-sizing: border-box !important;
+  display: block !important;
+  overflow: visible !important;
+  transform: none !important;
+  z-index: 4 !important;
+}
+
+.layout-desktop .skinHeader .headerTabs.sectionTabs > div,
+.layout-tv .skinHeader .headerTabs.sectionTabs > div {
+  position: relative !important;
+  display: block !important;
+  width: 100% !important;
+  max-width: min(100%, 72rem) !important;
+  height: 100% !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  scrollbar-width: none !important;
+  -webkit-overflow-scrolling: touch !important;
+  transform: none !important;
+}
+
+.layout-desktop .skinHeader .headerTabs.sectionTabs > div::-webkit-scrollbar,
+.layout-tv .skinHeader .headerTabs.sectionTabs > div::-webkit-scrollbar {
+  display: none !important;
+}
+
+.layout-desktop .skinHeader .headerTabs.sectionTabs > div > div,
+.layout-tv .skinHeader .headerTabs.sectionTabs > div > div {
+  position: relative !important;
+  inset: auto !important;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  width: max-content !important;
+  min-width: max-content !important;
+  max-width: none !important;
+  height: 100% !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+  display: flex !important;
+  flex-flow: row nowrap !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: clamp(1.05rem, 2.1vw, 3.25rem) !important;
+  white-space: nowrap !important;
+  transform: none !important;
+}
+
+.layout-desktop .skinHeader .headerTabs.sectionTabs .emby-tab-button,
+.layout-desktop .skinHeader .headerTabs.sectionTabs .emby-button,
+.layout-desktop .skinHeader .headerTabs.sectionTabs a,
+.layout-desktop .skinHeader .headerTabs.sectionTabs button,
+.layout-desktop .skinHeader .headerTabs.sectionTabs #moviesTab,
+.layout-tv .skinHeader .headerTabs.sectionTabs .emby-tab-button,
+.layout-tv .skinHeader .headerTabs.sectionTabs .emby-button,
+.layout-tv .skinHeader .headerTabs.sectionTabs a,
+.layout-tv .skinHeader .headerTabs.sectionTabs button,
+.layout-tv .skinHeader .headerTabs.sectionTabs #moviesTab {
+  position: relative !important;
+  inset: auto !important;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  flex: 0 0 auto !important;
+  min-width: max-content !important;
+  margin: 0 !important;
+  min-height: 2.35rem !important;
+  line-height: 2.35rem !important;
+  transform: none !important;
+}
+
+.layout-desktop .libraryPage:not(#itemDetailPage),
+.layout-desktop #moviesPage,
+.layout-desktop #tvShowsPage,
+.layout-desktop #seriesPage,
+.layout-desktop #tvRecommendedPage,
+.layout-desktop #musicRecommendedPage {
+  padding-top: clamp(8.35rem, 11.35vh, 10.6rem) !important;
+}
+
+.layout-desktop .libraryPage .viewSettingsContainer,
+.layout-desktop .libraryPage .itemsViewSettingsContainer,
+.layout-desktop .libraryPage .viewControls,
+.layout-desktop .libraryPage .paging,
+.layout-desktop #moviesPage .viewSettingsContainer,
+.layout-desktop #tvShowsPage .viewSettingsContainer,
+.layout-desktop #seriesPage .viewSettingsContainer {
+  position: relative !important;
+  z-index: 1 !important;
+  margin-top: 0 !important;
+}
+
+@media (max-width: 76em) {
+  .layout-desktop .skinHeader:has(.headerTabs.sectionTabs),
+  .layout-tv .skinHeader:has(.headerTabs.sectionTabs) {
+    min-height: clamp(7.45rem, 10.5vh, 9.25rem) !important;
+  }
+
+  .layout-desktop .skinHeader .headerTabs.sectionTabs,
+  .layout-tv .skinHeader .headerTabs.sectionTabs {
+    top: clamp(3.25rem, 5.25vh, 4.45rem) !important;
+    padding-inline: clamp(0.75rem, 1.8vw, 1.4rem) !important;
+  }
+
+  .layout-desktop .skinHeader .headerTabs.sectionTabs > div,
+  .layout-tv .skinHeader .headerTabs.sectionTabs > div {
+    max-width: 100% !important;
+  }
+
+  .layout-desktop .skinHeader .headerTabs.sectionTabs > div > div,
+  .layout-tv .skinHeader .headerTabs.sectionTabs > div > div {
+    margin-inline: 0 !important;
+    gap: clamp(1rem, 4vw, 1.8rem) !important;
+  }
+
+  .layout-desktop .libraryPage:not(#itemDetailPage),
+  .layout-desktop #moviesPage,
+  .layout-desktop #tvShowsPage,
+  .layout-desktop #seriesPage,
+  .layout-desktop #tvRecommendedPage,
+  .layout-desktop #musicRecommendedPage {
+    padding-top: clamp(8.7rem, 13vh, 10.9rem) !important;
+  }
+}
+
+
+/* Final detail logo anchor: always right-aligned directly above the detail ribbon. */
+.layout-desktop #itemDetailPage {
+  position: relative !important;
+  --jf-detail-backdrop-height: clamp(15rem, 31vh, 25rem);
+  --jf-detail-ribbon-height: clamp(4.5rem, 10vh, 7.75rem);
+  --jf-detail-logo-height: clamp(3.15rem, 7.2vh, 6.1rem);
+  --jf-detail-logo-gap: clamp(0.45rem, 1vh, 0.85rem);
+}
+
+.layout-desktop #itemDetailPage .itemBackdrop {
+  height: var(--jf-detail-backdrop-height) !important;
+}
+
+.layout-desktop #itemDetailPage .detailRibbon.padded-left.padded-right {
+  min-height: var(--jf-detail-ribbon-height) !important;
+}
+
+.layout-desktop #itemDetailPage .detailLogo.lazy,
+.layout-desktop #itemDetailPage .detailLogo.lazy.lazy-image-fadein-fast,
+.layout-desktop #itemDetailPage .detailLogo {
+  display: block !important;
+  position: absolute !important;
+  top: max(clamp(3.75rem, 6vh, 5.5rem), calc(var(--jf-detail-backdrop-height) - var(--jf-detail-logo-height) - var(--jf-detail-logo-gap))) !important;
+  right: var(--jf-detail-side-pad, clamp(1.75rem, 2.8vw, 3.7rem)) !important;
+  bottom: auto !important;
+  left: auto !important;
+  width: min(34vw, 32rem) !important;
+  height: var(--jf-detail-logo-height) !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background-position: right center !important;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  z-index: 7 !important;
+  pointer-events: none !important;
+  transform: none !important;
+}
+
+@media (max-width: 72em), (max-height: 46em) {
+  .layout-desktop #itemDetailPage .detailLogo.lazy,
+  .layout-desktop #itemDetailPage .detailLogo.lazy.lazy-image-fadein-fast,
+  .layout-desktop #itemDetailPage .detailLogo {
+    position: absolute !important;
+    top: max(clamp(3.75rem, 6vh, 5.5rem), calc(var(--jf-detail-backdrop-height) - var(--jf-detail-logo-height) - var(--jf-detail-logo-gap))) !important;
+    right: var(--jf-detail-side-pad, var(--jf-page-pad, 1rem)) !important;
+    left: auto !important;
+    bottom: auto !important;
+    width: min(42vw, 28rem) !important;
+    height: var(--jf-detail-logo-height) !important;
+    margin: 0 !important;
+    background-position: right center !important;
+  }
+}
+
+/* Final library right-edge compaction: the large right blank space is not the card gap;
+   it is leftover flex-row width from Jellyfin's fixed poster card sizing.
+   Cards now use a column-based flex basis so the row consumes the available width
+   while keeping a small gap and reserving room for the alphabet index. */
+:root,
+html,
+body {
+  --jf-card-gap: clamp(0.21rem, 0.3vw, 0.38rem) !important;
+  --jf-library-index-reserve: clamp(1.85rem, 2.15vw, 2.75rem);
+  --jf-library-cols: 4;
+}
+
+@media (min-width: 70em) {
+  :root,
+  html,
+  body { --jf-library-cols: 5; }
+}
+
+@media (min-width: 88em) {
+  :root,
+  html,
+  body { --jf-library-cols: 6; }
+}
+
+@media (min-width: 106em) {
+  :root,
+  html,
+  body { --jf-library-cols: 7; }
+}
+
+@media (min-width: 126em) {
+  :root,
+  html,
+  body { --jf-library-cols: 8; }
+}
+
+@media (min-width: 148em) {
+  :root,
+  html,
+  body { --jf-library-cols: 9; }
+}
+
+.layout-desktop #moviesPage .vertical-wrap.itemsContainer,
+.layout-desktop #tvShowsPage .vertical-wrap.itemsContainer,
+.layout-desktop #seriesPage .vertical-wrap.itemsContainer,
+.layout-desktop .libraryPage:not(#itemDetailPage) .vertical-wrap.itemsContainer {
+  justify-content: flex-start !important;
+  align-content: flex-start !important;
+  gap: var(--jf-row-gap, clamp(0.6rem, 0.75vw, 1rem)) var(--jf-card-gap) !important;
+  column-gap: var(--jf-card-gap) !important;
+  row-gap: var(--jf-row-gap, clamp(0.6rem, 0.75vw, 1rem)) !important;
+}
+
+.layout-desktop #moviesPage .vertical-wrap.itemsContainer > .card,
+.layout-desktop #tvShowsPage .vertical-wrap.itemsContainer > .card,
+.layout-desktop #seriesPage .vertical-wrap.itemsContainer > .card,
+.layout-desktop .libraryPage:not(#itemDetailPage) .vertical-wrap.itemsContainer > .card {
+  flex: 0 0 calc((100% - var(--jf-library-index-reserve) - ((var(--jf-library-cols) - 1) * var(--jf-card-gap))) / var(--jf-library-cols)) !important;
+  width: calc((100% - var(--jf-library-index-reserve) - ((var(--jf-library-cols) - 1) * var(--jf-card-gap))) / var(--jf-library-cols)) !important;
+  max-width: none !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+}
+
+.layout-desktop #moviesPage .vertical-wrap.itemsContainer > .card > .cardBox,
+.layout-desktop #tvShowsPage .vertical-wrap.itemsContainer > .card > .cardBox,
+.layout-desktop #seriesPage .vertical-wrap.itemsContainer > .card > .cardBox,
+.layout-desktop .libraryPage:not(#itemDetailPage) .vertical-wrap.itemsContainer > .card > .cardBox,
+.layout-desktop #moviesPage .vertical-wrap.itemsContainer > .card .cardScalable,
+.layout-desktop #tvShowsPage .vertical-wrap.itemsContainer > .card .cardScalable,
+.layout-desktop #seriesPage .vertical-wrap.itemsContainer > .card .cardScalable,
+.layout-desktop .libraryPage:not(#itemDetailPage) .vertical-wrap.itemsContainer > .card .cardScalable {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}

@@ -1,0 +1,123 @@
+/* Detail page button row */
+.mainDetailButtons {
+  font-size: clamp(1.05rem, 0.75vw + 0.92rem, 1.35rem);
+  gap: clamp(0.35rem, 0.8vw, 0.85rem);
+}
+
+@media all and (min-width: 100em) {
+  .button-flat {
+    margin: .2em !important;
+    padding: clamp(0.65em, 0.5vw + 0.55em, .85em) !important;
+  }
+}
+@media all and (max-width: 100em) {
+  .mainDetailButtons {
+    font-size: clamp(1.25rem, 1.4vw + 1rem, 1.72rem);
+  }
+  .detailButton {
+    max-width: min(15vw, 4.75rem) !important;
+  }
+}
+
+/* Media player */
+.startTimeText,
+.endTimeText {
+  width: 3.4em;
+  display: block;
+  text-align: center;
+}
+.osdTitle {
+  margin-left: 0.5em;
+}
+.videoOsdBottom {
+  padding-top: 1em;
+}
+.skinHeader-withBackground.osdHeader {
+  height: 5em;
+}
+
+/* Detail-page width handling is centralized in title_banner-logo.css.
+   The old aspect-ratio based padding jump has been removed because it pushed
+   detailRibbon/detailPagePrimaryContent too far to the right on wide browsers. */
+@media (min-aspect-ratio: 1.98/1) {
+  .layout-desktop #itemDetailPage .detailImageContainer .card {
+    width: var(--jf-detail-poster-width, clamp(15rem, 21vw, 24rem)) !important;
+  }
+}
+
+/* Entry field padding and alignment/sizes */
+.emby-input,
+.emby-textarea {
+  padding: .4em .55em;
+}
+.emby-select {
+  padding: .35em 1.9em .35em .35em;
+}
+.selectArrow {
+  margin-top: 1.05em;
+}
+
+/* Section title alignment */
+.layout-mobile :not(.sectionTitleContainer-cards) > .sectionTitle-cards {
+  padding-top: 0;
+}
+.sectionTitle {
+  margin-left: clamp(0.25rem, 0.45vw, 0.55rem) !important;
+  margin-top: .2em !important;
+  margin-bottom: .2em !important;
+}
+.sectionTitleTextButton > .material-icons {
+  margin: 0;
+}
+.layout-mobile .sectionTitleTextButton > .material-icons {
+  padding-top: .2em;
+}
+
+/* Prevent UI shifting */
+.nowPlayingBarCurrentTime {
+  width: 6em;
+}
+.osdTextContainer {
+  margin: 0 !important;
+  margin-top: 0.2em !important;
+  padding-left: 0.5em !important;
+  padding-right: 0.5em !important;
+}
+
+/* Top right user icon with profile image */
+.headerUserButtonRound {
+  border-radius: 50px !important;
+}
+
+/* Drawer/menu alignments */
+.mainDrawer {
+  width: min(86vw, 22rem);
+  border-right: 1px solid rgba(var(--accent), 0.18);
+}
+.navMenuOption {
+  min-height: 3rem;
+  border-radius: calc(var(--jf-radius) * 0.75);
+  margin-inline: 0.55rem;
+  transition:
+    transform var(--jf-motion-fast) var(--jf-ease),
+    background-color var(--jf-motion-fast) ease,
+    color var(--jf-motion-fast) ease;
+}
+.navMenuOption:hover {
+  transform: translateX(4px);
+}
+.navMenuOptionText {
+  margin-top: 0;
+}
+.formDialogHeaderTitle {
+  margin-left: 1em;
+}
+.formDialogContent {
+  margin-bottom: 6.2em;
+}
+.dialogContentInner {
+  padding: .5em 1em 1em;
+}
+.listItem-indexnumberleft {
+  margin: 1em;
+}

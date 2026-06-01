@@ -1,0 +1,551 @@
+/* Detail page: dynamic backdrop and logo alignment */
+.itemBackdrop {
+  height: clamp(15rem, 31vh, 25rem) !important;
+  display: inherit;
+}
+
+
+
+/* Desktop detail layout: stable poster/content/ribbon alignment across wide browsers */
+.layout-desktop #itemDetailPage {
+  --jf-detail-side-pad: clamp(1.75rem, 2.8vw, 3.7rem);
+  --jf-detail-poster-width: clamp(17rem, 21.25vw, 25.5rem);
+  --jf-detail-gap: clamp(1.6rem, 3vw, 4.25rem);
+  --jf-detail-poster-overlap: calc(var(--jf-detail-poster-width) * -0.40);
+  --jf-detail-content-left: calc(var(--jf-detail-side-pad) + var(--jf-detail-poster-width) + var(--jf-detail-gap));
+  --jf-detail-content-max: min(60rem, calc(100vw - var(--jf-detail-content-left) - var(--jf-detail-side-pad)));
+}
+
+.layout-desktop #itemDetailPage .detailPageWrapperContainer,
+.layout-desktop #itemDetailPage .detailPagePrimaryContainer {
+  box-sizing: border-box;
+}
+
+.layout-desktop #itemDetailPage .detailImageContainer .card {
+  left: var(--jf-detail-side-pad) !important;
+  width: var(--jf-detail-poster-width) !important;
+}
+
+.layout-desktop #itemDetailPage .detailPagePrimaryContainer,
+.layout-desktop #itemDetailPage .detailPageContent {
+  box-sizing: border-box;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.layout-desktop #itemDetailPage .detailRibbon.padded-left.padded-right,
+.layout-desktop #itemDetailPage .detailPagePrimaryContent.padded-right {
+  box-sizing: border-box;
+  padding-left: var(--jf-detail-content-left) !important;
+  padding-right: var(--jf-detail-side-pad) !important;
+}
+
+.layout-desktop #itemDetailPage .detailRibbon.padded-left.padded-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: clamp(0.5rem, 1vw, 1.25rem);
+  min-height: clamp(4.5rem, 10vh, 7.75rem);
+}
+
+.layout-desktop #itemDetailPage .detailPagePrimaryContent.padded-right {
+  max-width: none !important;
+  width: 100% !important;
+}
+
+.layout-desktop #itemDetailPage .detailPagePrimaryContent > .detailSection,
+.layout-desktop #itemDetailPage .detailPagePrimaryContent > .itemDetailsGroup,
+.layout-desktop #itemDetailPage .detailPagePrimaryContent > .collectionItems,
+.layout-desktop #itemDetailPage .detailPagePrimaryContent > .verticalSection,
+.layout-desktop #itemDetailPage .trackSelections {
+  width: var(--jf-detail-content-max) !important;
+  max-width: var(--jf-detail-content-max) !important;
+  box-sizing: border-box;
+}
+
+.layout-desktop #itemDetailPage .trackSelections {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(16rem, 100%), 1fr));
+  gap: clamp(0.25rem, 0.7vw, 0.75rem) clamp(1rem, 1.6vw, 2rem);
+  align-items: end;
+}
+
+.layout-desktop #itemDetailPage .trackSelectionFieldContainer,
+.layout-desktop #itemDetailPage .selectContainer {
+  min-width: 0 !important;
+}
+
+.layout-desktop #itemDetailPage .itemDetailsGroup {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  column-gap: clamp(1rem, 1.5vw, 1.75rem);
+  row-gap: 0.35rem;
+}
+
+.layout-desktop #itemDetailPage .itemDetailsGroup .detailsGroupItem {
+  display: contents;
+}
+
+.layout-desktop #itemDetailPage .itemDetailsGroup .label {
+  color: rgba(var(--jf-text), 0.72);
+  white-space: nowrap;
+}
+
+.layout-desktop #itemDetailPage .itemDetailsGroup .content {
+  min-width: 0;
+}
+
+
+@media (max-width: 70em) {
+  .layout-desktop #itemDetailPage,
+  .layout-mobile #itemDetailPage {
+    --jf-detail-side-pad: var(--jf-page-pad, clamp(1rem, 3vw, 4.25rem));
+    --jf-detail-content-left: var(--jf-detail-side-pad);
+    --jf-detail-content-max: calc(100vw - (var(--jf-detail-side-pad) * 2));
+  }
+
+  .layout-desktop #itemDetailPage .detailPagePrimaryContainer,
+  .layout-desktop #itemDetailPage .detailPageContent {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .layout-desktop #itemDetailPage .detailRibbon.padded-left.padded-right,
+  .layout-desktop #itemDetailPage .detailPagePrimaryContent.padded-right {
+    padding-left: var(--jf-detail-side-pad) !important;
+    padding-right: var(--jf-detail-side-pad) !important;
+  }
+}
+
+.detailLogo {
+  display: none;
+}
+
+.layout-desktop .detailRibbon {
+  margin-top: 0;
+  padding-top: .5em;
+  padding-bottom: .5em;
+}
+
+.layout-desktop .detailImageContainer .card {
+  top: clamp(6.25rem, 18vh, 11.5rem);
+}
+
+.layout-desktop #itemDetailPage .detailLogo {
+  --detail-logo-left: var(--jf-detail-content-left);
+  position: relative;
+  display: block;
+  width: min(42vw, 34rem, var(--jf-detail-content-max));
+  max-width: var(--jf-detail-content-max);
+  min-height: clamp(3.25rem, 7vh, 6.5rem);
+  margin: clamp(0.5rem, 2vh, 1.5rem) 0 clamp(0.8rem, 2vh, 1.4rem) var(--detail-logo-left);
+  background-position: left center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.72));
+  flex-shrink: 0;
+}
+
+.layout-mobile .detailLogo {
+  display: none !important;
+}
+
+#itemDetailPage .itemName.infoText.parentNameLast {
+  display: none;
+}
+
+.hide + .detailPageWrapperContainer .itemName {
+  display: block !important;
+}
+
+.itemName {
+  margin: .5em 0 !important;
+}
+
+.layout-mobile #itemDetailPage .itemName.infoText.parentNameLast {
+  display: block;
+}
+
+
+/* Detail page layer fix: poster, logo and compact desktop fallback */
+.layout-desktop #itemDetailPage .detailImageContainer,
+.layout-desktop #itemDetailPage .detailImageContainer.hide-mobile {
+  position: relative !important;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.layout-desktop #itemDetailPage .detailImageContainer .card,
+.layout-desktop #itemDetailPage .detailImageContainer .cardBox,
+.layout-desktop #itemDetailPage .detailImageContainer .cardScalable,
+.layout-desktop #itemDetailPage .detailImageContainer .cardImageContainer {
+  pointer-events: auto;
+}
+
+.layout-desktop #itemDetailPage .detailImageContainer .card {
+  position: absolute !important;
+  left: var(--jf-detail-side-pad) !important;
+  top: clamp(5.75rem, 14vh, 10.25rem) !important;
+  width: var(--jf-detail-poster-width) !important;
+  max-width: var(--jf-detail-poster-width) !important;
+  z-index: 3 !important;
+}
+
+.layout-desktop #itemDetailPage .detailImageContainer .cardBox,
+.layout-desktop #itemDetailPage .detailImageContainer .cardScalable,
+.layout-desktop #itemDetailPage .detailImageContainer .cardContent,
+.layout-desktop #itemDetailPage .detailImageContainer .cardImageContainer {
+  border-radius: var(--jf-radius) !important;
+}
+
+.layout-desktop #itemDetailPage .detailLogo {
+  position: relative !important;
+  top: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+  z-index: 5 !important;
+  height: auto !important;
+  min-height: clamp(3.25rem, 7vh, 6.5rem) !important;
+  max-height: clamp(4.5rem, 12vh, 8rem) !important;
+  margin: clamp(0.5rem, 2vh, 1.5rem) 0 clamp(0.8rem, 2vh, 1.4rem) var(--jf-detail-content-left) !important;
+  pointer-events: none;
+}
+
+@media (max-width: 72em), (max-height: 46em) {
+  .layout-desktop #itemDetailPage,
+  .layout-mobile #itemDetailPage {
+    --jf-detail-side-pad: var(--jf-page-pad, clamp(1rem, 3vw, 4.25rem));
+    --jf-detail-content-left: var(--jf-detail-side-pad);
+    --jf-detail-content-max: calc(100vw - (var(--jf-detail-side-pad) * 2));
+  }
+
+  .layout-desktop #itemDetailPage .detailImageContainer.hide-mobile,
+  .layout-desktop #itemDetailPage .detailImageContainer .card {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+
+  .layout-desktop #itemDetailPage .detailRibbon.padded-left.padded-right,
+  .layout-desktop #itemDetailPage .detailPagePrimaryContent.padded-right {
+    padding-left: var(--jf-detail-side-pad) !important;
+    padding-right: var(--jf-detail-side-pad) !important;
+  }
+
+  .layout-desktop #itemDetailPage .detailLogo {
+    display: block !important;
+    width: min(66vw, 32rem, var(--jf-detail-content-max)) !important;
+    max-width: var(--jf-detail-content-max) !important;
+    margin-left: var(--jf-detail-side-pad) !important;
+  }
+}
+
+@media (max-width: 48em) {
+  .layout-desktop #itemDetailPage .detailLogo,
+  .layout-mobile #itemDetailPage .detailLogo {
+    display: none !important;
+  }
+}
+
+/* Detail page scroll-flow fix: poster belongs to the page flow, not to the viewport layer.
+   This prevents the primary poster from covering cast rows, collections and episode lists while scrolling. */
+.layout-desktop #itemDetailPage {
+  --jf-detail-side-pad: clamp(1.75rem, 2.8vw, 3.7rem);
+  --jf-detail-poster-width: clamp(17rem, 21.25vw, 25.5rem);
+  --jf-detail-gap: clamp(1.6rem, 3vw, 4.25rem);
+  --jf-detail-poster-overlap: calc(var(--jf-detail-poster-width) * -0.40);
+  --jf-detail-content-left: calc(var(--jf-detail-side-pad) + var(--jf-detail-poster-width) + var(--jf-detail-gap));
+  --jf-detail-content-max: min(60rem, calc(100vw - var(--jf-detail-content-left) - var(--jf-detail-side-pad)));
+}
+
+.layout-desktop #itemDetailPage .detailPagePrimaryContainer {
+  display: flow-root !important;
+  position: relative !important;
+  overflow: visible !important;
+  min-height: clamp(35rem, 72vh, 48rem) !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.layout-desktop #itemDetailPage .detailImageContainer,
+.layout-desktop #itemDetailPage .detailImageContainer.hide-mobile {
+  display: block !important;
+  float: left !important;
+  clear: left !important;
+  position: relative !important;
+  width: var(--jf-detail-poster-width) !important;
+  height: auto !important;
+  margin: var(--jf-detail-poster-overlap) var(--jf-detail-gap) clamp(1.5rem, 4vh, 2.75rem) var(--jf-detail-side-pad) !important;
+  padding: 0 !important;
+  z-index: 2 !important;
+  pointer-events: auto !important;
+  transform: none !important;
+}
+
+.layout-desktop #itemDetailPage .detailImageContainer .card,
+.layout-desktop #itemDetailPage .detailImageContainer.hide-mobile .card {
+  position: relative !important;
+  inset: auto !important;
+  top: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  left: auto !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  height: auto !important;
+  margin: 0 !important;
+  z-index: 2 !important;
+  transform: none !important;
+}
+
+.layout-desktop #itemDetailPage .detailImageContainer .cardBox,
+.layout-desktop #itemDetailPage .detailImageContainer .cardScalable {
+  position: relative !important;
+  width: 100% !important;
+  height: auto !important;
+  aspect-ratio: 2 / 3 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+  border-radius: var(--jf-radius) !important;
+}
+
+.layout-desktop #itemDetailPage .detailImageContainer .cardContent,
+.layout-desktop #itemDetailPage .detailImageContainer .cardImageContainer {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: var(--jf-radius) !important;
+}
+
+.layout-desktop #itemDetailPage .detailImageContainer .cardPadder {
+  display: none !important;
+}
+
+.layout-desktop #itemDetailPage .detailPageSecondaryContainer,
+.layout-desktop #itemDetailPage .detailVerticalSection,
+.layout-desktop #itemDetailPage .childrenItemsContainer,
+.layout-desktop #itemDetailPage .collectionItems,
+.layout-desktop #itemDetailPage .nextUpSection,
+.layout-desktop #itemDetailPage .peopleSection {
+  clear: both !important;
+}
+
+.layout-desktop #itemDetailPage .detailRibbon.padded-left.padded-right,
+.layout-desktop #itemDetailPage .detailPagePrimaryContent.padded-right {
+  position: relative !important;
+  z-index: 3 !important;
+  padding-left: var(--jf-detail-content-left) !important;
+  padding-right: var(--jf-detail-side-pad) !important;
+}
+
+/* Logo: place item logo high on the right side of the banner/content layer. */
+.layout-desktop #itemDetailPage .detailLogo {
+  position: absolute !important;
+  top: clamp(3.25rem, 5.5vh, 5.25rem) !important;
+  right: var(--jf-detail-side-pad) !important;
+  bottom: auto !important;
+  left: auto !important;
+  width: min(36vw, 34rem) !important;
+  height: clamp(3.25rem, 8vh, 6.25rem) !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  margin: 0 !important;
+  background-position: right center !important;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  filter: drop-shadow(0 14px 30px rgba(0, 0, 0, 0.74)) !important;
+  opacity: 0.98 !important;
+  z-index: 6 !important;
+  pointer-events: none !important;
+}
+
+@media (max-width: 72em), (max-height: 46em) {
+  .layout-desktop #itemDetailPage,
+  .layout-mobile #itemDetailPage {
+    --jf-detail-side-pad: var(--jf-page-pad, clamp(1rem, 3vw, 4.25rem));
+    --jf-detail-content-left: var(--jf-detail-side-pad);
+    --jf-detail-content-max: calc(100vw - (var(--jf-detail-side-pad) * 2));
+  }
+
+  .layout-desktop #itemDetailPage .detailPagePrimaryContainer {
+    min-height: 0 !important;
+  }
+
+  .layout-desktop #itemDetailPage .detailImageContainer,
+  .layout-desktop #itemDetailPage .detailImageContainer.hide-mobile,
+  .layout-desktop #itemDetailPage .detailImageContainer .card {
+    display: none !important;
+    float: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+
+  .layout-desktop #itemDetailPage .detailRibbon.padded-left.padded-right,
+  .layout-desktop #itemDetailPage .detailPagePrimaryContent.padded-right {
+    padding-left: var(--jf-detail-side-pad) !important;
+    padding-right: var(--jf-detail-side-pad) !important;
+  }
+
+  .layout-desktop #itemDetailPage .detailLogo {
+    position: relative !important;
+    top: auto !important;
+    right: auto !important;
+    left: auto !important;
+    width: min(66vw, 32rem, var(--jf-detail-content-max)) !important;
+    height: clamp(3rem, 7vh, 5.5rem) !important;
+    margin: clamp(0.75rem, 2vh, 1.25rem) var(--jf-detail-side-pad) clamp(0.75rem, 2vh, 1.25rem) auto !important;
+    background-position: right center !important;
+  }
+}
+
+@media (max-width: 48em) {
+  .layout-desktop #itemDetailPage .detailLogo,
+  .layout-mobile #itemDetailPage .detailLogo {
+    display: none !important;
+  }
+}
+
+
+/* Final poster overlap: keep poster in normal scroll flow while pulling it 40% into the banner. */
+.layout-desktop #itemDetailPage .detailImageContainer.hide-mobile {
+  margin-top: var(--jf-detail-poster-overlap) !important;
+}
+
+.layout-desktop #itemDetailPage .detailImageContainer.hide-mobile .cardImageContainer.coveredImage,
+.layout-desktop #itemDetailPage .detailImageContainer.hide-mobile .cardImageContainer.coveredImage.cardContent {
+  position: absolute !important;
+  inset: 0 !important;
+}
+
+.layout-desktop #itemDetailPage .detailLogo.lazy,
+.layout-desktop #itemDetailPage .detailLogo {
+  top: clamp(3.25rem, 5.5vh, 5.25rem) !important;
+  right: var(--jf-detail-side-pad) !important;
+  left: auto !important;
+  background-position: right center !important;
+}
+
+
+/* Final duplicate-poster fix:
+   Jellyfin renders a second poster inside detailRibbon for compact layouts
+   (.hide-desktop.hide-tv). The earlier generic .detailImageContainer rules made it visible
+   on desktop and created a duplicate. Keep only the primary .hide-mobile poster on desktop. */
+.layout-desktop #itemDetailPage .detailRibbon .detailImageContainer.hide-desktop,
+.layout-desktop #itemDetailPage .detailRibbon .detailImageContainer.hide-desktop.hide-tv,
+.layout-desktop #itemDetailPage .infoWrapper .detailImageContainer.hide-desktop,
+.layout-desktop #itemDetailPage .infoWrapper .detailImageContainer.hide-desktop.hide-tv {
+  display: none !important;
+  visibility: hidden !important;
+  width: 0 !important;
+  height: 0 !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
+}
+
+.layout-desktop #itemDetailPage {
+  --jf-detail-poster-overlap: calc(var(--jf-detail-poster-width) * -0.40);
+}
+
+/* Keep the desktop poster visible for normal desktop/tablet widths.
+   The old max-height condition hid it on normal browser windows. */
+@media (min-width: 54.01em) {
+  .layout-desktop #itemDetailPage .detailImageContainer.hide-mobile {
+    display: block !important;
+    visibility: visible !important;
+    float: left !important;
+    clear: left !important;
+    position: relative !important;
+    width: var(--jf-detail-poster-width) !important;
+    height: auto !important;
+    margin: var(--jf-detail-poster-overlap) var(--jf-detail-gap) clamp(1.5rem, 4vh, 2.75rem) var(--jf-detail-side-pad) !important;
+    padding: 0 !important;
+    z-index: 4 !important;
+    pointer-events: auto !important;
+    transform: none !important;
+  }
+
+  .layout-desktop #itemDetailPage .detailImageContainer.hide-mobile .card {
+    display: block !important;
+    visibility: visible !important;
+    position: relative !important;
+    inset: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    margin: 0 !important;
+    transform: none !important;
+  }
+}
+
+/* Only hide the primary desktop poster on genuinely compact widths. */
+@media (max-width: 54em) {
+  .layout-desktop #itemDetailPage .detailImageContainer.hide-mobile,
+  .layout-desktop #itemDetailPage .detailImageContainer.hide-mobile .card {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+}
+
+/* Final detail logo anchor: always right-aligned directly above the detail ribbon. */
+.layout-desktop #itemDetailPage {
+  position: relative !important;
+  --jf-detail-backdrop-height: clamp(15rem, 31vh, 25rem);
+  --jf-detail-ribbon-height: clamp(4.5rem, 10vh, 7.75rem);
+  --jf-detail-logo-height: clamp(3.15rem, 7.2vh, 6.1rem);
+  --jf-detail-logo-gap: clamp(0.45rem, 1vh, 0.85rem);
+}
+
+.layout-desktop #itemDetailPage .itemBackdrop {
+  height: var(--jf-detail-backdrop-height) !important;
+}
+
+.layout-desktop #itemDetailPage .detailRibbon.padded-left.padded-right {
+  min-height: var(--jf-detail-ribbon-height) !important;
+}
+
+.layout-desktop #itemDetailPage .detailLogo.lazy,
+.layout-desktop #itemDetailPage .detailLogo.lazy.lazy-image-fadein-fast,
+.layout-desktop #itemDetailPage .detailLogo {
+  display: block !important;
+  position: absolute !important;
+  top: max(clamp(3.75rem, 6vh, 5.5rem), calc(var(--jf-detail-backdrop-height) - var(--jf-detail-logo-height) - var(--jf-detail-logo-gap))) !important;
+  right: var(--jf-detail-side-pad, clamp(1.75rem, 2.8vw, 3.7rem)) !important;
+  bottom: auto !important;
+  left: auto !important;
+  width: min(34vw, 32rem) !important;
+  height: var(--jf-detail-logo-height) !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background-position: right center !important;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  z-index: 7 !important;
+  pointer-events: none !important;
+  transform: none !important;
+}
+
+@media (max-width: 72em), (max-height: 46em) {
+  .layout-desktop #itemDetailPage .detailLogo.lazy,
+  .layout-desktop #itemDetailPage .detailLogo.lazy.lazy-image-fadein-fast,
+  .layout-desktop #itemDetailPage .detailLogo {
+    position: absolute !important;
+    top: max(clamp(3.75rem, 6vh, 5.5rem), calc(var(--jf-detail-backdrop-height) - var(--jf-detail-logo-height) - var(--jf-detail-logo-gap))) !important;
+    right: var(--jf-detail-side-pad, var(--jf-page-pad, 1rem)) !important;
+    left: auto !important;
+    bottom: auto !important;
+    width: min(42vw, 28rem) !important;
+    height: var(--jf-detail-logo-height) !important;
+    margin: 0 !important;
+    background-position: right center !important;
+  }
+}

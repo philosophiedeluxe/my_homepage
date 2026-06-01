@@ -1,0 +1,50 @@
+/* Floating progress bar */
+#indexPage .innerCardFooterClear,
+.libraryPage .innerCardFooterClear,
+#itemDetailPage .innerCardFooterClear {
+  background-color: transparent !important;
+  box-shadow: none;
+}
+
+#indexPage .itemProgressBarForeground,
+.libraryPage .itemProgressBarForeground,
+#itemDetailPage .itemProgressBarForeground,
+#indexPage .itemProgressBar,
+.libraryPage .itemProgressBar,
+#itemDetailPage .itemProgressBar {
+  border-radius: 999px;
+}
+
+#indexPage .itemProgressBarForeground,
+.libraryPage .itemProgressBarForeground,
+#itemDetailPage .itemProgressBarForeground {
+  background:
+    linear-gradient(90deg, rgba(var(--accent), 0.95), rgba(var(--accent), 0.62)) !important;
+}
+
+#indexPage .itemProgressBar,
+.libraryPage .itemProgressBar,
+#itemDetailPage .itemProgressBar {
+  height: clamp(4px, 0.36vw, 6px);
+  background: rgba(0,0,0,0.42);
+  margin: clamp(0.35rem, 0.65vw, 0.55rem) clamp(0.65rem, 0.9vw, 0.9rem);
+  overflow: hidden;
+}
+
+@media all and (max-width: 100em) {
+  #indexPage .itemProgressBar,
+  .libraryPage .itemProgressBar,
+  #itemDetailPage .itemProgressBar {
+    margin-right: 3.2em;
+  }
+}
+
+@supports ((backdrop-filter: blur(4px)) or (-webkit-backdrop-filter: blur(4px))) {
+  #indexPage .itemProgressBar,
+  .libraryPage .itemProgressBar,
+  #itemDetailPage .itemProgressBar {
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+    background: rgba(0, 0, 0, 0.35) !important;
+  }
+}

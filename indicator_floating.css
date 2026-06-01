@@ -1,0 +1,27 @@
+/* Card indicators */
+.innerCardFooter {
+  margin: .5em;
+}
+
+.countIndicator {
+  background: rgba(var(--indicator),0.82);
+  box-shadow: none;
+}
+.playedIndicator,
+.innerCardFooter {
+  background: rgba(0,0,0,0.44);
+  box-shadow: none;
+}
+
+.mediaSourceIndicator {
+  background: rgba(0,0,0,0.44);
+  box-shadow: none;
+  border-radius: var(--jf-radius);
+}
+
+.countIndicator,
+.playedIndicator,
+.mediaSourceIndicator,
+.innerCardFooter {
+  border: 1px solid rgba(255,255,255,0.07);
+}
