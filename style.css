@@ -225,7 +225,6 @@ html[data-lang="en"] .is-en {
     border-color 680ms ease,
     background 680ms ease;
   transition-delay: var(--reveal-delay, 0ms);
-  will-change: opacity, transform;
 }
 
 .reveal-ready .reveal-item[data-reveal="left"] {
@@ -254,8 +253,6 @@ main > .section:not(.hero),
 main > article.section {
   position: relative;
   isolation: isolate;
-  content-visibility: auto;
-  contain-intrinsic-size: auto 720px;
   background: var(--bg);
 }
 
@@ -303,7 +300,6 @@ main > article.section {
   background: rgba(16, 17, 20, 0.08);
   opacity: 0;
   pointer-events: none;
-  will-change: opacity;
 }
 
 .hero-copy {
@@ -525,8 +521,21 @@ h3 {
   object-position: 68% center;
   transform: translate3d(0, 0, 0) scale(1.02);
   transform-origin: 68% center;
-  will-change: transform;
   backface-visibility: hidden;
+}
+
+@supports (animation-timeline: scroll()) {
+  .hero-visual img {
+    animation: hero-image-scroll linear both;
+    animation-timeline: scroll(root block);
+    animation-range: 0 100vh;
+  }
+
+  .hero-scroll-dim {
+    animation: hero-dim-scroll linear both;
+    animation-timeline: scroll(root block);
+    animation-range: 0 100vh;
+  }
 }
 
 .signal-panel {
@@ -925,6 +934,26 @@ h3 {
   }
 }
 
+@keyframes hero-image-scroll {
+  from {
+    transform: translate3d(0, 0, 0) scale(1.02);
+  }
+
+  to {
+    transform: translate3d(-18px, 34px, 0) scale(1.065);
+  }
+}
+
+@keyframes hero-dim-scroll {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 0.72;
+  }
+}
+
 @media (max-width: 980px) {
   .nav-toggle {
     display: block;
@@ -1160,8 +1189,6 @@ h3 {
   .section:not(.hero) {
     width: 100%;
     padding: 20px 0;
-    content-visibility: visible;
-    contain-intrinsic-size: none;
   }
 
   main > .section:not(.hero),

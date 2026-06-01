@@ -244,6 +244,8 @@
   const heroImage = document.querySelector(".hero-visual img");
   const heroScrollDim = document.querySelector(".hero-scroll-dim");
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const isFirefox = navigator.userAgent.includes("Firefox");
+  const supportsScrollTimeline = CSS.supports("animation-timeline: scroll()");
   const LANG_STORAGE_KEY = "lang";
   const CONSENT_STORAGE_KEY = "pk-cookie-consent";
   const CONSENT_VERSION = 1;
@@ -523,8 +525,8 @@
     const y = window.scrollY || window.pageYOffset || 0;
     const progress = Math.min(1, Math.max(0, y / heroHeight));
 
-    if (heroImage) {
-      const frame = progress.toFixed(3);
+    if (heroImage && !supportsScrollTimeline) {
+      const frame = progress.toFixed(isFirefox ? 2 : 3);
       if (frame !== lastHeroFrame) {
         const shiftX = (-18 * progress).toFixed(2);
         const shiftY = (34 * progress).toFixed(2);
