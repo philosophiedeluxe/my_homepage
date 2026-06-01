@@ -246,6 +246,7 @@
   const CONSENT_STORAGE_KEY = "pk-cookie-consent";
   const CONSENT_VERSION = 1;
   let scrollTicking = false;
+  let lastScrolledState = null;
 
   function sanitizeLang(lang) {
     const value = String(lang || "").toLowerCase();
@@ -513,13 +514,20 @@
     const y = window.scrollY || window.pageYOffset || 0;
     const heroHeight = hero ? Math.max(hero.offsetHeight, 1) : 1;
     const progress = Math.min(1, Math.max(0, y / heroHeight));
-    root.style.setProperty("--hero-scroll", progress.toFixed(3));
-    root.style.setProperty("--hero-shift-x", `${(-18 * progress).toFixed(2)}px`);
-    root.style.setProperty("--hero-shift-y", `${(34 * progress).toFixed(2)}px`);
-    root.style.setProperty("--hero-scale", (1.02 + 0.045 * progress).toFixed(4));
-    root.style.setProperty("--hero-saturation", (1 - 0.08 * progress).toFixed(4));
-    root.style.setProperty("--hero-brightness", (1 - 0.08 * progress).toFixed(4));
-    root.dataset.scrolled = y > 24 ? "true" : "false";
+
+    if (hero) {
+      hero.style.setProperty("--hero-shift-x", `${(-18 * progress).toFixed(2)}px`);
+      hero.style.setProperty("--hero-shift-y", `${(34 * progress).toFixed(2)}px`);
+      hero.style.setProperty("--hero-scale", (1.02 + 0.045 * progress).toFixed(4));
+      hero.style.setProperty("--hero-dim", (0.72 * progress).toFixed(3));
+    }
+
+    const scrolledState = y > 24 ? "true" : "false";
+    if (scrolledState !== lastScrolledState) {
+      root.dataset.scrolled = scrolledState;
+      lastScrolledState = scrolledState;
+    }
+
     scrollTicking = false;
   }
 
@@ -555,7 +563,9 @@
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          entry.target.classList.toggle("is-visible", entry.isIntersecting);
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
         });
       },
       { rootMargin: "0px 0px -12% 0px", threshold: 0.16 }

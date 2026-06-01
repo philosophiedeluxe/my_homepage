@@ -1,6 +1,6 @@
 # Homepage Roadmap
 
-Stand: 29.05.2026
+Stand: 01.06.2026
 
 ## Kurzfazit
 
@@ -19,6 +19,8 @@ Die Homepage ist jetzt eine moderne, statische Portfolio-Seite mit starkem Hero,
 - SEO-Basics, OpenGraph und JSON-LD fuer die Startseite.
 - Datenschutzfreundlich ohne externe Fonts, Analytics oder Tracking.
 - Cookie-Hinweis mit lokaler, neutral benannter Consent-Speicherung und Footer-Link fuer spaetere Aenderungen.
+- Firefox-freundlicher Performance-Pass fuer Hero-Parallax, Reveal-Animationen, Glas-Effekte und Full-Bleed-Sektionsbaender.
+- Kleinere Hero-Bildvarianten fuer responsive Auslieferung per `srcset`.
 
 ## Erledigte Verbesserungen
 
@@ -50,6 +52,10 @@ Die Homepage ist jetzt eine moderne, statische Portfolio-Seite mit starkem Hero,
 - Brand-Text `Phil Kirchner` an den Sprachumschalter-Stil angepasst.
 - Zertifikats-Ueberschrift auf der Vita-Seite sauber umbrochen, sodass `Projektverstaendnis` vollstaendig in der zweiten Zeile steht.
 - Timeline-Daten auf der Vita-Seite optisch an den Navigationsstil angepasst.
+- Scroll-Parallax schreibt seine CSS-Variablen nur noch auf die Hero-Section statt global auf `:root`.
+- Animierter Hero-Bildfilter durch ein leichteres Overlay-Dimming ersetzt, damit Firefox weniger neu malen muss.
+- Full-Bleed-Sektionshintergruende von grossen `box-shadow`/`clip-path` Flaechen auf guenstigere Pseudo-Elemente umgestellt.
+- Reveal-Elemente bleiben nach dem ersten Erscheinen sichtbar und werden aus dem Observer genommen.
 
 ## Offene sinnvolle naechste Schritte
 

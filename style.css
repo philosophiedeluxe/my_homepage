@@ -15,12 +15,10 @@
   --radius: 8px;
   --max: 1180px;
   --nav-h: 76px;
-  --hero-scroll: 0;
   --hero-shift-x: 0px;
   --hero-shift-y: 0px;
   --hero-scale: 1.02;
-  --hero-saturation: 1;
-  --hero-brightness: 1;
+  --hero-dim: 0;
 }
 
 *,
@@ -88,8 +86,8 @@ a:hover {
   background: rgba(16, 17, 20, 0.82);
   border-bottom: 1px solid var(--line);
   transition: background 180ms ease, box-shadow 180ms ease;
-  -webkit-backdrop-filter: blur(18px);
-  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
 }
 
 html[data-scrolled="true"] .site-shell {
@@ -258,15 +256,23 @@ html[data-lang="en"] .is-en {
 
 main > .section:not(.hero),
 main > article.section {
+  position: relative;
+  isolation: isolate;
   background: var(--bg);
-  box-shadow: 0 0 0 100vmax var(--bg);
-  clip-path: inset(0 -100vmax);
+}
+
+main > .section:not(.hero)::before,
+main > article.section::before {
+  content: "";
+  position: absolute;
+  inset: 0 calc(50% - 50vw);
+  z-index: -1;
+  background: inherit;
 }
 
 main > .section:nth-of-type(even):not(.hero),
 main > article.section {
   background: var(--band);
-  box-shadow: 0 0 0 100vmax var(--band);
 }
 
 .hero {
@@ -288,6 +294,16 @@ main > article.section {
   background:
     linear-gradient(90deg, rgba(16, 17, 20, 0.96) 0%, rgba(16, 17, 20, 0.82) 38%, rgba(16, 17, 20, 0.2) 100%),
     linear-gradient(0deg, rgba(16, 17, 20, 0.92) 0%, rgba(16, 17, 20, 0.28) 46%, rgba(16, 17, 20, 0.68) 100%);
+  pointer-events: none;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: rgba(16, 17, 20, 0.08);
+  opacity: var(--hero-dim);
   pointer-events: none;
 }
 
@@ -499,8 +515,8 @@ h3 {
   object-position: 68% center;
   transform: translate3d(var(--hero-shift-x), var(--hero-shift-y), 0) scale(var(--hero-scale));
   transform-origin: 68% center;
-  filter: saturate(var(--hero-saturation)) brightness(var(--hero-brightness));
-  will-change: transform, filter;
+  will-change: transform;
+  backface-visibility: hidden;
 }
 
 .signal-panel {
@@ -778,8 +794,26 @@ h3 {
     var(--surface);
   box-shadow: var(--shadow);
   pointer-events: auto;
-  -webkit-backdrop-filter: blur(18px);
-  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+@supports (-moz-appearance: none) {
+  .site-shell,
+  .cookie-consent__card {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+  .site-shell {
+    background: rgba(16, 17, 20, 0.94);
+  }
+
+  .cookie-consent__card {
+    background:
+      linear-gradient(135deg, rgba(23, 26, 32, 0.98), rgba(16, 17, 20, 0.98)),
+      var(--surface);
+  }
 }
 
 .cookie-consent h2 {
@@ -1122,8 +1156,6 @@ h3 {
   main > article.section,
   main > .section:nth-of-type(even):not(.hero) {
     background: #ffffff;
-    box-shadow: none;
-    clip-path: none;
   }
 
   h1,
