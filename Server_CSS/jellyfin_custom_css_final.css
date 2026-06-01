@@ -16,12 +16,12 @@
 @import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/glassy.css');
 
 .backdropImage {
-  filter: blur(0px) saturate(112%) contrast(104%) brightness(108%) !important;
-  opacity: 0.96 !important;
+  filter: blur(0px) saturate(118%) contrast(106%) brightness(122%) !important;
+  opacity: 1 !important;
 }
 
 .detailPageSecondaryContainer.padded-bottom-page {
-  background-color: rgba(0, 0, 0, 0.64);
+  background-color: rgba(0, 0, 0, 0.56) !important;
 }
 
 #loginPage {
@@ -52,4 +52,31 @@
   display: block;
   width: clamp(12rem, 16vw, 15.625rem);
   height: clamp(3rem, 4.5vw, 3.75rem);
+}
+
+
+/* Final detail-page safety overrides */
+#reactRoot > .backdropContainer,
+#reactRoot > div.backdropContainer {
+  background: transparent !important;
+  opacity: 1 !important;
+}
+
+#reactRoot > .backdropContainer::before,
+#reactRoot > .backdropContainer::after,
+#reactRoot > div.backdropContainer::before,
+#reactRoot > div.backdropContainer::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  pointer-events: none !important;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.38), rgba(0, 0, 0, 0.12) 42%, rgba(0, 0, 0, 0.48)),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.10), rgba(0, 0, 0, 0.50)) !important;
+}
+
+#reactRoot > .backdropContainer > div,
+#reactRoot > div.backdropContainer > div {
+  opacity: 1 !important;
+  filter: blur(0) saturate(118%) contrast(106%) brightness(122%) !important;
 }

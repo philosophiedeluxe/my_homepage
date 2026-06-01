@@ -50,3 +50,10 @@ Die vorherige aspect-ratio-basierte Verschiebung wurde aus `fixes.css` entfernt.
 - `title_banner-logo.css`: kompakte Desktop-Breiten blenden das Poster aus und setzen den Inhalt wieder auf volle verfügbare Breite.
 - `dark.css`: Banner-Overlay reduziert, damit das Backdrop-Bild sichtbar bleibt.
 - `jellyfin_custom_css_final.css`: Backdrop-Filter und Detailseiten-Hintergrund entsprechend angepasst.
+
+## Detail page scroll-flow correction
+
+- Poster cards in `detailImageContainer` are now placed in the normal page flow with a left float instead of an absolute overlay layer.
+- `detailPagePrimaryContainer` uses `flow-root`, so the poster contributes to the layout height and does not cover cast rows, collections or episode grids while scrolling.
+- `detailLogo` is now positioned high on the right side of the detail header with explicit `top/right/height` overrides.
+- The backdrop overlay was reduced and the backdrop image is brightened through `backdropContainer`/`backdropImage` overrides.

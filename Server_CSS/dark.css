@@ -247,3 +247,48 @@ a[data-role="button"] {
 .defaultCardBackground3 { background-color: #1a1b24; }
 .defaultCardBackground4 { background-color: #252634; }
 .defaultCardBackground5 { background-color: #34364a; }
+
+/* Detail backdrop visibility fix: keep the real banner/backdrop visible and reduce the dark overlay. */
+#reactRoot > .backdropContainer,
+#reactRoot > div.backdropContainer {
+  background: transparent !important;
+  opacity: 1 !important;
+}
+
+#reactRoot > .backdropContainer::before,
+#reactRoot > .backdropContainer::after,
+#reactRoot > div.backdropContainer::before,
+#reactRoot > div.backdropContainer::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  pointer-events: none !important;
+  opacity: 1 !important;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.38), rgba(0, 0, 0, 0.12) 42%, rgba(0, 0, 0, 0.48)),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.10), rgba(0, 0, 0, 0.50)) !important;
+}
+
+#reactRoot > .backdropContainer > div,
+#reactRoot > div.backdropContainer > div,
+.backdropImage {
+  opacity: 1 !important;
+  filter: blur(0) saturate(118%) contrast(106%) brightness(122%) !important;
+}
+
+.backgroundContainer,
+.backgroundContainer.withBackdrop {
+  background:
+    radial-gradient(circle at top left, rgba(var(--accent), 0.08), transparent 34rem),
+    linear-gradient(180deg, rgba(8, 8, 11, 0.74), rgba(3, 3, 5, 0.94)) !important;
+}
+
+.itemBackdrop::after {
+  background:
+    linear-gradient(90deg, rgba(0,0,0,0.34), rgba(0,0,0,0.10) 44%, rgba(0,0,0,0.42)),
+    linear-gradient(180deg, rgba(0,0,0,0.02), rgba(0,0,0,0.46)) !important;
+}
+
+.detailPageSecondaryContainer.padded-bottom-page {
+  background-color: rgba(0, 0, 0, 0.56) !important;
+}
