@@ -427,7 +427,8 @@ h3 {
   margin-top: 28px;
 }
 
-.print-resume-header {
+.print-resume-header,
+.print-resume-document {
   display: none;
 }
 
@@ -1721,4 +1722,198 @@ h3 {
     padding: 2.6mm 0;
     border-width: 0 0 1px;
   }
+
+  body.vita-page main > :not(.print-resume-document) {
+    display: none !important;
+  }
+
+  body.vita-page .print-resume-document {
+    display: block !important;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    color: #151515;
+    background: #ffffff;
+    font-family: "Segoe UI", Arial, sans-serif;
+    line-height: 1.28;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .print-cv-header {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 58mm;
+    gap: 8mm;
+    margin: 0 0 5mm;
+    padding: 0 0 4mm;
+    border-bottom: 1px solid #d3d3d3;
+    break-inside: avoid;
+  }
+
+  .print-cv-name,
+  .print-cv-label,
+  .print-cv-kicker,
+  .print-cv-job time {
+    color: #6c00a1;
+    font-family: Consolas, "Liberation Mono", monospace;
+    font-weight: 800;
+    letter-spacing: 0.055em;
+    text-transform: uppercase;
+  }
+
+  .print-cv-name {
+    margin: 0 0 1.2mm;
+    font-size: 8.2pt;
+  }
+
+  .print-cv-header h1 {
+    max-width: none;
+    margin: 0 0 2mm;
+    color: #151515;
+    font-size: 15.6pt;
+    line-height: 1.05;
+  }
+
+  .print-cv-summary {
+    max-width: 118mm;
+    margin: 0;
+    color: #333333;
+    font-size: 8.8pt;
+  }
+
+  .print-cv-contact {
+    align-self: end;
+    display: grid;
+    gap: 1.15mm;
+    margin: 0;
+    padding: 0;
+    color: #333333;
+    font-size: 7.9pt;
+    line-height: 1.22;
+    list-style: none;
+    overflow-wrap: anywhere;
+  }
+
+  .print-cv-section {
+    margin: 0 0 4mm;
+    padding: 0;
+    break-inside: avoid;
+  }
+
+  .print-cv-section--experience {
+    break-inside: auto;
+  }
+
+  .print-cv-section:last-child {
+    margin-bottom: 0;
+  }
+
+  .print-cv-section-head {
+    display: grid;
+    grid-template-columns: 31mm minmax(0, 1fr);
+    gap: 5.5mm;
+    align-items: start;
+    margin: 0 0 2.1mm;
+    break-inside: avoid;
+  }
+
+  .print-cv-label {
+    margin: 0.8mm 0 0;
+    font-size: 7.2pt;
+  }
+
+  .print-cv-section-head h2 {
+    max-width: none;
+    margin: 0;
+    color: #151515;
+    font-size: 13.2pt;
+    line-height: 1.1;
+  }
+
+  .print-cv-cards {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 3.2mm;
+  }
+
+  .print-cv-cards article {
+    min-height: 0;
+    padding: 3mm;
+    border: 1px solid #dadada;
+    background: #ffffff;
+    break-inside: avoid;
+  }
+
+  .print-cv-kicker {
+    margin: 0 0 4mm;
+    font-size: 6.9pt;
+  }
+
+  .print-cv-cards h3,
+  .print-cv-job h3 {
+    margin: 0 0 0.8mm;
+    color: #151515;
+    font-size: 9.2pt;
+    line-height: 1.15;
+    break-after: avoid;
+  }
+
+  .print-cv-cards p:not(.print-cv-kicker),
+  .print-cv-job p,
+  .print-cv-certificates li {
+    color: #333333;
+    font-size: 8.1pt;
+  }
+
+  .print-cv-cards p:not(.print-cv-kicker),
+  .print-cv-job p {
+    margin: 0;
+  }
+
+  .print-cv-timeline {
+    display: block;
+  }
+
+  .print-cv-job {
+    display: grid;
+    grid-template-columns: 31mm minmax(0, 1fr);
+    gap: 5.5mm;
+    padding: 1.75mm 0;
+    border-top: 1px solid #d9d9d9;
+    background: #ffffff;
+    break-inside: avoid;
+  }
+
+  .print-cv-job:last-child {
+    border-bottom: 1px solid #d9d9d9;
+  }
+
+  .print-cv-job time {
+    padding-top: 0.25mm;
+    font-size: 7pt;
+    line-height: 1.2;
+  }
+
+  .print-cv-certificates {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 7mm;
+    row-gap: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .print-cv-certificates li {
+    min-height: 0;
+    padding: 1.55mm 0;
+    border-top: 1px solid #d9d9d9;
+    font-weight: 700;
+    break-inside: avoid;
+  }
+
+  .print-cv-certificates li:nth-last-child(-n + 2) {
+    border-bottom: 1px solid #d9d9d9;
+  }
+
 }
