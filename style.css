@@ -427,6 +427,10 @@ h3 {
   margin-top: 28px;
 }
 
+.print-resume-header {
+  display: none;
+}
+
 .button {
   min-height: 48px;
   display: inline-flex;
@@ -1471,8 +1475,22 @@ h3 {
 }
 
 @media print {
+  @page {
+    size: A4;
+    margin: 13mm 14mm;
+  }
+
   :root {
     color-scheme: light;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-shadow: none !important;
+    text-shadow: none !important;
+    animation: none !important;
+    transition: none !important;
   }
 
   html,
@@ -1480,14 +1498,76 @@ h3 {
     overflow: visible;
     color: #151515;
     background: #ffffff;
+    font-size: 10pt;
+    line-height: 1.34;
+  }
+
+  body {
+    min-height: 0;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
   }
 
   .site-shell,
   .footer,
   .cookie-consent,
+  .page-hero,
   .page-actions,
-  .contact-actions {
+  .contact-actions,
+  .contact-section,
+  .certificate-showcase,
+  .cert-lightbox {
     display: none !important;
+  }
+
+  .print-resume-header {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 58mm;
+    gap: 10mm;
+    margin: 0 0 8mm;
+    padding: 0 0 6mm;
+    border-bottom: 1px solid #cfcfcf;
+  }
+
+  .print-resume-name {
+    margin: 0 0 2mm;
+    color: #6c00a1;
+    font-family: Consolas, "Liberation Mono", monospace;
+    font-size: 9pt;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .print-resume-header h1 {
+    max-width: none;
+    margin: 0 0 3mm;
+    color: #151515;
+    font-size: 19pt;
+    line-height: 1.08;
+  }
+
+  .print-resume-header p {
+    max-width: 118mm;
+    margin: 0;
+    color: #343434;
+    font-size: 10pt;
+  }
+
+  .print-resume-contact {
+    align-self: end;
+    display: grid;
+    gap: 1.6mm;
+    margin: 0;
+    padding: 0;
+    color: #343434;
+    font-size: 8.5pt;
+    line-height: 1.25;
+    list-style: none;
+    overflow-wrap: anywhere;
   }
 
   .reveal-item {
@@ -1498,7 +1578,8 @@ h3 {
   .section,
   .section:not(.hero) {
     width: 100%;
-    padding: 20px 0;
+    margin: 0;
+    padding: 0 0 7mm;
   }
 
   main > .section:not(.hero),
@@ -1507,24 +1588,40 @@ h3 {
     background: #ffffff;
   }
 
+  .section::before,
+  .section::after {
+    display: none !important;
+  }
+
   h1,
   h2,
-  h3 {
+  h3,
+  h4 {
     color: #151515;
     break-after: avoid;
   }
 
-  h1 {
-    font-size: 34px;
-  }
-
   h2 {
-    max-width: 100%;
-    font-size: 26px;
+    max-width: none;
+    margin: 0;
+    font-size: 14.5pt;
+    line-height: 1.12;
   }
 
   h3 {
-    font-size: 18px;
+    margin: 0 0 1mm;
+    font-size: 10.5pt;
+    line-height: 1.18;
+  }
+
+  h4 {
+    margin: 0;
+    font-size: 9.5pt;
+    line-height: 1.2;
+  }
+
+  p {
+    margin-top: 0;
   }
 
   .accent-word {
@@ -1537,46 +1634,91 @@ h3 {
   .project-kicker,
   .timeline-item time {
     color: #6c00a1;
+    font-family: Consolas, "Liberation Mono", monospace;
+    font-size: 7.8pt;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
   }
 
-  .page-hero p:not(.eyebrow),
+  .section-heading {
+    display: grid;
+    grid-template-columns: 34mm minmax(0, 1fr);
+    gap: 6mm;
+    align-items: start;
+    margin: 0 0 3.5mm;
+  }
+
+  .section-heading .eyebrow {
+    margin: 1mm 0 0;
+  }
+
+  .profile-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 4mm;
+  }
+
+  .profile-grid article {
+    min-height: 0;
+    padding: 4mm;
+    break-inside: avoid;
+    border: 1px solid #d8d8d8;
+    border-radius: 0;
+    background: #ffffff;
+  }
+
+  .profile-grid p:not(.project-kicker),
   .timeline-item p:not(.eyebrow),
   .credential-list li,
   .legal-note {
     color: #343434;
+    font-size: 9pt;
   }
 
   .timeline,
   .credential-list {
-    gap: 10px;
+    display: grid;
+    gap: 0;
   }
 
   .timeline-item,
   .credential-list li {
     break-inside: avoid;
     border-color: #d8d8d8;
+    border-radius: 0;
     background: #ffffff;
-    box-shadow: none;
   }
 
   .timeline-item {
-    grid-template-columns: 140px minmax(0, 1fr);
-    padding: 14px 0;
+    display: grid;
+    grid-template-columns: 34mm minmax(0, 1fr);
+    gap: 6mm;
+    min-height: 0;
+    padding: 3mm 0;
     border-width: 0 0 1px;
   }
 
+  .timeline-item time {
+    padding-top: 0.5mm;
+  }
+
+  .timeline-item p {
+    margin: 0;
+  }
+
+  .credential-section {
+    padding-bottom: 0;
+  }
+
   .credential-list {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 7mm;
   }
 
   .credential-list li {
     min-height: 0;
-    padding: 10px 0;
+    padding: 2.6mm 0;
     border-width: 0 0 1px;
-  }
-
-  .contact-section {
-    display: block;
-    border-top: 1px solid #d8d8d8;
   }
 }
