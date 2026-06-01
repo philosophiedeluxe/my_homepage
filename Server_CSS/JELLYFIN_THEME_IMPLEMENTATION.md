@@ -129,3 +129,11 @@ Das Detailposter wurde um ca. 10 Prozentpunkte weiter nach unten gesetzt. Der Ba
 - Header-Tabs bleiben als eigene Zeile unterhalb der kompakten Header-Bar sichtbar.
 - Tabs werden bei ausreichender Breite wieder zentriert und erst bei schmalen Viewports linksbündig scrollbar.
 - Seiten-Top-Abstand neu berechnet, damit die Filter-/Toolbar-Zeile nicht mehr vom Header überdeckt wird.
+
+
+## 2026-06-01 - Header Restore v3
+
+- Die Header-/Menueleisten-Positionierung wurde wieder auf das Verhalten der alten Referenz zurueckgesetzt.
+- Entfernt wurden die kompakte Header-Logik und die direkte Behandlung von `#moviesTab > div`.
+- Der AlphaPicker wird dadurch nicht mehr als Header-Tab formatiert und bleibt wieder als vertikaler Index am rechten Rand.
+- Der semi-transparente Glass-Effekt der neueren Version bleibt erhalten.

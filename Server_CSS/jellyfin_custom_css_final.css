@@ -407,28 +407,67 @@ body {
   box-sizing: border-box !important;
 }
 
-/* Header/Menu fallback: known-good reference behavior. No direct tab positioning. */
+/* Final header restore: old menu behavior with current glass transparency. */
 .skinHeader-withBackground {
   background-color: transparent;
 }
 
+:root,
+html,
+body {
+  --jf-header-glass-bg: rgba(7, 8, 11, 0.48);
+  --jf-header-glass-shadow: 0 10px 28px rgba(0, 0, 0, 0.22);
+}
+
+.skinHeader,
+.skinHeader-withBackground {
+  transition:
+    background-color var(--jf-motion-med) ease,
+    backdrop-filter var(--jf-motion-med) ease,
+    box-shadow var(--jf-motion-med) ease;
+}
+
+.skinHeader.skinHeader-withBackground,
+.skinHeader.skinHeader-blurred,
+.skinHeader.skinHeader-withBackground.skinHeader-blurred,
+.skinHeader.skinHeader-withBackground.skinHeader-blurred.semiTransparent {
+  background-color: var(--jf-header-glass-bg) !important;
+  box-shadow: var(--jf-header-glass-shadow) !important;
+}
+
+@supports ((backdrop-filter: blur(12px)) or (-webkit-backdrop-filter: blur(12px))) {
+  .skinHeader.skinHeader-withBackground,
+  .skinHeader.skinHeader-blurred,
+  .skinHeader.skinHeader-withBackground.skinHeader-blurred,
+  .skinHeader.skinHeader-withBackground.skinHeader-blurred.semiTransparent {
+    -webkit-backdrop-filter: blur(12px) saturate(1.12) !important;
+    backdrop-filter: blur(12px) saturate(1.12) !important;
+  }
+}
+
+/* Alte Referenz-Abstaende: einzeilige Headerbar */
 @media all and (min-width: 100em) {
   #indexPage,
   #moviesPage,
+  #tvShowsPage,
+  #seriesPage,
   #tvRecommendedPage,
   #musicRecommendedPage {
-    margin-top: 68px;
-    padding-top: 0px !important;
+    margin-top: 68px !important;
+    padding-top: 0 !important;
     overflow-y: scroll;
   }
 }
 
+/* Alte Referenz-Abstaende: zweizeilige Header-/Tab-Kombination */
 @media all and (max-width: 100em) {
   #indexPage,
   #moviesPage,
+  #tvShowsPage,
+  #seriesPage,
   #tvRecommendedPage,
   #musicRecommendedPage {
-    margin-top: 130px;
+    margin-top: 130px !important;
     padding-top: 0.5em !important;
     overflow-y: scroll;
   }
@@ -439,21 +478,54 @@ body {
   overflow-x: auto;
 }
 
-/* Header glass visual only - no layout changes */
-.skinHeader-withBackground.skinHeader-blurred,
-.skinHeader-withBackground.skinHeader-blurred.semiTransparent,
-.skinHeader.skinHeader-withBackground.skinHeader-blurred,
-.skinHeader.skinHeader-withBackground.skinHeader-blurred.semiTransparent {
-  background-color: rgba(7, 8, 11, 0.42) !important;
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22) !important;
+/* Schutz: Header-Regeln duerfen nie direkte Inhalte des Filme-Tabs treffen.
+   Das verhindert, dass der AlphaPicker als Menue-Tab behandelt wird. */
+#moviesTab > .alphaPicker.alphaPicker-fixed.alphaPicker-vertical,
+#moviesPage .alphaPicker.alphaPicker-fixed.alphaPicker-vertical,
+.alphaPicker.alphaPicker-fixed.alphaPicker-vertical.alphabetPicker-right,
+.alphaPicker.alphaPicker-fixed.alphaPicker-vertical.alphaPicker-fixed-right {
+  position: fixed !important;
+  top: 50% !important;
+  right: 0.25rem !important;
+  bottom: auto !important;
+  left: auto !important;
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: calc(100vh - 8rem) !important;
+  margin: 0 !important;
+  padding: 0.25rem 0.15rem !important;
+  display: flex !important;
+  flex-flow: column nowrap !important;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow: visible !important;
+  transform: translateY(-50%) !important;
+  z-index: 1100 !important;
 }
 
-@supports ((backdrop-filter: blur(12px)) or (-webkit-backdrop-filter: blur(12px))) {
-  .skinHeader-withBackground.skinHeader-blurred,
-  .skinHeader-withBackground.skinHeader-blurred.semiTransparent,
-  .skinHeader.skinHeader-withBackground.skinHeader-blurred,
-  .skinHeader.skinHeader-withBackground.skinHeader-blurred.semiTransparent {
-    -webkit-backdrop-filter: blur(12px) saturate(1.12) !important;
-    backdrop-filter: blur(12px) saturate(1.12) !important;
-  }
+#moviesTab > .alphaPicker.alphaPicker-fixed.alphaPicker-vertical > div,
+#moviesPage .alphaPicker.alphaPicker-fixed.alphaPicker-vertical > div,
+.alphaPicker.alphaPicker-fixed.alphaPicker-vertical.alphabetPicker-right > div,
+.alphaPicker.alphaPicker-fixed.alphaPicker-vertical.alphaPicker-fixed-right > div {
+  position: static !important;
+  inset: auto !important;
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex !important;
+  flex-flow: column nowrap !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0 !important;
+  overflow: visible !important;
+  white-space: nowrap !important;
+  transform: none !important;
 }

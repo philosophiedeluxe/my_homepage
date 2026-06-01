@@ -41,23 +41,3 @@
     backdrop-filter: blur(2px);
   }
 }
-
-
-/* Header glass visual only - no layout changes */
-.skinHeader-withBackground.skinHeader-blurred,
-.skinHeader-withBackground.skinHeader-blurred.semiTransparent,
-.skinHeader.skinHeader-withBackground.skinHeader-blurred,
-.skinHeader.skinHeader-withBackground.skinHeader-blurred.semiTransparent {
-  background-color: rgba(7, 8, 11, 0.42) !important;
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22) !important;
-}
-
-@supports ((backdrop-filter: blur(12px)) or (-webkit-backdrop-filter: blur(12px))) {
-  .skinHeader-withBackground.skinHeader-blurred,
-  .skinHeader-withBackground.skinHeader-blurred.semiTransparent,
-  .skinHeader.skinHeader-withBackground.skinHeader-blurred,
-  .skinHeader.skinHeader-withBackground.skinHeader-blurred.semiTransparent {
-    -webkit-backdrop-filter: blur(12px) saturate(1.12) !important;
-    backdrop-filter: blur(12px) saturate(1.12) !important;
-  }
-}
