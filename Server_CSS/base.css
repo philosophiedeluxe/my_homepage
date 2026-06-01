@@ -511,3 +511,59 @@ body {
   max-width: 100% !important;
   box-sizing: border-box !important;
 }
+
+
+/* Final mobile-app library width fix.
+   In the Jellyfin app the desktop column calculation is not active because the page uses .layout-mobile.
+   Jellyfin keeps the alphabet index on the right, while the default poster card width remains too small.
+   This forces the mobile poster grid to consume the available width minus the index strip. */
+:root,
+html,
+body {
+  --jf-mobile-library-index-reserve: clamp(2.1rem, 7.5vw, 3rem);
+  --jf-mobile-library-cols: 2;
+}
+
+.layout-mobile #moviesPage .vertical-wrap.itemsContainer,
+.layout-mobile #tvShowsPage .vertical-wrap.itemsContainer,
+.layout-mobile #seriesPage .vertical-wrap.itemsContainer,
+.layout-mobile .libraryPage:not(#itemDetailPage) .vertical-wrap.itemsContainer {
+  justify-content: flex-start !important;
+  align-content: flex-start !important;
+  gap: var(--jf-row-gap, clamp(0.6rem, 0.75vw, 1rem)) var(--jf-card-gap, clamp(0.21rem, 0.3vw, 0.38rem)) !important;
+  column-gap: var(--jf-card-gap, clamp(0.21rem, 0.3vw, 0.38rem)) !important;
+  row-gap: var(--jf-row-gap, clamp(0.6rem, 0.75vw, 1rem)) !important;
+  padding-left: max(env(safe-area-inset-left), var(--jf-page-pad, 0.75rem)) !important;
+  padding-right: max(env(safe-area-inset-right), var(--jf-mobile-library-index-reserve)) !important;
+  box-sizing: border-box !important;
+}
+
+.layout-mobile #moviesPage .vertical-wrap.itemsContainer > .card,
+.layout-mobile #tvShowsPage .vertical-wrap.itemsContainer > .card,
+.layout-mobile #seriesPage .vertical-wrap.itemsContainer > .card,
+.layout-mobile .libraryPage:not(#itemDetailPage) .vertical-wrap.itemsContainer > .card {
+  flex: 0 0 calc((100% - var(--jf-mobile-library-index-reserve) - ((var(--jf-mobile-library-cols) - 1) * var(--jf-card-gap, 0.35rem))) / var(--jf-mobile-library-cols)) !important;
+  width: calc((100% - var(--jf-mobile-library-index-reserve) - ((var(--jf-mobile-library-cols) - 1) * var(--jf-card-gap, 0.35rem))) / var(--jf-mobile-library-cols)) !important;
+  max-width: none !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+}
+
+.layout-mobile #moviesPage .vertical-wrap.itemsContainer > .card > .cardBox,
+.layout-mobile #tvShowsPage .vertical-wrap.itemsContainer > .card > .cardBox,
+.layout-mobile #seriesPage .vertical-wrap.itemsContainer > .card > .cardBox,
+.layout-mobile .libraryPage:not(#itemDetailPage) .vertical-wrap.itemsContainer > .card > .cardBox,
+.layout-mobile #moviesPage .vertical-wrap.itemsContainer > .card .cardScalable,
+.layout-mobile #tvShowsPage .vertical-wrap.itemsContainer > .card .cardScalable,
+.layout-mobile #seriesPage .vertical-wrap.itemsContainer > .card .cardScalable,
+.layout-mobile .libraryPage:not(#itemDetailPage) .vertical-wrap.itemsContainer > .card .cardScalable {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+@media all and (max-width: 23em) {
+  :root,
+  html,
+  body { --jf-mobile-library-cols: 1; }
+}
