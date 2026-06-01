@@ -241,12 +241,16 @@
   const langToggle = document.getElementById("lang-toggle");
   const root = document.documentElement;
   const hero = document.querySelector(".hero");
+  const heroImage = document.querySelector(".hero-visual img");
+  const heroScrollDim = document.querySelector(".hero-scroll-dim");
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   const LANG_STORAGE_KEY = "lang";
   const CONSENT_STORAGE_KEY = "pk-cookie-consent";
   const CONSENT_VERSION = 1;
   let scrollTicking = false;
   let lastScrolledState = null;
+  let heroHeight = hero ? Math.max(hero.offsetHeight, 1) : 1;
+  let lastHeroFrame = "";
 
   function sanitizeLang(lang) {
     const value = String(lang || "").toLowerCase();
@@ -510,16 +514,25 @@
     element.textContent = String(new Date().getFullYear());
   });
 
+  function measureHero() {
+    heroHeight = hero ? Math.max(hero.offsetHeight, 1) : 1;
+    updateScrollState();
+  }
+
   function updateScrollState() {
     const y = window.scrollY || window.pageYOffset || 0;
-    const heroHeight = hero ? Math.max(hero.offsetHeight, 1) : 1;
     const progress = Math.min(1, Math.max(0, y / heroHeight));
 
-    if (hero) {
-      hero.style.setProperty("--hero-shift-x", `${(-18 * progress).toFixed(2)}px`);
-      hero.style.setProperty("--hero-shift-y", `${(34 * progress).toFixed(2)}px`);
-      hero.style.setProperty("--hero-scale", (1.02 + 0.045 * progress).toFixed(4));
-      hero.style.setProperty("--hero-dim", (0.72 * progress).toFixed(3));
+    if (heroImage) {
+      const frame = progress.toFixed(3);
+      if (frame !== lastHeroFrame) {
+        const shiftX = (-18 * progress).toFixed(2);
+        const shiftY = (34 * progress).toFixed(2);
+        const scale = (1.02 + 0.045 * progress).toFixed(4);
+        heroImage.style.transform = `translate3d(${shiftX}px, ${shiftY}px, 0) scale(${scale})`;
+        if (heroScrollDim) heroScrollDim.style.opacity = (0.72 * progress).toFixed(3);
+        lastHeroFrame = frame;
+      }
     }
 
     const scrolledState = y > 24 ? "true" : "false";
@@ -563,9 +576,7 @@
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          entry.target.classList.add("is-visible");
-          observer.unobserve(entry.target);
+          entry.target.classList.toggle("is-visible", entry.isIntersecting);
         });
       },
       { rootMargin: "0px 0px -12% 0px", threshold: 0.16 }
@@ -576,6 +587,11 @@
  
   addCookieSettingsLink();
   setLang(getInitialLang());
+  window.addEventListener("resize", measureHero, { passive: true });
+  window.addEventListener("orientationchange", measureHero, { passive: true });
+  if (hero && "ResizeObserver" in window) {
+    new ResizeObserver(measureHero).observe(hero);
+  }
   updateScrollState();
   setupScrollReveals();
   openCookieBanner();

@@ -52,10 +52,11 @@ Die Homepage ist jetzt eine moderne, statische Portfolio-Seite mit starkem Hero,
 - Brand-Text `Phil Kirchner` an den Sprachumschalter-Stil angepasst.
 - Zertifikats-Ueberschrift auf der Vita-Seite sauber umbrochen, sodass `Projektverstaendnis` vollstaendig in der zweiten Zeile steht.
 - Timeline-Daten auf der Vita-Seite optisch an den Navigationsstil angepasst.
-- Scroll-Parallax schreibt seine CSS-Variablen nur noch auf die Hero-Section statt global auf `:root`.
+- Scroll-Parallax schreibt keine CSS-Variablen mehr pro Frame, sondern bewegt Bild und Overlay direkt mit gecachter Hero-Hoehe.
 - Animierter Hero-Bildfilter durch ein leichteres Overlay-Dimming ersetzt, damit Firefox weniger neu malen muss.
 - Full-Bleed-Sektionshintergruende von grossen `box-shadow`/`clip-path` Flaechen auf guenstigere Pseudo-Elemente umgestellt.
-- Reveal-Elemente bleiben nach dem ersten Erscheinen sichtbar und werden aus dem Observer genommen.
+- Reveal-Elemente animieren weiterhin beim Rein- und Rausscrollen, damit die Seite beim Zurueckscrollen lebendig bleibt.
+- Die dauerhaft laufende Hero-Signal-Linie nutzt einen statischen Glow statt animiertem Schatten.
 
 ## Offene sinnvolle naechste Schritte
 

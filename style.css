@@ -15,10 +15,6 @@
   --radius: 8px;
   --max: 1180px;
   --nav-h: 76px;
-  --hero-shift-x: 0px;
-  --hero-shift-y: 0px;
-  --hero-scale: 1.02;
-  --hero-dim: 0;
 }
 
 *,
@@ -258,6 +254,8 @@ main > .section:not(.hero),
 main > article.section {
   position: relative;
   isolation: isolate;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 720px;
   background: var(--bg);
 }
 
@@ -297,14 +295,15 @@ main > article.section {
   pointer-events: none;
 }
 
-.hero::after {
+.hero-scroll-dim {
   content: "";
   position: absolute;
   inset: 0;
   z-index: 1;
   background: rgba(16, 17, 20, 0.08);
-  opacity: var(--hero-dim);
+  opacity: 0;
   pointer-events: none;
+  will-change: opacity;
 }
 
 .hero-copy {
@@ -324,13 +323,24 @@ main > article.section {
   overflow: hidden;
 }
 
-.hero-signal-line::before {
+.hero-signal-line::after {
   content: "";
   position: absolute;
   inset: 0;
   border-radius: inherit;
   background: linear-gradient(90deg, var(--violet), var(--accent-2));
-  box-shadow: 0 0 32px var(--violet-soft);
+  opacity: 0.32;
+  filter: blur(10px);
+  pointer-events: none;
+}
+
+.hero-signal-line::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--violet), var(--accent-2));
   transform: scaleX(0);
   transform-origin: left center;
   animation: signal-build 3.2s ease-in-out infinite;
@@ -513,7 +523,7 @@ h3 {
   height: 100%;
   object-fit: cover;
   object-position: 68% center;
-  transform: translate3d(var(--hero-shift-x), var(--hero-shift-y), 0) scale(var(--hero-scale));
+  transform: translate3d(0, 0, 0) scale(1.02);
   transform-origin: 68% center;
   will-change: transform;
   backface-visibility: hidden;
@@ -1150,6 +1160,8 @@ h3 {
   .section:not(.hero) {
     width: 100%;
     padding: 20px 0;
+    content-visibility: visible;
+    contain-intrinsic-size: none;
   }
 
   main > .section:not(.hero),
