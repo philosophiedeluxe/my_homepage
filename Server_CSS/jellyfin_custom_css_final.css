@@ -274,160 +274,6 @@ body {
   margin-right: 0 !important;
 }
 
-/* Header tabs responsive stability v2.
-   The tab strip is kept in its own header row. The scroll content is centered
-   only while it fits; when the viewport gets narrow it becomes left-aligned
-   and horizontally scrollable instead of moving outside the visible area. */
-.layout-desktop .skinHeader:has(.headerTabs.sectionTabs),
-.layout-tv .skinHeader:has(.headerTabs.sectionTabs) {
-  overflow: visible !important;
-  min-height: clamp(7.15rem, 9.25vh, 8.9rem) !important;
-  z-index: 1200 !important;
-}
-
-.layout-desktop .skinHeader .headerTabs.sectionTabs,
-.layout-tv .skinHeader .headerTabs.sectionTabs {
-  position: absolute !important;
-  top: clamp(3.05rem, 4.55vh, 4.05rem) !important;
-  left: 0 !important;
-  right: 0 !important;
-  bottom: auto !important;
-  width: 100% !important;
-  max-width: none !important;
-  height: clamp(2.55rem, 4.15vh, 3.25rem) !important;
-  min-height: clamp(2.55rem, 4.15vh, 3.25rem) !important;
-  margin: 0 !important;
-  padding: 0 clamp(0.85rem, 2.2vw, 2.6rem) !important;
-  box-sizing: border-box !important;
-  display: block !important;
-  overflow: visible !important;
-  transform: none !important;
-  z-index: 4 !important;
-}
-
-.layout-desktop .skinHeader .headerTabs.sectionTabs > div,
-.layout-tv .skinHeader .headerTabs.sectionTabs > div {
-  position: relative !important;
-  display: block !important;
-  width: 100% !important;
-  max-width: min(100%, 72rem) !important;
-  height: 100% !important;
-  margin: 0 auto !important;
-  padding: 0 !important;
-  overflow-x: auto !important;
-  overflow-y: hidden !important;
-  scrollbar-width: none !important;
-  -webkit-overflow-scrolling: touch !important;
-  transform: none !important;
-}
-
-.layout-desktop .skinHeader .headerTabs.sectionTabs > div::-webkit-scrollbar,
-.layout-tv .skinHeader .headerTabs.sectionTabs > div::-webkit-scrollbar {
-  display: none !important;
-}
-
-.layout-desktop .skinHeader .headerTabs.sectionTabs > div > div,
-.layout-tv .skinHeader .headerTabs.sectionTabs > div > div {
-  position: relative !important;
-  inset: auto !important;
-  top: auto !important;
-  left: auto !important;
-  right: auto !important;
-  bottom: auto !important;
-  width: max-content !important;
-  min-width: max-content !important;
-  max-width: none !important;
-  height: 100% !important;
-  margin: 0 auto !important;
-  padding: 0 !important;
-  display: flex !important;
-  flex-flow: row nowrap !important;
-  align-items: center !important;
-  justify-content: flex-start !important;
-  gap: clamp(1.05rem, 2.1vw, 3.25rem) !important;
-  white-space: nowrap !important;
-  transform: none !important;
-}
-
-.layout-desktop .skinHeader .headerTabs.sectionTabs .emby-tab-button,
-.layout-desktop .skinHeader .headerTabs.sectionTabs .emby-button,
-.layout-desktop .skinHeader .headerTabs.sectionTabs a,
-.layout-desktop .skinHeader .headerTabs.sectionTabs button,
-.layout-desktop .skinHeader .headerTabs.sectionTabs #moviesTab,
-.layout-tv .skinHeader .headerTabs.sectionTabs .emby-tab-button,
-.layout-tv .skinHeader .headerTabs.sectionTabs .emby-button,
-.layout-tv .skinHeader .headerTabs.sectionTabs a,
-.layout-tv .skinHeader .headerTabs.sectionTabs button,
-.layout-tv .skinHeader .headerTabs.sectionTabs #moviesTab {
-  position: relative !important;
-  inset: auto !important;
-  top: auto !important;
-  left: auto !important;
-  right: auto !important;
-  bottom: auto !important;
-  flex: 0 0 auto !important;
-  min-width: max-content !important;
-  margin: 0 !important;
-  min-height: 2.35rem !important;
-  line-height: 2.35rem !important;
-  transform: none !important;
-}
-
-.layout-desktop .libraryPage:not(#itemDetailPage),
-.layout-desktop #moviesPage,
-.layout-desktop #tvShowsPage,
-.layout-desktop #seriesPage,
-.layout-desktop #tvRecommendedPage,
-.layout-desktop #musicRecommendedPage {
-  padding-top: clamp(8.35rem, 11.35vh, 10.6rem) !important;
-}
-
-.layout-desktop .libraryPage .viewSettingsContainer,
-.layout-desktop .libraryPage .itemsViewSettingsContainer,
-.layout-desktop .libraryPage .viewControls,
-.layout-desktop .libraryPage .paging,
-.layout-desktop #moviesPage .viewSettingsContainer,
-.layout-desktop #tvShowsPage .viewSettingsContainer,
-.layout-desktop #seriesPage .viewSettingsContainer {
-  position: relative !important;
-  z-index: 1 !important;
-  margin-top: 0 !important;
-}
-
-@media (max-width: 76em) {
-  .layout-desktop .skinHeader:has(.headerTabs.sectionTabs),
-  .layout-tv .skinHeader:has(.headerTabs.sectionTabs) {
-    min-height: clamp(7.45rem, 10.5vh, 9.25rem) !important;
-  }
-
-  .layout-desktop .skinHeader .headerTabs.sectionTabs,
-  .layout-tv .skinHeader .headerTabs.sectionTabs {
-    top: clamp(3.25rem, 5.25vh, 4.45rem) !important;
-    padding-inline: clamp(0.75rem, 1.8vw, 1.4rem) !important;
-  }
-
-  .layout-desktop .skinHeader .headerTabs.sectionTabs > div,
-  .layout-tv .skinHeader .headerTabs.sectionTabs > div {
-    max-width: 100% !important;
-  }
-
-  .layout-desktop .skinHeader .headerTabs.sectionTabs > div > div,
-  .layout-tv .skinHeader .headerTabs.sectionTabs > div > div {
-    margin-inline: 0 !important;
-    gap: clamp(1rem, 4vw, 1.8rem) !important;
-  }
-
-  .layout-desktop .libraryPage:not(#itemDetailPage),
-  .layout-desktop #moviesPage,
-  .layout-desktop #tvShowsPage,
-  .layout-desktop #seriesPage,
-  .layout-desktop #tvRecommendedPage,
-  .layout-desktop #musicRecommendedPage {
-    padding-top: clamp(8.7rem, 13vh, 10.9rem) !important;
-  }
-}
-
-
 /* Final detail logo anchor: always right-aligned directly above the detail ribbon. */
 .layout-desktop #itemDetailPage {
   position: relative !important;
@@ -561,103 +407,10 @@ body {
   box-sizing: border-box !important;
 }
 
-/* Header height compaction: keep only the top control bar inside the semi-transparent header.
-   Header tabs stay visible below it, but no longer sit inside a thick overlay layer. */
-:root,
-html,
-body {
-  --jf-header-bar-height: clamp(2.8rem, 4.2vh, 3.55rem);
-  --jf-header-tabs-height: clamp(2.35rem, 3.65vh, 2.9rem);
-  --jf-header-tabs-top: calc(var(--jf-header-bar-height) + clamp(0.05rem, 0.35vh, 0.22rem));
-  --jf-header-page-offset: calc(var(--jf-header-bar-height) + var(--jf-header-tabs-height) + clamp(1.05rem, 2.2vh, 1.85rem));
+/* Final header restore: old menu behavior with current glass transparency. */
+.skinHeader-withBackground {
+  background-color: transparent;
 }
-
-.layout-desktop .skinHeader.skinHeader-withBackground.skinHeader-blurred.semiTransparent,
-.layout-desktop .skinHeader.skinHeader-blurred.semiTransparent,
-.layout-desktop .skinHeader:has(.headerTabs.sectionTabs),
-.layout-tv .skinHeader.skinHeader-withBackground.skinHeader-blurred.semiTransparent,
-.layout-tv .skinHeader.skinHeader-blurred.semiTransparent,
-.layout-tv .skinHeader:has(.headerTabs.sectionTabs) {
-  height: var(--jf-header-bar-height) !important;
-  min-height: var(--jf-header-bar-height) !important;
-  max-height: var(--jf-header-bar-height) !important;
-  overflow: visible !important;
-  background-color: rgba(7, 8, 11, 0.48) !important;
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22) !important;
-}
-
-.layout-desktop .skinHeader .headerTabs.sectionTabs,
-.layout-tv .skinHeader .headerTabs.sectionTabs {
-  top: var(--jf-header-tabs-top) !important;
-  height: var(--jf-header-tabs-height) !important;
-  min-height: var(--jf-header-tabs-height) !important;
-  padding-inline: clamp(0.85rem, 2.1vw, 2.4rem) !important;
-  background: transparent !important;
-  z-index: 5 !important;
-}
-
-.layout-desktop .skinHeader .headerTabs.sectionTabs > div,
-.layout-tv .skinHeader .headerTabs.sectionTabs > div {
-  width: 100% !important;
-  max-width: min(100%, 72rem) !important;
-  margin-inline: auto !important;
-  overflow-x: auto !important;
-  overflow-y: hidden !important;
-}
-
-.layout-desktop .skinHeader .headerTabs.sectionTabs > div > div,
-.layout-tv .skinHeader .headerTabs.sectionTabs > div > div {
-  width: max-content !important;
-  min-width: max-content !important;
-  margin-inline: auto !important;
-  justify-content: center !important;
-  gap: clamp(1.05rem, 2.1vw, 3.05rem) !important;
-}
-
-.layout-desktop .libraryPage:not(#itemDetailPage),
-.layout-desktop #indexPage,
-.layout-desktop #moviesPage,
-.layout-desktop #tvShowsPage,
-.layout-desktop #seriesPage,
-.layout-desktop #tvRecommendedPage,
-.layout-desktop #musicRecommendedPage {
-  padding-top: var(--jf-header-page-offset) !important;
-}
-
-@media (max-width: 52em) {
-  :root,
-  html,
-  body {
-    --jf-header-page-offset: calc(var(--jf-header-bar-height) + var(--jf-header-tabs-height) + clamp(1.3rem, 2.8vh, 2.1rem));
-  }
-
-  .layout-desktop .skinHeader .headerTabs.sectionTabs,
-  .layout-tv .skinHeader .headerTabs.sectionTabs {
-    padding-left: clamp(0.85rem, 2.2vw, 1.35rem) !important;
-    padding-right: clamp(0.85rem, 2.2vw, 1.35rem) !important;
-  }
-
-  .layout-desktop .skinHeader .headerTabs.sectionTabs > div,
-  .layout-tv .skinHeader .headerTabs.sectionTabs > div {
-    max-width: 100% !important;
-    margin-inline: 0 !important;
-  }
-
-  .layout-desktop .skinHeader .headerTabs.sectionTabs > div > div,
-  .layout-tv .skinHeader .headerTabs.sectionTabs > div > div {
-    margin-inline: 0 !important;
-    justify-content: flex-start !important;
-    gap: clamp(0.95rem, 4vw, 1.75rem) !important;
-  }
-}
-
-/* -------------------------------------------------------------------------
-   Header menu behavior restore
-   Basis: aktueller transparenter/glassy Header bleibt erhalten.
-   Verhalten: HeaderTop und horizontale SectionTabs laufen wieder im nativen
-   Jellyfin-Fluss wie in der alten Referenz. Dadurch liegt die Menüleiste nicht
-   mehr in einer künstlich kompakten Overlay-Höhe über dem Seiteninhalt.
-   ------------------------------------------------------------------------- */
 
 :root,
 html,
@@ -666,14 +419,18 @@ body {
   --jf-header-glass-shadow: 0 10px 28px rgba(0, 0, 0, 0.22);
 }
 
+.skinHeader,
+.skinHeader-withBackground {
+  transition:
+    background-color var(--jf-motion-med) ease,
+    backdrop-filter var(--jf-motion-med) ease,
+    box-shadow var(--jf-motion-med) ease;
+}
+
 .skinHeader.skinHeader-withBackground,
 .skinHeader.skinHeader-blurred,
 .skinHeader.skinHeader-withBackground.skinHeader-blurred,
 .skinHeader.skinHeader-withBackground.skinHeader-blurred.semiTransparent {
-  height: auto !important;
-  min-height: 0 !important;
-  max-height: none !important;
-  overflow: visible !important;
   background-color: var(--jf-header-glass-bg) !important;
   box-shadow: var(--jf-header-glass-shadow) !important;
 }
@@ -688,390 +445,87 @@ body {
   }
 }
 
-#reactRoot > div:nth-child(3) > div.skinHeader.focuscontainer-x.skinHeader-withBackground.skinHeader-blurred > div.flex.align-items-center.flex-grow.headerTop,
-.skinHeader .headerTop,
-.skinHeader > .flex.align-items-center.flex-grow.headerTop {
-  position: relative !important;
-  inset: auto !important;
-  top: auto !important;
-  right: auto !important;
-  bottom: auto !important;
-  left: auto !important;
-  height: auto !important;
-  min-height: 0 !important;
-  max-height: none !important;
-  margin: 0 !important;
-  transform: none !important;
-  z-index: 6 !important;
-}
-
-.layout-desktop .skinHeader:has(.headerTabs.sectionTabs),
-.layout-tv .skinHeader:has(.headerTabs.sectionTabs) {
-  height: auto !important;
-  min-height: 0 !important;
-  max-height: none !important;
-  overflow: visible !important;
-  background-color: var(--jf-header-glass-bg) !important;
-  box-shadow: var(--jf-header-glass-shadow) !important;
-}
-
-.layout-desktop .skinHeader .headerTabs.sectionTabs,
-.layout-tv .skinHeader .headerTabs.sectionTabs,
-.skinHeader .headerTabs.sectionTabs {
-  position: relative !important;
-  inset: auto !important;
-  top: auto !important;
-  right: auto !important;
-  bottom: auto !important;
-  left: auto !important;
-  width: 100% !important;
-  max-width: none !important;
-  height: auto !important;
-  min-height: 0 !important;
-  max-height: none !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  display: block !important;
-  overflow: visible !important;
-  transform: none !important;
-  background: transparent !important;
-  z-index: 5 !important;
-}
-
-.layout-desktop .skinHeader .headerTabs.sectionTabs > div,
-.layout-tv .skinHeader .headerTabs.sectionTabs > div,
-.skinHeader .headerTabs.sectionTabs > div {
-  position: relative !important;
-  inset: auto !important;
-  width: 100% !important;
-  max-width: none !important;
-  height: auto !important;
-  min-height: 0 !important;
-  max-height: none !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  overflow-x: visible !important;
-  overflow-y: visible !important;
-  scrollbar-width: auto !important;
-  transform: none !important;
-}
-
-.layout-desktop .skinHeader .headerTabs.sectionTabs > div::-webkit-scrollbar,
-.layout-tv .skinHeader .headerTabs.sectionTabs > div::-webkit-scrollbar,
-.skinHeader .headerTabs.sectionTabs > div::-webkit-scrollbar {
-  display: initial !important;
-}
-
-#reactRoot > div:nth-child(3) > div.skinHeader.focuscontainer-x.skinHeader-withBackground.skinHeader-blurred > div.headerTabs.sectionTabs > div > div,
-.layout-desktop .skinHeader .headerTabs.sectionTabs > div > div,
-.layout-tv .skinHeader .headerTabs.sectionTabs > div > div,
-.skinHeader .headerTabs.sectionTabs > div > div {
-  position: relative !important;
-  inset: auto !important;
-  top: auto !important;
-  right: auto !important;
-  bottom: auto !important;
-  left: auto !important;
-  width: auto !important;
-  min-width: 0 !important;
-  max-width: none !important;
-  height: auto !important;
-  min-height: 0 !important;
-  max-height: none !important;
-  margin: 0 auto !important;
-  padding: 0 !important;
-  display: flex !important;
-  flex-flow: row nowrap !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: inherit !important;
-  white-space: nowrap !important;
-  overflow: visible !important;
-  transform: none !important;
-}
-
-#moviesTab,
-#moviesTab > div,
-#moviesTab > div:nth-child(1),
-.layout-desktop .skinHeader .headerTabs.sectionTabs #moviesTab,
-.layout-tv .skinHeader .headerTabs.sectionTabs #moviesTab,
-.skinHeader .headerTabs.sectionTabs .emby-tab-button,
-.skinHeader .headerTabs.sectionTabs .emby-button,
-.skinHeader .headerTabs.sectionTabs a,
-.skinHeader .headerTabs.sectionTabs button {
-  position: relative !important;
-  inset: auto !important;
-  top: auto !important;
-  right: auto !important;
-  bottom: auto !important;
-  left: auto !important;
-  flex: 0 0 auto !important;
-  width: auto !important;
-  min-width: 0 !important;
-  max-width: none !important;
-  height: auto !important;
-  min-height: 0 !important;
-  max-height: none !important;
-  margin: 0 !important;
-  line-height: inherit !important;
-  transform: none !important;
-}
-
+/* Alte Referenz-Abstaende: einzeilige Headerbar */
 @media all and (min-width: 100em) {
   #indexPage,
   #moviesPage,
   #tvShowsPage,
   #seriesPage,
   #tvRecommendedPage,
-  #musicRecommendedPage,
-  .layout-desktop .libraryPage:not(#itemDetailPage) {
+  #musicRecommendedPage {
     margin-top: 68px !important;
     padding-top: 0 !important;
     overflow-y: scroll;
   }
 }
 
+/* Alte Referenz-Abstaende: zweizeilige Header-/Tab-Kombination */
 @media all and (max-width: 100em) {
   #indexPage,
   #moviesPage,
   #tvShowsPage,
   #seriesPage,
   #tvRecommendedPage,
-  #musicRecommendedPage,
-  .layout-desktop .libraryPage:not(#itemDetailPage) {
+  #musicRecommendedPage {
     margin-top: 130px !important;
     padding-top: 0.5em !important;
     overflow-y: scroll;
   }
 }
 
-@media all and (max-width: 52em) {
-  .skinHeader .headerTabs.sectionTabs > div > div {
-    margin-inline: auto !important;
-    justify-content: center !important;
-  }
+.force-scroll {
+  overflow-y: auto;
+  overflow-x: auto;
 }
 
-/* -------------------------------------------------------------------------
-   Header dimensions restore v2
-   Basis: transparenter/glassy Header bleibt erhalten.
-   Dimensionen: alte Referenz verwendet 68px fuer eine einzeilige Taskbar
-   und 130px fuer die zweizeilige Header-/Tab-Kombination.
-   ------------------------------------------------------------------------- */
-
-:root,
-html,
-body {
-  --jf-header-glass-bg: rgba(7, 8, 11, 0.48);
-  --jf-header-glass-shadow: 0 10px 28px rgba(0, 0, 0, 0.22);
-  --jf-header-old-top-height: 68px;
-  --jf-header-old-tabs-height: 62px;
-  --jf-header-old-total-height: 130px;
-}
-
-.skinHeader.skinHeader-withBackground,
-.skinHeader.skinHeader-blurred,
-.skinHeader.skinHeader-withBackground.skinHeader-blurred,
-.skinHeader.skinHeader-withBackground.skinHeader-blurred.semiTransparent,
-.layout-desktop .skinHeader.skinHeader-withBackground.skinHeader-blurred.semiTransparent,
-.layout-desktop .skinHeader.skinHeader-blurred.semiTransparent,
-.layout-tv .skinHeader.skinHeader-withBackground.skinHeader-blurred.semiTransparent,
-.layout-tv .skinHeader.skinHeader-blurred.semiTransparent {
-  height: auto !important;
-  min-height: var(--jf-header-old-top-height) !important;
-  max-height: none !important;
-  overflow: visible !important;
-  background-color: var(--jf-header-glass-bg) !important;
-  box-shadow: var(--jf-header-glass-shadow) !important;
-}
-
-@supports ((backdrop-filter: blur(12px)) or (-webkit-backdrop-filter: blur(12px))) {
-  .skinHeader.skinHeader-withBackground,
-  .skinHeader.skinHeader-blurred,
-  .skinHeader.skinHeader-withBackground.skinHeader-blurred,
-  .skinHeader.skinHeader-withBackground.skinHeader-blurred.semiTransparent,
-  .layout-desktop .skinHeader.skinHeader-withBackground.skinHeader-blurred.semiTransparent,
-  .layout-desktop .skinHeader.skinHeader-blurred.semiTransparent,
-  .layout-tv .skinHeader.skinHeader-withBackground.skinHeader-blurred.semiTransparent,
-  .layout-tv .skinHeader.skinHeader-blurred.semiTransparent {
-    -webkit-backdrop-filter: blur(12px) saturate(1.12) !important;
-    backdrop-filter: blur(12px) saturate(1.12) !important;
-  }
-}
-
-.layout-desktop .skinHeader:has(.headerTabs.sectionTabs),
-.layout-tv .skinHeader:has(.headerTabs.sectionTabs),
-.skinHeader:has(.headerTabs.sectionTabs) {
-  height: auto !important;
-  min-height: var(--jf-header-old-total-height) !important;
-  max-height: none !important;
-  overflow: visible !important;
-}
-
-#reactRoot > div:nth-child(3) > div.skinHeader.focuscontainer-x.skinHeader-withBackground.skinHeader-blurred > div.flex.align-items-center.flex-grow.headerTop,
-#reactRoot > div:nth-child(3) > div.skinHeader.focuscontainer-x.skinHeader-withBackground.skinHeader-blurred.semiTransparent > div.flex.align-items-center.flex-grow.headerTop,
-.skinHeader .headerTop,
-.skinHeader > .flex.align-items-center.flex-grow.headerTop {
-  position: relative !important;
-  inset: auto !important;
-  top: auto !important;
-  right: auto !important;
+/* Schutz: Header-Regeln duerfen nie direkte Inhalte des Filme-Tabs treffen.
+   Das verhindert, dass der AlphaPicker als Menue-Tab behandelt wird. */
+#moviesTab > .alphaPicker.alphaPicker-fixed.alphaPicker-vertical,
+#moviesPage .alphaPicker.alphaPicker-fixed.alphaPicker-vertical,
+.alphaPicker.alphaPicker-fixed.alphaPicker-vertical.alphabetPicker-right,
+.alphaPicker.alphaPicker-fixed.alphaPicker-vertical.alphaPicker-fixed-right {
+  position: fixed !important;
+  top: 50% !important;
+  right: 0.25rem !important;
   bottom: auto !important;
   left: auto !important;
-  height: var(--jf-header-old-top-height) !important;
-  min-height: var(--jf-header-old-top-height) !important;
-  max-height: var(--jf-header-old-top-height) !important;
-  margin: 0 !important;
-  transform: none !important;
-  display: flex !important;
-  align-items: center !important;
-  z-index: 6 !important;
-}
-
-#reactRoot > div:nth-child(3) > div.skinHeader.focuscontainer-x.skinHeader-withBackground.skinHeader-blurred > div.headerTabs.sectionTabs,
-#reactRoot > div:nth-child(3) > div.skinHeader.focuscontainer-x.skinHeader-withBackground.skinHeader-blurred.semiTransparent > div.headerTabs.sectionTabs,
-.layout-desktop .skinHeader .headerTabs.sectionTabs,
-.layout-tv .skinHeader .headerTabs.sectionTabs,
-.skinHeader .headerTabs.sectionTabs {
-  position: relative !important;
-  inset: auto !important;
-  top: auto !important;
-  right: auto !important;
-  bottom: auto !important;
-  left: auto !important;
-  width: 100% !important;
-  max-width: none !important;
-  height: var(--jf-header-old-tabs-height) !important;
-  min-height: var(--jf-header-old-tabs-height) !important;
-  max-height: var(--jf-header-old-tabs-height) !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  display: block !important;
-  overflow: visible !important;
-  transform: none !important;
-  background: transparent !important;
-  z-index: 5 !important;
-}
-
-#reactRoot > div:nth-child(3) > div.skinHeader.focuscontainer-x.skinHeader-withBackground.skinHeader-blurred > div.headerTabs.sectionTabs > div,
-#reactRoot > div:nth-child(3) > div.skinHeader.focuscontainer-x.skinHeader-withBackground.skinHeader-blurred.semiTransparent > div.headerTabs.sectionTabs > div,
-.layout-desktop .skinHeader .headerTabs.sectionTabs > div,
-.layout-tv .skinHeader .headerTabs.sectionTabs > div,
-.skinHeader .headerTabs.sectionTabs > div {
-  position: relative !important;
-  inset: auto !important;
-  width: 100% !important;
-  max-width: none !important;
-  height: var(--jf-header-old-tabs-height) !important;
-  min-height: var(--jf-header-old-tabs-height) !important;
-  max-height: var(--jf-header-old-tabs-height) !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  overflow-x: auto !important;
-  overflow-y: hidden !important;
-  scrollbar-width: none !important;
-  -webkit-overflow-scrolling: touch !important;
-  transform: none !important;
-}
-
-#reactRoot > div:nth-child(3) > div.skinHeader.focuscontainer-x.skinHeader-withBackground.skinHeader-blurred > div.headerTabs.sectionTabs > div::-webkit-scrollbar,
-#reactRoot > div:nth-child(3) > div.skinHeader.focuscontainer-x.skinHeader-withBackground.skinHeader-blurred.semiTransparent > div.headerTabs.sectionTabs > div::-webkit-scrollbar,
-.layout-desktop .skinHeader .headerTabs.sectionTabs > div::-webkit-scrollbar,
-.layout-tv .skinHeader .headerTabs.sectionTabs > div::-webkit-scrollbar,
-.skinHeader .headerTabs.sectionTabs > div::-webkit-scrollbar {
-  display: none !important;
-}
-
-#reactRoot > div:nth-child(3) > div.skinHeader.focuscontainer-x.skinHeader-withBackground.skinHeader-blurred > div.headerTabs.sectionTabs > div > div,
-#reactRoot > div:nth-child(3) > div.skinHeader.focuscontainer-x.skinHeader-withBackground.skinHeader-blurred.semiTransparent > div.headerTabs.sectionTabs > div > div,
-.layout-desktop .skinHeader .headerTabs.sectionTabs > div > div,
-.layout-tv .skinHeader .headerTabs.sectionTabs > div > div,
-.skinHeader .headerTabs.sectionTabs > div > div {
-  position: relative !important;
-  inset: auto !important;
-  top: auto !important;
-  right: auto !important;
-  bottom: auto !important;
-  left: auto !important;
-  width: auto !important;
-  min-width: max-content !important;
-  max-width: none !important;
-  height: var(--jf-header-old-tabs-height) !important;
-  min-height: var(--jf-header-old-tabs-height) !important;
-  max-height: var(--jf-header-old-tabs-height) !important;
-  margin: 0 auto !important;
-  padding: 0 !important;
-  display: flex !important;
-  flex-flow: row nowrap !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: normal !important;
-  white-space: nowrap !important;
-  overflow: visible !important;
-  transform: none !important;
-}
-
-#moviesTab,
-#moviesTab > div,
-#moviesTab > div:nth-child(1),
-.layout-desktop .skinHeader .headerTabs.sectionTabs #moviesTab,
-.layout-tv .skinHeader .headerTabs.sectionTabs #moviesTab,
-.skinHeader .headerTabs.sectionTabs .emby-tab-button,
-.skinHeader .headerTabs.sectionTabs .emby-button,
-.skinHeader .headerTabs.sectionTabs a,
-.skinHeader .headerTabs.sectionTabs button {
-  position: relative !important;
-  inset: auto !important;
-  top: auto !important;
-  right: auto !important;
-  bottom: auto !important;
-  left: auto !important;
-  flex: 0 0 auto !important;
   width: auto !important;
   min-width: 0 !important;
   max-width: none !important;
   height: auto !important;
-  min-height: var(--jf-header-old-tabs-height) !important;
+  min-height: 0 !important;
+  max-height: calc(100vh - 8rem) !important;
+  margin: 0 !important;
+  padding: 0.25rem 0.15rem !important;
+  display: flex !important;
+  flex-flow: column nowrap !important;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow: visible !important;
+  transform: translateY(-50%) !important;
+  z-index: 1100 !important;
+}
+
+#moviesTab > .alphaPicker.alphaPicker-fixed.alphaPicker-vertical > div,
+#moviesPage .alphaPicker.alphaPicker-fixed.alphaPicker-vertical > div,
+.alphaPicker.alphaPicker-fixed.alphaPicker-vertical.alphabetPicker-right > div,
+.alphaPicker.alphaPicker-fixed.alphaPicker-vertical.alphaPicker-fixed-right > div {
+  position: static !important;
+  inset: auto !important;
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  height: auto !important;
+  min-height: 0 !important;
   max-height: none !important;
   margin: 0 !important;
-  line-height: normal !important;
-  transform: none !important;
-  display: inline-flex !important;
+  padding: 0 !important;
+  display: flex !important;
+  flex-flow: column nowrap !important;
   align-items: center !important;
+  justify-content: center !important;
+  gap: 0 !important;
+  overflow: visible !important;
+  white-space: nowrap !important;
+  transform: none !important;
 }
-
-@media all and (min-width: 100em) {
-  #indexPage,
-  #moviesPage,
-  #tvShowsPage,
-  #seriesPage,
-  #tvRecommendedPage,
-  #musicRecommendedPage,
-  .layout-desktop .libraryPage:not(#itemDetailPage) {
-    margin-top: var(--jf-header-old-top-height) !important;
-    padding-top: 0 !important;
-    overflow-y: scroll;
-  }
-}
-
-@media all and (max-width: 100em) {
-  #indexPage,
-  #moviesPage,
-  #tvShowsPage,
-  #seriesPage,
-  #tvRecommendedPage,
-  #musicRecommendedPage,
-  .layout-desktop .libraryPage:not(#itemDetailPage) {
-    margin-top: var(--jf-header-old-total-height) !important;
-    padding-top: 0.5em !important;
-    overflow-y: scroll;
-  }
-
-  #reactRoot > div:nth-child(3) > div.skinHeader.focuscontainer-x.skinHeader-withBackground.skinHeader-blurred > div.headerTabs.sectionTabs > div > div,
-  #reactRoot > div:nth-child(3) > div.skinHeader.focuscontainer-x.skinHeader-withBackground.skinHeader-blurred.semiTransparent > div.headerTabs.sectionTabs > div > div,
-  .skinHeader .headerTabs.sectionTabs > div > div {
-    margin-inline: 0 !important;
-    justify-content: flex-start !important;
-  }
-}
-
