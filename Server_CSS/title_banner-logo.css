@@ -11,7 +11,7 @@
   --jf-detail-side-pad: clamp(1.75rem, 2.8vw, 3.7rem);
   --jf-detail-poster-width: clamp(17rem, 21.25vw, 25.5rem);
   --jf-detail-gap: clamp(1.6rem, 3vw, 4.25rem);
-  --jf-detail-poster-overlap: calc(var(--jf-detail-poster-width) * -0.72);
+  --jf-detail-poster-overlap: calc(var(--jf-detail-poster-width) * -0.50);
   --jf-detail-content-left: calc(var(--jf-detail-side-pad) + var(--jf-detail-poster-width) + var(--jf-detail-gap));
   --jf-detail-content-max: min(60rem, calc(100vw - var(--jf-detail-content-left) - var(--jf-detail-side-pad)));
 }
@@ -254,7 +254,7 @@
   --jf-detail-side-pad: clamp(1.75rem, 2.8vw, 3.7rem);
   --jf-detail-poster-width: clamp(17rem, 21.25vw, 25.5rem);
   --jf-detail-gap: clamp(1.6rem, 3vw, 4.25rem);
-  --jf-detail-poster-overlap: calc(var(--jf-detail-poster-width) * -0.72);
+  --jf-detail-poster-overlap: calc(var(--jf-detail-poster-width) * -0.50);
   --jf-detail-content-left: calc(var(--jf-detail-side-pad) + var(--jf-detail-poster-width) + var(--jf-detail-gap));
   --jf-detail-content-max: min(60rem, calc(100vw - var(--jf-detail-content-left) - var(--jf-detail-side-pad)));
 }
@@ -426,4 +426,70 @@
   right: var(--jf-detail-side-pad) !important;
   left: auto !important;
   background-position: right center !important;
+}
+
+
+/* Final duplicate-poster fix:
+   Jellyfin renders a second poster inside detailRibbon for compact layouts
+   (.hide-desktop.hide-tv). The earlier generic .detailImageContainer rules made it visible
+   on desktop and created a duplicate. Keep only the primary .hide-mobile poster on desktop. */
+.layout-desktop #itemDetailPage .detailRibbon .detailImageContainer.hide-desktop,
+.layout-desktop #itemDetailPage .detailRibbon .detailImageContainer.hide-desktop.hide-tv,
+.layout-desktop #itemDetailPage .infoWrapper .detailImageContainer.hide-desktop,
+.layout-desktop #itemDetailPage .infoWrapper .detailImageContainer.hide-desktop.hide-tv {
+  display: none !important;
+  visibility: hidden !important;
+  width: 0 !important;
+  height: 0 !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
+}
+
+.layout-desktop #itemDetailPage {
+  --jf-detail-poster-overlap: calc(var(--jf-detail-poster-width) * -0.50);
+}
+
+/* Keep the desktop poster visible for normal desktop/tablet widths.
+   The old max-height condition hid it on normal browser windows. */
+@media (min-width: 54.01em) {
+  .layout-desktop #itemDetailPage .detailImageContainer.hide-mobile {
+    display: block !important;
+    visibility: visible !important;
+    float: left !important;
+    clear: left !important;
+    position: relative !important;
+    width: var(--jf-detail-poster-width) !important;
+    height: auto !important;
+    margin: var(--jf-detail-poster-overlap) var(--jf-detail-gap) clamp(1.5rem, 4vh, 2.75rem) var(--jf-detail-side-pad) !important;
+    padding: 0 !important;
+    z-index: 4 !important;
+    pointer-events: auto !important;
+    transform: none !important;
+  }
+
+  .layout-desktop #itemDetailPage .detailImageContainer.hide-mobile .card {
+    display: block !important;
+    visibility: visible !important;
+    position: relative !important;
+    inset: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    margin: 0 !important;
+    transform: none !important;
+  }
+}
+
+/* Only hide the primary desktop poster on genuinely compact widths. */
+@media (max-width: 54em) {
+  .layout-desktop #itemDetailPage .detailImageContainer.hide-mobile,
+  .layout-desktop #itemDetailPage .detailImageContainer.hide-mobile .card {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
 }

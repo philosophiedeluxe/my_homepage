@@ -65,3 +65,11 @@ Die vorherige aspect-ratio-basierte Verschiebung wurde aus `fixes.css` entfernt.
 - `--jf-page-pad` leicht reduziert, damit Medienraster rechts weniger Leerraum erzeugen.
 - Detailposter bleibt im normalen Scrollfluss, wird aber per negativem oberen Margin ca. 50 Prozent in den Banner gezogen.
 - Detail-Logo sitzt oben rechts im Bannerbereich und überschreibt alte `top`-/`right`-/`left`-Werte.
+
+
+## Detail Duplicate Poster / Library Spacing Fix
+
+- Entfernt den doppelten kompakten Posterblock innerhalb `detailRibbon` auf Desktop-Layouts.
+- Der primäre Detailposter bleibt im normalen Scrollfluss und überlappt das Banner um ca. 50 %.
+- Die alte `max-height`-Umschaltung wird durch einen echten Breiten-Breakpoint ersetzt, damit der Poster nicht bei normaler Fensterhöhe verschwindet.
+- `--jf-card-gap` ist auf `0rem` gesetzt; Library-Container verwenden keine horizontale Gap mehr.

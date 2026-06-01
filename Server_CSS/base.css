@@ -12,9 +12,9 @@
   --jf-border: 255, 255, 255;
 
   --jf-radius: var(--rounding, 12px);
-  --jf-page-pad: clamp(0.85rem, 2.35vw, 3.35rem);
-  --jf-row-gap: clamp(0.7rem, 0.85vw, 1.15rem);
-  --jf-card-gap: clamp(0.45rem, 0.55vw, 0.85rem);
+  --jf-page-pad: clamp(0.75rem, 1.8vw, 2.4rem);
+  --jf-row-gap: clamp(0.6rem, 0.75vw, 1rem);
+  --jf-card-gap: 0rem;
   --jf-motion-fast: 150ms;
   --jf-motion-med: 240ms;
   --jf-motion-slow: 420ms;
@@ -360,4 +360,39 @@ div[data-role="controlgroup"] a[data-role="button"] {
     scroll-behavior: auto !important;
     transition-duration: 0.001ms !important;
   }
+}
+
+
+/* Final library grid compaction: remove theme card gap and reduce right-side dead space. */
+:root {
+  --jf-page-pad: clamp(0.75rem, 1.8vw, 2.4rem);
+  --jf-row-gap: clamp(0.6rem, 0.75vw, 1rem);
+  --jf-card-gap: 0rem;
+}
+
+.layout-desktop .libraryPage .itemsContainer,
+.layout-desktop #moviesPage .itemsContainer,
+.layout-desktop #tvRecommendedPage .itemsContainer,
+.layout-desktop #musicRecommendedPage .itemsContainer,
+.itemsContainer {
+  gap: 0 !important;
+  column-gap: 0 !important;
+  row-gap: var(--jf-row-gap) !important;
+  scroll-padding-inline: var(--jf-page-pad) !important;
+}
+
+.layout-desktop .libraryPage .padded-left,
+.layout-desktop .libraryPage .padded-right,
+.layout-desktop #moviesPage .padded-left,
+.layout-desktop #moviesPage .padded-right,
+.padded-left,
+.padded-right {
+  padding-left: var(--jf-page-pad) !important;
+  padding-right: var(--jf-page-pad) !important;
+}
+
+.itemsContainer > .card > .cardBox,
+.cardBox-bottompadded {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
 }
