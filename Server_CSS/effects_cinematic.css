@@ -1,0 +1,351 @@
+/*
+  Cinematic Effects Layer
+  Zweck: Nur optische Erweiterung. Keine Grid-, Breiten-, Margin- oder Padding-Regeln.
+  Diese Datei sollte als letzter Import geladen werden.
+*/
+
+:root {
+  --fx-panel-bg: rgba(5, 7, 12, 0.46);
+  --fx-panel-bg-hover: rgba(12, 15, 24, 0.58);
+  --fx-panel-border: rgba(255, 255, 255, 0.075);
+  --fx-panel-border-hover: rgba(var(--accent), 0.52);
+  --fx-shadow-soft: 0 8px 22px rgba(0, 0, 0, 0.32);
+  --fx-shadow-deep: 0 18px 48px rgba(0, 0, 0, 0.48);
+  --fx-glow-soft: 0 0 16px rgba(var(--accent), 0.16);
+  --fx-glow-medium: 0 0 24px rgba(var(--accent), 0.28), 0 0 54px rgba(var(--accent), 0.12);
+  --fx-glow-strong: 0 0 32px rgba(var(--accent), 0.42), 0 0 72px rgba(var(--accent), 0.18);
+  --fx-transition-fast: 160ms ease;
+  --fx-transition-medium: 240ms ease;
+}
+
+/* Grundflächen: mehr Tiefe, ohne Layoutveränderung */
+.visualCardBox,
+.cardImageContainer,
+.cardContent,
+.paperList,
+.dialog,
+.toast,
+.mainDrawer,
+.appfooter,
+.detailTable,
+.detailPageSecondaryContainer,
+.sessionNowPlayingInnerContent,
+.upNextContainer,
+.chapterThumb,
+.chapterThumbContainer,
+#itemDetailPage .listItem,
+.listItem:hover {
+  border: 1px solid var(--fx-panel-border) !important;
+  box-shadow: var(--fx-shadow-soft), var(--fx-glow-soft) !important;
+  transition:
+    background-color var(--fx-transition-medium),
+    border-color var(--fx-transition-medium),
+    box-shadow var(--fx-transition-medium),
+    filter var(--fx-transition-medium),
+    transform var(--fx-transition-medium) !important;
+}
+
+/* Glasflächen stärker ausbauen */
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .skinHeader-withBackground,
+  .css-fknfom,
+  .dialog,
+  .mainDrawer,
+  .toast,
+  .appfooter,
+  .detailPageSecondaryContainer,
+  .paperList,
+  .sessionNowPlayingInnerContent,
+  .upNextContainer,
+  .cardOverlayContainer,
+  .innerCardFooter,
+  .countIndicator,
+  .playedIndicator {
+    -webkit-backdrop-filter: blur(20px) saturate(145%) contrast(105%) !important;
+    backdrop-filter: blur(20px) saturate(145%) contrast(105%) !important;
+    background-color: var(--fx-panel-bg) !important;
+  }
+
+  .indicator,
+  .mediaSourceIndicator,
+  .itemProgressBar,
+  .backgroundProgress > div,
+  .cardOverlayButtonIcon,
+  .chapterThumbTextContainer {
+    -webkit-backdrop-filter: blur(10px) saturate(130%) !important;
+    backdrop-filter: blur(10px) saturate(130%) !important;
+  }
+}
+
+/* Cards: hochwertiger Hover, kein Einfluss auf Grid-Breiten */
+.cardBox,
+.visualCardBox,
+.cardImageContainer,
+.cardOverlayContainer,
+.listItemImageButton,
+.homeLibraryButton,
+.raised,
+.fab,
+a[data-role="button"],
+.emby-tab-button,
+.paper-icon-button-light,
+.detailButton {
+  transition:
+    transform var(--fx-transition-medium),
+    filter var(--fx-transition-medium),
+    background-color var(--fx-transition-medium),
+    border-color var(--fx-transition-medium),
+    box-shadow var(--fx-transition-medium),
+    color var(--fx-transition-fast) !important;
+}
+
+.card:hover > .cardBox,
+.card:focus-within > .cardBox {
+  filter: saturate(108%) contrast(104%) brightness(104%);
+}
+
+.card:hover .visualCardBox,
+.card:focus-within .visualCardBox,
+.card:hover .cardImageContainer,
+.card:focus-within .cardImageContainer,
+#itemDetailPage .listItem:hover,
+.paperList:hover,
+.homeLibraryButton:hover,
+.raised:hover,
+.fab:hover,
+a[data-role="button"]:hover {
+  border-color: var(--fx-panel-border-hover) !important;
+  box-shadow: var(--fx-shadow-deep), var(--fx-glow-medium) !important;
+}
+
+.card:hover > .cardBox,
+.homeLibraryButton:hover,
+.raised:hover,
+.fab:hover,
+a[data-role="button"]:hover,
+.detailButton:hover,
+.paper-icon-button-light:hover,
+.emby-tab-button:hover,
+.listItemImageButton:hover {
+  transform: translateY(-2px);
+}
+
+/* Lichtkante auf Poster/Boxen */
+.visualCardBox,
+.cardImageContainer,
+.cardOverlayContainer,
+.paperList,
+.dialog,
+.toast,
+#itemDetailPage .listItem,
+.sessionNowPlayingInnerContent,
+.upNextContainer {
+  position: relative;
+  overflow: hidden;
+}
+
+.visualCardBox::after,
+.cardImageContainer::after,
+.cardOverlayContainer::after,
+.paperList::after,
+.dialog::after,
+.toast::after,
+#itemDetailPage .listItem::after,
+.sessionNowPlayingInnerContent::after,
+.upNextContainer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  opacity: 0;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.02) 34%, rgba(255, 255, 255, 0) 58%),
+    radial-gradient(circle at 50% 0%, rgba(var(--accent), 0.16), rgba(var(--accent), 0) 62%);
+  transition: opacity var(--fx-transition-medium) !important;
+  mix-blend-mode: screen;
+}
+
+.card:hover .visualCardBox::after,
+.card:focus-within .visualCardBox::after,
+.card:hover .cardImageContainer::after,
+.card:focus-within .cardImageContainer::after,
+.cardOverlayContainer:hover::after,
+.paperList:hover::after,
+.dialog:hover::after,
+.toast:hover::after,
+#itemDetailPage .listItem:hover::after,
+.sessionNowPlayingInnerContent:hover::after,
+.upNextContainer:hover::after {
+  opacity: 0.82;
+}
+
+/* Overlay und Aktionsflächen: stärkerer Akzent */
+.cardOverlayContainer,
+.innerCardFooter,
+.countIndicator,
+.playedIndicator,
+.mediaSourceIndicator,
+.missingIndicator,
+.unairedIndicator {
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.42), 0 0 18px rgba(var(--accent), 0.18) !important;
+}
+
+.cardOverlayContainer:hover,
+.detailButton:hover,
+.paper-icon-button-light:hover,
+.emby-tab-button:hover,
+.navMenuOption:hover,
+.actionSheetMenuItem:hover {
+  background-color: var(--fx-panel-bg-hover) !important;
+  box-shadow: var(--fx-shadow-soft), var(--fx-glow-strong) !important;
+}
+
+/* Header/Footer mit mehr atmosphärischer Tiefe */
+.skinHeader-withBackground,
+.appfooter {
+  border-color: rgba(255, 255, 255, 0.06) !important;
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.42), 0 0 38px rgba(var(--accent), 0.10) !important;
+}
+
+.skinHeader-withBackground {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+
+.appfooter {
+  border-top: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+
+/* Detailseite: Logo, Poster, Ribbon */
+#itemDetailPage .detailLogo {
+  -webkit-filter: drop-shadow(0 0 16px rgba(0, 0, 0, 0.78)) drop-shadow(0 0 22px rgba(var(--accent), 0.24));
+  filter: drop-shadow(0 0 16px rgba(0, 0, 0, 0.78)) drop-shadow(0 0 22px rgba(var(--accent), 0.24));
+}
+
+.layout-desktop .detailRibbon,
+.detailPagePrimaryContainer,
+.detailPageSecondaryContainer {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035), 0 -16px 48px rgba(0, 0, 0, 0.28) !important;
+}
+
+.detailImageContainer .card:hover .cardBox {
+  filter: saturate(110%) contrast(105%) brightness(105%) drop-shadow(0 0 18px rgba(var(--accent), 0.22));
+}
+
+/* Fortschritt, Slider, Spinner */
+.itemProgressBarForeground,
+.playbackProgress > div,
+.transcodingProgress > div,
+.taskProgressInner,
+.iconOsdProgressInner,
+.mdl-slider-background-lower,
+progress::-webkit-progress-value,
+progress::-moz-progress-bar {
+  box-shadow: 0 0 14px rgba(var(--accent), 0.50), 0 0 32px rgba(var(--accent), 0.18) !important;
+}
+
+.itemProgressBar,
+.taskProgressOuter,
+progress {
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.055), 0 0 14px rgba(0, 0, 0, 0.35) !important;
+}
+
+/* Eingabefelder und Fokuszustände */
+.emby-input,
+.emby-textarea,
+.emby-select-withcolor,
+.checkboxOutline,
+.itemSelectionPanel {
+  background-color: rgba(0, 0, 0, 0.34) !important;
+  border-color: rgba(255, 255, 255, 0.075) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035), 0 8px 20px rgba(0, 0, 0, 0.22) !important;
+  transition: border-color var(--fx-transition-medium), box-shadow var(--fx-transition-medium), background-color var(--fx-transition-medium) !important;
+}
+
+.emby-input:focus,
+.emby-textarea:focus,
+.emby-select-withcolor:focus,
+.itemSelectionPanel,
+.emby-checkbox:checked + span + .checkboxOutline {
+  border-color: rgba(var(--accent), 0.65) !important;
+  box-shadow: 0 0 0 1px rgba(var(--accent), 0.18), var(--fx-glow-medium) !important;
+}
+
+/* Listen und Menüelemente */
+.listItem:hover,
+.navMenuOption:hover,
+.actionSheetMenuItem:hover,
+.css-17c09up:hover {
+  background-color: rgba(var(--accent), 0.16) !important;
+}
+
+.navMenuOption-selected,
+.css-17c09up.Mui-selected,
+.selectionCommandsPanel {
+  box-shadow: inset 3px 0 0 rgba(var(--accent), 0.72), 0 0 24px rgba(var(--accent), 0.12) !important;
+}
+
+/* Dialoge/Toasts deutlicher vom Hintergrund lösen */
+.dialog,
+.toast {
+  background-color: rgba(8, 10, 16, 0.72) !important;
+  box-shadow: 0 24px 76px rgba(0, 0, 0, 0.62), var(--fx-glow-medium) !important;
+}
+
+/* Dezente Ambient-Animation nur für aktive Zustände */
+@keyframes pkAmbientGlow {
+  0%, 100% {
+    box-shadow: var(--fx-shadow-soft), 0 0 16px rgba(var(--accent), 0.14);
+  }
+  50% {
+    box-shadow: var(--fx-shadow-deep), 0 0 34px rgba(var(--accent), 0.34), 0 0 72px rgba(var(--accent), 0.12);
+  }
+}
+
+.playstatebutton-icon-played,
+.ratingbutton-icon-withrating,
+.buttonActive,
+.syncPlayIconCircle,
+.upNextDialog-countdownText {
+  text-shadow: 0 0 10px rgba(var(--accent), 0.60), 0 0 28px rgba(var(--accent), 0.24) !important;
+}
+
+.cardOverlayContainer:hover,
+.emby-checkbox:checked + span + .checkboxOutline,
+.itemSelectionPanel {
+  animation: pkAmbientGlow 2.8s ease-in-out infinite;
+}
+
+/* Mobile etwas leichter halten */
+@media all and (max-width: 50em) {
+  :root {
+    --fx-shadow-soft: 0 6px 18px rgba(0, 0, 0, 0.32);
+    --fx-shadow-deep: 0 12px 34px rgba(0, 0, 0, 0.46);
+    --fx-glow-soft: 0 0 12px rgba(var(--accent), 0.13);
+    --fx-glow-medium: 0 0 18px rgba(var(--accent), 0.22), 0 0 38px rgba(var(--accent), 0.10);
+    --fx-glow-strong: 0 0 24px rgba(var(--accent), 0.32), 0 0 54px rgba(var(--accent), 0.14);
+  }
+
+  .card:hover > .cardBox,
+  .homeLibraryButton:hover,
+  .raised:hover,
+  .fab:hover,
+  a[data-role="button"]:hover,
+  .detailButton:hover,
+  .paper-icon-button-light:hover,
+  .emby-tab-button:hover,
+  .listItemImageButton:hover {
+    transform: none;
+  }
+}
+
+/* Nutzer-/Systemeinstellung respektieren */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,46 @@
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/fixes.css');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/jf_font.css');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/base.css');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/accentlist.css');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/rounding_circlehover.css');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/smallercast.css');
+/*@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/episodes_grid.css');*/
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/episodes_compactlist.css');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/header_transparent.css');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/login_frame.css');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/fields_noborder.css');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/indicator_floating.css');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/dark.css');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/title_banner-logo.css');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/floating.css');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/hoverglow.css');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/glassy.css');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/effects_cinematic.css');
+
+
+/*Style backdrop*/
+.backdropImage {filter: blur(0px) saturate(100%) contrast(100%) brightness(100%);}
+
+/*Style PageSecondaryContainer*/
+.detailPageSecondaryContainer.padded-bottom-page {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+/*Login background*/
+#loginPage {background: url(https://philosophiedeluxe.github.io/my_homepage/Server_CSS/loginBG.jpg) !important;}
+
+/*Accent and roundingd*/
+:root {--accent: 98, 121, 205;}
+:root {--rounding: 12px;}
+
+/* Ersetze das Standard-Logo durch ein eigenes von einer URL */
+.pageTitleWithDefaultLogo,
+.pageTitleWithLogo {
+  background-image: url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/ServerLogo_long2x_noBG.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: block;  /* Sicherstellen, dass es sichtbar ist */
+  width: 250px;    /* Breite nach Wunsch anpassen */
+  height: 60px;    /* Höhe nach Wunsch anpassen */
+}
