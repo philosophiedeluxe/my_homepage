@@ -15,7 +15,7 @@
 @import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/floating.css');
 @import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/hoverglow.css');
 @import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/glassy.css');
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/effects_cinematic.css');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/effects_cinematic.css?v=3');
 
 
 /*Style backdrop*/
