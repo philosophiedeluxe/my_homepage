@@ -1,238 +1,260 @@
 /*
-  Cinematic Effects Layer
-  Zweck: Nur optische Erweiterung. Keine Grid-, Breiten-, Margin- oder Padding-Regeln.
-  Diese Datei sollte als letzter Import geladen werden.
+  Jellyfin Premium Effects Layer - safe rebuild
+  Zweck: Optische Aufwertung ohne Eingriff in Layout, Card-Breiten, Posterbilder oder Grid-Verhalten.
+  Wichtig: Diese Datei als letzte Import-Schicht laden.
+
+  Diese Version berührt keine Poster-/Vorschaubildcontainer direkt:
+  - keine Regeln auf .visualCardBox
+  - keine Regeln auf .cardImageContainer
+  - keine Regeln auf .cardImage
+  - keine Regeln auf img
+  - keine ::before/::after-Layer über Card-Bildern
 */
 
 :root {
-  --fx-panel-bg: rgba(5, 7, 12, 0.46);
-  --fx-panel-bg-hover: rgba(12, 15, 24, 0.58);
-  --fx-panel-border: rgba(255, 255, 255, 0.075);
-  --fx-panel-border-hover: rgba(var(--accent), 0.52);
-  --fx-shadow-soft: 0 8px 22px rgba(0, 0, 0, 0.32);
-  --fx-shadow-deep: 0 18px 48px rgba(0, 0, 0, 0.48);
-  --fx-glow-soft: 0 0 16px rgba(var(--accent), 0.16);
-  --fx-glow-medium: 0 0 24px rgba(var(--accent), 0.28), 0 0 54px rgba(var(--accent), 0.12);
-  --fx-glow-strong: 0 0 32px rgba(var(--accent), 0.42), 0 0 72px rgba(var(--accent), 0.18);
-  --fx-transition-fast: 160ms ease;
-  --fx-transition-medium: 240ms ease;
+  --pkfx-accent: var(--accent, 98, 121, 205);
+  --pkfx-radius: var(--rounding, 12px);
+
+  --pkfx-glass-bg: rgba(8, 10, 18, 0.48);
+  --pkfx-glass-bg-strong: rgba(8, 10, 18, 0.68);
+  --pkfx-glass-bg-hover: rgba(18, 22, 34, 0.74);
+  --pkfx-border: rgba(255, 255, 255, 0.075);
+  --pkfx-border-soft: rgba(255, 255, 255, 0.045);
+  --pkfx-border-accent: rgba(var(--pkfx-accent), 0.58);
+
+  --pkfx-shadow-panel: 0 14px 42px rgba(0, 0, 0, 0.42);
+  --pkfx-shadow-panel-deep: 0 24px 74px rgba(0, 0, 0, 0.58);
+  --pkfx-shadow-card: 0 10px 24px rgba(0, 0, 0, 0.28), 0 0 0 1px rgba(255, 255, 255, 0.035);
+  --pkfx-shadow-card-hover: 0 18px 42px rgba(0, 0, 0, 0.44), 0 0 0 1px rgba(var(--pkfx-accent), 0.36), 0 0 28px rgba(var(--pkfx-accent), 0.20);
+  --pkfx-glow-soft: 0 0 18px rgba(var(--pkfx-accent), 0.18);
+  --pkfx-glow-medium: 0 0 26px rgba(var(--pkfx-accent), 0.28), 0 0 56px rgba(var(--pkfx-accent), 0.12);
+  --pkfx-glow-strong: 0 0 34px rgba(var(--pkfx-accent), 0.42), 0 0 86px rgba(var(--pkfx-accent), 0.16);
+
+  --pkfx-time-fast: 150ms;
+  --pkfx-time-normal: 240ms;
+  --pkfx-ease: cubic-bezier(.2, .7, .2, 1);
 }
 
-/* Grundflächen: mehr Tiefe, ohne Layoutveränderung */
-.visualCardBox,
-.cardImageContainer,
-.cardContent,
-.paperList,
+/* Grundatmosphäre: nur Hintergrundebenen, keine Cards */
+.backgroundContainer,
+.backgroundContainer.withBackdrop {
+  background:
+    radial-gradient(circle at 18% 10%, rgba(var(--pkfx-accent), 0.11), transparent 34%),
+    radial-gradient(circle at 82% 4%, rgba(255, 255, 255, 0.045), transparent 30%),
+    linear-gradient(180deg, rgba(3, 4, 8, 0.18), rgba(0, 0, 0, 0.58)) !important;
+}
+
+.backdropImage {
+  filter: saturate(108%) contrast(104%) brightness(86%) !important;
+}
+
+.itemBackdrop::after {
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.30), rgba(0, 0, 0, 0.74)),
+    radial-gradient(circle at 30% 8%, rgba(var(--pkfx-accent), 0.16), transparent 42%) !important;
+}
+
+/* Glasflächen: Header, Footer, Drawer, Dialoge, Toasts */
+.skinHeader-withBackground,
+.appfooter,
+.mainDrawer,
 .dialog,
 .toast,
-.mainDrawer,
-.appfooter,
+.formDialogHeader,
+.formDialogFooter,
+.actionSheet,
+.selectionCommandsPanel,
+.paperList,
 .detailTable,
-.detailPageSecondaryContainer,
 .sessionNowPlayingInnerContent,
 .upNextContainer,
-.chapterThumb,
-.chapterThumbContainer,
-#itemDetailPage .listItem,
-.listItem:hover {
-  border: 1px solid var(--fx-panel-border) !important;
-  box-shadow: var(--fx-shadow-soft), var(--fx-glow-soft) !important;
-  transition:
-    background-color var(--fx-transition-medium),
-    border-color var(--fx-transition-medium),
-    box-shadow var(--fx-transition-medium),
-    filter var(--fx-transition-medium),
-    transform var(--fx-transition-medium) !important;
+.infoBanner {
+  background-color: var(--pkfx-glass-bg) !important;
+  border-color: var(--pkfx-border) !important;
+  box-shadow: var(--pkfx-shadow-panel), var(--pkfx-glow-soft) !important;
 }
 
-/* Glasflächen stärker ausbauen */
+.dialog,
+.toast,
+.actionSheet {
+  background-color: var(--pkfx-glass-bg-strong) !important;
+  box-shadow: var(--pkfx-shadow-panel-deep), var(--pkfx-glow-medium) !important;
+}
+
+.skinHeader-withBackground {
+  border-bottom: 1px solid var(--pkfx-border-soft) !important;
+  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.46), 0 0 42px rgba(var(--pkfx-accent), 0.10) !important;
+}
+
+.appfooter {
+  border-top: 1px solid var(--pkfx-border-soft) !important;
+  box-shadow: 0 -16px 44px rgba(0, 0, 0, 0.48), 0 0 42px rgba(var(--pkfx-accent), 0.11) !important;
+}
+
 @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
   .skinHeader-withBackground,
-  .css-fknfom,
-  .dialog,
-  .mainDrawer,
-  .toast,
   .appfooter,
-  .detailPageSecondaryContainer,
+  .mainDrawer,
+  .dialog,
+  .toast,
+  .formDialogHeader,
+  .formDialogFooter,
+  .actionSheet,
+  .selectionCommandsPanel,
   .paperList,
+  .detailTable,
   .sessionNowPlayingInnerContent,
   .upNextContainer,
-  .cardOverlayContainer,
-  .innerCardFooter,
-  .countIndicator,
-  .playedIndicator {
-    -webkit-backdrop-filter: blur(20px) saturate(145%) contrast(105%) !important;
-    backdrop-filter: blur(20px) saturate(145%) contrast(105%) !important;
-    background-color: var(--fx-panel-bg) !important;
+  .infoBanner {
+    -webkit-backdrop-filter: blur(18px) saturate(142%) contrast(106%) !important;
+    backdrop-filter: blur(18px) saturate(142%) contrast(106%) !important;
   }
 
-  .indicator,
-  .mediaSourceIndicator,
-  .itemProgressBar,
-  .backgroundProgress > div,
+  .cardOverlayContainer,
   .cardOverlayButtonIcon,
+  .innerCardFooter,
+  .countIndicator,
+  .playedIndicator,
+  .missingIndicator,
+  .unairedIndicator,
+  .mediaSourceIndicator,
+  .indicator,
   .chapterThumbTextContainer {
-    -webkit-backdrop-filter: blur(10px) saturate(130%) !important;
-    backdrop-filter: blur(10px) saturate(130%) !important;
+    -webkit-backdrop-filter: blur(10px) saturate(135%) !important;
+    backdrop-filter: blur(10px) saturate(135%) !important;
   }
 }
 
-/* Cards: hochwertiger Hover, kein Einfluss auf Grid-Breiten */
-.cardBox,
-.visualCardBox,
-.cardImageContainer,
-.cardOverlayContainer,
-.listItemImageButton,
-.homeLibraryButton,
-.raised,
-.fab,
-a[data-role="button"],
-.emby-tab-button,
-.paper-icon-button-light,
-.detailButton {
+/* Cards: nur die äußere Box bekommt Tiefe. Posterbilder bleiben unberührt. */
+.card > .cardBox {
+  outline: 1px solid rgba(255, 255, 255, 0.035) !important;
+  outline-offset: -1px !important;
+  box-shadow: var(--pkfx-shadow-card) !important;
   transition:
-    transform var(--fx-transition-medium),
-    filter var(--fx-transition-medium),
-    background-color var(--fx-transition-medium),
-    border-color var(--fx-transition-medium),
-    box-shadow var(--fx-transition-medium),
-    color var(--fx-transition-fast) !important;
+    transform var(--pkfx-time-normal) var(--pkfx-ease),
+    box-shadow var(--pkfx-time-normal) var(--pkfx-ease),
+    outline-color var(--pkfx-time-normal) var(--pkfx-ease),
+    filter var(--pkfx-time-normal) var(--pkfx-ease) !important;
 }
 
 .card:hover > .cardBox,
 .card:focus-within > .cardBox {
-  filter: saturate(108%) contrast(104%) brightness(104%);
+  outline-color: var(--pkfx-border-accent) !important;
+  box-shadow: var(--pkfx-shadow-card-hover) !important;
+  transform: translateY(-3px) scale(1.012) !important;
+  filter: saturate(106%) contrast(103%) brightness(103%) !important;
 }
 
-.card:hover .visualCardBox,
-.card:focus-within .visualCardBox,
-.card:hover .cardImageContainer,
-.card:focus-within .cardImageContainer,
-#itemDetailPage .listItem:hover,
-.paperList:hover,
-.homeLibraryButton:hover,
-.raised:hover,
-.fab:hover,
-a[data-role="button"]:hover {
-  border-color: var(--fx-panel-border-hover) !important;
-  box-shadow: var(--fx-shadow-deep), var(--fx-glow-medium) !important;
+/* Detailposter separat, ebenfalls ohne Eingriff in Bildcontainer */
+.detailImageContainer .card > .cardBox {
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.52), 0 0 0 1px rgba(255, 255, 255, 0.055), 0 0 26px rgba(var(--pkfx-accent), 0.12) !important;
 }
 
-.card:hover > .cardBox,
-.homeLibraryButton:hover,
-.raised:hover,
-.fab:hover,
-a[data-role="button"]:hover,
-.detailButton:hover,
-.paper-icon-button-light:hover,
-.emby-tab-button:hover,
-.listItemImageButton:hover {
-  transform: translateY(-2px);
+.detailImageContainer .card:hover > .cardBox,
+.detailImageContainer .card:focus-within > .cardBox {
+  box-shadow: 0 26px 68px rgba(0, 0, 0, 0.62), 0 0 0 1px rgba(var(--pkfx-accent), 0.44), 0 0 46px rgba(var(--pkfx-accent), 0.24) !important;
 }
 
-/* Lichtkante auf Poster/Boxen */
-.visualCardBox,
-.cardImageContainer,
-.cardOverlayContainer,
-.paperList,
-.dialog,
-.toast,
-#itemDetailPage .listItem,
-.sessionNowPlayingInnerContent,
-.upNextContainer {
-  position: relative;
-  overflow: hidden;
-}
-
-.visualCardBox::after,
-.cardImageContainer::after,
-.cardOverlayContainer::after,
-.paperList::after,
-.dialog::after,
-.toast::after,
-#itemDetailPage .listItem::after,
-.sessionNowPlayingInnerContent::after,
-.upNextContainer::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  border-radius: inherit;
-  opacity: 0;
-  background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.02) 34%, rgba(255, 255, 255, 0) 58%),
-    radial-gradient(circle at 50% 0%, rgba(var(--accent), 0.16), rgba(var(--accent), 0) 62%);
-  transition: opacity var(--fx-transition-medium) !important;
-  mix-blend-mode: screen;
-}
-
-.card:hover .visualCardBox::after,
-.card:focus-within .visualCardBox::after,
-.card:hover .cardImageContainer::after,
-.card:focus-within .cardImageContainer::after,
-.cardOverlayContainer:hover::after,
-.paperList:hover::after,
-.dialog:hover::after,
-.toast:hover::after,
-#itemDetailPage .listItem:hover::after,
-.sessionNowPlayingInnerContent:hover::after,
-.upNextContainer:hover::after {
-  opacity: 0.82;
-}
-
-/* Overlay und Aktionsflächen: stärkerer Akzent */
+/* Card-Overlays und Badges */
 .cardOverlayContainer,
 .innerCardFooter,
 .countIndicator,
 .playedIndicator,
-.mediaSourceIndicator,
 .missingIndicator,
-.unairedIndicator {
-  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.42), 0 0 18px rgba(var(--accent), 0.18) !important;
+.unairedIndicator,
+.mediaSourceIndicator,
+.indicator,
+.chapterThumbTextContainer {
+  background-color: rgba(7, 9, 15, 0.62) !important;
+  border: 1px solid rgba(255, 255, 255, 0.075) !important;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.42), 0 0 18px rgba(var(--pkfx-accent), 0.12) !important;
+  transition:
+    background-color var(--pkfx-time-normal) var(--pkfx-ease),
+    border-color var(--pkfx-time-normal) var(--pkfx-ease),
+    box-shadow var(--pkfx-time-normal) var(--pkfx-ease),
+    transform var(--pkfx-time-normal) var(--pkfx-ease) !important;
 }
 
 .cardOverlayContainer:hover,
+.card:focus-within .cardOverlayContainer {
+  background-color: rgba(11, 14, 24, 0.76) !important;
+  border-color: rgba(var(--pkfx-accent), 0.55) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.50), var(--pkfx-glow-medium) !important;
+}
+
+.cardOverlayButtonIcon,
+.detailButton,
+.paper-icon-button-light,
+.emby-tab-button,
+.button-flat,
+.raised,
+.fab,
+a[data-role="button"] {
+  transition:
+    transform var(--pkfx-time-fast) var(--pkfx-ease),
+    background-color var(--pkfx-time-normal) var(--pkfx-ease),
+    color var(--pkfx-time-fast) var(--pkfx-ease),
+    box-shadow var(--pkfx-time-normal) var(--pkfx-ease),
+    border-color var(--pkfx-time-normal) var(--pkfx-ease) !important;
+}
+
+.cardOverlayButtonIcon:hover,
 .detailButton:hover,
 .paper-icon-button-light:hover,
 .emby-tab-button:hover,
+.button-flat:hover,
+.raised:hover,
+.fab:hover,
+a[data-role="button"]:hover {
+  color: rgba(255, 255, 255, 0.96) !important;
+  background-color: rgba(var(--pkfx-accent), 0.18) !important;
+  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.38), var(--pkfx-glow-medium) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Listen, Navigation, Menüs */
+.listItem,
+.navMenuOption,
+.actionSheetMenuItem {
+  transition:
+    background-color var(--pkfx-time-normal) var(--pkfx-ease),
+    box-shadow var(--pkfx-time-normal) var(--pkfx-ease),
+    border-color var(--pkfx-time-normal) var(--pkfx-ease),
+    transform var(--pkfx-time-normal) var(--pkfx-ease) !important;
+}
+
+.listItem:hover,
 .navMenuOption:hover,
 .actionSheetMenuItem:hover {
-  background-color: var(--fx-panel-bg-hover) !important;
-  box-shadow: var(--fx-shadow-soft), var(--fx-glow-strong) !important;
+  background-color: rgba(var(--pkfx-accent), 0.13) !important;
+  box-shadow: inset 3px 0 0 rgba(var(--pkfx-accent), 0.48), 0 10px 28px rgba(0, 0, 0, 0.30), 0 0 22px rgba(var(--pkfx-accent), 0.12) !important;
 }
 
-/* Header/Footer mit mehr atmosphärischer Tiefe */
-.skinHeader-withBackground,
-.appfooter {
-  border-color: rgba(255, 255, 255, 0.06) !important;
-  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.42), 0 0 38px rgba(var(--accent), 0.10) !important;
+.navMenuOption-selected,
+.selectionCommandsPanel {
+  border-color: rgba(var(--pkfx-accent), 0.42) !important;
+  box-shadow: inset 3px 0 0 rgba(var(--pkfx-accent), 0.70), 0 0 28px rgba(var(--pkfx-accent), 0.16) !important;
 }
 
-.skinHeader-withBackground {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
-}
-
-.appfooter {
-  border-top: 1px solid rgba(255, 255, 255, 0.06) !important;
-}
-
-/* Detailseite: Logo, Poster, Ribbon */
+/* Detailseite */
 #itemDetailPage .detailLogo {
-  -webkit-filter: drop-shadow(0 0 16px rgba(0, 0, 0, 0.78)) drop-shadow(0 0 22px rgba(var(--accent), 0.24));
-  filter: drop-shadow(0 0 16px rgba(0, 0, 0, 0.78)) drop-shadow(0 0 22px rgba(var(--accent), 0.24));
+  -webkit-filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.78)) drop-shadow(0 0 22px rgba(var(--pkfx-accent), 0.24)) !important;
+  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.78)) drop-shadow(0 0 22px rgba(var(--pkfx-accent), 0.24)) !important;
 }
 
 .layout-desktop .detailRibbon,
 .detailPagePrimaryContainer,
 .detailPageSecondaryContainer {
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035), 0 -16px 48px rgba(0, 0, 0, 0.28) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035), 0 -18px 54px rgba(0, 0, 0, 0.34) !important;
 }
 
-.detailImageContainer .card:hover .cardBox {
-  filter: saturate(110%) contrast(105%) brightness(105%) drop-shadow(0 0 18px rgba(var(--accent), 0.22));
+.detailPageSecondaryContainer.padded-bottom-page {
+  background:
+    linear-gradient(180deg, rgba(7, 8, 14, 0.72), rgba(0, 0, 0, 0.86)),
+    radial-gradient(circle at 18% 0%, rgba(var(--pkfx-accent), 0.10), transparent 46%) !important;
 }
 
-/* Fortschritt, Slider, Spinner */
+/* Fortschritt und Player */
 .itemProgressBarForeground,
 .playbackProgress > div,
 .transcodingProgress > div,
@@ -241,64 +263,56 @@ a[data-role="button"]:hover,
 .mdl-slider-background-lower,
 progress::-webkit-progress-value,
 progress::-moz-progress-bar {
-  box-shadow: 0 0 14px rgba(var(--accent), 0.50), 0 0 32px rgba(var(--accent), 0.18) !important;
+  box-shadow: 0 0 14px rgba(var(--pkfx-accent), 0.48), 0 0 36px rgba(var(--pkfx-accent), 0.18) !important;
 }
 
 .itemProgressBar,
 .taskProgressOuter,
-progress {
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.055), 0 0 14px rgba(0, 0, 0, 0.35) !important;
+progress,
+.mdl-slider-background-flex {
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.055), 0 0 16px rgba(0, 0, 0, 0.36) !important;
 }
 
-/* Eingabefelder und Fokuszustände */
+.nowPlayingPageImage,
+.osdPoster,
+.chapterThumb,
+.chapterThumbContainer,
+.upNextDialog-poster-img {
+  box-shadow: 0 16px 42px rgba(0, 0, 0, 0.56), 0 0 28px rgba(var(--pkfx-accent), 0.12) !important;
+}
+
+/* Formulare */
 .emby-input,
 .emby-textarea,
 .emby-select-withcolor,
 .checkboxOutline,
+.multiSelectCheckboxOutline,
 .itemSelectionPanel {
-  background-color: rgba(0, 0, 0, 0.34) !important;
-  border-color: rgba(255, 255, 255, 0.075) !important;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035), 0 8px 20px rgba(0, 0, 0, 0.22) !important;
-  transition: border-color var(--fx-transition-medium), box-shadow var(--fx-transition-medium), background-color var(--fx-transition-medium) !important;
+  background-color: rgba(5, 7, 12, 0.52) !important;
+  border-color: rgba(255, 255, 255, 0.085) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035), 0 8px 22px rgba(0, 0, 0, 0.26) !important;
+  transition:
+    background-color var(--pkfx-time-normal) var(--pkfx-ease),
+    border-color var(--pkfx-time-normal) var(--pkfx-ease),
+    box-shadow var(--pkfx-time-normal) var(--pkfx-ease) !important;
 }
 
 .emby-input:focus,
 .emby-textarea:focus,
 .emby-select-withcolor:focus,
-.itemSelectionPanel,
-.emby-checkbox:checked + span + .checkboxOutline {
-  border-color: rgba(var(--accent), 0.65) !important;
-  box-shadow: 0 0 0 1px rgba(var(--accent), 0.18), var(--fx-glow-medium) !important;
+.emby-checkbox:checked + span + .checkboxOutline,
+.itemSelectionPanel {
+  border-color: rgba(var(--pkfx-accent), 0.62) !important;
+  box-shadow: 0 0 0 1px rgba(var(--pkfx-accent), 0.22), var(--pkfx-glow-medium) !important;
 }
 
-/* Listen und Menüelemente */
-.listItem:hover,
-.navMenuOption:hover,
-.actionSheetMenuItem:hover,
-.css-17c09up:hover {
-  background-color: rgba(var(--accent), 0.16) !important;
-}
-
-.navMenuOption-selected,
-.css-17c09up.Mui-selected,
-.selectionCommandsPanel {
-  box-shadow: inset 3px 0 0 rgba(var(--accent), 0.72), 0 0 24px rgba(var(--accent), 0.12) !important;
-}
-
-/* Dialoge/Toasts deutlicher vom Hintergrund lösen */
-.dialog,
-.toast {
-  background-color: rgba(8, 10, 16, 0.72) !important;
-  box-shadow: 0 24px 76px rgba(0, 0, 0, 0.62), var(--fx-glow-medium) !important;
-}
-
-/* Dezente Ambient-Animation nur für aktive Zustände */
-@keyframes pkAmbientGlow {
+/* Aktive Zustände mit dezenter Animation */
+@keyframes pkfxPulseGlow {
   0%, 100% {
-    box-shadow: var(--fx-shadow-soft), 0 0 16px rgba(var(--accent), 0.14);
+    box-shadow: 0 0 14px rgba(var(--pkfx-accent), 0.22), 0 0 34px rgba(var(--pkfx-accent), 0.08);
   }
   50% {
-    box-shadow: var(--fx-shadow-deep), 0 0 34px rgba(var(--accent), 0.34), 0 0 72px rgba(var(--accent), 0.12);
+    box-shadow: 0 0 28px rgba(var(--pkfx-accent), 0.44), 0 0 68px rgba(var(--pkfx-accent), 0.16);
   }
 }
 
@@ -306,46 +320,83 @@ progress {
 .ratingbutton-icon-withrating,
 .buttonActive,
 .syncPlayIconCircle,
-.upNextDialog-countdownText {
-  text-shadow: 0 0 10px rgba(var(--accent), 0.60), 0 0 28px rgba(var(--accent), 0.24) !important;
+.upNextDialog-countdownText,
+.selectLabelFocused,
+.inputLabelFocused,
+.textareaLabelFocused {
+  text-shadow: 0 0 12px rgba(var(--pkfx-accent), 0.58), 0 0 30px rgba(var(--pkfx-accent), 0.22) !important;
 }
 
 .cardOverlayContainer:hover,
 .emby-checkbox:checked + span + .checkboxOutline,
-.itemSelectionPanel {
-  animation: pkAmbientGlow 2.8s ease-in-out infinite;
+.buttonActive {
+  animation: pkfxPulseGlow 3.4s ease-in-out infinite;
 }
 
-/* Mobile etwas leichter halten */
+/* Mobile/App: weniger Transform und Blur-Last, keine Layoutänderung */
 @media all and (max-width: 50em) {
   :root {
-    --fx-shadow-soft: 0 6px 18px rgba(0, 0, 0, 0.32);
-    --fx-shadow-deep: 0 12px 34px rgba(0, 0, 0, 0.46);
-    --fx-glow-soft: 0 0 12px rgba(var(--accent), 0.13);
-    --fx-glow-medium: 0 0 18px rgba(var(--accent), 0.22), 0 0 38px rgba(var(--accent), 0.10);
-    --fx-glow-strong: 0 0 24px rgba(var(--accent), 0.32), 0 0 54px rgba(var(--accent), 0.14);
+    --pkfx-shadow-panel: 0 10px 30px rgba(0, 0, 0, 0.42);
+    --pkfx-shadow-panel-deep: 0 16px 48px rgba(0, 0, 0, 0.56);
+    --pkfx-shadow-card: 0 8px 18px rgba(0, 0, 0, 0.30), 0 0 0 1px rgba(255, 255, 255, 0.03);
+    --pkfx-shadow-card-hover: 0 12px 28px rgba(0, 0, 0, 0.42), 0 0 0 1px rgba(var(--pkfx-accent), 0.32), 0 0 22px rgba(var(--pkfx-accent), 0.16);
   }
 
   .card:hover > .cardBox,
-  .homeLibraryButton:hover,
-  .raised:hover,
-  .fab:hover,
-  a[data-role="button"]:hover,
+  .card:focus-within > .cardBox,
+  .cardOverlayButtonIcon:hover,
   .detailButton:hover,
   .paper-icon-button-light:hover,
   .emby-tab-button:hover,
-  .listItemImageButton:hover {
-    transform: none;
+  .button-flat:hover,
+  .raised:hover,
+  .fab:hover,
+  a[data-role="button"]:hover {
+    transform: none !important;
+  }
+
+  @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .skinHeader-withBackground,
+    .appfooter,
+    .mainDrawer,
+    .dialog,
+    .toast,
+    .formDialogHeader,
+    .formDialogFooter,
+    .actionSheet,
+    .selectionCommandsPanel,
+    .paperList,
+    .detailTable,
+    .sessionNowPlayingInnerContent,
+    .upNextContainer,
+    .infoBanner {
+      -webkit-backdrop-filter: blur(12px) saturate(128%) !important;
+      backdrop-filter: blur(12px) saturate(128%) !important;
+    }
   }
 }
 
-/* Nutzer-/Systemeinstellung respektieren */
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  .card > .cardBox,
+  .cardOverlayContainer,
+  .cardOverlayButtonIcon,
+  .detailButton,
+  .paper-icon-button-light,
+  .emby-tab-button,
+  .button-flat,
+  .raised,
+  .fab,
+  a[data-role="button"],
+  .listItem,
+  .navMenuOption,
+  .actionSheetMenuItem,
+  .emby-input,
+  .emby-textarea,
+  .emby-select-withcolor,
+  .checkboxOutline,
+  .multiSelectCheckboxOutline,
+  .itemSelectionPanel {
     animation: none !important;
     transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
   }
 }
