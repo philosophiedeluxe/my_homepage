@@ -38,35 +38,47 @@
 }
 
 /*Accommodate ultrawide aspect ratios
-  PK 2026-06-03:
-  Die alte Abstimmung hat den Detailbereich ab ca. 1.98:1 zu weit nach rechts geschoben.
-  Ursache war ein rein viewport-basierter linker Abstand von 28.45vw bzw. 23.45vw.
-  Die neue Abstimmung richtet den Inhalt am Poster aus: Posterbreite + linker Jellyfin-Grundabstand + definierter Abstand.
-  Keine Transform-Regel, keine Änderung an vertikalen Abständen, keine Änderung am dynamischen Verhalten.
+  PK 2026-06-03 v6:
+  Der alte Ansatz war noch zu stark viewport-basiert. Bei breiten Fenstern wuchs der linke Abstand weiter mit
+  und der Detailinhalt wanderte sichtbar nach rechts.
+  Neue Abstimmung: Posterbreite und Inhaltsversatz werden begrenzt. Dadurch bleibt die Detailseite stabiler,
+  ohne das normale Card-Grid oder die vertikalen Abstände anzufassen.
 */
 @media (min-aspect-ratio: 1.98/1) {
+  .layout-desktop #itemDetailPage {
+    --pk-detail-poster-width: clamp(13rem, 18vw, 17rem);
+    --pk-detail-content-left: calc(var(--pk-detail-poster-width) + clamp(4rem, 5vw, 6rem));
+  }
+
   .layout-desktop #itemDetailPage .detailImageContainer .card {
-    width: 21vw !important;
+    width: var(--pk-detail-poster-width) !important;
+    max-width: var(--pk-detail-poster-width) !important;
   }
 
   .layout-desktop #itemDetailPage .detailRibbon.padded-left,
   .layout-desktop #itemDetailPage .detailPagePrimaryContainer,
   .layout-desktop #itemDetailPage .detailPagePrimaryContent,
   .layout-desktop #itemDetailPage .detailPageContent {
-    padding-left: calc(24.3vw + 2rem) !important;
+    padding-left: var(--pk-detail-content-left) !important;
   }
 }
 
 @media (min-aspect-ratio: 2.7/1) {
+  .layout-desktop #itemDetailPage {
+    --pk-detail-poster-width: clamp(11.5rem, 12.5vw, 15.5rem);
+    --pk-detail-content-left: calc(var(--pk-detail-poster-width) + clamp(4rem, 4.2vw, 6.5rem));
+  }
+
   .layout-desktop #itemDetailPage .detailImageContainer .card {
-    width: 16vw !important;
+    width: var(--pk-detail-poster-width) !important;
+    max-width: var(--pk-detail-poster-width) !important;
   }
 
   .layout-desktop #itemDetailPage .detailRibbon.padded-left,
   .layout-desktop #itemDetailPage .detailPagePrimaryContainer,
   .layout-desktop #itemDetailPage .detailPagePrimaryContent,
   .layout-desktop #itemDetailPage .detailPageContent {
-    padding-left: calc(19.3vw + 2rem) !important;
+    padding-left: var(--pk-detail-content-left) !important;
   }
 }
 

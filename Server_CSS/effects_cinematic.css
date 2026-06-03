@@ -3,7 +3,7 @@
   Zweck: Optische Aufwertung ohne Eingriff in Layout, Card-Breiten, Posterbilder oder Grid-Verhalten.
   Wichtig: Diese Datei als letzte Import-Schicht laden.
 
-  Version v5:
+  Version v6:
   - keine dunkle Dauerfläche mehr auf .cardOverlayContainer
   - Poster-/Vorschaubildcontainer werden explizit geschützt
   - Effekte bleiben auf äußeren Hüllen, Header, Panels, Dialogen und aktiven UI-Elementen
@@ -13,6 +13,8 @@
   --pkfx-accent: var(--accent, 98, 121, 205);
   --pkfx-radius: var(--rounding, 12px);
   --pkfx-card-radius: var(--rounding, 12px);
+  --pkfx-hover-radius: calc(var(--rounding, 12px) + 10px);
+  --pkfx-pill-radius: 999px;
 
   --pkfx-glass-bg: rgba(8, 10, 18, 0.48);
   --pkfx-glass-bg-strong: rgba(8, 10, 18, 0.68);
@@ -234,6 +236,52 @@
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.50), var(--pkfx-glow-medium) !important;
 }
 
+
+/* Runde Hover-/Aktivflächen: Jellyfin setzt mehrere Hover-Hintergründe rechteckig.
+   Diese Schicht rundet nur die sichtbaren Effektflächen, ohne Maße oder Layout zu ändern. */
+.paper-icon-button-light,
+.emby-tab-button,
+.button-flat,
+.raised,
+.fab,
+a[data-role="button"],
+.navMenuOption,
+.actionSheetMenuItem,
+.listItem,
+.cardOverlayButtonIcon,
+.innerCardFooter,
+.selectionCommandsPanel,
+.headerTabs.sectionTabs .emby-tab-button {
+  border-radius: var(--pkfx-hover-radius) !important;
+  background-clip: padding-box !important;
+}
+
+.detailButton,
+.mainDetailButtons .button-flat,
+.mainDetailButtons .paper-icon-button-light,
+.cardOverlayButtonIcon {
+  border-radius: var(--pkfx-pill-radius) !important;
+}
+
+.headerTabs.sectionTabs .emby-tab-button {
+  margin-inline: .18em !important;
+  overflow: hidden !important;
+}
+
+.headerTabs.sectionTabs .emby-tab-button:hover,
+.headerTabs.sectionTabs .emby-tab-button:focus,
+.headerTabs.sectionTabs .emby-tab-button:focus-visible,
+.headerTabs.sectionTabs .emby-tab-button.emby-tab-button-active,
+.headerTabs.sectionTabs .emby-tab-button-active,
+.emby-tab-button[aria-selected="true"] {
+  border-radius: var(--pkfx-hover-radius) !important;
+  background-color: rgba(var(--pkfx-accent), 0.16) !important;
+  box-shadow:
+    inset 0 0 0 1px rgba(var(--pkfx-accent), 0.24),
+    0 8px 28px rgba(0, 0, 0, 0.26),
+    0 0 28px rgba(var(--pkfx-accent), 0.14) !important;
+}
+
 .cardOverlayButtonIcon,
 .detailButton,
 .paper-icon-button-light,
@@ -258,6 +306,7 @@ a[data-role="button"] {
 .raised:hover,
 .fab:hover,
 a[data-role="button"]:hover {
+  border-radius: var(--pkfx-hover-radius) !important;
   color: rgba(255, 255, 255, 0.96) !important;
   background-color: rgba(var(--pkfx-accent), 0.18) !important;
   box-shadow: 0 8px 26px rgba(0, 0, 0, 0.38), var(--pkfx-glow-medium) !important;
@@ -278,12 +327,14 @@ a[data-role="button"]:hover {
 .listItem:hover,
 .navMenuOption:hover,
 .actionSheetMenuItem:hover {
+  border-radius: var(--pkfx-hover-radius) !important;
   background-color: rgba(var(--pkfx-accent), 0.13) !important;
   box-shadow: inset 3px 0 0 rgba(var(--pkfx-accent), 0.48), 0 10px 28px rgba(0, 0, 0, 0.30), 0 0 22px rgba(var(--pkfx-accent), 0.12) !important;
 }
 
 .navMenuOption-selected,
 .selectionCommandsPanel {
+  border-radius: var(--pkfx-hover-radius) !important;
   border-color: rgba(var(--pkfx-accent), 0.42) !important;
   box-shadow: inset 3px 0 0 rgba(var(--pkfx-accent), 0.70), 0 0 28px rgba(var(--pkfx-accent), 0.16) !important;
 }
@@ -405,6 +456,23 @@ progress,
 .visualCardBox::after {
   content: none !important;
   display: none !important;
+}
+
+
+/* Detailseiten-Hoverflächen abrunden */
+.layout-desktop #itemDetailPage .detailRibbon .button-flat,
+.layout-desktop #itemDetailPage .detailRibbon .paper-icon-button-light,
+.layout-desktop #itemDetailPage .detailRibbon .detailButton,
+.layout-desktop #itemDetailPage .mainDetailButtons .button-flat,
+.layout-desktop #itemDetailPage .mainDetailButtons .paper-icon-button-light {
+  border-radius: var(--pkfx-pill-radius) !important;
+}
+
+.layout-desktop #itemDetailPage .detailRibbon .button-flat:hover,
+.layout-desktop #itemDetailPage .detailRibbon .paper-icon-button-light:hover,
+.layout-desktop #itemDetailPage .mainDetailButtons .button-flat:hover,
+.layout-desktop #itemDetailPage .mainDetailButtons .paper-icon-button-light:hover {
+  border-radius: var(--pkfx-pill-radius) !important;
 }
 
 /* Mobile/App: weniger Transform und Blur-Last, keine Layoutänderung */
