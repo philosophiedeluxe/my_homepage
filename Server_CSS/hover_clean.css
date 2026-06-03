@@ -1,6 +1,6 @@
 /*
   Jellyfin Clean Hover Layer
-  Stand: v14
+  Stand: v15
   Zweck: sichtbare Reduzierung der Tab-/Hover-Flächen und etwas mehr Luft unter der oberen Leiste.
   Wichtig: Diese Datei muss nach effects_cinematic.css geladen werden.
   Kein Card-Grid, keine Detailseiten-Positionierung, keine fixes.css.
@@ -285,7 +285,7 @@ html body.layout-desktop .sectionTitle.padded-left {
 }
 
 
-/* v14 finaler Abstandsschutz für die erste Home-Section.
+/* v15 finaler Abstandsschutz für die erste Home-Section.
    Dieser Block steht absichtlich am Dateiende, damit ältere Regeln aus base/header_transparent nicht wieder gewinnen. */
 html body.layout-desktop #indexPage .sectionTitle.sectionTitle-cards.padded-left,
 html body.layout-desktop #indexPage h2.sectionTitle.sectionTitle-cards.padded-left {
