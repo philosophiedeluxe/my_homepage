@@ -324,11 +324,17 @@ main > article.section {
   margin: 32px 0 32px;
   border-radius: 999px;
   overflow: hidden;
-  background: transparent;
 }
 
 .hero-signal-line::after {
-  display: none;
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--violet), var(--accent-2));
+  opacity: 0.32;
+  filter: blur(10px);
+  pointer-events: none;
 }
 
 .hero-signal-line::before {
