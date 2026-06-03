@@ -1,27 +1,30 @@
 /*
   Jellyfin Clean Hover Layer
-  Stand: v12
-  Zweck: Reduziert die vorher sehr sichtbaren Glow-/Block-Hover-Effekte auf ein ruhiges, cleanes UI.
+  Stand: v13
+  Zweck: sichtbare Reduzierung der Tab-/Hover-Flächen und etwas mehr Luft unter der oberen Leiste.
   Wichtig: Diese Datei muss nach effects_cinematic.css geladen werden.
-  Keine Layoutänderungen: keine Breiten, Höhen, Abstände oder Detailseiten-Positionierung.
+  Kein Card-Grid, keine Detailseiten-Positionierung, keine fixes.css.
 */
 
 :root {
   --pkhover-radius: calc(var(--rounding, 12px) + 4px);
   --pkhover-pill: 999px;
-  --pkhover-bg-soft: rgba(255, 255, 255, 0.035);
-  --pkhover-tab-inset-y: 9%;
-  --pkhover-bg: rgba(255, 255, 255, 0.055);
+  --pkhover-bg-soft: rgba(255, 255, 255, 0.032);
+  --pkhover-bg: rgba(255, 255, 255, 0.050);
   --pkhover-bg-active: rgba(var(--accent), 0.095);
-  --pkhover-border: rgba(255, 255, 255, 0.095);
-  --pkhover-border-active: rgba(var(--accent), 0.26);
+  --pkhover-border: rgba(255, 255, 255, 0.090);
+  --pkhover-border-active: rgba(var(--accent), 0.22);
   --pkhover-shadow-soft: 0 8px 22px rgba(0, 0, 0, 0.22);
   --pkhover-shadow-card: 0 14px 32px rgba(0, 0, 0, 0.38), 0 0 0 1px rgba(255, 255, 255, 0.10);
   --pkhover-time: 180ms;
   --pkhover-ease: cubic-bezier(.2, .7, .2, 1);
+
+  /* Der sichtbare Tab-Hintergrund ist jetzt deutlich niedriger als die Klickfläche. */
+  --pkhover-tab-inset-y: 11%;
+  --pkhover-tab-inset-x: 1px;
 }
 
-/* Alte starke Glow-Hover aus hoverglow.css neutralisieren */
+/* Alte starke Glow-Hover aus hoverglow.css und effects_cinematic.css neutralisieren */
 .cardOverlayContainer:hover,
 .raised.homeLibraryButton:hover {
   border-color: var(--pkhover-border) !important;
@@ -33,21 +36,21 @@
   box-shadow: 12px 0 36px rgba(0, 0, 0, 0.34) !important;
 }
 
-/* Top-Tabs: Touch-Ziel bleibt gleich, die sichtbare Hover-/Aktivfläche wird separat als flacherer Layer gezeichnet. */
-.headerTabs.sectionTabs .emby-tab-button,
-.headerTabs.sectionTabs .emby-tab-button-active,
-.emby-tab-button,
-.emby-tab-button-active,
-.emby-tab-button[aria-selected="true"] {
+/*
+  Top-Tabs: Die Klickfläche bleibt, aber die sichtbare Fläche wird nicht mehr auf dem Button selbst gezeichnet.
+  Dadurch wird der aktive/hovernde Block sichtbar flacher und wirkt weniger wuchtig.
+*/
+html body .headerTabs.sectionTabs .emby-tab-button,
+html body .emby-tab-button {
   position: relative !important;
   isolation: isolate !important;
   border-radius: var(--pkhover-radius) !important;
   background: transparent !important;
   background-color: transparent !important;
   background-image: none !important;
-  box-shadow: none !important;
-  border: 0 !important;
+  border: 1px solid transparent !important;
   outline: 0 !important;
+  box-shadow: none !important;
   overflow: visible !important;
   transform: none !important;
   transition:
@@ -55,21 +58,18 @@
     opacity var(--pkhover-time) var(--pkhover-ease) !important;
 }
 
-.headerTabs.sectionTabs .emby-tab-button::before,
-.emby-tab-button::before,
-.headerTabs.sectionTabs .emby-tab-button-active::before,
-.emby-tab-button-active::before,
-.emby-tab-button[aria-selected="true"]::before {
+html body .headerTabs.sectionTabs .emby-tab-button::before,
+html body .emby-tab-button::before {
   content: "" !important;
   position: absolute !important;
-  left: .18rem !important;
-  right: .18rem !important;
+  left: var(--pkhover-tab-inset-x) !important;
+  right: var(--pkhover-tab-inset-x) !important;
   top: var(--pkhover-tab-inset-y) !important;
   bottom: var(--pkhover-tab-inset-y) !important;
-  z-index: -1 !important;
+  z-index: 0 !important;
   border-radius: calc(var(--pkhover-radius) - 3px) !important;
-  border: 1px solid transparent !important;
   background: transparent !important;
+  border: 1px solid transparent !important;
   box-shadow: none !important;
   pointer-events: none !important;
   transition:
@@ -78,59 +78,70 @@
     box-shadow var(--pkhover-time) var(--pkhover-ease) !important;
 }
 
-.headerTabs.sectionTabs .emby-tab-button:hover,
-.emby-tab-button:hover,
-.headerTabs.sectionTabs .emby-tab-button:focus,
-.emby-tab-button:focus,
-.headerTabs.sectionTabs .emby-tab-button:focus-visible,
-.emby-tab-button:focus-visible,
-.headerTabs.sectionTabs .emby-tab-button.emby-tab-button-active,
-.headerTabs.sectionTabs .emby-tab-button-active,
-.emby-tab-button-active,
-.emby-tab-button[aria-selected="true"] {
+/* Text und Jellyfin-interne Inhalte über den reduzierten Layer legen. */
+html body .emby-tab-button > * {
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+/* Vollflächige Hintergründe aus vorherigen Dateien konsequent entfernen. */
+html body .headerTabs.sectionTabs .emby-tab-button:hover,
+html body .headerTabs.sectionTabs .emby-tab-button:focus,
+html body .headerTabs.sectionTabs .emby-tab-button:focus-visible,
+html body .headerTabs.sectionTabs .emby-tab-button.emby-tab-button-active,
+html body .headerTabs.sectionTabs .emby-tab-button-active,
+html body .emby-tab-button:hover,
+html body .emby-tab-button:focus,
+html body .emby-tab-button:focus-visible,
+html body .emby-tab-button.emby-tab-button-active,
+html body .emby-tab-button.buttonActive,
+html body .emby-tab-button[aria-selected="true"] {
   background: transparent !important;
   background-color: transparent !important;
   background-image: none !important;
   border-color: transparent !important;
-  box-shadow: none !important;
-  transform: none !important;
   outline: 0 !important;
+  box-shadow: none !important;
+  filter: none !important;
+  transform: none !important;
 }
 
-.headerTabs.sectionTabs .emby-tab-button:hover::before,
-.emby-tab-button:hover::before,
-.headerTabs.sectionTabs .emby-tab-button:focus-visible::before,
-.emby-tab-button:focus-visible::before {
-  background-color: rgba(255, 255, 255, 0.032) !important;
+html body .headerTabs.sectionTabs .emby-tab-button:hover::before,
+html body .emby-tab-button:hover::before,
+html body .emby-tab-button:focus-visible::before {
+  background-color: var(--pkhover-bg-soft) !important;
   border-color: rgba(255, 255, 255, 0.055) !important;
 }
 
-.headerTabs.sectionTabs .emby-tab-button.emby-tab-button-active::before,
-.headerTabs.sectionTabs .emby-tab-button-active::before,
-.emby-tab-button-active::before,
-.emby-tab-button[aria-selected="true"]::before {
-  background-color: rgba(var(--accent), 0.078) !important;
+html body .headerTabs.sectionTabs .emby-tab-button.emby-tab-button-active::before,
+html body .headerTabs.sectionTabs .emby-tab-button-active::before,
+html body .emby-tab-button.emby-tab-button-active::before,
+html body .emby-tab-button.buttonActive::before,
+html body .emby-tab-button[aria-selected="true"]::before {
+  background-color: var(--pkhover-bg-active) !important;
   border-color: rgba(var(--accent), 0.16) !important;
+  box-shadow: inset 0 0 0 1px rgba(var(--accent), 0.08) !important;
 }
 
-.headerTabs.sectionTabs .emby-tab-button.emby-tab-button-active::after,
-.headerTabs.sectionTabs .emby-tab-button-active::after,
-.emby-tab-button-active::after,
-.emby-tab-button[aria-selected="true"]::after {
+html body .headerTabs.sectionTabs .emby-tab-button.emby-tab-button-active::after,
+html body .headerTabs.sectionTabs .emby-tab-button-active::after,
+html body .emby-tab-button.emby-tab-button-active::after,
+html body .emby-tab-button.buttonActive::after,
+html body .emby-tab-button[aria-selected="true"]::after {
   content: "" !important;
   position: absolute !important;
-  left: 34% !important;
-  right: 34% !important;
+  left: 31% !important;
+  right: 31% !important;
   bottom: calc(var(--pkhover-tab-inset-y) + .16em) !important;
   height: 2px !important;
-  z-index: 1 !important;
+  z-index: 3 !important;
   border-radius: var(--pkhover-pill) !important;
-  background-color: rgba(var(--accent), 0.62) !important;
+  background-color: rgba(var(--accent), 0.68) !important;
   box-shadow: none !important;
   pointer-events: none !important;
 }
 
-/* Buttons: ruhiger Hover ohne Glow-Block */
+/* Buttons: ruhiger Hover ohne Neon-Block */
 .cardOverlayButtonIcon,
 .detailButton,
 .paper-icon-button-light,
@@ -188,30 +199,21 @@ a[data-role="button"]:hover {
   box-shadow: none !important;
 }
 
-
-/* Abschnittstitel: sichtbarer Abstand zur oberen Leiste.
-   Padding statt nur Margin, weil Jellyfin die Margins bei einigen Sections zusammenfallen lässt. */
-.sectionTitle.sectionTitle-cards,
-h2.sectionTitle.sectionTitle-cards,
-.sectionTitle.padded-left,
-h2.sectionTitle.sectionTitle-cards.padded-left {
-  margin-top: .38rem !important;
-  padding-top: .32rem !important;
+/* Abschnittstitel: sichtbar mehr Luft zur oberen Leiste. */
+.layout-desktop h2.sectionTitle.sectionTitle-cards.padded-left,
+.layout-desktop .sectionTitle.sectionTitle-cards.padded-left,
+.layout-desktop .sectionTitle.padded-left {
+  padding-top: .48em !important;
+  margin-top: .18em !important;
 }
 
-.homePage .sectionTitle.sectionTitle-cards,
-.homePage h2.sectionTitle.sectionTitle-cards,
-#homePage .sectionTitle.sectionTitle-cards,
-#homePage h2.sectionTitle.sectionTitle-cards {
-  margin-top: .46rem !important;
-  padding-top: .36rem !important;
-}
-
-.homePage .verticalSection:first-child,
-#homePage .verticalSection:first-child,
-.homePage .homeSection:first-child,
-#homePage .homeSection:first-child {
-  padding-top: .26rem !important;
+/* In sehr kompakten App-/Mobilbreiten weniger zusätzlicher Abstand. */
+@media all and (max-width: 50em) {
+  h2.sectionTitle.sectionTitle-cards.padded-left,
+  .sectionTitle.sectionTitle-cards.padded-left,
+  .sectionTitle.padded-left {
+    padding-top: .25em !important;
+  }
 }
 
 /* Cards: weniger Neon, weiter hochwertig */
