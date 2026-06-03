@@ -3,7 +3,7 @@
   Zweck: Optische Aufwertung ohne Eingriff in Layout, Card-Breiten, Posterbilder oder Grid-Verhalten.
   Wichtig: Diese Datei als letzte Import-Schicht laden.
 
-  Version v3:
+  Version v4:
   - keine dunkle Dauerfläche mehr auf .cardOverlayContainer
   - Poster-/Vorschaubildcontainer werden explizit geschützt
   - Effekte bleiben auf äußeren Hüllen, Header, Panels, Dialogen und aktiven UI-Elementen
@@ -12,6 +12,7 @@
 :root {
   --pkfx-accent: var(--accent, 98, 121, 205);
   --pkfx-radius: var(--rounding, 12px);
+  --pkfx-card-radius: var(--rounding, 12px);
 
   --pkfx-glass-bg: rgba(8, 10, 18, 0.48);
   --pkfx-glass-bg-strong: rgba(8, 10, 18, 0.68);
@@ -122,22 +123,38 @@
   }
 }
 
-/* Cards: Tiefe nur über die äußere Card-Hülle. Posterbilder und Bildcontainer bleiben frei. */
+/* Cards: Tiefe nur über die äußere Card-Hülle. Posterbilder und Bildcontainer bleiben frei.
+   Wichtig: kein outline verwenden, da outline die Rundungen ignoriert und eckige Rahmen erzeugt. */
 .card > .cardBox {
-  outline: 1px solid rgba(255, 255, 255, 0.035) !important;
-  outline-offset: -1px !important;
-  box-shadow: var(--pkfx-shadow-card) !important;
+  border-radius: var(--pkfx-card-radius) !important;
+  box-shadow:
+    0 10px 24px rgba(0, 0, 0, 0.28),
+    0 0 0 1px rgba(255, 255, 255, 0.035),
+    inset 0 1px 0 rgba(255, 255, 255, 0.02) !important;
   transition:
     transform var(--pkfx-time-normal) var(--pkfx-ease),
-    box-shadow var(--pkfx-time-normal) var(--pkfx-ease),
-    outline-color var(--pkfx-time-normal) var(--pkfx-ease) !important;
+    box-shadow var(--pkfx-time-normal) var(--pkfx-ease) !important;
 }
 
 .card:hover > .cardBox,
 .card:focus-within > .cardBox {
-  outline-color: var(--pkfx-border-accent) !important;
-  box-shadow: var(--pkfx-shadow-card-hover) !important;
+  box-shadow:
+    0 18px 42px rgba(0, 0, 0, 0.44),
+    0 0 0 1px rgba(var(--pkfx-accent), 0.36),
+    0 0 28px rgba(var(--pkfx-accent), 0.20),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03) !important;
   transform: translateY(-3px) scale(1.012) !important;
+}
+
+
+
+/* Kartenrahmen konsistent zur Card-Rundung */
+.card,
+.cardScalable,
+.cardPadder,
+.card > .cardBox,
+.cardOverlayContainer {
+  border-radius: var(--pkfx-card-radius) !important;
 }
 
 /* Poster-Schutz: keine Effekte direkt auf Bildträger. */
@@ -168,6 +185,7 @@
 /* Card-Overlays und Badges
    Wichtig: .cardOverlayContainer darf im Ruhezustand keine Fläche bekommen, sonst liegt sie als schwarzer Layer über den Postern. */
 .cardOverlayContainer {
+  border-radius: inherit !important;
   background: transparent !important;
   border-color: transparent !important;
   box-shadow: none !important;
