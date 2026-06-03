@@ -2,27 +2,25 @@
     background-color: transparent;
 }
 
-/*Pages that have single unit height taskbar*/
-/* v15: Abstand zwischen fixer Header-Leiste und erstem Inhaltsblock erhöht.
-   Der Abstand sitzt hier direkt an der Quelle, weil #indexPage diesen Versatz setzt. */
+/*Pages the have single unit height taskbar*/
 @media all and (min-width: 100em){
   #indexPage,
   #moviesPage,
   #tvRecommendedPage,
   #musicRecommendedPage {
-    margin-top: 92px;
+    margin-top: 68px;
     padding-top: 0px !important;
     overflow-y: scroll;
   }
 }
 
-/*Pages that have two unit height taskbar*/
+/*Pages the have two unit height taskbar*/
 @media all and (max-width: 100em){
   #indexPage,
   #moviesPage,
   #tvRecommendedPage,
   #musicRecommendedPage {
-    margin-top: 154px;
+    margin-top: 130px;
     padding-top: 0.5em !important;
     overflow-y: scroll;
   }

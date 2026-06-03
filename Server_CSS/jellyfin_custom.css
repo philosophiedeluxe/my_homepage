@@ -1,28 +1,29 @@
 /*
   Jellyfin Custom CSS - zentraler Einstieg
-  Stand: v15 clean - Header-Abstand direkt korrigiertn - sichtbarer Hover-/Spacing-Fix
+  Stand: v16 clean - sichtbarer Hover-/Spacing-Fix
   Zweck: Ein einziger Jellyfin-Aufruf, ohne fixes.css, ohne zusätzliche Layoutkorrekturen und mit reduzierten Hover-Effekten und leicht erhöhtem Abstand über Abschnittstiteln.
   Regel: effects_cinematic.css bleibt die letzte optische Schicht.
 */
 
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/jf_font.css?v=15');
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/base.css?v=15');
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/accentlist.css?v=15');
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/rounding_circlehover.css?v=15');
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/smallercast.css?v=15');
-/*@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/episodes_grid.css?v=15');*/
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/episodes_compactlist.css?v=15');
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/header_transparent.css?v=15');
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/login_frame.css?v=15');
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/fields_noborder.css?v=15');
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/indicator_floating.css?v=15');
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/dark.css?v=15');
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/title_banner-logo.css?v=15');
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/floating.css?v=15');
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/hoverglow.css?v=15');
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/glassy.css?v=15');
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/effects_cinematic.css?v=15');
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/hover_clean.css?v=15');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/jf_font.css?v=16');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/base.css?v=16');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/accentlist.css?v=16');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/rounding_circlehover.css?v=16');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/smallercast.css?v=16');
+/*@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/episodes_grid.css?v=16');*/
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/episodes_compactlist.css?v=16');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/header_transparent.css?v=16');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/login_frame.css?v=16');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/fields_noborder.css?v=16');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/indicator_floating.css?v=16');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/dark.css?v=16');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/title_banner-logo.css?v=16');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/floating.css?v=16');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/hoverglow.css?v=16');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/glassy.css?v=16');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/effects_cinematic.css?v=16');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/hover_clean.css?v=16');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/home_spacing.css?v=16');
 
 
 /*Style backdrop*/

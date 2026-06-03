@@ -13,7 +13,7 @@ Dieser Stand entfernt `fixes.css` vollständig aus dem Jellyfin-CSS-Aufruf.
 ## Jellyfin-Aufruf
 
 ```css
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/jellyfin_custom.css?v=14');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/jellyfin_custom.css?v=9');
 ```
 
 ## Reihenfolge

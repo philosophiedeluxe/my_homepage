@@ -1,0 +1,47 @@
+/*
+  Jellyfin Home Spacing Layer
+  Stand: v16
+  Zweck: Erzwingt sichtbaren Abstand zwischen headerTop und dem ersten Startseiten-Abschnitt "Meine Medien".
+  Grund: Der Titel liegt direkt im ersten .verticalSection.section0 innerhalb von .homeSectionsContainer; margin am h2 kann am Parent kollabieren.
+  Diese Datei liegt absichtlich ganz am Ende der Import-Kette.
+*/
+
+:root {
+  --pkhome-header-gap-desktop: 26px;
+  --pkhome-header-gap-compact: 18px;
+}
+
+/* Exakter DOM-Pfad der Startseite: #homeTab > .homeSectionsContainer > .verticalSection.section0 > h2 "Meine Medien" */
+html body #homeTab > .sections.homeSectionsContainer > .verticalSection.section0,
+html body .pageTabContent#homeTab > .sections.homeSectionsContainer > .verticalSection.section0,
+html body .homeSectionsContainer > .verticalSection.section0:first-child {
+  padding-top: var(--pkhome-header-gap-desktop) !important;
+  box-sizing: border-box !important;
+}
+
+/* Den Titel selbst neutral halten, damit der Abstand nicht wieder über kollabierende margins verschluckt wird. */
+html body #homeTab > .sections.homeSectionsContainer > .verticalSection.section0 > h2.sectionTitle.sectionTitle-cards.padded-left,
+html body .homeSectionsContainer > .verticalSection.section0:first-child > h2.sectionTitle.sectionTitle-cards.padded-left {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* Kompaktere Ansichten etwas weniger stark verschieben. */
+@media all and (max-width: 100em) {
+  html body #homeTab > .sections.homeSectionsContainer > .verticalSection.section0,
+  html body .pageTabContent#homeTab > .sections.homeSectionsContainer > .verticalSection.section0,
+  html body .homeSectionsContainer > .verticalSection.section0:first-child {
+    padding-top: var(--pkhome-header-gap-compact) !important;
+  }
+}
+
+/* Falls Jellyfin den Startseiten-Container nicht über #homeTab, sondern direkt über #indexPage rendert. */
+html body #indexPage .homeSectionsContainer > .verticalSection.section0:first-child {
+  padding-top: var(--pkhome-header-gap-desktop) !important;
+}
+
+@media all and (max-width: 100em) {
+  html body #indexPage .homeSectionsContainer > .verticalSection.section0:first-child {
+    padding-top: var(--pkhome-header-gap-compact) !important;
+  }
+}
