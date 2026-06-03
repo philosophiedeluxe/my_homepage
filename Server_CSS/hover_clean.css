@@ -1,6 +1,6 @@
 /*
   Jellyfin Clean Hover Layer
-  Stand: v10
+  Stand: v11
   Zweck: Reduziert die vorher sehr sichtbaren Glow-/Block-Hover-Effekte auf ein ruhiges, cleanes UI.
   Wichtig: Diese Datei muss nach effects_cinematic.css geladen werden.
   Keine Layoutänderungen: keine Breiten, Höhen, Abstände oder Detailseiten-Positionierung.
@@ -10,6 +10,7 @@
   --pkhover-radius: calc(var(--rounding, 12px) + 4px);
   --pkhover-pill: 999px;
   --pkhover-bg-soft: rgba(255, 255, 255, 0.035);
+  --pkhover-tab-inset-y: 5%;
   --pkhover-bg: rgba(255, 255, 255, 0.055);
   --pkhover-bg-active: rgba(var(--accent), 0.095);
   --pkhover-border: rgba(255, 255, 255, 0.095);
@@ -32,7 +33,7 @@
   box-shadow: 12px 0 36px rgba(0, 0, 0, 0.34) !important;
 }
 
-/* Top-Tabs: keine massiven Rechteckflächen, nur dezente aktive Fläche + feine Akzentlinie */
+/* Top-Tabs: Touch-Ziel bleibt gleich, aber die sichtbare Hover-/Aktivfläche ist 10% niedriger. */
 .headerTabs.sectionTabs .emby-tab-button,
 .emby-tab-button {
   position: relative !important;
@@ -41,35 +42,74 @@
   box-shadow: none !important;
   border: 1px solid transparent !important;
   overflow: hidden !important;
+  transform: none !important;
   transition:
-    background-color var(--pkhover-time) var(--pkhover-ease),
-    border-color var(--pkhover-time) var(--pkhover-ease),
     color var(--pkhover-time) var(--pkhover-ease),
     opacity var(--pkhover-time) var(--pkhover-ease) !important;
 }
 
+.headerTabs.sectionTabs .emby-tab-button::before,
+.emby-tab-button::before {
+  content: "" !important;
+  position: absolute !important;
+  left: 0 !important;
+  right: 0 !important;
+  top: var(--pkhover-tab-inset-y) !important;
+  bottom: var(--pkhover-tab-inset-y) !important;
+  z-index: -1 !important;
+  border-radius: calc(var(--pkhover-radius) - 2px) !important;
+  border: 1px solid transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  pointer-events: none !important;
+  transition:
+    background-color var(--pkhover-time) var(--pkhover-ease),
+    border-color var(--pkhover-time) var(--pkhover-ease),
+    box-shadow var(--pkhover-time) var(--pkhover-ease) !important;
+}
+
 .headerTabs.sectionTabs .emby-tab-button:hover,
 .emby-tab-button:hover {
-  background-color: var(--pkhover-bg-soft) !important;
-  border-color: rgba(255, 255, 255, 0.055) !important;
+  background-color: transparent !important;
+  border-color: transparent !important;
   box-shadow: none !important;
   transform: none !important;
 }
 
+.headerTabs.sectionTabs .emby-tab-button:hover::before,
+.emby-tab-button:hover::before {
+  background-color: var(--pkhover-bg-soft) !important;
+  border-color: rgba(255, 255, 255, 0.055) !important;
+}
+
 .headerTabs.sectionTabs .emby-tab-button:focus-visible,
 .emby-tab-button:focus-visible {
+  background-color: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.headerTabs.sectionTabs .emby-tab-button:focus-visible::before,
+.emby-tab-button:focus-visible::before {
   background-color: var(--pkhover-bg) !important;
   border-color: var(--pkhover-border-active) !important;
-  box-shadow: 0 0 0 1px rgba(var(--accent), 0.18) !important;
+  box-shadow: 0 0 0 1px rgba(var(--accent), 0.14) !important;
 }
 
 .headerTabs.sectionTabs .emby-tab-button.emby-tab-button-active,
 .headerTabs.sectionTabs .emby-tab-button-active,
 .emby-tab-button[aria-selected="true"] {
-  background-color: var(--pkhover-bg-active) !important;
-  border-color: rgba(var(--accent), 0.16) !important;
+  background-color: transparent !important;
+  border-color: transparent !important;
   box-shadow: none !important;
   transform: none !important;
+}
+
+.headerTabs.sectionTabs .emby-tab-button.emby-tab-button-active::before,
+.headerTabs.sectionTabs .emby-tab-button-active::before,
+.emby-tab-button[aria-selected="true"]::before {
+  background-color: var(--pkhover-bg-active) !important;
+  border-color: rgba(var(--accent), 0.16) !important;
 }
 
 .headerTabs.sectionTabs .emby-tab-button.emby-tab-button-active::after,
@@ -77,12 +117,12 @@
 .emby-tab-button[aria-selected="true"]::after {
   content: "" !important;
   position: absolute !important;
-  left: 28% !important;
-  right: 28% !important;
-  bottom: .38em !important;
+  left: 30% !important;
+  right: 30% !important;
+  bottom: calc(var(--pkhover-tab-inset-y) + .18em) !important;
   height: 2px !important;
   border-radius: var(--pkhover-pill) !important;
-  background-color: rgba(var(--accent), 0.72) !important;
+  background-color: rgba(var(--accent), 0.66) !important;
   box-shadow: none !important;
   pointer-events: none !important;
 }
@@ -143,6 +183,19 @@ a[data-role="button"]:hover {
   background-color: rgba(var(--accent), 0.08) !important;
   border-color: rgba(var(--accent), 0.18) !important;
   box-shadow: none !important;
+}
+
+
+/* Abschnittstitel: etwas mehr Luft zur oberen Leiste, ohne Card-Layout zu verändern. */
+.sectionTitle.sectionTitle-cards,
+h2.sectionTitle.sectionTitle-cards,
+.sectionTitle.padded-left {
+  margin-top: .18em !important;
+}
+
+.homePage .sectionTitle.sectionTitle-cards,
+.homePage h2.sectionTitle.sectionTitle-cards {
+  margin-top: .22em !important;
 }
 
 /* Cards: weniger Neon, weiter hochwertig */
