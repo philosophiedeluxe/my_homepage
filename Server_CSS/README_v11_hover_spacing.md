@@ -14,5 +14,5 @@ Basis: v10 clean hover.
 Jellyfin-Aufruf:
 
 ```css
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/jellyfin_custom.css?v=11');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/jellyfin_custom.css?v=14');
 ```

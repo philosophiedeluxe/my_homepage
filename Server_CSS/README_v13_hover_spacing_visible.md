@@ -1,4 +1,4 @@
-# Server_CSS v13 - sichtbarer Hover-/Spacing-Fix
+# Server_CSS v14 - sichtbarer Hover-/Spacing-Fix
 
 Basis: vom Nutzer hochgeladener aktueller Stand `Server_CSS(2).zip`.
 
@@ -16,5 +16,5 @@ Basis: vom Nutzer hochgeladener aktueller Stand `Server_CSS(2).zip`.
 Jellyfin-Aufruf:
 
 ```css
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/jellyfin_custom.css?v=13');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/jellyfin_custom.css?v=14');
 ```

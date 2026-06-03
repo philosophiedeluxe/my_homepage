@@ -1,6 +1,6 @@
 /*
   Jellyfin Clean Hover Layer
-  Stand: v13
+  Stand: v14
   Zweck: sichtbare Reduzierung der Tab-/Hover-Flächen und etwas mehr Luft unter der oberen Leiste.
   Wichtig: Diese Datei muss nach effects_cinematic.css geladen werden.
   Kein Card-Grid, keine Detailseiten-Positionierung, keine fixes.css.
@@ -199,20 +199,33 @@ a[data-role="button"]:hover {
   box-shadow: none !important;
 }
 
-/* Abschnittstitel: sichtbar mehr Luft zur oberen Leiste. */
-.layout-desktop h2.sectionTitle.sectionTitle-cards.padded-left,
-.layout-desktop .sectionTitle.sectionTitle-cards.padded-left,
-.layout-desktop .sectionTitle.padded-left {
-  padding-top: .48em !important;
-  margin-top: .18em !important;
+/* Abschnittstitel: sichtbar mehr Luft zur oberen Leiste.
+   v14: Der Abstand wird jetzt nicht mehr nur am Text korrigiert, sondern zusätzlich am Seiten-Offset. */
+html body.layout-desktop h2.sectionTitle.sectionTitle-cards.padded-left,
+html body.layout-desktop .sectionTitle.sectionTitle-cards.padded-left,
+html body.layout-desktop .sectionTitle.padded-left {
+  margin-top: 22px !important;
+  padding-top: 0 !important;
 }
 
-/* In sehr kompakten App-/Mobilbreiten weniger zusätzlicher Abstand. */
+/* Desktop-Startseite: header_transparent.css setzt bei breiten Fenstern nur 68px.
+   Die aktuelle Header-Leiste ist höher; deshalb begann "Meine Medien" optisch zu nah an der Leiste. */
+@media all and (min-width: 100em) {
+  html body.layout-desktop #indexPage,
+  html body.layout-desktop #moviesPage,
+  html body.layout-desktop #tvRecommendedPage,
+  html body.layout-desktop #musicRecommendedPage {
+    margin-top: 88px !important;
+  }
+}
+
+/* In kompakten App-/Mobilbreiten weniger zusätzlicher Abstand. */
 @media all and (max-width: 50em) {
-  h2.sectionTitle.sectionTitle-cards.padded-left,
-  .sectionTitle.sectionTitle-cards.padded-left,
-  .sectionTitle.padded-left {
-    padding-top: .25em !important;
+  html body h2.sectionTitle.sectionTitle-cards.padded-left,
+  html body .sectionTitle.sectionTitle-cards.padded-left,
+  html body .sectionTitle.padded-left {
+    margin-top: 12px !important;
+    padding-top: 0 !important;
   }
 }
 
@@ -269,4 +282,13 @@ a[data-role="button"]:hover {
   .card:focus-within > .cardBox {
     transform: none !important;
   }
+}
+
+
+/* v14 finaler Abstandsschutz für die erste Home-Section.
+   Dieser Block steht absichtlich am Dateiende, damit ältere Regeln aus base/header_transparent nicht wieder gewinnen. */
+html body.layout-desktop #indexPage .sectionTitle.sectionTitle-cards.padded-left,
+html body.layout-desktop #indexPage h2.sectionTitle.sectionTitle-cards.padded-left {
+  margin-top: 22px !important;
+  padding-top: 0 !important;
 }
