@@ -37,48 +37,45 @@
     height: 5em;
 }
 
-/*Accommodate ultrawide aspect ratios
-  PK 2026-06-03 v6:
-  Der alte Ansatz war noch zu stark viewport-basiert. Bei breiten Fenstern wuchs der linke Abstand weiter mit
-  und der Detailinhalt wanderte sichtbar nach rechts.
-  Neue Abstimmung: Posterbreite und Inhaltsversatz werden begrenzt. Dadurch bleibt die Detailseite stabiler,
-  ohne das normale Card-Grid oder die vertikalen Abstände anzufassen.
+/*Detailseite: stabile Desktop-Ausrichtung
+  PK 2026-06-03 v7:
+  Vorher wurden .detailPagePrimaryContainer und .detailPagePrimaryContent gleichzeitig nach links gepaddet.
+  Dadurch entstand bei breiten Fenstern eine doppelte Verschiebung: Poster links, Inhalt deutlich zu weit rechts.
+  Jetzt bekommt nur noch die eigentliche Inhaltsebene den linken Ausgleich. Der Container selbst bleibt neutral.
 */
-@media (min-aspect-ratio: 1.98/1) {
+@media all and (min-width: 70em) {
   .layout-desktop #itemDetailPage {
-    --pk-detail-poster-width: clamp(13rem, 18vw, 17rem);
-    --pk-detail-content-left: calc(var(--pk-detail-poster-width) + clamp(4rem, 5vw, 6rem));
+    --pk-detail-poster-left: clamp(2.5rem, 3.2vw, 4rem);
+    --pk-detail-poster-width: clamp(15.5rem, 18vw, 19rem);
+    --pk-detail-poster-gap: clamp(4.25rem, 5vw, 6rem);
+    --pk-detail-content-offset: calc(var(--pk-detail-poster-left) + var(--pk-detail-poster-width) + var(--pk-detail-poster-gap));
   }
 
   .layout-desktop #itemDetailPage .detailImageContainer .card {
     width: var(--pk-detail-poster-width) !important;
     max-width: var(--pk-detail-poster-width) !important;
+    left: var(--pk-detail-poster-left) !important;
+  }
+
+  .layout-desktop #itemDetailPage .detailPagePrimaryContainer,
+  .layout-desktop #itemDetailPage .detailPageContent {
+    padding-left: 0 !important;
   }
 
   .layout-desktop #itemDetailPage .detailRibbon.padded-left,
-  .layout-desktop #itemDetailPage .detailPagePrimaryContainer,
   .layout-desktop #itemDetailPage .detailPagePrimaryContent,
-  .layout-desktop #itemDetailPage .detailPageContent {
-    padding-left: var(--pk-detail-content-left) !important;
+  .layout-desktop #itemDetailPage .detailPagePrimaryContent.padded-left,
+  .layout-desktop #itemDetailPage .detailPagePrimaryContent.padded-right {
+    box-sizing: border-box !important;
+    padding-left: var(--pk-detail-content-offset) !important;
   }
 }
 
 @media (min-aspect-ratio: 2.7/1) {
   .layout-desktop #itemDetailPage {
-    --pk-detail-poster-width: clamp(11.5rem, 12.5vw, 15.5rem);
-    --pk-detail-content-left: calc(var(--pk-detail-poster-width) + clamp(4rem, 4.2vw, 6.5rem));
-  }
-
-  .layout-desktop #itemDetailPage .detailImageContainer .card {
-    width: var(--pk-detail-poster-width) !important;
-    max-width: var(--pk-detail-poster-width) !important;
-  }
-
-  .layout-desktop #itemDetailPage .detailRibbon.padded-left,
-  .layout-desktop #itemDetailPage .detailPagePrimaryContainer,
-  .layout-desktop #itemDetailPage .detailPagePrimaryContent,
-  .layout-desktop #itemDetailPage .detailPageContent {
-    padding-left: var(--pk-detail-content-left) !important;
+    --pk-detail-poster-left: clamp(2rem, 2.4vw, 3.5rem);
+    --pk-detail-poster-width: clamp(12.75rem, 12vw, 15.5rem);
+    --pk-detail-poster-gap: clamp(3.25rem, 3.4vw, 5rem);
   }
 }
 
