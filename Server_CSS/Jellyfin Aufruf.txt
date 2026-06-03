@@ -1,4 +1,4 @@
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/fixes.css');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/fixes.css?v=5');
 @import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/jf_font.css');
 @import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/base.css');
 @import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/accentlist.css');
@@ -15,7 +15,7 @@
 @import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/floating.css');
 @import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/hoverglow.css');
 @import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/glassy.css');
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/effects_cinematic.css?v=4');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/effects_cinematic.css?v=5');
 
 
 /*Style backdrop*/

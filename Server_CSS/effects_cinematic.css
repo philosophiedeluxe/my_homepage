@@ -3,7 +3,7 @@
   Zweck: Optische Aufwertung ohne Eingriff in Layout, Card-Breiten, Posterbilder oder Grid-Verhalten.
   Wichtig: Diese Datei als letzte Import-Schicht laden.
 
-  Version v4:
+  Version v5:
   - keine dunkle Dauerfläche mehr auf .cardOverlayContainer
   - Poster-/Vorschaubildcontainer werden explizit geschützt
   - Effekte bleiben auf äußeren Hüllen, Header, Panels, Dialogen und aktiven UI-Elementen
