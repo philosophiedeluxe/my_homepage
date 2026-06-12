@@ -432,7 +432,7 @@ main > article.section {
       transparent 1px,
       transparent 4px
     ),
-    url("./image/no_signal.jpg") center / cover no-repeat;
+    url("./image/no_signal.jpg?v=20260612-12") center / 100% 100% no-repeat;
   opacity: 0;
   will-change: opacity, transform;
 }
@@ -442,8 +442,8 @@ main > article.section {
 }
 
 .hero-scanline::after {
-  inset: 6% -4% 9% 3%;
-  background-position: 58% center;
+  inset: 0;
+  background-position: center;
   animation: none;
 }
 
@@ -540,7 +540,6 @@ h1 {
   opacity: 0;
   pointer-events: none;
   animation: accent-sheen 5.8s cubic-bezier(0.22, 0.61, 0.36, 1) infinite;
-  will-change: clip-path, opacity;
 }
 
 h2 {
@@ -1404,7 +1403,7 @@ main > .section.interior-hero::before {
   text-transform: uppercase;
 }
 
-.page-hero .vita-status,
+.page-hero p.vita-status,
 .section-heading .vita-status {
   max-width: 100%;
   font-size: 0.7rem;
