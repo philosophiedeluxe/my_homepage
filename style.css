@@ -412,7 +412,7 @@ main > article.section {
 
 .hero-scanline {
   position: absolute;
-  inset: 0 0 0 48%;
+  inset: 0;
   z-index: 3;
   overflow: hidden;
   pointer-events: none;
