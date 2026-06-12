@@ -415,14 +415,12 @@ main > article.section {
   inset: 0 0 0 48%;
   z-index: 3;
   overflow: hidden;
-  opacity: 0;
   pointer-events: none;
-  background: url("./image/no_signal.jpg") center / cover no-repeat;
   mix-blend-mode: screen;
-  animation: no-signal-flash 13s steps(1, end) infinite;
 }
 
-.hero-scanline::before {
+.hero-scanline::before,
+.hero-scanline::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -433,7 +431,28 @@ main > article.section {
       rgba(255, 255, 255, 0.08) 1px,
       transparent 1px,
       transparent 4px
-    );
+    ),
+    url("./image/no_signal.jpg") center / cover no-repeat;
+  opacity: 0;
+  will-change: opacity, transform;
+}
+
+.hero-scanline::before {
+  animation: none;
+}
+
+.hero-scanline::after {
+  inset: 6% -4% 9% 3%;
+  background-position: 58% center;
+  animation: none;
+}
+
+.hero-scanline.is-glitching-a::before {
+  animation: no-signal-flash-a 720ms steps(1, end) both;
+}
+
+.hero-scanline.is-glitching-b::after {
+  animation: no-signal-flash-b 620ms steps(1, end) both;
 }
 
 .hero-signal-line {
@@ -1352,6 +1371,36 @@ main > .section.interior-hero::before {
   z-index: 1;
 }
 
+.vita-signal-field {
+  position: fixed;
+  inset: var(--nav-h) 0 0;
+  z-index: 6;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.vita-signal-field span {
+  position: absolute;
+  width: 6px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  opacity: 0;
+  background: #7bfff8;
+  box-shadow:
+    0 0 0 5px rgba(98, 214, 208, 0.1),
+    0 0 18px rgba(98, 214, 208, 0.95);
+  animation: vita-signal-pulse var(--signal-duration, 8s) cubic-bezier(0.2, 0.75, 0.25, 1) var(--signal-delay, 0s) infinite;
+}
+
+.vita-signal-field span:nth-child(1) { top: 12%; left: 4%; --signal-duration: 8.7s; --signal-delay: -2.1s; }
+.vita-signal-field span:nth-child(2) { top: 21%; left: 94%; --signal-duration: 11.3s; --signal-delay: -7.4s; }
+.vita-signal-field span:nth-child(3) { top: 37%; left: 72%; --signal-duration: 9.6s; --signal-delay: -4.8s; }
+.vita-signal-field span:nth-child(4) { top: 49%; left: 9%; --signal-duration: 13.1s; --signal-delay: -9.2s; }
+.vita-signal-field span:nth-child(5) { top: 61%; left: 96%; --signal-duration: 10.4s; --signal-delay: -1.7s; }
+.vita-signal-field span:nth-child(6) { top: 72%; left: 32%; --signal-duration: 12.2s; --signal-delay: -6.3s; }
+.vita-signal-field span:nth-child(7) { top: 84%; left: 86%; --signal-duration: 8.9s; --signal-delay: -5.5s; }
+.vita-signal-field span:nth-child(8) { top: 93%; left: 6%; --signal-duration: 14.6s; --signal-delay: -11.8s; }
+
 .vita-page .profile-summary::after,
 .vita-page .timeline-section::after {
   right: auto;
@@ -1994,30 +2043,107 @@ main > .section.interior-hero::before {
   }
 }
 
-@keyframes no-signal-flash {
+@keyframes no-signal-flash-a {
   0%,
-  67%,
-  67.28%,
-  67.66%,
-  68.04%,
+  8%,
+  23%,
+  38%,
+  51%,
+  72%,
+  88%,
   100% {
     opacity: 0;
     transform: translate3d(0, 0, 0);
   }
 
-  67.08% {
-    opacity: 0.2;
-    transform: translate3d(-8px, 0, 0) scaleX(1.015);
+  13% {
+    opacity: 0.54;
+    transform: translate3d(-11px, 0, 0) scaleX(1.022);
   }
 
-  67.48% {
-    opacity: 0.12;
-    transform: translate3d(11px, 0, 0) scaleX(0.99);
+  30% {
+    opacity: 0.31;
+    transform: translate3d(14px, -3px, 0) scaleX(0.985);
   }
 
-  67.84% {
-    opacity: 0.17;
-    transform: translate3d(-4px, 0, 0);
+  44% {
+    opacity: 0.46;
+    transform: translate3d(-5px, 2px, 0);
+  }
+
+  61% {
+    opacity: 0.36;
+    transform: translate3d(8px, 0, 0) scaleX(1.01);
+  }
+
+  80% {
+    opacity: 0.59;
+    transform: translate3d(-13px, 3px, 0) scaleX(1.025);
+  }
+}
+
+@keyframes no-signal-flash-b {
+  0%,
+  12%,
+  31%,
+  49%,
+  68%,
+  87%,
+  100% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0);
+  }
+
+  20% {
+    opacity: 0.42;
+    transform: translate3d(16px, 4px, 0) scale(1.018);
+  }
+
+  40% {
+    opacity: 0.25;
+    transform: translate3d(-9px, -2px, 0) scaleX(0.98);
+  }
+
+  59% {
+    opacity: 0.48;
+    transform: translate3d(-15px, 0, 0) scaleX(1.03);
+  }
+
+  77% {
+    opacity: 0.3;
+    transform: translate3d(7px, -3px, 0) scaleX(0.99);
+  }
+}
+
+@keyframes vita-signal-pulse {
+  0%,
+  11%,
+  13%,
+  47%,
+  49%,
+  100% {
+    opacity: 0.24;
+    transform: scale(0.72);
+  }
+
+  11.5% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  12.2% {
+    opacity: 0.3;
+    transform: scale(0.86);
+  }
+
+  47.6% {
+    opacity: 0.78;
+    transform: scale(0.94);
+  }
+
+  48.3% {
+    opacity: 0.16;
+    transform: scale(0.78);
   }
 }
 

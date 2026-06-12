@@ -1041,6 +1041,50 @@
 
     document.querySelectorAll(".reveal-item").forEach((element) => observer.observe(element));
   }
+
+  function setupSignalFlicker() {
+    const signal = document.querySelector(".hero-scanline");
+    if (!signal || reduceMotion.matches) return;
+
+    let triggerTimer = 0;
+    let cleanupTimer = 0;
+
+    function scheduleFlicker(minDelay = 2400, spread = 8800) {
+      const delay = minDelay + Math.random() * spread;
+      window.clearTimeout(triggerTimer);
+      triggerTimer = window.setTimeout(triggerFlicker, delay);
+    }
+
+    function triggerFlicker() {
+      if (document.hidden) {
+        scheduleFlicker(900);
+        return;
+      }
+
+      const roll = Math.random();
+      const className = roll < 0.46
+        ? "is-glitching-a"
+        : roll < 0.86
+          ? "is-glitching-b"
+          : "is-glitching-a is-glitching-b";
+
+      signal.classList.remove("is-glitching-a", "is-glitching-b");
+      className.split(" ").forEach((name) => signal.classList.add(name));
+
+      window.clearTimeout(cleanupTimer);
+      cleanupTimer = window.setTimeout(() => {
+        signal.classList.remove("is-glitching-a", "is-glitching-b");
+      }, 780);
+
+      scheduleFlicker();
+    }
+
+    document.addEventListener("visibilitychange", () => {
+      if (!document.hidden) scheduleFlicker(400, 1200);
+    });
+
+    scheduleFlicker(650, 1800);
+  }
  
   addCookieSettingsLink();
   setupCertificateLightbox();
@@ -1050,6 +1094,7 @@
   setupActiveNavigation();
   setupTechStream();
   setupSignalCanvas();
+  setupSignalFlicker();
   if (window.location.hash) {
     window.addEventListener("load", () => {
       const target = document.querySelector(window.location.hash);
