@@ -429,6 +429,9 @@
     const nextLang = sanitizeLang(lang);
     storeLang(nextLang);
     applyTranslations(nextLang);
+    document.querySelectorAll(".hero-title .accent-word").forEach((word) => {
+      word.dataset.reflection = word.textContent;
+    });
     if (updateUrl) updateLangUrl(nextLang);
   }
 
@@ -710,6 +713,67 @@
     targets.forEach((target) => observer.observe(target));
   }
 
+  function setupTechStream() {
+    const track = document.querySelector(".tech-stream__track");
+    const firstGroup = track?.querySelector(".tech-stream__group");
+    if (!track || !firstGroup || reduceMotion.matches || typeof track.animate !== "function") return;
+
+    let streamAnimation = null;
+    let resizeFrame = 0;
+    const pixelsPerSecond = 38;
+
+    function startStream() {
+      const groupWidth = firstGroup.getBoundingClientRect().width;
+      if (!groupWidth) return;
+
+      const previousDuration = streamAnimation?.effect?.getTiming().duration;
+      const previousProgress = previousDuration && streamAnimation.currentTime
+        ? Number(streamAnimation.currentTime) / previousDuration
+        : 0;
+
+      streamAnimation?.cancel();
+      const duration = (groupWidth / pixelsPerSecond) * 1000;
+      streamAnimation = track.animate(
+        [
+          { transform: "translate3d(0, 0, 0)" },
+          { transform: `translate3d(${-groupWidth}px, 0, 0)` }
+        ],
+        {
+          duration,
+          iterations: Infinity,
+          easing: "linear"
+        }
+      );
+      streamAnimation.currentTime = previousProgress * duration;
+    }
+
+    function scheduleMeasurement() {
+      if (resizeFrame) return;
+      resizeFrame = window.requestAnimationFrame(() => {
+        resizeFrame = 0;
+        startStream();
+      });
+    }
+
+    if (document.fonts?.ready) {
+      document.fonts.ready.then(scheduleMeasurement).catch(scheduleMeasurement);
+    } else {
+      scheduleMeasurement();
+    }
+
+    if ("ResizeObserver" in window) {
+      new ResizeObserver(scheduleMeasurement).observe(firstGroup);
+    } else {
+      window.addEventListener("resize", scheduleMeasurement, { passive: true });
+    }
+
+    document.addEventListener("visibilitychange", () => {
+      if (!streamAnimation) return;
+      if (document.hidden) streamAnimation.pause();
+      else streamAnimation.play();
+    });
+  }
+
   function setupSignalCanvas() {
     if (!signalCanvas || !hero || reduceMotion.matches) return;
     const context = signalCanvas.getContext("2d", { alpha: true });
@@ -725,10 +789,10 @@
     let heroVisible = true;
     let animationFrame = 0;
     let lastFrame = 0;
-    const frameInterval = isFirefox ? 42 : 28;
+    const frameInterval = isFirefox ? 33 : 16;
 
     function createNodes() {
-      const count = width < 720 ? 16 : (isFirefox ? 22 : 30);
+      const count = width < 720 ? 14 : (isFirefox ? 18 : 26);
       nodes = Array.from({ length: count }, (_, index) => ({
         x: Math.random() * width,
         y: Math.random() * height,
@@ -904,7 +968,7 @@
     scrollProgress.style.transform = `scaleX(${Math.min(1, Math.max(0, y / scrollable)).toFixed(4)})`;
 
     if (heroImage && !supportsScrollTimeline) {
-      const frame = progress.toFixed(isFirefox ? 2 : 3);
+      const frame = progress.toFixed(3);
       if (frame !== lastHeroFrame) {
         const shiftX = (-18 * progress).toFixed(2);
         const shiftY = (34 * progress).toFixed(2);
@@ -971,6 +1035,7 @@
   setupHeroPointer();
   setupTiltCards();
   setupActiveNavigation();
+  setupTechStream();
   setupSignalCanvas();
   if (window.location.hash) {
     window.addEventListener("load", () => {
