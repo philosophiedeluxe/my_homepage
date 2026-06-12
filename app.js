@@ -626,15 +626,40 @@
     if (reduceMotion.matches || !finePointer.matches) return;
 
     const cursor = document.createElement("div");
-    const interactiveSelector = [
+    const actionSelector = [
       "a",
       "button",
-      "input",
-      "textarea",
       "select",
       "summary",
+      "input[type='button']",
+      "input[type='submit']",
+      "input[type='reset']",
+      "input[type='checkbox']",
+      "input[type='radio']",
+      "input[type='range']",
+      "input[type='color']",
+      "input[type='file']",
       "[role='button']",
       "[tabindex]:not([tabindex='-1'])"
+    ].join(", ");
+    const textControlSelector = [
+      "textarea",
+      "input:not([type])",
+      "input[type='text']",
+      "input[type='email']",
+      "input[type='search']",
+      "input[type='password']",
+      "input[type='tel']",
+      "input[type='url']",
+      "input[type='number']",
+      "input[type='date']",
+      "input[type='datetime-local']",
+      "input[type='month']",
+      "input[type='time']",
+      "input[type='week']",
+      "[contenteditable='']",
+      "[contenteditable='true']",
+      "[role='textbox']"
     ].join(", ");
 
     cursor.className = "hero-code-cursor";
@@ -643,6 +668,9 @@
       <span class="hero-code-cursor__layer hero-code-cursor__layer--cyan"></span>
       <span class="hero-code-cursor__layer hero-code-cursor__layer--magenta"></span>
       <span class="hero-code-cursor__layer hero-code-cursor__layer--core"></span>
+      <span class="hero-code-cursor__text hero-code-cursor__text--cyan"></span>
+      <span class="hero-code-cursor__text hero-code-cursor__text--magenta"></span>
+      <span class="hero-code-cursor__text hero-code-cursor__text--core"></span>
       <span class="hero-code-cursor__code">&lt;/&gt;</span>
     `;
     document.body.appendChild(cursor);
@@ -652,6 +680,40 @@
     let nextX = -80;
     let nextY = -80;
 
+    function textNodeFromPoint(x, y) {
+      if (document.caretPositionFromPoint) {
+        const position = document.caretPositionFromPoint(x, y);
+        return position ? position.offsetNode : null;
+      }
+
+      if (document.caretRangeFromPoint) {
+        const range = document.caretRangeFromPoint(x, y);
+        return range ? range.startContainer : null;
+      }
+
+      return null;
+    }
+
+    function isReadableTextNode(node) {
+      return Boolean(
+        node &&
+        node.nodeType === Node.TEXT_NODE &&
+        node.textContent &&
+        node.textContent.trim().length > 0
+      );
+    }
+
+    function isTextAtPoint(x, y) {
+      const node = textNodeFromPoint(x, y);
+      if (isReadableTextNode(node)) return true;
+
+      if (node && node.nodeType === Node.ELEMENT_NODE) {
+        return Boolean(Array.from(node.childNodes).find(isReadableTextNode));
+      }
+
+      return false;
+    }
+
     function renderCursor() {
       cursor.style.setProperty("--cursor-x", `${nextX}px`);
       cursor.style.setProperty("--cursor-y", `${nextY}px`);
@@ -659,16 +721,21 @@
     }
 
     function hideCursor() {
-      cursor.classList.remove("is-visible", "is-action", "is-clicking");
+      cursor.classList.remove("is-visible", "is-action", "is-text", "is-clicking");
     }
 
     document.addEventListener("pointermove", (event) => {
       if (event.pointerType === "touch") return;
 
-      nextX = event.clientX - 3;
-      nextY = event.clientY - 2;
+      const textControl = event.target.closest(textControlSelector);
+      const actionElement = textControl ? null : event.target.closest(actionSelector);
+      const isTextCursor = Boolean(textControl || (!actionElement && isTextAtPoint(event.clientX, event.clientY)));
+
+      nextX = event.clientX - (isTextCursor ? 7 : 3);
+      nextY = event.clientY - (isTextCursor ? 15 : 2);
       cursor.classList.add("is-visible");
-      cursor.classList.toggle("is-action", Boolean(event.target.closest(interactiveSelector)));
+      cursor.classList.toggle("is-action", Boolean(actionElement));
+      cursor.classList.toggle("is-text", isTextCursor);
       if (!frame) frame = window.requestAnimationFrame(renderCursor);
     }, { passive: true });
 

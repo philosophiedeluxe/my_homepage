@@ -361,7 +361,9 @@ main > article.section {
   left: 0;
   width: 18.3px;
   height: 24.6px;
+  opacity: 1;
   clip-path: polygon(0 0, 0 82%, 23% 64%, 43% 100%, 61% 91%, 42% 58%, 78% 58%);
+  transition: opacity 90ms ease, transform 120ms ease;
 }
 
 .hero-code-cursor__layer--cyan {
@@ -379,16 +381,65 @@ main > article.section {
   filter: drop-shadow(1.3px 1.9px 0 #050608);
 }
 
+.hero-code-cursor__text {
+  position: absolute;
+  top: -1px;
+  left: 7px;
+  width: 3px;
+  height: 31px;
+  opacity: 0;
+  border-radius: 999px;
+  transform-origin: 50% 50%;
+  transition: opacity 90ms ease, transform 120ms ease;
+}
+
+.hero-code-cursor__text::before,
+.hero-code-cursor__text::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  width: 15px;
+  height: 3px;
+  border-radius: 999px;
+  transform: translateX(-50%);
+  background: inherit;
+}
+
+.hero-code-cursor__text::before {
+  top: 0;
+}
+
+.hero-code-cursor__text::after {
+  bottom: 0;
+}
+
+.hero-code-cursor__text--cyan {
+  background: #00ecec;
+  transform: translate3d(2.3px, 1.2px, 0);
+}
+
+.hero-code-cursor__text--magenta {
+  background: #ff2aa1;
+  transform: translate3d(-2.3px, -1.2px, 0);
+}
+
+.hero-code-cursor__text--core {
+  background: #f4f1ea;
+  filter: drop-shadow(1.3px 1.9px 0 #050608);
+}
+
 .hero-code-cursor__code {
   position: absolute;
   right: 0;
   bottom: 0;
+  opacity: 1;
   color: var(--accent-2);
   font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
   font-size: 0.78rem;
   font-weight: 800;
   line-height: 1;
   text-shadow: 1.3px 0 rgba(255, 42, 161, 0.7);
+  transition: opacity 90ms ease, color 120ms ease;
 }
 
 .hero-code-cursor.is-action .hero-code-cursor__layer--cyan {
@@ -403,8 +454,21 @@ main > article.section {
   color: var(--accent);
 }
 
+.hero-code-cursor.is-text .hero-code-cursor__layer,
+.hero-code-cursor.is-text .hero-code-cursor__code {
+  opacity: 0;
+}
+
+.hero-code-cursor.is-text .hero-code-cursor__text {
+  opacity: 1;
+}
+
 .hero-code-cursor.is-clicking {
   --cursor-scale: 0.84;
+}
+
+.hero-code-cursor.is-clicking.is-text {
+  --cursor-scale: 0.92;
 }
 
 .hero-scroll-dim {
