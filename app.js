@@ -64,6 +64,10 @@
       "contact.status": "Offen für fachlichen Austausch und passende Projekte.",
 
       "vita.eyebrow": "Vita",
+      "vita.status.focus": "Aktueller Fokus: Oracle APEX & PL/SQL",
+      "vita.status.apps": "Business Apps mit operativem Fokus",
+      "vita.status.experience": "Softwareentwicklung seit 2021",
+      "vita.status.certified": "Oracle Certified Professional",
       "vita.title": "Eine Laufbahn aus Praxis, Verantwortung und <span class=\"accent-word\">Software</span>.",
       "vita.intro": "Mein beruflicher Weg begann in der Gastronomie und führte über Einkauf, Prozessverantwortung und Projektarbeit in die Softwareentwicklung. Diese Stationen sind für mich kein Bruch, sondern ein Fundament.",
       "vita.focus.eyebrow": "Entwicklerprofil",
@@ -213,6 +217,10 @@
       "contact.status": "Open to technical conversations and suitable projects.",
 
       "vita.eyebrow": "Resume",
+      "vita.status.focus": "Current focus: Oracle APEX & PL/SQL",
+      "vita.status.apps": "Business apps with an operational focus",
+      "vita.status.experience": "Software development since 2021",
+      "vita.status.certified": "Oracle Certified Professional",
       "vita.title": "A career built from hands-on work, responsibility and <span class=\"accent-word\">software</span>.",
       "vita.intro": "My career began in hospitality and moved through purchasing, process responsibility and project work into software development. These stages are not a detour; they are the foundation.",
       "vita.focus.eyebrow": "Developer profile",

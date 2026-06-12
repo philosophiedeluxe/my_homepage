@@ -1371,35 +1371,61 @@ main > .section.interior-hero::before {
   z-index: 1;
 }
 
-.vita-signal-field {
-  position: fixed;
-  inset: var(--nav-h) 0 0;
-  z-index: 6;
-  overflow: hidden;
-  pointer-events: none;
+.vita-meta-line {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px 18px;
 }
 
-.vita-signal-field span {
-  position: absolute;
-  width: 6px;
+.vita-meta-line .eyebrow,
+.vita-section-meta .eyebrow {
+  margin: 0;
+}
+
+.vita-section-meta {
+  display: grid;
+  align-content: end;
+  gap: 14px;
+}
+
+.vita-status {
+  display: inline-grid;
+  grid-template-columns: 7px minmax(0, 1fr);
+  align-items: center;
+  gap: 9px;
+  margin: 0;
+  color: var(--muted);
+  font-family: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+.page-hero .vita-status,
+.section-heading .vita-status {
+  max-width: 100%;
+  font-size: 0.7rem;
+  line-height: 1.35;
+}
+
+.vita-status > span:last-child {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.vita-status > span:first-child {
+  width: 7px;
   aspect-ratio: 1;
   border-radius: 50%;
-  opacity: 0;
-  background: #7bfff8;
+  background: var(--accent-2);
   box-shadow:
-    0 0 0 5px rgba(98, 214, 208, 0.1),
-    0 0 18px rgba(98, 214, 208, 0.95);
-  animation: vita-signal-pulse var(--signal-duration, 8s) cubic-bezier(0.2, 0.75, 0.25, 1) var(--signal-delay, 0s) infinite;
+    0 0 0 5px rgba(98, 214, 208, 0.08),
+    0 0 18px rgba(98, 214, 208, 0.72);
+  animation: status-pulse 2.4s ease-in-out infinite;
 }
-
-.vita-signal-field span:nth-child(1) { top: 12%; left: 4%; --signal-duration: 8.7s; --signal-delay: -2.1s; }
-.vita-signal-field span:nth-child(2) { top: 21%; left: 94%; --signal-duration: 11.3s; --signal-delay: -7.4s; }
-.vita-signal-field span:nth-child(3) { top: 37%; left: 72%; --signal-duration: 9.6s; --signal-delay: -4.8s; }
-.vita-signal-field span:nth-child(4) { top: 49%; left: 9%; --signal-duration: 13.1s; --signal-delay: -9.2s; }
-.vita-signal-field span:nth-child(5) { top: 61%; left: 96%; --signal-duration: 10.4s; --signal-delay: -1.7s; }
-.vita-signal-field span:nth-child(6) { top: 72%; left: 32%; --signal-duration: 12.2s; --signal-delay: -6.3s; }
-.vita-signal-field span:nth-child(7) { top: 84%; left: 86%; --signal-duration: 8.9s; --signal-delay: -5.5s; }
-.vita-signal-field span:nth-child(8) { top: 93%; left: 6%; --signal-duration: 14.6s; --signal-delay: -11.8s; }
 
 .vita-page .profile-summary::after,
 .vita-page .timeline-section::after {
@@ -2115,38 +2141,6 @@ main > .section.interior-hero::before {
   }
 }
 
-@keyframes vita-signal-pulse {
-  0%,
-  11%,
-  13%,
-  47%,
-  49%,
-  100% {
-    opacity: 0.24;
-    transform: scale(0.72);
-  }
-
-  11.5% {
-    opacity: 1;
-    transform: scale(1);
-  }
-
-  12.2% {
-    opacity: 0.3;
-    transform: scale(0.86);
-  }
-
-  47.6% {
-    opacity: 0.78;
-    transform: scale(0.94);
-  }
-
-  48.3% {
-    opacity: 0.16;
-    transform: scale(0.78);
-  }
-}
-
 @keyframes system-meter {
   0%,
   100% {
@@ -2374,6 +2368,19 @@ main > .section.interior-hero::before {
     min-height: 470px;
     padding-top: 110px;
     padding-inline: 14px;
+  }
+
+  .vita-meta-line {
+    width: 100%;
+    min-width: 0;
+    display: grid;
+    justify-items: start;
+    gap: 12px;
+  }
+
+  .vita-status {
+    width: 100%;
+    min-width: 0;
   }
 
   .system-profile-panel__grid {
@@ -2664,6 +2671,7 @@ main > .section.interior-hero::before {
   .scroll-progress,
   .footer,
   .cookie-consent,
+  .vita-status,
   .page-hero,
   .page-actions,
   .contact-actions,
