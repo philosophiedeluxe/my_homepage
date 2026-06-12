@@ -20,7 +20,7 @@
       "nav.privacy": "Datenschutz",
 
       "hero.eyebrow": "Softwareentwickler aus Freising",
-      "hero.title": "Ich baue <span class=\"accent-word\">Software,</span> die Prozesse nicht nur digitalisiert, sondern <span class=\"accent-word\">antreibt</span>.",
+      "hero.title": "Ich baue <span class=\"accent-token\"><span class=\"accent-word\">Software</span><span class=\"accent-punctuation\">,</span></span> die Prozesse nicht nur digitalisiert, sondern <span class=\"accent-token\"><span class=\"accent-word\">antreibt</span><span class=\"accent-punctuation\">.</span></span>",
       "hero.text": "Ich komme aus operativer Verantwortung: Einkauf, Prozesse und Teams kenne ich aus der Praxis. Heute entwickle ich Anwendungen mit Oracle APEX, PL/SQL, JavaScript und Java. Diese Mischung ist mein Vorteil: Technik, die nicht nur läuft, sondern im Alltag Wirkung zeigt.",
       "hero.status": "Verfügbar für Austausch",
       "hero.mail": "Kontakt aufnehmen",
@@ -169,7 +169,7 @@
       "nav.privacy": "Privacy",
 
       "hero.eyebrow": "Software developer from Freising",
-      "hero.title": "I build <span class=\"accent-word\">software</span> that does not just digitize work. It <span class=\"accent-word\">drives</span> it.",
+      "hero.title": "I build <span class=\"accent-token\"><span class=\"accent-word\">software</span></span> that does not just digitize work. It <span class=\"accent-token\"><span class=\"accent-word\">drives</span></span> it.",
       "hero.text": "I come from operational responsibility: I know purchasing, processes and teams from hands-on work. Today I build applications with Oracle APEX, PL/SQL, JavaScript and Java. That mix is my edge: technology that does not just run, but creates impact in daily work.",
       "hero.status": "Open to conversations",
       "hero.mail": "Get in touch",
@@ -975,7 +975,16 @@
   if (window.location.hash) {
     window.addEventListener("load", () => {
       const target = document.querySelector(window.location.hash);
-      if (target) window.setTimeout(() => target.scrollIntoView({ block: "start" }), 80);
+      if (target) {
+        window.setTimeout(() => {
+          const previousScrollBehavior = root.style.scrollBehavior;
+          root.style.scrollBehavior = "auto";
+          target.scrollIntoView({ block: "start" });
+          window.requestAnimationFrame(() => {
+            root.style.scrollBehavior = previousScrollBehavior;
+          });
+        }, 80);
+      }
     }, { once: true });
   }
   window.addEventListener("resize", measureHero, { passive: true });

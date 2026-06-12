@@ -387,19 +387,35 @@ main > article.section {
   text-wrap: balance;
 }
 
-.hero-title .accent-word {
+.hero-title .accent-token {
   position: relative;
   display: inline-block;
+  white-space: nowrap;
 }
 
-.hero-title .accent-word::after {
-  content: "";
-  position: absolute;
-  inset: auto 2% 0.02em;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, rgba(98, 214, 208, 0.85), transparent);
-  transform: scaleX(0);
-  animation: accent-scan 4.6s var(--ease-out) infinite;
+.hero-title .accent-word {
+  background:
+    linear-gradient(
+      105deg,
+      #6c00a1 0%,
+      #8d3dff 34%,
+      #c58aff 43%,
+      #f4f1ea 48%,
+      #8ff3ee 52%,
+      #9b4cff 58%,
+      #6c00a1 100%
+    );
+  background-size: 320% 100%;
+  background-position: 120% 50%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: accent-reflection 5.8s ease-in-out infinite;
+}
+
+.hero-title .accent-punctuation {
+  color: var(--text);
+  -webkit-text-fill-color: var(--text);
 }
 
 .signal-canvas {
@@ -781,8 +797,8 @@ h3 {
 [data-section-index]::after {
   content: attr(data-section-index);
   position: absolute;
-  top: clamp(28px, 4vw, 52px);
-  right: max(0px, calc((100vw - var(--max)) / -2 + 28px));
+  top: clamp(30px, 4vw, 54px);
+  right: 0;
   z-index: 0;
   color: rgba(244, 241, 234, 0.035);
   font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
@@ -797,6 +813,17 @@ h3 {
   z-index: 1;
 }
 
+.projects-section .section-heading,
+.stack-section .section-heading {
+  min-height: clamp(150px, 15vw, 200px);
+  padding-right: clamp(150px, 17vw, 230px);
+}
+
+.projects-section .section-heading h2,
+.stack-section .section-heading h2 {
+  max-width: 12ch;
+}
+
 .tech-stream {
   width: 100%;
   overflow: hidden;
@@ -809,8 +836,7 @@ h3 {
   min-height: 52px;
   display: flex;
   align-items: center;
-  gap: 24px;
-  padding-inline: 24px;
+  gap: 0;
   color: rgba(244, 241, 234, 0.62);
   font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
   font-size: 0.76rem;
@@ -820,7 +846,15 @@ h3 {
   animation: tech-stream 32s linear infinite;
 }
 
-.tech-stream__track i {
+.tech-stream__group {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding-right: 24px;
+}
+
+.tech-stream__group i {
   width: 5px;
   aspect-ratio: 1;
   border: 1px solid var(--accent-2);
@@ -1717,23 +1751,21 @@ h3 {
   }
 }
 
-@keyframes accent-scan {
+@keyframes accent-reflection {
   0%,
-  18% {
-    opacity: 0;
-    transform: scaleX(0);
+  20% {
+    background-position: 120% 50%;
+    filter: drop-shadow(0 0 0 rgba(98, 214, 208, 0));
   }
 
-  38%,
-  58% {
-    opacity: 1;
-    transform: scaleX(1);
+  46% {
+    filter: drop-shadow(0 0 10px rgba(98, 214, 208, 0.38));
   }
 
-  78%,
+  64%,
   100% {
-    opacity: 0;
-    transform: scaleX(0);
+    background-position: -120% 50%;
+    filter: drop-shadow(0 0 0 rgba(98, 214, 208, 0));
   }
 }
 
@@ -1760,7 +1792,7 @@ h3 {
 
 @keyframes tech-stream {
   to {
-    transform: translateX(-50%);
+    transform: translate3d(-50%, 0, 0);
   }
 }
 
@@ -1924,6 +1956,11 @@ h3 {
     display: block;
   }
 
+  .projects-section .section-heading,
+  .stack-section .section-heading {
+    padding-right: 120px;
+  }
+
   .contact-actions {
     margin-top: 0;
   }
@@ -2020,6 +2057,12 @@ h3 {
 
   [data-section-index]::after {
     display: none;
+  }
+
+  .projects-section .section-heading,
+  .stack-section .section-heading {
+    min-height: 0;
+    padding-right: 0;
   }
 
   .tech-stream__track {
