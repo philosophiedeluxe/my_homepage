@@ -723,13 +723,21 @@
     const firstGroup = track?.querySelector(".tech-stream__group");
     if (!track || !firstGroup || reduceMotion.matches || typeof track.animate !== "function") return;
 
+    const groupTemplate = firstGroup.cloneNode(true);
     let streamAnimation = null;
     let resizeFrame = 0;
     const pixelsPerSecond = 38;
 
     function startStream() {
+      Array.from(track.children).slice(1).forEach((group) => group.remove());
       const groupWidth = firstGroup.getBoundingClientRect().width;
       if (!groupWidth) return;
+
+      const streamWidth = track.parentElement?.getBoundingClientRect().width || window.innerWidth;
+      const requiredGroups = Math.max(3, Math.ceil(streamWidth / groupWidth) + 2);
+      for (let index = 1; index < requiredGroups; index += 1) {
+        track.appendChild(groupTemplate.cloneNode(true));
+      }
 
       const previousDuration = streamAnimation?.effect?.getTiming().duration;
       const previousProgress = previousDuration && streamAnimation.currentTime
@@ -768,9 +776,8 @@
 
     if ("ResizeObserver" in window) {
       new ResizeObserver(scheduleMeasurement).observe(firstGroup);
-    } else {
-      window.addEventListener("resize", scheduleMeasurement, { passive: true });
     }
+    window.addEventListener("resize", scheduleMeasurement, { passive: true });
 
     document.addEventListener("visibilitychange", () => {
       if (!streamAnimation) return;
@@ -1016,7 +1023,8 @@
 
     addReveal(".quick-facts > div", "up", true);
     addReveal(".split-section > div:first-child, .contact-section > div:first-child", "left");
-    addReveal(".split-section .text-stack, .contact-actions", "right");
+    addReveal(".split-section .text-stack > p, .contact-actions", "right");
+    addReveal(".system-profile-panel, .stack-console, .certificate-header > div", "up");
     addReveal(".section-heading, .page-hero > *, .legal-page > section, .legal-page > .legal-note", "up");
     addReveal(".project-card, .stack-grid article, .profile-grid article, .timeline-item, .credential-list li, .oracle-badge-card, .proof-card", "up", true);
 
