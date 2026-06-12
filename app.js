@@ -626,6 +626,7 @@
     if (reduceMotion.matches || !finePointer.matches) return;
 
     const cursor = document.createElement("div");
+    const code = document.createElement("span");
     const actionSelector = [
       "a",
       "button",
@@ -661,6 +662,18 @@
       "[contenteditable='true']",
       "[role='textbox']"
     ].join(", ");
+    const keywordSignals = [
+      { pattern: /\bPL\/?SQL\b/i, label: "SQL" },
+      { pattern: /\bOracle\b/i, label: "DB" },
+      { pattern: /\bAPEX\b/i, label: "APP" },
+      { pattern: /\bJavaScript\b/i, label: "JS" },
+      { pattern: /\bJava\b/i, label: "JV" },
+      { pattern: /\bKI\b|\bAI\b|\bKünstliche Intelligenz\b/i, label: "AI" },
+      { pattern: /\bGit\b|\bGitHub\b/i, label: "GIT" },
+      { pattern: /\bREST\b/i, label: "API" },
+      { pattern: /\bSoftware\b/i, label: "SW" },
+      { pattern: /\bProzess\w*\b/i, label: "FLOW" }
+    ];
 
     cursor.className = "hero-code-cursor";
     cursor.setAttribute("aria-hidden", "true");
@@ -671,14 +684,21 @@
       <span class="hero-code-cursor__text hero-code-cursor__text--cyan"></span>
       <span class="hero-code-cursor__text hero-code-cursor__text--magenta"></span>
       <span class="hero-code-cursor__text hero-code-cursor__text--core"></span>
-      <span class="hero-code-cursor__code">&lt;/&gt;</span>
     `;
+    code.className = "hero-code-cursor__code";
+    code.textContent = "</>";
+    cursor.appendChild(code);
     document.body.appendChild(cursor);
     root.classList.add("has-hero-cursor");
 
     let frame = 0;
     let nextX = -80;
     let nextY = -80;
+    let idleTimer = 0;
+    let forcedCodeTimer = 0;
+    let lastForcedClass = "";
+    let currentKeyword = "";
+    const idleDelay = 12000;
 
     function textNodeFromPoint(x, y) {
       if (document.caretPositionFromPoint) {
@@ -703,15 +723,40 @@
       );
     }
 
-    function isTextAtPoint(x, y) {
-      const node = textNodeFromPoint(x, y);
-      if (isReadableTextNode(node)) return true;
+    function readableTextFromNode(node) {
+      if (!node) return "";
+      if (isReadableTextNode(node)) return node.textContent;
 
-      if (node && node.nodeType === Node.ELEMENT_NODE) {
-        return Boolean(Array.from(node.childNodes).find(isReadableTextNode));
+      if (node.nodeType === Node.ELEMENT_NODE) {
+        return Array.from(node.childNodes)
+          .filter(isReadableTextNode)
+          .map((child) => child.textContent)
+          .join(" ");
       }
 
-      return false;
+      return "";
+    }
+
+    function getKeywordSignal(text) {
+      if (!text) return "";
+      const signal = keywordSignals.find((item) => item.pattern.test(text));
+      return signal ? signal.label : "";
+    }
+
+    function textInfoAtPoint(x, y) {
+      const node = textNodeFromPoint(x, y);
+      const text = readableTextFromNode(node);
+      if (text.trim()) {
+        return {
+          isText: true,
+          keyword: getKeywordSignal(text)
+        };
+      }
+
+      return {
+        isText: false,
+        keyword: ""
+      };
     }
 
     function renderCursor() {
@@ -720,22 +765,72 @@
       frame = 0;
     }
 
-    function hideCursor() {
-      cursor.classList.remove("is-visible", "is-action", "is-text", "is-clicking");
+    function setCursorCode(value, className = "") {
+      code.textContent = value || "</>";
+      if (lastForcedClass) cursor.classList.remove(lastForcedClass);
+      lastForcedClass = className;
+      if (className) cursor.classList.add(className);
     }
+
+    function resetCursorCode() {
+      window.clearTimeout(forcedCodeTimer);
+      setCursorCode(currentKeyword || "</>", currentKeyword ? "is-keyword" : "");
+    }
+
+    function resetIdleTimer() {
+      window.clearTimeout(idleTimer);
+      cursor.classList.remove("is-idle");
+      if (!forcedCodeTimer) resetCursorCode();
+      idleTimer = window.setTimeout(() => {
+        if (!cursor.classList.contains("is-visible")) return;
+        cursor.classList.add("is-idle");
+        if (!forcedCodeTimer) setCursorCode("</zZ>", "is-idle-code");
+      }, idleDelay);
+    }
+
+    function hideCursor() {
+      cursor.classList.remove("is-visible", "is-action", "is-text", "is-clicking", "is-idle", "is-keyword");
+      currentKeyword = "";
+      window.clearTimeout(idleTimer);
+      if (!forcedCodeTimer) setCursorCode("</>");
+    }
+
+    document.addEventListener("pk:cursor-code", (event) => {
+      const detail = event.detail || {};
+      const value = typeof detail.code === "string" ? detail.code : "</>";
+      const duration = Number.isFinite(detail.duration) ? detail.duration : 2600;
+      const className = typeof detail.className === "string" ? detail.className : "is-forced-code";
+      window.clearTimeout(forcedCodeTimer);
+      setCursorCode(value, className);
+      forcedCodeTimer = window.setTimeout(() => {
+        forcedCodeTimer = 0;
+        resetCursorCode();
+      }, duration);
+    });
 
     document.addEventListener("pointermove", (event) => {
       if (event.pointerType === "touch") return;
 
       const textControl = event.target.closest(textControlSelector);
       const actionElement = textControl ? null : event.target.closest(actionSelector);
-      const isTextCursor = Boolean(textControl || (!actionElement && isTextAtPoint(event.clientX, event.clientY)));
+      const textInfo = textControl
+        ? { isText: true, keyword: "" }
+        : actionElement
+          ? { isText: false, keyword: "" }
+          : textInfoAtPoint(event.clientX, event.clientY);
+      const isTextCursor = Boolean(textInfo.isText);
+      currentKeyword = textInfo.keyword;
 
       nextX = event.clientX - (isTextCursor ? 7 : 3);
       nextY = event.clientY - (isTextCursor ? 15 : 2);
       cursor.classList.add("is-visible");
       cursor.classList.toggle("is-action", Boolean(actionElement));
       cursor.classList.toggle("is-text", isTextCursor);
+      cursor.classList.toggle("is-keyword", Boolean(currentKeyword) && !forcedCodeTimer && !cursor.classList.contains("is-idle"));
+      if (!forcedCodeTimer && !cursor.classList.contains("is-idle")) {
+        setCursorCode(currentKeyword || "</>", currentKeyword ? "is-keyword" : "");
+      }
+      resetIdleTimer();
       if (!frame) frame = window.requestAnimationFrame(renderCursor);
     }, { passive: true });
 
@@ -1174,6 +1269,295 @@
     scheduleFlicker(650, 1800);
   }
  
+
+  function setupEasterEggs() {
+    const typedInputSelector = "input, textarea, select, [contenteditable=''], [contenteditable='true'], [role='textbox']";
+    const bootLines = [
+      "INITIALIZING INTERFACE",
+      "LOADING SIGNAL LAYER",
+      "CURSOR MODULE ONLINE"
+    ];
+    const sectionMessages = {
+      "01": "identity layer touched",
+      "02": "timeline trace opened",
+      "03": "runtime stack indexed",
+      "04": "handshake protocol ready"
+    };
+    const terminalMessages = [
+      "> signal found: phil.kirchner",
+      "> compiling personality layer...",
+      "> access granted"
+    ];
+    const konami = ["arrowup", "arrowup", "arrowdown", "arrowdown", "arrowleft", "arrowright", "arrowleft", "arrowright", "b", "a"];
+    let konamiBuffer = [];
+    let typedBuffer = "";
+    let toastTimer = 0;
+    let terminalTimer = 0;
+    let devModeTimer = 0;
+    let themeTimer = 0;
+    let matrixRunning = false;
+
+    document.body.appendChild(document.createComment(" PK_SIGNAL_LAYER::EASTER_EGGS_ARMED "));
+
+    const toast = document.createElement("div");
+    toast.className = "easter-toast";
+    toast.setAttribute("aria-hidden", "true");
+    document.body.appendChild(toast);
+
+    const terminal = hero ? document.createElement("div") : null;
+    if (terminal) {
+      terminal.className = "easter-terminal";
+      terminal.setAttribute("aria-hidden", "true");
+      hero.appendChild(terminal);
+    }
+
+    function isTypingTarget(target) {
+      return Boolean(target && target.closest && target.closest(typedInputSelector));
+    }
+
+    function emitCursorCode(code, duration = 2600, className = "is-forced-code") {
+      document.dispatchEvent(new CustomEvent("pk:cursor-code", {
+        detail: { code, duration, className }
+      }));
+    }
+
+    function showToast(message, duration = 2600) {
+      toast.textContent = message;
+      toast.classList.add("is-visible");
+      window.clearTimeout(toastTimer);
+      toastTimer = window.setTimeout(() => {
+        toast.classList.remove("is-visible");
+      }, duration);
+    }
+
+    function flashTerminal(message, duration = 3600) {
+      if (!terminal) return;
+      terminal.textContent = message;
+      terminal.classList.add("is-visible");
+      window.clearTimeout(terminalTimer);
+      terminalTimer = window.setTimeout(() => {
+        terminal.classList.remove("is-visible");
+      }, duration);
+    }
+
+    function pulseHeroSignal() {
+      if (!hero || reduceMotion.matches) return;
+      hero.classList.remove("easter-hero-pulse");
+      window.requestAnimationFrame(() => {
+        hero.classList.add("easter-hero-pulse");
+        window.setTimeout(() => hero.classList.remove("easter-hero-pulse"), 900);
+      });
+    }
+
+    function triggerDeveloperMode() {
+      window.clearTimeout(devModeTimer);
+      root.classList.add("easter-dev-mode");
+      showToast("developer mode unlocked", 3200);
+      flashTerminal("> developer mode unlocked", 4200);
+      emitCursorCode("{PK}", 4200, "is-dev-signal");
+      pulseHeroSignal();
+      devModeTimer = window.setTimeout(() => {
+        root.classList.remove("easter-dev-mode");
+      }, 12000);
+    }
+
+    function resizeMatrix(canvas, context, columns) {
+      const ratio = Math.min(window.devicePixelRatio || 1, isFirefox ? 1.25 : 1.75);
+      canvas.width = Math.floor(window.innerWidth * ratio);
+      canvas.height = Math.floor(window.innerHeight * ratio);
+      canvas.style.width = `${window.innerWidth}px`;
+      canvas.style.height = `${window.innerHeight}px`;
+      context.setTransform(ratio, 0, 0, ratio, 0, 0);
+      columns.length = Math.ceil(window.innerWidth / 18);
+      for (let i = 0; i < columns.length; i += 1) {
+        columns[i] = Math.random() * -window.innerHeight;
+      }
+    }
+
+    function runMatrixRain() {
+      if (matrixRunning) return;
+      matrixRunning = true;
+      showToast("matrix rain injected", 3000);
+      flashTerminal("> matrix layer active", 3600);
+      emitCursorCode("MTRX", 3600, "is-matrix-signal");
+
+      if (reduceMotion.matches) {
+        window.setTimeout(() => { matrixRunning = false; }, 900);
+        return;
+      }
+
+      const canvas = document.createElement("canvas");
+      const context = canvas.getContext("2d");
+      const columns = [];
+      const glyphs = "01{}[]<>/\\|#$%&ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      let frame = 0;
+      let startTime = performance.now();
+      canvas.className = "easter-matrix-rain";
+      document.body.appendChild(canvas);
+
+      resizeMatrix(canvas, context, columns);
+      const resizeHandler = () => resizeMatrix(canvas, context, columns);
+      window.addEventListener("resize", resizeHandler, { passive: true });
+
+      function paint(now) {
+        const elapsed = now - startTime;
+        context.fillStyle = "rgba(16, 17, 20, 0.18)";
+        context.fillRect(0, 0, window.innerWidth, window.innerHeight);
+        context.font = "14px ui-monospace, SFMono-Regular, Consolas, monospace";
+        context.fillStyle = "rgba(98, 214, 208, 0.72)";
+
+        columns.forEach((y, index) => {
+          const x = index * 18;
+          const glyph = glyphs[Math.floor(Math.random() * glyphs.length)];
+          context.fillText(glyph, x, y);
+          columns[index] = y > window.innerHeight + Math.random() * 140 ? 0 : y + 18;
+        });
+
+        if (elapsed > 7800) canvas.classList.add("is-fading");
+        if (elapsed < 8400) {
+          frame = window.requestAnimationFrame(paint);
+        } else {
+          window.cancelAnimationFrame(frame);
+          window.removeEventListener("resize", resizeHandler);
+          canvas.remove();
+          matrixRunning = false;
+        }
+      }
+
+      frame = window.requestAnimationFrame(paint);
+    }
+
+    function setupHeroDwellTerminal() {
+      if (!hero || !terminal) return;
+      let dwellTimer = 0;
+      let shown = false;
+      const reveal = () => {
+        if (shown) return;
+        shown = true;
+        const message = terminalMessages[Math.floor(Math.random() * terminalMessages.length)];
+        flashTerminal(message, 4200);
+        emitCursorCode("SIG", 3200, "is-signal-code");
+      };
+
+      if (!("IntersectionObserver" in window)) {
+        dwellTimer = window.setTimeout(reveal, 7000);
+        return;
+      }
+
+      const observer = new IntersectionObserver((entries) => {
+        const active = entries.some((entry) => entry.isIntersecting && entry.intersectionRatio > 0.56);
+        window.clearTimeout(dwellTimer);
+        if (active && !shown) dwellTimer = window.setTimeout(reveal, 7000);
+      }, { threshold: [0, 0.56, 0.9] });
+
+      observer.observe(hero);
+    }
+
+    function setupSectionNumberTriggers() {
+      document.querySelectorAll("[data-section-index]").forEach((section) => {
+        if (section.querySelector(":scope > .easter-section-trigger")) return;
+        const index = section.dataset.sectionIndex || "";
+        const trigger = document.createElement("button");
+        trigger.className = "easter-section-trigger";
+        trigger.type = "button";
+        trigger.setAttribute("aria-label", `Signal ${index}`);
+        trigger.textContent = index;
+        trigger.addEventListener("click", () => {
+          section.classList.remove("easter-section-pulse");
+          window.requestAnimationFrame(() => section.classList.add("easter-section-pulse"));
+          showToast(`section ${index} signal`, 2300);
+          flashTerminal(`> ${sectionMessages[index] || "section signal touched"}`, 3200);
+          emitCursorCode(`S${index}`, 2500, "is-section-signal");
+          window.setTimeout(() => section.classList.remove("easter-section-pulse"), 1000);
+        });
+        section.appendChild(trigger);
+      });
+    }
+
+    function setupLanguageToggleEgg() {
+      if (!langToggle) return;
+      let clicks = [];
+      langToggle.addEventListener("click", () => {
+        const now = Date.now();
+        clicks = clicks.filter((time) => now - time < 3600);
+        clicks.push(now);
+        if (clicks.length < 6) return;
+        clicks = [];
+        langToggle.classList.add("is-easter-dev-lang");
+        showToast("language pack: DEV", 2800);
+        flashTerminal("> language layer switched to DEV", 3400);
+        emitCursorCode("DEV", 3200, "is-dev-lang-code");
+        window.setTimeout(() => langToggle.classList.remove("is-easter-dev-lang"), 3000);
+      });
+    }
+
+    function setupThemeShift() {
+      const brand = document.querySelector(".brand");
+      if (!brand) return;
+      brand.addEventListener("click", (event) => {
+        if (!event.shiftKey) return;
+        event.preventDefault();
+        window.clearTimeout(themeTimer);
+        root.classList.add("easter-theme-shift");
+        showToast("secret theme shift", 3000);
+        flashTerminal("> chroma protocol shifted", 3600);
+        emitCursorCode("SYS", 3600, "is-theme-signal");
+        themeTimer = window.setTimeout(() => root.classList.remove("easter-theme-shift"), 10000);
+      });
+    }
+
+    function maybeRunBootSequence() {
+      try {
+        if (sessionStorage.getItem("pk-boot-sequence-seen") === "1") return;
+        sessionStorage.setItem("pk-boot-sequence-seen", "1");
+      } catch (error) {
+        return;
+      }
+
+      if (Math.random() > 0.045) return;
+
+      const boot = document.createElement("div");
+      boot.className = "easter-boot-sequence";
+      boot.setAttribute("aria-hidden", "true");
+      bootLines.forEach((line, index) => {
+        const item = document.createElement("span");
+        item.textContent = line;
+        item.style.setProperty("--boot-delay", `${index * 320}ms`);
+        boot.appendChild(item);
+      });
+      document.body.appendChild(boot);
+      window.setTimeout(() => boot.classList.add("is-visible"), 280);
+      window.setTimeout(() => boot.classList.add("is-fading"), 4200);
+      window.setTimeout(() => boot.remove(), 5100);
+    }
+
+    document.addEventListener("keydown", (event) => {
+      if (event.repeat || event.altKey || event.ctrlKey || event.metaKey || isTypingTarget(event.target)) return;
+
+      const key = event.key.toLowerCase();
+      konamiBuffer.push(key);
+      if (konamiBuffer.length > konami.length) konamiBuffer.shift();
+      if (konamiBuffer.length === konami.length && konamiBuffer.every((value, index) => value === konami[index])) {
+        triggerDeveloperMode();
+        konamiBuffer = [];
+      }
+
+      if (/^[a-z]$/.test(key)) {
+        typedBuffer = `${typedBuffer}${key}`.slice(-12);
+        if (typedBuffer.endsWith("matrix")) {
+          runMatrixRain();
+          typedBuffer = "";
+        }
+      }
+    });
+
+    setupHeroDwellTerminal();
+    setupSectionNumberTriggers();
+    setupLanguageToggleEgg();
+    setupThemeShift();
+    maybeRunBootSequence();
+  }
+
   addCookieSettingsLink();
   setupCertificateLightbox();
   setLang(getInitialLang());
@@ -1183,6 +1567,7 @@
   setupTechStream();
   setupSignalCanvas();
   setupSignalFlicker();
+  setupEasterEggs();
   if (window.location.hash) {
     window.addEventListener("load", () => {
       const target = document.querySelector(window.location.hash);
