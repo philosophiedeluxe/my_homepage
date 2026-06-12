@@ -623,9 +623,20 @@
   }
 
   function setupHeroCursor() {
-    if (!hero || reduceMotion.matches || !finePointer.matches) return;
+    if (reduceMotion.matches || !finePointer.matches) return;
 
     const cursor = document.createElement("div");
+    const interactiveSelector = [
+      "a",
+      "button",
+      "input",
+      "textarea",
+      "select",
+      "summary",
+      "[role='button']",
+      "[tabindex]:not([tabindex='-1'])"
+    ].join(", ");
+
     cursor.className = "hero-code-cursor";
     cursor.setAttribute("aria-hidden", "true");
     cursor.innerHTML = `
@@ -647,24 +658,27 @@
       frame = 0;
     }
 
-    hero.addEventListener("pointerenter", () => {
-      cursor.classList.add("is-visible");
-    });
+    function hideCursor() {
+      cursor.classList.remove("is-visible", "is-action", "is-clicking");
+    }
 
-    hero.addEventListener("pointermove", (event) => {
-      nextX = event.clientX - 4;
-      nextY = event.clientY - 3;
-      cursor.classList.toggle("is-action", Boolean(event.target.closest("a, button")));
+    document.addEventListener("pointermove", (event) => {
+      if (event.pointerType === "touch") return;
+
+      nextX = event.clientX - 3;
+      nextY = event.clientY - 2;
+      cursor.classList.add("is-visible");
+      cursor.classList.toggle("is-action", Boolean(event.target.closest(interactiveSelector)));
       if (!frame) frame = window.requestAnimationFrame(renderCursor);
     }, { passive: true });
 
-    hero.addEventListener("pointerleave", () => {
-      cursor.classList.remove("is-visible", "is-action", "is-clicking");
-    });
+    document.addEventListener("pointerleave", hideCursor);
 
-    hero.addEventListener("pointerdown", () => {
-      cursor.classList.add("is-clicking");
-    });
+    window.addEventListener("blur", hideCursor);
+
+    document.addEventListener("pointerdown", (event) => {
+      if (event.pointerType !== "touch") cursor.classList.add("is-clicking");
+    }, { passive: true });
 
     window.addEventListener("pointerup", () => {
       cursor.classList.remove("is-clicking");
