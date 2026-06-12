@@ -1515,6 +1515,16 @@ main > .section.interior-hero::before {
   left: auto;
 }
 
+@media (min-width: 981px) {
+  .vita-page .timeline-section .section-heading {
+    min-height: clamp(168px, 16vw, 224px);
+  }
+
+  .vita-page .timeline-section .vita-section-meta {
+    align-self: stretch;
+  }
+}
+
 .timeline {
   display: grid;
   gap: 14px;
