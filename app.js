@@ -429,8 +429,13 @@
     const nextLang = sanitizeLang(lang);
     storeLang(nextLang);
     applyTranslations(nextLang);
-    document.querySelectorAll(".hero-title .accent-word").forEach((word) => {
-      word.dataset.reflection = word.textContent;
+    document.querySelectorAll(".accent-word").forEach((word) => {
+      const isSoftware = word.textContent.trim().toLocaleLowerCase(nextLang) === "software";
+      if (isSoftware && (document.body.classList.contains("vita-page") || document.querySelector(".hero"))) {
+        word.dataset.reflection = word.textContent;
+      } else {
+        delete word.dataset.reflection;
+      }
     });
     if (updateUrl) updateLangUrl(nextLang);
   }
