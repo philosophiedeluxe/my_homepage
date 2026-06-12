@@ -430,8 +430,8 @@ main > article.section {
 
 .hero-code-cursor__code {
   position: absolute;
-  right: 0;
-  bottom: 0;
+  right: -4px;
+  bottom: -3px;
   opacity: 1;
   color: var(--accent-2);
   font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
