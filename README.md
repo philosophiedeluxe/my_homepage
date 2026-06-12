@@ -118,11 +118,11 @@ Cursor states:
 | Idle | pointer remains still for about 12 seconds | temporary sleeping cursor code |
 | Keyword | selected technical words | temporary context label such as `SQL`, `APP`, `DB`, `JS`, `AI` |
 
-Technical keyword reactions currently include terms such as `Oracle`, `APEX`, `PL/SQL`, `JavaScript`, `KI`, `GitHub` and `REST`.
+Technical keyword reactions currently include terms such as `Oracle`, `APEX`, `PL/SQL`, `SQL`, `JavaScript`, `KI`, `GitHub` and `REST`.
 
 ### Tilt Cards and Glow
 
-Project and stack cards use `data-tilt-card`. The tilt logic is handled in `setupTiltCards()` and writes CSS variables to the hovered card:
+The tilt system is handled in `setupTiltCards()` and now covers project cards, stack cards, hero quick facts, Vita profile cards, timeline entries and credential rows. Existing project and stack cards still use `data-tilt-card`; the remaining supported cards are registered at runtime with `.tilt-card-effect`. The logic writes CSS variables to the hovered card:
 
 ```text
 --tilt-x
@@ -131,7 +131,7 @@ Project and stack cards use `data-tilt-card`. The tilt logic is handled in `setu
 --glow-y
 ```
 
-During pointer movement, the card receives `.is-tilting`, which removes transform lag while preserving a smooth reset on pointer leave. The glow is deliberately restrained so the visual effect does not reduce text readability.
+During pointer movement, the card receives `.is-tilting`, which removes transform lag while preserving a smooth reset on pointer leave. Compact and very wide cards use reduced tilt strength so the motion stays controlled. The glow is deliberately restrained and sits below the content layer so the visual effect does not reduce text readability.
 
 ## Easter Eggs
 

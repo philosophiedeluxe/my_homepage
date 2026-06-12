@@ -664,6 +664,7 @@
     ].join(", ");
     const keywordSignals = [
       { pattern: /\bPL\/?SQL\b/i, label: "SQL" },
+      { pattern: /\bSQL\b/i, label: "SQL" },
       { pattern: /\bOracle\b/i, label: "DB" },
       { pattern: /\bAPEX\b/i, label: "APP" },
       { pattern: /\bJavaScript\b/i, label: "JS" },
@@ -850,7 +851,17 @@
   function setupTiltCards() {
     if (reduceMotion.matches || !finePointer.matches) return;
 
-    document.querySelectorAll("[data-tilt-card]").forEach((card) => {
+    const tiltTargets = [
+      "[data-tilt-card]",
+      ".quick-facts > div",
+      ".profile-grid > article",
+      ".timeline-item",
+      ".credential-list > li"
+    ].join(", ");
+
+    document.querySelectorAll(tiltTargets).forEach((card) => {
+      card.classList.add("tilt-card-effect");
+
       let frame = 0;
       let resetTimer = 0;
       let nextX = 0;
@@ -872,8 +883,12 @@
 
         const x = Math.min(Math.max((event.clientX - rect.left) / rect.width, 0), 1);
         const y = Math.min(Math.max((event.clientY - rect.top) / rect.height, 0), 1);
-        nextX = (0.5 - y) * 5.4;
-        nextY = (x - 0.5) * 6.4;
+        const compactFactor = rect.height < 100 ? 0.68 : 1;
+        const wideFactor = rect.width > 900 ? 0.82 : 1;
+        const strength = compactFactor * wideFactor;
+
+        nextX = (0.5 - y) * 5.4 * strength;
+        nextY = (x - 0.5) * 6.4 * strength;
         glowX = x * 100;
         glowY = y * 100;
 
@@ -1454,28 +1469,59 @@
 
     function setupHeroDwellTerminal() {
       if (!hero || !terminal) return;
+
       let dwellTimer = 0;
       let shown = false;
+      let heroActive = false;
+      const dwellDelay = 7000;
+
       const reveal = () => {
-        if (shown) return;
+        if (shown || !heroActive || document.hidden) return;
         shown = true;
         const message = terminalMessages[Math.floor(Math.random() * terminalMessages.length)];
-        flashTerminal(message, 4200);
+        flashTerminal(message, 5000);
         emitCursorCode("SIG", 3200, "is-signal-code");
       };
 
-      if (!("IntersectionObserver" in window)) {
-        dwellTimer = window.setTimeout(reveal, 7000);
-        return;
+      const isHeroVisible = () => {
+        const rect = hero.getBoundingClientRect();
+        const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+        const visibleHeight = Math.min(rect.bottom, viewportHeight) - Math.max(rect.top, 0);
+        return visibleHeight > Math.min(rect.height * 0.18, 220);
+      };
+
+      const arm = () => {
+        if (shown) return;
+        window.clearTimeout(dwellTimer);
+        heroActive = isHeroVisible();
+        if (heroActive && !document.hidden) dwellTimer = window.setTimeout(reveal, dwellDelay);
+      };
+
+      const disarm = () => {
+        heroActive = false;
+        window.clearTimeout(dwellTimer);
+      };
+
+      if ("IntersectionObserver" in window) {
+        const observer = new IntersectionObserver((entries) => {
+          const active = entries.some((entry) => entry.isIntersecting && entry.intersectionRatio > 0.18);
+          if (active) arm();
+          else disarm();
+        }, { threshold: [0, 0.18, 0.56] });
+
+        observer.observe(hero);
+      } else {
+        window.addEventListener("scroll", arm, { passive: true });
+        window.addEventListener("resize", arm, { passive: true });
       }
 
-      const observer = new IntersectionObserver((entries) => {
-        const active = entries.some((entry) => entry.isIntersecting && entry.intersectionRatio > 0.56);
-        window.clearTimeout(dwellTimer);
-        if (active && !shown) dwellTimer = window.setTimeout(reveal, 7000);
-      }, { threshold: [0, 0.56, 0.9] });
-
-      observer.observe(hero);
+      hero.addEventListener("pointerenter", arm, { passive: true });
+      hero.addEventListener("focusin", arm);
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden) disarm();
+        else arm();
+      });
+      window.setTimeout(arm, 120);
     }
 
     function setupSectionNumberTriggers() {
