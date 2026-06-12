@@ -622,28 +622,53 @@
     });
   }
 
-  function setupHeroPointer() {
-    if (!hero || reduceMotion.matches || !finePointer.matches || isFirefox) return;
+  function setupHeroCursor() {
+    if (!hero || reduceMotion.matches || !finePointer.matches) return;
+
+    const cursor = document.createElement("div");
+    cursor.className = "hero-code-cursor";
+    cursor.setAttribute("aria-hidden", "true");
+    cursor.innerHTML = `
+      <span class="hero-code-cursor__layer hero-code-cursor__layer--cyan"></span>
+      <span class="hero-code-cursor__layer hero-code-cursor__layer--magenta"></span>
+      <span class="hero-code-cursor__layer hero-code-cursor__layer--core"></span>
+      <span class="hero-code-cursor__code">&lt;/&gt;</span>
+    `;
+    document.body.appendChild(cursor);
+    root.classList.add("has-hero-cursor");
+
     let frame = 0;
-    let nextX = 68;
-    let nextY = 42;
+    let nextX = -80;
+    let nextY = -80;
+
+    function renderCursor() {
+      cursor.style.setProperty("--cursor-x", `${nextX}px`);
+      cursor.style.setProperty("--cursor-y", `${nextY}px`);
+      frame = 0;
+    }
+
+    hero.addEventListener("pointerenter", () => {
+      cursor.classList.add("is-visible");
+    });
 
     hero.addEventListener("pointermove", (event) => {
-      const rect = hero.getBoundingClientRect();
-      nextX = ((event.clientX - rect.left) / rect.width) * 100;
-      nextY = ((event.clientY - rect.top) / rect.height) * 100;
-      if (frame) return;
-      frame = window.requestAnimationFrame(() => {
-        hero.style.setProperty("--pointer-x", `${nextX.toFixed(2)}%`);
-        hero.style.setProperty("--pointer-y", `${nextY.toFixed(2)}%`);
-        frame = 0;
-      });
+      nextX = event.clientX - 4;
+      nextY = event.clientY - 3;
+      cursor.classList.toggle("is-action", Boolean(event.target.closest("a, button")));
+      if (!frame) frame = window.requestAnimationFrame(renderCursor);
     }, { passive: true });
 
     hero.addEventListener("pointerleave", () => {
-      hero.style.setProperty("--pointer-x", "68%");
-      hero.style.setProperty("--pointer-y", "42%");
+      cursor.classList.remove("is-visible", "is-action", "is-clicking");
     });
+
+    hero.addEventListener("pointerdown", () => {
+      cursor.classList.add("is-clicking");
+    });
+
+    window.addEventListener("pointerup", () => {
+      cursor.classList.remove("is-clicking");
+    }, { passive: true });
   }
 
   function setupTiltCards() {
@@ -803,9 +828,6 @@
     let height = 0;
     let ratio = 1;
     let nodes = [];
-    let pointerX = 0;
-    let pointerY = 0;
-    let pointerActive = false;
     let heroVisible = true;
     let animationFrame = 0;
     let lastFrame = 0;
@@ -864,35 +886,12 @@
           context.stroke();
         }
 
-        if (pointerActive) {
-          const dx = node.x - pointerX;
-          const dy = node.y - pointerY;
-          const distance = Math.hypot(dx, dy);
-          if (distance < 180) {
-            context.strokeStyle = `rgba(240, 168, 58, ${(1 - distance / 180) * 0.22})`;
-            context.beginPath();
-            context.moveTo(node.x, node.y);
-            context.lineTo(pointerX, pointerY);
-            context.stroke();
-          }
-        }
-
         context.fillStyle = node.size > 1 ? "rgba(240, 168, 58, 0.72)" : "rgba(98, 214, 208, 0.58)";
         context.beginPath();
         context.arc(node.x, node.y, node.size, 0, Math.PI * 2);
         context.fill();
       }
     }
-
-    hero.addEventListener("pointermove", (event) => {
-      const rect = hero.getBoundingClientRect();
-      pointerX = event.clientX - rect.left;
-      pointerY = event.clientY - rect.top;
-      pointerActive = true;
-    }, { passive: true });
-    hero.addEventListener("pointerleave", () => {
-      pointerActive = false;
-    });
 
     if ("IntersectionObserver" in window) {
       const observer = new IntersectionObserver(([entry]) => {
@@ -1097,7 +1096,7 @@
   addCookieSettingsLink();
   setupCertificateLightbox();
   setLang(getInitialLang());
-  setupHeroPointer();
+  setupHeroCursor();
   setupTiltCards();
   setupActiveNavigation();
   setupTechStream();
