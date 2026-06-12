@@ -29,13 +29,14 @@ The site combines a clean dark visual style with a technical portfolio structure
 
 - Responsive portfolio homepage for desktop, tablet and mobile
 - Interactive signal canvas with a Firefox-aware render budget
-- Scroll progress, active section navigation and pointer-reactive depth effects
+- Scroll progress, active section navigation and responsive pointer-reactive depth effects
+- Global custom code cursor with dynamic text-cursor mode and keyword-aware labels
 - Animated technology stream and visual project modules
 - German and English language switch
 - Dedicated Vita / Resume page
 - Browser-based PDF export for the German Vita and English Resume
 - Print-optimized A4 layout for complete one-page PDF generation
-- Project spotlight section
+- Project spotlight section with optimized tilt cards and restrained glow feedback
 - Technology stack overview
 - Certificate section with visual assets
 - SEO basics with canonical URLs, OpenGraph metadata and Twitter Card metadata
@@ -44,6 +45,7 @@ The site combines a clean dark visual style with a technical portfolio structure
 - Local consent handling for cookie and language preferences
 - Dedicated legal pages for Impressum and Datenschutz
 - Custom 404 page
+- Hidden Easter eggs for developer-oriented discovery interactions
 - Lightweight QA script for local checks
 - GitHub Pages compatible without build process
 
@@ -97,6 +99,58 @@ Key design principles:
 - portfolio content first, decoration second
 - mobile-first interaction behavior
 - accessible navigation and readable contrast
+
+## Interaction System
+
+The site uses a global custom cursor and a set of controlled pointer effects. These effects are intentionally desktop-only and respect `prefers-reduced-motion`. Touch devices keep the native interaction model.
+
+### Custom Cursor
+
+The cursor is generated in `app.js` by `setupHeroCursor()` and styled in `style.css` with the `.hero-code-cursor` family of selectors. Despite the original function name, the cursor is now global and no longer limited to the hero section.
+
+Cursor states:
+
+| State | Trigger | Behavior |
+| --- | --- | --- |
+| Default | normal page surface | code-shaped pointer with cyan/magenta/core layers |
+| Action | links, buttons and interactive controls | stronger split-layer action state |
+| Text | readable text, text inputs and contenteditable areas | smaller I-beam cursor in the same visual style |
+| Idle | pointer remains still for about 12 seconds | temporary sleeping cursor code |
+| Keyword | selected technical words | temporary context label such as `SQL`, `APP`, `DB`, `JS`, `AI` |
+
+Technical keyword reactions currently include terms such as `Oracle`, `APEX`, `PL/SQL`, `JavaScript`, `KI`, `GitHub` and `REST`.
+
+### Tilt Cards and Glow
+
+Project and stack cards use `data-tilt-card`. The tilt logic is handled in `setupTiltCards()` and writes CSS variables to the hovered card:
+
+```text
+--tilt-x
+--tilt-y
+--glow-x
+--glow-y
+```
+
+During pointer movement, the card receives `.is-tilting`, which removes transform lag while preserving a smooth reset on pointer leave. The glow is deliberately restrained so the visual effect does not reduce text readability.
+
+## Easter Eggs
+
+The Easter eggs are intentionally subtle. They are implemented in `setupEasterEggs()` and are meant as hidden interface details, not primary navigation.
+
+| Easter Egg | Trigger | Result |
+| --- | --- | --- |
+| Developer Mode | `ArrowUp ArrowUp ArrowDown ArrowDown ArrowLeft ArrowRight ArrowLeft ArrowRight B A` | temporary developer state, terminal message and cursor code `{PK}` |
+| Cursor Sleep | leave the mouse still for about 12 seconds | cursor switches into an idle/sleeping state |
+| Hero Terminal | keep the hero section visible for about 7 seconds | hidden terminal line appears in the hero area |
+| Matrix Rain | type `matrix` on the keyboard | temporary Matrix-style rain overlay |
+| DOM Comment | inspect the HTML source or DevTools DOM | hidden signal-layer comments are present |
+| Section Signals | click decorative section numbers such as `01`, `02`, `03`, `04` | section pulse, toast and cursor code |
+| Language DEV Mode | click the `DE/EN` toggle 6 times quickly | temporary `DEV` language-state hint |
+| Boot Sequence | rare first page visit per session | brief boot overlay with signal-layer lines |
+| Keyword Cursor | hover selected technology words | cursor label changes contextually |
+| Secret Theme Shift | hold `Shift` and click the `PK` branding | temporary alternate theme shift |
+
+The effects are session-safe and temporary. They do not store analytics, do not call external services and do not change the content model of the site.
 
 ## Vita and PDF Export
 

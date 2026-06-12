@@ -852,36 +852,61 @@
 
     document.querySelectorAll("[data-tilt-card]").forEach((card) => {
       let frame = 0;
+      let resetTimer = 0;
       let nextX = 0;
       let nextY = 0;
       let glowX = 50;
       let glowY = 50;
 
-      card.addEventListener("pointermove", (event) => {
+      function applyTilt() {
+        card.style.setProperty("--tilt-x", `${nextX.toFixed(2)}deg`);
+        card.style.setProperty("--tilt-y", `${nextY.toFixed(2)}deg`);
+        card.style.setProperty("--glow-x", `${glowX.toFixed(1)}%`);
+        card.style.setProperty("--glow-y", `${glowY.toFixed(1)}%`);
+        frame = 0;
+      }
+
+      function updateTilt(event) {
         const rect = card.getBoundingClientRect();
-        const x = (event.clientX - rect.left) / rect.width;
-        const y = (event.clientY - rect.top) / rect.height;
-        nextX = (0.5 - y) * 5;
-        nextY = (x - 0.5) * 6;
+        if (!rect.width || !rect.height) return;
+
+        const x = Math.min(Math.max((event.clientX - rect.left) / rect.width, 0), 1);
+        const y = Math.min(Math.max((event.clientY - rect.top) / rect.height, 0), 1);
+        nextX = (0.5 - y) * 5.4;
+        nextY = (x - 0.5) * 6.4;
         glowX = x * 100;
         glowY = y * 100;
 
-        if (frame) return;
-        frame = window.requestAnimationFrame(() => {
-          card.style.setProperty("--tilt-x", `${nextX.toFixed(2)}deg`);
-          card.style.setProperty("--tilt-y", `${nextY.toFixed(2)}deg`);
-          card.style.setProperty("--glow-x", `${glowX.toFixed(1)}%`);
-          card.style.setProperty("--glow-y", `${glowY.toFixed(1)}%`);
-          frame = 0;
-        });
+        if (!frame) frame = window.requestAnimationFrame(applyTilt);
+      }
+
+      card.addEventListener("pointerenter", (event) => {
+        window.clearTimeout(resetTimer);
+        card.classList.add("is-tilting");
+        updateTilt(event);
       }, { passive: true });
 
+      card.addEventListener("pointermove", updateTilt, { passive: true });
+
       card.addEventListener("pointerleave", () => {
+        window.clearTimeout(resetTimer);
+        if (frame) {
+          window.cancelAnimationFrame(frame);
+          frame = 0;
+        }
+
+        card.classList.remove("is-tilting");
         card.style.setProperty("--tilt-x", "0deg");
         card.style.setProperty("--tilt-y", "0deg");
         card.style.setProperty("--glow-x", "50%");
         card.style.setProperty("--glow-y", "50%");
-      });
+        resetTimer = window.setTimeout(() => {
+          card.style.removeProperty("--tilt-x");
+          card.style.removeProperty("--tilt-y");
+          card.style.removeProperty("--glow-x");
+          card.style.removeProperty("--glow-y");
+        }, 260);
+      }, { passive: true });
     });
   }
 

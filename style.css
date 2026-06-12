@@ -394,10 +394,10 @@ main > article.section {
 
 .hero-code-cursor__text {
   position: absolute;
-  top: 2px;
-  left: 7.3px;
-  width: 2.4px;
-  height: 24.8px;
+  top: 4.5px;
+  left: 7.55px;
+  width: 1.9px;
+  height: 19.8px;
   opacity: 0;
   border-radius: 999px;
   transform-origin: 50% 50%;
@@ -409,8 +409,8 @@ main > article.section {
   content: "";
   position: absolute;
   left: 50%;
-  width: 12px;
-  height: 2.4px;
+  width: 9.6px;
+  height: 1.9px;
   border-radius: 999px;
   transform: translateX(-50%);
   background: inherit;
@@ -426,12 +426,12 @@ main > article.section {
 
 .hero-code-cursor__text--cyan {
   background: #00ecec;
-  transform: translate3d(1.8px, 1px, 0);
+  transform: translate3d(1.4px, 0.8px, 0);
 }
 
 .hero-code-cursor__text--magenta {
   background: #ff2aa1;
-  transform: translate3d(-1.8px, -1px, 0);
+  transform: translate3d(-1.4px, -0.8px, 0);
 }
 
 .hero-code-cursor__text--core {
@@ -1433,8 +1433,14 @@ h3 {
   --glow-x: 50%;
   --glow-y: 50%;
   position: relative;
-  transform: perspective(900px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
-  transition: transform 280ms var(--ease-out), border-color 220ms ease, background 220ms ease;
+  transform: perspective(900px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) translateZ(0);
+  backface-visibility: hidden;
+  transition: transform 190ms var(--ease-out), border-color 180ms ease, background 180ms ease;
+}
+
+[data-tilt-card].is-tilting {
+  transition: border-color 140ms ease, background 140ms ease;
+  will-change: transform;
 }
 
 [data-tilt-card]::after {
@@ -1442,14 +1448,16 @@ h3 {
   position: absolute;
   inset: 0;
   z-index: 0;
-  background: radial-gradient(circle at var(--glow-x) var(--glow-y), rgba(98, 214, 208, 0.12), transparent 34%);
+  background:
+    radial-gradient(circle at var(--glow-x) var(--glow-y), rgba(98, 214, 208, 0.07), rgba(143, 92, 255, 0.035) 18%, transparent 42%);
   opacity: 0;
-  transition: opacity 220ms ease;
+  transition: opacity 180ms ease;
   pointer-events: none;
 }
 
-[data-tilt-card]:hover::after {
-  opacity: 1;
+[data-tilt-card]:hover::after,
+[data-tilt-card].is-tilting::after {
+  opacity: 0.72;
 }
 
 [data-tilt-card] > * {
@@ -1458,7 +1466,7 @@ h3 {
 }
 
 .reveal-ready [data-tilt-card].reveal-item.is-visible {
-  transform: perspective(900px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
+  transform: perspective(900px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) translateZ(0);
 }
 
 .project-card__visual {
