@@ -753,6 +753,175 @@ html.easter-dev-mode .hero-scanline {
   pointer-events: none;
 }
 
+
+
+/* PK 2026-06-12: Effektive Block-Verdichtung
+   Ursache der großen sichtbaren Abstände war nicht nur .section padding,
+   sondern die Kombination aus großen Section-Headings, Text-Stack-Offset,
+   Karten-Mindesthöhen und mehreren bereichsspezifischen Abständen. */
+@media screen and (min-width: 981px) {
+  main > .section:not(.hero):not(.interior-hero),
+  main > article.section {
+    padding-block: clamp(16px, 2.2vw, 32px) clamp(12px, 1.8vw, 24px);
+  }
+
+  .split-section,
+  .projects-section,
+  .stack-section,
+  .profile-summary,
+  .timeline-section,
+  .credential-section,
+  .contact-section {
+    padding-top: clamp(16px, 2.2vw, 32px);
+    padding-bottom: clamp(12px, 1.8vw, 24px);
+  }
+
+  .split-section {
+    align-items: start;
+    gap: clamp(24px, 4vw, 58px);
+  }
+
+  .split-section .text-stack {
+    align-self: start;
+    padding-top: clamp(8px, 1.1vw, 16px);
+  }
+
+  .section-heading {
+    margin-bottom: clamp(10px, 1.2vw, 16px);
+  }
+
+  .section-heading h2,
+  .split-section h2,
+  .contact-section h2 {
+    font-size: clamp(2.15rem, 4.35vw, 4.15rem);
+  }
+
+  .split-section h2,
+  .section-heading h2 {
+    max-width: 15ch;
+  }
+
+  .contact-section h2 {
+    max-width: 14ch;
+  }
+
+  .project-grid,
+  .stack-grid,
+  .profile-grid {
+    gap: 14px;
+  }
+
+  .project-card {
+    min-height: clamp(390px, 31vw, 450px);
+  }
+
+  .project-card,
+  .stack-grid article,
+  .profile-grid article {
+    padding: clamp(18px, 2.3vw, 24px);
+  }
+
+  .project-kicker {
+    margin-bottom: 16px;
+  }
+
+  .tag-list {
+    padding-top: 18px;
+  }
+
+  .stack-console {
+    margin-bottom: 16px;
+  }
+
+  .certificate-showcase {
+    margin-top: 18px;
+  }
+
+  .credential-proof-grid {
+    gap: 10px;
+  }
+
+  .proof-card img,
+  .proof-card--oracle img {
+    height: 150px;
+  }
+
+  .timeline {
+    gap: 10px;
+  }
+
+  .timeline-item {
+    gap: 22px;
+    padding: clamp(16px, 2.1vw, 24px);
+  }
+
+  .vita-page .timeline-section .section-heading {
+    min-height: 0;
+  }
+
+  .vita-section-meta {
+    align-content: start;
+    gap: 10px;
+  }
+
+  .interior-hero {
+    min-height: clamp(340px, 44vh, 460px);
+  }
+
+  .legal-hero {
+    min-height: clamp(220px, 30vh, 320px);
+    padding-block: clamp(32px, 4.5vw, 58px);
+  }
+}
+
+@media screen and (max-width: 980px) {
+  main > .section:not(.hero):not(.interior-hero),
+  main > article.section {
+    padding-block: clamp(20px, 4vw, 32px) clamp(16px, 3vw, 26px);
+  }
+
+  .section-heading {
+    margin-bottom: 14px;
+  }
+
+  .project-card {
+    min-height: 340px;
+  }
+
+  .interior-hero {
+    min-height: 360px;
+  }
+
+  .certificate-showcase {
+    margin-top: 18px;
+  }
+}
+
+@media screen and (max-width: 680px) {
+  main > .section:not(.hero):not(.interior-hero),
+  main > article.section {
+    padding-block: 20px 18px;
+  }
+
+  .section-heading {
+    margin-bottom: 12px;
+  }
+
+  .project-card,
+  .profile-grid article,
+  .stack-grid article {
+    padding: 18px;
+  }
+
+  .project-card {
+    min-height: 300px;
+  }
+
+  .interior-hero {
+    min-height: 330px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .easter-matrix-rain {
     display: none;
