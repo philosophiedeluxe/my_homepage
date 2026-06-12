@@ -28,6 +28,9 @@ The site combines a clean dark visual style with a technical portfolio structure
 ## Core Features
 
 - Responsive portfolio homepage for desktop, tablet and mobile
+- Interactive signal canvas with a Firefox-aware render budget
+- Scroll progress, active section navigation and pointer-reactive depth effects
+- Animated technology stream and visual project modules
 - German and English language switch
 - Dedicated Vita / Resume page
 - Browser-based PDF export for the German Vita and English Resume
@@ -83,13 +86,13 @@ The site combines a clean dark visual style with a technical portfolio structure
 
 ## Design Direction
 
-The visual concept is dark, precise and technical. Purple is used as a controlled accent color, while the layout stays focused on readability and structure.
+The visual concept is dark, precise and technical. Purple is used as a controlled accent color, while animated signal lines, restrained grid structures and responsive depth effects create a distinctive developer identity.
 
 Key design principles:
 
 - clean dark interface
 - reduced but recognizable technical aesthetic
-- calm motion instead of distracting effects
+- expressive motion with reduced-motion and browser-specific fallbacks
 - strong typography and clear section hierarchy
 - portfolio content first, decoration second
 - mobile-first interaction behavior

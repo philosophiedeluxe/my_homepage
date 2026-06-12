@@ -26,8 +26,8 @@
   <meta name="twitter:image" content="https://philosophiedeluxe.github.io/my_homepage/image/social-card.jpg">
   <meta name="twitter:image:alt" content="Phil Kirchner - Softwareentwickler für Oracle APEX, PL/SQL, JavaScript und Java">
   <link rel="icon" type="image/gif" href="./image/iconstar.gif">
-  <link rel="stylesheet" href="./style.css?v=20260601-3">
-  <script defer src="./app.js?v=20260601-3"></script>
+  <link rel="stylesheet" href="./style.css?v=20260612-1">
+  <script defer src="./app.js?v=20260612-1"></script>
 </head>
 <body>
   <header class="site-shell">
@@ -62,9 +62,13 @@
 
   <main>
     <section class="hero section" id="profil">
+      <canvas class="signal-canvas" aria-hidden="true"></canvas>
       <div class="hero-copy">
-        <p class="eyebrow" data-i18n="hero.eyebrow">Softwareentwickler aus Freising</p>
-        <h1 class="hero-title" data-i18n-rich="hero.title">Ich baue <span class="accent-word">Software</span>, die Prozesse nicht nur digitalisiert, sondern <span class="accent-word">antreibt</span>.</h1>
+        <div class="hero-status">
+          <p class="eyebrow" data-i18n="hero.eyebrow">Softwareentwickler aus Freising</p>
+          <span class="availability-signal"><span aria-hidden="true"></span><span data-i18n="hero.status">Verfügbar für Austausch</span></span>
+        </div>
+        <h1 class="hero-title" data-i18n-rich="hero.title">Ich baue <span class="accent-word">Software,</span> die Prozesse nicht nur digitalisiert, sondern <span class="accent-word">antreibt</span>.</h1>
         <p class="hero-text" data-i18n="hero.text">Ich komme aus operativer Verantwortung: Einkauf, Prozesse und Teams kenne ich aus der Praxis. Heute entwickle ich Anwendungen mit Oracle APEX, PL/SQL, JavaScript und Java. Diese Mischung ist mein Vorteil: Technik, die nicht nur läuft, sondern im Alltag Wirkung zeigt.</p>
         <div class="hero-actions" aria-label="Kontakt und Profil">
           <a class="button button-primary" href="mailto:phil.kirchner.999@googlemail.com" data-i18n="hero.mail">Kontakt aufnehmen</a>
@@ -90,16 +94,25 @@
       </div>
       <div class="hero-visual" aria-label="Portrait von Phil Kirchner">
         <img src="./image/iconic.jpg" srcset="./image/iconic-720.jpg 720w, ./image/iconic-960.jpg 960w, ./image/iconic.jpg 1122w" sizes="100vw" alt="Stilisiertes Portrait von Phil Kirchner" width="1122" height="1402" fetchpriority="high" decoding="async">
-        <div class="signal-panel" aria-hidden="true">
-          <span>APEX</span>
-          <span>PL/SQL</span>
-          <span>JavaScript</span>
-        </div>
+      </div>
+      <div class="hero-system-panel" aria-hidden="true">
+        <span class="hero-system-panel__label">SYSTEM / PROFILE</span>
+        <strong>BUSINESS SOFTWARE</strong>
+        <span>APEX · PL/SQL · JS</span>
+        <span class="hero-system-panel__meter"><i></i></span>
       </div>
       <div class="hero-scroll-dim" aria-hidden="true"></div>
+      <div class="hero-scanline" aria-hidden="true"></div>
     </section>
 
-    <section class="section split-section" aria-labelledby="position-title">
+    <section class="tech-stream" aria-label="Technologie-Stream">
+      <div class="tech-stream__track" aria-hidden="true">
+        <span>ORACLE APEX</span><i></i><span>PL/SQL</span><i></i><span>JAVASCRIPT</span><i></i><span>BUSINESS APPS</span><i></i><span>REST</span><i></i><span>JAVA</span><i></i><span>SQL</span><i></i><span>PROCESS DESIGN</span><i></i>
+        <span>ORACLE APEX</span><i></i><span>PL/SQL</span><i></i><span>JAVASCRIPT</span><i></i><span>BUSINESS APPS</span><i></i><span>REST</span><i></i><span>JAVA</span><i></i><span>SQL</span><i></i><span>PROCESS DESIGN</span><i></i>
+      </div>
+    </section>
+
+    <section class="section split-section" aria-labelledby="position-title" data-section-index="01">
       <div>
         <p class="eyebrow" data-i18n="position.eyebrow">Was mich unterscheidet</p>
         <h2 id="position-title" data-i18n-rich="position.title">Ich denke <span class="accent-word">Software</span> nicht nur vom Code aus.</h2>
@@ -110,16 +123,25 @@
       </div>
     </section>
 
-    <section class="section" id="projekte" aria-labelledby="projects-title">
+    <section class="section projects-section" id="projekte" aria-labelledby="projects-title" data-section-index="02">
       <div class="section-heading">
         <p class="eyebrow" data-i18n="projects.eyebrow">Projekt-Spotlights</p>
         <h2 id="projects-title" data-i18n-rich="projects.title">Arbeiten, die zeigen, wie ich <span class="accent-word">denke</span>.</h2>
       </div>
       <div class="project-grid">
-        <article class="project-card">
+        <article class="project-card" data-tilt-card>
+          <div class="project-card__visual project-card__visual--portfolio" aria-hidden="true">
+            <span class="project-card__number">01</span>
+            <div class="portfolio-window">
+              <span></span><span></span><span></span>
+              <strong>PHIL / PORTFOLIO</strong>
+              <i></i>
+            </div>
+          </div>
           <p class="project-kicker">Portfolio</p>
           <h3 data-i18n="project.home.title">Modernisierte persönliche Homepage</h3>
           <p data-i18n="project.home.text">Eine statische, schnelle Portfolio-Seite mit klarer Positionierung, responsivem Layout, DE/EN-Umschaltung und verbessertem SEO-Fundament.</p>
+          <p class="project-result" data-i18n="project.home.result">Statisch · zweisprachig · ohne Build-Schritt</p>
           <ul class="tag-list" aria-label="Technologien">
             <li>HTML</li>
             <li>CSS</li>
@@ -127,10 +149,17 @@
             <li>SEO</li>
           </ul>
         </article>
-        <article class="project-card">
+        <article class="project-card" data-tilt-card>
+          <div class="project-card__visual project-card__visual--apex" aria-hidden="true">
+            <span class="project-card__number">02</span>
+            <div class="data-flow">
+              <b>UI</b><i></i><b>APEX</b><i></i><b>DB</b>
+            </div>
+          </div>
           <p class="project-kicker">Business Apps</p>
           <h3 data-i18n="project.apex.title">Oracle-nahe Anwendungsentwicklung</h3>
           <p data-i18n="project.apex.text">Fokus auf Oberflächen, Datenmodelle und Abläufe rund um Oracle APEX, PL/SQL, REST Data Sources und strukturierte Datenhaltung.</p>
+          <p class="project-result" data-i18n="project.apex.result">Datengetrieben · workfloworientiert · robust</p>
           <ul class="tag-list" aria-label="Technologien">
             <li>Oracle APEX</li>
             <li>PL/SQL</li>
@@ -138,10 +167,17 @@
             <li>Oracle DB</li>
           </ul>
         </article>
-        <article class="project-card">
+        <article class="project-card" data-tilt-card>
+          <div class="project-card__visual project-card__visual--java" aria-hidden="true">
+            <span class="project-card__number">03</span>
+            <div class="code-lines">
+              <i></i><i></i><i></i><i></i><i></i>
+            </div>
+          </div>
           <p class="project-kicker">Backend</p>
           <h3 data-i18n="project.java.title">Java, SQL und saubere Grundarchitektur</h3>
           <p data-i18n="project.java.text">Ausbildung und Praxis mit Java, SQL, Spring Boot, MVC, Vaadin, Git, Jira, Confluence und modellgetriebener Softwareentwicklung.</p>
+          <p class="project-result" data-i18n="project.java.result">Modular · nachvollziehbar · teamfähig</p>
           <ul class="tag-list" aria-label="Technologien">
             <li>Java</li>
             <li>Spring</li>
@@ -152,23 +188,36 @@
       </div>
     </section>
 
-    <section class="section stack-section" id="stack" aria-labelledby="stack-title">
+    <section class="section stack-section" id="stack" aria-labelledby="stack-title" data-section-index="03">
       <div class="section-heading">
         <p class="eyebrow" data-i18n="stack.eyebrow">Kompetenzprofil</p>
         <h2 id="stack-title" data-i18n-rich="stack.title">Technik, Methoden und <span class="accent-word">Erfahrung</span> in einem Profil.</h2>
       </div>
+      <div class="stack-console" aria-hidden="true">
+        <div class="stack-console__bar">
+          <span></span><span></span><span></span>
+          <p>phil@portfolio:~/capabilities</p>
+        </div>
+        <div class="stack-console__body">
+          <p><span>$</span> build --focus business-software</p>
+          <p><b>01</b> Oracle APEX / PL/SQL / REST</p>
+          <p><b>02</b> JavaScript / Java / SQL</p>
+          <p><b>03</b> Product Thinking / Delivery</p>
+          <p class="stack-console__ready"><span>READY</span> systems connected</p>
+        </div>
+      </div>
       <div class="stack-grid">
-        <article>
+        <article data-tilt-card>
           <p class="project-kicker" data-i18n="stack.dev.kicker">Entwicklung</p>
           <h3 data-i18n="stack.dev.title">Business-nahe Anwendungen</h3>
           <p>Oracle APEX, PL/SQL, JavaScript, HTML, CSS, Java, SQL, RESTful Services, Spring Boot</p>
         </article>
-        <article>
+        <article data-tilt-card>
           <p class="project-kicker" data-i18n="stack.product.kicker">Produkt & Prozess</p>
           <h3 data-i18n="stack.product.title">Struktur für echte Abläufe</h3>
           <p>Scrum Master, Product Owner, PRINCE2, ITIL, Kanban, Anforderungsdenken, Prozesssicht</p>
         </article>
-        <article>
+        <article data-tilt-card>
           <p class="project-kicker" data-i18n="stack.tools.kicker">Tools</p>
           <h3 data-i18n="stack.tools.title">Werkzeuge für Lieferung</h3>
           <p>GitHub, Jira, Confluence, IntelliJ IDEA, MS Office, Oracle DB, Microsoft SQL Server</p>
@@ -176,10 +225,11 @@
       </div>
     </section>
 
-    <section class="section contact-section" aria-labelledby="contact-title">
+    <section class="section contact-section" aria-labelledby="contact-title" data-section-index="04">
       <div>
         <p class="eyebrow" data-i18n="contact.eyebrow">Nächster Schritt</p>
         <h2 id="contact-title" data-i18n-rich="contact.title">Lass uns über <span class="accent-word">Software</span> sprechen, die im echten Betrieb trägt.</h2>
+        <p class="contact-status"><span aria-hidden="true"></span><span data-i18n="contact.status">Offen für fachlichen Austausch und passende Projekte.</span></p>
       </div>
       <div class="contact-actions">
         <a class="button button-primary" href="mailto:phil.kirchner.999@googlemail.com" data-i18n="contact.mail">Mail schreiben</a>

@@ -20,8 +20,9 @@
       "nav.privacy": "Datenschutz",
 
       "hero.eyebrow": "Softwareentwickler aus Freising",
-      "hero.title": "Ich baue <span class=\"accent-word\">Software</span>, die Prozesse nicht nur digitalisiert, sondern <span class=\"accent-word\">antreibt</span>.",
+      "hero.title": "Ich baue <span class=\"accent-word\">Software,</span> die Prozesse nicht nur digitalisiert, sondern <span class=\"accent-word\">antreibt</span>.",
       "hero.text": "Ich komme aus operativer Verantwortung: Einkauf, Prozesse und Teams kenne ich aus der Praxis. Heute entwickle ich Anwendungen mit Oracle APEX, PL/SQL, JavaScript und Java. Diese Mischung ist mein Vorteil: Technik, die nicht nur läuft, sondern im Alltag Wirkung zeigt.",
+      "hero.status": "Verfügbar für Austausch",
       "hero.mail": "Kontakt aufnehmen",
       "hero.vita": "Vita ansehen",
       "facts.focus.label": "Fokus",
@@ -39,10 +40,13 @@
       "projects.title": "Arbeiten, die zeigen, wie ich <span class=\"accent-word\">denke</span>.",
       "project.home.title": "Modernisierte persönliche Homepage",
       "project.home.text": "Eine statische, schnelle Portfolio-Seite mit klarer Positionierung, responsivem Layout, DE/EN-Umschaltung und verbessertem SEO-Fundament.",
+      "project.home.result": "Statisch · zweisprachig · ohne Build-Schritt",
       "project.apex.title": "Oracle-nahe Anwendungsentwicklung",
       "project.apex.text": "Fokus auf Oberflächen, Datenmodelle und Abläufe rund um Oracle APEX, PL/SQL, REST Data Sources und strukturierte Datenhaltung.",
+      "project.apex.result": "Datengetrieben · workfloworientiert · robust",
       "project.java.title": "Java, SQL und saubere Grundarchitektur",
       "project.java.text": "Ausbildung und Praxis mit Java, SQL, Spring Boot, MVC, Vaadin, Git, Jira, Confluence und modellgetriebener Softwareentwicklung.",
+      "project.java.result": "Modular · nachvollziehbar · teamfähig",
 
       "stack.eyebrow": "Kompetenzprofil",
       "stack.title": "Technik, Methoden und <span class=\"accent-word\">Erfahrung</span> in einem Profil.",
@@ -57,6 +61,7 @@
       "contact.title": "Lass uns über <span class=\"accent-word\">Software</span> sprechen, die im echten Betrieb trägt.",
       "contact.mail": "Mail schreiben",
       "contact.linkedin": "LinkedIn öffnen",
+      "contact.status": "Offen für fachlichen Austausch und passende Projekte.",
 
       "vita.eyebrow": "Vita",
       "vita.title": "Eine Laufbahn aus Praxis, Verantwortung und <span class=\"accent-word\">Software</span>.",
@@ -166,6 +171,7 @@
       "hero.eyebrow": "Software developer from Freising",
       "hero.title": "I build <span class=\"accent-word\">software</span> that does not just digitize work. It <span class=\"accent-word\">drives</span> it.",
       "hero.text": "I come from operational responsibility: I know purchasing, processes and teams from hands-on work. Today I build applications with Oracle APEX, PL/SQL, JavaScript and Java. That mix is my edge: technology that does not just run, but creates impact in daily work.",
+      "hero.status": "Open to conversations",
       "hero.mail": "Get in touch",
       "hero.vita": "View resume",
       "facts.focus.label": "Focus",
@@ -183,10 +189,13 @@
       "projects.title": "Work that shows how I <span class=\"accent-word\">think</span>.",
       "project.home.title": "Modernized personal homepage",
       "project.home.text": "A static, fast portfolio site with clearer positioning, responsive layout, DE/EN language switching and a stronger SEO foundation.",
+      "project.home.result": "Static · bilingual · no build step",
       "project.apex.title": "Oracle-centered application development",
       "project.apex.text": "Focus on interfaces, data models and workflows around Oracle APEX, PL/SQL, REST Data Sources and structured data management.",
+      "project.apex.result": "Data-driven · workflow-focused · robust",
       "project.java.title": "Java, SQL and clean fundamentals",
       "project.java.text": "Training and practice with Java, SQL, Spring Boot, MVC, Vaadin, Git, Jira, Confluence and model-driven software development.",
+      "project.java.result": "Modular · transparent · team-ready",
 
       "stack.eyebrow": "Skill profile",
       "stack.title": "Technology, methods and <span class=\"accent-word\">experience</span> in one profile.",
@@ -201,6 +210,7 @@
       "contact.title": "Let's talk about <span class=\"accent-word\">software</span> that holds up in real operations.",
       "contact.mail": "Write an email",
       "contact.linkedin": "Open LinkedIn",
+      "contact.status": "Open to technical conversations and suitable projects.",
 
       "vita.eyebrow": "Resume",
       "vita.title": "A career built from hands-on work, responsibility and <span class=\"accent-word\">software</span>.",
@@ -299,7 +309,9 @@
   const hero = document.querySelector(".hero");
   const heroImage = document.querySelector(".hero-visual img");
   const heroScrollDim = document.querySelector(".hero-scroll-dim");
+  const signalCanvas = document.querySelector(".signal-canvas");
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const finePointer = window.matchMedia("(pointer: fine)");
   const isFirefox = navigator.userAgent.includes("Firefox");
   const supportsScrollTimeline = CSS.supports("animation-timeline: scroll()");
   const LANG_STORAGE_KEY = "lang";
@@ -309,6 +321,10 @@
   let lastScrolledState = null;
   let heroHeight = hero ? Math.max(hero.offsetHeight, 1) : 1;
   let lastHeroFrame = "";
+  const scrollProgress = document.createElement("div");
+  scrollProgress.className = "scroll-progress";
+  scrollProgress.setAttribute("aria-hidden", "true");
+  document.body.prepend(scrollProgress);
 
   function sanitizeLang(lang) {
     const value = String(lang || "").toLowerCase();
@@ -590,6 +606,226 @@
     });
   }
 
+  function setupHeroPointer() {
+    if (!hero || reduceMotion.matches || !finePointer.matches || isFirefox) return;
+    let frame = 0;
+    let nextX = 68;
+    let nextY = 42;
+
+    hero.addEventListener("pointermove", (event) => {
+      const rect = hero.getBoundingClientRect();
+      nextX = ((event.clientX - rect.left) / rect.width) * 100;
+      nextY = ((event.clientY - rect.top) / rect.height) * 100;
+      if (frame) return;
+      frame = window.requestAnimationFrame(() => {
+        hero.style.setProperty("--pointer-x", `${nextX.toFixed(2)}%`);
+        hero.style.setProperty("--pointer-y", `${nextY.toFixed(2)}%`);
+        frame = 0;
+      });
+    }, { passive: true });
+
+    hero.addEventListener("pointerleave", () => {
+      hero.style.setProperty("--pointer-x", "68%");
+      hero.style.setProperty("--pointer-y", "42%");
+    });
+  }
+
+  function setupTiltCards() {
+    if (reduceMotion.matches || !finePointer.matches) return;
+
+    document.querySelectorAll("[data-tilt-card]").forEach((card) => {
+      let frame = 0;
+      let nextX = 0;
+      let nextY = 0;
+      let glowX = 50;
+      let glowY = 50;
+
+      card.addEventListener("pointermove", (event) => {
+        const rect = card.getBoundingClientRect();
+        const x = (event.clientX - rect.left) / rect.width;
+        const y = (event.clientY - rect.top) / rect.height;
+        nextX = (0.5 - y) * 5;
+        nextY = (x - 0.5) * 6;
+        glowX = x * 100;
+        glowY = y * 100;
+
+        if (frame) return;
+        frame = window.requestAnimationFrame(() => {
+          card.style.setProperty("--tilt-x", `${nextX.toFixed(2)}deg`);
+          card.style.setProperty("--tilt-y", `${nextY.toFixed(2)}deg`);
+          card.style.setProperty("--glow-x", `${glowX.toFixed(1)}%`);
+          card.style.setProperty("--glow-y", `${glowY.toFixed(1)}%`);
+          frame = 0;
+        });
+      }, { passive: true });
+
+      card.addEventListener("pointerleave", () => {
+        card.style.setProperty("--tilt-x", "0deg");
+        card.style.setProperty("--tilt-y", "0deg");
+        card.style.setProperty("--glow-x", "50%");
+        card.style.setProperty("--glow-y", "50%");
+      });
+    });
+  }
+
+  function setupActiveNavigation() {
+    if (!("IntersectionObserver" in window)) return;
+    const links = Array.from(document.querySelectorAll('.nav-list a[href^="#"]'));
+    const targets = links
+      .map((link) => document.querySelector(link.getAttribute("href")))
+      .filter(Boolean);
+    if (!targets.length) return;
+
+    const linkById = new Map(links.map((link) => [link.getAttribute("href").slice(1), link]));
+    const visibleSections = new Map();
+
+    function updateActiveLink() {
+      let activeId = "";
+      let activeRatio = -1;
+      visibleSections.forEach((ratio, id) => {
+        if (ratio > activeRatio) {
+          activeRatio = ratio;
+          activeId = id;
+        }
+      });
+      links.forEach((link) => {
+        link.dataset.active = String(link === linkById.get(activeId));
+      });
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          visibleSections.set(entry.target.id, entry.intersectionRatio);
+        } else {
+          visibleSections.delete(entry.target.id);
+        }
+      });
+      updateActiveLink();
+    }, {
+      rootMargin: "-18% 0px -62% 0px",
+      threshold: [0.01, 0.2, 0.45]
+    });
+
+    targets.forEach((target) => observer.observe(target));
+  }
+
+  function setupSignalCanvas() {
+    if (!signalCanvas || !hero || reduceMotion.matches) return;
+    const context = signalCanvas.getContext("2d", { alpha: true });
+    if (!context) return;
+
+    let width = 0;
+    let height = 0;
+    let ratio = 1;
+    let nodes = [];
+    let pointerX = 0;
+    let pointerY = 0;
+    let pointerActive = false;
+    let heroVisible = true;
+    let animationFrame = 0;
+    let lastFrame = 0;
+    const frameInterval = isFirefox ? 42 : 28;
+
+    function createNodes() {
+      const count = width < 720 ? 16 : (isFirefox ? 22 : 30);
+      nodes = Array.from({ length: count }, (_, index) => ({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * (index % 3 === 0 ? 0.2 : 0.12),
+        vy: (Math.random() - 0.5) * (index % 4 === 0 ? 0.18 : 0.1),
+        size: index % 5 === 0 ? 1.7 : 1
+      }));
+    }
+
+    function resizeCanvas() {
+      const rect = hero.getBoundingClientRect();
+      width = Math.max(1, rect.width);
+      height = Math.max(1, rect.height);
+      ratio = Math.min(window.devicePixelRatio || 1, isFirefox ? 1 : 1.5);
+      signalCanvas.width = Math.round(width * ratio);
+      signalCanvas.height = Math.round(height * ratio);
+      signalCanvas.style.width = `${width}px`;
+      signalCanvas.style.height = `${height}px`;
+      context.setTransform(ratio, 0, 0, ratio, 0, 0);
+      createNodes();
+    }
+
+    function render(timestamp) {
+      animationFrame = window.requestAnimationFrame(render);
+      if (!heroVisible || document.hidden || timestamp - lastFrame < frameInterval) return;
+      lastFrame = timestamp;
+      context.clearRect(0, 0, width, height);
+
+      nodes.forEach((node) => {
+        node.x += node.vx;
+        node.y += node.vy;
+        if (node.x < 0 || node.x > width) node.vx *= -1;
+        if (node.y < 0 || node.y > height) node.vy *= -1;
+      });
+
+      for (let i = 0; i < nodes.length; i += 1) {
+        const node = nodes[i];
+        for (let j = i + 1; j < nodes.length; j += 1) {
+          const other = nodes[j];
+          const dx = node.x - other.x;
+          const dy = node.y - other.y;
+          const distance = Math.hypot(dx, dy);
+          if (distance > 145) continue;
+          context.strokeStyle = `rgba(98, 214, 208, ${(1 - distance / 145) * 0.13})`;
+          context.lineWidth = 0.7;
+          context.beginPath();
+          context.moveTo(node.x, node.y);
+          context.lineTo(other.x, other.y);
+          context.stroke();
+        }
+
+        if (pointerActive) {
+          const dx = node.x - pointerX;
+          const dy = node.y - pointerY;
+          const distance = Math.hypot(dx, dy);
+          if (distance < 180) {
+            context.strokeStyle = `rgba(240, 168, 58, ${(1 - distance / 180) * 0.22})`;
+            context.beginPath();
+            context.moveTo(node.x, node.y);
+            context.lineTo(pointerX, pointerY);
+            context.stroke();
+          }
+        }
+
+        context.fillStyle = node.size > 1 ? "rgba(240, 168, 58, 0.72)" : "rgba(98, 214, 208, 0.58)";
+        context.beginPath();
+        context.arc(node.x, node.y, node.size, 0, Math.PI * 2);
+        context.fill();
+      }
+    }
+
+    hero.addEventListener("pointermove", (event) => {
+      const rect = hero.getBoundingClientRect();
+      pointerX = event.clientX - rect.left;
+      pointerY = event.clientY - rect.top;
+      pointerActive = true;
+    }, { passive: true });
+    hero.addEventListener("pointerleave", () => {
+      pointerActive = false;
+    });
+
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver(([entry]) => {
+        heroVisible = entry.isIntersecting;
+      }, { threshold: 0.02 });
+      observer.observe(hero);
+    }
+
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas, { passive: true });
+    animationFrame = window.requestAnimationFrame(render);
+
+    window.addEventListener("pagehide", () => {
+      window.cancelAnimationFrame(animationFrame);
+    }, { once: true });
+  }
+
   function setNavOpen(open) {
     if (!navToggle || !navList) return;
     navToggle.setAttribute("aria-expanded", String(open));
@@ -664,6 +900,8 @@
   function updateScrollState() {
     const y = window.scrollY || window.pageYOffset || 0;
     const progress = Math.min(1, Math.max(0, y / heroHeight));
+    const scrollable = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+    scrollProgress.style.transform = `scaleX(${Math.min(1, Math.max(0, y / scrollable)).toFixed(4)})`;
 
     if (heroImage && !supportsScrollTimeline) {
       const frame = progress.toFixed(isFirefox ? 2 : 3);
@@ -730,6 +968,16 @@
   addCookieSettingsLink();
   setupCertificateLightbox();
   setLang(getInitialLang());
+  setupHeroPointer();
+  setupTiltCards();
+  setupActiveNavigation();
+  setupSignalCanvas();
+  if (window.location.hash) {
+    window.addEventListener("load", () => {
+      const target = document.querySelector(window.location.hash);
+      if (target) window.setTimeout(() => target.scrollIntoView({ block: "start" }), 80);
+    }, { once: true });
+  }
   window.addEventListener("resize", measureHero, { passive: true });
   window.addEventListener("orientationchange", measureHero, { passive: true });
   if (hero && "ResizeObserver" in window) {

@@ -1,6 +1,6 @@
 # Homepage Roadmap
 
-Stand: 01.06.2026
+Stand: 12.06.2026
 
 ## Kurzfazit
 
@@ -25,6 +25,11 @@ Die Homepage ist jetzt eine moderne, statische Portfolio-Seite mit starkem Hero,
 - Vita mit fokussiertem Entwicklerprofil, Oracle-APEX-Zertifikat und Zertifikatsgalerie erweitert.
 - Hreflang-Strategie fuer DE/EN-URLs ueber `?lang=en` ergaenzt.
 - Kleiner lokaler QA-Workflow fuer Syntax, lokale Referenzen, Sitemap und optionale Screenshots ergaenzt.
+- Interaktives Signal-Canvas mit reduziertem Render-Budget fuer Firefox ergaenzt.
+- Scroll-Fortschritt, aktive Abschnittsnavigation und Pointer-Reaktionen ergaenzt.
+- Animierter Technologie-Stream und visuelle Projektmodule ergaenzt.
+- Projekt- und Stack-Karten mit kontrollierter Tiefenreaktion aufgewertet.
+- Vita-PDF als sprachabhaengiger, einseitiger A4-Lebenslauf verfeinert.
 
 ## Erledigte Verbesserungen
 
@@ -68,7 +73,6 @@ Die Homepage ist jetzt eine moderne, statische Portfolio-Seite mit starkem Hero,
 ### Prio A
 
 - Echte Projektkarten mit Links, Screenshots und GitHub-Repositories fuellen.
-- Optional ein eigenes OpenGraph-Bild fuer Social Sharing erstellen.
 - Projektkarten mit konkreten Case-Study-Details und sichtbaren Ergebnissen fuellen.
 
 ### Prio B
@@ -79,7 +83,6 @@ Die Homepage ist jetzt eine moderne, statische Portfolio-Seite mit starkem Hero,
 
 ### Prio C
 
-- Optional englische CV-PDF anbieten.
 - Projektsektion um Case Studies erweitern.
 - Medien in WebP/AVIF Varianten optimieren.
 
