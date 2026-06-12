@@ -385,7 +385,7 @@ main > article.section {
   bottom: 0;
   color: var(--accent-2);
   font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
-  font-size: 0.39rem;
+  font-size: 0.78rem;
   font-weight: 800;
   line-height: 1;
   text-shadow: 1.3px 0 rgba(255, 42, 161, 0.7);
