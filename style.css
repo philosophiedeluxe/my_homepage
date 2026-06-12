@@ -394,10 +394,10 @@ main > article.section {
 
 .hero-code-cursor__text {
   position: absolute;
-  top: 6.5px;
-  left: 7.75px;
-  width: 1.5px;
-  height: 15.8px;
+  top: 4.5px;
+  left: 7.55px;
+  width: 1.9px;
+  height: 19.8px;
   opacity: 0;
   border-radius: 999px;
   transform-origin: 50% 50%;
@@ -409,8 +409,8 @@ main > article.section {
   content: "";
   position: absolute;
   left: 50%;
-  width: 7.7px;
-  height: 1.5px;
+  width: 9.6px;
+  height: 1.9px;
   border-radius: 999px;
   transform: translateX(-50%);
   background: inherit;
@@ -426,12 +426,12 @@ main > article.section {
 
 .hero-code-cursor__text--cyan {
   background: #00ecec;
-  transform: translate3d(1.1px, 0.6px, 0);
+  transform: translate3d(1.4px, 0.8px, 0);
 }
 
 .hero-code-cursor__text--magenta {
   background: #ff2aa1;
-  transform: translate3d(-1.1px, -0.6px, 0);
+  transform: translate3d(-1.4px, -0.8px, 0);
 }
 
 .hero-code-cursor__text--core {
@@ -1451,7 +1451,7 @@ h3 {
   inset: 0;
   z-index: 0;
   background:
-    radial-gradient(circle at var(--glow-x) var(--glow-y), rgba(98, 214, 208, 0.07), rgba(143, 92, 255, 0.035) 18%, transparent 42%);
+    radial-gradient(circle at var(--glow-x) var(--glow-y), rgba(98, 214, 208, 0.085), rgba(143, 92, 255, 0.044) 20%, transparent 46%);
   opacity: 0;
   transition: opacity 180ms ease;
   pointer-events: none;
@@ -1459,7 +1459,7 @@ h3 {
 
 [data-tilt-card]:hover::after,
 [data-tilt-card].is-tilting::after {
-  opacity: 0.72;
+  opacity: 0.78;
 }
 
 [data-tilt-card] > * {
@@ -3578,7 +3578,7 @@ main > .section.interior-hero::before {
   inset: 0;
   z-index: 0;
   background:
-    radial-gradient(circle at var(--glow-x) var(--glow-y), rgba(98, 214, 208, 0.045), rgba(143, 92, 255, 0.024) 16%, transparent 36%);
+    radial-gradient(circle at var(--glow-x) var(--glow-y), rgba(98, 214, 208, 0.062), rgba(143, 92, 255, 0.032) 18%, transparent 42%);
   opacity: 0;
   transition: opacity 160ms ease;
   pointer-events: none;
@@ -3586,7 +3586,7 @@ main > .section.interior-hero::before {
 
 .tilt-card-effect:hover::after,
 .tilt-card-effect.is-tilting::after {
-  opacity: 0.62;
+  opacity: 0.72;
 }
 
 .tilt-card-effect > * {
