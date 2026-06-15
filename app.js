@@ -1337,9 +1337,13 @@
   function setupEasterEggs() {
     const typedInputSelector = "input, textarea, select, [contenteditable=''], [contenteditable='true'], [role='textbox']";
     const bootLines = [
-      "INITIALIZING INTERFACE",
-      "LOADING SIGNAL LAYER",
-      "CURSOR MODULE ONLINE"
+      "pk_boot.sequence :: cold-start",
+      "mount /interface --visual --safe",
+      "scan nav.hero.buttons --reveal",
+      "hydrate cursor_module --custom",
+      "resolve signal_layers --ok",
+      "unlock profile_surface --visible",
+      "startup complete :: welcome phil"
     ];
     const sectionMessages = {
       "01": "identity layer touched",
@@ -1362,6 +1366,8 @@
     let devLangTimer = 0;
     let matrixRunning = false;
     let devTypingTimers = [];
+    let bootTypingTimers = [];
+    let bootRunning = false;
 
     document.body.appendChild(document.createComment(" PK_SIGNAL_LAYER::EASTER_EGGS_ARMED "));
 
@@ -1503,6 +1509,141 @@
       state.text = "booting pk developer shell...\n";
       queueDevTerminalStep(nextLine, 360);
     }
+    function clearBootSequenceTyping() {
+      bootTypingTimers.forEach((timer) => window.clearTimeout(timer));
+      bootTypingTimers = [];
+    }
+
+    function queueBootSequenceStep(callback, delay) {
+      const timer = window.setTimeout(callback, delay);
+      bootTypingTimers.push(timer);
+      return timer;
+    }
+
+    function renderBootSequenceText(output, text, cursor = true) {
+      if (!output) return;
+      output.textContent = cursor ? `${text}█` : text;
+      output.scrollTop = output.scrollHeight;
+    }
+
+    function typeBootSequenceLine(output, state, line, done) {
+      let index = 0;
+      const writeNext = () => {
+        index += 1;
+        renderBootSequenceText(output, `${state.text}${line.slice(0, index)}`, true);
+        if (index < line.length) {
+          const char = line[index - 1];
+          const pace = char === " " ? 24 : 10 + Math.random() * 18;
+          queueBootSequenceStep(writeNext, pace);
+          return;
+        }
+        state.text += `${line}\n`;
+        renderBootSequenceText(output, state.text, true);
+        queueBootSequenceStep(done, 115 + Math.random() * 150);
+      };
+      writeNext();
+    }
+
+    function startBootSequenceTyping(boot, forced = false) {
+      const output = boot.querySelector(".easter-boot-sequence__output");
+      const status = boot.querySelector(".easter-boot-sequence__status b");
+      const state = { text: "" };
+      let lineIndex = 0;
+      const route = document.body.classList.contains("vita-page") ? "vita" : "index";
+      const lines = [
+        `pk@startup:~$ init --route=${route} --mode=${forced ? "manual" : "rare"}`,
+        "[bios] pointer layer detected .......... OK",
+        "[bios] nav shell handshake ............. OK",
+        "[bios] hero surface offline -> waking .. OK",
+        "pk@startup:~$ scan --targets nav,hero,actions,cards",
+        "target.nav ............... found",
+        "target.hero .............. found",
+        "target.buttons ........... found",
+        "target.signal-layer ...... armed",
+        "pk@startup:~$ decrypt ./profile/phil.kirchner",
+        "identity: PHIL KIRCHNER",
+        "stack: ORACLE_APEX | PL_SQL | JAVASCRIPT | SQL | REST",
+        "pk@startup:~$ reveal --main-elements --stagger=120ms",
+        "interface visibility: restoring",
+        "cursor module: synchronized",
+        "startup sequence complete"
+      ];
+
+      const nextLine = () => {
+        if (lineIndex === 8) {
+          root.classList.add("easter-boot-revealing");
+          if (status) status.textContent = "revealing";
+        }
+        if (lineIndex >= lines.length) {
+          if (status) status.textContent = "complete";
+          renderBootSequenceText(output, `${state.text}\npk@startup:~$ _`, false);
+          return;
+        }
+        const line = lines[lineIndex];
+        lineIndex += 1;
+        const isCommand = line.startsWith("pk@startup");
+        if (isCommand) {
+          typeBootSequenceLine(output, state, line, nextLine);
+          return;
+        }
+        state.text += `${line}\n`;
+        renderBootSequenceText(output, state.text, true);
+        queueBootSequenceStep(nextLine, 155 + Math.random() * 165);
+      };
+
+      renderBootSequenceText(output, "powering visual interface...\n", true);
+      state.text = "powering visual interface...\n";
+      queueBootSequenceStep(nextLine, 480);
+    }
+
+    function runBootSequence(forced = false) {
+      if (bootRunning) return;
+      bootRunning = true;
+      clearBootSequenceTyping();
+      document.querySelector(".easter-boot-sequence")?.remove();
+
+      const boot = document.createElement("div");
+      boot.className = "easter-boot-sequence";
+      boot.setAttribute("aria-hidden", "true");
+      boot.innerHTML = `
+        <div class="easter-boot-sequence__grid" aria-hidden="true"></div>
+        <div class="easter-boot-sequence__terminal">
+          <div class="easter-boot-sequence__bar">
+            <span class="easter-boot-sequence__lights" aria-hidden="true"><b></b><b></b><b></b></span>
+            <strong>PK_STARTUP_SEQUENCE</strong>
+            <em>${forced ? "manual trigger" : "rare session boot"}</em>
+          </div>
+          <div class="easter-boot-sequence__meta">
+            <span>route::<b>${document.body.classList.contains("vita-page") ? "vita" : "index"}</b></span>
+            <span>visibility::<b>locked</b></span>
+            <span class="easter-boot-sequence__status">status::<b>booting</b></span>
+          </div>
+          <pre class="easter-boot-sequence__output" aria-hidden="true"></pre>
+          <div class="easter-boot-sequence__modules" aria-hidden="true">
+            <span>nav</span><span>hero</span><span>cursor</span><span>buttons</span><span>signal</span>
+          </div>
+          <i class="easter-boot-sequence__meter"></i>
+        </div>
+      `;
+      document.body.appendChild(boot);
+      root.classList.add("easter-boot-active");
+      showToast(forced ? "manual boot sequence" : "hidden boot sequence", 2600);
+      emitCursorCode("BOOT", 5200, "is-dev-signal");
+
+      window.setTimeout(() => boot.classList.add("is-visible"), 40);
+      window.setTimeout(() => root.classList.add("easter-boot-scan"), 720);
+      startBootSequenceTyping(boot, forced);
+      queueBootSequenceStep(() => root.classList.add("easter-boot-revealing"), 3800);
+      queueBootSequenceStep(() => boot.classList.add("is-complete"), 5100);
+      queueBootSequenceStep(() => boot.classList.add("is-fading"), 6650);
+      queueBootSequenceStep(() => {
+        clearBootSequenceTyping();
+        boot.remove();
+        root.classList.remove("easter-boot-active", "easter-boot-scan", "easter-boot-revealing");
+        bootRunning = false;
+      }, 7480);
+    }
+
 
     function pulseHeroSignal() {
       if (!hero || reduceMotion.matches) return;
@@ -1758,20 +1899,7 @@
       }
 
       if (Math.random() > 0.045) return;
-
-      const boot = document.createElement("div");
-      boot.className = "easter-boot-sequence";
-      boot.setAttribute("aria-hidden", "true");
-      bootLines.forEach((line, index) => {
-        const item = document.createElement("span");
-        item.textContent = line;
-        item.style.setProperty("--boot-delay", `${index * 320}ms`);
-        boot.appendChild(item);
-      });
-      document.body.appendChild(boot);
-      window.setTimeout(() => boot.classList.add("is-visible"), 280);
-      window.setTimeout(() => boot.classList.add("is-fading"), 4200);
-      window.setTimeout(() => boot.remove(), 5100);
+      window.setTimeout(() => runBootSequence(false), 620);
     }
 
     document.addEventListener("keydown", (event) => {
@@ -1789,6 +1917,9 @@
         typedBuffer = `${typedBuffer}${key}`.slice(-12);
         if (typedBuffer.endsWith("matrix")) {
           runMatrixRain();
+          typedBuffer = "";
+        } else if (typedBuffer.endsWith("boot")) {
+          runBootSequence(true);
           typedBuffer = "";
         }
       }

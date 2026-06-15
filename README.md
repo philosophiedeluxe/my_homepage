@@ -139,18 +139,18 @@ The Easter eggs are intentionally subtle. They are implemented in `setupEasterEg
 
 | Easter Egg | Trigger | Result |
 | --- | --- | --- |
-| Developer Mode | `ArrowUp ArrowUp ArrowDown ArrowDown ArrowLeft ArrowRight ArrowLeft ArrowRight B A` | stronger developer state with HUD, scan/grid overlay, outlined interface modules, terminal message, short Matrix injection and cursor code `{PK}` |
+| Developer Mode | `ArrowUp ArrowUp ArrowDown ArrowDown ArrowLeft ArrowRight ArrowLeft ArrowRight B A` | stronger developer state with large `PK_DEV_TERMINAL`, scan/grid overlay, outlined interface modules, typed shell-style output and cursor code `{PK}` |
 | Cursor Sleep | leave the mouse still for about 12 seconds | cursor switches into an idle/sleeping state |
 | Hero Terminal | keep the hero section visible for about 7 seconds | hidden terminal line appears in the hero area |
 | Matrix Rain | type `matrix` on the keyboard | temporary Matrix-style rain overlay |
 | DOM Comment | inspect the HTML source or DevTools DOM | hidden signal-layer comments are present |
 | Section Signals | click decorative section numbers such as `01`, `02`, `03`, `04` | section number glows, content briefly fades/reboots, cards/data panels jitter and a thin scan line crosses the section without changing the section background |
 | Language DEV Mode | click the `DE/EN` toggle 6 times quickly | temporary `DEV` language-state hint plus code-style monospace UI treatment |
-| Boot Sequence | rare first page visit per session | brief boot overlay with signal-layer lines |
+| Boot Sequence | rare first page visit per session, or type `boot` on the keyboard | cinematic full-page startup overlay with large terminal window, typed boot commands, hidden page surface and staggered reveal of nav, hero, buttons and main content |
 | Keyword Cursor | hover selected technology words or the name | cursor label changes contextually; name/brand hover emits `{PK}` |
 | Secret Theme Shift | hold `Shift` and click the `PK` branding | temporary alternate theme shift |
 
-The effects are session-safe and temporary. They do not store analytics, do not call external services and do not change the content model of the site. Section-number triggers are invisible buttons positioned directly over the decorative numbers, so the Easter egg remains discoverable through the number itself and does not create layout spacing.
+The effects are session-safe and temporary. They do not store analytics, do not call external services and do not change the content model of the site. Section-number triggers are invisible buttons positioned directly over the decorative numbers, so the Easter egg remains discoverable through the number itself and does not create layout spacing. The Boot Sequence can still appear rarely on a first session visit, but the hidden keyboard trigger `boot` exists so the startup animation can be tested deterministically.
 
 ## Vita and PDF Export
 
