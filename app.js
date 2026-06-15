@@ -1361,6 +1361,7 @@
     let themeTimer = 0;
     let devLangTimer = 0;
     let matrixRunning = false;
+    let devTypingTimers = [];
 
     document.body.appendChild(document.createComment(" PK_SIGNAL_LAYER::EASTER_EGGS_ARMED "));
 
@@ -1380,13 +1381,21 @@
     devHud.className = "easter-dev-hud";
     devHud.setAttribute("aria-hidden", "true");
     devHud.innerHTML = `
-      <strong>DEVELOPER MODE</strong>
-      <span>route :: ${document.body.classList.contains("vita-page") ? "vita" : "index"}</span>
-      <span>cursor :: custom</span>
-      <span>signal :: armed</span>
-      <i></i>
+      <div class="easter-dev-hud__bar">
+        <span class="easter-dev-hud__lights" aria-hidden="true"><b></b><b></b><b></b></span>
+        <strong>PK_DEV_TERMINAL</strong>
+        <em>armed</em>
+      </div>
+      <div class="easter-dev-hud__meta">
+        <span>route::<b>${document.body.classList.contains("vita-page") ? "vita" : "index"}</b></span>
+        <span>cursor::<b>custom</b></span>
+        <span>signal::<b>writable</b></span>
+      </div>
+      <pre class="easter-dev-hud__terminal" aria-hidden="true"></pre>
+      <i class="easter-dev-hud__meter"></i>
     `;
     document.body.appendChild(devHud);
+    const devTerminal = devHud.querySelector(".easter-dev-hud__terminal");
 
     function isTypingTarget(target) {
       return Boolean(target && target.closest && target.closest(typedInputSelector));
@@ -1417,6 +1426,84 @@
       }, duration);
     }
 
+    function clearDevTerminalTyping() {
+      devTypingTimers.forEach((timer) => window.clearTimeout(timer));
+      devTypingTimers = [];
+    }
+
+    function queueDevTerminalStep(callback, delay) {
+      const timer = window.setTimeout(callback, delay);
+      devTypingTimers.push(timer);
+      return timer;
+    }
+
+    function renderDevTerminalText(text, cursor = true) {
+      if (!devTerminal) return;
+      devTerminal.textContent = cursor ? `${text}█` : text;
+      devTerminal.scrollTop = devTerminal.scrollHeight;
+    }
+
+    function typeDevTerminalLine(state, line, done) {
+      let index = 0;
+      const writeNext = () => {
+        index += 1;
+        renderDevTerminalText(`${state.text}${line.slice(0, index)}`, true);
+        if (index < line.length) {
+          const pace = line[index - 1] === " " ? 34 : 16 + Math.random() * 18;
+          queueDevTerminalStep(writeNext, pace);
+          return;
+        }
+        state.text += `${line}\n`;
+        renderDevTerminalText(state.text, true);
+        queueDevTerminalStep(done, 115 + Math.random() * 110);
+      };
+      writeNext();
+    }
+
+    function startDevTerminalTyping() {
+      if (!devTerminal) return;
+      clearDevTerminalTyping();
+      const route = document.body.classList.contains("vita-page") ? "vita" : "index";
+      const lines = [
+        "pk@portfolio:~$ whoami",
+        "phil.kirchner // software developer",
+        `pk@portfolio:~$ cd /var/www/${route}`,
+        "pk@portfolio:/var/www$ ls -la signal_layers",
+        "cursor.custom     hero.signal     section.reboot     theme.shift",
+        `pk@portfolio:/var/www$ grep -n "Oracle|APEX|SQL|REST" ./profile.md`,
+        "match: business apps | oracle apex | pl/sql | javascript | rest data sources",
+        "pk@portfolio:/var/www$ ./arm-interface --mode developer --safe",
+        "interface: armed",
+        "cursor: {PK}",
+        "scan-layer: online",
+        "pk@portfolio:/var/www$ tail -f ./runtime.log",
+        "[ok] hidden routes indexed",
+        "[ok] easter triggers synchronized",
+        "[ok] portfolio system writable"
+      ];
+      const state = { text: "" };
+      let lineIndex = 0;
+      const nextLine = () => {
+        if (lineIndex >= lines.length) {
+          renderDevTerminalText(`${state.text}\npk@portfolio:/var/www$ _`, false);
+          return;
+        }
+        const line = lines[lineIndex];
+        lineIndex += 1;
+        const isCommand = line.startsWith("pk@portfolio");
+        if (isCommand) {
+          typeDevTerminalLine(state, line, nextLine);
+          return;
+        }
+        state.text += `${line}\n`;
+        renderDevTerminalText(state.text, true);
+        queueDevTerminalStep(nextLine, 180 + Math.random() * 180);
+      };
+      renderDevTerminalText("booting pk developer shell...\n", true);
+      state.text = "booting pk developer shell...\n";
+      queueDevTerminalStep(nextLine, 360);
+    }
+
     function pulseHeroSignal() {
       if (!hero || reduceMotion.matches) return;
       hero.classList.remove("easter-hero-pulse");
@@ -1431,14 +1518,16 @@
       root.classList.add("easter-dev-mode", "easter-dev-boot");
       devHud.classList.add("is-visible");
       showToast("developer mode unlocked", 3600);
-      flashTerminal("> root access granted // signal layer writable", 5200);
-      emitCursorCode("{PK}", 5200, "is-dev-signal");
+      flashTerminal("> developer shell attached // local interface only", 5200);
+      emitCursorCode("{PK}", 6200, "is-dev-signal");
+      startDevTerminalTyping();
       pulseHeroSignal();
       window.setTimeout(() => root.classList.remove("easter-dev-boot"), 1600);
       devModeTimer = window.setTimeout(() => {
         root.classList.remove("easter-dev-mode", "easter-dev-boot");
         devHud.classList.remove("is-visible");
-      }, 15000);
+        clearDevTerminalTyping();
+      }, 24000);
     }
 
     function resizeMatrix(canvas, context, columns) {
