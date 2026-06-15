@@ -1675,6 +1675,14 @@
       document.querySelectorAll("[data-section-index]").forEach((section) => {
         if (section.querySelector(":scope > .easter-section-trigger")) return;
         const index = section.dataset.sectionIndex || "";
+        let scan = section.querySelector(":scope > .easter-section-scan");
+        if (!scan) {
+          scan = document.createElement("span");
+          scan.className = "easter-section-scan";
+          scan.setAttribute("aria-hidden", "true");
+          section.appendChild(scan);
+        }
+
         const trigger = document.createElement("button");
         trigger.className = "easter-section-trigger";
         trigger.type = "button";
@@ -1686,12 +1694,19 @@
             item.style.setProperty("--easter-delay", `${Math.min(itemIndex * 48, 336)}ms`);
           });
           section.classList.remove("easter-section-pulse");
+          scan.classList.remove("is-active");
           section.offsetHeight;
-          window.requestAnimationFrame(() => section.classList.add("easter-section-pulse"));
+          window.requestAnimationFrame(() => {
+            section.classList.add("easter-section-pulse");
+            scan.classList.add("is-active");
+          });
           showToast(`section ${index} signal`, 2600);
           flashTerminal(`> ${sectionMessages[index] || "section signal touched"}`, 3600);
           emitCursorCode(`S${index}`, 2900, "is-section-signal");
-          window.setTimeout(() => section.classList.remove("easter-section-pulse"), 1300);
+          window.setTimeout(() => {
+            section.classList.remove("easter-section-pulse");
+            scan.classList.remove("is-active");
+          }, 1300);
         });
         section.appendChild(trigger);
       });

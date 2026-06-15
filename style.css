@@ -767,23 +767,60 @@ main > article.section {
 
 [data-section-index].easter-section-pulse {
   isolation: isolate;
-  box-shadow: 0 0 0 100vmax var(--section-easter-bg, var(--bg));
 }
 
 [data-section-index].easter-section-pulse::before {
   content: "";
   position: absolute;
   inset: 0 calc(50% - 50vw);
-  z-index: 0;
+  z-index: -1;
   width: auto;
   border-radius: 0;
-  background:
-    linear-gradient(90deg, transparent, rgba(var(--cyan-rgb), 0.12), transparent),
-    repeating-linear-gradient(0deg, transparent 0 10px, rgba(var(--cyan-rgb), 0.035) 10px 11px);
-  opacity: 0;
+  background: inherit;
+  opacity: 1;
   pointer-events: none;
   transform: none;
-  animation: easter-section-scan 1150ms ease both;
+  animation: none;
+}
+
+[data-section-index] > .easter-section-scan {
+  position: absolute;
+  left: calc(50% - 50vw);
+  right: calc(50% - 50vw);
+  top: clamp(112px, 16vw, 220px);
+  z-index: 0;
+  height: 2px;
+  pointer-events: none;
+  opacity: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(var(--violet-rgb), 0.74) 26%, rgba(var(--cyan-rgb), 0.9) 50%, rgba(247, 178, 57, 0.58) 72%, transparent 100%);
+  box-shadow:
+    0 0 18px rgba(var(--cyan-rgb), 0.22),
+    0 0 34px rgba(var(--violet-rgb), 0.12);
+  transform: translate3d(-18%, 0, 0) scaleX(0.18);
+  transform-origin: left center;
+}
+
+[data-section-index] > .easter-section-scan::before,
+[data-section-index] > .easter-section-scan::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: inherit;
+  opacity: 0.38;
+}
+
+[data-section-index] > .easter-section-scan::before {
+  top: -12px;
+}
+
+[data-section-index] > .easter-section-scan::after {
+  bottom: -12px;
+}
+
+[data-section-index] > .easter-section-scan.is-active {
+  animation: easter-section-scan-line 980ms var(--ease-out) both;
 }
 
 [data-section-index].easter-section-pulse .section-heading,
@@ -811,19 +848,24 @@ main > article.section {
   animation: easter-section-data-jump 840ms steps(2, end) both;
 }
 
-@keyframes easter-section-scan {
+@keyframes easter-section-scan-line {
   0% {
     opacity: 0;
-    clip-path: inset(0 100% 0 0);
+    transform: translate3d(-22%, 0, 0) scaleX(0.16);
   }
 
-  38% {
+  24% {
     opacity: 0.95;
+  }
+
+  68% {
+    opacity: 0.72;
+    transform: translate3d(14%, 0, 0) scaleX(0.82);
   }
 
   100% {
     opacity: 0;
-    clip-path: inset(0 0 0 0);
+    transform: translate3d(72%, 0, 0) scaleX(0.22);
   }
 }
 
