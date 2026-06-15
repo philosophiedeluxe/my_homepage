@@ -663,17 +663,25 @@
       "[role='textbox']"
     ].join(", ");
     const keywordSignals = [
-      { pattern: /\bPL\/?SQL\b/i, label: "SQL" },
-      { pattern: /\bSQL\b/i, label: "SQL" },
-      { pattern: /\bOracle\b/i, label: "DB" },
-      { pattern: /\bAPEX\b/i, label: "APP" },
-      { pattern: /\bJavaScript\b/i, label: "JS" },
-      { pattern: /\bJava\b/i, label: "JV" },
-      { pattern: /\bKI\b|\bAI\b|\bKünstliche Intelligenz\b/i, label: "AI" },
-      { pattern: /\bGit\b|\bGitHub\b/i, label: "GIT" },
-      { pattern: /\bREST\b/i, label: "API" },
-      { pattern: /\bSoftware\b/i, label: "SW" },
-      { pattern: /\bProzess\w*\b/i, label: "FLOW" }
+      { pattern: /\bPhil(?:\s+Kirchner)?\b|\bKirchner\b/i, label: "{PK}", className: "is-name-signal" },
+      { pattern: /\bPL\/?SQL\b/i, label: "PLSQL", className: "is-db-keyword" },
+      { pattern: /\bSQL\b/i, label: "SQL", className: "is-db-keyword" },
+      { pattern: /\bOracle(?:\s+DB)?\b/i, label: "DB", className: "is-db-keyword" },
+      { pattern: /\bAPEX\b|\bOracle\s+APEX\b/i, label: "APEX", className: "is-app-keyword" },
+      { pattern: /\bJavaScript\b/i, label: "JS", className: "is-code-keyword" },
+      { pattern: /\bJava\b/i, label: "JAVA", className: "is-code-keyword" },
+      { pattern: /\bHTML\b/i, label: "HTML", className: "is-code-keyword" },
+      { pattern: /\bCSS\b/i, label: "CSS", className: "is-code-keyword" },
+      { pattern: /\bKI\b|\bAI\b|\bKünstliche\s+Intelligenz\b/i, label: "AI", className: "is-ai-keyword" },
+      { pattern: /\bGitHub\b|\bGit\b/i, label: "GIT", className: "is-tool-keyword" },
+      { pattern: /\bREST(?:ful)?\b|\bREST\s+Data\s+Sources\b/i, label: "API", className: "is-api-keyword" },
+      { pattern: /\bDBMS\b|\bDatenbanken?\b|\bDatenmodell\w*\b/i, label: "DATA", className: "is-db-keyword" },
+      { pattern: /\bSpring(?:\s+Boot|\s+Framework)?\b/i, label: "BOOT", className: "is-code-keyword" },
+      { pattern: /\bVaadin\b|\bMVC\b|\bUML\b|\bOOP\b/i, label: "ARCH", className: "is-code-keyword" },
+      { pattern: /\bScrum\b|\bKanban\b|\bProduct\s+Owner(?:ship)?\b|\bPRINCE2\b|\bITIL\b/i, label: "FLOW", className: "is-flow-keyword" },
+      { pattern: /\bJira\b|\bConfluence\b|\bIntelliJ\b|\bMS\s+Office\b/i, label: "TOOL", className: "is-tool-keyword" },
+      { pattern: /\bSoftware\b/i, label: "SW", className: "is-code-keyword" },
+      { pattern: /\bProzess\w*\b|\bWorkflow\w*\b|\bLiefer\w*\b/i, label: "FLOW", className: "is-flow-keyword" }
     ];
 
     cursor.className = "hero-code-cursor";
@@ -699,17 +707,18 @@
     let forcedCodeTimer = 0;
     let lastForcedClass = "";
     let currentKeyword = "";
+    let currentKeywordClass = "";
     const idleDelay = 12000;
 
-    function textNodeFromPoint(x, y) {
+    function textPositionFromPoint(x, y) {
       if (document.caretPositionFromPoint) {
         const position = document.caretPositionFromPoint(x, y);
-        return position ? position.offsetNode : null;
+        return position ? { node: position.offsetNode, offset: position.offset } : null;
       }
 
       if (document.caretRangeFromPoint) {
         const range = document.caretRangeFromPoint(x, y);
-        return range ? range.startContainer : null;
+        return range ? { node: range.startContainer, offset: range.startOffset } : null;
       }
 
       return null;
@@ -724,39 +733,52 @@
       );
     }
 
-    function readableTextFromNode(node) {
-      if (!node) return "";
-      if (isReadableTextNode(node)) return node.textContent;
+    function nearestReadableTextNode(node) {
+      if (!node) return null;
+      if (isReadableTextNode(node)) return node;
 
       if (node.nodeType === Node.ELEMENT_NODE) {
-        return Array.from(node.childNodes)
-          .filter(isReadableTextNode)
-          .map((child) => child.textContent)
-          .join(" ");
+        return Array.from(node.childNodes).find(isReadableTextNode) || null;
       }
 
-      return "";
+      return null;
+    }
+
+    function textWindowAtOffset(text, offset) {
+      const source = String(text || "");
+      if (!source.trim()) return "";
+      const safeOffset = Math.max(0, Math.min(Number.isFinite(offset) ? offset : 0, source.length));
+      const start = Math.max(0, safeOffset - 32);
+      const end = Math.min(source.length, safeOffset + 32);
+      return source.slice(start, end);
     }
 
     function getKeywordSignal(text) {
-      if (!text) return "";
+      if (!text) return null;
       const signal = keywordSignals.find((item) => item.pattern.test(text));
-      return signal ? signal.label : "";
+      return signal ? { label: signal.label, className: signal.className || "is-keyword" } : null;
     }
 
     function textInfoAtPoint(x, y) {
-      const node = textNodeFromPoint(x, y);
-      const text = readableTextFromNode(node);
-      if (text.trim()) {
+      const position = textPositionFromPoint(x, y);
+      const node = nearestReadableTextNode(position?.node);
+
+      if (!node) {
         return {
-          isText: true,
-          keyword: getKeywordSignal(text)
+          isText: false,
+          keyword: "",
+          keywordClass: ""
         };
       }
 
+      const source = node.textContent || "";
+      const candidate = textWindowAtOffset(source, position?.offset || 0);
+      const signal = getKeywordSignal(candidate);
+
       return {
-        isText: false,
-        keyword: ""
+        isText: source.trim().length > 0,
+        keyword: signal?.label || "",
+        keywordClass: signal?.className || ""
       };
     }
 
@@ -775,7 +797,7 @@
 
     function resetCursorCode() {
       window.clearTimeout(forcedCodeTimer);
-      setCursorCode(currentKeyword || "</>", currentKeyword ? "is-keyword" : "");
+      setCursorCode(currentKeyword || "</>", currentKeyword ? currentKeywordClass || "is-keyword" : "");
     }
 
     function resetIdleTimer() {
@@ -792,6 +814,7 @@
     function hideCursor() {
       cursor.classList.remove("is-visible", "is-action", "is-text", "is-clicking", "is-idle", "is-keyword");
       currentKeyword = "";
+      currentKeywordClass = "";
       window.clearTimeout(idleTimer);
       if (!forcedCodeTimer) setCursorCode("</>");
     }
@@ -821,6 +844,7 @@
           : textInfoAtPoint(event.clientX, event.clientY);
       const isTextCursor = Boolean(textInfo.isText);
       currentKeyword = textInfo.keyword;
+      currentKeywordClass = textInfo.keywordClass || "";
 
       nextX = event.clientX - (isTextCursor ? 7 : 3);
       nextY = event.clientY - (isTextCursor ? 15 : 2);
@@ -829,7 +853,7 @@
       cursor.classList.toggle("is-text", isTextCursor);
       cursor.classList.toggle("is-keyword", Boolean(currentKeyword) && !forcedCodeTimer && !cursor.classList.contains("is-idle"));
       if (!forcedCodeTimer && !cursor.classList.contains("is-idle")) {
-        setCursorCode(currentKeyword || "</>", currentKeyword ? "is-keyword" : "");
+        setCursorCode(currentKeyword || "</>", currentKeyword ? currentKeywordClass || "is-keyword" : "");
       }
       resetIdleTimer();
       if (!frame) frame = window.requestAnimationFrame(renderCursor);
@@ -1335,6 +1359,7 @@
     let terminalTimer = 0;
     let devModeTimer = 0;
     let themeTimer = 0;
+    let devLangTimer = 0;
     let matrixRunning = false;
 
     document.body.appendChild(document.createComment(" PK_SIGNAL_LAYER::EASTER_EGGS_ARMED "));
@@ -1350,6 +1375,18 @@
       terminal.setAttribute("aria-hidden", "true");
       hero.appendChild(terminal);
     }
+
+    const devHud = document.createElement("div");
+    devHud.className = "easter-dev-hud";
+    devHud.setAttribute("aria-hidden", "true");
+    devHud.innerHTML = `
+      <strong>DEVELOPER MODE</strong>
+      <span>route :: ${document.body.classList.contains("vita-page") ? "vita" : "index"}</span>
+      <span>cursor :: custom</span>
+      <span>signal :: armed</span>
+      <i></i>
+    `;
+    document.body.appendChild(devHud);
 
     function isTypingTarget(target) {
       return Boolean(target && target.closest && target.closest(typedInputSelector));
@@ -1392,13 +1429,16 @@
     function triggerDeveloperMode() {
       window.clearTimeout(devModeTimer);
       root.classList.add("easter-dev-mode");
-      showToast("developer mode unlocked", 3200);
-      flashTerminal("> developer mode unlocked", 4200);
-      emitCursorCode("{PK}", 4200, "is-dev-signal");
+      devHud.classList.add("is-visible");
+      showToast("developer mode unlocked", 3600);
+      flashTerminal("> root access granted // signal layer writable", 5200);
+      emitCursorCode("{PK}", 5200, "is-dev-signal");
       pulseHeroSignal();
+      if (!reduceMotion.matches) window.setTimeout(runMatrixRain, 240);
       devModeTimer = window.setTimeout(() => {
         root.classList.remove("easter-dev-mode");
-      }, 12000);
+        devHud.classList.remove("is-visible");
+      }, 15000);
     }
 
     function resizeMatrix(canvas, context, columns) {
@@ -1525,6 +1565,24 @@
     }
 
     function setupSectionNumberTriggers() {
+      const sectionAnimationTargets = [
+        ".section-heading",
+        ".text-stack",
+        ".system-profile-panel",
+        ".quick-facts > div",
+        ".project-card",
+        ".stack-console",
+        ".stack-grid > article",
+        ".profile-grid > article",
+        ".timeline-item",
+        ".credential-list > li",
+        ".proof-card",
+        ".oracle-badge-card",
+        ".certificate-showcase",
+        ".contact-actions > *",
+        ".contact-status"
+      ].join(", ");
+
       document.querySelectorAll("[data-section-index]").forEach((section) => {
         if (section.querySelector(":scope > .easter-section-trigger")) return;
         const index = section.dataset.sectionIndex || "";
@@ -1534,12 +1592,17 @@
         trigger.setAttribute("aria-label", `Signal ${index}`);
         trigger.textContent = index;
         trigger.addEventListener("click", () => {
+          const items = Array.from(section.querySelectorAll(sectionAnimationTargets));
+          items.forEach((item, itemIndex) => {
+            item.style.setProperty("--easter-delay", `${Math.min(itemIndex * 48, 336)}ms`);
+          });
           section.classList.remove("easter-section-pulse");
+          section.offsetHeight;
           window.requestAnimationFrame(() => section.classList.add("easter-section-pulse"));
-          showToast(`section ${index} signal`, 2300);
-          flashTerminal(`> ${sectionMessages[index] || "section signal touched"}`, 3200);
-          emitCursorCode(`S${index}`, 2500, "is-section-signal");
-          window.setTimeout(() => section.classList.remove("easter-section-pulse"), 1000);
+          showToast(`section ${index} signal`, 2600);
+          flashTerminal(`> ${sectionMessages[index] || "section signal touched"}`, 3600);
+          emitCursorCode(`S${index}`, 2900, "is-section-signal");
+          window.setTimeout(() => section.classList.remove("easter-section-pulse"), 1300);
         });
         section.appendChild(trigger);
       });
@@ -1554,11 +1617,16 @@
         clicks.push(now);
         if (clicks.length < 6) return;
         clicks = [];
+        window.clearTimeout(devLangTimer);
         langToggle.classList.add("is-easter-dev-lang");
-        showToast("language pack: DEV", 2800);
-        flashTerminal("> language layer switched to DEV", 3400);
-        emitCursorCode("DEV", 3200, "is-dev-lang-code");
-        window.setTimeout(() => langToggle.classList.remove("is-easter-dev-lang"), 3000);
+        root.classList.add("easter-dev-language-mode");
+        showToast("language pack: DEV", 3200);
+        flashTerminal("> language layer switched to DEV // monospace runtime", 4200);
+        emitCursorCode("DEV", 3800, "is-dev-lang-code");
+        devLangTimer = window.setTimeout(() => {
+          langToggle.classList.remove("is-easter-dev-lang");
+          root.classList.remove("easter-dev-language-mode");
+        }, 6400);
       });
     }
 

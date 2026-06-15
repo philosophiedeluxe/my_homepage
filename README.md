@@ -116,9 +116,9 @@ Cursor states:
 | Action | links, buttons and interactive controls | stronger split-layer action state |
 | Text | readable text, text inputs and contenteditable areas | smaller I-beam cursor in the same visual style |
 | Idle | pointer remains still for about 12 seconds | temporary sleeping cursor code |
-| Keyword | selected technical words | temporary context label such as `SQL`, `APP`, `DB`, `JS`, `AI` |
+| Keyword | selected technical words | temporary context label such as `SQL`, `APEX`, `DB`, `JS`, `AI`, `FLOW` or `{PK}` |
 
-Technical keyword reactions currently include terms such as `Oracle`, `APEX`, `PL/SQL`, `SQL`, `JavaScript`, `KI`, `GitHub` and `REST`.
+Technical keyword reactions are offset-based around the hovered word instead of scanning the whole paragraph. Supported terms include `Phil Kirchner`, `Oracle`, `Oracle DB`, `APEX`, `PL/SQL`, `SQL`, `JavaScript`, `Java`, `HTML`, `CSS`, `KI`, `AI`, `Git`, `GitHub`, `REST`, `RESTful`, `REST Data Sources`, `DBMS`, `Datenbank`, `Spring`, `Spring Boot`, `Vaadin`, `MVC`, `UML`, `OOP`, `Scrum`, `Kanban`, `Product Owner`, `PRINCE2`, `ITIL`, `Jira`, `Confluence`, `IntelliJ`, `MS Office`, `Software`, `Prozess` and `Workflow`. Hovering the name/brand signal uses the special cursor label `{PK}`.
 
 ### Tilt Cards and Glow
 
@@ -139,18 +139,18 @@ The Easter eggs are intentionally subtle. They are implemented in `setupEasterEg
 
 | Easter Egg | Trigger | Result |
 | --- | --- | --- |
-| Developer Mode | `ArrowUp ArrowUp ArrowDown ArrowDown ArrowLeft ArrowRight ArrowLeft ArrowRight B A` | temporary developer state, terminal message and cursor code `{PK}` |
+| Developer Mode | `ArrowUp ArrowUp ArrowDown ArrowDown ArrowLeft ArrowRight ArrowLeft ArrowRight B A` | stronger developer state with HUD, scan/grid overlay, outlined interface modules, terminal message, short Matrix injection and cursor code `{PK}` |
 | Cursor Sleep | leave the mouse still for about 12 seconds | cursor switches into an idle/sleeping state |
 | Hero Terminal | keep the hero section visible for about 7 seconds | hidden terminal line appears in the hero area |
 | Matrix Rain | type `matrix` on the keyboard | temporary Matrix-style rain overlay |
 | DOM Comment | inspect the HTML source or DevTools DOM | hidden signal-layer comments are present |
-| Section Signals | click decorative section numbers such as `01`, `02`, `03`, `04` | section pulse, toast and cursor code |
-| Language DEV Mode | click the `DE/EN` toggle 6 times quickly | temporary `DEV` language-state hint |
+| Section Signals | click decorative section numbers such as `01`, `02`, `03`, `04` | section number glows, content briefly fades/reboots, cards/data panels jitter and a scanning layer crosses the section |
+| Language DEV Mode | click the `DE/EN` toggle 6 times quickly | temporary `DEV` language-state hint plus code-style monospace UI treatment |
 | Boot Sequence | rare first page visit per session | brief boot overlay with signal-layer lines |
-| Keyword Cursor | hover selected technology words | cursor label changes contextually |
+| Keyword Cursor | hover selected technology words or the name | cursor label changes contextually; name/brand hover emits `{PK}` |
 | Secret Theme Shift | hold `Shift` and click the `PK` branding | temporary alternate theme shift |
 
-The effects are session-safe and temporary. They do not store analytics, do not call external services and do not change the content model of the site.
+The effects are session-safe and temporary. They do not store analytics, do not call external services and do not change the content model of the site. Section-number triggers are invisible buttons positioned directly over the decorative numbers, so the Easter egg remains discoverable through the number itself and does not create layout spacing.
 
 ## Vita and PDF Export
 
