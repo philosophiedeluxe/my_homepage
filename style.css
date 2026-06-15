@@ -936,7 +936,7 @@ html.easter-dev-mode .hero-scanline {
   filter: saturate(1.45) contrast(1.18);
 }
 
-html.easter-dev-boot  .easter-dev-hud {
+.easter-dev-hud {
   position: fixed;
   right: max(18px, env(safe-area-inset-right));
   top: calc(var(--nav-h) + max(14px, env(safe-area-inset-top)));
@@ -1100,6 +1100,10 @@ html.easter-dev-boot  .easter-dev-hud {
 .easter-dev-hud.is-visible {
   opacity: 1;
   transform: translate3d(0, 0, 0) scale(1);
+}
+
+html.easter-dev-boot .easter-dev-hud.is-visible {
+  animation: easter-dev-hud-boot 760ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 html.easter-dev-mode body::after {
