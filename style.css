@@ -297,6 +297,7 @@ html[data-lang="en"] .is-en {
 
 main > .section:not(.hero),
 main > article.section {
+  --section-easter-bg: var(--bg);
   position: relative;
   isolation: isolate;
   background: var(--bg);
@@ -313,6 +314,7 @@ main > article.section::before {
 
 main > .section:nth-of-type(even):not(.hero),
 main > article.section {
+  --section-easter-bg: var(--band);
   background: var(--band);
 }
 
@@ -765,24 +767,22 @@ main > article.section {
 
 [data-section-index].easter-section-pulse {
   isolation: isolate;
+  box-shadow: 0 0 0 100vmax var(--section-easter-bg, var(--bg));
 }
 
 [data-section-index].easter-section-pulse::before {
   content: "";
   position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 50%;
-  right: auto;
+  inset: 0 calc(50% - 50vw);
   z-index: 0;
-  width: 100vw;
+  width: auto;
   border-radius: 0;
   background:
     linear-gradient(90deg, transparent, rgba(var(--cyan-rgb), 0.12), transparent),
     repeating-linear-gradient(0deg, transparent 0 10px, rgba(var(--cyan-rgb), 0.035) 10px 11px);
   opacity: 0;
   pointer-events: none;
-  transform: translateX(-50%);
+  transform: none;
   animation: easter-section-scan 1150ms ease both;
 }
 
