@@ -4149,3 +4149,14 @@ main > .section.interior-hero::before {
   }
 }
 
+
+/* Vita: remove the decorative action signal dash from section 01.
+   The animated pseudo line scaled with viewport/action width and appeared as an unintended stripe. */
+.vita-page.interior-page .page-actions {
+  padding-top: 0;
+}
+
+.vita-page.interior-page .page-actions::before {
+  content: none;
+  display: none;
+}
