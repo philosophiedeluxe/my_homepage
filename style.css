@@ -770,14 +770,19 @@ main > article.section {
 [data-section-index].easter-section-pulse::before {
   content: "";
   position: absolute;
-  inset: 0;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  right: auto;
   z-index: 0;
-  border-radius: var(--radius);
+  width: 100vw;
+  border-radius: 0;
   background:
     linear-gradient(90deg, transparent, rgba(var(--cyan-rgb), 0.12), transparent),
     repeating-linear-gradient(0deg, transparent 0 10px, rgba(var(--cyan-rgb), 0.035) 10px 11px);
   opacity: 0;
   pointer-events: none;
+  transform: translateX(-50%);
   animation: easter-section-scan 1150ms ease both;
 }
 
@@ -887,6 +892,21 @@ main > article.section {
 html.easter-dev-mode .hero-scanline {
   opacity: 0.54;
   filter: saturate(1.45) contrast(1.18);
+}
+
+html.easter-dev-boot .easter-dev-hud {
+  animation: easter-dev-hud-boot 980ms steps(3, end) both;
+}
+
+html.easter-dev-boot .site-shell,
+html.easter-dev-boot .project-card,
+html.easter-dev-boot .stack-grid > article,
+html.easter-dev-boot .profile-grid > article,
+html.easter-dev-boot .timeline-item,
+html.easter-dev-boot .credential-list > li,
+html.easter-dev-boot .proof-card,
+html.easter-dev-boot .system-profile-panel {
+  animation: easter-dev-interface-boot 1120ms steps(3, end) both;
 }
 
 .language-toggle.is-easter-dev-lang {
@@ -1053,6 +1073,47 @@ html.easter-dev-language-mode .site-shell::after {
 
   50% {
     transform: translate3d(0, 2px, 0);
+  }
+}
+
+@keyframes easter-dev-hud-boot {
+  0% {
+    opacity: 0;
+    transform: translate3d(18px, -12px, 0) skewX(-5deg);
+    filter: saturate(1.6) contrast(1.25);
+  }
+
+  34% {
+    opacity: 1;
+    transform: translate3d(-4px, 2px, 0) skewX(3deg);
+  }
+
+  62% {
+    transform: translate3d(3px, -1px, 0) skewX(-2deg);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    filter: none;
+  }
+}
+
+@keyframes easter-dev-interface-boot {
+  0% {
+    filter: none;
+  }
+
+  24% {
+    filter: saturate(1.55) contrast(1.16) hue-rotate(18deg);
+  }
+
+  52% {
+    filter: saturate(1.18) contrast(1.08) hue-rotate(-12deg);
+  }
+
+  100% {
+    filter: none;
   }
 }
 

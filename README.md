@@ -139,12 +139,12 @@ The Easter eggs are intentionally subtle. They are implemented in `setupEasterEg
 
 | Easter Egg | Trigger | Result |
 | --- | --- | --- |
-| Developer Mode | `ArrowUp ArrowUp ArrowDown ArrowDown ArrowLeft ArrowRight ArrowLeft ArrowRight B A` | stronger developer state with HUD, scan/grid overlay, outlined interface modules, terminal message, short Matrix injection and cursor code `{PK}` |
+| Developer Mode | `ArrowUp ArrowUp ArrowDown ArrowDown ArrowLeft ArrowRight ArrowLeft ArrowRight B A` | stronger developer state with HUD, scan/grid overlay, outlined interface modules, terminal message, boot/glitch pulse and cursor code `{PK}` |
 | Cursor Sleep | leave the mouse still for about 12 seconds | cursor switches into an idle/sleeping state |
 | Hero Terminal | keep the hero section visible for about 7 seconds | hidden terminal line appears in the hero area |
 | Matrix Rain | type `matrix` on the keyboard | temporary Matrix-style rain overlay |
 | DOM Comment | inspect the HTML source or DevTools DOM | hidden signal-layer comments are present |
-| Section Signals | click decorative section numbers such as `01`, `02`, `03`, `04` | section number glows, content briefly fades/reboots, cards/data panels jitter and a scanning layer crosses the section |
+| Section Signals | click decorative section numbers such as `01`, `02`, `03`, `04` | section number glows, content briefly fades/reboots, cards/data panels jitter and a full-width scanning layer crosses the section |
 | Language DEV Mode | click the `DE/EN` toggle 6 times quickly | temporary `DEV` language-state hint plus code-style monospace UI treatment |
 | Boot Sequence | rare first page visit per session | brief boot overlay with signal-layer lines |
 | Keyword Cursor | hover selected technology words or the name | cursor label changes contextually; name/brand hover emits `{PK}` |

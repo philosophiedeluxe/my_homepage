@@ -1428,15 +1428,15 @@
 
     function triggerDeveloperMode() {
       window.clearTimeout(devModeTimer);
-      root.classList.add("easter-dev-mode");
+      root.classList.add("easter-dev-mode", "easter-dev-boot");
       devHud.classList.add("is-visible");
       showToast("developer mode unlocked", 3600);
       flashTerminal("> root access granted // signal layer writable", 5200);
       emitCursorCode("{PK}", 5200, "is-dev-signal");
       pulseHeroSignal();
-      if (!reduceMotion.matches) window.setTimeout(runMatrixRain, 240);
+      window.setTimeout(() => root.classList.remove("easter-dev-boot"), 1600);
       devModeTimer = window.setTimeout(() => {
-        root.classList.remove("easter-dev-mode");
+        root.classList.remove("easter-dev-mode", "easter-dev-boot");
         devHud.classList.remove("is-visible");
       }, 15000);
     }
