@@ -663,25 +663,36 @@
       "[role='textbox']"
     ].join(", ");
     const keywordSignals = [
-      { pattern: /\bPhil(?:\s+Kirchner)?\b|\bKirchner\b/i, label: "{PK}", className: "is-name-signal" },
-      { pattern: /\bPL\/?SQL\b/i, label: "PLSQL", className: "is-db-keyword" },
+      { pattern: /\bPhil\s+Kirchner\b/i, label: "{PK}", className: "is-name-signal" },
+      { pattern: /\bPhil\b|\bKirchner\b|\bPK\b/i, label: "{PK}", className: "is-name-signal" },
+      { pattern: /\bOracle\s+APEX\b/i, label: "APEX", className: "is-app-keyword" },
+      { pattern: /\bOracle\s+DB\b/i, label: "DB", className: "is-db-keyword" },
+      { pattern: /\bREST\s+Data\s+Sources?\b/i, label: "RDS", className: "is-api-keyword" },
+      { pattern: /\bRESTful\s+Services?\b/i, label: "API", className: "is-api-keyword" },
+      { pattern: /\bMicrosoft\s+SQL\s+Server\b/i, label: "SQL", className: "is-db-keyword" },
+      { pattern: /\bSQL\s+Server\b/i, label: "SQL", className: "is-db-keyword" },
+      { pattern: /\bPL\s*\/\s*SQL\b/i, label: "PLSQL", className: "is-db-keyword" },
+      { pattern: /\bAPEX\b/i, label: "APEX", className: "is-app-keyword" },
+      { pattern: /\bOracle(?:[-\s]nahe)?\b/i, label: "DB", className: "is-db-keyword" },
       { pattern: /\bSQL\b/i, label: "SQL", className: "is-db-keyword" },
-      { pattern: /\bOracle(?:\s+DB)?\b/i, label: "DB", className: "is-db-keyword" },
-      { pattern: /\bAPEX\b|\bOracle\s+APEX\b/i, label: "APEX", className: "is-app-keyword" },
-      { pattern: /\bJavaScript\b/i, label: "JS", className: "is-code-keyword" },
+      { pattern: /\bJavaScript\b|\bVanilla\s+JS\b|\bJS\b/i, label: "JS", className: "is-code-keyword" },
+      { pattern: /\bTypeScript\b|\bTS\b/i, label: "TS", className: "is-code-keyword" },
       { pattern: /\bJava\b/i, label: "JAVA", className: "is-code-keyword" },
       { pattern: /\bHTML\b/i, label: "HTML", className: "is-code-keyword" },
       { pattern: /\bCSS\b/i, label: "CSS", className: "is-code-keyword" },
+      { pattern: /\bJSON\b/i, label: "JSON", className: "is-api-keyword" },
+      { pattern: /\bXML\b|\bXSD\b/i, label: "XML", className: "is-api-keyword" },
       { pattern: /\bKI\b|\bAI\b|\bKünstliche\s+Intelligenz\b/i, label: "AI", className: "is-ai-keyword" },
-      { pattern: /\bGitHub\b|\bGit\b/i, label: "GIT", className: "is-tool-keyword" },
-      { pattern: /\bREST(?:ful)?\b|\bREST\s+Data\s+Sources\b/i, label: "API", className: "is-api-keyword" },
-      { pattern: /\bDBMS\b|\bDatenbanken?\b|\bDatenmodell\w*\b/i, label: "DATA", className: "is-db-keyword" },
-      { pattern: /\bSpring(?:\s+Boot|\s+Framework)?\b/i, label: "BOOT", className: "is-code-keyword" },
-      { pattern: /\bVaadin\b|\bMVC\b|\bUML\b|\bOOP\b/i, label: "ARCH", className: "is-code-keyword" },
-      { pattern: /\bScrum\b|\bKanban\b|\bProduct\s+Owner(?:ship)?\b|\bPRINCE2\b|\bITIL\b/i, label: "FLOW", className: "is-flow-keyword" },
-      { pattern: /\bJira\b|\bConfluence\b|\bIntelliJ\b|\bMS\s+Office\b/i, label: "TOOL", className: "is-tool-keyword" },
-      { pattern: /\bSoftware\b/i, label: "SW", className: "is-code-keyword" },
-      { pattern: /\bProzess\w*\b|\bWorkflow\w*\b|\bLiefer\w*\b/i, label: "FLOW", className: "is-flow-keyword" }
+      { pattern: /\bGitHub\b/i, label: "GH", className: "is-tool-keyword" },
+      { pattern: /\bGit\b/i, label: "GIT", className: "is-tool-keyword" },
+      { pattern: /\bREST(?:ful)?\b|\bAPI\b|\bEndpoint\w*\b/i, label: "API", className: "is-api-keyword" },
+      { pattern: /\bDBMS\b|\bDatenbanken?\b|\bDatenmodell\w*\b|\bDatenhaltung\b|\bData\s+Sources?\b/i, label: "DATA", className: "is-db-keyword" },
+      { pattern: /\bSpring\s+Boot\b|\bSpring\s+Framework\b|\bSpring\b/i, label: "BOOT", className: "is-code-keyword" },
+      { pattern: /\bVaadin\b|\bMVC\b|\bUML\b|\bOOP\b|\bArchitektur\w*\b|\bGrundarchitektur\b/i, label: "ARCH", className: "is-code-keyword" },
+      { pattern: /\bScrum\s+Master\b|\bProduct\s+Owner(?:ship)?\b|\bScrum\b|\bKanban\b|\bPRINCE2\b|\bITIL\b|\bagil\w*\b/i, label: "FLOW", className: "is-flow-keyword" },
+      { pattern: /\bJira\b|\bConfluence\b|\bIntelliJ(?:\s+IDEA)?\b|\bMS\s+Office\b|\bMicrosoft\s+Office\b/i, label: "TOOL", className: "is-tool-keyword" },
+      { pattern: /\bSoftware(?:entwicklung)?\b|\bAnwendungsentwicklung\b|\bAnwendungen\b/i, label: "SW", className: "is-code-keyword" },
+      { pattern: /\bProzess\w*\b|\bWorkflow\w*\b|\bLiefer\w*\b|\bArbeitsfluss\b|\bAbläufe\b/i, label: "FLOW", className: "is-flow-keyword" }
     ];
 
     cursor.className = "hero-code-cursor";
@@ -733,52 +744,152 @@
       );
     }
 
+    function readableTextNodesIn(element, limit = 28) {
+      if (!element || element.nodeType !== Node.ELEMENT_NODE) return [];
+      if (element === document.body || element === document.documentElement) return [];
+
+      const nodes = [];
+      const walker = document.createTreeWalker(
+        element,
+        NodeFilter.SHOW_TEXT,
+        {
+          acceptNode(node) {
+            return isReadableTextNode(node) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+          }
+        }
+      );
+
+      while (nodes.length < limit) {
+        const node = walker.nextNode();
+        if (!node) break;
+        nodes.push(node);
+      }
+
+      return nodes;
+    }
+
     function nearestReadableTextNode(node) {
       if (!node) return null;
       if (isReadableTextNode(node)) return node;
 
-      if (node.nodeType === Node.ELEMENT_NODE) {
-        return Array.from(node.childNodes).find(isReadableTextNode) || null;
+      const element = node.nodeType === Node.ELEMENT_NODE ? node : node.parentElement;
+      return readableTextNodesIn(element, 1)[0] || null;
+    }
+
+    function pointInRect(rect, x, y, tolerance = 1.5) {
+      return Boolean(
+        rect &&
+        x >= rect.left - tolerance &&
+        x <= rect.right + tolerance &&
+        y >= rect.top - tolerance &&
+        y <= rect.bottom + tolerance
+      );
+    }
+
+    function pointTouchesTextNode(node, x, y) {
+      if (!isReadableTextNode(node)) return false;
+      const range = document.createRange();
+      try {
+        range.selectNodeContents(node);
+        return Array.from(range.getClientRects()).some((rect) => pointInRect(rect, x, y, 2));
+      } finally {
+        range.detach?.();
+      }
+    }
+
+    function globalKeywordPattern(pattern) {
+      const flags = pattern.flags.includes("g") ? pattern.flags : `${pattern.flags}g`;
+      return new RegExp(pattern.source, flags);
+    }
+
+    function signalFromMatch(signal) {
+      return { label: signal.label, className: signal.className || "is-keyword" };
+    }
+
+    function keywordSignalAtOffset(node, offset) {
+      if (!isReadableTextNode(node)) return null;
+      const source = node.textContent || "";
+      const safeOffset = Math.max(0, Math.min(Number.isFinite(offset) ? offset : 0, source.length));
+
+      for (const signal of keywordSignals) {
+        const pattern = globalKeywordPattern(signal.pattern);
+        let match;
+        while ((match = pattern.exec(source))) {
+          const start = match.index;
+          const end = start + match[0].length;
+          if (safeOffset >= start - 1 && safeOffset <= end + 1) return signalFromMatch(signal);
+          if (match[0].length === 0) pattern.lastIndex += 1;
+        }
       }
 
       return null;
     }
 
-    function textWindowAtOffset(text, offset) {
-      const source = String(text || "");
-      if (!source.trim()) return "";
-      const safeOffset = Math.max(0, Math.min(Number.isFinite(offset) ? offset : 0, source.length));
-      const start = Math.max(0, safeOffset - 32);
-      const end = Math.min(source.length, safeOffset + 32);
-      return source.slice(start, end);
+    function keywordSignalAtPointInTextNode(node, x, y) {
+      if (!isReadableTextNode(node)) return null;
+      const source = node.textContent || "";
+      const range = document.createRange();
+
+      try {
+        for (const signal of keywordSignals) {
+          const pattern = globalKeywordPattern(signal.pattern);
+          let match;
+          while ((match = pattern.exec(source))) {
+            const start = match.index;
+            const end = start + match[0].length;
+            if (end <= start) {
+              pattern.lastIndex += 1;
+              continue;
+            }
+
+            range.setStart(node, start);
+            range.setEnd(node, end);
+            if (Array.from(range.getClientRects()).some((rect) => pointInRect(rect, x, y, 3))) {
+              return signalFromMatch(signal);
+            }
+          }
+        }
+      } finally {
+        range.detach?.();
+      }
+
+      return null;
     }
 
-    function getKeywordSignal(text) {
-      if (!text) return null;
-      const signal = keywordSignals.find((item) => item.pattern.test(text));
-      return signal ? { label: signal.label, className: signal.className || "is-keyword" } : null;
+    function elementFromEventTarget(target) {
+      if (!target) return null;
+      return target.nodeType === Node.ELEMENT_NODE ? target : target.parentElement;
     }
 
-    function textInfoAtPoint(x, y) {
+    function textInfoAtPoint(x, y, target) {
       const position = textPositionFromPoint(x, y);
-      const node = nearestReadableTextNode(position?.node);
+      const directNode = nearestReadableTextNode(position?.node);
+      const candidates = [];
 
-      if (!node) {
+      if (directNode) candidates.push(directNode);
+
+      const targetElement = elementFromEventTarget(target) || document.elementFromPoint(x, y);
+      for (const node of readableTextNodesIn(targetElement)) {
+        if (!candidates.includes(node)) candidates.push(node);
+      }
+
+      for (const node of candidates) {
+        if (!pointTouchesTextNode(node, x, y)) continue;
+
+        const signal = keywordSignalAtPointInTextNode(node, x, y) ||
+          (node === directNode ? keywordSignalAtOffset(node, position?.offset || 0) : null);
+
         return {
-          isText: false,
-          keyword: "",
-          keywordClass: ""
+          isText: true,
+          keyword: signal?.label || "",
+          keywordClass: signal?.className || ""
         };
       }
 
-      const source = node.textContent || "";
-      const candidate = textWindowAtOffset(source, position?.offset || 0);
-      const signal = getKeywordSignal(candidate);
-
       return {
-        isText: source.trim().length > 0,
-        keyword: signal?.label || "",
-        keywordClass: signal?.className || ""
+        isText: false,
+        keyword: "",
+        keywordClass: ""
       };
     }
 
@@ -835,13 +946,15 @@
     document.addEventListener("pointermove", (event) => {
       if (event.pointerType === "touch") return;
 
-      const textControl = event.target.closest(textControlSelector);
-      const actionElement = textControl ? null : event.target.closest(actionSelector);
-      const textInfo = textControl
-        ? { isText: true, keyword: "" }
-        : actionElement
-          ? { isText: false, keyword: "" }
-          : textInfoAtPoint(event.clientX, event.clientY);
+      const targetElement = elementFromEventTarget(event.target);
+      const textControl = targetElement?.closest(textControlSelector);
+      const actionElement = textControl ? null : targetElement?.closest(actionSelector);
+      const detectedTextInfo = textControl
+        ? { isText: true, keyword: "", keywordClass: "" }
+        : textInfoAtPoint(event.clientX, event.clientY, event.target);
+      const textInfo = actionElement
+        ? { ...detectedTextInfo, isText: false }
+        : detectedTextInfo;
       const isTextCursor = Boolean(textInfo.isText);
       currentKeyword = textInfo.keyword;
       currentKeywordClass = textInfo.keywordClass || "";
