@@ -1369,7 +1369,7 @@ html.easter-dev-language-mode .site-shell::after {
       transparent 1px,
       transparent 4px
     ),
-    url("./image/no_signal.jpg?v=20260612-12") center / 100% 100% no-repeat;
+    url("./image/no_signal.jpg?v=20260616-1") center / 100% 100% no-repeat;
   opacity: 0;
   will-change: opacity, transform;
 }
@@ -4149,17 +4149,6 @@ main > .section.interior-hero::before {
   }
 }
 
-
-/* Vita: remove the decorative action signal dash from section 01.
-   The animated pseudo line scaled with viewport/action width and appeared as an unintended stripe. */
-.vita-page.interior-page .page-actions {
-  padding-top: 0;
-}
-
-.vita-page.interior-page .page-actions::before {
-  content: none;
-  display: none;
-}
 
 /* Easter Egg: cinematic startup sequence -------------------------------------------------- */
 html.easter-boot-active body {
