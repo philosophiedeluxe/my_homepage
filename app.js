@@ -1390,13 +1390,41 @@
 
     root.classList.add("reveal-ready");
 
+    const revealState = new WeakMap();
+
+    function shouldReveal(entry) {
+      const rect = entry.boundingClientRect;
+      const viewportHeight = window.innerHeight || document.documentElement.clientHeight || 1;
+      const entersComfortZone = rect.top < viewportHeight * 0.86 && rect.bottom > viewportHeight * 0.1;
+      return entry.isIntersecting && (entry.intersectionRatio >= 0.08 || entersComfortZone);
+    }
+
+    function shouldConceal(entry) {
+      const rect = entry.boundingClientRect;
+      const viewportHeight = window.innerHeight || document.documentElement.clientHeight || 1;
+      const aboveViewport = rect.bottom < viewportHeight * 0.04;
+      const belowViewport = rect.top > viewportHeight * 0.96;
+      return (!entry.isIntersecting || entry.intersectionRatio <= 0.01) && (aboveViewport || belowViewport);
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          entry.target.classList.toggle("is-visible", entry.isIntersecting);
+          const isVisible = revealState.get(entry.target) === true;
+
+          if (!isVisible && shouldReveal(entry)) {
+            revealState.set(entry.target, true);
+            entry.target.classList.add("is-visible");
+            return;
+          }
+
+          if (isVisible && shouldConceal(entry)) {
+            revealState.set(entry.target, false);
+            entry.target.classList.remove("is-visible");
+          }
         });
       },
-      { rootMargin: "0px 0px -12% 0px", threshold: 0.16 }
+      { rootMargin: "8% 0px 8% 0px", threshold: [0, 0.01, 0.08, 0.16, 0.32] }
     );
 
     document.querySelectorAll(".reveal-item").forEach((element) => observer.observe(element));
