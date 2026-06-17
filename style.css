@@ -1463,20 +1463,46 @@ h1 {
 .accent-word[data-reflection] {
   position: relative;
   display: inline-block;
+  isolation: isolate;
+  filter:
+    drop-shadow(-0.018em 0 rgba(var(--cyan-rgb), 0.28))
+    drop-shadow(0.018em 0 rgba(255, 42, 161, 0.22));
 }
 
+.accent-word[data-reflection]::before,
 .accent-word[data-reflection]::after {
   position: absolute;
   content: attr(data-reflection);
   inset: 0;
   z-index: 1;
-  color: #f4f1ea;
-  -webkit-text-fill-color: #f4f1ea;
-  text-shadow: 0 0 10px rgba(143, 243, 238, 0.64);
-  clip-path: polygon(-18% 0, -2% 0, -18% 100%, -34% 100%);
+  background: none;
+  -webkit-background-clip: initial;
+  background-clip: initial;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+.accent-word[data-reflection]::before {
+  color: var(--accent-2);
+  -webkit-text-fill-color: var(--accent-2);
+  text-shadow:
+    -1px 0 rgba(var(--cyan-rgb), 0.95),
+    0 0 14px rgba(var(--cyan-rgb), 0.56);
+  clip-path: polygon(0 8%, 100% 8%, 100% 24%, 0 24%, 0 48%, 100% 48%, 100% 59%, 0 59%);
   opacity: 0;
   pointer-events: none;
-  animation: accent-sheen 5.8s cubic-bezier(0.22, 0.61, 0.36, 1) infinite;
+  animation: accent-glitch-cyan 4.9s steps(1, end) infinite;
+}
+
+.accent-word[data-reflection]::after {
+  color: #ff2aa1;
+  -webkit-text-fill-color: #ff2aa1;
+  text-shadow:
+    1px 0 rgba(255, 42, 161, 0.86),
+    0 0 16px rgba(var(--violet-rgb), 0.6);
+  clip-path: polygon(0 28%, 100% 28%, 100% 39%, 0 39%, 0 68%, 100% 68%, 100% 82%, 0 82%);
+  opacity: 0;
+  animation: accent-glitch-magenta 5.7s steps(1, end) infinite;
 }
 
 h2 {
@@ -3031,26 +3057,81 @@ main > .section.interior-hero::before {
   }
 }
 
-@keyframes accent-sheen {
+@keyframes accent-glitch-cyan {
   0%,
-  24% {
-    opacity: 0;
-    clip-path: polygon(-18% 0, -2% 0, -18% 100%, -34% 100%);
-  }
-
-  30% {
-    opacity: 0.92;
-  }
-
-  58% {
-    opacity: 0.92;
-    clip-path: polygon(118% 0, 134% 0, 118% 100%, 102% 100%);
-  }
-
-  64%,
+  7%,
+  11%,
+  43%,
+  49%,
+  72%,
+  78%,
   100% {
     opacity: 0;
-    clip-path: polygon(118% 0, 134% 0, 118% 100%, 102% 100%);
+    transform: translate3d(0, 0, 0);
+  }
+
+  8% {
+    opacity: 0.7;
+    transform: translate3d(-0.055em, -0.012em, 0);
+  }
+
+  10% {
+    opacity: 0.34;
+    transform: translate3d(0.025em, 0.01em, 0);
+  }
+
+  44% {
+    opacity: 0.58;
+    transform: translate3d(-0.04em, 0.018em, 0);
+  }
+
+  48% {
+    opacity: 0.28;
+    transform: translate3d(0.02em, -0.01em, 0);
+  }
+
+  73% {
+    opacity: 0.46;
+    transform: translate3d(-0.032em, 0, 0);
+  }
+}
+
+@keyframes accent-glitch-magenta {
+  0%,
+  17%,
+  21%,
+  56%,
+  62%,
+  86%,
+  91%,
+  100% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0);
+  }
+
+  18% {
+    opacity: 0.52;
+    transform: translate3d(0.05em, 0.014em, 0);
+  }
+
+  20% {
+    opacity: 0.3;
+    transform: translate3d(-0.02em, -0.012em, 0);
+  }
+
+  57% {
+    opacity: 0.6;
+    transform: translate3d(0.036em, -0.018em, 0);
+  }
+
+  61% {
+    opacity: 0.25;
+    transform: translate3d(-0.018em, 0.012em, 0);
+  }
+
+  87% {
+    opacity: 0.44;
+    transform: translate3d(0.03em, 0, 0);
   }
 }
 
@@ -3671,6 +3752,7 @@ main > .section.interior-hero::before {
     display: none !important;
   }
 
+  .accent-word[data-reflection]::before,
   .accent-word[data-reflection]::after,
   [data-section-index]::after,
   .easter-section-trigger {
