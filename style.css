@@ -739,6 +739,12 @@ main > article.section {
   animation: cursor-code-sleep 1.3s steps(2, end) infinite;
 }
 
+body.vita-print-mode .hero-code-cursor {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
 @keyframes cursor-code-sleep {
   0%, 48% {
     opacity: 0.36;
@@ -3898,6 +3904,7 @@ main > .section.interior-hero::before {
 
   .site-shell,
   .scroll-progress,
+  .hero-code-cursor,
   .footer,
   .cookie-consent,
   .vita-status,
