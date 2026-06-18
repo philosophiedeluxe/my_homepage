@@ -1983,20 +1983,20 @@
       document.body.appendChild(boot);
       root.classList.add("easter-boot-active");
       showToast(forced ? "manual boot sequence" : "hidden boot sequence", 2600);
-      emitCursorCode("BOOT", 5200, "is-dev-signal");
+      emitCursorCode("BOOT", 10200, "is-dev-signal");
 
       window.setTimeout(() => boot.classList.add("is-visible"), 40);
       window.setTimeout(() => root.classList.add("easter-boot-scan"), 720);
       startBootSequenceTyping(boot, forced);
       queueBootSequenceStep(() => root.classList.add("easter-boot-revealing"), 3800);
-      queueBootSequenceStep(() => boot.classList.add("is-complete"), 5100);
-      queueBootSequenceStep(() => boot.classList.add("is-fading"), 6650);
+      queueBootSequenceStep(() => boot.classList.add("is-complete"), 10100);
+      queueBootSequenceStep(() => boot.classList.add("is-fading"), 11650);
       queueBootSequenceStep(() => {
         clearBootSequenceTyping();
         boot.remove();
         root.classList.remove("easter-boot-active", "easter-boot-scan", "easter-boot-revealing");
         bootRunning = false;
-      }, 7480);
+      }, 12480);
     }
 
 
