@@ -486,6 +486,11 @@
   const isFirefox = navigator.userAgent.includes("Firefox");
   const supportsScrollTimeline = CSS.supports("animation-timeline: scroll()");
   const LANG_STORAGE_KEY = "lang";
+  const LANG_META = {
+    de: { short: "DE", nativeName: "Deutsch", nextLabel: "Nächste Sprache", switchLabel: "Sprache wechseln", currentLabel: "Aktuell" },
+    en: { short: "EN", nativeName: "English", nextLabel: "Next language", switchLabel: "Switch language", currentLabel: "Current" },
+    ja: { short: "JP", nativeName: "日本語", nextLabel: "次の言語", switchLabel: "言語を切り替え", currentLabel: "現在" }
+  };
   const CONSENT_STORAGE_KEY = "pk-cookie-consent";
   const CONSENT_VERSION = 1;
   let scrollTicking = false;
@@ -568,6 +573,33 @@
     window.history.replaceState({}, "", url);
   }
 
+  function getNextLang(lang) {
+    const currentIndex = SUPPORTED_LANGS.indexOf(sanitizeLang(lang));
+    return SUPPORTED_LANGS[(currentIndex + 1) % SUPPORTED_LANGS.length] || DEFAULT_LANG;
+  }
+
+  function updateLanguageToggleState(lang) {
+    if (!langToggle) return;
+    const currentLang = sanitizeLang(lang);
+    const nextLang = getNextLang(currentLang);
+    const currentMeta = LANG_META[currentLang] || LANG_META[DEFAULT_LANG];
+    const nextMeta = LANG_META[nextLang] || LANG_META[DEFAULT_LANG];
+
+    langToggle.dataset.currentLang = currentLang;
+    langToggle.dataset.currentLabel = currentMeta.nativeName;
+    langToggle.title = `${currentMeta.switchLabel}: ${currentMeta.nativeName} → ${nextMeta.nativeName}`;
+    langToggle.setAttribute(
+      "aria-label",
+      `${currentMeta.switchLabel}. ${currentMeta.currentLabel}: ${currentMeta.nativeName}. ${currentMeta.nextLabel}: ${nextMeta.nativeName}.`
+    );
+
+    langToggle.querySelectorAll("[data-lang-option]").forEach((option) => {
+      const isActive = option.dataset.langOption === currentLang;
+      option.dataset.active = isActive ? "true" : "false";
+      option.setAttribute("aria-hidden", "true");
+    });
+  }
+
   function getMenuLabel(open) {
     const lang = document.documentElement.dataset.lang || DEFAULT_LANG;
     const labels = {
@@ -603,10 +635,7 @@
     });
 
     document.title = dict[document.querySelector("title[data-i18n]")?.dataset.i18n] || document.title;
-    if (langToggle) {
-      const langLabels = { de: "Sprache wechseln", en: "Switch language", ja: "言語を切り替え" };
-      langToggle.setAttribute("aria-label", langLabels[lang] || langLabels.de);
-    }
+    updateLanguageToggleState(lang);
     if (navToggle) {
       navToggle.setAttribute("aria-label", getMenuLabel(navToggle.getAttribute("aria-expanded") === "true"));
     }
@@ -1467,9 +1496,7 @@
   if (langToggle) {
     langToggle.addEventListener("click", () => {
       const current = document.documentElement.dataset.lang || DEFAULT_LANG;
-      const currentIndex = SUPPORTED_LANGS.indexOf(current);
-      const nextLang = SUPPORTED_LANGS[(currentIndex + 1) % SUPPORTED_LANGS.length] || DEFAULT_LANG;
-      setLang(nextLang, true);
+      setLang(getNextLang(current), true);
       setNavOpen(false);
     });
   }

@@ -259,3 +259,8 @@ Website:  https://philosophiedeluxe.github.io/my_homepage/
 ## License
 
 This is a personal portfolio project. Content, images and personal branding assets are not intended for reuse without permission.
+
+
+### Language switcher
+
+The navigation uses a compact segmented language toggle for German, English and Japanese. The active language is visibly highlighted inside the toggle, while the button still cycles in order: `DE → EN → JP → DE`. The current language is also exposed through the button title and `aria-label`.
