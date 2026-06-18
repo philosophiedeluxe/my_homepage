@@ -4772,3 +4772,87 @@ html.easter-boot-revealing .timeline-item:nth-child(3) {
     transition: none !important;
   }
 }
+
+/* Direct language selector refinement */
+.language-toggle {
+  --language-switch-accent: #f0a83a;
+  border-color: var(--language-switch-accent);
+  background:
+    linear-gradient(180deg, rgba(240, 168, 58, 0.055), rgba(98, 214, 208, 0.04) 48%, rgba(143, 61, 255, 0.045)),
+    rgba(7, 9, 13, 0.74);
+  box-shadow:
+    inset 0 0 0 1px rgba(244, 241, 234, 0.025),
+    inset 0 -1px 0 rgba(240, 168, 58, 0.28),
+    0 0 22px rgba(0, 0, 0, 0.28);
+}
+
+.language-toggle:hover,
+.language-toggle:focus-within {
+  border-color: var(--language-switch-accent);
+  background:
+    linear-gradient(180deg, rgba(240, 168, 58, 0.08), rgba(98, 214, 208, 0.055) 50%, rgba(143, 61, 255, 0.055)),
+    rgba(7, 9, 13, 0.8);
+  box-shadow:
+    inset 0 0 0 1px rgba(244, 241, 234, 0.035),
+    inset 0 -1px 0 rgba(240, 168, 58, 0.42),
+    0 0 24px rgba(240, 168, 58, 0.13),
+    0 0 18px rgba(98, 214, 208, 0.08);
+}
+
+.language-toggle::after {
+  background: linear-gradient(90deg, rgba(240, 168, 58, 0.95), rgba(98, 214, 208, 0.78), rgba(143, 61, 255, 0.5) 82%);
+  opacity: 0.58;
+}
+
+.language-toggle__option {
+  appearance: none;
+  border: 1px solid transparent;
+  background: transparent;
+  font: inherit;
+  cursor: pointer;
+}
+
+.language-toggle__option:hover:not(:disabled),
+.language-toggle__option:focus-visible {
+  color: rgba(244, 241, 234, 0.92);
+  border-color: rgba(240, 168, 58, 0.55);
+  background:
+    linear-gradient(180deg, rgba(240, 168, 58, 0.09), rgba(98, 214, 208, 0.035)),
+    rgba(255, 255, 255, 0.026);
+  outline: none;
+  box-shadow:
+    inset 0 0 0 1px rgba(244, 241, 234, 0.025),
+    0 0 12px rgba(240, 168, 58, 0.12);
+}
+
+.language-toggle__option:disabled {
+  cursor: default;
+}
+
+html[data-lang="de"] .language-toggle .is-de,
+html[data-lang="en"] .language-toggle .is-en,
+html[data-lang="ja"] .language-toggle .is-ja {
+  color: var(--language-switch-accent);
+  background:
+    linear-gradient(180deg, rgba(240, 168, 58, 0.16), rgba(240, 168, 58, 0.055) 48%, rgba(98, 214, 208, 0.07)),
+    rgba(240, 168, 58, 0.035);
+  border-color: var(--language-switch-accent);
+  box-shadow:
+    inset 0 0 0 1px rgba(244, 241, 234, 0.035),
+    inset 0 -2px 0 rgba(240, 168, 58, 0.82),
+    0 0 15px rgba(240, 168, 58, 0.18),
+    0 0 12px rgba(98, 214, 208, 0.08);
+}
+
+html[data-lang="de"] .language-toggle .is-de::before,
+html[data-lang="en"] .language-toggle .is-en::before,
+html[data-lang="ja"] .language-toggle .is-ja::before {
+  background: var(--language-switch-accent);
+  box-shadow: 0 0 8px rgba(240, 168, 58, 0.78);
+}
+
+html[data-lang="de"] .language-toggle .is-de::after,
+html[data-lang="en"] .language-toggle .is-en::after,
+html[data-lang="ja"] .language-toggle .is-ja::after {
+  background: linear-gradient(90deg, rgba(240, 168, 58, 0.95), rgba(98, 214, 208, 0.8));
+}

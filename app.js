@@ -581,22 +581,24 @@
   function updateLanguageToggleState(lang) {
     if (!langToggle) return;
     const currentLang = sanitizeLang(lang);
-    const nextLang = getNextLang(currentLang);
     const currentMeta = LANG_META[currentLang] || LANG_META[DEFAULT_LANG];
-    const nextMeta = LANG_META[nextLang] || LANG_META[DEFAULT_LANG];
 
     langToggle.dataset.currentLang = currentLang;
     langToggle.dataset.currentLabel = currentMeta.nativeName;
-    langToggle.title = `${currentMeta.switchLabel}: ${currentMeta.nativeName} → ${nextMeta.nativeName}`;
+    langToggle.title = `${currentMeta.currentLabel}: ${currentMeta.nativeName}`;
     langToggle.setAttribute(
       "aria-label",
-      `${currentMeta.switchLabel}. ${currentMeta.currentLabel}: ${currentMeta.nativeName}. ${currentMeta.nextLabel}: ${nextMeta.nativeName}.`
+      `${currentMeta.switchLabel}. ${currentMeta.currentLabel}: ${currentMeta.nativeName}.`
     );
 
     langToggle.querySelectorAll("[data-lang-option]").forEach((option) => {
-      const isActive = option.dataset.langOption === currentLang;
+      const optionLang = sanitizeLang(option.dataset.langOption);
+      const optionMeta = LANG_META[optionLang] || LANG_META[DEFAULT_LANG];
+      const isActive = optionLang === currentLang;
       option.dataset.active = isActive ? "true" : "false";
-      option.setAttribute("aria-hidden", "true");
+      option.setAttribute("aria-pressed", isActive ? "true" : "false");
+      option.setAttribute("aria-label", `${optionMeta.nativeName} ${isActive ? `(${currentMeta.currentLabel})` : ""}`.trim());
+      option.disabled = isActive;
     });
   }
 
@@ -1494,9 +1496,12 @@
   }
 
   if (langToggle) {
-    langToggle.addEventListener("click", () => {
-      const current = document.documentElement.dataset.lang || DEFAULT_LANG;
-      setLang(getNextLang(current), true);
+    langToggle.addEventListener("click", (event) => {
+      const option = event.target.closest("[data-lang-option]");
+      if (!option || !langToggle.contains(option)) return;
+      const selectedLang = sanitizeLang(option.dataset.langOption);
+      if (selectedLang === (document.documentElement.dataset.lang || DEFAULT_LANG)) return;
+      setLang(selectedLang, true);
       setNavOpen(false);
     });
   }

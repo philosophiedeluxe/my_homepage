@@ -50,13 +50,13 @@
         <li><a href="./impressum.html" data-i18n="nav.imprint">Impressum</a></li>
         <li><a href="./datenschutz.html" data-i18n="nav.privacy">Datenschutz</a></li>
         <li>
-          <button class="language-toggle" type="button" id="lang-toggle" aria-label="Sprache wechseln" data-current-lang="de">
-            <span class="language-toggle__option is-de" data-lang-option="de">DE</span>
+          <div class="language-toggle" id="lang-toggle" role="group" aria-label="Sprache auswählen" data-current-lang="de">
+            <button class="language-toggle__option is-de" type="button" data-lang-option="de" aria-pressed="true">DE</button>
             <span class="language-toggle__separator" aria-hidden="true">/</span>
-            <span class="language-toggle__option is-en" data-lang-option="en">EN</span>
+            <button class="language-toggle__option is-en" type="button" data-lang-option="en" aria-pressed="false">EN</button>
             <span class="language-toggle__separator" aria-hidden="true">/</span>
-            <span class="language-toggle__option is-ja" data-lang-option="ja">JP</span>
-          </button>
+            <button class="language-toggle__option is-ja" type="button" data-lang-option="ja" aria-pressed="false">JP</button>
+          </div>
         </li>
       </ul>
     </nav>
