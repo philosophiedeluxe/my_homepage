@@ -263,4 +263,4 @@ This is a personal portfolio project. Content, images and personal branding asse
 
 ### Language switcher
 
-The navigation uses a compact segmented language selector for German, English and Japanese. `DE`, `EN` and `JP` are now direct selection buttons instead of a pure cycle toggle. The active language is visibly highlighted inside the selector. The selector keeps the dark glass/interface look and uses `#f0a83a` for the language-control border, active segment, status dot and signal underline so it matches the warm system accents used elsewhere in the navigation.
+The navigation uses a compact segmented language selector for German, English and Japanese. `DE`, `EN` and `JP` are direct selection buttons instead of a pure cycle toggle. The options are separated with `|` characters. The active language is visibly highlighted inside the selector without an additional status dot. The selector keeps the dark glass/interface look and uses `#f0a83a` for the language-control border, active segment and signal underline so it matches the warm system accents used elsewhere in the navigation.

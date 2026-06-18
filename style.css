@@ -4856,3 +4856,23 @@ html[data-lang="en"] .language-toggle .is-en::after,
 html[data-lang="ja"] .language-toggle .is-ja::after {
   background: linear-gradient(90deg, rgba(240, 168, 58, 0.95), rgba(98, 214, 208, 0.8));
 }
+
+
+/* Language selector separator/dot refinement */
+.language-toggle__separator {
+  color: rgba(240, 168, 58, 0.46);
+  font-size: 0.7rem;
+  margin-inline: -1px;
+}
+
+.language-toggle:hover .language-toggle__separator,
+.language-toggle:focus-within .language-toggle__separator {
+  color: rgba(240, 168, 58, 0.68);
+}
+
+html[data-lang="de"] .language-toggle .is-de::before,
+html[data-lang="en"] .language-toggle .is-en::before,
+html[data-lang="ja"] .language-toggle .is-ja::before {
+  content: none;
+  display: none;
+}
