@@ -1,5 +1,5 @@
 (function () {
-  const SUPPORTED_LANGS = ["de", "en"];
+  const SUPPORTED_LANGS = ["de", "en", "ja"];
   const DEFAULT_LANG = "de";
 
   const translations = {
@@ -10,6 +10,8 @@
       "meta.vita.description": "Vita von Phil Kirchner: Softwareentwicklung, Oracle APEX, PL/SQL, Java, Ausbildung, Zertifikate und berufliche Stationen.",
       "meta.imprint.title": "Phil Kirchner - Impressum",
       "meta.privacy.title": "Phil Kirchner - Datenschutz",
+      "meta.404.title": "Phil Kirchner - Seite nicht gefunden",
+      "meta.404.description": "Diese Portfolio-Seite wurde nicht gefunden.",
 
       "nav.profile": "Profil",
       "nav.projects": "Projekte",
@@ -18,6 +20,11 @@
       "nav.linkedin": "LinkedIn",
       "nav.imprint": "Impressum",
       "nav.privacy": "Datenschutz",
+
+      "error.eyebrow": "404",
+      "error.title": "Diese Seite gibt es hier nicht.",
+      "error.text": "Der Link ist entweder veraltet oder die Seite wurde verschoben. Die Startseite, Vita und Kontaktwege sind weiterhin erreichbar.",
+      "error.home": "Zur Startseite",
 
       "hero.eyebrow": "Softwareentwickler aus Freising",
       "hero.title": "Ich baue <span class=\"accent-token\"><span class=\"accent-word\">Software</span><span class=\"accent-punctuation\">,</span></span> die Prozesse nicht nur digitalisiert, sondern <span class=\"accent-token\"><span class=\"accent-word\">antreibt</span><span class=\"accent-punctuation\">.</span></span>",
@@ -163,6 +170,8 @@
       "meta.vita.description": "Resume of Phil Kirchner: software development, Oracle APEX, PL/SQL, Java, education, certificates and professional experience.",
       "meta.imprint.title": "Phil Kirchner - Legal Notice",
       "meta.privacy.title": "Phil Kirchner - Privacy",
+      "meta.404.title": "Phil Kirchner - Page not found",
+      "meta.404.description": "This portfolio page was not found.",
 
       "nav.profile": "Profile",
       "nav.projects": "Projects",
@@ -171,6 +180,11 @@
       "nav.linkedin": "LinkedIn",
       "nav.imprint": "Legal Notice",
       "nav.privacy": "Privacy",
+
+      "error.eyebrow": "404",
+      "error.title": "This page does not exist here.",
+      "error.text": "The link is either outdated or the page has been moved. The homepage, resume and contact options are still available.",
+      "error.home": "Back home",
 
       "hero.eyebrow": "Software developer from Freising",
       "hero.title": "I build <span class=\"accent-token\"><span class=\"accent-word\">software</span></span> that does not just digitize work. It <span class=\"accent-token\"><span class=\"accent-word\">drives</span></span> it.",
@@ -307,6 +321,155 @@
       "cookie.privacy": "View privacy policy",
       "cookie.settings": "Cookie settings",
       "cookie.optionsLabel": "Cookie categories"
+    },
+    ja: {
+      "meta.home.title": "Phil Kirchner - ソフトウェア開発者",
+      "meta.home.description": "Phil Kirchnerのポートフォリオ：ソフトウェア開発、Oracle APEX、PL/SQL、JavaScript、Java、構造化されたプロダクトワーク。",
+      "meta.vita.title": "Phil Kirchner - 経歴",
+      "meta.vita.description": "Phil Kirchnerの経歴：ソフトウェア開発、Oracle APEX、PL/SQL、Java、教育、認定資格、職務経験。",
+      "meta.imprint.title": "Phil Kirchner - 法的表示",
+      "meta.privacy.title": "Phil Kirchner - プライバシー",
+      "meta.404.title": "Phil Kirchner - ページが見つかりません",
+      "meta.404.description": "このポートフォリオページは見つかりませんでした。",
+      "nav.profile": "プロフィール",
+      "nav.projects": "プロジェクト",
+      "nav.stack": "スタック",
+      "nav.vita": "経歴",
+      "nav.linkedin": "LinkedIn",
+      "nav.imprint": "法的表示",
+      "nav.privacy": "プライバシー",
+
+      "error.eyebrow": "404",
+      "error.title": "このページはここにはありません。",
+      "error.text": "リンクが古いか、ページが移動された可能性があります。トップページ、経歴、連絡手段は引き続き利用できます。",
+      "error.home": "トップへ戻る",
+      "hero.eyebrow": "Freisingのソフトウェア開発者",
+      "hero.title": "私は、プロセスをデジタル化するだけでなく、業務を前へ動かす<span class=\"accent-token\"><span class=\"accent-word\">ソフトウェア</span><span class=\"accent-punctuation\">を</span></span>作ります。",
+      "hero.text": "私の出発点は現場での責任です。購買、プロセス、チーム運営を実務として理解しています。現在はOracle APEX、PL/SQL、JavaScript、Javaでアプリケーションを開発しています。この組み合わせが私の強みです。単に動く技術ではなく、日々の業務で効果を出す技術です。",
+      "hero.status": "技術的な対話を歓迎",
+      "hero.mail": "連絡する",
+      "hero.vita": "経歴を見る",
+      "facts.focus.label": "フォーカス",
+      "facts.focus.value": "Business Apps",
+      "facts.stack.label": "スタック",
+      "facts.mode.label": "進め方",
+      "facts.mode.value": "アジャイル & 構造的",
+      "position.eyebrow": "私の違い",
+      "position.title": "私は<span class=\"accent-word\">ソフトウェア</span>をコードだけから考えません。",
+      "position.p1": "ITへ移る前、私は長年、飲食業、購買、プロセス責任の現場で働いてきました。プレッシャー、引き継ぎ、優先順位、サプライチェーン、調整、そして良いツールが差を生む瞬間を知っています。",
+      "position.p2": "だからこそ、プロセスを見える化し、データを正しく扱い、人の業務フローを軽くするアプリケーションを作ることに強い関心があります。",
+      "projects.eyebrow": "プロジェクト・スポットライト",
+      "projects.title": "私の<span class=\"accent-word\">考え方</span>が見える仕事。",
+      "project.home.title": "個人ホームページのモダナイズ",
+      "project.home.text": "明確なポジショニング、レスポンシブレイアウト、DE/EN/JP切替、改善されたSEO基盤を備えた、静的で高速なポートフォリオサイト。",
+      "project.home.result": "静的 · 三言語対応 · ビルド不要",
+      "project.apex.title": "Oracle中心のアプリケーション開発",
+      "project.apex.text": "Oracle APEX、PL/SQL、REST Data Sources、構造化されたデータ管理を中心に、UI、データモデル、業務フローへフォーカス。",
+      "project.apex.result": "データ駆動 · ワークフロー重視 · 堅牢",
+      "project.java.title": "Java、SQL、クリーンな基礎設計",
+      "project.java.text": "Java、SQL、Spring Boot、MVC、Vaadin、Git、Jira、Confluence、モデル駆動のソフトウェア開発に関する教育と実務経験。",
+      "project.java.result": "モジュール化 · 追跡可能 · チーム対応",
+      "stack.eyebrow": "スキルプロファイル",
+      "stack.title": "技術、方法論、<span class=\"accent-word\">経験</span>を一つのプロフィールに。",
+      "stack.dev.kicker": "開発",
+      "stack.dev.title": "業務に近いアプリケーション",
+      "stack.product.kicker": "プロダクト & プロセス",
+      "stack.product.title": "実際の業務フローのための構造",
+      "stack.tools.kicker": "ツール",
+      "stack.tools.title": "デリバリーを支えるツール",
+      "contact.eyebrow": "次のステップ",
+      "contact.title": "実運用で耐えられる<span class=\"accent-word\">ソフトウェア</span>について話しましょう。",
+      "contact.mail": "メールを書く",
+      "contact.linkedin": "LinkedInを開く",
+      "contact.status": "技術的な対話と適切なプロジェクトにオープンです。",
+      "vita.eyebrow": "経歴",
+      "vita.status.focus": "現在のフォーカス：Oracle APEX & PL/SQL",
+      "vita.status.apps": "現場起点のBusiness Apps",
+      "vita.status.experience": "2021年からソフトウェア開発",
+      "vita.status.certified": "Oracle Certified Professional",
+      "vita.title": "現場経験、責任、そして<span class=\"accent-word\">ソフトウェア</span>から成るキャリア。",
+      "vita.intro": "私のキャリアは飲食業から始まり、購買、プロセス責任、プロジェクト業務を経てソフトウェア開発へ進みました。これらは遠回りではなく、私の土台です。",
+      "vita.focus.eyebrow": "開発者プロフィール",
+      "vita.focus.title": "私は<span class=\"accent-word\">開発</span>、データ、そして現場のプロセスをつなぎます。",
+      "vita.focus.apps.kicker": "APEXアプリケーション",
+      "vita.focus.apps.title": "Business Apps",
+      "vita.focus.apps.text": "日々の業務に近いアプリケーションを開発します。UI、データモデル、バリデーション、ワークフロー、連携が対象です。",
+      "vita.focus.oracle.kicker": "データ & Oracle",
+      "vita.focus.oracle.title": "Oracleフォーカス",
+      "vita.focus.oracle.text": "Oracle APEX、PL/SQL、REST Data Sources、Oracle DBが、現在の日々の開発における中心です。",
+      "vita.focus.delivery.kicker": "デリバリー & 運用",
+      "vita.focus.delivery.title": "届け切る力",
+      "vita.focus.delivery.text": "Scrum、Product Ownership、PRINCE2、ITILは、要件、実装、運用をつなげて考えるための基盤です。",
+      "vita.timeline.eyebrow": "職務経験",
+      "vita.timeline.title": "職務<span class=\"accent-word\">経歴</span>",
+      "vita.job1.title": "ソフトウェア開発者 - Pragmatis GmbH",
+      "vita.job1.text": "Neufahrn bei Freising。Oracle APEX、PL/SQL、JavaScript、HTML、CSS、REST Data Sources、RESTful Services、Oracle DBによる開発。",
+      "vita.job2.title": "ソフトウェア開発インターン - Europa Möbel-Verbund",
+      "vita.job2.text": "Java、SQL、データベース、Git、Kanban、Confluence、Jira、Vaadin、MVC、Spring Framework、Spring Boot、UMLの実務経験。",
+      "vita.job3.title": "アプリケーション開発 Fachinformatiker 職業訓練 - WBS Gruppe",
+      "vita.job3.text": "重点領域：OOP、ソフトウェア設計パターン、Java、SQL、データベース、アジャイル手法、DBMS、HTML、CSS、Microsoft SQL Server。",
+      "vita.job4.title": "購買 - Munich Airport Marriott Hotel",
+      "vita.job4.text": "Purchasing AgentおよびPurchasing Supervisorとして、調達、調整、運用フロー、信頼できるプロセスを担当。",
+      "vita.job5.title": "飲食業でのキャリア - Munich Airport Marriott Hotel",
+      "vita.job5.text": "調理師見習い、Commis de Cuisine、Demi Chef de Partie、Chef de Partie、Food and Beverage Trainee。",
+      "vita.cert.eyebrow": "認定資格",
+      "vita.cert.title": "方法論と<br><span class=\"accent-word\">プロジェクト理解</span>",
+      "vita.cert.oracle": "Oracle APEX Cloud Developer Professional",
+      "vita.cert.media": "Credential Stack",
+      "vita.cert.media.title": "技術プロフィールを裏づける認定。",
+      "vita.cert.media.text": "Oracle開発、アジャイルなプロジェクトワーク、ITサービス理解、正式なアプリケーション開発教育。業務に近いソフトウェアのための実用的な基盤です。",
+      "vita.cert.oracle.meta": "Oracle University · Professional",
+      "vita.cert.wbs.meta": "WBS Training · IHK context",
+      "vita.cert.agile.meta": "GFN · Scrum Master & Product Owner",
+      "vita.cert.prince.meta": "GFN · PRINCE2 project leadership",
+      "vita.cert.itil.meta": "GFN · ITIL Foundation",
+      "vita.contact.title": "この<span class=\"accent-word\">プロフィール</span>が合うなら、ぜひご連絡ください。",
+      "vita.pdf": "経歴をPDFで保存",
+      "vita.print.role": "ソフトウェア開発者 · Oracle APEX · PL/SQL · JavaScript",
+      "vita.print.summary": "Oracle APEX、クリーンなデータモデル、実用的なUI、現場で機能するプロセスに焦点を当てた業務寄りのソフトウェア開発。",
+      "vita.print.location": "Freising, Germany",
+      "vita.job1.date": "2023年12月 - 現在",
+      "vita.job2.date": "2022年9月 - 2023年4月",
+      "vita.job3.date": "2021年8月 - 2023年6月",
+      "vita.job4.date": "2015年 - 2021年",
+      "vita.job5.date": "2003年 - 2015年",
+      "vita.back": "トップへ戻る",
+      "imprint.eyebrow": "法的表示",
+      "imprint.title": "<span class=\"accent-word\">法的表示</span>",
+      "imprint.owner": "サイト運営者",
+      "imprint.contact": "<span class=\"accent-word\">連絡先</span>",
+      "imprint.responsible": "コンテンツ責任者",
+      "imprint.note": "このページは個人のポートフォリオサイトです。",
+      "privacy.eyebrow": "プライバシー",
+      "privacy.title": "<span class=\"accent-word\">プライバシーポリシー</span>",
+      "privacy.intro": "このプライバシーポリシーは、このポートフォリオサイトを訪問した際に処理される可能性のある個人データについて説明します。",
+      "privacy.controller": "管理者",
+      "privacy.access": "ホスティングとアクセスデータ",
+      "privacy.access.text": "このWebサイトはGitHub Pagesで提供されています。訪問時には、技術的に必要なアクセスデータが処理される場合があります。特にIPアドレス、アクセス日時、ブラウザおよびデバイス情報、リファラーURL、要求されたファイルなどです。GitHubは、GitHub Pagesサイト訪問者のIPアドレスをログイン状態に関係なくセキュリティ目的で記録するとしています。この処理は、Webサイトを安全かつ安定して提供するためのものです。",
+      "privacy.contact": "連絡",
+      "privacy.contact.text": "メールで連絡する場合、送信された情報は問い合わせ対応のために処理されます。これには、メールアドレス、メッセージ内容、およびその後の通信データが含まれます。データは同意なく第三者へ提供されません。",
+      "privacy.fonts": "Cookieとローカル保存",
+      "privacy.fonts.text": "このWebサイトはシステムフォントを使用し、Analytics、マーケティングCookie、トラッキングスクリプトは使用しません。Cookie通知の表示のため、選択内容はブラウザにローカル保存されます。これは毎回選択を求めないために技術的に必要です。同意した場合、選択した言語もローカル保存できます。フッターの「Cookie設定」リンクからいつでも変更できます。",
+      "privacy.links": "外部リンク",
+      "privacy.links.text": "このWebサイトはLinkedIn、GitHub、Instagramなどの外部プロフィールやサービスへリンクしています。これらのリンクを開いた場合のみ、このWebサイトを離れ、各提供者のプライバシーポリシーが適用されます。",
+      "privacy.rights": "あなたの権利",
+      "privacy.rights.text": "適用法の範囲内で、アクセス、訂正、削除、処理制限、データポータビリティ、および特定の処理への異議申立ての権利があります。また、管轄の監督機関へ苦情を申し立てることもできます。",
+      "privacy.legal": "法的根拠",
+      "privacy.legal.text": "処理は、該当する場合、安全で安定したWebサイト提供という正当な利益に基づくGDPR第6条第1項(f)、および任意の問い合わせ対応に関するGDPR第6条第1項(b)または(f)に基づきます。任意の言語選択の保存は同意に基づきます。",
+      "privacy.note": "最終更新：2026年5月29日。このポリシーは、現在の静的ポートフォリオサイトの範囲に意図的に限定しています。トラッキング、フォーム、埋め込みコンテンツ、Analyticsを追加する場合は、公開前に法的確認と拡張が必要です。",
+      "cookie.eyebrow": "プライバシー",
+      "cookie.title": "Cookie設定",
+      "cookie.text": "AnalyticsやマーケティングCookieは使用しません。任意で言語選択を保存できます。",
+      "cookie.necessary.title": "必要な保存",
+      "cookie.necessary.text": "Cookieの選択を保存し、Webサイトを安定して動作させます。",
+      "cookie.preferences.title": "快適化の保存",
+      "cookie.preferences.text": "次回訪問時のために選択した言語を記憶します。",
+      "cookie.acceptAll": "すべて許可",
+      "cookie.save": "選択を保存",
+      "cookie.necessaryOnly": "必要なものだけ",
+      "cookie.privacy": "プライバシーを見る",
+      "cookie.settings": "Cookie設定",
+      "cookie.optionsLabel": "Cookieカテゴリ"
     }
   };
 
@@ -339,6 +502,7 @@
     if (SUPPORTED_LANGS.includes(value)) return value;
     if (value.startsWith("en")) return "en";
     if (value.startsWith("de")) return "de";
+    if (value.startsWith("ja") || value.startsWith("jp")) return "ja";
     return DEFAULT_LANG;
   }
 
@@ -404,6 +568,17 @@
     window.history.replaceState({}, "", url);
   }
 
+  function getMenuLabel(open) {
+    const lang = document.documentElement.dataset.lang || DEFAULT_LANG;
+    const labels = {
+      de: { open: "Menü öffnen", close: "Menü schließen" },
+      en: { open: "Open menu", close: "Close menu" },
+      ja: { open: "メニューを開く", close: "メニューを閉じる" }
+    };
+    const dict = labels[lang] || labels.de;
+    return open ? dict.close : dict.open;
+  }
+
   function applyTranslations(lang) {
     const dict = translations[lang] || translations[DEFAULT_LANG];
     document.documentElement.lang = lang;
@@ -429,7 +604,11 @@
 
     document.title = dict[document.querySelector("title[data-i18n]")?.dataset.i18n] || document.title;
     if (langToggle) {
-      langToggle.setAttribute("aria-label", lang === "de" ? "Sprache wechseln" : "Switch language");
+      const langLabels = { de: "Sprache wechseln", en: "Switch language", ja: "言語を切り替え" };
+      langToggle.setAttribute("aria-label", langLabels[lang] || langLabels.de);
+    }
+    if (navToggle) {
+      navToggle.setAttribute("aria-label", getMenuLabel(navToggle.getAttribute("aria-expanded") === "true"));
     }
   }
 
@@ -438,7 +617,8 @@
     storeLang(nextLang);
     applyTranslations(nextLang);
     document.querySelectorAll(".accent-word").forEach((word) => {
-      const isSoftware = word.textContent.trim().toLocaleLowerCase(nextLang) === "software";
+      const accentText = word.textContent.trim().toLocaleLowerCase(nextLang);
+      const isSoftware = accentText === "software" || accentText === "ソフトウェア";
       if (isSoftware && (document.body.classList.contains("vita-page") || document.querySelector(".hero"))) {
         word.dataset.reflection = word.textContent;
       } else {
@@ -1265,7 +1445,7 @@
   function setNavOpen(open) {
     if (!navToggle || !navList) return;
     navToggle.setAttribute("aria-expanded", String(open));
-    navToggle.setAttribute("aria-label", open ? "Menü schließen" : "Menü öffnen");
+    navToggle.setAttribute("aria-label", getMenuLabel(open));
     navList.dataset.open = open ? "true" : "false";
     document.body.classList.toggle("nav-open", open);
   }
@@ -1287,7 +1467,9 @@
   if (langToggle) {
     langToggle.addEventListener("click", () => {
       const current = document.documentElement.dataset.lang || DEFAULT_LANG;
-      setLang(current === "de" ? "en" : "de", true);
+      const currentIndex = SUPPORTED_LANGS.indexOf(current);
+      const nextLang = SUPPORTED_LANGS[(currentIndex + 1) % SUPPORTED_LANGS.length] || DEFAULT_LANG;
+      setLang(nextLang, true);
       setNavOpen(false);
     });
   }
@@ -1314,7 +1496,7 @@
         window.removeEventListener("afterprint", cleanupPrintState);
       }
 
-      document.title = lang === "en" ? "Phil_Kirchner_Resume" : "Phil_Kirchner_Vita";
+      document.title = lang === "en" ? "Phil_Kirchner_Resume" : lang === "ja" ? "Phil_Kirchner_Rirekisho" : "Phil_Kirchner_Vita";
       document.body.classList.add("vita-print-mode");
       window.addEventListener("afterprint", cleanupPrintState);
 

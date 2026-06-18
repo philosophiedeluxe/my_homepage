@@ -5,7 +5,7 @@
 ![CSS](https://img.shields.io/badge/CSS-responsive-111111?style=for-the-badge&logo=css3)
 ![JavaScript](https://img.shields.io/badge/JavaScript-vanilla-111111?style=for-the-badge&logo=javascript)
 
-A modern, bilingual portfolio website for a software developer with a strong focus on Oracle APEX, PL/SQL, JavaScript and business-oriented application development.
+A modern, trilingual portfolio website for a software developer with a strong focus on Oracle APEX, PL/SQL, JavaScript and business-oriented application development.
 
 The project is intentionally built as a lightweight static site: no framework, no build step, no external runtime dependencies, no analytics and no tracking.
 
@@ -32,10 +32,10 @@ The site combines a clean dark visual style with a technical portfolio structure
 - Scroll progress, active section navigation and responsive pointer-reactive depth effects
 - Global custom code cursor with dynamic text-cursor mode and keyword-aware labels
 - Animated technology stream and visual project modules
-- German and English language switch
+- German, English and Japanese language switch
 - Dedicated Vita / Resume page
-- Browser-based PDF export for the German Vita and English Resume
-- Print-optimized A4 layout for complete one-page PDF generation
+- Browser-based PDF export for German, English and Japanese profile versions
+- Print-optimized A4 layout for complete one-page PDF generation with language-aware document titles
 - Project spotlight section with optimized tilt cards and restrained glow feedback
 - Technology stack overview
 - Certificate section with visual assets
@@ -145,7 +145,7 @@ The Easter eggs are intentionally subtle. They are implemented in `setupEasterEg
 | Matrix Rain | type `matrix` on the keyboard | temporary Matrix-style rain overlay |
 | DOM Comment | inspect the HTML source or DevTools DOM | hidden signal-layer comments are present |
 | Section Signals | click decorative section numbers such as `01`, `02`, `03`, `04` | section number glows, content briefly fades/reboots, cards/data panels jitter and a thin scan line crosses the section without changing the section background |
-| Language DEV Mode | click the `DE/EN` toggle 6 times quickly | temporary `DEV` language-state hint plus code-style monospace UI treatment |
+| Language DEV Mode | click the `DE/EN/JP` toggle 6 times quickly | temporary `DEV` language-state hint plus code-style monospace UI treatment |
 | Boot Sequence | rare first page visit per session, or type `boot` on the keyboard | cinematic full-page startup overlay with large terminal window, typed boot commands, hidden page surface and staggered reveal of nav, hero, buttons and main content |
 | Keyword Cursor | hover selected technology words or the name | cursor label changes contextually; name/brand hover emits `{PK}` |
 | Secret Theme Shift | hold `Shift` and click the `PK` branding | temporary alternate theme shift |
@@ -163,6 +163,7 @@ The print implementation uses:
 - reduced spacing and controlled typography
 - hidden website-only elements during printing
 - language-aware document titles
+- Japanese localization with dedicated `ja` dictionary, `?lang=ja` URL support and Japanese font fallbacks
 - layout stabilization before `window.print()`
 
 This keeps the exported PDF complete, compact and independent from the visual website layout.
@@ -212,8 +213,8 @@ Manual checks before publishing:
 
 - test homepage on desktop and mobile
 - open and close mobile navigation
-- switch language between DE and EN
-- test Vita PDF export in both languages
+- switch language between DE, EN and JP
+- test Vita PDF export in all three languages
 - verify Impressum and Datenschutz links
 - verify LinkedIn and GitHub links
 - check cookie settings flow
