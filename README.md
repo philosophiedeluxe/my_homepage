@@ -263,4 +263,4 @@ This is a personal portfolio project. Content, images and personal branding asse
 
 ### Language switcher
 
-The navigation uses a compact segmented language toggle for German, English and Japanese. The active language is visibly highlighted inside the toggle, while the button still cycles in order: `DE → EN → JP → DE`. The current language is also exposed through the button title and `aria-label`.
+The navigation uses a compact segmented language toggle for German, English and Japanese. The active language is visibly highlighted inside the toggle, while the button still cycles in order: `DE → EN → JP → DE`. The active state intentionally follows the site style: dark glass surface, cyan/violet signal line, small active-status dot and subtle glow instead of a bright filled badge. The current language is also exposed through the button title and `aria-label`.
