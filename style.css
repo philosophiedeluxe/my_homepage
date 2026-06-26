@@ -745,6 +745,10 @@ body.vita-print-mode .hero-code-cursor {
   opacity: 0 !important;
 }
 
+body.vita-print-mode .tech-stream {
+  display: none !important;
+}
+
 @keyframes cursor-code-sleep {
   0%, 48% {
     opacity: 0.36;
@@ -3905,6 +3909,7 @@ main > .section.interior-hero::before {
   .site-shell,
   .scroll-progress,
   .hero-code-cursor,
+  .tech-stream,
   .footer,
   .cookie-consent,
   .vita-status,
