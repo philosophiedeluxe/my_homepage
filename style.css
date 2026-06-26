@@ -889,13 +889,15 @@ body.vita-print-mode .tech-stream {
   height: 1em;
   padding: 0;
   border: 0;
-  color: transparent;
+  color: rgba(244, 241, 234, 0.035);
   background: transparent;
   font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
   font-size: clamp(5rem, 14vw, 12rem);
   font-weight: 800;
   line-height: 1;
   appearance: none;
+  cursor: pointer;
+  overflow: visible;
 }
 
 .projects-section > .easter-section-trigger,
@@ -910,11 +912,51 @@ body.vita-print-mode .tech-stream {
 }
 
 [data-section-index].easter-section-pulse::after {
+  opacity: 0;
+}
+
+[data-section-index].has-easter-section-trigger::after {
+  opacity: 0;
+}
+
+[data-section-index].easter-section-pulse > .easter-section-trigger {
   color: rgba(var(--cyan-rgb), 0.16);
   text-shadow:
     2px 0 rgba(255, 42, 161, 0.42),
     0 0 38px rgba(var(--cyan-rgb), 0.38);
   animation: easter-section-pulse 900ms ease both;
+}
+
+.easter-section-trigger::before {
+  content: attr(data-section-signal);
+  position: absolute;
+  inset: 0;
+  color: transparent;
+  background:
+    linear-gradient(
+      90deg,
+      transparent 0%,
+      transparent 28%,
+      rgba(var(--cyan-rgb), 0.98) 43%,
+      rgba(247, 178, 57, 0.82) 50%,
+      rgba(var(--violet-rgb), 0.96) 57%,
+      transparent 72%,
+      transparent 100%
+    );
+  background-size: 230% 100%;
+  background-position: 145% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter:
+    drop-shadow(-2px 0 rgba(var(--cyan-rgb), 0.34))
+    drop-shadow(2px 0 rgba(255, 42, 161, 0.28));
+  opacity: 0;
+  pointer-events: none;
+}
+
+[data-section-index].easter-section-pulse > .easter-section-trigger::before {
+  animation: easter-section-number-scan 880ms var(--ease-out) both;
 }
 
 @keyframes easter-section-pulse {
@@ -952,46 +994,6 @@ body.vita-print-mode .tech-stream {
   animation: none;
 }
 
-[data-section-index] > .easter-section-scan {
-  position: absolute;
-  left: calc(50% - 50vw);
-  right: calc(50% - 50vw);
-  top: clamp(112px, 16vw, 220px);
-  z-index: 0;
-  height: 2px;
-  pointer-events: none;
-  opacity: 0;
-  background: linear-gradient(90deg, transparent 0%, rgba(var(--violet-rgb), 0.74) 26%, rgba(var(--cyan-rgb), 0.9) 50%, rgba(247, 178, 57, 0.58) 72%, transparent 100%);
-  box-shadow:
-    0 0 18px rgba(var(--cyan-rgb), 0.22),
-    0 0 34px rgba(var(--violet-rgb), 0.12);
-  transform: translate3d(-18%, 0, 0) scaleX(0.18);
-  transform-origin: left center;
-}
-
-[data-section-index] > .easter-section-scan::before,
-[data-section-index] > .easter-section-scan::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: inherit;
-  opacity: 0.38;
-}
-
-[data-section-index] > .easter-section-scan::before {
-  top: -12px;
-}
-
-[data-section-index] > .easter-section-scan::after {
-  bottom: -12px;
-}
-
-[data-section-index] > .easter-section-scan.is-active {
-  animation: easter-section-scan-line 980ms var(--ease-out) both;
-}
-
 [data-section-index].easter-section-pulse .section-heading,
 [data-section-index].easter-section-pulse .text-stack,
 [data-section-index].easter-section-pulse .system-profile-panel,
@@ -1017,24 +1019,26 @@ body.vita-print-mode .tech-stream {
   animation: easter-section-data-jump 840ms steps(2, end) both;
 }
 
-@keyframes easter-section-scan-line {
+@keyframes easter-section-number-scan {
   0% {
     opacity: 0;
-    transform: translate3d(-22%, 0, 0) scaleX(0.16);
+    background-position: 145% 0;
+    transform: translate3d(-0.012em, 0, 0);
   }
 
-  24% {
-    opacity: 0.95;
+  18% {
+    opacity: 1;
   }
 
-  68% {
-    opacity: 0.72;
-    transform: translate3d(14%, 0, 0) scaleX(0.82);
+  62% {
+    opacity: 0.96;
+    background-position: 50% 0;
   }
 
   100% {
     opacity: 0;
-    transform: translate3d(72%, 0, 0) scaleX(0.22);
+    background-position: -35% 0;
+    transform: translate3d(0.012em, 0, 0);
   }
 }
 
@@ -2058,12 +2062,14 @@ h3 {
   z-index: 2;
   width: 1.75em;
   height: 1em;
-  color: transparent;
+  color: rgba(244, 241, 234, 0.035);
   background: transparent;
   font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
   font-size: clamp(5rem, 14vw, 12rem);
   font-weight: 800;
   line-height: 1;
+  cursor: pointer;
+  overflow: visible;
 }
 
 .projects-section > .easter-section-trigger,
