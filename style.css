@@ -549,6 +549,10 @@ main > article.section {
   transition: opacity 120ms ease;
 }
 
+html.secret-console-open .hero-code-cursor {
+  z-index: 187;
+}
+
 .hero-code-cursor.is-visible {
   opacity: 1;
 }
