@@ -493,10 +493,24 @@
   };
   const CONSENT_STORAGE_KEY = "pk-cookie-consent";
   const CONSENT_VERSION = 1;
+  const PORTFOLIO_BOOT_SESSION_KEY = "pk-portfolio-boot-seen";
   let scrollTicking = false;
   let lastScrolledState = null;
   let heroHeight = hero ? Math.max(hero.offsetHeight, 1) : 1;
   let lastHeroFrame = "";
+  const shouldRunPortfolioBoot = (() => {
+    if (reduceMotion.matches) return false;
+    try {
+      return sessionStorage.getItem(PORTFOLIO_BOOT_SESSION_KEY) !== "1";
+    } catch (error) {
+      return false;
+    }
+  })();
+
+  if (shouldRunPortfolioBoot) {
+    root.classList.add("portfolio-boot-active", "portfolio-nav-boot", "portfolio-hero-locked");
+  }
+
   const scrollProgress = document.createElement("div");
   scrollProgress.className = "scroll-progress";
   scrollProgress.setAttribute("aria-hidden", "true");
@@ -1687,6 +1701,151 @@
 
     scheduleFlicker(650, 1800);
   }
+
+  function emitPortfolioCursorCode(code, duration = 700, className = "is-dev-signal") {
+    document.dispatchEvent(new CustomEvent("pk:cursor-code", {
+      detail: { code, duration, className }
+    }));
+  }
+
+  function setupPortfolioStartup(runBoot) {
+    const heroTitle = document.querySelector(".hero-title, .interior-hero h1, .page-hero h1, .legal-hero h1");
+    if (heroTitle) {
+      const source = (heroTitle.textContent || "").replace(/\s+/g, " ").trim();
+      const glyphs = "01{}[]<>/\\|#$%&";
+      const scrambled = Array.from(source).map((char, index) => {
+        if (/\s/.test(char)) return " ";
+        if (/[.,:;!?-]/.test(char)) return char;
+        return glyphs[(char.charCodeAt(0) + index * 7) % glyphs.length];
+      }).join("");
+      heroTitle.dataset.bootText = scrambled || "PK_PORTFOLIO_UNLOCK";
+    }
+
+    if (!runBoot) return;
+
+    try {
+      sessionStorage.setItem(PORTFOLIO_BOOT_SESSION_KEY, "1");
+    } catch (error) {
+      root.classList.remove("portfolio-boot-active", "portfolio-nav-boot", "portfolio-hero-locked");
+      return;
+    }
+
+    const overlay = document.createElement("div");
+    overlay.className = "portfolio-boot-overlay";
+    overlay.setAttribute("aria-hidden", "true");
+    overlay.innerHTML = `
+      <div class="portfolio-boot-overlay__panel">
+        <span class="portfolio-boot-overlay__scan" aria-hidden="true"></span>
+        <p class="portfolio-boot-overlay__kicker">session handshake</p>
+        <strong>PK_PORTFOLIO_BOOT</strong>
+        <ul>
+          <li>loading profile...</li>
+          <li>oracle/apex/plsql/js connected</li>
+          <li>interface unlock ready</li>
+        </ul>
+        <i></i>
+      </div>
+    `;
+    document.body.appendChild(overlay);
+
+    window.setTimeout(() => overlay.classList.add("is-visible"), 30);
+    window.setTimeout(() => emitPortfolioCursorCode("INIT", 560, "is-dev-signal"), 130);
+    window.setTimeout(() => emitPortfolioCursorCode("AUTH", 580, "is-dev-lang-code"), 610);
+    window.setTimeout(() => emitPortfolioCursorCode("READY", 840, "is-signal-code"), 1080);
+    window.setTimeout(() => root.classList.add("portfolio-boot-cut"), 1160);
+    window.setTimeout(() => {
+      root.classList.add("portfolio-boot-reveal");
+      overlay.classList.add("is-complete");
+    }, 1280);
+    window.setTimeout(() => overlay.classList.add("is-fading"), 1660);
+    window.setTimeout(() => {
+      overlay.remove();
+      root.classList.remove(
+        "portfolio-boot-active",
+        "portfolio-nav-boot",
+        "portfolio-hero-locked",
+        "portfolio-boot-cut",
+        "portfolio-boot-reveal"
+      );
+    }, 2140);
+  }
+
+  function setupSecretDevConsole() {
+    const typingSelector = "input, textarea, select, [contenteditable=''], [contenteditable='true'], [role='textbox']";
+    const route = document.body.classList.contains("vita-page")
+      ? "vita"
+      : document.body.classList.contains("legal-page")
+        ? "legal"
+        : "index";
+    const version = document.querySelector("script[src*='app.js']")?.src.match(/[?&]v=([^&]+)/)?.[1] || "local";
+    const mailLink = document.querySelector("a[href^='mailto:']")?.getAttribute("href") || "mailto:kontakt@phil-kirchner.dev";
+    const githubLink = document.querySelector("a[href*='github.com']")?.getAttribute("href") || "https://github.com/philosophiedeluxe";
+    const linkedinLink = document.querySelector("a[href*='linkedin.com']")?.getAttribute("href") || "https://www.linkedin.com/";
+
+    const consolePanel = document.createElement("aside");
+    consolePanel.className = "secret-dev-console";
+    consolePanel.setAttribute("aria-hidden", "true");
+    consolePanel.setAttribute("aria-label", "Secret developer console");
+    consolePanel.inert = true;
+    consolePanel.innerHTML = `
+      <div class="secret-dev-console__bar">
+        <span class="secret-dev-console__lights" aria-hidden="true"><b></b><b></b><b></b></span>
+        <strong>PK_DEV_CONSOLE</strong>
+        <button class="secret-dev-console__close" type="button" aria-label="Konsole schließen">×</button>
+      </div>
+      <div class="secret-dev-console__grid">
+        <span>route::<b>${route}</b></span>
+        <span>build::<b>${version}</b></span>
+        <span>mode::<b>static</b></span>
+      </div>
+      <pre class="secret-dev-console__output">pk@portfolio:~$ stack --profile
+[ok] oracle apex / plsql / javascript / java
+[ok] business apps / data / delivery
+[ok] pdf mode isolated
+
+pk@portfolio:~$ hint
+type: boot, matrix, theme
+shortcut: ctrl + alt + d</pre>
+      <div class="secret-dev-console__links">
+        <a href="${mailLink}">mail</a>
+        <a href="${linkedinLink}" target="_blank" rel="noreferrer">linkedin</a>
+        <a href="${githubLink}" target="_blank" rel="noreferrer">github</a>
+      </div>
+    `;
+    document.body.appendChild(consolePanel);
+
+    const closeButton = consolePanel.querySelector(".secret-dev-console__close");
+    let consoleVisible = false;
+
+    function setConsoleVisible(visible) {
+      consoleVisible = visible;
+      consolePanel.classList.toggle("is-visible", visible);
+      consolePanel.setAttribute("aria-hidden", visible ? "false" : "true");
+      consolePanel.inert = !visible;
+      root.classList.toggle("secret-console-open", visible);
+      if (visible) {
+        emitPortfolioCursorCode("CON", 1300, "is-dev-signal");
+        closeButton?.focus({ preventScroll: true });
+      }
+    }
+
+    closeButton?.addEventListener("click", () => setConsoleVisible(false));
+
+    document.addEventListener("keydown", (event) => {
+      const key = event.key.toLowerCase();
+      const isShortcut = (event.ctrlKey || event.metaKey) && event.altKey && key === "d";
+      if (isShortcut) {
+        event.preventDefault();
+        setConsoleVisible(!consoleVisible);
+        return;
+      }
+      if (event.key === "Escape" && consoleVisible) {
+        setConsoleVisible(false);
+        return;
+      }
+      if (event.repeat || event.altKey || event.ctrlKey || event.metaKey || event.target?.closest?.(typingSelector)) return;
+    });
+  }
  
 
   function setupEasterEggs() {
@@ -2238,7 +2397,9 @@
     }
 
     function maybeRunBootSequence() {
+      if (reduceMotion.matches) return;
       try {
+        if (sessionStorage.getItem(PORTFOLIO_BOOT_SESSION_KEY) === "1") return;
         if (sessionStorage.getItem("pk-boot-sequence-seen") === "1") return;
         sessionStorage.setItem("pk-boot-sequence-seen", "1");
       } catch (error) {
@@ -2283,11 +2444,13 @@
   setupCertificateLightbox();
   setLang(getInitialLang());
   setupHeroCursor();
+  setupPortfolioStartup(shouldRunPortfolioBoot);
   setupTiltCards();
   setupActiveNavigation();
   setupTechStream();
   setupSignalCanvas();
   setupSignalFlicker();
+  setupSecretDevConsole();
   setupEasterEggs();
   if (window.location.hash) {
     window.addEventListener("load", () => {
