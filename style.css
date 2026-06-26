@@ -1578,7 +1578,7 @@ html.portfolio-hero-unlock .legal-hero h1 {
   color: var(--text);
   -webkit-text-fill-color: currentColor;
   text-shadow: none;
-  animation: portfolio-title-unlock 1120ms steps(8, end) both;
+  animation: portfolio-title-unlock 840ms steps(7, end) both;
 }
 
 html.portfolio-hero-unlock .hero-title .accent-word,
@@ -1592,14 +1592,14 @@ html.portfolio-hero-unlock .hero-title > *,
 html.portfolio-hero-unlock .interior-hero h1 > *,
 html.portfolio-hero-unlock .page-hero h1 > *,
 html.portfolio-hero-unlock .legal-hero h1 > * {
-  animation: portfolio-title-content-in 1040ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: portfolio-title-content-in 800ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 html.portfolio-hero-unlock .hero-title::before,
 html.portfolio-hero-unlock .interior-hero h1::before,
 html.portfolio-hero-unlock .page-hero h1::before,
 html.portfolio-hero-unlock .legal-hero h1::before {
-  animation: portfolio-title-code-out 980ms steps(7, end) both;
+  animation: portfolio-title-code-out 760ms steps(6, end) both;
 }
 
 .hero-title .accent-token {

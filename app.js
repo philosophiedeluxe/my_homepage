@@ -1761,7 +1761,7 @@
       emitPortfolioCursorCode("INIT", 560, "is-dev-signal");
     }, 1920);
     window.setTimeout(() => emitPortfolioCursorCode("AUTH", 580, "is-dev-lang-code"), 2320);
-    window.setTimeout(() => root.classList.add("portfolio-hero-unlock"), 2520);
+    window.setTimeout(() => root.classList.add("portfolio-hero-unlock"), 2360);
     window.setTimeout(() => emitPortfolioCursorCode("READY", 840, "is-signal-code"), 2760);
     window.setTimeout(() => {
       root.classList.remove(
@@ -1770,7 +1770,7 @@
         "portfolio-boot-reveal",
         "portfolio-hero-unlock"
       );
-    }, 4140);
+    }, 3740);
   }
 
   function setupSecretDevConsole() {
