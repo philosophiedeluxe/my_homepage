@@ -1781,6 +1781,7 @@
         ? "legal"
         : "index";
     const version = document.querySelector("script[src*='app.js']")?.src.match(/[?&]v=([^&]+)/)?.[1] || "local";
+    const pageUrl = window.location.href.split("#")[0];
     const mailLink = document.querySelector("a[href^='mailto:']")?.getAttribute("href") || "mailto:kontakt@phil-kirchner.dev";
     const githubLink = document.querySelector("a[href*='github.com']")?.getAttribute("href") || "https://github.com/philosophiedeluxe";
     const linkedinLink = document.querySelector("a[href*='linkedin.com']")?.getAttribute("href") || "https://www.linkedin.com/";
@@ -1817,8 +1818,95 @@ shortcut: ctrl + alt + d</pre>
     `;
     document.body.appendChild(consolePanel);
 
+    const contextMenu = document.createElement("nav");
+    contextMenu.className = "cursor-context-menu";
+    contextMenu.setAttribute("aria-hidden", "true");
+    contextMenu.setAttribute("aria-label", "Cursor command menu");
+    contextMenu.inert = true;
+    contextMenu.innerHTML = `
+      <div class="cursor-context-menu__bar">
+        <span aria-hidden="true"><b></b><b></b><b></b></span>
+        <strong>PK_CURSOR_MENU</strong>
+      </div>
+      <button type="button" data-cursor-command="console">
+        <span>01</span><b>Dev Console</b><em>toggle panel</em>
+      </button>
+      <button type="button" data-cursor-command="copy">
+        <span>02</span><b>Copy Link</b><em>share route</em>
+      </button>
+      <button type="button" data-cursor-command="mail">
+        <span>03</span><b>Mail Phil</b><em>contact</em>
+      </button>
+      <button type="button" data-cursor-command="github">
+        <span>04</span><b>GitHub</b><em>open repo</em>
+      </button>
+    `;
+    document.body.appendChild(contextMenu);
+
     const closeButton = consolePanel.querySelector(".secret-dev-console__close");
+    const menuButtons = Array.from(contextMenu.querySelectorAll("[data-cursor-command]"));
     let consoleVisible = false;
+    let contextVisible = false;
+
+    function closeContextMenu() {
+      contextVisible = false;
+      contextMenu.classList.remove("is-visible");
+      contextMenu.setAttribute("aria-hidden", "true");
+      contextMenu.inert = true;
+      root.classList.remove("cursor-context-open");
+    }
+
+    function placeContextMenu(clientX, clientY) {
+      const margin = 14;
+      contextMenu.style.left = "0px";
+      contextMenu.style.top = "0px";
+      contextMenu.classList.add("is-measuring");
+      const rect = contextMenu.getBoundingClientRect();
+      contextMenu.classList.remove("is-measuring");
+      const width = rect.width || 260;
+      const height = rect.height || 290;
+      const x = Math.min(Math.max(clientX + 16, margin), window.innerWidth - width - margin);
+      const y = Math.min(Math.max(clientY + 16, margin), window.innerHeight - height - margin);
+      contextMenu.style.left = `${Math.round(x)}px`;
+      contextMenu.style.top = `${Math.round(y)}px`;
+    }
+
+    function openContextMenu(event) {
+      if (reduceMotion.matches || !finePointer.matches) return;
+      event.preventDefault();
+      placeContextMenu(event.clientX, event.clientY);
+      contextVisible = true;
+      contextMenu.classList.add("is-visible");
+      contextMenu.setAttribute("aria-hidden", "false");
+      contextMenu.inert = false;
+      root.classList.add("cursor-context-open");
+      emitPortfolioCursorCode("MENU", 1200, "is-dev-signal");
+      window.requestAnimationFrame(() => menuButtons[0]?.focus({ preventScroll: true }));
+    }
+
+    async function copyText(value) {
+      if (navigator.clipboard?.writeText && window.isSecureContext) {
+        await navigator.clipboard.writeText(value);
+        return true;
+      }
+
+      const field = document.createElement("textarea");
+      field.value = value;
+      field.setAttribute("readonly", "");
+      field.style.position = "fixed";
+      field.style.left = "-9999px";
+      field.style.top = "0";
+      document.body.appendChild(field);
+      field.select();
+      let copied = false;
+      try {
+        copied = document.execCommand("copy");
+      } finally {
+        field.remove();
+      }
+      if (!copied) throw new Error("copy failed");
+      return true;
+    }
 
     function setConsoleVisible(visible) {
       consoleVisible = visible;
@@ -1834,6 +1922,47 @@ shortcut: ctrl + alt + d</pre>
 
     closeButton?.addEventListener("click", () => setConsoleVisible(false));
 
+    contextMenu.addEventListener("click", async (event) => {
+      const button = event.target.closest("[data-cursor-command]");
+      if (!button) return;
+      const command = button.dataset.cursorCommand;
+      closeContextMenu();
+
+      if (command === "console") {
+        setConsoleVisible(!consoleVisible);
+        return;
+      }
+
+      if (command === "copy") {
+        try {
+          await copyText(pageUrl);
+          emitPortfolioCursorCode("COPY", 1150, "is-dev-lang-code");
+        } catch (error) {
+          emitPortfolioCursorCode("ERR", 1150, "is-theme-signal");
+        }
+        return;
+      }
+
+      if (command === "mail") {
+        window.location.href = mailLink;
+        return;
+      }
+
+      if (command === "github") {
+        window.open(githubLink, "_blank", "noreferrer");
+      }
+    });
+
+    document.addEventListener("contextmenu", (event) => {
+      if (!event.shiftKey || event.target?.closest?.(typingSelector)) return;
+      openContextMenu(event);
+    });
+
+    document.addEventListener("pointerdown", (event) => {
+      if (!contextVisible || contextMenu.contains(event.target)) return;
+      closeContextMenu();
+    }, { capture: true });
+
     document.addEventListener("keydown", (event) => {
       const key = event.key.toLowerCase();
       const isShortcut = (event.ctrlKey || event.metaKey) && event.altKey && key === "d";
@@ -1844,6 +1973,10 @@ shortcut: ctrl + alt + d</pre>
       }
       if (event.key === "Escape" && consoleVisible) {
         setConsoleVisible(false);
+        return;
+      }
+      if (event.key === "Escape" && contextVisible) {
+        closeContextMenu();
         return;
       }
       if (event.repeat || event.altKey || event.ctrlKey || event.metaKey || event.target?.closest?.(typingSelector)) return;

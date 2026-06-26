@@ -553,6 +553,10 @@ html.secret-console-open .hero-code-cursor {
   z-index: 187;
 }
 
+html.cursor-context-open .hero-code-cursor {
+  z-index: 191;
+}
+
 .hero-code-cursor.is-visible {
   opacity: 1;
 }
@@ -4023,6 +4027,7 @@ main > .section.interior-hero::before {
   .tech-stream,
   .portfolio-boot-overlay,
   .secret-dev-console,
+  .cursor-context-menu,
   .footer,
   .cookie-consent,
   .vita-status,
@@ -4895,6 +4900,205 @@ html.portfolio-boot-cut body::before {
   box-shadow: 0 0 20px rgba(var(--cyan-rgb), 0.12);
 }
 
+.cursor-context-menu {
+  position: fixed;
+  z-index: 190;
+  width: min(280px, calc(100vw - 28px));
+  overflow: hidden;
+  border: 1px solid rgba(var(--cyan-rgb), 0.52);
+  border-radius: calc(var(--radius) + 3px);
+  color: rgba(244, 241, 234, 0.92);
+  background:
+    linear-gradient(180deg, rgba(14, 18, 24, 0.98), rgba(4, 7, 11, 0.96)),
+    radial-gradient(circle at 0 0, rgba(255, 42, 161, 0.12), transparent 32%),
+    radial-gradient(circle at 100% 0, rgba(var(--cyan-rgb), 0.13), transparent 34%);
+  box-shadow:
+    0 20px 70px rgba(0, 0, 0, 0.54),
+    0 0 0 1px rgba(255, 42, 161, 0.16),
+    5px 0 0 rgba(255, 42, 161, 0.42),
+    -5px 0 0 rgba(var(--cyan-rgb), 0.36),
+    inset 0 0 36px rgba(var(--cyan-rgb), 0.08);
+  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate3d(10px, 8px, 0) scale(0.965) skewX(-1deg);
+  transform-origin: 0 0;
+  transition:
+    opacity 120ms ease,
+    transform 180ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cursor-context-menu::before,
+.cursor-context-menu::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.cursor-context-menu::before {
+  opacity: 0.16;
+  background:
+    repeating-linear-gradient(0deg, transparent 0 6px, rgba(255, 255, 255, 0.07) 6px 7px),
+    linear-gradient(90deg, transparent, rgba(var(--cyan-rgb), 0.22), transparent);
+  mix-blend-mode: screen;
+}
+
+.cursor-context-menu::after {
+  opacity: 0;
+  background: linear-gradient(90deg, transparent, rgba(var(--cyan-rgb), 0.38), rgba(255, 42, 161, 0.22), transparent);
+  transform: translateX(-110%);
+}
+
+.cursor-context-menu.is-measuring {
+  display: block;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.cursor-context-menu.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate3d(0, 0, 0) scale(1) skewX(0);
+}
+
+.cursor-context-menu.is-visible::after {
+  animation: cursor-context-scan 560ms cubic-bezier(0.16, 1, 0.3, 1) 80ms both;
+}
+
+.cursor-context-menu__bar,
+.cursor-context-menu button {
+  position: relative;
+  z-index: 1;
+}
+
+.cursor-context-menu__bar {
+  min-height: 2.35rem;
+  display: flex;
+  align-items: center;
+  gap: 0.62rem;
+  padding: 0.58rem 0.68rem;
+  border-bottom: 1px solid rgba(var(--cyan-rgb), 0.18);
+  background: rgba(255, 255, 255, 0.028);
+}
+
+.cursor-context-menu__bar span {
+  display: inline-flex;
+  gap: 0.28rem;
+}
+
+.cursor-context-menu__bar b {
+  width: 0.42rem;
+  aspect-ratio: 1;
+  border-radius: 999px;
+  background: var(--accent);
+  box-shadow: 0 0 12px rgba(244, 180, 64, 0.48);
+}
+
+.cursor-context-menu__bar b:nth-child(2) {
+  background: var(--accent-2);
+  box-shadow: 0 0 12px rgba(var(--cyan-rgb), 0.5);
+}
+
+.cursor-context-menu__bar b:nth-child(3) {
+  background: var(--violet);
+  box-shadow: 0 0 12px rgba(var(--violet-rgb), 0.5);
+}
+
+.cursor-context-menu__bar strong {
+  color: var(--accent-2);
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-shadow:
+    1px 0 rgba(255, 42, 161, 0.44),
+    0 0 16px rgba(var(--cyan-rgb), 0.24);
+}
+
+.cursor-context-menu button {
+  width: 100%;
+  min-height: 3.05rem;
+  display: grid;
+  grid-template-columns: 2.1rem minmax(0, 1fr);
+  grid-template-areas:
+    "num title"
+    "num meta";
+  align-items: center;
+  gap: 0 0.55rem;
+  padding: 0.58rem 0.72rem;
+  border: 0;
+  border-bottom: 1px solid rgba(var(--cyan-rgb), 0.11);
+  color: rgba(244, 241, 234, 0.9);
+  background: transparent;
+  text-align: left;
+  cursor: none;
+}
+
+.cursor-context-menu button:last-child {
+  border-bottom: 0;
+}
+
+.cursor-context-menu button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  background:
+    linear-gradient(90deg, rgba(var(--cyan-rgb), 0.13), rgba(255, 42, 161, 0.07), transparent 72%);
+  transform: scaleX(0.34);
+  transform-origin: left center;
+  transition:
+    opacity 130ms ease,
+    transform 180ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cursor-context-menu button span {
+  grid-area: num;
+  color: var(--accent-2);
+  font-size: 0.62rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-shadow: 0 0 12px rgba(var(--cyan-rgb), 0.45);
+}
+
+.cursor-context-menu button b {
+  grid-area: title;
+  color: var(--text);
+  font-size: 0.82rem;
+  font-weight: 900;
+  letter-spacing: 0.03em;
+}
+
+.cursor-context-menu button em {
+  grid-area: meta;
+  color: rgba(244, 241, 234, 0.54);
+  font-size: 0.58rem;
+  font-style: normal;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.cursor-context-menu button:hover,
+.cursor-context-menu button:focus-visible {
+  outline: 0;
+}
+
+.cursor-context-menu button:hover::before,
+.cursor-context-menu button:focus-visible::before {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+.cursor-context-menu button:hover b,
+.cursor-context-menu button:focus-visible b {
+  color: var(--accent-2);
+  text-shadow:
+    1px 0 rgba(255, 42, 161, 0.48),
+    0 0 14px rgba(var(--cyan-rgb), 0.34);
+}
+
 @keyframes portfolio-nav-unlock {
   from {
     opacity: 0;
@@ -4911,6 +5115,22 @@ html.portfolio-boot-cut body::before {
     opacity: 1;
     filter: none;
     transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes cursor-context-scan {
+  from {
+    opacity: 0;
+    transform: translateX(-110%);
+  }
+
+  18% {
+    opacity: 0.68;
+  }
+
+  to {
+    opacity: 0;
+    transform: translateX(110%);
   }
 }
 
@@ -5007,6 +5227,10 @@ html.portfolio-boot-cut body::before {
 }
 
 @media (max-width: 760px) {
+  .cursor-context-menu {
+    width: min(260px, calc(100vw - 28px));
+  }
+
   .secret-dev-console {
     left: max(14px, env(safe-area-inset-left));
     right: max(14px, env(safe-area-inset-right));
@@ -5037,6 +5261,8 @@ html.portfolio-boot-cut body::before {
   html.portfolio-nav-boot .nav-toggle,
   .portfolio-boot-overlay,
   .portfolio-boot-overlay *,
+  .cursor-context-menu,
+  .cursor-context-menu *,
   .secret-dev-console {
     animation: none !important;
     transition: none !important;
