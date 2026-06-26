@@ -1847,8 +1847,13 @@ shortcut: ctrl + alt + d</pre>
     let consoleVisible = false;
     let contextVisible = false;
 
+    function clearContextMenuHover() {
+      contextMenu.querySelectorAll(".is-hovered").forEach((item) => item.classList.remove("is-hovered"));
+    }
+
     function closeContextMenu() {
       contextVisible = false;
+      clearContextMenuHover();
       contextMenu.classList.remove("is-visible");
       contextMenu.setAttribute("aria-hidden", "true");
       contextMenu.inert = true;
@@ -1876,6 +1881,7 @@ shortcut: ctrl + alt + d</pre>
       event.preventDefault();
       placeContextMenu(event.clientX, event.clientY);
       contextVisible = true;
+      clearContextMenuHover();
       contextMenu.classList.add("is-visible");
       contextMenu.setAttribute("aria-hidden", "false");
       contextMenu.inert = false;
@@ -1920,6 +1926,15 @@ shortcut: ctrl + alt + d</pre>
     }
 
     closeButton?.addEventListener("click", () => setConsoleVisible(false));
+
+    contextMenu.addEventListener("pointermove", (event) => {
+      if (!contextVisible) return;
+      const button = event.target.closest("[data-cursor-command]");
+      clearContextMenuHover();
+      if (button && contextMenu.contains(button)) button.classList.add("is-hovered");
+    });
+
+    contextMenu.addEventListener("pointerleave", clearContextMenuHover);
 
     contextMenu.addEventListener("click", async (event) => {
       const button = event.target.closest("[data-cursor-command]");

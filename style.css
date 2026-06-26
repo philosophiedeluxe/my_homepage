@@ -5080,17 +5080,16 @@ html.portfolio-boot-cut body::before {
   text-transform: uppercase;
 }
 
-.cursor-context-menu button:hover,
 .cursor-context-menu button:focus-visible {
   outline: 0;
 }
 
-.cursor-context-menu button:hover::before {
+.cursor-context-menu button.is-hovered::before {
   opacity: 1;
   transform: scaleX(1);
 }
 
-.cursor-context-menu button:hover b {
+.cursor-context-menu button.is-hovered b {
   color: var(--accent-2);
   text-shadow:
     1px 0 rgba(255, 42, 161, 0.48),
