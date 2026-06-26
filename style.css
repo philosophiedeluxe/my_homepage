@@ -5085,18 +5085,20 @@ html.portfolio-boot-cut body::before {
   outline: 0;
 }
 
-.cursor-context-menu button:hover::before,
-.cursor-context-menu button:focus-visible::before {
+.cursor-context-menu button:hover::before {
   opacity: 1;
   transform: scaleX(1);
 }
 
-.cursor-context-menu button:hover b,
-.cursor-context-menu button:focus-visible b {
+.cursor-context-menu button:hover b {
   color: var(--accent-2);
   text-shadow:
     1px 0 rgba(255, 42, 161, 0.48),
     0 0 14px rgba(var(--cyan-rgb), 0.34);
+}
+
+.cursor-context-menu button:focus-visible {
+  box-shadow: inset 0 0 0 1px rgba(var(--cyan-rgb), 0.46);
 }
 
 @keyframes portfolio-nav-unlock {

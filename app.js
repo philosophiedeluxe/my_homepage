@@ -1844,7 +1844,6 @@ shortcut: ctrl + alt + d</pre>
     document.body.appendChild(contextMenu);
 
     const closeButton = consolePanel.querySelector(".secret-dev-console__close");
-    const menuButtons = Array.from(contextMenu.querySelectorAll("[data-cursor-command]"));
     let consoleVisible = false;
     let contextVisible = false;
 
@@ -1854,6 +1853,7 @@ shortcut: ctrl + alt + d</pre>
       contextMenu.setAttribute("aria-hidden", "true");
       contextMenu.inert = true;
       root.classList.remove("cursor-context-open");
+      if (contextMenu.contains(document.activeElement)) document.activeElement.blur();
     }
 
     function placeContextMenu(clientX, clientY) {
@@ -1881,7 +1881,6 @@ shortcut: ctrl + alt + d</pre>
       contextMenu.inert = false;
       root.classList.add("cursor-context-open");
       emitPortfolioCursorCode("MENU", 1200, "is-dev-signal");
-      window.requestAnimationFrame(() => menuButtons[0]?.focus({ preventScroll: true }));
     }
 
     async function copyText(value) {
