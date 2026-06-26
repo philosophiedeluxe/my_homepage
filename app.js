@@ -671,6 +671,7 @@
       }
     });
     if (updateUrl) updateLangUrl(nextLang);
+    document.dispatchEvent(new CustomEvent("pk:lang-change", { detail: { lang: nextLang } }));
   }
 
   function saveCookieConsent(preferences, event) {
@@ -1527,30 +1528,54 @@
     }));
   }
 
+  async function printVita() {
+    if (!document.body.classList.contains("vita-page")) {
+      const lang = document.documentElement.dataset.lang || DEFAULT_LANG;
+      const target = new URL("./vita.html", window.location.href);
+      target.searchParams.set("print", "1");
+      if (lang !== DEFAULT_LANG) target.searchParams.set("lang", lang);
+      window.location.href = target.href;
+      return;
+    }
+
+    const lang = document.documentElement.dataset.lang || DEFAULT_LANG;
+    const previousTitle = document.title;
+    let cleanupDone = false;
+
+    function cleanupPrintState() {
+      if (cleanupDone) return;
+      cleanupDone = true;
+      document.title = previousTitle;
+      document.body.classList.remove("vita-print-mode");
+      window.removeEventListener("afterprint", cleanupPrintState);
+    }
+
+    document.title = lang === "en" ? "Phil_Kirchner_Resume" : lang === "ja" ? "Phil_Kirchner_Rirekisho" : "Phil_Kirchner_Vita";
+    document.body.classList.add("vita-print-mode");
+    window.addEventListener("afterprint", cleanupPrintState);
+
+    await waitForPrintLayout();
+    window.print();
+    window.setTimeout(cleanupPrintState, 10000);
+  }
+
   document.querySelectorAll("[data-print-vita]").forEach((button) => {
     button.addEventListener("click", async (event) => {
       event.preventDefault();
-      const lang = document.documentElement.dataset.lang || DEFAULT_LANG;
-      const previousTitle = document.title;
-      let cleanupDone = false;
-
-      function cleanupPrintState() {
-        if (cleanupDone) return;
-        cleanupDone = true;
-        document.title = previousTitle;
-        document.body.classList.remove("vita-print-mode");
-        window.removeEventListener("afterprint", cleanupPrintState);
-      }
-
-      document.title = lang === "en" ? "Phil_Kirchner_Resume" : lang === "ja" ? "Phil_Kirchner_Rirekisho" : "Phil_Kirchner_Vita";
-      document.body.classList.add("vita-print-mode");
-      window.addEventListener("afterprint", cleanupPrintState);
-
-      await waitForPrintLayout();
-      window.print();
-      window.setTimeout(cleanupPrintState, 10000);
+      await printVita();
     });
   });
+
+  if (document.body.classList.contains("vita-page") && new URLSearchParams(window.location.search).get("print") === "1") {
+    window.addEventListener("load", () => {
+      if ("history" in window) {
+        const cleanUrl = new URL(window.location.href);
+        cleanUrl.searchParams.delete("print");
+        window.history.replaceState({}, "", cleanUrl);
+      }
+      window.setTimeout(() => printVita(), 420);
+    }, { once: true });
+  }
 
   document.querySelectorAll("[data-year]").forEach((element) => {
     element.textContent = String(new Date().getFullYear());
@@ -1781,10 +1806,35 @@
         ? "legal"
         : "index";
     const version = document.querySelector("script[src*='app.js']")?.src.match(/[?&]v=([^&]+)/)?.[1] || "local";
-    const pageUrl = window.location.href.split("#")[0];
     const mailLink = document.querySelector("a[href^='mailto:']")?.getAttribute("href") || "mailto:kontakt@phil-kirchner.dev";
     const githubLink = document.querySelector("a[href*='github.com']")?.getAttribute("href") || "https://github.com/philosophiedeluxe";
     const linkedinLink = document.querySelector("a[href*='linkedin.com']")?.getAttribute("href") || "https://www.linkedin.com/";
+    const contextMenuLabels = {
+      de: {
+        title: "PK_CURSOR_MENU",
+        console: ["Dev Console", "Panel wechseln"],
+        copy: ["Link kopieren", "Route teilen"],
+        print: ["Vita drucken", "PDF/Print"],
+        mail: ["Mail schreiben", "Kontakt"],
+        github: ["GitHub", "Repo öffnen"]
+      },
+      en: {
+        title: "PK_CURSOR_MENU",
+        console: ["Dev Console", "Toggle panel"],
+        copy: ["Copy Link", "Share route"],
+        print: ["Print Resume", "PDF/print"],
+        mail: ["Mail Phil", "Contact"],
+        github: ["GitHub", "Open repo"]
+      },
+      ja: {
+        title: "PK_CURSOR_MENU",
+        console: ["Dev Console", "パネル切替"],
+        copy: ["リンクコピー", "ルート共有"],
+        print: ["経歴を印刷", "PDF/印刷"],
+        mail: ["メール", "連絡"],
+        github: ["GitHub", "リポジトリ"]
+      }
+    };
 
     const consolePanel = document.createElement("aside");
     consolePanel.className = "secret-dev-console";
@@ -1829,16 +1879,19 @@ shortcut: ctrl + alt + d</pre>
         <strong>PK_CURSOR_MENU</strong>
       </div>
       <button type="button" data-cursor-command="console">
-        <span>01</span><b>Dev Console</b><em>toggle panel</em>
+        <span>01</span><b></b><em></em>
       </button>
       <button type="button" data-cursor-command="copy">
-        <span>02</span><b>Copy Link</b><em>share route</em>
+        <span>02</span><b></b><em></em>
+      </button>
+      <button type="button" data-cursor-command="print">
+        <span>03</span><b></b><em></em>
       </button>
       <button type="button" data-cursor-command="mail">
-        <span>03</span><b>Mail Phil</b><em>contact</em>
+        <span>04</span><b></b><em></em>
       </button>
       <button type="button" data-cursor-command="github">
-        <span>04</span><b>GitHub</b><em>open repo</em>
+        <span>05</span><b></b><em></em>
       </button>
     `;
     document.body.appendChild(contextMenu);
@@ -1849,6 +1902,18 @@ shortcut: ctrl + alt + d</pre>
 
     function clearContextMenuHover() {
       contextMenu.querySelectorAll(".is-hovered").forEach((item) => item.classList.remove("is-hovered"));
+    }
+
+    function updateContextMenuLabels(lang = document.documentElement.dataset.lang || DEFAULT_LANG) {
+      const labels = contextMenuLabels[sanitizeLang(lang)] || contextMenuLabels[DEFAULT_LANG];
+      contextMenu.querySelector(".cursor-context-menu__bar strong").textContent = labels.title;
+      contextMenu.querySelectorAll("[data-cursor-command]").forEach((button) => {
+        const commandLabels = labels[button.dataset.cursorCommand];
+        if (!commandLabels) return;
+        button.querySelector("b").textContent = commandLabels[0];
+        button.querySelector("em").textContent = commandLabels[1];
+        button.setAttribute("aria-label", `${commandLabels[0]} - ${commandLabels[1]}`);
+      });
     }
 
     function closeContextMenu() {
@@ -1879,6 +1944,7 @@ shortcut: ctrl + alt + d</pre>
     function openContextMenu(event) {
       if (reduceMotion.matches || !finePointer.matches) return;
       event.preventDefault();
+      updateContextMenuLabels();
       placeContextMenu(event.clientX, event.clientY);
       contextVisible = true;
       clearContextMenuHover();
@@ -1926,6 +1992,8 @@ shortcut: ctrl + alt + d</pre>
     }
 
     closeButton?.addEventListener("click", () => setConsoleVisible(false));
+    updateContextMenuLabels();
+    document.addEventListener("pk:lang-change", (event) => updateContextMenuLabels(event.detail?.lang));
 
     contextMenu.addEventListener("pointermove", (event) => {
       if (!contextVisible) return;
@@ -1949,11 +2017,17 @@ shortcut: ctrl + alt + d</pre>
 
       if (command === "copy") {
         try {
-          await copyText(pageUrl);
+          await copyText(window.location.href.split("#")[0]);
           emitPortfolioCursorCode("COPY", 1150, "is-dev-lang-code");
         } catch (error) {
           emitPortfolioCursorCode("ERR", 1150, "is-theme-signal");
         }
+        return;
+      }
+
+      if (command === "print") {
+        emitPortfolioCursorCode("PDF", 1150, "is-dev-lang-code");
+        await printVita();
         return;
       }
 
