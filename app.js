@@ -1749,25 +1749,26 @@
     document.body.appendChild(overlay);
 
     window.setTimeout(() => overlay.classList.add("is-visible"), 30);
-    window.setTimeout(() => emitPortfolioCursorCode("INIT", 560, "is-dev-signal"), 130);
-    window.setTimeout(() => emitPortfolioCursorCode("AUTH", 580, "is-dev-lang-code"), 610);
-    window.setTimeout(() => emitPortfolioCursorCode("READY", 840, "is-signal-code"), 1080);
-    window.setTimeout(() => root.classList.add("portfolio-boot-cut"), 1160);
+    window.setTimeout(() => root.classList.add("portfolio-boot-cut"), 1180);
     window.setTimeout(() => {
-      root.classList.add("portfolio-boot-reveal");
       overlay.classList.add("is-complete");
-    }, 1280);
-    window.setTimeout(() => overlay.classList.add("is-fading"), 1660);
+    }, 1320);
+    window.setTimeout(() => overlay.classList.add("is-fading"), 1640);
     window.setTimeout(() => {
       overlay.remove();
+      root.classList.remove("portfolio-boot-active", "portfolio-boot-cut");
+      root.classList.add("portfolio-boot-reveal");
+      emitPortfolioCursorCode("INIT", 560, "is-dev-signal");
+    }, 1920);
+    window.setTimeout(() => emitPortfolioCursorCode("AUTH", 580, "is-dev-lang-code"), 2320);
+    window.setTimeout(() => emitPortfolioCursorCode("READY", 840, "is-signal-code"), 2760);
+    window.setTimeout(() => {
       root.classList.remove(
-        "portfolio-boot-active",
         "portfolio-nav-boot",
         "portfolio-hero-locked",
-        "portfolio-boot-cut",
         "portfolio-boot-reveal"
       );
-    }, 2140);
+    }, 3360);
   }
 
   function setupSecretDevConsole() {
