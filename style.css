@@ -1571,35 +1571,35 @@ html.portfolio-hero-locked .legal-hero h1::before {
   clip-path: polygon(0 0, 100% 0, 100% 52%, 0 52%, 0 61%, 100% 61%, 100% 100%, 0 100%);
 }
 
-html.portfolio-boot-reveal .hero-title,
-html.portfolio-boot-reveal .interior-hero h1,
-html.portfolio-boot-reveal .page-hero h1,
-html.portfolio-boot-reveal .legal-hero h1 {
+html.portfolio-hero-unlock .hero-title,
+html.portfolio-hero-unlock .interior-hero h1,
+html.portfolio-hero-unlock .page-hero h1,
+html.portfolio-hero-unlock .legal-hero h1 {
   color: var(--text);
   -webkit-text-fill-color: currentColor;
   text-shadow: none;
-  animation: portfolio-title-unlock 760ms steps(6, end) both;
+  animation: portfolio-title-unlock 1120ms steps(8, end) both;
 }
 
-html.portfolio-boot-reveal .hero-title .accent-word,
-html.portfolio-boot-reveal .interior-hero h1 .accent-word,
-html.portfolio-boot-reveal .page-hero h1 .accent-word,
-html.portfolio-boot-reveal .legal-hero h1 .accent-word {
+html.portfolio-hero-unlock .hero-title .accent-word,
+html.portfolio-hero-unlock .interior-hero h1 .accent-word,
+html.portfolio-hero-unlock .page-hero h1 .accent-word,
+html.portfolio-hero-unlock .legal-hero h1 .accent-word {
   -webkit-text-fill-color: transparent;
 }
 
-html.portfolio-boot-reveal .hero-title > *,
-html.portfolio-boot-reveal .interior-hero h1 > *,
-html.portfolio-boot-reveal .page-hero h1 > *,
-html.portfolio-boot-reveal .legal-hero h1 > * {
-  animation: portfolio-title-content-in 720ms cubic-bezier(0.16, 1, 0.3, 1) both;
+html.portfolio-hero-unlock .hero-title > *,
+html.portfolio-hero-unlock .interior-hero h1 > *,
+html.portfolio-hero-unlock .page-hero h1 > *,
+html.portfolio-hero-unlock .legal-hero h1 > * {
+  animation: portfolio-title-content-in 1040ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-html.portfolio-boot-reveal .hero-title::before,
-html.portfolio-boot-reveal .interior-hero h1::before,
-html.portfolio-boot-reveal .page-hero h1::before,
-html.portfolio-boot-reveal .legal-hero h1::before {
-  animation: portfolio-title-code-out 680ms steps(5, end) both;
+html.portfolio-hero-unlock .hero-title::before,
+html.portfolio-hero-unlock .interior-hero h1::before,
+html.portfolio-hero-unlock .page-hero h1::before,
+html.portfolio-hero-unlock .legal-hero h1::before {
+  animation: portfolio-title-code-out 980ms steps(7, end) both;
 }
 
 .hero-title .accent-token {
