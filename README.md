@@ -46,6 +46,7 @@ The site combines a clean dark visual style with a technical portfolio structure
 - Dedicated legal pages for Impressum and Datenschutz
 - Custom 404 page
 - Hidden Easter eggs for developer-oriented discovery interactions
+- Hidden Signal Index page as an internal Easter Egg manual
 - Lightweight QA script for local checks
 - GitHub Pages compatible without build process
 
@@ -69,6 +70,7 @@ The site combines a clean dark visual style with a technical portfolio structure
 ├── vita.html               # Vita / Resume page with PDF print support
 ├── impressum.html          # Legal notice
 ├── datenschutz.html        # Privacy policy
+├── signals.html            # Hidden Signal Index / Easter Egg manual
 ├── 404.html                # Custom not-found page
 ├── style.css               # Complete styling including responsive and print layouts
 ├── app.js                  # Language switch, navigation, consent logic, animations, PDF print logic
@@ -139,6 +141,10 @@ The Easter eggs are intentionally subtle. They are implemented in `setupEasterEg
 
 | Easter Egg | Trigger | Result |
 | --- | --- | --- |
+| Portfolio Boot | first page visit per session | short boot overlay, signal cut and staged interface unlock |
+| Hero Terminal Unlock | directly after the session boot | hero headline appears briefly as a glitch-code layer and resolves into readable text |
+| Navigation Boot | directly after the boot sequence | brand, navigation links and language switcher enter in staggered order |
+| Cursor Handshake | after the boot reveal | custom cursor reports `INIT`, `AUTH` and `READY` before normal operation |
 | Developer Mode | `ArrowUp ArrowUp ArrowDown ArrowDown ArrowLeft ArrowRight ArrowLeft ArrowRight B A` | stronger developer state with large `PK_DEV_TERMINAL`, scan/grid overlay, outlined interface modules, typed shell-style output and cursor code `{PK}` |
 | Cursor Sleep | leave the mouse still for about 12 seconds | cursor switches into an idle/sleeping state |
 | Hero Terminal | keep the hero section visible for about 7 seconds | hidden terminal line appears in the hero area |
@@ -149,8 +155,11 @@ The Easter eggs are intentionally subtle. They are implemented in `setupEasterEg
 | Boot Sequence | rare first page visit per session, or type `boot` on the keyboard | cinematic full-page startup overlay with large terminal window, typed boot commands, hidden page surface and staggered reveal of nav, hero, buttons and main content |
 | Keyword Cursor | hover selected technology words or the name | cursor label changes contextually; name/brand hover emits `{PK}` |
 | Secret Theme Shift | hold `Shift` and click the `PK` branding | temporary alternate theme shift |
+| Secret Dev Console | press `Ctrl` + `Alt` + `D`, or use the cursor context menu | internal console with route, build info, stack, links and access to the Signal Index |
+| Cursor Context Menu | hold `Shift` and right-click | custom command menu with Dev Console, copy link, Vita print, mail and GitHub actions |
+| Signal Index | open the small footer signal or the Dev Console link | hidden `signals.html` page listing the known interaction signals; marked `noindex` and intentionally omitted from the main navigation |
 
-The effects are session-safe and temporary. They do not store analytics, do not call external services and do not change the content model of the site. Section-number triggers are invisible buttons positioned directly over the decorative numbers, so the Easter egg remains discoverable through the number itself and does not create layout spacing. The Boot Sequence can still appear rarely on a first session visit, but the hidden keyboard trigger `boot` exists so the startup animation can be tested deterministically.
+The effects are session-safe and temporary. They do not store analytics, do not call external services and do not change the content model of the site. Section-number triggers are invisible buttons positioned directly over the decorative numbers, so the Easter egg remains discoverable through the number itself and does not create layout spacing. The Boot Sequence appears once per session, while the hidden keyboard trigger `boot` exists so the startup animation can be tested deterministically. The Signal Index is deliberately discoverable through hidden interface routes instead of the primary navigation.
 
 ## Vita and PDF Export
 
@@ -165,6 +174,7 @@ The print implementation uses:
 - language-aware document titles
 - Japanese localization with dedicated `ja` dictionary, `?lang=ja` URL support and Japanese font fallbacks
 - layout stabilization before `window.print()`
+- the cursor context menu action `Vita drucken`
 
 This keeps the exported PDF complete, compact and independent from the visual website layout.
 

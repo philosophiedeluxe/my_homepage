@@ -1,6 +1,6 @@
 # Homepage Roadmap
 
-Stand: 12.06.2026
+Stand: 29.06.2026
 
 ## Kurzfazit
 
@@ -10,6 +10,7 @@ Die Homepage ist jetzt eine moderne, statische Portfolio-Seite mit starkem Hero,
 
 - Statischer Stack mit HTML, CSS und Vanilla JavaScript.
 - Vier Hauptseiten: Startseite, Vita, Impressum, Datenschutz.
+- Versteckte Signal-Index-Seite als bewusst nicht prominent verlinktes Easter-Egg-Handbuch.
 - GitHub Pages kompatibel ohne Build-Schritt.
 - Responsives Layout mit mobiler Navigation.
 - Hero mit Hintergrundbild, Verlauf und Signal-Linie, die sich von links nach rechts aufbaut und wieder zurueckzieht.
@@ -30,6 +31,8 @@ Die Homepage ist jetzt eine moderne, statische Portfolio-Seite mit starkem Hero,
 - Animierter Technologie-Stream und visuelle Projektmodule ergaenzt.
 - Projekt- und Stack-Karten mit kontrollierter Tiefenreaktion aufgewertet.
 - Vita-PDF als sprachabhaengiger, einseitiger A4-Lebenslauf verfeinert.
+- Cinematic Boot Sequence, Hero-Terminal-Unlock, gestaffelter Navigations-Boot und Cursor-Handshake ergaenzt.
+- Secret Dev Console, Shift-Rechtsklick-Kontextmenue und Signal Index als versteckte Entwickler-Schicht ergaenzt.
 
 ## Erledigte Verbesserungen
 
@@ -67,6 +70,8 @@ Die Homepage ist jetzt eine moderne, statische Portfolio-Seite mit starkem Hero,
 - Reveal-Elemente animieren weiterhin beim Rein- und Rausscrollen, damit die Seite beim Zurueckscrollen lebendig bleibt.
 - Die dauerhaft laufende Hero-Signal-Linie nutzt einen statischen Glow statt animiertem Schatten.
 - Cookie-Hinweis kompakter gemacht, damit der erste Hero-Eindruck weniger stark ueberdeckt wird.
+- Signal Index (`signals.html`) als `noindex`-Seite im gleichen Interface-Stil angelegt und ueber Footer-Signal sowie Dev Console erreichbar gemacht.
+- Easter-Egg-Dokumentation erweitert: Boot, Cursor, Kontextmenue, Dev Console, Section Signals, Keyboard-Triggers und versteckte Route sind nachvollziehbar dokumentiert.
 
 ## Offene sinnvolle naechste Schritte
 
@@ -89,9 +94,12 @@ Die Homepage ist jetzt eine moderne, statische Portfolio-Seite mit starkem Hero,
 ## QA-Checkliste nach Aenderungen
 
 - Desktop: Startseite, Vita, Datenschutz, Impressum und 404 visuell pruefen.
+- Hidden Route: `signals.html` visuell pruefen, Footer-Signal und Dev-Console-Link testen.
 - Mobile: Navigation oeffnen/schliessen, Hero-Buttons, Footer und Cookie-Banner pruefen.
 - Cookie-Auswahl: `Alle akzeptieren`, `Auswahl speichern`, `Nur notwendige` und erneutes Oeffnen ueber Footer testen.
-- Sprachwechsel: DE/EN auf Startseite, Vita und Datenschutz testen.
+- Sprachwechsel: DE/EN/JP auf Startseite, Vita, Signal Index und Datenschutz testen.
+- Easter Eggs: `Ctrl+Alt+D`, `Shift + Rechtsklick`, `matrix`, `boot`, Konami-Code und Section-Number-Klicks kurz pruefen.
+- Kontextmenue: Dev Console, Copy Link, Vita drucken, Mail und GitHub pruefen.
 - Footer-Links: LinkedIn, GitHub, Impressum, Datenschutz und Cookie-Einstellungen pruefen.
 - Externe Links: LinkedIn und GitHub in neuem Browserkontext pruefen.
 - SEO: Canonical URLs, OpenGraph-Bild, `sitemap.xml`, `robots.txt` und JSON-LD pruefen.

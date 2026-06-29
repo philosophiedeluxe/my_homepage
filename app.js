@@ -10,6 +10,8 @@
       "meta.vita.description": "Vita von Phil Kirchner: Softwareentwicklung, Oracle APEX, PL/SQL, Java, Ausbildung, Zertifikate und berufliche Stationen.",
       "meta.imprint.title": "Phil Kirchner - Impressum",
       "meta.privacy.title": "Phil Kirchner - Datenschutz",
+      "meta.signals.title": "Phil Kirchner - Signal Index",
+      "meta.signals.description": "Verstecktes Interface-Handbuch der Portfolio-Seite: Easter Eggs, Tastenkombinationen, Cursor-Signale und geheime UI-Protokolle.",
       "meta.404.title": "Phil Kirchner - Seite nicht gefunden",
       "meta.404.description": "Diese Portfolio-Seite wurde nicht gefunden.",
 
@@ -20,6 +22,17 @@
       "nav.linkedin": "LinkedIn",
       "nav.imprint": "Impressum",
       "nav.privacy": "Datenschutz",
+      "nav.signals": "Signal Index",
+
+      "signals.eyebrow": "Verstecktes Interface",
+      "signals.title": "Signal Index / <span class=\"accent-word\">Easter Egg Manual</span>",
+      "signals.intro": "Diese Seite sammelt die absichtlich versteckten Interaktionen der Homepage. Nichts davon ist notwendig, aber alles davon gehört zur Identität des Interfaces.",
+      "signals.status": "Nicht im Hauptmenü · über Footer-Signal oder Dev Console erreichbar",
+      "signals.catalog.eyebrow": "Discovery-Protokoll",
+      "signals.catalog.title": "Alle bekannten <span class=\"accent-word\">Signale</span>",
+      "signals.note.title": "Hinweis",
+      "signals.note.text": "Alle Effekte sind lokal, temporär und respektieren reduzierte Bewegung. Es werden keine externen Dienste, kein Tracking und keine Analytics ausgelöst.",
+      "signals.back": "Zurück zur Homepage",
 
       "error.eyebrow": "404",
       "error.title": "Diese Seite gibt es hier nicht.",
@@ -170,6 +183,8 @@
       "meta.vita.description": "Resume of Phil Kirchner: software development, Oracle APEX, PL/SQL, Java, education, certificates and professional experience.",
       "meta.imprint.title": "Phil Kirchner - Legal Notice",
       "meta.privacy.title": "Phil Kirchner - Privacy",
+      "meta.signals.title": "Phil Kirchner - Signal Index",
+      "meta.signals.description": "Hidden interface manual of the portfolio site: Easter eggs, shortcuts, cursor signals and secret UI protocols.",
       "meta.404.title": "Phil Kirchner - Page not found",
       "meta.404.description": "This portfolio page was not found.",
 
@@ -180,6 +195,17 @@
       "nav.linkedin": "LinkedIn",
       "nav.imprint": "Legal Notice",
       "nav.privacy": "Privacy",
+      "nav.signals": "Signal Index",
+
+      "signals.eyebrow": "Hidden interface",
+      "signals.title": "Signal Index / <span class=\"accent-word\">Easter Egg Manual</span>",
+      "signals.intro": "This page collects the deliberately hidden interactions of the homepage. None of them is required, but all of them belong to the identity of the interface.",
+      "signals.status": "Not in the main menu · reachable through footer signal or Dev Console",
+      "signals.catalog.eyebrow": "Discovery protocol",
+      "signals.catalog.title": "All known <span class=\"accent-word\">signals</span>",
+      "signals.note.title": "Note",
+      "signals.note.text": "All effects are local, temporary and respect reduced motion. No external services, tracking or analytics are triggered.",
+      "signals.back": "Back to homepage",
 
       "error.eyebrow": "404",
       "error.title": "This page does not exist here.",
@@ -329,6 +355,8 @@
       "meta.vita.description": "Phil Kirchnerの経歴：ソフトウェア開発、Oracle APEX、PL/SQL、Java、教育、認定資格、職務経験。",
       "meta.imprint.title": "Phil Kirchner - 法的表示",
       "meta.privacy.title": "Phil Kirchner - プライバシー",
+      "meta.signals.title": "Phil Kirchner - Signal Index",
+      "meta.signals.description": "ポートフォリオサイトの隠しインターフェース手帳：Easter Egg、ショートカット、カーソル信号、秘密のUIプロトコル。",
       "meta.404.title": "Phil Kirchner - ページが見つかりません",
       "meta.404.description": "このポートフォリオページは見つかりませんでした。",
       "nav.profile": "プロフィール",
@@ -338,6 +366,17 @@
       "nav.linkedin": "LinkedIn",
       "nav.imprint": "法的表示",
       "nav.privacy": "プライバシー",
+      "nav.signals": "Signal Index",
+
+      "signals.eyebrow": "隠しインターフェース",
+      "signals.title": "Signal Index / <span class=\"accent-word\">Easter Egg Manual</span>",
+      "signals.intro": "このページは、ホームページに意図的に隠されたインタラクションをまとめたものです。必須ではありませんが、インターフェースの個性を作る要素です。",
+      "signals.status": "メインメニュー非表示 · フッター信号またはDev Consoleからアクセス",
+      "signals.catalog.eyebrow": "Discovery protocol",
+      "signals.catalog.title": "既知の<span class=\"accent-word\">信号</span>",
+      "signals.note.title": "注意",
+      "signals.note.text": "すべてのエフェクトはローカルかつ一時的で、reduced motionを尊重します。外部サービス、トラッキング、Analyticsは実行されません。",
+      "signals.back": "トップへ戻る",
 
       "error.eyebrow": "404",
       "error.title": "このページはここにはありません。",
@@ -672,6 +711,39 @@
     });
     if (updateUrl) updateLangUrl(nextLang);
     document.dispatchEvent(new CustomEvent("pk:lang-change", { detail: { lang: nextLang } }));
+  }
+
+  function localizedPageHref(path, lang = document.documentElement.dataset.lang || DEFAULT_LANG) {
+    const cleanLang = sanitizeLang(lang);
+    const suffix = cleanLang === DEFAULT_LANG ? "" : `?lang=${encodeURIComponent(cleanLang)}`;
+    return `${path}${suffix}`;
+  }
+
+  function setupSignalManualAccess() {
+    const footerLinks = document.querySelector(".footer div");
+    if (footerLinks && !footerLinks.querySelector("[data-signal-route-link]")) {
+      const link = document.createElement("a");
+      link.className = "footer-signal-link";
+      link.href = "./signals.html";
+      link.dataset.signalRouteLink = "true";
+      link.dataset.i18n = "nav.signals";
+      link.textContent = (translations[document.documentElement.dataset.lang || DEFAULT_LANG] || translations[DEFAULT_LANG])["nav.signals"];
+      footerLinks.appendChild(link);
+    }
+
+    function updateSignalLinks(lang = document.documentElement.dataset.lang || DEFAULT_LANG) {
+      const dict = translations[sanitizeLang(lang)] || translations[DEFAULT_LANG];
+      document.querySelectorAll("[data-signal-route-link]").forEach((link) => {
+        link.href = localizedPageHref("./signals.html", lang);
+        if (link.dataset.i18n === "nav.signals") link.textContent = dict["nav.signals"];
+      });
+      document.querySelectorAll("[data-signal-home-link]").forEach((link) => {
+        link.href = localizedPageHref("./index.html", lang);
+      });
+    }
+
+    updateSignalLinks();
+    document.addEventListener("pk:lang-change", (event) => updateSignalLinks(event.detail?.lang));
   }
 
   function saveCookieConsent(preferences, event) {
@@ -1861,6 +1933,7 @@ pk@portfolio:~$ hint
 type: boot, matrix, theme
 shortcut: ctrl + alt + d</pre>
       <div class="secret-dev-console__links">
+        <a href="./signals.html" data-signal-route-link="true" data-i18n="nav.signals">signals</a>
         <a href="${mailLink}">mail</a>
         <a href="${linkedinLink}" target="_blank" rel="noreferrer">linkedin</a>
         <a href="${githubLink}" target="_blank" rel="noreferrer">github</a>
@@ -2675,6 +2748,7 @@ shortcut: ctrl + alt + d</pre>
   setupSignalCanvas();
   setupSignalFlicker();
   setupSecretDevConsole();
+  setupSignalManualAccess();
   setupEasterEggs();
   if (window.location.hash) {
     window.addEventListener("load", () => {
