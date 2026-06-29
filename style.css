@@ -4759,6 +4759,35 @@ main > .section.interior-hero::before {
   z-index: 1;
 }
 
+.signal-card.tilt-card-effect::before {
+  z-index: 0;
+  background:
+    radial-gradient(circle at var(--glow-x) var(--glow-y), rgba(98, 214, 208, 0.14), rgba(143, 92, 255, 0.07) 22%, transparent 50%),
+    linear-gradient(rgba(98, 214, 208, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(98, 214, 208, 0.04) 1px, transparent 1px);
+  background-size: auto, 32px 32px, 32px 32px;
+  mask-image: linear-gradient(to bottom, black, transparent 72%);
+  opacity: 0.68;
+  transition: opacity 160ms ease;
+}
+
+.signal-card.tilt-card-effect:hover::before,
+.signal-card.tilt-card-effect.is-tilting::before {
+  opacity: 1;
+}
+
+.signal-card.tilt-card-effect::after {
+  top: 0;
+  right: auto;
+  bottom: auto;
+  left: 0;
+  width: 46%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent-2), var(--violet));
+  box-shadow: 0 0 18px rgba(98, 214, 208, 0.45);
+  opacity: 1;
+}
+
 .quick-facts div.tilt-card-effect::before,
 .profile-grid article.tilt-card-effect::before,
 .proof-card.tilt-card-effect::before {
