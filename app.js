@@ -2556,6 +2556,7 @@ shortcut: ctrl + alt + d</pre>
       "> process background detected",
       "> delivery profile: business software"
     ];
+    const traceLogNodeMap = [0, 0, 1, 2, 3, 4, 2, 3, 1];
 
     const mailAddress = "phil.kirchner.999@googlemail.com";
     let palette = null;
@@ -2673,27 +2674,15 @@ shortcut: ctrl + alt + d</pre>
       }
     }
 
-    function getTraceNodePosition(selector, fallbackX, fallbackY) {
-      const target = selector ? document.querySelector(selector) : null;
-      if (!target) return { x: fallbackX, y: fallbackY };
-      const rect = target.getBoundingClientRect();
-      const x = ((rect.left + rect.width / 2) / window.innerWidth) * 100;
-      const y = ((rect.top + rect.height / 2) / window.innerHeight) * 100;
-      return {
-        x: Math.min(88, Math.max(12, x)),
-        y: Math.min(82, Math.max(18, y))
-      };
-    }
-
     function buildTraceOverlay() {
       const copy = dict();
       const nodes = [
-        { key: "PROFILE_NODE", selector: ".hero, .page-hero", x: 20, y: 34 },
-        { key: "DELIVERY_MODULES", selector: ".projects-section", x: 40, y: 58 },
-        { key: "CAPABILITY_GRAPH", selector: ".stack-section", x: 62, y: 58 },
-        { key: "EXPERIENCE_LOG", selector: ".timeline-section", x: 78, y: 34 },
-        { key: "TRUST_CHAIN", selector: ".credential-section", x: 84, y: 72 }
-      ].map((node) => ({ ...node, ...getTraceNodePosition(node.selector, node.x, node.y) }));
+        { key: "PROFILE_NODE", x: 18, y: 23 },
+        { key: "DELIVERY_MODULES", x: 40, y: 37 },
+        { key: "CAPABILITY_GRAPH", x: 25, y: 66 },
+        { key: "EXPERIENCE_LOG", x: 58, y: 58 },
+        { key: "TRUST_CHAIN", x: 82, y: 27 }
+      ];
       const points = nodes.map((node) => `${node.x},${node.y}`).join(" ");
       const overlay = document.createElement("aside");
       overlay.className = "system-trace-overlay";
@@ -2738,7 +2727,8 @@ shortcut: ctrl + alt + d</pre>
           if (traceOverlay !== activeOverlay || !log.isConnected) return;
           log.textContent += `${line}\n`;
           log.scrollTop = log.scrollHeight;
-          const node = activeOverlay.querySelectorAll(".system-trace-overlay__nodes span")[index % 5];
+          const nodeIndex = traceLogNodeMap[index] ?? 0;
+          const node = activeOverlay.querySelectorAll(".system-trace-overlay__nodes span")[nodeIndex];
           node?.classList.add("is-hot");
           window.setTimeout(() => node?.classList.remove("is-hot"), 760);
         }, 260 + index * 430));
@@ -2861,6 +2851,14 @@ shortcut: ctrl + alt + d</pre>
       if (event.target.closest("[data-system-trace-trigger]")) runSystemTrace();
       if (event.target.closest("[data-vita-playback]")) runVitaPlayback();
       if (event.target.closest("[data-trace-close]")) closeSystemTrace();
+      if (
+        traceOverlay &&
+        event.target.closest(".system-trace-overlay") &&
+        !event.target.closest(".system-trace-terminal") &&
+        !event.target.closest(".system-trace-overlay__nodes")
+      ) {
+        closeSystemTrace();
+      }
     });
 
     document.addEventListener("keydown", (event) => {
