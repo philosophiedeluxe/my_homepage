@@ -146,6 +146,7 @@ The Easter eggs are intentionally subtle. They are implemented in `setupEasterEg
 | Hero Terminal Unlock | directly after the session boot | hero headline appears briefly as a glitch-code layer and resolves into readable text |
 | Navigation Boot | directly after the boot sequence | brand, navigation links and language switcher enter in staggered order |
 | Cursor Handshake | after the boot reveal | custom cursor reports `INIT`, `AUTH` and `READY` before normal operation |
+| First-Time Guide | once per session after the interface boot | subtle terminal hint for `Ctrl + K`, hidden routes and the custom context menu |
 | Developer Mode | `ArrowUp ArrowUp ArrowDown ArrowDown ArrowLeft ArrowRight ArrowLeft ArrowRight B A` | stronger developer state with large `PK_DEV_TERMINAL`, scan/grid overlay, outlined interface modules, typed shell-style output and cursor code `{PK}` |
 | Cursor Sleep | leave the mouse still for about 12 seconds | cursor switches into an idle/sleeping state |
 | Hero Terminal | keep the hero section visible for about 7 seconds | hidden terminal line appears in the hero area |
@@ -159,13 +160,23 @@ The Easter eggs are intentionally subtle. They are implemented in `setupEasterEg
 | Secret Dev Console | press `Ctrl` + `Alt` + `D`, or use the cursor context menu | internal console with route, build info, stack, links and access to the Signal Index |
 | Cursor Context Menu | hold `Shift` and right-click | custom command menu with Dev Console, copy link, Vita print, mail and GitHub actions |
 | Signal Index | open the small footer signal or the Dev Console link | hidden `signals.html` page listing the known interaction signals; marked `noindex` and intentionally omitted from the main navigation |
-| System Trace | click `trace profile` in the hero or run it from `Ctrl + K` | scans profile areas as `PROFILE_NODE`, `DELIVERY_MODULES`, `CAPABILITY_GRAPH`, `EXPERIENCE_LOG` and `TRUST_CHAIN` with animated links and terminal output |
+| System Trace | click `trace profile` in the hero or run it from `Ctrl + K` | scans profile areas as `PROFILE_NODE`, `DELIVERY_MODULES`, `CAPABILITY_GRAPH`, `EXPERIENCE_LOG` and `TRUST_CHAIN` with animated links, terminal output and clickable navigation nodes |
 | Command Palette | press `Ctrl + K` | command interface for profile trace, resume, stack focus, recruiter mode, mail, GitHub, Signal Index and Vita print |
 | Live Skill Graph | click nodes in the stack section | capability graph emits short readouts for APEX, PL/SQL, JavaScript, data models, processes and delivery |
-| Recruiter Mode | run `Recruiter Mode` from the command palette | compact decision panel with fit, differentiator and proof points |
+| Recruiter Mode | run `Recruiter Mode` from the command palette | decision panel with fit, differentiator, proof points, best-fit roles, skill matrix, PDF export and copy-mail |
 | Bootable Vita | click `play timeline` on the Vita page | plays the career timeline as an `EXPERIENCE_LOG` with focused timeline entries |
 
 The effects are session-safe and temporary. They do not store analytics, do not call external services and do not change the content model of the site. Section-number triggers are invisible buttons positioned directly over the decorative numbers, so the Easter egg remains discoverable through the number itself and does not create layout spacing. The Boot Sequence appears once per session, while the hidden keyboard trigger `boot` exists so the startup animation can be tested deterministically. The Signal Index is deliberately discoverable through hidden interface routes instead of the primary navigation.
+
+## Social Preview
+
+The OpenGraph preview image is generated from `tools/social-card.html` so the layout is deterministic and text stays exact. Re-render it with:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\tools\render-social-card.ps1
+```
+
+The output is written to `image/social-card.jpg`.
 
 ## Vita and PDF Export
 

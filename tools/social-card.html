@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1200, initial-scale=1">
+  <title>Phil Kirchner Social Card</title>
+  <style>
+    :root {
+      --bg: #0b0d11;
+      --panel: rgba(16, 17, 20, 0.9);
+      --text: #f4f1ea;
+      --muted: rgba(244, 241, 234, 0.72);
+      --line: rgba(98, 214, 208, 0.34);
+      --cyan: #62d6d0;
+      --gold: #f0a83a;
+      --purple: #8d3dff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 1200px;
+      height: 630px;
+      margin: 0;
+      overflow: hidden;
+      color: var(--text);
+      background: var(--bg);
+      font-family: Inter, Arial, Helvetica, sans-serif;
+    }
+
+    .card {
+      position: relative;
+      width: 1200px;
+      height: 630px;
+      overflow: hidden;
+      background:
+        linear-gradient(90deg, rgba(9, 11, 15, 0.98) 0 52%, rgba(9, 11, 15, 0.54) 72%, rgba(9, 11, 15, 0.22)),
+        linear-gradient(rgba(98, 214, 208, 0.075) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(98, 214, 208, 0.075) 1px, transparent 1px),
+        #0b0d11;
+      background-size: auto, 80px 80px, 80px 80px, auto;
+    }
+
+    .portrait {
+      position: absolute;
+      inset: 0 0 0 auto;
+      width: 54%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 62% 50%;
+      opacity: 0.9;
+      filter: saturate(1.03) contrast(1.04);
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 16px;
+      z-index: 2;
+      border: 1px solid rgba(98, 214, 208, 0.52);
+      pointer-events: none;
+    }
+
+    .card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background:
+        radial-gradient(circle at 76% 44%, rgba(98, 214, 208, 0.18), transparent 23%),
+        linear-gradient(90deg, rgba(9, 11, 15, 0.12), rgba(9, 11, 15, 0.1) 48%, rgba(9, 11, 15, 0.44) 100%);
+      pointer-events: none;
+    }
+
+    .content {
+      position: relative;
+      z-index: 3;
+      display: grid;
+      align-content: start;
+      width: 58%;
+      height: 100%;
+      padding: 58px 78px 42px;
+    }
+
+    .name,
+    .url,
+    .chip,
+    .system-card,
+    .stack {
+      font-family: Consolas, "SFMono-Regular", ui-monospace, monospace;
+      font-weight: 900;
+      letter-spacing: 0.06em;
+    }
+
+    .name {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0 0 36px;
+      color: var(--gold);
+      font-size: 25px;
+      text-transform: uppercase;
+    }
+
+    .name::before {
+      content: "";
+      width: 18px;
+      aspect-ratio: 1;
+      border: 3px solid var(--cyan);
+      border-radius: 50%;
+      box-shadow: 0 0 18px rgba(98, 214, 208, 0.6);
+    }
+
+    h1 {
+      max-width: 680px;
+      margin: 0;
+      font-size: 62px;
+      line-height: 0.98;
+      letter-spacing: 0;
+    }
+
+    .accent {
+      color: var(--purple);
+      background: linear-gradient(180deg, #b06cff 0%, #8d3dff 46%, #6c00a1 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .stack {
+      margin: 18px 0 14px;
+      color: var(--muted);
+      font-size: 29px;
+      letter-spacing: 0;
+    }
+
+    .signal {
+      width: 420px;
+      height: 5px;
+      margin-bottom: 20px;
+      background: linear-gradient(90deg, var(--cyan) 0 56%, var(--purple) 56% 100%);
+      box-shadow: 0 0 26px rgba(98, 214, 208, 0.22);
+    }
+
+    .system-card {
+      display: grid;
+      grid-template-columns: 74px 1fr auto;
+      gap: 16px;
+      align-items: center;
+      width: 580px;
+      margin-top: 0;
+      padding: 13px 18px;
+      border: 1px solid rgba(98, 214, 208, 0.45);
+      border-radius: 8px;
+      background: rgba(12, 14, 19, 0.86);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.28);
+    }
+
+    .system-card img {
+      width: 58px;
+      height: 58px;
+      object-fit: contain;
+      justify-self: center;
+    }
+
+    .system-card small {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--cyan);
+      font-size: 13px;
+      text-transform: uppercase;
+    }
+
+    .system-card strong {
+      display: block;
+      color: var(--text);
+      font-size: 26px;
+      letter-spacing: 0;
+    }
+
+    .system-card span {
+      color: var(--muted);
+      font-size: 16px;
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+    }
+
+    .url {
+      position: absolute;
+      left: 78px;
+      bottom: 22px;
+      z-index: 3;
+      color: var(--gold);
+      font-size: 26px;
+      letter-spacing: 0.02em;
+    }
+
+    .chip {
+      position: absolute;
+      top: 50px;
+      right: 70px;
+      z-index: 3;
+      min-width: 280px;
+      padding: 20px 24px;
+      border: 1px solid rgba(98, 214, 208, 0.52);
+      border-radius: 8px;
+      background: rgba(12, 14, 19, 0.82);
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.28);
+    }
+
+    .chip small {
+      display: block;
+      margin-bottom: 10px;
+      color: var(--cyan);
+      font-size: 14px;
+      text-transform: uppercase;
+    }
+
+    .chip strong {
+      color: var(--text);
+      font-size: 18px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <img class="portrait" src="../image/iconic-960.jpg" alt="">
+    <section class="content" aria-label="Social preview">
+      <p class="name">Phil Kirchner</p>
+      <h1>Business <span class="accent">Software</span><br>für Prozesse,<br>die tragen.</h1>
+      <p class="stack">Oracle APEX · PL/SQL · JavaScript · Java</p>
+      <div class="signal"></div>
+      <div class="system-card">
+        <img src="../image/Cert/badges/APEX24CDOCP.png" alt="">
+        <div>
+          <small>System / Profile</small>
+          <strong>Business Software</strong>
+        </div>
+        <span>APEX · PL/SQL · JS</span>
+      </div>
+    </section>
+    <aside class="chip">
+      <small>Portfolio</small>
+      <strong>APEX · Data · Delivery</strong>
+    </aside>
+    <p class="url">philosophiedeluxe.github.io/my_homepage</p>
+  </main>
+</body>
+</html>

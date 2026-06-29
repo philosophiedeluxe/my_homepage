@@ -14,6 +14,10 @@
       "signals.card.unlock.title": "Terminal Unlock",
       "signals.card.unlock.trigger": "Direkt nach dem Session-Boot",
       "signals.card.unlock.effect": "Die Headline erscheint kurz als Code-Layer und rastet dann in echten Text ein.",
+      "signals.card.firstGuide.kicker": "HINT",
+      "signals.card.firstGuide.title": "First-Time Guide",
+      "signals.card.firstGuide.trigger": "Einmal pro Session nach dem Interface-Boot",
+      "signals.card.firstGuide.effect": "Zeigt einen kleinen Terminal-Hinweis auf Command Palette und versteckte Routen.",
       "signals.card.handshake.kicker": "CURSOR",
       "signals.card.handshake.title": "Handshake",
       "signals.card.handshake.trigger": "Nach dem Boot-Reveal",
@@ -69,7 +73,7 @@
       "signals.card.trace.kicker": "PROFILE GRAPH",
       "signals.card.trace.title": "System Trace",
       "signals.card.trace.trigger": "<code>trace profile</code> im Hero oder Command Palette",
-      "signals.card.trace.effect": "Scant PROFILE_NODE, DELIVERY_MODULES, CAPABILITY_GRAPH, EXPERIENCE_LOG und TRUST_CHAIN als animierten Systemfluss.",
+      "signals.card.trace.effect": "Scant PROFILE_NODE, DELIVERY_MODULES, CAPABILITY_GRAPH, EXPERIENCE_LOG und TRUST_CHAIN als klickbare Systemroute.",
       "signals.card.palette.kicker": "COMMAND",
       "signals.card.palette.title": "Command Palette",
       "signals.card.palette.trigger": "<kbd>Ctrl</kbd> + <kbd>K</kbd>",
@@ -81,7 +85,7 @@
       "signals.card.recruiter.kicker": "DECISION MODE",
       "signals.card.recruiter.title": "Recruiter Mode",
       "signals.card.recruiter.trigger": "Command Palette: Recruiter Mode",
-      "signals.card.recruiter.effect": "Blendet eine kompakte Entscheidungsansicht ein: Passung, Profil-Unterschied und Belege.",
+      "signals.card.recruiter.effect": "Blendet eine Entscheidungsansicht mit Passung, Profil-Unterschied, Belegen, Skill-Matrix, PDF und Copy-Mail ein.",
       "signals.card.vitaPlayback.kicker": "EXPERIENCE LOG",
       "signals.card.vitaPlayback.title": "Bootable Vita",
       "signals.card.vitaPlayback.trigger": "<code>play timeline</code> auf der Vita-Seite",
@@ -98,6 +102,10 @@
       "signals.card.unlock.title": "Terminal Unlock",
       "signals.card.unlock.trigger": "Right after the session boot",
       "signals.card.unlock.effect": "The headline appears as a code layer for a moment, then locks into readable text.",
+      "signals.card.firstGuide.kicker": "HINT",
+      "signals.card.firstGuide.title": "First-Time Guide",
+      "signals.card.firstGuide.trigger": "Once per session after the interface boot",
+      "signals.card.firstGuide.effect": "Shows a small terminal hint for the Command Palette and hidden routes.",
       "signals.card.handshake.kicker": "CURSOR",
       "signals.card.handshake.title": "Handshake",
       "signals.card.handshake.trigger": "After the boot reveal",
@@ -153,7 +161,7 @@
       "signals.card.trace.kicker": "PROFILE GRAPH",
       "signals.card.trace.title": "System Trace",
       "signals.card.trace.trigger": "<code>trace profile</code> in the hero or Command Palette",
-      "signals.card.trace.effect": "Scans PROFILE_NODE, DELIVERY_MODULES, CAPABILITY_GRAPH, EXPERIENCE_LOG and TRUST_CHAIN as an animated system flow.",
+      "signals.card.trace.effect": "Scans PROFILE_NODE, DELIVERY_MODULES, CAPABILITY_GRAPH, EXPERIENCE_LOG and TRUST_CHAIN as a clickable system route.",
       "signals.card.palette.kicker": "COMMAND",
       "signals.card.palette.title": "Command Palette",
       "signals.card.palette.trigger": "<kbd>Ctrl</kbd> + <kbd>K</kbd>",
@@ -165,7 +173,7 @@
       "signals.card.recruiter.kicker": "DECISION MODE",
       "signals.card.recruiter.title": "Recruiter Mode",
       "signals.card.recruiter.trigger": "Command Palette: Recruiter Mode",
-      "signals.card.recruiter.effect": "Shows a compact decision view: fit, profile difference and proof points.",
+      "signals.card.recruiter.effect": "Shows a decision view with fit, profile difference, proof points, skill matrix, PDF and copy mail.",
       "signals.card.vitaPlayback.kicker": "EXPERIENCE LOG",
       "signals.card.vitaPlayback.title": "Bootable Resume",
       "signals.card.vitaPlayback.trigger": "<code>play timeline</code> on the resume page",
@@ -182,6 +190,10 @@
       "signals.card.unlock.title": "Terminal Unlock",
       "signals.card.unlock.trigger": "Session Bootの直後",
       "signals.card.unlock.effect": "見出しが一瞬コードレイヤーとして表示され、その後読みやすいテキストにロックされます。",
+      "signals.card.firstGuide.kicker": "HINT",
+      "signals.card.firstGuide.title": "First-Time Guide",
+      "signals.card.firstGuide.trigger": "Interface Boot後、Sessionごとに一度",
+      "signals.card.firstGuide.effect": "Command Paletteとhidden routesへの小さなTerminal Hintを表示します。",
       "signals.card.handshake.kicker": "CURSOR",
       "signals.card.handshake.title": "Handshake",
       "signals.card.handshake.trigger": "Boot Revealの後",
@@ -237,7 +249,7 @@
       "signals.card.trace.kicker": "PROFILE GRAPH",
       "signals.card.trace.title": "System Trace",
       "signals.card.trace.trigger": "Heroの<code>trace profile</code> またはCommand Palette",
-      "signals.card.trace.effect": "PROFILE_NODE、DELIVERY_MODULES、CAPABILITY_GRAPH、EXPERIENCE_LOG、TRUST_CHAINをSystem Flowとしてスキャンします。",
+      "signals.card.trace.effect": "PROFILE_NODE、DELIVERY_MODULES、CAPABILITY_GRAPH、EXPERIENCE_LOG、TRUST_CHAINをクリック可能なSystem Routeとしてスキャンします。",
       "signals.card.palette.kicker": "COMMAND",
       "signals.card.palette.title": "Command Palette",
       "signals.card.palette.trigger": "<kbd>Ctrl</kbd> + <kbd>K</kbd>",
@@ -249,7 +261,7 @@
       "signals.card.recruiter.kicker": "DECISION MODE",
       "signals.card.recruiter.title": "Recruiter Mode",
       "signals.card.recruiter.trigger": "Command Palette: Recruiter Mode",
-      "signals.card.recruiter.effect": "Fit、Profile Difference、Proof Pointsをコンパクトな判断ビューで表示します。",
+      "signals.card.recruiter.effect": "Fit、Profile Difference、Proof Points、Skill Matrix、PDF、Copy Mailを含む判断ビューを表示します。",
       "signals.card.vitaPlayback.kicker": "EXPERIENCE LOG",
       "signals.card.vitaPlayback.title": "Bootable Vita",
       "signals.card.vitaPlayback.trigger": "Vitaページの<code>play timeline</code>",
@@ -797,6 +809,7 @@
   const CONSENT_STORAGE_KEY = "pk-cookie-consent";
   const CONSENT_VERSION = 1;
   const PORTFOLIO_BOOT_SESSION_KEY = "pk-portfolio-boot-seen";
+  const FIRST_TIME_GUIDE_SESSION_KEY = "pk-first-time-guide-seen";
   let scrollTicking = false;
   let lastScrolledState = null;
   let heroHeight = hero ? Math.max(hero.offsetHeight, 1) : 1;
@@ -1047,6 +1060,7 @@
     if (!banner) return;
     banner.hidden = true;
     banner.dataset.visible = "false";
+    document.dispatchEvent(new CustomEvent("pk:cookie-consent-hidden"));
   }
 
   function openCookieBanner(force = false) {
@@ -2134,6 +2148,110 @@
     }, 3740);
   }
 
+  function setupFirstTimeGuide(runAfterBoot) {
+    if (reduceMotion.matches || document.body.classList.contains("legal-page")) return;
+
+    try {
+      if (sessionStorage.getItem(FIRST_TIME_GUIDE_SESSION_KEY) === "1") return;
+      sessionStorage.setItem(FIRST_TIME_GUIDE_SESSION_KEY, "1");
+    } catch (error) {
+      return;
+    }
+
+    const guideLabels = {
+      de: {
+        title: "signal hint",
+        command: "hint: Strg + K öffnet Befehle",
+        context: "shift + rechtsklick entsperrt das Kontextmenü",
+        mobile: "hint: Menü und Signal Index halten die versteckten Routen",
+        close: "Hinweis schließen"
+      },
+      en: {
+        title: "signal hint",
+        command: "hint: press Ctrl + K for commands",
+        context: "shift + right click unlocks the context menu",
+        mobile: "hint: menu and Signal Index hold the hidden routes",
+        close: "Close hint"
+      },
+      ja: {
+        title: "signal hint",
+        command: "hint: Ctrl + K でコマンド",
+        context: "shift + right click でcontext menu",
+        mobile: "hint: menu と Signal Index にhidden routes",
+        close: "ヒントを閉じる"
+      }
+    };
+
+    const guide = document.createElement("aside");
+    guide.className = "first-time-guide";
+    guide.setAttribute("role", "status");
+    guide.setAttribute("aria-live", "polite");
+
+    function renderGuide() {
+      const lang = document.documentElement.dataset.lang || DEFAULT_LANG;
+      const copy = guideLabels[lang] || guideLabels[DEFAULT_LANG];
+      const secondLine = finePointer.matches ? copy.context : copy.mobile;
+      guide.innerHTML = `
+        <div class="first-time-guide__bar">
+          <span aria-hidden="true"><b></b><b></b><b></b></span>
+          <strong>${copy.title}</strong>
+          <button type="button" data-first-guide-close aria-label="${copy.close}">×</button>
+        </div>
+        <button class="first-time-guide__line" type="button" data-first-guide-command>&gt; ${copy.command}</button>
+        <p class="first-time-guide__line">&gt; ${secondLine}</p>
+      `;
+    }
+
+    renderGuide();
+    document.body.appendChild(guide);
+
+    const showDelay = runAfterBoot ? 4200 : 1400;
+    let hideTimer = null;
+    let removeTimer = null;
+
+    function beginGuideVisibility() {
+      if (!guide.isConnected || guide.classList.contains("is-visible")) return;
+      guide.classList.add("is-visible");
+      hideTimer = window.setTimeout(() => guide.classList.add("is-fading"), 9400);
+      removeTimer = window.setTimeout(() => guide.remove(), 9900);
+    }
+
+    function showWhenSurfaceIsClear() {
+      const cookieVisible = document.querySelector("[data-pk-consent-banner][data-visible='true']:not([hidden])");
+      if (!cookieVisible) {
+        beginGuideVisibility();
+        return;
+      }
+
+      document.addEventListener("pk:cookie-consent-hidden", () => {
+        window.setTimeout(beginGuideVisibility, 620);
+      }, { once: true });
+    }
+
+    const showTimer = window.setTimeout(showWhenSurfaceIsClear, showDelay);
+
+    function closeGuide() {
+      window.clearTimeout(showTimer);
+      if (hideTimer) window.clearTimeout(hideTimer);
+      if (removeTimer) window.clearTimeout(removeTimer);
+      guide.classList.add("is-fading");
+      window.setTimeout(() => guide.remove(), 240);
+    }
+
+    guide.addEventListener("click", (event) => {
+      if (event.target.closest("[data-first-guide-close]")) {
+        closeGuide();
+        return;
+      }
+      if (event.target.closest("[data-first-guide-command]")) {
+        closeGuide();
+        document.dispatchEvent(new CustomEvent("pk:open-command-palette"));
+      }
+    });
+
+    document.addEventListener("pk:lang-change", renderGuide);
+  }
+
   function setupSecretDevConsole() {
     const typingSelector = "input, textarea, select, [contenteditable=''], [contenteditable='true'], [role='textbox']";
     const route = document.body.classList.contains("vita-page")
@@ -2443,6 +2561,19 @@ shortcut: ctrl + alt + d</pre>
         recruiterProof: "Belege",
         recruiterProofText: "Oracle Certified Professional, agile Projektrollen, ITIL/PRINCE2 und ein konsequent gepflegtes Portfolio.",
         recruiterPrint: "PDF speichern",
+        recruiterMail: "Mail kopieren",
+        recruiterGithub: "GitHub",
+        recruiterRoles: "Best fit",
+        recruiterRoleApex: "APEX Developer",
+        recruiterRoleBusiness: "Business Apps",
+        recruiterRoleProcess: "Data & Process UI",
+        recruiterMatrix: "Skill-Matrix",
+        recruiterMatrixApex: "Oracle APEX",
+        recruiterMatrixPlsql: "PL/SQL",
+        recruiterMatrixJs: "JavaScript",
+        recruiterMatrixProcess: "Prozesssicht",
+        recruiterMatrixDelivery: "Delivery",
+        recruiterMatrixData: "Datenmodelle",
         timelineDone: "timeline playback complete"
       },
       en: {
@@ -2477,6 +2608,19 @@ shortcut: ctrl + alt + d</pre>
         recruiterProof: "Proof points",
         recruiterProofText: "Oracle Certified Professional, agile project roles, ITIL/PRINCE2 and a deliberately maintained portfolio.",
         recruiterPrint: "Save PDF",
+        recruiterMail: "Copy mail",
+        recruiterGithub: "GitHub",
+        recruiterRoles: "Best fit",
+        recruiterRoleApex: "APEX Developer",
+        recruiterRoleBusiness: "Business Apps",
+        recruiterRoleProcess: "Data & Process UI",
+        recruiterMatrix: "Skill matrix",
+        recruiterMatrixApex: "Oracle APEX",
+        recruiterMatrixPlsql: "PL/SQL",
+        recruiterMatrixJs: "JavaScript",
+        recruiterMatrixProcess: "Process view",
+        recruiterMatrixDelivery: "Delivery",
+        recruiterMatrixData: "Data models",
         timelineDone: "timeline playback complete"
       },
       ja: {
@@ -2511,6 +2655,19 @@ shortcut: ctrl + alt + d</pre>
         recruiterProof: "根拠",
         recruiterProofText: "Oracle Certified Professional、Agile Project Role、ITIL/PRINCE2、継続的に整備されたPortfolio。",
         recruiterPrint: "PDF保存",
+        recruiterMail: "Mailコピー",
+        recruiterGithub: "GitHub",
+        recruiterRoles: "Best fit",
+        recruiterRoleApex: "APEX Developer",
+        recruiterRoleBusiness: "Business Apps",
+        recruiterRoleProcess: "Data & Process UI",
+        recruiterMatrix: "Skill Matrix",
+        recruiterMatrixApex: "Oracle APEX",
+        recruiterMatrixPlsql: "PL/SQL",
+        recruiterMatrixJs: "JavaScript",
+        recruiterMatrixProcess: "Process View",
+        recruiterMatrixDelivery: "Delivery",
+        recruiterMatrixData: "Data Models",
         timelineDone: "timeline playback complete"
       }
     };
@@ -2677,11 +2834,11 @@ shortcut: ctrl + alt + d</pre>
     function buildTraceOverlay() {
       const copy = dict();
       const nodes = [
-        { key: "PROFILE_NODE", x: 18, y: 23 },
-        { key: "DELIVERY_MODULES", x: 40, y: 37 },
-        { key: "CAPABILITY_GRAPH", x: 25, y: 66 },
-        { key: "EXPERIENCE_LOG", x: 58, y: 58 },
-        { key: "TRUST_CHAIN", x: 82, y: 27 }
+        { key: "PROFILE_NODE", x: 18, y: 23, target: "#profil", href: "./index.html#profil" },
+        { key: "DELIVERY_MODULES", x: 40, y: 37, target: "#projekte", href: "./index.html#projekte" },
+        { key: "CAPABILITY_GRAPH", x: 25, y: 66, target: "#stack", href: "./index.html#stack" },
+        { key: "EXPERIENCE_LOG", x: 58, y: 58, target: "#timeline-title", href: "./vita.html#timeline-title" },
+        { key: "TRUST_CHAIN", x: 82, y: 27, target: "#cert-title", href: "./vita.html#cert-title" }
       ];
       const points = nodes.map((node) => `${node.x},${node.y}`).join(" ");
       const overlay = document.createElement("aside");
@@ -2693,9 +2850,9 @@ shortcut: ctrl + alt + d</pre>
         </svg>
         <div class="system-trace-overlay__nodes">
           ${nodes.map((node, index) => `
-            <span style="--trace-x:${node.x}%;--trace-y:${node.y}%;--trace-delay:${index * 180}ms">
+            <button type="button" data-trace-node="${node.key}" data-trace-target="${node.target}" data-trace-href="${node.href}" style="--trace-x:${node.x}%;--trace-y:${node.y}%;--trace-delay:${index * 180}ms">
               <b>${String(index + 1).padStart(2, "0")}</b>${node.key}
-            </span>
+            </button>
           `).join("")}
         </div>
         <div class="system-trace-terminal">
@@ -2728,7 +2885,7 @@ shortcut: ctrl + alt + d</pre>
           log.textContent += `${line}\n`;
           log.scrollTop = log.scrollHeight;
           const nodeIndex = traceLogNodeMap[index] ?? 0;
-          const node = activeOverlay.querySelectorAll(".system-trace-overlay__nodes span")[nodeIndex];
+          const node = activeOverlay.querySelectorAll(".system-trace-overlay__nodes button")[nodeIndex];
           node?.classList.add("is-hot");
           window.setTimeout(() => node?.classList.remove("is-hot"), 760);
         }, 260 + index * 430));
@@ -2749,6 +2906,27 @@ shortcut: ctrl + alt + d</pre>
       window.setTimeout(() => overlay?.remove(), 240);
     }
 
+    function navigateTraceNode(trigger) {
+      const targetSelector = trigger.dataset.traceTarget;
+      const href = trigger.dataset.traceHref;
+      const target = targetSelector ? document.querySelector(targetSelector) : null;
+      closeSystemTrace();
+      emitPortfolioCursorCode("GOTO", 900, "is-dev-lang-code");
+
+      window.setTimeout(() => {
+        if (target) {
+          target.scrollIntoView({ behavior: reduceMotion.matches ? "auto" : "smooth", block: "start" });
+          return;
+        }
+
+        if (href) {
+          const [path, hash = ""] = href.split("#");
+          const localized = localizedPageHref(path || "./index.html");
+          window.location.href = hash ? `${localized}#${hash}` : localized;
+        }
+      }, 180);
+    }
+
     function renderRecruiterPanel() {
       const copy = dict();
       recruiterPanel.innerHTML = `
@@ -2762,8 +2940,31 @@ shortcut: ctrl + alt + d</pre>
           <article><p>02</p><h3>${copy.recruiterEdge}</h3><span>${copy.recruiterEdgeText}</span></article>
           <article><p>03</p><h3>${copy.recruiterProof}</h3><span>${copy.recruiterProofText}</span></article>
         </div>
+        <div class="recruiter-mode-panel__decision">
+          <section>
+            <p>${copy.recruiterRoles}</p>
+            <div class="recruiter-role-stack">
+              <span>${copy.recruiterRoleApex}</span>
+              <span>${copy.recruiterRoleBusiness}</span>
+              <span>${copy.recruiterRoleProcess}</span>
+            </div>
+          </section>
+          <section>
+            <p>${copy.recruiterMatrix}</p>
+            <div class="recruiter-skill-matrix">
+              <span><b>${copy.recruiterMatrixApex}</b><i style="--level:94%"></i></span>
+              <span><b>${copy.recruiterMatrixPlsql}</b><i style="--level:88%"></i></span>
+              <span><b>${copy.recruiterMatrixJs}</b><i style="--level:78%"></i></span>
+              <span><b>${copy.recruiterMatrixProcess}</b><i style="--level:92%"></i></span>
+              <span><b>${copy.recruiterMatrixDelivery}</b><i style="--level:84%"></i></span>
+              <span><b>${copy.recruiterMatrixData}</b><i style="--level:90%"></i></span>
+            </div>
+          </section>
+        </div>
         <div class="recruiter-mode-panel__actions">
           <button class="button button-primary" type="button" data-recruiter-print>${copy.recruiterPrint}</button>
+          <button class="button button-secondary" type="button" data-recruiter-mail>${copy.recruiterMail}</button>
+          <a class="button button-ghost" href="https://github.com/philosophiedeluxe" target="_blank" rel="noopener noreferrer">${copy.recruiterGithub}</a>
           <button class="button button-secondary" type="button" data-recruiter-close>${copy.recruiterClose}</button>
         </div>
       `;
@@ -2780,6 +2981,7 @@ shortcut: ctrl + alt + d</pre>
         recruiterPanel.addEventListener("click", (event) => {
           if (event.target.closest("[data-recruiter-close]")) toggleRecruiterMode(false);
           if (event.target.closest("[data-recruiter-print]")) printVita();
+          if (event.target.closest("[data-recruiter-mail]")) copyMailAddress();
         });
       }
       renderRecruiterPanel();
@@ -2851,6 +3053,11 @@ shortcut: ctrl + alt + d</pre>
       if (event.target.closest("[data-system-trace-trigger]")) runSystemTrace();
       if (event.target.closest("[data-vita-playback]")) runVitaPlayback();
       if (event.target.closest("[data-trace-close]")) closeSystemTrace();
+      const traceNode = event.target.closest("[data-trace-node]");
+      if (traceNode) {
+        navigateTraceNode(traceNode);
+        return;
+      }
       if (
         traceOverlay &&
         event.target.closest(".system-trace-overlay") &&
@@ -2874,6 +3081,8 @@ shortcut: ctrl + alt + d</pre>
         toggleRecruiterMode(false);
       }
     });
+
+    document.addEventListener("pk:open-command-palette", openPalette);
 
     document.addEventListener("input", (event) => {
       if (!event.target.matches("[data-command-search]")) return;
@@ -3506,6 +3715,7 @@ shortcut: ctrl + alt + d</pre>
   setLang(getInitialLang());
   setupHeroCursor();
   setupPortfolioStartup(shouldRunPortfolioBoot);
+  setupFirstTimeGuide(shouldRunPortfolioBoot);
   setupTiltCards();
   setupActiveNavigation();
   setupTechStream();

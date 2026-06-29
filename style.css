@@ -3774,9 +3774,103 @@ main > .section.interior-hero::before {
 .command-palette,
 .system-trace-overlay,
 .recruiter-mode-panel,
-.timeline-playback-console {
+.timeline-playback-console,
+.first-time-guide {
   position: fixed;
   z-index: 95;
+}
+
+.first-time-guide {
+  top: calc(var(--nav-h) + 16px);
+  right: 22px;
+  width: min(390px, calc(100vw - 44px));
+  overflow: hidden;
+  border: 1px solid rgba(98, 214, 208, 0.32);
+  border-radius: 8px;
+  opacity: 0;
+  pointer-events: none;
+  background: rgba(16, 17, 20, 0.94);
+  box-shadow: 0 22px 70px rgba(0, 0, 0, 0.4);
+  transform: translate3d(0, -10px, 0);
+  transition: opacity 220ms ease, transform 220ms var(--ease-out);
+}
+
+.first-time-guide.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate3d(0, 0, 0);
+}
+
+.first-time-guide.is-fading {
+  opacity: 0;
+  pointer-events: none;
+  transform: translate3d(0, -8px, 0);
+}
+
+.first-time-guide__bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(244, 241, 234, 0.1);
+}
+
+.first-time-guide__bar span {
+  display: flex;
+  gap: 6px;
+}
+
+.first-time-guide__bar b {
+  width: 8px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.first-time-guide__bar b:nth-child(2) { background: var(--accent-2); }
+.first-time-guide__bar b:nth-child(3) { background: var(--accent-3); }
+
+.first-time-guide__bar strong,
+.first-time-guide__line {
+  font-family: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.first-time-guide__bar strong {
+  flex: 1;
+  color: var(--accent-2);
+}
+
+.first-time-guide__bar button {
+  border: 0;
+  color: var(--muted);
+  background: transparent;
+  cursor: pointer;
+}
+
+.first-time-guide__line {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 10px 12px;
+  border: 0;
+  color: var(--muted);
+  background: transparent;
+  text-align: left;
+}
+
+button.first-time-guide__line {
+  color: var(--accent-2);
+  cursor: pointer;
+}
+
+button.first-time-guide__line:hover,
+button.first-time-guide__line:focus-visible {
+  color: var(--text);
+  background: rgba(98, 214, 208, 0.08);
 }
 
 .command-palette {
@@ -3971,7 +4065,7 @@ main > .section.interior-hero::before {
   }
 }
 
-.system-trace-overlay__nodes span {
+.system-trace-overlay__nodes button {
   position: absolute;
   top: var(--trace-y);
   left: var(--trace-x);
@@ -3990,15 +4084,20 @@ main > .section.interior-hero::before {
   letter-spacing: 0.05em;
   transform: translate(-50%, -50%) scale(0.92);
   opacity: 0;
+  cursor: pointer;
   animation: trace-node-in 440ms var(--ease-out) var(--trace-delay) forwards;
+  transition: border-color 160ms ease, box-shadow 160ms ease, background 160ms ease;
 }
 
 .system-trace-overlay__nodes b {
   color: var(--accent-2);
 }
 
-.system-trace-overlay__nodes span.is-hot {
+.system-trace-overlay__nodes button:hover,
+.system-trace-overlay__nodes button:focus-visible,
+.system-trace-overlay__nodes button.is-hot {
   border-color: rgba(240, 168, 58, 0.72);
+  background: rgba(25, 22, 18, 0.88);
   box-shadow: 0 0 40px rgba(240, 168, 58, 0.18);
 }
 
@@ -4050,7 +4149,7 @@ main > .section.interior-hero::before {
 .recruiter-mode-panel {
   right: 22px;
   bottom: 22px;
-  width: min(620px, calc(100vw - 44px));
+  width: min(820px, calc(100vw - 44px));
   border: 1px solid rgba(98, 214, 208, 0.34);
   border-radius: 8px;
   overflow: hidden;
@@ -4079,7 +4178,7 @@ main > .section.interior-hero::before {
   display: grid;
   align-content: start;
   gap: 10px;
-  min-height: 210px;
+  min-height: 184px;
   padding: 20px;
   background: rgba(16, 17, 20, 0.96);
 }
@@ -4103,15 +4202,89 @@ main > .section.interior-hero::before {
   line-height: 1.02;
 }
 
-.recruiter-mode-panel__actions {
+.recruiter-mode-panel__decision {
+  display: grid;
+  grid-template-columns: 0.78fr 1.22fr;
+  gap: 1px;
+  border-top: 1px solid rgba(244, 241, 234, 0.08);
+  background: rgba(244, 241, 234, 0.08);
+}
+
+.recruiter-mode-panel__decision section {
+  padding: 16px;
+  background: rgba(9, 11, 15, 0.72);
+}
+
+.recruiter-mode-panel__decision p {
+  margin: 0 0 12px;
+  color: var(--accent);
+  font-family: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.recruiter-role-stack {
   display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.recruiter-role-stack span {
+  padding: 8px 10px;
+  border: 1px solid rgba(98, 214, 208, 0.26);
+  border-radius: 999px;
+  color: var(--text);
+  background: rgba(98, 214, 208, 0.07);
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.recruiter-skill-matrix {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 14px;
+}
+
+.recruiter-skill-matrix span {
+  display: grid;
+  gap: 7px;
+  min-width: 0;
+  color: var(--muted);
+  font-family: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.recruiter-skill-matrix i {
+  position: relative;
+  height: 4px;
+  overflow: hidden;
+  background: rgba(244, 241, 234, 0.12);
+}
+
+.recruiter-skill-matrix i::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: var(--level);
+  background: linear-gradient(90deg, var(--accent-3), var(--accent-2));
+  box-shadow: 0 0 16px rgba(98, 214, 208, 0.28);
+}
+
+.recruiter-mode-panel__actions {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 10px;
   padding: 16px;
 }
 
 .recruiter-mode-panel__actions .button {
-  flex: 1;
   justify-content: center;
+  min-width: 0;
 }
 
 html.recruiter-mode-active .project-card,
@@ -4963,15 +5136,25 @@ html.recruiter-mode-active .profile-grid article {
     padding-top: 84px;
   }
 
+  .command-palette__dialog {
+    max-height: calc(100svh - 104px);
+    overflow: hidden;
+  }
+
+  .command-palette__list {
+    max-height: calc(100svh - 230px);
+  }
+
   .command-palette__list button {
     grid-template-columns: 34px minmax(0, 1fr);
+    min-height: 58px;
   }
 
   .command-palette__list em {
     grid-column: 2;
   }
 
-  .system-trace-overlay__nodes span {
+  .system-trace-overlay__nodes button {
     max-width: 150px;
     font-size: 0.58rem;
   }
@@ -4981,11 +5164,42 @@ html.recruiter-mode-active .profile-grid article {
   .timeline-playback-console {
     right: 14px;
     bottom: 14px;
+    left: auto;
     width: calc(100vw - 28px);
+  }
+
+  .first-time-guide {
+    top: calc(var(--nav-h) + 10px);
+    right: 14px;
+    left: auto;
+    bottom: auto;
+    width: calc(100vw - 28px);
+  }
+
+  .system-trace-terminal,
+  .recruiter-mode-panel,
+  .timeline-playback-console {
+    max-height: calc(100svh - 96px);
+    overflow-y: auto;
+  }
+
+  .system-trace-terminal pre {
+    min-height: 110px;
+    max-height: 32svh;
   }
 
   .recruiter-mode-panel__grid {
     grid-template-columns: 1fr;
+  }
+
+  .recruiter-mode-panel__decision,
+  .recruiter-skill-matrix,
+  .recruiter-mode-panel__actions {
+    grid-template-columns: 1fr;
+  }
+
+  .recruiter-mode-panel article {
+    min-height: 0;
   }
 
   .cookie-consent {
@@ -4996,7 +5210,7 @@ html.recruiter-mode-active .profile-grid article {
 
   .cookie-consent__card {
     width: 100%;
-    max-height: calc(64svh - 28px);
+    max-height: calc(58svh - 28px);
     gap: 8px;
     padding: 10px;
     overflow-y: auto;
@@ -5111,6 +5325,7 @@ html.recruiter-mode-active .profile-grid article {
   .system-trace-overlay,
   .recruiter-mode-panel,
   .timeline-playback-console,
+  .first-time-guide,
   .trace-entry,
   .timeline-playback,
   .skill-graph,
