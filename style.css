@@ -3599,9 +3599,9 @@ main > .section.interior-hero::before {
 .skill-graph button:nth-of-type(2) { top: 17%; right: 18%; }
 .skill-graph button:nth-of-type(3) { top: 46%; left: 9%; }
 .skill-graph button:nth-of-type(4) { top: 48%; right: 9%; }
-.skill-graph button:nth-of-type(5) { bottom: 17%; left: 14%; }
-.skill-graph button:nth-of-type(6) { bottom: 17%; left: 50%; transform: translateX(-50%); }
-.skill-graph button:nth-of-type(7) { right: 14%; bottom: 17%; }
+.skill-graph button:nth-of-type(5) { bottom: 27%; left: 14%; }
+.skill-graph button:nth-of-type(6) { bottom: 27%; left: 50%; transform: translateX(-50%); }
+.skill-graph button:nth-of-type(7) { right: 14%; bottom: 27%; }
 
 .skill-graph button:nth-of-type(1)::before,
 .skill-graph button:nth-of-type(3)::before,
@@ -4530,7 +4530,7 @@ html.recruiter-mode-active .profile-grid article {
   }
 
   .skill-graph {
-    min-height: 520px;
+    min-height: 560px;
   }
 
   .skill-graph button {
