@@ -30,3 +30,8 @@ Hidden interface checks:
 6. Test context menu commands: Dev Console, Copy Link, Vita drucken, Mail and GitHub.
 7. Switch DE, EN and JP and verify hidden links plus context menu labels update with the active language.
 8. Type `matrix` and `boot`, then test the Konami code and section-number signals after the animation finishes.
+9. Press `Ctrl + K` and verify the Command Palette can run Profile Trace, Stack focus, Recruiter Mode and Signal Index.
+10. Click `trace profile` in the hero and verify trace nodes, terminal output and close behavior.
+11. Click Live Skill Graph nodes in the stack section and verify the readout updates.
+12. On `vita.html`, click `play timeline` and verify the timeline entries are highlighted one after another.
+13. Print/PDF check: verify Command Palette, System Trace, Recruiter Mode, Skill Graph and Timeline Playback do not appear in the PDF output.

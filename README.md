@@ -47,6 +47,7 @@ The site combines a clean dark visual style with a technical portfolio structure
 - Custom 404 page
 - Hidden Easter eggs for developer-oriented discovery interactions
 - Hidden Signal Index page as an internal Easter Egg manual
+- Developer Operating Layer with System Trace, Command Palette, Recruiter Mode, Live Skill Graph and Bootable Vita playback
 - Lightweight QA script for local checks
 - GitHub Pages compatible without build process
 
@@ -158,6 +159,11 @@ The Easter eggs are intentionally subtle. They are implemented in `setupEasterEg
 | Secret Dev Console | press `Ctrl` + `Alt` + `D`, or use the cursor context menu | internal console with route, build info, stack, links and access to the Signal Index |
 | Cursor Context Menu | hold `Shift` and right-click | custom command menu with Dev Console, copy link, Vita print, mail and GitHub actions |
 | Signal Index | open the small footer signal or the Dev Console link | hidden `signals.html` page listing the known interaction signals; marked `noindex` and intentionally omitted from the main navigation |
+| System Trace | click `trace profile` in the hero or run it from `Ctrl + K` | scans profile areas as `PROFILE_NODE`, `DELIVERY_MODULES`, `CAPABILITY_GRAPH`, `EXPERIENCE_LOG` and `TRUST_CHAIN` with animated links and terminal output |
+| Command Palette | press `Ctrl + K` | command interface for profile trace, resume, stack focus, recruiter mode, mail, GitHub, Signal Index and Vita print |
+| Live Skill Graph | click nodes in the stack section | capability graph emits short readouts for APEX, PL/SQL, JavaScript, data models, processes and delivery |
+| Recruiter Mode | run `Recruiter Mode` from the command palette | compact decision panel with fit, differentiator and proof points |
+| Bootable Vita | click `play timeline` on the Vita page | plays the career timeline as an `EXPERIENCE_LOG` with focused timeline entries |
 
 The effects are session-safe and temporary. They do not store analytics, do not call external services and do not change the content model of the site. Section-number triggers are invisible buttons positioned directly over the decorative numbers, so the Easter egg remains discoverable through the number itself and does not create layout spacing. The Boot Sequence appears once per session, while the hidden keyboard trigger `boot` exists so the startup animation can be tested deterministically. The Signal Index is deliberately discoverable through hidden interface routes instead of the primary navigation.
 

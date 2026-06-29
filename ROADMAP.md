@@ -33,6 +33,7 @@ Die Homepage ist jetzt eine moderne, statische Portfolio-Seite mit starkem Hero,
 - Vita-PDF als sprachabhaengiger, einseitiger A4-Lebenslauf verfeinert.
 - Cinematic Boot Sequence, Hero-Terminal-Unlock, gestaffelter Navigations-Boot und Cursor-Handshake ergaenzt.
 - Secret Dev Console, Shift-Rechtsklick-Kontextmenue und Signal Index als versteckte Entwickler-Schicht ergaenzt.
+- Developer Operating Layer ergaenzt: System Trace, Command Palette, Recruiter Mode, Live Skill Graph, Projekt-Mini-Simulationen und Bootable Vita.
 
 ## Erledigte Verbesserungen
 
@@ -72,6 +73,9 @@ Die Homepage ist jetzt eine moderne, statische Portfolio-Seite mit starkem Hero,
 - Cookie-Hinweis kompakter gemacht, damit der erste Hero-Eindruck weniger stark ueberdeckt wird.
 - Signal Index (`signals.html`) als `noindex`-Seite im gleichen Interface-Stil angelegt und ueber Footer-Signal sowie Dev Console erreichbar gemacht.
 - Easter-Egg-Dokumentation erweitert: Boot, Cursor, Kontextmenue, Dev Console, Section Signals, Keyboard-Triggers und versteckte Route sind nachvollziehbar dokumentiert.
+- Command Palette (`Ctrl+K`) als schneller Zugriff auf Trace, Vita, Stack, Recruiter Mode, Mail, GitHub und Signal Index umgesetzt.
+- System Trace visualisiert die Profilpositionierung als technische Scan-Schicht mit Nodes, Linien und Terminal-Protokoll.
+- Skill Graph im Stack-Bereich und Timeline-Playback auf der Vita-Seite ergaenzt.
 
 ## Offene sinnvolle naechste Schritte
 
@@ -99,6 +103,7 @@ Die Homepage ist jetzt eine moderne, statische Portfolio-Seite mit starkem Hero,
 - Cookie-Auswahl: `Alle akzeptieren`, `Auswahl speichern`, `Nur notwendige` und erneutes Oeffnen ueber Footer testen.
 - Sprachwechsel: DE/EN/JP auf Startseite, Vita, Signal Index und Datenschutz testen.
 - Easter Eggs: `Ctrl+Alt+D`, `Shift + Rechtsklick`, `matrix`, `boot`, Konami-Code und Section-Number-Klicks kurz pruefen.
+- Developer OS: `Ctrl+K`, `trace profile`, `Recruiter Mode`, Stack-Skill-Nodes und `play timeline` pruefen.
 - Kontextmenue: Dev Console, Copy Link, Vita drucken, Mail und GitHub pruefen.
 - Footer-Links: LinkedIn, GitHub, Impressum, Datenschutz und Cookie-Einstellungen pruefen.
 - Externe Links: LinkedIn und GitHub in neuem Browserkontext pruefen.
