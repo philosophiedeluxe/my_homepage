@@ -2004,6 +2004,35 @@ h3 {
   backface-visibility: hidden;
 }
 
+.hero-visual::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  background:
+    linear-gradient(90deg, transparent, rgba(var(--cyan-rgb), 0.18), rgba(var(--violet-rgb), 0.16), transparent),
+    repeating-linear-gradient(0deg, transparent 0 8px, rgba(244, 241, 234, 0.06) 8px 9px);
+  mix-blend-mode: screen;
+  transform: translateX(-120%);
+}
+
+html.iconic-avatar-active .hero-visual {
+  background:
+    radial-gradient(circle at 72% 42%, rgba(var(--violet-rgb), 0.18), transparent 34%),
+    var(--surface);
+}
+
+html.iconic-avatar-active .hero-visual img {
+  filter: saturate(1.08) contrast(1.05);
+}
+
+html.iconic-avatar-active .hero-visual::after,
+.hero-visual:has(img.is-hero-avatar-switching)::after {
+  animation: iconic-avatar-signal 760ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
 .system-profile-panel {
   width: 100%;
   display: grid;
@@ -4790,6 +4819,26 @@ html.recruiter-mode-active .profile-grid article {
 
   to {
     opacity: 0.72;
+  }
+}
+
+@keyframes iconic-avatar-signal {
+  0% {
+    opacity: 0;
+    transform: translateX(-120%);
+  }
+
+  18% {
+    opacity: 0.86;
+  }
+
+  54% {
+    opacity: 0.48;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(120%);
   }
 }
 

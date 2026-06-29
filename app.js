@@ -25,7 +25,7 @@
       "signals.card.context.kicker": "SHIFT + RIGHT CLICK",
       "signals.card.context.title": "Cursor Context Menu",
       "signals.card.context.trigger": "<kbd>Shift</kbd> + Rechtsklick",
-      "signals.card.context.effect": "Öffnet ein eigenes Command-Menü mit Dev Console, Copy Link, Vita drucken, Mail und GitHub.",
+      "signals.card.context.effect": "Öffnet ein eigenes Command-Menü mit Dev Console, Copy Link, Vita drucken, Mail, GitHub und Avatar Hero.",
       "signals.card.console.kicker": "SECRET",
       "signals.card.console.title": "Dev Console",
       "signals.card.console.trigger": "<kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>D</kbd> oder Cursor-Menü",
@@ -66,6 +66,10 @@
       "signals.card.theme.title": "Theme Shift",
       "signals.card.theme.trigger": "<kbd>Shift</kbd> halten und auf das PK-Branding klicken",
       "signals.card.theme.effect": "Ein kurzer alternativer Chroma-Zustand verschiebt die Farbwelt der Seite.",
+      "signals.card.avatarHero.kicker": "SESSION",
+      "signals.card.avatarHero.title": "Iconic Hero",
+      "signals.card.avatarHero.trigger": "Command Palette: <code>Avatar Hero</code>, Cursor-Menü oder <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>I</kbd>",
+      "signals.card.avatarHero.effect": "Schaltet das Hero-Portrait für die laufende Browser-Session auf die Iconic-Avatar-Version um.",
       "signals.card.dom.kicker": "SOURCE",
       "signals.card.dom.title": "DOM Signal",
       "signals.card.dom.trigger": "DevTools oder HTML-Quelltext öffnen",
@@ -77,7 +81,7 @@
       "signals.card.palette.kicker": "COMMAND",
       "signals.card.palette.title": "Command Palette",
       "signals.card.palette.trigger": "<kbd>Ctrl</kbd> + <kbd>K</kbd>",
-      "signals.card.palette.effect": "Öffnet ein schnelles Portfolio-Command-Interface für Trace, Vita, Stack, Recruiter Mode, Mail, GitHub und Signal Index.",
+      "signals.card.palette.effect": "Öffnet ein schnelles Portfolio-Command-Interface für Trace, Vita, Stack, Recruiter Mode, Mail, GitHub, Avatar Hero und Signal Index.",
       "signals.card.skillGraph.kicker": "CAPABILITY",
       "signals.card.skillGraph.title": "Live Skill Graph",
       "signals.card.skillGraph.trigger": "Skill-Knoten im Stack-Bereich anklicken",
@@ -113,7 +117,7 @@
       "signals.card.context.kicker": "SHIFT + RIGHT CLICK",
       "signals.card.context.title": "Cursor Context Menu",
       "signals.card.context.trigger": "<kbd>Shift</kbd> + right click",
-      "signals.card.context.effect": "Opens a custom command menu with Dev Console, Copy Link, print resume, mail and GitHub.",
+      "signals.card.context.effect": "Opens a custom command menu with Dev Console, Copy Link, print resume, mail, GitHub and Avatar Hero.",
       "signals.card.console.kicker": "SECRET",
       "signals.card.console.title": "Dev Console",
       "signals.card.console.trigger": "<kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>D</kbd> or cursor menu",
@@ -154,6 +158,10 @@
       "signals.card.theme.title": "Theme Shift",
       "signals.card.theme.trigger": "Hold <kbd>Shift</kbd> and click the PK branding",
       "signals.card.theme.effect": "A short alternate chroma state shifts the page color system.",
+      "signals.card.avatarHero.kicker": "SESSION",
+      "signals.card.avatarHero.title": "Iconic Hero",
+      "signals.card.avatarHero.trigger": "Command Palette: <code>Avatar Hero</code>, cursor menu or <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>I</kbd>",
+      "signals.card.avatarHero.effect": "Switches the hero portrait to the Iconic Avatar version for the current browser session.",
       "signals.card.dom.kicker": "SOURCE",
       "signals.card.dom.title": "DOM Signal",
       "signals.card.dom.trigger": "Open DevTools or the HTML source",
@@ -165,7 +173,7 @@
       "signals.card.palette.kicker": "COMMAND",
       "signals.card.palette.title": "Command Palette",
       "signals.card.palette.trigger": "<kbd>Ctrl</kbd> + <kbd>K</kbd>",
-      "signals.card.palette.effect": "Opens a fast portfolio command interface for trace, resume, stack, recruiter mode, mail, GitHub and Signal Index.",
+      "signals.card.palette.effect": "Opens a fast portfolio command interface for trace, resume, stack, recruiter mode, mail, GitHub, Avatar Hero and Signal Index.",
       "signals.card.skillGraph.kicker": "CAPABILITY",
       "signals.card.skillGraph.title": "Live Skill Graph",
       "signals.card.skillGraph.trigger": "Click skill nodes in the stack section",
@@ -201,7 +209,7 @@
       "signals.card.context.kicker": "SHIFT + RIGHT CLICK",
       "signals.card.context.title": "Cursor Context Menu",
       "signals.card.context.trigger": "<kbd>Shift</kbd> + 右クリック",
-      "signals.card.context.effect": "Dev Console、Copy Link、Vita印刷、Mail、GitHubを含む独自のCommand Menuを開きます。",
+      "signals.card.context.effect": "Dev Console、Copy Link、Vita印刷、Mail、GitHub、Avatar Heroを含む独自のCommand Menuを開きます。",
       "signals.card.console.kicker": "SECRET",
       "signals.card.console.title": "Dev Console",
       "signals.card.console.trigger": "<kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>D</kbd> またはCursor Menu",
@@ -242,6 +250,10 @@
       "signals.card.theme.title": "Theme Shift",
       "signals.card.theme.trigger": "<kbd>Shift</kbd>を押しながらPK Brandingをクリック",
       "signals.card.theme.effect": "短い代替Chroma状態でページの色調が切り替わります。",
+      "signals.card.avatarHero.kicker": "SESSION",
+      "signals.card.avatarHero.title": "Iconic Hero",
+      "signals.card.avatarHero.trigger": "Command Palette: <code>Avatar Hero</code>、Cursor Menu、または<kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>I</kbd>",
+      "signals.card.avatarHero.effect": "現在のBrowser SessionだけHero PortraitをIconic Avatar版に切り替えます。",
       "signals.card.dom.kicker": "SOURCE",
       "signals.card.dom.title": "DOM Signal",
       "signals.card.dom.trigger": "DevToolsまたはHTML Sourceを開く",
@@ -253,7 +265,7 @@
       "signals.card.palette.kicker": "COMMAND",
       "signals.card.palette.title": "Command Palette",
       "signals.card.palette.trigger": "<kbd>Ctrl</kbd> + <kbd>K</kbd>",
-      "signals.card.palette.effect": "Trace、経歴、Stack、Recruiter Mode、Mail、GitHub、Signal Indexへ素早くアクセスするCommand Interfaceです。",
+      "signals.card.palette.effect": "Trace、経歴、Stack、Recruiter Mode、Mail、GitHub、Avatar Hero、Signal Indexへ素早くアクセスするCommand Interfaceです。",
       "signals.card.skillGraph.kicker": "CAPABILITY",
       "signals.card.skillGraph.title": "Live Skill Graph",
       "signals.card.skillGraph.trigger": "StackセクションのSkill Nodeをクリック",
@@ -810,6 +822,7 @@
   const CONSENT_VERSION = 1;
   const PORTFOLIO_BOOT_SESSION_KEY = "pk-portfolio-boot-seen";
   const FIRST_TIME_GUIDE_SESSION_KEY = "pk-first-time-guide-seen";
+  const HERO_AVATAR_SESSION_KEY = "pk-iconic-avatar-hero";
   let scrollTicking = false;
   let lastScrolledState = null;
   let heroHeight = hero ? Math.max(hero.offsetHeight, 1) : 1;
@@ -2083,6 +2096,76 @@
     }));
   }
 
+  function setupHeroAvatarEgg() {
+    const avatarSources = {
+      src: "./image/iconic-avatar.jpg?v=20260629-avatar-egg1",
+      srcset: "./image/iconic-avatar-720.jpg?v=20260629-avatar-egg1 720w, ./image/iconic-avatar-960.jpg?v=20260629-avatar-egg1 960w, ./image/iconic-avatar.jpg?v=20260629-avatar-egg1 1122w",
+      alt: "Stilisiertes Hero-Portrait mit Iconic Avatar"
+    };
+
+    const originalSources = heroImage ? {
+      src: heroImage.getAttribute("src") || "",
+      srcset: heroImage.getAttribute("srcset") || "",
+      alt: heroImage.getAttribute("alt") || ""
+    } : null;
+
+    function readState() {
+      try {
+        return sessionStorage.getItem(HERO_AVATAR_SESSION_KEY) === "1";
+      } catch (error) {
+        return false;
+      }
+    }
+
+    function writeState(active) {
+      try {
+        sessionStorage.setItem(HERO_AVATAR_SESSION_KEY, active ? "1" : "0");
+      } catch (error) {
+        // Session storage can be unavailable in hardened browser contexts.
+      }
+    }
+
+    function setHeroAvatar(active, announce = false) {
+      writeState(active);
+      root.classList.toggle("iconic-avatar-active", active);
+
+      if (!heroImage || !originalSources) {
+        if (active && announce) window.location.href = `${localizedPageHref("./index.html")}#profil`;
+        return;
+      }
+
+      if (announce) {
+        heroImage.classList.remove("is-hero-avatar-switching");
+        window.requestAnimationFrame(() => heroImage.classList.add("is-hero-avatar-switching"));
+      }
+
+      if (active) {
+        heroImage.setAttribute("src", avatarSources.src);
+        heroImage.setAttribute("srcset", avatarSources.srcset);
+        heroImage.setAttribute("alt", avatarSources.alt);
+      } else {
+        heroImage.setAttribute("src", originalSources.src);
+        heroImage.setAttribute("srcset", originalSources.srcset);
+        heroImage.setAttribute("alt", originalSources.alt);
+      }
+
+      if (announce) window.setTimeout(() => heroImage.classList.remove("is-hero-avatar-switching"), 760);
+      if (announce) emitPortfolioCursorCode(active ? "AVATAR" : "HERO", 1500, "is-dev-signal");
+    }
+
+    document.addEventListener("pk:toggle-iconic-avatar", () => setHeroAvatar(!readState(), true));
+    document.addEventListener("keydown", (event) => {
+      const key = event.key.toLowerCase();
+      const isShortcut = (event.ctrlKey || event.metaKey) && event.altKey && key === "i";
+      if (!isShortcut) return;
+      if (event.target?.closest?.("input, textarea, select, [contenteditable=''], [contenteditable='true'], [role='textbox']")) return;
+      event.preventDefault();
+      setHeroAvatar(!readState(), true);
+    });
+
+    setHeroAvatar(readState(), false);
+  }
+
   function setupPortfolioStartup(runBoot) {
     const heroTitle = document.querySelector(".hero-title, .interior-hero h1, .page-hero h1, .legal-hero h1");
     if (heroTitle) {
@@ -2270,7 +2353,8 @@
         copy: ["Link kopieren", "Route teilen"],
         print: ["Vita drucken", "PDF/Print"],
         mail: ["Mail schreiben", "Kontakt"],
-        github: ["GitHub", "Repo öffnen"]
+        github: ["GitHub", "Repo öffnen"],
+        avatar: ["Avatar Hero", "Session-Toggle"]
       },
       en: {
         title: "PK_CURSOR_MENU",
@@ -2278,7 +2362,8 @@
         copy: ["Copy Link", "Share route"],
         print: ["Print Resume", "PDF/print"],
         mail: ["Mail Phil", "Contact"],
-        github: ["GitHub", "Open repo"]
+        github: ["GitHub", "Open repo"],
+        avatar: ["Avatar Hero", "Session toggle"]
       },
       ja: {
         title: "PK_CURSOR_MENU",
@@ -2286,7 +2371,8 @@
         copy: ["リンクコピー", "ルート共有"],
         print: ["経歴を印刷", "PDF/印刷"],
         mail: ["メール", "連絡"],
-        github: ["GitHub", "リポジトリ"]
+        github: ["GitHub", "リポジトリ"],
+        avatar: ["Avatar Hero", "Session切替"]
       }
     };
 
@@ -2347,6 +2433,9 @@ shortcut: ctrl + alt + d</pre>
       </button>
       <button type="button" data-cursor-command="github">
         <span>05</span><b></b><em></em>
+      </button>
+      <button type="button" data-cursor-command="avatar">
+        <span>06</span><b></b><em></em>
       </button>
     `;
     document.body.appendChild(contextMenu);
@@ -2493,6 +2582,11 @@ shortcut: ctrl + alt + d</pre>
 
       if (command === "github") {
         window.open(githubLink, "_blank", "noreferrer");
+        return;
+      }
+
+      if (command === "avatar") {
+        document.dispatchEvent(new CustomEvent("pk:toggle-iconic-avatar"));
       }
     });
 
@@ -2549,6 +2643,8 @@ shortcut: ctrl + alt + d</pre>
         signalsHint: "Easter-Egg-Manual öffnen",
         print: "Vita drucken",
         printHint: "PDF/Print auslösen",
+        avatar: "Avatar Hero",
+        avatarHint: "Iconic Hero für diese Session umschalten",
         traceTitle: "PROFILE_TRACE",
         traceSubtitle: "Scanning profile graph",
         traceComplete: "trace complete",
@@ -2596,6 +2692,8 @@ shortcut: ctrl + alt + d</pre>
         signalsHint: "Open the Easter Egg manual",
         print: "Print Resume",
         printHint: "Trigger PDF/print",
+        avatar: "Avatar Hero",
+        avatarHint: "Toggle the iconic hero for this session",
         traceTitle: "PROFILE_TRACE",
         traceSubtitle: "Scanning profile graph",
         traceComplete: "trace complete",
@@ -2643,6 +2741,8 @@ shortcut: ctrl + alt + d</pre>
         signalsHint: "Easter Egg Manualを開く",
         print: "経歴を印刷",
         printHint: "PDF/Printを実行",
+        avatar: "Avatar Hero",
+        avatarHint: "このSessionだけIconic Heroを切替",
         traceTitle: "PROFILE_TRACE",
         traceSubtitle: "profile graphをスキャン中",
         traceComplete: "trace complete",
@@ -2735,7 +2835,8 @@ shortcut: ctrl + alt + d</pre>
         { id: "mail", code: "05", action: () => copyMailAddress() },
         { id: "github", code: "06", action: () => window.open("https://github.com/philosophiedeluxe", "_blank", "noreferrer") },
         { id: "signals", code: "07", action: () => { window.location.href = localizedPageHref("./signals.html"); } },
-        { id: "print", code: "08", action: () => printVita() }
+        { id: "print", code: "08", action: () => printVita() },
+        { id: "avatar", code: "09", action: () => document.dispatchEvent(new CustomEvent("pk:toggle-iconic-avatar")) }
       ];
     }
 
@@ -3722,6 +3823,7 @@ shortcut: ctrl + alt + d</pre>
   setLang(getInitialLang());
   setupHeroCursor();
   setupPortfolioStartup(shouldRunPortfolioBoot);
+  setupHeroAvatarEgg();
   setupFirstTimeGuide(shouldRunPortfolioBoot);
   setupTiltCards();
   setupActiveNavigation();
