@@ -3758,6 +3758,19 @@ main > .section.interior-hero::before {
   }
 }
 
+@keyframes mobile-skill-node-pulse {
+  0%,
+  100% {
+    border-color: rgba(98, 214, 208, 0.28);
+    box-shadow: 0 0 0 rgba(98, 214, 208, 0);
+  }
+
+  48% {
+    border-color: rgba(98, 214, 208, 0.62);
+    box-shadow: 0 0 0 1px rgba(98, 214, 208, 0.14), 0 0 28px rgba(98, 214, 208, 0.12);
+  }
+}
+
 @keyframes skill-link-scan {
   0%,
   100% {
@@ -4249,7 +4262,7 @@ button.first-time-guide__line:focus-visible {
 
 .recruiter-skill-matrix span {
   display: grid;
-  gap: 7px;
+  gap: 8px;
   min-width: 0;
   color: var(--muted);
   font-family: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", monospace;
@@ -4259,11 +4272,34 @@ button.first-time-guide__line:focus-visible {
   text-transform: uppercase;
 }
 
+.recruiter-skill-matrix b {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  min-width: 0;
+}
+
+.recruiter-skill-matrix em {
+  color: var(--accent-2);
+  font-style: normal;
+}
+
 .recruiter-skill-matrix i {
   position: relative;
+  display: block;
+  width: 100%;
   height: 4px;
   overflow: hidden;
-  background: rgba(244, 241, 234, 0.12);
+  background: rgba(244, 241, 234, 0.13);
+}
+
+.recruiter-skill-matrix i::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.22), transparent);
+  transform: translateX(-120%);
+  animation: recruiter-skill-scan 2600ms ease-in-out infinite;
 }
 
 .recruiter-skill-matrix i::before {
@@ -4273,6 +4309,18 @@ button.first-time-guide__line:focus-visible {
   width: var(--level);
   background: linear-gradient(90deg, var(--accent-3), var(--accent-2));
   box-shadow: 0 0 16px rgba(98, 214, 208, 0.28);
+}
+
+@keyframes recruiter-skill-scan {
+  0%,
+  32% {
+    transform: translateX(-120%);
+  }
+
+  72%,
+  100% {
+    transform: translateX(120%);
+  }
 }
 
 .recruiter-mode-panel__actions {
@@ -4817,10 +4865,14 @@ html.recruiter-mode-active .profile-grid article {
   }
 
   .skill-graph {
-    min-height: 560px;
+    min-height: 520px;
   }
 
-  .skill-graph__trace {
+  .skill-graph__trace,
+  .skill-graph__core,
+  .skill-graph::before,
+  .skill-graph::after,
+  .skill-graph button::before {
     display: none;
   }
 
@@ -4829,6 +4881,7 @@ html.recruiter-mode-active .profile-grid article {
     left: 50% !important;
     width: min(260px, calc(100% - 36px));
     transform: translateX(-50%);
+    animation: mobile-skill-node-pulse 3600ms ease-in-out infinite;
   }
 
   .skill-graph button:hover,
@@ -4844,18 +4897,6 @@ html.recruiter-mode-active .profile-grid article {
   .skill-graph button:nth-of-type(5) { top: 302px; bottom: auto; }
   .skill-graph button:nth-of-type(6) { top: 360px; bottom: auto; }
   .skill-graph button:nth-of-type(7) { top: 418px; bottom: auto; }
-
-  .skill-graph button::before,
-  .skill-graph button:nth-of-type(1)::before,
-  .skill-graph button:nth-of-type(3)::before,
-  .skill-graph button:nth-of-type(5)::before {
-    right: auto;
-    left: 50%;
-    width: 1px;
-    height: 26px;
-    background: linear-gradient(rgba(98, 214, 208, 0.45), transparent);
-    transform: translate(-50%, -100%);
-  }
 
   .interior-hero {
     min-height: 540px;
@@ -5076,6 +5117,23 @@ html.recruiter-mode-active .profile-grid article {
     text-align: center;
   }
 
+  .easter-terminal {
+    position: relative;
+    left: auto;
+    bottom: auto;
+    z-index: 4;
+    width: min(100%, 340px);
+    max-width: calc(100vw - 28px);
+    margin: 14px auto 0;
+    padding: 9px 11px;
+    border: 1px solid rgba(98, 214, 208, 0.18);
+    border-radius: 8px;
+    background: rgba(9, 11, 15, 0.72);
+    letter-spacing: 0.08em;
+    white-space: normal;
+    transform: translateY(8px);
+  }
+
   .quick-facts,
   .quick-facts div,
   .quick-facts dt,
@@ -5159,6 +5217,31 @@ html.recruiter-mode-active .profile-grid article {
     font-size: 0.58rem;
   }
 
+  .system-trace-overlay__nodes button:nth-child(1) {
+    --trace-x: 25% !important;
+    --trace-y: 8% !important;
+  }
+
+  .system-trace-overlay__nodes button:nth-child(2) {
+    --trace-x: 50% !important;
+    --trace-y: 22% !important;
+  }
+
+  .system-trace-overlay__nodes button:nth-child(3) {
+    --trace-x: 28% !important;
+    --trace-y: 41% !important;
+  }
+
+  .system-trace-overlay__nodes button:nth-child(4) {
+    --trace-x: 67% !important;
+    --trace-y: 38% !important;
+  }
+
+  .system-trace-overlay__nodes button:nth-child(5) {
+    --trace-x: 78% !important;
+    --trace-y: 13% !important;
+  }
+
   .system-trace-terminal,
   .recruiter-mode-panel,
   .timeline-playback-console {
@@ -5183,9 +5266,16 @@ html.recruiter-mode-active .profile-grid article {
     overflow-y: auto;
   }
 
+  .system-trace-terminal {
+    display: grid;
+    grid-template-rows: auto auto minmax(0, 1fr) auto;
+    height: min(292px, 42svh);
+    overflow: hidden;
+  }
+
   .system-trace-terminal pre {
-    min-height: 110px;
-    max-height: 32svh;
+    min-height: 0;
+    max-height: none;
   }
 
   .recruiter-mode-panel__grid {

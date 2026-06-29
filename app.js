@@ -2833,7 +2833,14 @@ shortcut: ctrl + alt + d</pre>
 
     function buildTraceOverlay() {
       const copy = dict();
-      const nodes = [
+      const compactTrace = window.matchMedia("(max-width: 680px)").matches;
+      const nodes = compactTrace ? [
+        { key: "PROFILE_NODE", x: 25, y: 8, target: "#profil", href: "./index.html#profil" },
+        { key: "DELIVERY_MODULES", x: 50, y: 22, target: "#projekte", href: "./index.html#projekte" },
+        { key: "CAPABILITY_GRAPH", x: 28, y: 41, target: "#stack", href: "./index.html#stack" },
+        { key: "EXPERIENCE_LOG", x: 67, y: 38, target: "#timeline-title", href: "./vita.html#timeline-title" },
+        { key: "TRUST_CHAIN", x: 78, y: 13, target: "#cert-title", href: "./vita.html#cert-title" }
+      ] : [
         { key: "PROFILE_NODE", x: 18, y: 23, target: "#profil", href: "./index.html#profil" },
         { key: "DELIVERY_MODULES", x: 40, y: 37, target: "#projekte", href: "./index.html#projekte" },
         { key: "CAPABILITY_GRAPH", x: 25, y: 66, target: "#stack", href: "./index.html#stack" },
@@ -2952,12 +2959,12 @@ shortcut: ctrl + alt + d</pre>
           <section>
             <p>${copy.recruiterMatrix}</p>
             <div class="recruiter-skill-matrix">
-              <span><b>${copy.recruiterMatrixApex}</b><i style="--level:94%"></i></span>
-              <span><b>${copy.recruiterMatrixPlsql}</b><i style="--level:88%"></i></span>
-              <span><b>${copy.recruiterMatrixJs}</b><i style="--level:78%"></i></span>
-              <span><b>${copy.recruiterMatrixProcess}</b><i style="--level:92%"></i></span>
-              <span><b>${copy.recruiterMatrixDelivery}</b><i style="--level:84%"></i></span>
-              <span><b>${copy.recruiterMatrixData}</b><i style="--level:90%"></i></span>
+              <span><b>${copy.recruiterMatrixApex}<em>94%</em></b><i style="--level:94%"></i></span>
+              <span><b>${copy.recruiterMatrixPlsql}<em>88%</em></b><i style="--level:88%"></i></span>
+              <span><b>${copy.recruiterMatrixJs}<em>78%</em></b><i style="--level:78%"></i></span>
+              <span><b>${copy.recruiterMatrixProcess}<em>92%</em></b><i style="--level:92%"></i></span>
+              <span><b>${copy.recruiterMatrixDelivery}<em>84%</em></b><i style="--level:84%"></i></span>
+              <span><b>${copy.recruiterMatrixData}<em>90%</em></b><i style="--level:90%"></i></span>
             </div>
           </section>
         </div>
