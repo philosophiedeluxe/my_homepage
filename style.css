@@ -825,11 +825,17 @@ body.vita-print-mode .tech-stream {
 }
 
 .easter-terminal {
-  position: absolute;
-  left: clamp(16px, 5vw, 72px);
-  bottom: clamp(28px, 7vh, 92px);
+  position: relative;
+  left: auto;
+  bottom: auto;
   z-index: 4;
+  width: min(100%, 760px);
+  margin: 16px 0 0;
+  padding: 10px 12px;
+  border: 1px solid rgba(98, 214, 208, 0.18);
+  border-radius: 8px;
   color: var(--accent-2);
+  background: rgba(9, 11, 15, 0.64);
   font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
   font-size: clamp(0.68rem, 0.8vw, 0.78rem);
   font-weight: 800;
@@ -4890,13 +4896,13 @@ html.recruiter-mode-active .profile-grid article {
     transform: translate(-50%, -2px);
   }
 
-  .skill-graph button:nth-of-type(1) { top: 70px; }
-  .skill-graph button:nth-of-type(2) { top: 128px; }
-  .skill-graph button:nth-of-type(3) { top: 186px; }
-  .skill-graph button:nth-of-type(4) { top: 244px; }
-  .skill-graph button:nth-of-type(5) { top: 302px; bottom: auto; }
-  .skill-graph button:nth-of-type(6) { top: 360px; bottom: auto; }
-  .skill-graph button:nth-of-type(7) { top: 418px; bottom: auto; }
+  .skill-graph button:nth-of-type(1) { top: 52px; }
+  .skill-graph button:nth-of-type(2) { top: 110px; }
+  .skill-graph button:nth-of-type(3) { top: 168px; }
+  .skill-graph button:nth-of-type(4) { top: 226px; }
+  .skill-graph button:nth-of-type(5) { top: 284px; bottom: auto; }
+  .skill-graph button:nth-of-type(6) { top: 342px; bottom: auto; }
+  .skill-graph button:nth-of-type(7) { top: 400px; bottom: auto; }
 
   .interior-hero {
     min-height: 540px;
@@ -5118,16 +5124,10 @@ html.recruiter-mode-active .profile-grid article {
   }
 
   .easter-terminal {
-    position: relative;
-    left: auto;
-    bottom: auto;
-    z-index: 4;
     width: min(100%, 340px);
     max-width: calc(100vw - 28px);
     margin: 14px auto 0;
     padding: 9px 11px;
-    border: 1px solid rgba(98, 214, 208, 0.18);
-    border-radius: 8px;
     background: rgba(9, 11, 15, 0.72);
     letter-spacing: 0.08em;
     white-space: normal;
