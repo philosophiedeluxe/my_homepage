@@ -3616,6 +3616,17 @@ main > .section.interior-hero::before {
   font-weight: 900;
   transform: translate(-50%, -50%);
   animation: skill-core-pulse 3600ms ease-in-out infinite;
+  overflow: hidden;
+}
+
+.skill-graph__core img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  border-radius: inherit;
+  filter: saturate(1.08) contrast(1.04);
 }
 
 .skill-graph button {
