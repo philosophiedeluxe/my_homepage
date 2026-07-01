@@ -2362,12 +2362,30 @@
   }
 
   if (langToggle) {
+    let languagePointerCloseTimer = null;
+    const keepLanguageMenuOpen = () => {
+      window.clearTimeout(languagePointerCloseTimer);
+      langToggle.classList.add("is-pointer-open");
+    };
+    const releaseLanguageMenuOpen = () => {
+      window.clearTimeout(languagePointerCloseTimer);
+      languagePointerCloseTimer = window.setTimeout(() => {
+        langToggle.classList.remove("is-pointer-open");
+      }, 160);
+    };
+
+    langToggle.addEventListener("pointerenter", keepLanguageMenuOpen);
+    langToggle.addEventListener("pointerleave", releaseLanguageMenuOpen);
+    langToggle.addEventListener("focusin", keepLanguageMenuOpen);
+    langToggle.addEventListener("focusout", releaseLanguageMenuOpen);
+
     langToggle.addEventListener("click", (event) => {
       const option = event.target.closest("[data-lang-option]");
       if (!option || !langToggle.contains(option)) return;
       const selectedLang = sanitizeLang(option.dataset.langOption);
       if (selectedLang === (document.documentElement.dataset.lang || DEFAULT_LANG)) return;
       setLang(selectedLang, true);
+      langToggle.classList.remove("is-pointer-open");
       langToggle.blur();
       setNavOpen(false);
     });
@@ -2587,8 +2605,8 @@
 
   function setupHeroAvatarEgg() {
     const avatarSources = {
-      src: "./image/iconic-avatar.jpg?v=20260701-langmorph3",
-      srcset: "./image/iconic-avatar-720.jpg?v=20260701-langmorph3 720w, ./image/iconic-avatar-960.jpg?v=20260701-langmorph3 960w, ./image/iconic-avatar.jpg?v=20260701-langmorph3 1122w",
+      src: "./image/iconic-avatar.jpg?v=20260701-langtoggle1",
+      srcset: "./image/iconic-avatar-720.jpg?v=20260701-langtoggle1 720w, ./image/iconic-avatar-960.jpg?v=20260701-langtoggle1 960w, ./image/iconic-avatar.jpg?v=20260701-langtoggle1 1122w",
       alt: "Stilisiertes Hero-Portrait mit Iconic Avatar"
     };
 

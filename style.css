@@ -7252,7 +7252,8 @@ html.easter-boot-revealing .timeline-item:nth-child(3) {
 }
 
 .language-toggle:hover,
-.language-toggle:focus-within {
+.language-toggle:focus-within,
+.language-toggle.is-pointer-open {
   border-color: var(--language-switch-accent);
   background:
     linear-gradient(180deg, rgba(240, 168, 58, 0.08), rgba(98, 214, 208, 0.055) 50%, rgba(143, 61, 255, 0.055)),
@@ -7421,13 +7422,15 @@ html[data-lang="ja"] .language-toggle .is-ja::before {
 }
 
 .language-toggle:hover::before,
-.language-toggle:focus-within::before {
+.language-toggle:focus-within::before,
+.language-toggle.is-pointer-open::before {
   opacity: 0.95;
   transform: scaleX(1);
 }
 
 .language-toggle:hover::after,
-.language-toggle:focus-within::after {
+.language-toggle:focus-within::after,
+.language-toggle.is-pointer-open::after {
   border-color: var(--accent-2);
   transform: translateY(-35%) rotate(225deg);
 }
@@ -7445,7 +7448,7 @@ html[data-lang="ja"] .language-toggle .is-ja::before {
 .language-toggle__menu {
   position: absolute;
   right: 0;
-  top: calc(100% + 8px);
+  top: calc(100% + 4px);
   z-index: 30;
   min-width: 138px;
   display: grid;
@@ -7464,7 +7467,7 @@ html[data-lang="ja"] .language-toggle .is-ja::before {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transform: translateY(-7px) scale(0.97);
+  transform: translateY(-5px) scale(0.97);
   transform-origin: top right;
   transition:
     opacity 170ms ease,
@@ -7473,7 +7476,8 @@ html[data-lang="ja"] .language-toggle .is-ja::before {
 }
 
 .language-toggle:hover .language-toggle__menu,
-.language-toggle:focus-within .language-toggle__menu {
+.language-toggle:focus-within .language-toggle__menu,
+.language-toggle.is-pointer-open .language-toggle__menu {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
@@ -7491,6 +7495,16 @@ html[data-lang="ja"] .language-toggle .is-ja::before {
   border-top: 1px solid rgba(98, 214, 208, 0.34);
   background: rgba(7, 9, 13, 0.94);
   transform: rotate(45deg);
+}
+
+.language-toggle__menu::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -12px;
+  height: 12px;
+  background: transparent;
 }
 
 .language-toggle__option {
@@ -7624,7 +7638,8 @@ html[data-lang="ja"] .language-toggle .is-ja::after {
   }
 
   .language-toggle:hover .language-toggle__menu,
-  .language-toggle:focus-within .language-toggle__menu {
+  .language-toggle:focus-within .language-toggle__menu,
+  .language-toggle.is-pointer-open .language-toggle__menu {
     max-height: 190px;
     margin-top: 12px;
     padding-block: 7px;
@@ -7635,6 +7650,10 @@ html[data-lang="ja"] .language-toggle .is-ja::after {
   }
 
   .language-toggle__menu::before {
+    display: none;
+  }
+
+  .language-toggle__menu::after {
     display: none;
   }
 
