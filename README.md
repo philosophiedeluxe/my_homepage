@@ -161,7 +161,7 @@ The Easter eggs are intentionally subtle. They are implemented in `setupEasterEg
 | Matrix Rain | type `matrix` on the keyboard | temporary Matrix-style rain overlay |
 | DOM Comment | inspect the HTML source or DevTools DOM | hidden signal-layer comments are present |
 | Section Signals | click decorative section numbers such as `01`, `02`, `03`, `04` | section number glows, content briefly fades/reboots, cards/data panels jitter and a thin scan line crosses the section without changing the section background |
-| Language DEV Mode | click the `DE/EN/JP` toggle 6 times quickly | temporary `DEV` language-state hint plus code-style monospace UI treatment |
+| Language DEV Mode | click the `DE/EN/ES/JP` toggle 6 times quickly | temporary `DEV` language-state hint plus code-style monospace UI treatment |
 | Boot Sequence | rare first page visit per session, or type `boot` on the keyboard | cinematic full-page startup overlay with large terminal window, typed boot commands, hidden page surface and staggered reveal of nav, hero, buttons and main content |
 | Keyword Cursor | hover selected technology words or the name | cursor label changes contextually; name/brand hover emits `{PK}` |
 | Secret Theme Shift | hold `Shift` and click the `PK` branding | temporary alternate theme shift |
@@ -198,7 +198,7 @@ The print implementation uses:
 - reduced spacing and controlled typography
 - hidden website-only elements during printing
 - language-aware document titles
-- Japanese localization with dedicated `ja` dictionary, `?lang=ja` URL support and Japanese font fallbacks
+- four-language localization with dedicated DE/EN/ES/JP dictionaries, query-parameter URLs and Japanese font fallbacks where needed
 - layout stabilization before `window.print()`
 - the cursor context menu action `Vita drucken`
 
@@ -252,7 +252,7 @@ Manual checks before publishing:
 - test homepage on desktop and mobile
 - open and close mobile navigation
 - switch language between DE, EN and JP
-- test Vita PDF export in all three languages
+- test Vita PDF export in all four languages
 - verify Impressum and Datenschutz links
 - verify LinkedIn and GitHub links
 - check cookie settings flow

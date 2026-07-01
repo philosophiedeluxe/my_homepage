@@ -273,9 +273,12 @@ html.portfolio-boot-reveal .nav-toggle { animation-delay: 470ms; }
 
 .language-toggle {
   position: relative;
-  gap: 4px;
+  display: inline-grid;
+  grid-template-columns: repeat(2, minmax(32px, 1fr));
+  gap: 3px;
+  min-width: 84px;
   min-height: 40px;
-  padding: 4px 7px;
+  padding: 4px;
   color: rgba(244, 241, 234, 0.7);
   border: 1px solid rgba(98, 214, 208, 0.3);
   background:
@@ -342,15 +345,17 @@ html.portfolio-boot-reveal .nav-toggle { animation-delay: 470ms; }
 .language-toggle__option {
   position: relative;
   z-index: 1;
-  min-width: 2.2rem;
-  min-height: 30px;
+  min-width: 0;
+  min-height: 16px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding-inline: 0.48rem;
+  padding-inline: 0.28rem;
   border: 1px solid transparent;
   border-radius: calc(var(--radius) - 4px);
   color: rgba(98, 214, 208, 0.58);
+  line-height: 1;
+  font-size: 0.68rem;
   text-shadow: none;
   transition:
     color 160ms ease,
@@ -361,6 +366,7 @@ html.portfolio-boot-reveal .nav-toggle { animation-delay: 470ms; }
 }
 
 .language-toggle__separator {
+  display: none;
   color: rgba(244, 241, 234, 0.2);
   font-size: 0.68rem;
   margin-inline: -1px;
@@ -378,6 +384,7 @@ html.portfolio-boot-reveal .nav-toggle { animation-delay: 470ms; }
 
 html[data-lang="de"] .language-toggle .is-de,
 html[data-lang="en"] .language-toggle .is-en,
+html[data-lang="es"] .language-toggle .is-es,
 html[data-lang="ja"] .language-toggle .is-ja {
   color: var(--text);
   font-weight: 900;
@@ -389,11 +396,12 @@ html[data-lang="ja"] .language-toggle .is-ja {
     inset 0 0 0 1px rgba(244, 241, 234, 0.035),
     inset 0 -2px 0 rgba(98, 214, 208, 0.74),
     0 0 14px rgba(98, 214, 208, 0.13);
-  transform: translateY(-1px);
+  transform: none;
 }
 
 html[data-lang="de"] .language-toggle .is-de::before,
 html[data-lang="en"] .language-toggle .is-en::before,
+html[data-lang="es"] .language-toggle .is-es::before,
 html[data-lang="ja"] .language-toggle .is-ja::before {
   content: "";
   position: absolute;
@@ -408,6 +416,7 @@ html[data-lang="ja"] .language-toggle .is-ja::before {
 
 html[data-lang="de"] .language-toggle .is-de::after,
 html[data-lang="en"] .language-toggle .is-en::after,
+html[data-lang="es"] .language-toggle .is-es::after,
 html[data-lang="ja"] .language-toggle .is-ja::after {
   content: "";
   position: absolute;
@@ -4958,7 +4967,7 @@ html.recruiter-mode-active .profile-grid article {
     justify-self: start;
     justify-content: center;
     min-height: 40px;
-    padding: 4px 7px;
+    padding: 4px;
   }
 
   .split-section,
@@ -7287,6 +7296,7 @@ html.easter-boot-revealing .timeline-item:nth-child(3) {
 
 html[data-lang="de"] .language-toggle .is-de,
 html[data-lang="en"] .language-toggle .is-en,
+html[data-lang="es"] .language-toggle .is-es,
 html[data-lang="ja"] .language-toggle .is-ja {
   color: var(--language-switch-accent);
   background:
@@ -7302,6 +7312,7 @@ html[data-lang="ja"] .language-toggle .is-ja {
 
 html[data-lang="de"] .language-toggle .is-de::before,
 html[data-lang="en"] .language-toggle .is-en::before,
+html[data-lang="es"] .language-toggle .is-es::before,
 html[data-lang="ja"] .language-toggle .is-ja::before {
   background: var(--language-switch-accent);
   box-shadow: 0 0 8px rgba(240, 168, 58, 0.78);
@@ -7309,6 +7320,7 @@ html[data-lang="ja"] .language-toggle .is-ja::before {
 
 html[data-lang="de"] .language-toggle .is-de::after,
 html[data-lang="en"] .language-toggle .is-en::after,
+html[data-lang="es"] .language-toggle .is-es::after,
 html[data-lang="ja"] .language-toggle .is-ja::after {
   background: linear-gradient(90deg, rgba(240, 168, 58, 0.95), rgba(98, 214, 208, 0.8));
 }
@@ -7316,6 +7328,7 @@ html[data-lang="ja"] .language-toggle .is-ja::after {
 
 /* Language selector separator/dot refinement */
 .language-toggle__separator {
+  display: none;
   color: rgba(240, 168, 58, 0.46);
   font-size: 0.7rem;
   margin-inline: -1px;
@@ -7328,6 +7341,7 @@ html[data-lang="ja"] .language-toggle .is-ja::after {
 
 html[data-lang="de"] .language-toggle .is-de::before,
 html[data-lang="en"] .language-toggle .is-en::before,
+html[data-lang="es"] .language-toggle .is-es::before,
 html[data-lang="ja"] .language-toggle .is-ja::before {
   content: none;
   display: none;

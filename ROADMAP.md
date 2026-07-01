@@ -4,7 +4,7 @@ Stand: 01.07.2026
 
 ## Kurzfazit
 
-Die Homepage ist jetzt eine moderne, statische Portfolio-Seite mit starkem Hero, integriertem Portrait-Hintergrund, DE/EN/JP-Umschaltung, GitHub-Verlinkung, sauberer Navigation und rechtlichen Unterseiten. Der Stil ist bewusst reduziert, dunkel, technisch und klar.
+Die Homepage ist jetzt eine moderne, statische Portfolio-Seite mit starkem Hero, integriertem Portrait-Hintergrund, DE/EN/ES/JP-Umschaltung, GitHub-Verlinkung, sauberer Navigation und rechtlichen Unterseiten. Der Stil ist bewusst reduziert, dunkel, technisch und klar.
 
 ## Aktueller Stand
 
@@ -24,7 +24,7 @@ Die Homepage ist jetzt eine moderne, statische Portfolio-Seite mit starkem Hero,
 - Kleinere Hero-Bildvarianten fuer responsive Auslieferung per `srcset`.
 - Eigene Social-Preview-Grafik fuer OpenGraph/Twitter Cards.
 - Vita mit fokussiertem Entwicklerprofil, Oracle-APEX-Zertifikat und Zertifikatsgalerie erweitert.
-- Hreflang-Strategie fuer DE/EN/JP-URLs ueber Query-Parameter ergaenzt.
+- Hreflang-Strategie fuer DE/EN/ES/JP-URLs ueber Query-Parameter ergaenzt.
 - Kleiner lokaler QA-Workflow fuer Syntax, lokale Referenzen, Sitemap und optionale Screenshots ergaenzt.
 - Interaktives Signal-Canvas mit reduziertem Render-Budget fuer Firefox ergaenzt.
 - Scroll-Fortschritt, aktive Abschnittsnavigation und Pointer-Reaktionen ergaenzt.
@@ -104,14 +104,14 @@ Die Homepage ist jetzt eine moderne, statische Portfolio-Seite mit starkem Hero,
 - Hidden Route: `signals.html` visuell pruefen, Footer-Signal und Dev-Console-Link testen.
 - Mobile: Navigation oeffnen/schliessen, Hero-Buttons, Footer und Cookie-Banner pruefen.
 - Cookie-Auswahl: `Alle akzeptieren`, `Auswahl speichern`, `Nur notwendige` und erneutes Oeffnen ueber Footer testen.
-- Sprachwechsel: DE/EN/JP auf Startseite, Vita, Signal Index und Datenschutz testen.
+- Sprachwechsel: DE/EN/ES/JP auf Startseite, Vita, Signal Index und Datenschutz testen.
 - Easter Eggs: `Ctrl+Alt+D`, `Shift + Rechtsklick`, `matrix`, `boot`, Konami-Code und Section-Number-Klicks kurz pruefen.
 - Developer OS: `Ctrl+K`, `trace profile`, `Recruiter Mode`, Stack-Skill-Nodes und `play timeline` pruefen.
 - Kontextmenue: Dev Console, Copy Link, Vita drucken, Mail, GitHub und Avatar Hero pruefen.
 - Footer-Links: LinkedIn, GitHub, Impressum, Datenschutz und Cookie-Einstellungen pruefen.
 - Externe Links: LinkedIn und GitHub in neuem Browserkontext pruefen.
 - SEO: Canonical URLs, OpenGraph-Bild, `sitemap.xml`, `robots.txt` und JSON-LD pruefen.
-- Vita-PDF: Auf DE, EN und JP jeweils `Vita als PDF erstellen` pruefen und im Druckdialog `Als PDF speichern` testen.
+- Vita-PDF: Auf DE, EN, ES und JP jeweils `Vita als PDF erstellen` pruefen und im Druckdialog `Als PDF speichern` testen.
 
 ## Design-Leitplanken
 
