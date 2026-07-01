@@ -1,15 +1,15 @@
 # Homepage Roadmap
 
-Stand: 29.06.2026
+Stand: 01.07.2026
 
 ## Kurzfazit
 
-Die Homepage ist jetzt eine moderne, statische Portfolio-Seite mit starkem Hero, integriertem Portrait-Hintergrund, DE/EN-Umschaltung, GitHub-Verlinkung, sauberer Navigation und rechtlichen Unterseiten. Der Stil ist bewusst reduziert, dunkel, technisch und klar.
+Die Homepage ist jetzt eine moderne, statische Portfolio-Seite mit starkem Hero, integriertem Portrait-Hintergrund, DE/EN/JP-Umschaltung, GitHub-Verlinkung, sauberer Navigation und rechtlichen Unterseiten. Der Stil ist bewusst reduziert, dunkel, technisch und klar.
 
 ## Aktueller Stand
 
 - Statischer Stack mit HTML, CSS und Vanilla JavaScript.
-- Vier Hauptseiten: Startseite, Vita, Impressum, Datenschutz.
+- Hauptseiten: Startseite, Vita, Impressum, Datenschutz, 404 und versteckter Signal Index.
 - Versteckte Signal-Index-Seite als bewusst nicht prominent verlinktes Easter-Egg-Handbuch.
 - GitHub Pages kompatibel ohne Build-Schritt.
 - Responsives Layout mit mobiler Navigation.
@@ -24,7 +24,7 @@ Die Homepage ist jetzt eine moderne, statische Portfolio-Seite mit starkem Hero,
 - Kleinere Hero-Bildvarianten fuer responsive Auslieferung per `srcset`.
 - Eigene Social-Preview-Grafik fuer OpenGraph/Twitter Cards.
 - Vita mit fokussiertem Entwicklerprofil, Oracle-APEX-Zertifikat und Zertifikatsgalerie erweitert.
-- Hreflang-Strategie fuer DE/EN-URLs ueber `?lang=en` ergaenzt.
+- Hreflang-Strategie fuer DE/EN/JP-URLs ueber Query-Parameter ergaenzt.
 - Kleiner lokaler QA-Workflow fuer Syntax, lokale Referenzen, Sitemap und optionale Screenshots ergaenzt.
 - Interaktives Signal-Canvas mit reduziertem Render-Budget fuer Firefox ergaenzt.
 - Scroll-Fortschritt, aktive Abschnittsnavigation und Pointer-Reaktionen ergaenzt.
@@ -33,7 +33,7 @@ Die Homepage ist jetzt eine moderne, statische Portfolio-Seite mit starkem Hero,
 - Vita-PDF als sprachabhaengiger, einseitiger A4-Lebenslauf verfeinert.
 - Cinematic Boot Sequence, Hero-Terminal-Unlock, gestaffelter Navigations-Boot und Cursor-Handshake ergaenzt.
 - Secret Dev Console, Shift-Rechtsklick-Kontextmenue und Signal Index als versteckte Entwickler-Schicht ergaenzt.
-- Developer Operating Layer ergaenzt: System Trace, Command Palette, Recruiter Mode, Live Skill Graph, Projekt-Mini-Simulationen und Bootable Vita.
+- Developer Operating Layer ergaenzt: System Trace, Command Palette, Recruiter Mode, Live Skill Graph, Projekt-Mini-Simulationen, Iconic Hero und Bootable Vita mit aufklappbaren Experience Logs.
 
 ## Erledigte Verbesserungen
 
@@ -76,6 +76,9 @@ Die Homepage ist jetzt eine moderne, statische Portfolio-Seite mit starkem Hero,
 - Command Palette (`Ctrl+K`) als schneller Zugriff auf Trace, Vita, Stack, Recruiter Mode, Mail, GitHub und Signal Index umgesetzt.
 - System Trace visualisiert die Profilpositionierung als technische Scan-Schicht mit Nodes, Linien und Terminal-Protokoll.
 - Skill Graph im Stack-Bereich und Timeline-Playback auf der Vita-Seite ergaenzt.
+- Timeline-Kacheln auf der Vita-Seite als klickbare Experience Logs erweitert.
+- Iconic Hero als sessionbasierter Avatar-Hero-Schalter ergaenzt.
+- QA-Skript erweitert: prueft lokale `href`/`src`, `srcset`, Zertifikatsdatenquellen, CSS-Asset-URLs, Sitemap und JavaScript-Syntax.
 
 ## Offene sinnvolle naechste Schritte
 
@@ -104,11 +107,11 @@ Die Homepage ist jetzt eine moderne, statische Portfolio-Seite mit starkem Hero,
 - Sprachwechsel: DE/EN/JP auf Startseite, Vita, Signal Index und Datenschutz testen.
 - Easter Eggs: `Ctrl+Alt+D`, `Shift + Rechtsklick`, `matrix`, `boot`, Konami-Code und Section-Number-Klicks kurz pruefen.
 - Developer OS: `Ctrl+K`, `trace profile`, `Recruiter Mode`, Stack-Skill-Nodes und `play timeline` pruefen.
-- Kontextmenue: Dev Console, Copy Link, Vita drucken, Mail und GitHub pruefen.
+- Kontextmenue: Dev Console, Copy Link, Vita drucken, Mail, GitHub und Avatar Hero pruefen.
 - Footer-Links: LinkedIn, GitHub, Impressum, Datenschutz und Cookie-Einstellungen pruefen.
 - Externe Links: LinkedIn und GitHub in neuem Browserkontext pruefen.
 - SEO: Canonical URLs, OpenGraph-Bild, `sitemap.xml`, `robots.txt` und JSON-LD pruefen.
-- Vita-PDF: Auf DE und EN jeweils `Vita als PDF erstellen` pruefen und im Druckdialog `Als PDF speichern` testen.
+- Vita-PDF: Auf DE, EN und JP jeweils `Vita als PDF erstellen` pruefen und im Druckdialog `Als PDF speichern` testen.
 
 ## Design-Leitplanken
 

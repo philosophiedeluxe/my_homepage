@@ -36,9 +36,10 @@ The site combines a clean dark visual style with a technical portfolio structure
 - Dedicated Vita / Resume page
 - Browser-based PDF export for German, English and Japanese profile versions
 - Print-optimized A4 layout for complete one-page PDF generation with language-aware document titles
-- Project spotlight section with optimized tilt cards and restrained glow feedback
+- Project spotlight section with optimized tilt cards, mini terminal simulations and restrained glow feedback
 - Technology stack overview
 - Certificate section with visual assets
+- Certificate lightbox for larger proof previews
 - SEO basics with canonical URLs, OpenGraph metadata and Twitter Card metadata
 - JSON-LD structured data for better search engine context
 - Privacy-friendly setup without analytics or marketing cookies
@@ -48,7 +49,8 @@ The site combines a clean dark visual style with a technical portfolio structure
 - Hidden Easter eggs for developer-oriented discovery interactions
 - Hidden Signal Index page as an internal Easter Egg manual
 - Developer Operating Layer with System Trace, Command Palette, Recruiter Mode, Live Skill Graph and Bootable Vita playback
-- Lightweight QA script for local checks
+- Session-only Iconic Hero avatar mode
+- Lightweight QA script for local JS, HTML, `srcset`, certificate and CSS asset checks
 - GitHub Pages compatible without build process
 
 ## Tech Stack
@@ -80,12 +82,18 @@ The site combines a clean dark visual style with a technical portfolio structure
 ├── QA.md                   # Local QA instructions
 ├── ROADMAP.md              # Project roadmap and design notes
 ├── tools/
-│   └── check-site.ps1      # Lightweight local validation script
+│   ├── check-site.ps1      # Lightweight local validation script
+│   ├── render-social-card.ps1
+│   └── social-card.html    # Deterministic OpenGraph card source
 └── image/
     ├── social-card.jpg     # OpenGraph / preview image
     ├── iconic.jpg          # Main visual asset
     ├── iconic-720.jpg      # Responsive image variant
     ├── iconic-960.jpg      # Responsive image variant
+    ├── iconic-avatar.jpg   # Session-only Iconic Hero source
+    ├── iconic-avatar-720.jpg
+    ├── iconic-avatar-960.jpg
+    ├── profile-avatar.jpg  # Header / graph avatar
     └── Cert/               # Certificate images and badges
 ```
 
@@ -158,13 +166,14 @@ The Easter eggs are intentionally subtle. They are implemented in `setupEasterEg
 | Keyword Cursor | hover selected technology words or the name | cursor label changes contextually; name/brand hover emits `{PK}` |
 | Secret Theme Shift | hold `Shift` and click the `PK` branding | temporary alternate theme shift |
 | Secret Dev Console | press `Ctrl` + `Alt` + `D`, or use the cursor context menu | internal console with route, build info, stack, links and access to the Signal Index |
-| Cursor Context Menu | hold `Shift` and right-click | custom command menu with Dev Console, copy link, Vita print, mail and GitHub actions |
+| Cursor Context Menu | hold `Shift` and right-click | custom command menu with Dev Console, copy link, Vita print, mail, GitHub and Avatar Hero actions |
 | Signal Index | open the small footer signal or the Dev Console link | hidden `signals.html` page listing the known interaction signals; marked `noindex` and intentionally omitted from the main navigation |
 | System Trace | click `trace profile` in the hero or run it from `Ctrl + K` | scans profile areas as `PROFILE_NODE`, `DELIVERY_MODULES`, `CAPABILITY_GRAPH`, `EXPERIENCE_LOG` and `TRUST_CHAIN` with animated links, terminal output and clickable navigation nodes |
-| Command Palette | press `Ctrl + K` | command interface for profile trace, resume, stack focus, recruiter mode, mail, GitHub, Signal Index and Vita print |
+| Command Palette | press `Ctrl + K` | command interface for profile trace, resume, stack focus, recruiter mode, mail, GitHub, Avatar Hero, Signal Index and Vita print |
+| Iconic Hero | `Ctrl + Alt + I`, Command Palette or Cursor Context Menu | switches the hero portrait to the Iconic Avatar version for the current browser session only |
 | Live Skill Graph | click nodes in the stack section | capability graph emits short readouts for APEX, PL/SQL, JavaScript, data models, processes and delivery |
 | Recruiter Mode | run `Recruiter Mode` from the command palette | decision panel with fit, differentiator, proof points, best-fit roles, skill matrix, PDF export and copy-mail |
-| Bootable Vita | click `play timeline` on the Vita page | plays the career timeline as an `EXPERIENCE_LOG` with focused timeline entries |
+| Bootable Vita | click `play timeline` on the Vita page | plays the career timeline as an `EXPERIENCE_LOG`, opens the station logs and focuses entries one after another |
 
 The effects are session-safe and temporary. They do not store analytics, do not call external services and do not change the content model of the site. Section-number triggers are invisible buttons positioned directly over the decorative numbers, so the Easter egg remains discoverable through the number itself and does not create layout spacing. The Boot Sequence appears once per session, while the hidden keyboard trigger `boot` exists so the startup animation can be tested deterministically. The Signal Index is deliberately discoverable through hidden interface routes instead of the primary navigation.
 
@@ -236,6 +245,8 @@ Optional visual smoke screenshots:
 powershell -ExecutionPolicy Bypass -File .\tools\check-site.ps1 -Screenshots
 ```
 
+Screenshot mode requires local Chrome headless file output. It fails deliberately if the `_qa_*.png` files are not created.
+
 Manual checks before publishing:
 
 - test homepage on desktop and mobile
@@ -245,6 +256,7 @@ Manual checks before publishing:
 - verify Impressum and Datenschutz links
 - verify LinkedIn and GitHub links
 - check cookie settings flow
+- test `Ctrl + K`, `Shift + right click`, `Ctrl + Alt + D`, `Ctrl + Alt + I`, `trace profile`, Recruiter Mode and `play timeline`
 - test Firefox, Chrome and Edge rendering
 
 ## Deployment

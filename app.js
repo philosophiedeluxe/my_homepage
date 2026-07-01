@@ -341,7 +341,7 @@
       "projects.eyebrow": "Projekt-Spotlights",
       "projects.title": "Arbeiten, die zeigen, wie ich <span class=\"accent-word\">denke</span>.",
       "project.home.title": "Modernisierte persönliche Homepage",
-      "project.home.text": "Eine statische, schnelle Portfolio-Seite mit klarer Positionierung, responsivem Layout, DE/EN-Umschaltung und verbessertem SEO-Fundament.",
+      "project.home.text": "Eine statische, schnelle Portfolio-Seite mit klarer Positionierung, responsivem Layout, DE/EN/JP-Umschaltung und verbessertem SEO-Fundament.",
       "project.home.result": "Statisch · zweisprachig · ohne Build-Schritt",
       "project.apex.title": "Oracle-nahe Anwendungsentwicklung",
       "project.apex.text": "Fokus auf Oberflächen, Datenmodelle und Abläufe rund um Oracle APEX, PL/SQL, REST Data Sources und strukturierte Datenhaltung.",
@@ -537,7 +537,7 @@
       "projects.eyebrow": "Project spotlights",
       "projects.title": "Work that shows how I <span class=\"accent-word\">think</span>.",
       "project.home.title": "Modernized personal homepage",
-      "project.home.text": "A static, fast portfolio site with clearer positioning, responsive layout, DE/EN language switching and a stronger SEO foundation.",
+      "project.home.text": "A static, fast portfolio site with clearer positioning, responsive layout, DE/EN/JP language switching and a stronger SEO foundation.",
       "project.home.result": "Static · bilingual · no build step",
       "project.apex.title": "Oracle-centered application development",
       "project.apex.text": "Focus on interfaces, data models and workflows around Oracle APEX, PL/SQL, REST Data Sources and structured data management.",
@@ -2158,8 +2158,8 @@
 
   function setupHeroAvatarEgg() {
     const avatarSources = {
-      src: "./image/iconic-avatar.jpg?v=20260629-avatar-egg1",
-      srcset: "./image/iconic-avatar-720.jpg?v=20260629-avatar-egg1 720w, ./image/iconic-avatar-960.jpg?v=20260629-avatar-egg1 960w, ./image/iconic-avatar.jpg?v=20260629-avatar-egg1 1122w",
+      src: "./image/iconic-avatar.jpg?v=20260701-maintenance1",
+      srcset: "./image/iconic-avatar-720.jpg?v=20260701-maintenance1 720w, ./image/iconic-avatar-960.jpg?v=20260701-maintenance1 960w, ./image/iconic-avatar.jpg?v=20260701-maintenance1 1122w",
       alt: "Stilisiertes Hero-Portrait mit Iconic Avatar"
     };
 
@@ -3942,4 +3942,5 @@ shortcut: ctrl + alt + d</pre>
   setupScrollReveals();
   openCookieBanner();
 })();
+
 

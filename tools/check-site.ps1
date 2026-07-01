@@ -9,26 +9,53 @@ if (-not (Test-Path -LiteralPath (Join-Path $Root "app.js"))) {
 }
 
 Write-Host "Checking JavaScript syntax..."
-node --check app.js
+node -e "new Function(require('fs').readFileSync('app.js','utf8'));"
 if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
 Write-Host "Checking local HTML references..."
 $htmlFiles = Get-ChildItem -LiteralPath $Root -Filter "*.html" -File
 $missing = New-Object System.Collections.Generic.List[string]
-$attributePattern = '(?:href|src)=["'']([^"'']+)["'']'
+
+function Add-LocalReference {
+  param(
+    [string]$BaseDirectory,
+    [string]$Owner,
+    [string]$Raw
+  )
+
+  if ([string]::IsNullOrWhiteSpace($Raw)) { return }
+  if ($Raw -match '^(https?:|mailto:|tel:|#|data:)') { return }
+
+  $clean = ($Raw -split '[?#]')[0].Trim()
+  if ([string]::IsNullOrWhiteSpace($clean)) { return }
+
+  $target = Join-Path $BaseDirectory $clean
+  if (-not (Test-Path -LiteralPath $target)) {
+    $missing.Add("${Owner}: $Raw")
+  }
+}
 
 foreach ($file in $htmlFiles) {
   $content = Get-Content -Raw -LiteralPath $file.FullName
-  foreach ($match in [regex]::Matches($content, $attributePattern)) {
-    $raw = $match.Groups[1].Value
-    if ($raw -match '^(https?:|mailto:|tel:|#)') { continue }
-    $clean = ($raw -split '[?#]')[0]
-    if ([string]::IsNullOrWhiteSpace($clean)) { continue }
+  foreach ($match in [regex]::Matches($content, '(?:href|src|data-cert-src)=["'']([^"'']+)["'']')) {
+    Add-LocalReference -BaseDirectory $file.DirectoryName -Owner $file.Name -Raw $match.Groups[1].Value
+  }
 
-    $target = Join-Path $file.DirectoryName $clean
-    if (-not (Test-Path -LiteralPath $target)) {
-      $missing.Add("$($file.Name): $raw")
+  foreach ($match in [regex]::Matches($content, 'srcset=["'']([^"'']+)["'']')) {
+    $sources = $match.Groups[1].Value -split ','
+    foreach ($source in $sources) {
+      $raw = ($source.Trim() -split '\s+')[0]
+      Add-LocalReference -BaseDirectory $file.DirectoryName -Owner "$($file.Name) srcset" -Raw $raw
     }
+  }
+}
+
+Write-Host "Checking CSS asset references..."
+$cssFiles = Get-ChildItem -LiteralPath $Root -Filter "*.css" -File
+foreach ($file in $cssFiles) {
+  $content = Get-Content -Raw -LiteralPath $file.FullName
+  foreach ($match in [regex]::Matches($content, 'url\((["'']?)([^)"'']+)\1\)')) {
+    Add-LocalReference -BaseDirectory $file.DirectoryName -Owner $file.Name -Raw $match.Groups[2].Value
   }
 }
 
@@ -49,9 +76,32 @@ if ($Screenshots) {
   if (Test-Path -LiteralPath $chrome) {
     Write-Host "Rendering smoke screenshots..."
     $rootUrl = $Root.Replace('\','/')
-    & $chrome --headless=new --disable-gpu --hide-scrollbars --window-size=1440,1200 --screenshot="$Root\_qa_home_desktop.png" "file:///$rootUrl/index.html"
-    & $chrome --headless=new --disable-gpu --hide-scrollbars --window-size=390,900 --screenshot="$Root\_qa_home_mobile.png" "file:///$rootUrl/index.html"
-    & $chrome --headless=new --disable-gpu --hide-scrollbars --window-size=970,700 --screenshot="$Root\_qa_vita.png" "file:///$rootUrl/vita.html"
+    $profileDir = Join-Path $Root "_chrome_tmp_profile"
+    $screenshotsToRender = @(
+      @{ Path = "$Root\_qa_home_desktop.png"; Size = "1440,1200"; Url = "file:///$rootUrl/index.html" },
+      @{ Path = "$Root\_qa_home_mobile.png"; Size = "390,900"; Url = "file:///$rootUrl/index.html" },
+      @{ Path = "$Root\_qa_vita.png"; Size = "970,700"; Url = "file:///$rootUrl/vita.html" }
+    )
+
+    if (Test-Path -LiteralPath $profileDir) {
+      Remove-Item -LiteralPath $profileDir -Recurse -Force
+    }
+
+    foreach ($shot in $screenshotsToRender) {
+      if (Test-Path -LiteralPath $shot.Path) {
+        Remove-Item -LiteralPath $shot.Path -Force
+      }
+
+      & $chrome --headless=new --disable-gpu --hide-scrollbars "--user-data-dir=$profileDir" "--window-size=$($shot.Size)" "--screenshot=$($shot.Path)" $shot.Url
+      if (-not (Test-Path -LiteralPath $shot.Path)) {
+        throw "Screenshot was not created: $($shot.Path)"
+      }
+
+      $created = Get-Item -LiteralPath $shot.Path
+      if ($created.Length -le 0) {
+        throw "Screenshot is empty: $($shot.Path)"
+      }
+    }
   } else {
     Write-Host "Chrome not found, skipping screenshots."
   }

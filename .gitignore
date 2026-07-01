@@ -1,0 +1,4 @@
+*.zip
+_qa_*.png
+_check_*.png
+_chrome_tmp_profile/
