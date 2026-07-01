@@ -7645,10 +7645,10 @@ html[data-lang="ja"] .language-toggle .is-ja::after {
 
 .language-transform-signal {
   position: fixed;
-  left: 50%;
+  left: max(20px, calc((100vw - var(--max-width, 1180px)) / 2));
   top: calc(var(--nav-h) + 18px);
   z-index: 220;
-  width: min(340px, calc(100vw - 32px));
+  width: min(320px, calc(100vw - 32px));
   display: grid;
   gap: 7px;
   padding: 13px 15px 14px;
@@ -7741,28 +7741,28 @@ html.language-transform-active .language-toggle__current {
 }
 
 .language-morphing-text {
-  animation: language-text-resolve 560ms steps(2, end) both;
+  animation: language-text-resolve 780ms steps(3, end) both;
 }
 
 @keyframes language-transform-in {
   0% {
     opacity: 0;
-    transform: translate3d(-50%, -12px, 0) scale(0.96);
-    filter: saturate(1.4) hue-rotate(-16deg);
+    transform: translate3d(0, -10px, 0) scale(0.97);
+    filter: saturate(1.16);
   }
 
   18% {
     opacity: 1;
-    transform: translate3d(calc(-50% - 5px), 0, 0) scale(1.015);
+    transform: translate3d(-4px, 0, 0) scale(1.01);
   }
 
   44% {
-    transform: translate3d(calc(-50% + 4px), 0, 0) scale(1);
+    transform: translate3d(3px, 0, 0) scale(1);
   }
 
   100% {
     opacity: 1;
-    transform: translate3d(-50%, 0, 0) scale(1);
+    transform: translate3d(0, 0, 0) scale(1);
     filter: none;
   }
 }
@@ -7770,7 +7770,7 @@ html.language-transform-active .language-toggle__current {
 @keyframes language-transform-out {
   to {
     opacity: 0;
-    transform: translate3d(-50%, -8px, 0) scale(0.98);
+    transform: translate3d(0, -8px, 0) scale(0.98);
   }
 }
 
@@ -7787,15 +7787,20 @@ html.language-transform-active .language-toggle__current {
   }
 
   22% {
-    color: var(--accent-2);
-    text-shadow: 0 0 14px rgba(98, 214, 208, 0.2);
-    filter: saturate(1.18) hue-rotate(8deg);
-    transform: translate3d(1px, 0, 0);
+    text-shadow:
+      0 0 10px rgba(98, 214, 208, 0.1),
+      0 0 14px rgba(143, 61, 255, 0.08);
+    filter: saturate(1.08);
+    transform: translate3d(0.5px, 0, 0);
   }
 
   46% {
-    filter: saturate(1.08) hue-rotate(-8deg);
-    transform: translate3d(-1px, 0, 0);
+    filter: saturate(1.04);
+    transform: translate3d(-0.5px, 0, 0);
+  }
+
+  68% {
+    text-shadow: 0 0 8px rgba(240, 168, 58, 0.08);
   }
 }
 
@@ -7816,11 +7821,11 @@ html.language-transform-active .language-toggle__current {
 
 @media (max-width: 680px) {
   .language-transform-signal {
-    left: 50%;
-    right: auto;
+    left: 16px;
+    right: 16px;
     top: auto;
     bottom: 18px;
-    width: calc(100vw - 32px);
+    width: auto;
   }
 }
 

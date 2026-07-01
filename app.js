@@ -1375,7 +1375,7 @@
       root.classList.remove("language-transform-active");
       signal.classList.add("is-fading");
       window.setTimeout(() => signal.remove(), 260);
-    }, 820);
+    }, 1120);
   }
 
   function visibleLanguageTargets(lang) {
@@ -1396,25 +1396,31 @@
       .map((element, index) => {
         const isRich = Boolean(element.dataset.i18nRich);
         const key = isRich ? element.dataset.i18nRich : element.dataset.i18n;
-        return { element, key, isRich, target: dict[key], delay: Math.min(index * 18, 260) };
+        return { element, key, isRich, target: dict[key], delay: Math.min(index * 24, 340) };
       })
       .filter((entry) => entry.target);
   }
 
   function scrambleText(target, progress, seed = 0) {
-    const glyphs = "01<>/{}[]#$%&ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const glyphs = "01/_-<>ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const chars = [...String(target)];
+    const plainLength = chars.filter((char) => !/\s/.test(char)).length || 1;
+    let glyphIndex = 0;
     return [...String(target)].map((char, index) => {
       if (/\s/.test(char)) return char;
-      const reveal = index / Math.max(target.length, 1);
-      if (progress > reveal + 0.16) return char;
-      return glyphs[(index * 7 + seed + Math.floor(progress * 28)) % glyphs.length];
+      const reveal = glyphIndex++ / plainLength;
+      const windowSize = 0.1;
+      const shouldScramble = progress >= reveal - windowSize && progress <= reveal + 0.22;
+      if (!shouldScramble || progress > reveal + 0.18) return char;
+      if (/[.,:;!?·()&]/.test(char)) return char;
+      return glyphs[(index * 5 + seed + Math.floor(progress * 38)) % glyphs.length];
     }).join("");
   }
 
   function morphVisibleLanguageText(lang) {
     const targets = visibleLanguageTargets(lang);
     const started = performance.now();
-    const duration = 520;
+    const duration = 720;
 
     targets.forEach(({ element }) => {
       element.classList.add("language-morphing-text");
@@ -1428,13 +1434,13 @@
         const local = Math.min(Math.max((elapsed - entry.delay) / duration, 0), 1);
         if (local < 1) done = false;
         if (entry.isRich) {
-          if (local < 0.52) {
+          if (local < 0.62) {
             entry.element.textContent = scrambleText(entry.target.replace(/<[^>]+>/g, ""), local, index);
           } else {
             entry.element.innerHTML = entry.target;
           }
         } else {
-          entry.element.textContent = local < 0.92
+          entry.element.textContent = local < 0.96
             ? scrambleText(entry.target, local, index)
             : entry.target;
         }
@@ -2579,8 +2585,8 @@
 
   function setupHeroAvatarEgg() {
     const avatarSources = {
-      src: "./image/iconic-avatar.jpg?v=20260701-langmorph1",
-      srcset: "./image/iconic-avatar-720.jpg?v=20260701-langmorph1 720w, ./image/iconic-avatar-960.jpg?v=20260701-langmorph1 960w, ./image/iconic-avatar.jpg?v=20260701-langmorph1 1122w",
+      src: "./image/iconic-avatar.jpg?v=20260701-langmorph2",
+      srcset: "./image/iconic-avatar-720.jpg?v=20260701-langmorph2 720w, ./image/iconic-avatar-960.jpg?v=20260701-langmorph2 960w, ./image/iconic-avatar.jpg?v=20260701-langmorph2 1122w",
       alt: "Stilisiertes Hero-Portrait mit Iconic Avatar"
     };
 
