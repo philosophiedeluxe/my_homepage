@@ -1178,6 +1178,9 @@
   let languageTransformReady = false;
   let languageTransformTimer = null;
   let languageTransformFrame = null;
+  const LANGUAGE_MORPH_DURATION = 2680;
+  const LANGUAGE_MORPH_ELEMENT_STAGGER = 10;
+  const LANGUAGE_MORPH_MAX_DELAY = 160;
   const shouldRunPortfolioBoot = (() => {
     if (reduceMotion.matches) return false;
     try {
@@ -1442,50 +1445,60 @@
           targetMarkup: targetValue,
           source,
           target,
-          delay: Math.min(index * 32, 520)
+          delay: Math.min(index * LANGUAGE_MORPH_ELEMENT_STAGGER, LANGUAGE_MORPH_MAX_DELAY)
         };
       })
       .filter((entry) => entry.target && entry.source !== entry.target);
   }
 
   function transformLanguageText(source, target, progress, seed = 0) {
-    const glyphs = "01-_/ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const glyphs = "01ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     const sourceChars = [...String(source || "")];
     const targetChars = [...String(target || "")];
     const length = Math.max(sourceChars.length, targetChars.length, 1);
+    const safeProgress = Math.min(Math.max(progress, 0), 1);
+    const glyphTick = Math.floor(safeProgress * 11);
     const output = [];
 
     for (let index = 0; index < length; index += 1) {
       const fromChar = sourceChars[index] || "";
       const toChar = targetChars[index] || "";
-      const reveal = index / Math.max(length - 1, 1);
-      const local = Math.min(Math.max((progress - reveal * 0.26 - 0.14) / 0.66, 0), 1);
-      const charSeed = (index * 7 + seed * 13 + Math.floor(progress * 13)) % glyphs.length;
+      const position = length <= 1 ? 0 : index / (length - 1);
+      const charStart = 0.015 + position * 0.38;
+      const charDuration = 0.56;
+      const local = Math.min(Math.max((safeProgress - charStart) / charDuration, 0), 1);
       const targetIsPunctuation = /[.,:;!?·()&/|]/.test(toChar);
+      const sourceIsSpace = /\s/.test(fromChar);
+      const targetIsSpace = /\s/.test(toChar || fromChar);
+      const glyph = glyphs[(index * 5 + seed * 11 + glyphTick) % glyphs.length];
 
-      if (local <= 0.16) {
+      if (local <= 0) {
         output.push(fromChar || toChar);
         continue;
       }
 
-      if (/\s/.test(fromChar) && /\s/.test(toChar || fromChar)) {
+      if (sourceIsSpace && targetIsSpace) {
         output.push(" ");
         continue;
       }
 
-      if (targetIsPunctuation && local > 0.5) {
+      if (targetIsPunctuation && local > 0.62) {
         output.push(toChar);
         continue;
       }
 
-      if (local < 0.58) {
-        output.push(glyphs[charSeed]);
+      if (local < 0.28) {
+        output.push((index + glyphTick + seed) % 4 === 0 ? glyph : (fromChar || glyph));
         continue;
       }
 
-      if (local < 0.8 && toChar && !/\s/.test(toChar) && !targetIsPunctuation) {
-        const pulse = Math.floor((progress + index * 0.011 + seed * 0.017) * 10) % 3;
-        output.push(pulse === 0 ? glyphs[charSeed] : toChar);
+      if (local < 0.66) {
+        output.push(glyph);
+        continue;
+      }
+
+      if (local < 0.88 && toChar && !/\s/.test(toChar) && !targetIsPunctuation) {
+        output.push((index + glyphTick + seed) % 5 === 0 ? glyph : toChar);
         continue;
       }
 
@@ -1496,16 +1509,13 @@
   }
 
   function easeLanguageProgress(value) {
-    const safeValue = Math.min(Math.max(value, 0), 1);
-    return safeValue < 0.5
-      ? 4 * safeValue * safeValue * safeValue
-      : 1 - Math.pow(-2 * safeValue + 2, 3) / 2;
+    return Math.min(Math.max(value, 0), 1);
   }
 
   function morphVisibleLanguageText(lang, targets, onComplete) {
     const cleanLang = sanitizeLang(lang);
     const started = performance.now();
-    const duration = 1720;
+    const duration = LANGUAGE_MORPH_DURATION;
 
     targets.forEach(({ element }) => {
       element.classList.add("language-morphing-text");
