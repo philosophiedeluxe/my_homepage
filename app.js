@@ -1177,6 +1177,7 @@
   let lastHeroFrame = "";
   let languageTransformReady = false;
   let languageTransformTimer = null;
+  let languageTransformFrame = null;
   const shouldRunPortfolioBoot = (() => {
     if (reduceMotion.matches) return false;
     try {
@@ -1342,17 +1343,49 @@
     }
   }
 
-  function playLanguageTransform(fromLang, toLang) {
-    if (reduceMotion.matches || fromLang === toLang) {
-      applyTranslations(toLang);
-      refreshAccentReflections(toLang);
+  function stripLanguageMarkup(value) {
+    const container = document.createElement("div");
+    container.innerHTML = String(value || "");
+    return container.textContent || "";
+  }
+
+  function completeLanguageTransform(signal, toLang, onComplete) {
+    applyTranslations(toLang);
+    refreshAccentReflections(toLang);
+    root.classList.remove("language-transform-active");
+    signal?.classList.add("is-fading");
+    languageTransformTimer = window.setTimeout(() => {
+      signal?.remove();
+    }, 260);
+    if (typeof onComplete === "function") onComplete(toLang);
+  }
+
+  function playLanguageTransform(fromLang, toLang, onComplete) {
+    const cleanFromLang = sanitizeLang(fromLang);
+    const cleanToLang = sanitizeLang(toLang);
+
+    if (reduceMotion.matches || cleanFromLang === cleanToLang) {
+      applyTranslations(cleanToLang);
+      refreshAccentReflections(cleanToLang);
+      if (typeof onComplete === "function") onComplete(cleanToLang);
       return;
     }
-    const fromMeta = LANG_META[sanitizeLang(fromLang)] || LANG_META[DEFAULT_LANG];
-    const toMeta = LANG_META[sanitizeLang(toLang)] || LANG_META[DEFAULT_LANG];
+
+    if (languageTransformFrame) {
+      window.cancelAnimationFrame(languageTransformFrame);
+      languageTransformFrame = null;
+    }
+    if (languageTransformTimer) {
+      window.clearTimeout(languageTransformTimer);
+      languageTransformTimer = null;
+    }
+
     const existing = document.querySelector("[data-language-transform]");
     if (existing) existing.remove();
-    if (languageTransformTimer) window.clearTimeout(languageTransformTimer);
+
+    const targets = visibleLanguageTargets(cleanFromLang, cleanToLang);
+    const fromMeta = LANG_META[cleanFromLang] || LANG_META[DEFAULT_LANG];
+    const toMeta = LANG_META[cleanToLang] || LANG_META[DEFAULT_LANG];
 
     const signal = document.createElement("div");
     signal.className = "language-transform-signal";
@@ -1363,27 +1396,27 @@
       <b>${fromMeta.short} <i></i> ${toMeta.short}</b>
       <em>${toMeta.nativeName}</em>
     `;
+
     document.body.appendChild(signal);
     root.classList.add("language-transform-active");
-    applyTranslations(toLang, { deferText: true });
-    morphVisibleLanguageText(toLang);
+
+    morphVisibleLanguageText(cleanToLang, targets, () => {
+      completeLanguageTransform(signal, cleanToLang, onComplete);
+    });
+
     if (typeof emitPortfolioCursorCode === "function") {
       emitPortfolioCursorCode(`L:${toMeta.short}`, 900, "is-dev-lang-code");
     }
-
-    languageTransformTimer = window.setTimeout(() => {
-      root.classList.remove("language-transform-active");
-      signal.classList.add("is-fading");
-      window.setTimeout(() => signal.remove(), 260);
-    }, 1120);
   }
 
-  function visibleLanguageTargets(lang) {
-    const dict = translations[lang] || translations[DEFAULT_LANG];
+  function visibleLanguageTargets(fromLang, toLang) {
+    const fromDict = translations[fromLang] || translations[DEFAULT_LANG];
+    const toDict = translations[toLang] || translations[DEFAULT_LANG];
     const selectors = [
       "[data-i18n]",
       "[data-i18n-rich]"
     ];
+
     return [...document.querySelectorAll(selectors.join(","))]
       .filter((element) => {
         if (element.closest(".print-resume-document")) return false;
@@ -1394,35 +1427,72 @@
         const rect = element.getBoundingClientRect();
         return rect.width > 0 && rect.height > 0 && rect.bottom >= 0 && rect.top <= window.innerHeight;
       })
-      .slice(0, 34)
+      .slice(0, 42)
       .map((element, index) => {
         const isRich = Boolean(element.dataset.i18nRich);
         const key = isRich ? element.dataset.i18nRich : element.dataset.i18n;
-        return { element, key, isRich, target: dict[key], delay: Math.min(index * 24, 340) };
+        const sourceValue = isRich ? stripLanguageMarkup(fromDict[key]) : fromDict[key];
+        const targetValue = toDict[key];
+        const source = String(sourceValue || element.textContent || "");
+        const target = String(isRich ? stripLanguageMarkup(targetValue) : targetValue || "");
+        return {
+          element,
+          key,
+          isRich,
+          targetMarkup: targetValue,
+          source,
+          target,
+          delay: Math.min(index * 18, 270)
+        };
       })
-      .filter((entry) => entry.target);
+      .filter((entry) => entry.target && entry.source !== entry.target);
   }
 
-  function scrambleText(target, progress, seed = 0) {
-    const glyphs = "01/_-<>ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    const chars = [...String(target)];
-    const plainLength = chars.filter((char) => !/\s/.test(char)).length || 1;
-    let glyphIndex = 0;
-    return [...String(target)].map((char, index) => {
-      if (/\s/.test(char)) return char;
-      const reveal = glyphIndex++ / plainLength;
-      const windowSize = 0.1;
-      const shouldScramble = progress >= reveal - windowSize && progress <= reveal + 0.22;
-      if (!shouldScramble || progress > reveal + 0.18) return char;
-      if (/[.,:;!?·()&]/.test(char)) return char;
-      return glyphs[(index * 5 + seed + Math.floor(progress * 38)) % glyphs.length];
-    }).join("");
+  function transformLanguageText(source, target, progress, seed = 0) {
+    const glyphs = "01/_-<>[]{}#$%&ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const sourceChars = [...String(source || "")];
+    const targetChars = [...String(target || "")];
+    const length = Math.max(sourceChars.length, targetChars.length, 1);
+    const output = [];
+
+    for (let index = 0; index < length; index += 1) {
+      const fromChar = sourceChars[index] || "";
+      const toChar = targetChars[index] || "";
+      const reveal = index / Math.max(length - 1, 1);
+      const local = Math.min(Math.max((progress - reveal * 0.34 - 0.1) / 0.56, 0), 1);
+      const charSeed = (index * 11 + seed * 17 + Math.floor(progress * 44)) % glyphs.length;
+
+      if (local <= 0.08) {
+        output.push(fromChar || toChar);
+        continue;
+      }
+
+      if (local < 0.76) {
+        if (/\s/.test(fromChar) && /\s/.test(toChar || fromChar)) {
+          output.push(" ");
+        } else if (/[.,:;!?·()&/|]/.test(toChar) && local > 0.52) {
+          output.push(toChar);
+        } else {
+          output.push(glyphs[charSeed]);
+        }
+        continue;
+      }
+
+      if (local < 0.92 && toChar && !/\s/.test(toChar) && !/[.,:;!?·()&/|]/.test(toChar)) {
+        output.push(glyphs[charSeed]);
+        continue;
+      }
+
+      output.push(toChar);
+    }
+
+    return output.join("").replace(/[ 	]{2,}/g, " ").trimEnd();
   }
 
-  function morphVisibleLanguageText(lang) {
-    const targets = visibleLanguageTargets(lang);
+  function morphVisibleLanguageText(lang, targets, onComplete) {
+    const cleanLang = sanitizeLang(lang);
     const started = performance.now();
-    const duration = 720;
+    const duration = 880;
 
     targets.forEach(({ element }) => {
       element.classList.add("language-morphing-text");
@@ -1435,32 +1505,29 @@
       targets.forEach((entry, index) => {
         const local = Math.min(Math.max((elapsed - entry.delay) / duration, 0), 1);
         if (local < 1) done = false;
-        if (entry.isRich) {
-          if (local < 0.62) {
-            entry.element.textContent = scrambleText(entry.target.replace(/<[^>]+>/g, ""), local, index);
-          } else {
-            entry.element.innerHTML = entry.target;
-          }
+
+        if (local < 0.98) {
+          entry.element.textContent = transformLanguageText(entry.source, entry.target, local, index);
+        } else if (entry.isRich) {
+          entry.element.innerHTML = entry.targetMarkup;
         } else {
-          entry.element.textContent = local < 0.96
-            ? scrambleText(entry.target, local, index)
-            : entry.target;
+          entry.element.textContent = entry.target;
         }
       });
 
       if (!done) {
-        window.requestAnimationFrame(frame);
+        languageTransformFrame = window.requestAnimationFrame(frame);
         return;
       }
 
-      applyTranslations(lang);
-      refreshAccentReflections(lang);
       targets.forEach(({ element }) => {
         element.classList.remove("language-morphing-text");
       });
+      languageTransformFrame = null;
+      if (typeof onComplete === "function") onComplete(cleanLang);
     }
 
-    window.requestAnimationFrame(frame);
+    languageTransformFrame = window.requestAnimationFrame(frame);
   }
 
   function refreshAccentReflections(lang) {
@@ -1479,16 +1546,23 @@
     const nextLang = sanitizeLang(lang);
     const previousLang = sanitizeLang(document.documentElement.dataset.lang || DEFAULT_LANG);
     const shouldAnimateLanguage = languageTransformReady && nextLang !== previousLang;
+
+    const finishLanguageChange = (finishedLang) => {
+      const cleanFinishedLang = sanitizeLang(finishedLang);
+      if (updateUrl) updateLangUrl(cleanFinishedLang);
+      document.dispatchEvent(new CustomEvent("pk:lang-change", { detail: { lang: cleanFinishedLang } }));
+    };
+
     storeLang(nextLang);
     if (shouldAnimateLanguage) {
-      playLanguageTransform(previousLang, nextLang);
+      playLanguageTransform(previousLang, nextLang, finishLanguageChange);
     } else {
       applyTranslations(nextLang);
       refreshAccentReflections(nextLang);
+      finishLanguageChange(nextLang);
     }
-    if (updateUrl) updateLangUrl(nextLang);
+
     languageTransformReady = true;
-    document.dispatchEvent(new CustomEvent("pk:lang-change", { detail: { lang: nextLang } }));
   }
 
   function localizedPageHref(path, lang = document.documentElement.dataset.lang || DEFAULT_LANG) {
