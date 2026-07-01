@@ -7645,13 +7645,15 @@ html[data-lang="ja"] .language-toggle .is-ja::after {
 
 .language-transform-signal {
   position: fixed;
-  left: max(20px, calc((100vw - var(--max-width, 1180px)) / 2));
-  top: calc(var(--nav-h) + 18px);
+  left: auto;
+  right: clamp(18px, 3.8vw, 42px);
+  top: auto;
+  bottom: 22px;
   z-index: 220;
-  width: min(320px, calc(100vw - 32px));
+  width: min(236px, calc(100vw - 32px));
   display: grid;
-  gap: 7px;
-  padding: 13px 15px 14px;
+  gap: 5px;
+  padding: 10px 11px 11px;
   border: 1px solid rgba(98, 214, 208, 0.48);
   border-radius: var(--radius);
   color: var(--text);
@@ -7704,21 +7706,26 @@ html[data-lang="ja"] .language-toggle .is-ja::after {
 
 .language-transform-signal span {
   color: var(--accent-2);
-  font-size: 0.62rem;
-  letter-spacing: 0.13em;
+  font-size: 0.55rem;
+  letter-spacing: 0.12em;
+  line-height: 1.1;
 }
 
 .language-transform-signal b {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto minmax(22px, 1fr) auto;
   align-items: center;
-  gap: 9px;
+  gap: 7px;
   color: var(--language-switch-accent, #f0a83a);
-  font-size: 1rem;
+  font-size: 0.82rem;
   letter-spacing: 0.08em;
+  line-height: 1.15;
 }
 
 .language-transform-signal b i {
-  width: 42px;
+  width: 100%;
+  min-width: 22px;
+  max-width: 34px;
   height: 2px;
   border-radius: 999px;
   background: linear-gradient(90deg, var(--accent-3), var(--accent-2), var(--language-switch-accent, #f0a83a));
@@ -7728,8 +7735,9 @@ html[data-lang="ja"] .language-toggle .is-ja::after {
 .language-transform-signal em {
   color: rgba(244, 241, 234, 0.72);
   font-style: normal;
-  font-size: 0.68rem;
-  letter-spacing: 0.08em;
+  font-size: 0.58rem;
+  letter-spacing: 0.075em;
+  line-height: 1.25;
 }
 
 .language-transform-signal.is-fading {
@@ -7821,11 +7829,11 @@ html.language-transform-active .language-toggle__current {
 
 @media (max-width: 680px) {
   .language-transform-signal {
-    left: 16px;
+    left: auto;
     right: 16px;
     top: auto;
     bottom: 18px;
-    width: auto;
+    width: min(230px, calc(100vw - 32px));
   }
 }
 

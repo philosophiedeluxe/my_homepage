@@ -1389,6 +1389,8 @@
         if (element.closest(".print-resume-document")) return false;
         if (element.closest(".language-toggle")) return false;
         if (element.closest("[data-language-transform]")) return false;
+        if (element.closest("[data-language-static]")) return false;
+        if (element.closest(".tech-stream, .tech-stream__track, .tech-stream__group")) return false;
         const rect = element.getBoundingClientRect();
         return rect.width > 0 && rect.height > 0 && rect.bottom >= 0 && rect.top <= window.innerHeight;
       })
@@ -2585,8 +2587,8 @@
 
   function setupHeroAvatarEgg() {
     const avatarSources = {
-      src: "./image/iconic-avatar.jpg?v=20260701-langmorph2",
-      srcset: "./image/iconic-avatar-720.jpg?v=20260701-langmorph2 720w, ./image/iconic-avatar-960.jpg?v=20260701-langmorph2 960w, ./image/iconic-avatar.jpg?v=20260701-langmorph2 1122w",
+      src: "./image/iconic-avatar.jpg?v=20260701-langmorph3",
+      srcset: "./image/iconic-avatar-720.jpg?v=20260701-langmorph3 720w, ./image/iconic-avatar-960.jpg?v=20260701-langmorph3 960w, ./image/iconic-avatar.jpg?v=20260701-langmorph3 1122w",
       alt: "Stilisiertes Hero-Portrait mit Iconic Avatar"
     };
 
