@@ -2488,6 +2488,10 @@ html.iconic-avatar-active .hero-visual::after,
   text-transform: uppercase;
 }
 
+.project-card h3 + p {
+  min-height: 6.1em;
+}
+
 .project-kicker {
   margin-bottom: 22px;
   color: var(--accent-2);
@@ -2790,13 +2794,21 @@ main > .section.interior-hero::before {
   grid-template-columns: 190px minmax(0, 1fr);
   gap: 28px;
   padding: 24px;
-  transition: transform 260ms var(--ease-out), border-color 220ms ease, background 220ms ease;
+  cursor: pointer;
+  transition: transform 260ms var(--ease-out), border-color 220ms ease, background 220ms ease, box-shadow 220ms ease;
 }
 
-.timeline-item:hover {
+.timeline-item:hover,
+.timeline-item:focus-visible,
+.timeline-item.is-expanded {
   transform: translateX(6px);
   border-color: rgba(98, 214, 208, 0.4);
   background: rgba(25, 30, 38, 0.94);
+}
+
+.timeline-item:focus-visible {
+  outline: 0;
+  box-shadow: 0 0 0 1px rgba(98, 214, 208, 0.32), 0 0 36px rgba(98, 214, 208, 0.1);
 }
 
 .timeline-item time {
@@ -2807,6 +2819,67 @@ main > .section.interior-hero::before {
   letter-spacing: 0.08em;
   line-height: 1.4;
   text-transform: uppercase;
+}
+
+.timeline-item__log {
+  display: grid;
+  gap: 5px;
+  max-height: 0;
+  margin-top: 0;
+  overflow: hidden;
+  border: 1px solid rgba(98, 214, 208, 0);
+  border-radius: 8px;
+  color: rgba(244, 241, 234, 0.68);
+  background: rgba(9, 11, 15, 0.46);
+  font-family: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  line-height: 1.45;
+  opacity: 0;
+  transform: translate3d(0, -6px, 0);
+  transition:
+    max-height 340ms var(--ease-out),
+    margin-top 260ms ease,
+    padding 260ms ease,
+    border-color 220ms ease,
+    opacity 220ms ease,
+    transform 260ms var(--ease-out);
+}
+
+.timeline-item__log span {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.timeline-item.is-expanded .timeline-item__log,
+.timeline-item.is-playing .timeline-item__log {
+  max-height: 190px;
+  margin-top: 16px;
+  padding: 12px;
+  border-color: rgba(98, 214, 208, 0.2);
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.timeline-item.is-expanded .timeline-item__log span,
+.timeline-item.is-playing .timeline-item__log span {
+  animation: sim-line-type 760ms steps(34, end) both;
+}
+
+.timeline-item.is-expanded .timeline-item__log span:nth-child(2),
+.timeline-item.is-playing .timeline-item__log span:nth-child(2) {
+  animation-delay: 110ms;
+}
+
+.timeline-item.is-expanded .timeline-item__log span:nth-child(3),
+.timeline-item.is-playing .timeline-item__log span:nth-child(3) {
+  animation-delay: 220ms;
+}
+
+.timeline-item.is-expanded .timeline-item__log span:nth-child(4),
+.timeline-item.is-playing .timeline-item__log span:nth-child(4) {
+  animation-delay: 330ms;
 }
 
 .credential-list {
@@ -4921,6 +4994,10 @@ html.recruiter-mode-active .profile-grid article {
     min-height: 470px;
   }
 
+  .project-card h3 + p {
+    min-height: 0;
+  }
+
   .stack-console {
     margin-inline: 0;
   }
@@ -5136,6 +5213,10 @@ html.recruiter-mode-active .profile-grid article {
     min-height: 0;
   }
 
+  .project-card h3 + p {
+    min-height: 0;
+  }
+
   .project-card__visual {
     height: 150px;
   }
@@ -5156,6 +5237,10 @@ html.recruiter-mode-active .profile-grid article {
   .timeline-item {
     grid-template-columns: 1fr;
     gap: 10px;
+  }
+
+  .timeline-item__log span {
+    white-space: normal;
   }
 
   .credential-proof-grid {
@@ -5489,6 +5574,7 @@ html.recruiter-mode-active .profile-grid article {
   .first-time-guide,
   .trace-entry,
   .timeline-playback,
+  .timeline-item__log,
   .skill-graph,
   .footer,
   .cookie-consent,

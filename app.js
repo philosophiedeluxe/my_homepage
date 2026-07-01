@@ -387,14 +387,34 @@
       "vita.timeline.title": "Beruflicher <span class=\"accent-word\">Verlauf</span>",
       "vita.job1.title": "Softwareentwickler - Pragmatis GmbH",
       "vita.job1.text": "Neufahrn bei Freising. Entwicklung mit Oracle APEX, PL/SQL, JavaScript, HTML, CSS, REST Data Sources, RESTful Services und Oracle DB.",
+      "vita.job1.log1": "> connect oracle_runtime",
+      "vita.job1.log2": "[ok] APEX, PL/SQL und REST nicht nur gelesen, sondern im Alltag verdrahtet",
+      "vita.job1.log3": "[ok] gelernt: Gute Business-Software ist selten laut, aber sehr nützlich",
+      "vita.job1.log4": "[note] Kaffee hilft. Saubere Validierungen helfen mehr.",
       "vita.job2.title": "Praktikum Softwareentwicklung - Europa Möbel-Verbund",
       "vita.job2.text": "Praxis mit Java, SQL, Datenbanken, Git, Kanban, Confluence, Jira, Vaadin, MVC, Spring Framework, Spring Boot und UML.",
+      "vita.job2.log1": "> compile first_delivery_stack",
+      "vita.job2.log2": "[ok] Java, SQL, Git und Ticketsysteme aus der Theorie in echte Aufgaben gezogen",
+      "vita.job2.log3": "[ok] verstanden: Code ist nur halb fertig, wenn niemand ihn nachvollziehen kann",
+      "vita.job2.log4": "[note] UML war nicht immer Liebe auf den ersten Blick. Nützlich war es trotzdem.",
       "vita.job3.title": "Ausbildung Fachinformatiker Anwendungsentwicklung - WBS Gruppe",
       "vita.job3.text": "Schwerpunkte: OOP, Software-Entwurfsmuster, Java, SQL, Datenbanken, agile Methoden, DBMS, HTML, CSS und Microsoft SQL Server.",
+      "vita.job3.log1": "> rebuild career_kernel",
+      "vita.job3.log2": "[ok] OOP, Datenbanken, Patterns und agile Methoden als neues Fundament gesetzt",
+      "vita.job3.log3": "[ok] operative Erfahrung mit technischer Sprache verbunden",
+      "vita.job3.log4": "[note] Später Wechsel, aber sehr absichtlich. Kein Patch, eher Major Release.",
       "vita.job4.title": "Purchasing - Munich Airport Marriott Hotel",
       "vita.job4.text": "Purchasing Agent und Purchasing Supervisor mit Verantwortung für Beschaffung, Abstimmung, operative Abläufe und verlässliche Prozesse.",
+      "vita.job4.log1": "> trace process_reality",
+      "vita.job4.log2": "[ok] Lieferketten, Abstimmungen und Prioritäten unter echtem Druck sortiert",
+      "vita.job4.log3": "[ok] gelernt: Ein Prozess ist erst gut, wenn Menschen ihn freiwillig benutzen",
+      "vita.job4.log4": "[note] Excel war damals das Low-Code-Tool. Man tat, was man musste.",
       "vita.job5.title": "Gastronomielaufbahn - Munich Airport Marriott Hotel",
       "vita.job5.text": "Ausbildung zum Koch, Commis de Cuisine, Demi Chef de Partie, Chef de Partie und Food and Beverage Trainee.",
+      "vita.job5.log1": "> load pressure_handling",
+      "vita.job5.log2": "[ok] Timing, Qualität, Kommunikation und Verantwortung im laufenden Betrieb trainiert",
+      "vita.job5.log3": "[ok] Grundlage für pragmatisches Denken: Was nicht funktioniert, merkt man sofort",
+      "vita.job5.log4": "[note] Debugging mit Pfannen war lauter. Die Denkweise blieb erstaunlich ähnlich.",
       "vita.cert.eyebrow": "Zertifikate",
       "vita.cert.title": "Methodik und<br><span class=\"accent-word\">Projektverständnis</span>",
       "vita.cert.oracle": "Oracle APEX Cloud Developer Professional",
@@ -563,14 +583,34 @@
       "vita.timeline.title": "Professional <span class=\"accent-word\">path</span>",
       "vita.job1.title": "Software Developer - Pragmatis GmbH",
       "vita.job1.text": "Neufahrn near Freising. Development with Oracle APEX, PL/SQL, JavaScript, HTML, CSS, REST Data Sources, RESTful Services and Oracle DB.",
+      "vita.job1.log1": "> connect oracle_runtime",
+      "vita.job1.log2": "[ok] APEX, PL/SQL and REST moved from docs into daily delivery",
+      "vita.job1.log3": "[ok] learned: good business software is rarely loud, but very useful",
+      "vita.job1.log4": "[note] Coffee helps. Clean validations help more.",
       "vita.job2.title": "Software Development Internship - Europa Möbel-Verbund",
       "vita.job2.text": "Practice with Java, SQL, databases, Git, Kanban, Confluence, Jira, Vaadin, MVC, Spring Framework, Spring Boot and UML.",
+      "vita.job2.log1": "> compile first_delivery_stack",
+      "vita.job2.log2": "[ok] Java, SQL, Git and ticket systems pulled from theory into real tasks",
+      "vita.job2.log3": "[ok] understood: code is only half done if nobody can follow it",
+      "vita.job2.log4": "[note] UML was not love at first sight. Still useful though.",
       "vita.job3.title": "Apprenticeship IT Specialist for Application Development - WBS Group",
       "vita.job3.text": "Focus areas: OOP, software design patterns, Java, SQL, databases, agile methods, DBMS, HTML, CSS and Microsoft SQL Server.",
+      "vita.job3.log1": "> rebuild career_kernel",
+      "vita.job3.log2": "[ok] OOP, databases, patterns and agile methods installed as a new foundation",
+      "vita.job3.log3": "[ok] connected operational experience with technical language",
+      "vita.job3.log4": "[note] Late switch, very intentional. Less patch, more major release.",
       "vita.job4.title": "Purchasing - Munich Airport Marriott Hotel",
       "vita.job4.text": "Purchasing Agent and Purchasing Supervisor with responsibility for procurement, coordination, operations and reliable processes.",
+      "vita.job4.log1": "> trace process_reality",
+      "vita.job4.log2": "[ok] supply chains, coordination and priorities sorted under real pressure",
+      "vita.job4.log3": "[ok] learned: a process is good when people use it voluntarily",
+      "vita.job4.log4": "[note] Excel was the low-code tool back then. We did what we had to do.",
       "vita.job5.title": "Culinary career - Munich Airport Marriott Hotel",
       "vita.job5.text": "Apprenticeship as cook, Commis de Cuisine, Demi Chef de Partie, Chef de Partie and Food and Beverage Trainee.",
+      "vita.job5.log1": "> load pressure_handling",
+      "vita.job5.log2": "[ok] timing, quality, communication and ownership trained in live operations",
+      "vita.job5.log3": "[ok] foundation for pragmatic thinking: if it fails, you notice immediately",
+      "vita.job5.log4": "[note] Debugging with pans was louder. The thinking stayed surprisingly similar.",
       "vita.cert.eyebrow": "Certificates",
       "vita.cert.title": "Methods and<br><span class=\"accent-word\">project understanding</span>",
       "vita.cert.oracle": "Oracle APEX Cloud Developer Professional",
@@ -731,14 +771,34 @@
       "vita.timeline.title": "職務<span class=\"accent-word\">経歴</span>",
       "vita.job1.title": "ソフトウェア開発者 - Pragmatis GmbH",
       "vita.job1.text": "Neufahrn bei Freising。Oracle APEX、PL/SQL、JavaScript、HTML、CSS、REST Data Sources、RESTful Services、Oracle DBによる開発。",
+      "vita.job1.log1": "> connect oracle_runtime",
+      "vita.job1.log2": "[ok] APEX、PL/SQL、RESTを日々のDeliveryで接続",
+      "vita.job1.log3": "[ok] 良いBusiness Softwareは派手ではないが、かなり役に立つ",
+      "vita.job1.log4": "[note] コーヒーは助けになる。きれいなValidationはもっと助けになる。",
       "vita.job2.title": "ソフトウェア開発インターン - Europa Möbel-Verbund",
       "vita.job2.text": "Java、SQL、データベース、Git、Kanban、Confluence、Jira、Vaadin、MVC、Spring Framework、Spring Boot、UMLの実務経験。",
+      "vita.job2.log1": "> compile first_delivery_stack",
+      "vita.job2.log2": "[ok] Java、SQL、Git、Ticket Systemを実務タスクで使用",
+      "vita.job2.log3": "[ok] 誰も追えないCodeは、まだ半分しか終わっていない",
+      "vita.job2.log4": "[note] UMLは一目惚れではなかった。でも役には立った。",
       "vita.job3.title": "アプリケーション開発 Fachinformatiker 職業訓練 - WBS Gruppe",
       "vita.job3.text": "重点領域：OOP、ソフトウェア設計パターン、Java、SQL、データベース、アジャイル手法、DBMS、HTML、CSS、Microsoft SQL Server。",
+      "vita.job3.log1": "> rebuild career_kernel",
+      "vita.job3.log2": "[ok] OOP、Database、Pattern、Agile Methodを新しい土台として構築",
+      "vita.job3.log3": "[ok] 現場経験を技術の言葉に接続",
+      "vita.job3.log4": "[note] 遅めの転換。でも意図的。PatchというよりMajor Release。",
       "vita.job4.title": "購買 - Munich Airport Marriott Hotel",
       "vita.job4.text": "Purchasing AgentおよびPurchasing Supervisorとして、調達、調整、運用フロー、信頼できるプロセスを担当。",
+      "vita.job4.log1": "> trace process_reality",
+      "vita.job4.log2": "[ok] Supply Chain、調整、優先順位を実際のプレッシャー下で整理",
+      "vita.job4.log3": "[ok] 良いProcessとは、人が自分から使うもの",
+      "vita.job4.log4": "[note] 当時のLow-Code ToolはExcel。必要なことをやった。",
       "vita.job5.title": "飲食業でのキャリア - Munich Airport Marriott Hotel",
       "vita.job5.text": "調理師見習い、Commis de Cuisine、Demi Chef de Partie、Chef de Partie、Food and Beverage Trainee。",
+      "vita.job5.log1": "> load pressure_handling",
+      "vita.job5.log2": "[ok] Timing、Quality、Communication、Ownershipを現場運用で訓練",
+      "vita.job5.log3": "[ok] 実用的に考える土台：動かなければすぐ分かる",
+      "vita.job5.log4": "[note] フライパンでのDebuggingはもっと騒がしかった。考え方は意外と近い。",
       "vita.cert.eyebrow": "認定資格",
       "vita.cert.title": "方法論と<br><span class=\"accent-word\">プロジェクト理解</span>",
       "vita.cert.oracle": "Oracle APEX Cloud Developer Professional",
@@ -3127,6 +3187,28 @@ shortcut: ctrl + alt + d</pre>
       });
     }
 
+    function setTimelineItemExpanded(item, expanded) {
+      item.classList.toggle("is-expanded", expanded);
+      item.setAttribute("aria-expanded", expanded ? "true" : "false");
+      item.querySelector(".timeline-item__log")?.setAttribute("aria-hidden", expanded ? "false" : "true");
+    }
+
+    function setupTimelineCards() {
+      document.querySelectorAll(".timeline-item").forEach((item) => {
+        item.querySelector(".timeline-item__log")?.setAttribute("aria-hidden", "true");
+        item.addEventListener("click", () => {
+          setTimelineItemExpanded(item, !item.classList.contains("is-expanded"));
+          emitPortfolioCursorCode("LOG", 850, "is-signal-code");
+        });
+        item.addEventListener("keydown", (event) => {
+          if (event.key !== "Enter" && event.key !== " ") return;
+          event.preventDefault();
+          setTimelineItemExpanded(item, !item.classList.contains("is-expanded"));
+          emitPortfolioCursorCode("LOG", 850, "is-signal-code");
+        });
+      });
+    }
+
     function runVitaPlayback() {
       const items = Array.from(document.querySelectorAll(".timeline-item"));
       if (!items.length) return;
@@ -3142,6 +3224,7 @@ shortcut: ctrl + alt + d</pre>
         window.setTimeout(() => {
           items.forEach((entry) => entry.classList.remove("is-playing"));
           item.classList.add("is-playing");
+          setTimelineItemExpanded(item, true);
           const time = item.querySelector("time")?.textContent?.trim() || `step ${index + 1}`;
           const title = item.querySelector("h3")?.textContent?.trim() || "experience node";
           output.textContent += `> ${time} :: ${title}\n`;
@@ -3224,6 +3307,7 @@ shortcut: ctrl + alt + d</pre>
     });
 
     setupSkillGraph();
+    setupTimelineCards();
   }
 
   function setupEasterEggs() {
@@ -3858,3 +3942,4 @@ shortcut: ctrl + alt + d</pre>
   setupScrollReveals();
   openCookieBanner();
 })();
+
