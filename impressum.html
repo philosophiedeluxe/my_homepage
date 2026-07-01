@@ -9,14 +9,14 @@
   <link rel="canonical" href="https://philosophiedeluxe.github.io/my_homepage/impressum.html">
   <meta name="theme-color" content="#101114">
   <link rel="icon" type="image/gif" href="./image/iconstar.gif">
-  <link rel="stylesheet" href="./style.css?v=20260701-es1">
-  <script defer src="./app.js?v=20260701-es1"></script>
+  <link rel="stylesheet" href="./style.css?v=20260701-langmenu1">
+  <script defer src="./app.js?v=20260701-langmenu1"></script>
 </head>
 <body class="interior-page legal-site-page">
   <header class="site-shell">
     <nav class="nav" aria-label="Hauptnavigation">
       <a class="brand" href="./index.html">
-        <span class="brand-mark" aria-hidden="true"><img src="./image/profile-avatar.jpg?v=20260701-es1" alt=""></span>
+        <span class="brand-mark" aria-hidden="true"><img src="./image/profile-avatar.jpg?v=20260701-langmenu1" alt=""></span>
         <span>Phil Kirchner</span>
       </a>
       <button class="nav-toggle" type="button" aria-controls="primary-nav" aria-expanded="false" aria-label="Menü öffnen">
@@ -33,11 +33,14 @@
         <li><a href="./impressum.html" data-i18n="nav.imprint" aria-current="page">Impressum</a></li>
         <li><a href="./datenschutz.html" data-i18n="nav.privacy">Datenschutz</a></li>
         <li>
-          <div class="language-toggle" id="lang-toggle" role="group" aria-label="Sprache auswählen" data-current-lang="de">
-            <button class="language-toggle__option is-de" type="button" data-lang-option="de" aria-pressed="true">DE</button>
-            <button class="language-toggle__option is-en" type="button" data-lang-option="en" aria-pressed="false">EN</button>
-            <button class="language-toggle__option is-es" type="button" data-lang-option="es" aria-pressed="false">ES</button>
-            <button class="language-toggle__option is-ja" type="button" data-lang-option="ja" aria-pressed="false">JP</button>
+          <div class="language-toggle" id="lang-toggle" role="group" aria-label="Sprache auswählen" data-current-lang="de" tabindex="0">
+            <span class="language-toggle__current" data-lang-current aria-hidden="true">DE</span>
+            <div class="language-toggle__menu">
+              <button class="language-toggle__option is-de" type="button" data-lang-option="de" aria-pressed="true">DE</button>
+              <button class="language-toggle__option is-en" type="button" data-lang-option="en" aria-pressed="false">EN</button>
+              <button class="language-toggle__option is-es" type="button" data-lang-option="es" aria-pressed="false">ES</button>
+              <button class="language-toggle__option is-ja" type="button" data-lang-option="ja" aria-pressed="false">JP</button>
+            </div>
           </div>
         </li>
       </ul>

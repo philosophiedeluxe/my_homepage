@@ -1282,6 +1282,8 @@
       "aria-label",
       `${currentMeta.switchLabel}. ${currentMeta.currentLabel}: ${currentMeta.nativeName}.`
     );
+    const currentDisplay = langToggle.querySelector("[data-lang-current]");
+    if (currentDisplay) currentDisplay.textContent = currentMeta.short;
 
     langToggle.querySelectorAll("[data-lang-option]").forEach((option) => {
       const optionLang = sanitizeLang(option.dataset.langOption);
@@ -2448,8 +2450,8 @@
 
   function setupHeroAvatarEgg() {
     const avatarSources = {
-      src: "./image/iconic-avatar.jpg?v=20260701-es1",
-      srcset: "./image/iconic-avatar-720.jpg?v=20260701-es1 720w, ./image/iconic-avatar-960.jpg?v=20260701-es1 960w, ./image/iconic-avatar.jpg?v=20260701-es1 1122w",
+      src: "./image/iconic-avatar.jpg?v=20260701-langmenu1",
+      srcset: "./image/iconic-avatar-720.jpg?v=20260701-langmenu1 720w, ./image/iconic-avatar-960.jpg?v=20260701-langmenu1 960w, ./image/iconic-avatar.jpg?v=20260701-langmenu1 1122w",
       alt: "Stilisiertes Hero-Portrait mit Iconic Avatar"
     };
 
