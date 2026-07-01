@@ -1178,7 +1178,7 @@
   let languageTransformReady = false;
   let languageTransformTimer = null;
   let languageTransformFrame = null;
-  const LANGUAGE_MORPH_DURATION = 2680;
+  const LANGUAGE_MORPH_DURATION = 2140;
   const LANGUAGE_MORPH_ELEMENT_STAGGER = 10;
   const LANGUAGE_MORPH_MAX_DELAY = 160;
   const shouldRunPortfolioBoot = (() => {
@@ -1464,8 +1464,8 @@
       const fromChar = sourceChars[index] || "";
       const toChar = targetChars[index] || "";
       const position = length <= 1 ? 0 : index / (length - 1);
-      const charStart = 0.015 + position * 0.38;
-      const charDuration = 0.56;
+      const charStart = 0.01 + position * 0.34;
+      const charDuration = 0.58;
       const local = Math.min(Math.max((safeProgress - charStart) / charDuration, 0), 1);
       const targetIsPunctuation = /[.,:;!?·()&/|]/.test(toChar);
       const sourceIsSpace = /\s/.test(fromChar);
@@ -1482,22 +1482,22 @@
         continue;
       }
 
-      if (targetIsPunctuation && local > 0.62) {
+      if (targetIsPunctuation && local > 0.54) {
         output.push(toChar);
         continue;
       }
 
-      if (local < 0.28) {
+      if (local < 0.24) {
         output.push((index + glyphTick + seed) % 4 === 0 ? glyph : (fromChar || glyph));
         continue;
       }
 
-      if (local < 0.66) {
+      if (local < 0.56) {
         output.push(glyph);
         continue;
       }
 
-      if (local < 0.88 && toChar && !/\s/.test(toChar) && !targetIsPunctuation) {
+      if (local < 0.78 && toChar && !/\s/.test(toChar) && !targetIsPunctuation) {
         output.push((index + glyphTick + seed) % 5 === 0 ? glyph : toChar);
         continue;
       }
@@ -1530,7 +1530,7 @@
         const local = easeLanguageProgress(rawLocal);
         if (local < 1) done = false;
 
-        if (local < 0.98) {
+        if (local < 0.92) {
           entry.element.textContent = transformLanguageText(entry.source, entry.target, local, index);
         } else if (entry.isRich) {
           entry.element.innerHTML = entry.targetMarkup;
