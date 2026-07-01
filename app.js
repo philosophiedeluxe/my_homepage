@@ -1310,20 +1310,22 @@
     return open ? dict.close : dict.open;
   }
 
-  function applyTranslations(lang) {
+  function applyTranslations(lang, options = {}) {
     const dict = translations[lang] || translations[DEFAULT_LANG];
     document.documentElement.lang = lang;
     document.documentElement.dataset.lang = lang;
 
-    document.querySelectorAll("[data-i18n]").forEach((element) => {
-      const key = element.dataset.i18n;
-      if (dict[key]) element.textContent = dict[key];
-    });
+    if (!options.deferText) {
+      document.querySelectorAll("[data-i18n]").forEach((element) => {
+        const key = element.dataset.i18n;
+        if (dict[key]) element.textContent = dict[key];
+      });
 
-    document.querySelectorAll("[data-i18n-rich]").forEach((element) => {
-      const key = element.dataset.i18nRich;
-      if (dict[key]) element.innerHTML = dict[key];
-    });
+      document.querySelectorAll("[data-i18n-rich]").forEach((element) => {
+        const key = element.dataset.i18nRich;
+        if (dict[key]) element.innerHTML = dict[key];
+      });
+    }
 
     document.querySelectorAll("[data-i18n-attr]").forEach((element) => {
       const mappings = element.dataset.i18nAttr.split(",");
@@ -1341,7 +1343,11 @@
   }
 
   function playLanguageTransform(fromLang, toLang) {
-    if (reduceMotion.matches || fromLang === toLang) return;
+    if (reduceMotion.matches || fromLang === toLang) {
+      applyTranslations(toLang);
+      refreshAccentReflections(toLang);
+      return;
+    }
     const fromMeta = LANG_META[sanitizeLang(fromLang)] || LANG_META[DEFAULT_LANG];
     const toMeta = LANG_META[sanitizeLang(toLang)] || LANG_META[DEFAULT_LANG];
     const existing = document.querySelector("[data-language-transform]");
@@ -1359,6 +1365,8 @@
     `;
     document.body.appendChild(signal);
     root.classList.add("language-transform-active");
+    applyTranslations(toLang, { deferText: true });
+    morphVisibleLanguageText(toLang);
     if (typeof emitPortfolioCursorCode === "function") {
       emitPortfolioCursorCode(`L:${toMeta.short}`, 900, "is-dev-lang-code");
     }
@@ -1370,14 +1378,86 @@
     }, 820);
   }
 
-  function setLang(lang, updateUrl = false) {
-    const nextLang = sanitizeLang(lang);
-    const previousLang = sanitizeLang(document.documentElement.dataset.lang || DEFAULT_LANG);
-    const shouldAnimateLanguage = languageTransformReady && nextLang !== previousLang;
-    storeLang(nextLang);
-    applyTranslations(nextLang);
+  function visibleLanguageTargets(lang) {
+    const dict = translations[lang] || translations[DEFAULT_LANG];
+    const selectors = [
+      "[data-i18n]",
+      "[data-i18n-rich]"
+    ];
+    return [...document.querySelectorAll(selectors.join(","))]
+      .filter((element) => {
+        if (element.closest(".print-resume-document")) return false;
+        if (element.closest(".language-toggle")) return false;
+        if (element.closest("[data-language-transform]")) return false;
+        const rect = element.getBoundingClientRect();
+        return rect.width > 0 && rect.height > 0 && rect.bottom >= 0 && rect.top <= window.innerHeight;
+      })
+      .slice(0, 34)
+      .map((element, index) => {
+        const isRich = Boolean(element.dataset.i18nRich);
+        const key = isRich ? element.dataset.i18nRich : element.dataset.i18n;
+        return { element, key, isRich, target: dict[key], delay: Math.min(index * 18, 260) };
+      })
+      .filter((entry) => entry.target);
+  }
+
+  function scrambleText(target, progress, seed = 0) {
+    const glyphs = "01<>/{}[]#$%&ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    return [...String(target)].map((char, index) => {
+      if (/\s/.test(char)) return char;
+      const reveal = index / Math.max(target.length, 1);
+      if (progress > reveal + 0.16) return char;
+      return glyphs[(index * 7 + seed + Math.floor(progress * 28)) % glyphs.length];
+    }).join("");
+  }
+
+  function morphVisibleLanguageText(lang) {
+    const targets = visibleLanguageTargets(lang);
+    const started = performance.now();
+    const duration = 520;
+
+    targets.forEach(({ element }) => {
+      element.classList.add("language-morphing-text");
+    });
+
+    function frame(now) {
+      const elapsed = now - started;
+      let done = true;
+
+      targets.forEach((entry, index) => {
+        const local = Math.min(Math.max((elapsed - entry.delay) / duration, 0), 1);
+        if (local < 1) done = false;
+        if (entry.isRich) {
+          if (local < 0.52) {
+            entry.element.textContent = scrambleText(entry.target.replace(/<[^>]+>/g, ""), local, index);
+          } else {
+            entry.element.innerHTML = entry.target;
+          }
+        } else {
+          entry.element.textContent = local < 0.92
+            ? scrambleText(entry.target, local, index)
+            : entry.target;
+        }
+      });
+
+      if (!done) {
+        window.requestAnimationFrame(frame);
+        return;
+      }
+
+      applyTranslations(lang);
+      refreshAccentReflections(lang);
+      targets.forEach(({ element }) => {
+        element.classList.remove("language-morphing-text");
+      });
+    }
+
+    window.requestAnimationFrame(frame);
+  }
+
+  function refreshAccentReflections(lang) {
     document.querySelectorAll(".accent-word").forEach((word) => {
-      const accentText = word.textContent.trim().toLocaleLowerCase(nextLang);
+      const accentText = word.textContent.trim().toLocaleLowerCase(lang);
       const isSoftware = accentText === "software" || accentText === "ソフトウェア";
       if (isSoftware && (document.body.classList.contains("vita-page") || document.querySelector(".hero"))) {
         word.dataset.reflection = word.textContent;
@@ -1385,8 +1465,20 @@
         delete word.dataset.reflection;
       }
     });
+  }
+
+  function setLang(lang, updateUrl = false) {
+    const nextLang = sanitizeLang(lang);
+    const previousLang = sanitizeLang(document.documentElement.dataset.lang || DEFAULT_LANG);
+    const shouldAnimateLanguage = languageTransformReady && nextLang !== previousLang;
+    storeLang(nextLang);
+    if (shouldAnimateLanguage) {
+      playLanguageTransform(previousLang, nextLang);
+    } else {
+      applyTranslations(nextLang);
+      refreshAccentReflections(nextLang);
+    }
     if (updateUrl) updateLangUrl(nextLang);
-    if (shouldAnimateLanguage) playLanguageTransform(previousLang, nextLang);
     languageTransformReady = true;
     document.dispatchEvent(new CustomEvent("pk:lang-change", { detail: { lang: nextLang } }));
   }
@@ -2487,8 +2579,8 @@
 
   function setupHeroAvatarEgg() {
     const avatarSources = {
-      src: "./image/iconic-avatar.jpg?v=20260701-langtransform1",
-      srcset: "./image/iconic-avatar-720.jpg?v=20260701-langtransform1 720w, ./image/iconic-avatar-960.jpg?v=20260701-langtransform1 960w, ./image/iconic-avatar.jpg?v=20260701-langtransform1 1122w",
+      src: "./image/iconic-avatar.jpg?v=20260701-langmorph1",
+      srcset: "./image/iconic-avatar-720.jpg?v=20260701-langmorph1 720w, ./image/iconic-avatar-960.jpg?v=20260701-langmorph1 960w, ./image/iconic-avatar.jpg?v=20260701-langmorph1 1122w",
       alt: "Stilisiertes Hero-Portrait mit Iconic Avatar"
     };
 
