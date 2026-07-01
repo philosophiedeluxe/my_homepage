@@ -6183,7 +6183,7 @@ html.portfolio-boot-cut body::before {
 }
 
 .portfolio-boot-overlay::after {
-  opacity: 0.22;
+  opacity: 0.16;
   mix-blend-mode: screen;
   background:
     repeating-linear-gradient(0deg, transparent 0 8px, rgba(255, 255, 255, 0.07) 8px 9px),
@@ -7688,7 +7688,7 @@ html[data-lang="ja"] .language-toggle .is-ja::after {
   backdrop-filter: blur(16px);
   pointer-events: none;
   overflow: hidden;
-  animation: language-transform-in 520ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: language-transform-in 720ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .language-transform-signal::before,
@@ -7701,19 +7701,19 @@ html[data-lang="ja"] .language-toggle .is-ja::after {
 
 .language-transform-signal::before {
   background:
-    linear-gradient(90deg, transparent, rgba(98, 214, 208, 0.4), rgba(143, 61, 255, 0.22), transparent);
+    linear-gradient(90deg, transparent, rgba(98, 214, 208, 0.28), rgba(143, 61, 255, 0.16), transparent);
   transform: translateX(-120%);
-  animation: language-transform-scan 920ms ease-out 40ms both;
+  animation: language-transform-scan 1880ms ease-in-out 120ms both;
 }
 
 .language-transform-signal::after {
   background: repeating-linear-gradient(
     180deg,
-    rgba(255, 255, 255, 0.08) 0 1px,
+    rgba(255, 255, 255, 0.055) 0 1px,
     transparent 1px 7px
   );
   mix-blend-mode: screen;
-  opacity: 0.22;
+  opacity: 0.16;
 }
 
 .language-transform-signal span,
@@ -7760,7 +7760,7 @@ html[data-lang="ja"] .language-toggle .is-ja::after {
 }
 
 .language-transform-signal.is-fading {
-  animation: language-transform-out 260ms ease both;
+  animation: language-transform-out 420ms ease both;
 }
 
 html.language-transform-active .language-toggle {
@@ -7773,11 +7773,11 @@ html.language-transform-active .language-toggle {
 }
 
 html.language-transform-active .language-toggle__current {
-  animation: language-current-pop 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: language-current-pop 1500ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .language-morphing-text {
-  animation: language-text-resolve 980ms steps(5, end) both;
+  animation: language-text-resolve 1720ms ease-in-out both;
 }
 
 @keyframes language-transform-in {
@@ -7787,13 +7787,13 @@ html.language-transform-active .language-toggle__current {
     filter: saturate(1.16);
   }
 
-  18% {
+  22% {
     opacity: 1;
-    transform: translate3d(-4px, 0, 0) scale(1.01);
+    transform: translate3d(-2px, 0, 0) scale(1.005);
   }
 
-  44% {
-    transform: translate3d(3px, 0, 0) scale(1);
+  54% {
+    transform: translate3d(1px, 0, 0) scale(1);
   }
 
   100% {
@@ -7845,9 +7845,9 @@ html.language-transform-active .language-toggle__current {
     transform: translateY(0) scale(1);
   }
 
-  36% {
-    transform: translateY(-1px) scale(1.12);
-    text-shadow: 0 0 18px rgba(240, 168, 58, 0.42);
+  42% {
+    transform: translateY(-1px) scale(1.06);
+    text-shadow: 0 0 14px rgba(240, 168, 58, 0.28);
   }
 
   100% {
