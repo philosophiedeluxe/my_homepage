@@ -7574,15 +7574,41 @@ html[data-lang="ja"] .language-toggle .is-ja::after {
     width: 100%;
     max-width: 220px;
     justify-self: start;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 0;
+    padding: 10px;
+  }
+
+  .language-toggle::before {
+    left: 10px;
+    right: 34px;
+    bottom: auto;
+    top: 34px;
+  }
+
+  .language-toggle::after {
+    top: 21px;
+    right: 15px;
+  }
+
+  .language-toggle__current {
+    min-height: 24px;
+    display: inline-flex;
+    align-items: center;
+    padding: 0 28px 0 2px;
   }
 
   .language-toggle__menu {
     position: static;
-    width: 100%;
+    width: auto;
     min-width: 0;
     max-height: 0;
     margin-top: 0;
+    margin-inline: 0;
     padding-block: 0;
+    padding-inline: 7px;
     overflow: hidden;
     opacity: 0;
     visibility: hidden;
@@ -7600,7 +7626,7 @@ html[data-lang="ja"] .language-toggle .is-ja::after {
   .language-toggle:hover .language-toggle__menu,
   .language-toggle:focus-within .language-toggle__menu {
     max-height: 190px;
-    margin-top: 10px;
+    margin-top: 12px;
     padding-block: 7px;
     opacity: 1;
     visibility: visible;
@@ -7610,5 +7636,198 @@ html[data-lang="ja"] .language-toggle .is-ja::after {
 
   .language-toggle__menu::before {
     display: none;
+  }
+
+  .language-toggle__option {
+    min-height: 34px;
+  }
+}
+
+.language-transform-signal {
+  position: fixed;
+  right: clamp(16px, 5vw, 48px);
+  top: calc(var(--nav-h) + 16px);
+  z-index: 220;
+  min-width: min(280px, calc(100vw - 32px));
+  display: grid;
+  gap: 7px;
+  padding: 13px 15px 14px;
+  border: 1px solid rgba(98, 214, 208, 0.48);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-family: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  text-transform: uppercase;
+  background:
+    linear-gradient(135deg, rgba(98, 214, 208, 0.12), rgba(143, 61, 255, 0.08) 52%, rgba(240, 168, 58, 0.08)),
+    rgba(7, 9, 13, 0.92);
+  box-shadow:
+    inset 0 0 0 1px rgba(244, 241, 234, 0.035),
+    0 22px 50px rgba(0, 0, 0, 0.42),
+    0 0 28px rgba(98, 214, 208, 0.12);
+  backdrop-filter: blur(16px);
+  pointer-events: none;
+  overflow: hidden;
+  animation: language-transform-in 820ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.language-transform-signal::before,
+.language-transform-signal::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.language-transform-signal::before {
+  background:
+    linear-gradient(90deg, transparent, rgba(98, 214, 208, 0.4), rgba(143, 61, 255, 0.22), transparent);
+  transform: translateX(-120%);
+  animation: language-transform-scan 620ms ease-out 60ms both;
+}
+
+.language-transform-signal::after {
+  background: repeating-linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.08) 0 1px,
+    transparent 1px 7px
+  );
+  mix-blend-mode: screen;
+  opacity: 0.22;
+}
+
+.language-transform-signal span,
+.language-transform-signal b,
+.language-transform-signal em {
+  position: relative;
+  z-index: 1;
+}
+
+.language-transform-signal span {
+  color: var(--accent-2);
+  font-size: 0.62rem;
+  letter-spacing: 0.13em;
+}
+
+.language-transform-signal b {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--language-switch-accent, #f0a83a);
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+}
+
+.language-transform-signal b i {
+  width: 42px;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--accent-3), var(--accent-2), var(--language-switch-accent, #f0a83a));
+  box-shadow: 0 0 16px rgba(98, 214, 208, 0.3);
+}
+
+.language-transform-signal em {
+  color: rgba(244, 241, 234, 0.72);
+  font-style: normal;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+}
+
+.language-transform-signal.is-fading {
+  animation: language-transform-out 260ms ease both;
+}
+
+html.language-transform-active main,
+html.language-transform-active .site-shell {
+  animation: language-surface-rewrite 760ms steps(2, end) both;
+}
+
+html.language-transform-active .language-toggle__current {
+  animation: language-current-pop 640ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes language-transform-in {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -12px, 0) scale(0.96);
+    filter: saturate(1.4) hue-rotate(-16deg);
+  }
+
+  18% {
+    opacity: 1;
+    transform: translate3d(-5px, 0, 0) scale(1.015);
+  }
+
+  44% {
+    transform: translate3d(4px, 0, 0) scale(1);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    filter: none;
+  }
+}
+
+@keyframes language-transform-out {
+  to {
+    opacity: 0;
+    transform: translate3d(0, -8px, 0) scale(0.98);
+  }
+}
+
+@keyframes language-transform-scan {
+  to {
+    transform: translateX(120%);
+  }
+}
+
+@keyframes language-surface-rewrite {
+  0%, 100% {
+    filter: none;
+    transform: translateZ(0);
+  }
+
+  22% {
+    filter: saturate(1.25) hue-rotate(8deg);
+    transform: translate3d(1px, 0, 0);
+  }
+
+  46% {
+    filter: saturate(1.1) hue-rotate(-8deg);
+    transform: translate3d(-1px, 0, 0);
+  }
+}
+
+@keyframes language-current-pop {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+
+  36% {
+    transform: translateY(-1px) scale(1.12);
+    text-shadow: 0 0 18px rgba(240, 168, 58, 0.42);
+  }
+
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 680px) {
+  .language-transform-signal {
+    left: 16px;
+    right: 16px;
+    top: calc(var(--nav-h) + 12px);
+    min-width: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .language-transform-signal,
+  .language-transform-signal::before,
+  html.language-transform-active main,
+  html.language-transform-active .site-shell,
+  html.language-transform-active .language-toggle__current {
+    animation: none !important;
   }
 }

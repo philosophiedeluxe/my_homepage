@@ -1175,6 +1175,8 @@
   let lastScrolledState = null;
   let heroHeight = hero ? Math.max(hero.offsetHeight, 1) : 1;
   let lastHeroFrame = "";
+  let languageTransformReady = false;
+  let languageTransformTimer = null;
   const shouldRunPortfolioBoot = (() => {
     if (reduceMotion.matches) return false;
     try {
@@ -1338,8 +1340,40 @@
     }
   }
 
+  function playLanguageTransform(fromLang, toLang) {
+    if (reduceMotion.matches || fromLang === toLang) return;
+    const fromMeta = LANG_META[sanitizeLang(fromLang)] || LANG_META[DEFAULT_LANG];
+    const toMeta = LANG_META[sanitizeLang(toLang)] || LANG_META[DEFAULT_LANG];
+    const existing = document.querySelector("[data-language-transform]");
+    if (existing) existing.remove();
+    if (languageTransformTimer) window.clearTimeout(languageTransformTimer);
+
+    const signal = document.createElement("div");
+    signal.className = "language-transform-signal";
+    signal.dataset.languageTransform = "true";
+    signal.setAttribute("aria-hidden", "true");
+    signal.innerHTML = `
+      <span>LANGUAGE TRANSFORM</span>
+      <b>${fromMeta.short} <i></i> ${toMeta.short}</b>
+      <em>${toMeta.nativeName}</em>
+    `;
+    document.body.appendChild(signal);
+    root.classList.add("language-transform-active");
+    if (typeof emitPortfolioCursorCode === "function") {
+      emitPortfolioCursorCode(`L:${toMeta.short}`, 900, "is-dev-lang-code");
+    }
+
+    languageTransformTimer = window.setTimeout(() => {
+      root.classList.remove("language-transform-active");
+      signal.classList.add("is-fading");
+      window.setTimeout(() => signal.remove(), 260);
+    }, 820);
+  }
+
   function setLang(lang, updateUrl = false) {
     const nextLang = sanitizeLang(lang);
+    const previousLang = sanitizeLang(document.documentElement.dataset.lang || DEFAULT_LANG);
+    const shouldAnimateLanguage = languageTransformReady && nextLang !== previousLang;
     storeLang(nextLang);
     applyTranslations(nextLang);
     document.querySelectorAll(".accent-word").forEach((word) => {
@@ -1352,6 +1386,8 @@
       }
     });
     if (updateUrl) updateLangUrl(nextLang);
+    if (shouldAnimateLanguage) playLanguageTransform(previousLang, nextLang);
+    languageTransformReady = true;
     document.dispatchEvent(new CustomEvent("pk:lang-change", { detail: { lang: nextLang } }));
   }
 
@@ -2232,6 +2268,7 @@
       const selectedLang = sanitizeLang(option.dataset.langOption);
       if (selectedLang === (document.documentElement.dataset.lang || DEFAULT_LANG)) return;
       setLang(selectedLang, true);
+      langToggle.blur();
       setNavOpen(false);
     });
   }
@@ -2450,8 +2487,8 @@
 
   function setupHeroAvatarEgg() {
     const avatarSources = {
-      src: "./image/iconic-avatar.jpg?v=20260701-langmenu1",
-      srcset: "./image/iconic-avatar-720.jpg?v=20260701-langmenu1 720w, ./image/iconic-avatar-960.jpg?v=20260701-langmenu1 960w, ./image/iconic-avatar.jpg?v=20260701-langmenu1 1122w",
+      src: "./image/iconic-avatar.jpg?v=20260701-langtransform1",
+      srcset: "./image/iconic-avatar-720.jpg?v=20260701-langtransform1 720w, ./image/iconic-avatar-960.jpg?v=20260701-langtransform1 960w, ./image/iconic-avatar.jpg?v=20260701-langtransform1 1122w",
       alt: "Stilisiertes Hero-Portrait mit Iconic Avatar"
     };
 
