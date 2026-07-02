@@ -1724,7 +1724,7 @@ html.portfolio-hero-unlock .legal-hero h1::before {
   background: linear-gradient(90deg, var(--violet), var(--accent-2));
   transform: scaleX(0);
   transform-origin: left center;
-  animation: signal-build 3.2s ease-in-out infinite;
+  animation: hero-signal-flow 4.4s ease-in-out infinite;
 }
 
 .eyebrow {
@@ -4863,6 +4863,52 @@ html.recruiter-mode-active .profile-grid article {
   50% {
     opacity: 1;
     transform: scaleX(1);
+  }
+}
+
+@keyframes hero-signal-flow {
+  0% {
+    opacity: 0.72;
+    transform-origin: left center;
+    transform: scaleX(0);
+  }
+
+  22% {
+    opacity: 1;
+    transform-origin: left center;
+    transform: scaleX(1);
+  }
+
+  25% {
+    opacity: 1;
+    transform-origin: right center;
+    transform: scaleX(1);
+  }
+
+  47%,
+  50% {
+    opacity: 0.72;
+    transform-origin: right center;
+    transform: scaleX(0);
+  }
+
+  72% {
+    opacity: 1;
+    transform-origin: right center;
+    transform: scaleX(1);
+  }
+
+  75% {
+    opacity: 1;
+    transform-origin: left center;
+    transform: scaleX(1);
+  }
+
+  97%,
+  100% {
+    opacity: 0.72;
+    transform-origin: left center;
+    transform: scaleX(0);
   }
 }
 

@@ -5,7 +5,7 @@
 ![CSS](https://img.shields.io/badge/CSS-responsive-111111?style=for-the-badge&logo=css3)
 ![JavaScript](https://img.shields.io/badge/JavaScript-vanilla-111111?style=for-the-badge&logo=javascript)
 
-A modern, trilingual portfolio website for a software developer with a strong focus on Oracle APEX, PL/SQL, JavaScript and business-oriented application development.
+A modern, four-language portfolio website for a software developer with a strong focus on Oracle APEX, PL/SQL, JavaScript and business-oriented application development.
 
 The project is intentionally built as a lightweight static site: no framework, no build step, no external runtime dependencies, no analytics and no tracking.
 
@@ -32,9 +32,9 @@ The site combines a clean dark visual style with a technical portfolio structure
 - Scroll progress, active section navigation and responsive pointer-reactive depth effects
 - Global custom code cursor with dynamic text-cursor mode and keyword-aware labels
 - Animated technology stream and visual project modules
-- German, English and Japanese language switch
+- German, English, Spanish and Japanese language switch
 - Dedicated Vita / Resume page
-- Browser-based PDF export for German, English and Japanese profile versions
+- Browser-based PDF export for German, English, Spanish and Japanese profile versions
 - Print-optimized A4 layout for complete one-page PDF generation with language-aware document titles
 - Project spotlight section with optimized tilt cards, mini terminal simulations and restrained glow feedback
 - Technology stack overview
@@ -251,7 +251,7 @@ Manual checks before publishing:
 
 - test homepage on desktop and mobile
 - open and close mobile navigation
-- switch language between DE, EN and JP
+- switch language between DE, EN, ES and JP
 - test Vita PDF export in all four languages
 - verify Impressum and Datenschutz links
 - verify LinkedIn and GitHub links
@@ -302,4 +302,4 @@ This is a personal portfolio project. Content, images and personal branding asse
 
 ### Language switcher
 
-The navigation uses a compact segmented language selector for German, English and Japanese. `DE`, `EN` and `JP` are direct selection buttons instead of a pure cycle toggle. The options are separated with `|` characters. The active language is visibly highlighted inside the selector without an additional status dot. The selector keeps the dark glass/interface look and uses `#f0a83a` for the language-control border, active segment and signal underline so it matches the warm system accents used elsewhere in the navigation.
+The navigation uses a compact animated language selector for German, English, Spanish and Japanese. `DE`, `EN`, `ES` and `JP` are direct selection buttons exposed through a hover/focus dropdown instead of a pure cycle toggle. The active language is visibly highlighted inside the selector without an additional status dot. The selector keeps the dark glass/interface look and uses `#f0a83a` for the language-control border, active segment and signal underline so it matches the warm system accents used elsewhere in the navigation.

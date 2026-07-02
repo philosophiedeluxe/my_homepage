@@ -30,7 +30,7 @@ Hidden interface checks:
 4. Press `Ctrl + Alt + D` and verify the Secret Dev Console opens, closes and keeps inert behavior while closed.
 5. Use `Shift + right click` and verify the custom context menu opens without stuck hover states.
 6. Test context menu commands: Dev Console, Copy Link, Vita drucken, Mail, GitHub and Avatar Hero.
-7. Switch DE, EN and JP and verify hidden links plus context menu labels update with the active language.
+7. Switch DE, EN, ES and JP and verify hidden links plus context menu labels update with the active language.
 8. Type `matrix` and `boot`, then test the Konami code and section-number signals after the animation finishes.
 9. Press `Ctrl + K` and verify the Command Palette can run Profile Trace, Stack focus, Recruiter Mode, Avatar Hero and Signal Index.
 10. After a fresh session boot, verify the small First-Time Guide appears once and can open the Command Palette.
