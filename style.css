@@ -1867,6 +1867,10 @@ h3 {
   animation: signal-build 3.2s ease-in-out infinite;
 }
 
+.vita-page .page-actions::before {
+  animation: hero-signal-flow 4.4s ease-in-out infinite;
+}
+
 .print-resume-header,
 .print-resume-document {
   display: none;
