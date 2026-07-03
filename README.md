@@ -112,7 +112,7 @@ PWA files:
 - `manifest.webmanifest` defines app name, scope, start URL, display mode, theme colors, shortcuts and icons.
 - `sw.js` precaches the static portfolio shell and serves cached assets when available.
 - `offline.html` is a styled fallback for navigation requests while offline.
-- `image/pwa/` contains the generated PNG app icons, including maskable variants.
+- `image/pwa/` contains the generated PNG app icons, favicon sizes and maskable variants.
 
 Important deployment note: whenever `style.css`, `app.js`, core HTML or relevant assets change, bump the cache version in the HTML query strings, `manifest.webmanifest` and `sw.js`. This prevents installed instances from holding an old interface shell too long.
 
