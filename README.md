@@ -185,7 +185,7 @@ The Easter eggs are intentionally subtle. They are implemented in `setupEasterEg
 | Keyword Cursor | hover selected technology words or the name | cursor label changes contextually; name/brand hover emits `{PK}` |
 | Secret Theme Shift | hold `Shift` and click the `PK` branding | temporary alternate theme shift |
 | Secret Dev Console | press `Ctrl` + `Alt` + `D`, or use the cursor context menu | internal console with route, build info, stack, links and access to the Signal Index |
-| Cursor Context Menu | hold `Shift` and right-click | custom command menu with Dev Console, copy link, Vita print, mail, GitHub and Avatar Hero actions |
+| Cursor Context Menu | hold `Ctrl` and right-click | custom command menu with Dev Console, copy link, Vita print, mail, GitHub and Avatar Hero actions |
 | Signal Index | open the small footer signal or the Dev Console link | hidden `signals.html` page listing the known interaction signals; marked `noindex` and intentionally omitted from the main navigation |
 | System Trace | click `trace profile` in the hero or run it from `Ctrl + K` | scans profile areas as `PROFILE_NODE`, `DELIVERY_MODULES`, `CAPABILITY_GRAPH`, `EXPERIENCE_LOG` and `TRUST_CHAIN` with animated links, terminal output and clickable navigation nodes |
 | Command Palette | press `Ctrl + K` | command interface for profile trace, resume, stack focus, recruiter mode, mail, GitHub, Avatar Hero, Signal Index and Vita print |
@@ -276,7 +276,7 @@ Manual checks before publishing:
 - verify Impressum and Datenschutz links
 - verify LinkedIn and GitHub links
 - check cookie settings flow
-- test `Ctrl + K`, `Shift + right click`, `Ctrl + Alt + D`, `Ctrl + Alt + I`, `trace profile`, Recruiter Mode and `play timeline`
+- test `Ctrl + K`, `Ctrl + right click`, `Ctrl + Alt + D`, `Ctrl + Alt + I`, `trace profile`, Recruiter Mode and `play timeline`
 - verify installability in Chrome or Edge via DevTools Application / Manifest
 - test PWA offline fallback after one successful online load
 - test Firefox, Chrome and Edge rendering

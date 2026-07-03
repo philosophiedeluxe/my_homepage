@@ -22,9 +22,9 @@
       "signals.card.handshake.title": "Handshake",
       "signals.card.handshake.trigger": "Nach dem Boot-Reveal",
       "signals.card.handshake.effect": "Der Custom Cursor meldet nacheinander <code>INIT</code>, <code>AUTH</code> und <code>READY</code>.",
-      "signals.card.context.kicker": "SHIFT + RIGHT CLICK",
+      "signals.card.context.kicker": "CTRL + RIGHT CLICK",
       "signals.card.context.title": "Cursor Context Menu",
-      "signals.card.context.trigger": "<kbd>Shift</kbd> + Rechtsklick",
+      "signals.card.context.trigger": "<kbd>Ctrl</kbd> + Rechtsklick",
       "signals.card.context.effect": "Öffnet ein eigenes Command-Menü mit Dev Console, Copy Link, Vita drucken, Mail, GitHub und Avatar Hero.",
       "signals.card.console.kicker": "SECRET",
       "signals.card.console.title": "Dev Console",
@@ -114,9 +114,9 @@
       "signals.card.handshake.title": "Handshake",
       "signals.card.handshake.trigger": "After the boot reveal",
       "signals.card.handshake.effect": "The custom cursor reports <code>INIT</code>, <code>AUTH</code> and <code>READY</code> in sequence.",
-      "signals.card.context.kicker": "SHIFT + RIGHT CLICK",
+      "signals.card.context.kicker": "CTRL + RIGHT CLICK",
       "signals.card.context.title": "Cursor Context Menu",
-      "signals.card.context.trigger": "<kbd>Shift</kbd> + right click",
+      "signals.card.context.trigger": "<kbd>Ctrl</kbd> + right click",
       "signals.card.context.effect": "Opens a custom command menu with Dev Console, Copy Link, print resume, mail, GitHub and Avatar Hero.",
       "signals.card.console.kicker": "SECRET",
       "signals.card.console.title": "Dev Console",
@@ -206,9 +206,9 @@
       "signals.card.handshake.title": "Handshake",
       "signals.card.handshake.trigger": "Después del boot reveal",
       "signals.card.handshake.effect": "El cursor personalizado informa <code>INIT</code>, <code>AUTH</code> y <code>READY</code> en secuencia.",
-      "signals.card.context.kicker": "SHIFT + RIGHT CLICK",
+      "signals.card.context.kicker": "CTRL + RIGHT CLICK",
       "signals.card.context.title": "Cursor Context Menu",
-      "signals.card.context.trigger": "<kbd>Shift</kbd> + clic derecho",
+      "signals.card.context.trigger": "<kbd>Ctrl</kbd> + clic derecho",
       "signals.card.context.effect": "Abre un menú de comandos propio con Dev Console, copiar enlace, imprimir vita, mail, GitHub y Avatar Hero.",
       "signals.card.console.kicker": "SECRET",
       "signals.card.console.title": "Dev Console",
@@ -298,9 +298,9 @@
       "signals.card.handshake.title": "Handshake",
       "signals.card.handshake.trigger": "Boot Revealの後",
       "signals.card.handshake.effect": "Custom Cursorが順番に<code>INIT</code>、<code>AUTH</code>、<code>READY</code>を表示します。",
-      "signals.card.context.kicker": "SHIFT + RIGHT CLICK",
+      "signals.card.context.kicker": "CTRL + RIGHT CLICK",
       "signals.card.context.title": "Cursor Context Menu",
-      "signals.card.context.trigger": "<kbd>Shift</kbd> + 右クリック",
+      "signals.card.context.trigger": "<kbd>Ctrl</kbd> + 右クリック",
       "signals.card.context.effect": "Dev Console、Copy Link、Vita印刷、Mail、GitHub、Avatar Heroを含む独自のCommand Menuを開きます。",
       "signals.card.console.kicker": "SECRET",
       "signals.card.console.title": "Dev Console",
@@ -2722,8 +2722,8 @@
 
   function setupHeroAvatarEgg() {
     const avatarSources = {
-      src: "./image/iconic-avatar.jpg?v=20260703-pwa1",
-      srcset: "./image/iconic-avatar-720.jpg?v=20260703-pwa1 720w, ./image/iconic-avatar-960.jpg?v=20260703-pwa1 960w, ./image/iconic-avatar.jpg?v=20260703-pwa1 1122w",
+      src: "./image/iconic-avatar.jpg?v=20260703-ctxmenu1",
+      srcset: "./image/iconic-avatar-720.jpg?v=20260703-ctxmenu1 720w, ./image/iconic-avatar-960.jpg?v=20260703-ctxmenu1 960w, ./image/iconic-avatar.jpg?v=20260703-ctxmenu1 1122w",
       alt: "Stilisiertes Hero-Portrait mit Iconic Avatar"
     };
 
@@ -2876,28 +2876,28 @@
       de: {
         title: "signal hint",
         command: "hint: Strg + K öffnet Befehle",
-        context: "shift + rechtsklick entsperrt das Kontextmenü",
+        context: "ctrl + rechtsklick entsperrt das Kontextmenü",
         mobile: "hint: Menü und Signal Index halten die versteckten Routen",
         close: "Hinweis schließen"
       },
       en: {
         title: "signal hint",
         command: "hint: press Ctrl + K for commands",
-        context: "shift + right click unlocks the context menu",
+        context: "ctrl + right click unlocks the context menu",
         mobile: "hint: menu and Signal Index hold the hidden routes",
         close: "Close hint"
       },
       es: {
         title: "signal hint",
         command: "hint: pulsa Ctrl + K para comandos",
-        context: "shift + clic derecho desbloquea el menú contextual",
+        context: "ctrl + clic derecho desbloquea el menú contextual",
         mobile: "hint: menú y Signal Index contienen rutas ocultas",
         close: "Cerrar pista"
       },
       ja: {
         title: "signal hint",
         command: "hint: Ctrl + K でコマンド",
-        context: "shift + right click でcontext menu",
+        context: "ctrl + right click でcontext menu",
         mobile: "hint: menu と Signal Index にhidden routes",
         close: "ヒントを閉じる"
       }
@@ -3090,6 +3090,7 @@ shortcut: ctrl + alt + d</pre>
     const closeButton = consolePanel.querySelector(".secret-dev-console__close");
     let consoleVisible = false;
     let contextVisible = false;
+    let contextPointerOpenedAt = 0;
 
     function clearContextMenuHover() {
       contextMenu.querySelectorAll(".is-hovered").forEach((item) => item.classList.remove("is-hovered"));
@@ -3133,7 +3134,7 @@ shortcut: ctrl + alt + d</pre>
     }
 
     function openContextMenu(event) {
-      if (reduceMotion.matches || !finePointer.matches) return;
+      if (!finePointer.matches) return;
       event.preventDefault();
       updateContextMenuLabels();
       placeContextMenu(event.clientX, event.clientY);
@@ -3144,6 +3145,10 @@ shortcut: ctrl + alt + d</pre>
       contextMenu.inert = false;
       root.classList.add("cursor-context-open");
       emitPortfolioCursorCode("MENU", 1200, "is-dev-signal");
+    }
+
+    function isCursorContextTrigger(event) {
+      return event.ctrlKey && !event.target?.closest?.(typingSelector);
     }
 
     async function copyText(value) {
@@ -3237,12 +3242,24 @@ shortcut: ctrl + alt + d</pre>
       }
     });
 
+    document.addEventListener("pointerdown", (event) => {
+      if (event.button !== 2 || !isCursorContextTrigger(event)) return;
+      contextPointerOpenedAt = Date.now();
+      event.__pkContextMenuOpened = true;
+      openContextMenu(event);
+    }, { capture: true });
+
     document.addEventListener("contextmenu", (event) => {
-      if (!event.shiftKey || event.target?.closest?.(typingSelector)) return;
+      if (!isCursorContextTrigger(event)) return;
+      if (Date.now() - contextPointerOpenedAt < 700) {
+        event.preventDefault();
+        return;
+      }
       openContextMenu(event);
     });
 
     document.addEventListener("pointerdown", (event) => {
+      if (event.__pkContextMenuOpened) return;
       if (!contextVisible || contextMenu.contains(event.target)) return;
       closeContextMenu();
     }, { capture: true });

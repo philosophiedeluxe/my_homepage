@@ -32,7 +32,7 @@ Die Homepage ist jetzt eine moderne, statische Portfolio-Seite mit starkem Hero,
 - Projekt- und Stack-Karten mit kontrollierter Tiefenreaktion aufgewertet.
 - Vita-PDF als sprachabhaengiger, einseitiger A4-Lebenslauf verfeinert.
 - Cinematic Boot Sequence, Hero-Terminal-Unlock, gestaffelter Navigations-Boot und Cursor-Handshake ergaenzt.
-- Secret Dev Console, Shift-Rechtsklick-Kontextmenue und Signal Index als versteckte Entwickler-Schicht ergaenzt.
+- Secret Dev Console, Ctrl-Rechtsklick-Kontextmenue und Signal Index als versteckte Entwickler-Schicht ergaenzt.
 - Developer Operating Layer ergaenzt: System Trace, Command Palette, Recruiter Mode, Live Skill Graph, Projekt-Mini-Simulationen, Iconic Hero und Bootable Vita mit aufklappbaren Experience Logs.
 - PWA-Grundlage ergaenzt: Manifest, Service Worker, App-Icons, Standalone-Start und Offline-Fallback fuer installierbare Nutzung.
 
@@ -106,7 +106,7 @@ Die Homepage ist jetzt eine moderne, statische Portfolio-Seite mit starkem Hero,
 - Mobile: Navigation oeffnen/schliessen, Hero-Buttons, Footer und Cookie-Banner pruefen.
 - Cookie-Auswahl: `Alle akzeptieren`, `Auswahl speichern`, `Nur notwendige` und erneutes Oeffnen ueber Footer testen.
 - Sprachwechsel: DE/EN/ES/JP auf Startseite, Vita, Signal Index und Datenschutz testen.
-- Easter Eggs: `Ctrl+Alt+D`, `Shift + Rechtsklick`, `matrix`, `boot`, Konami-Code und Section-Number-Klicks kurz pruefen.
+- Easter Eggs: `Ctrl+Alt+D`, `Ctrl + Rechtsklick`, `matrix`, `boot`, Konami-Code und Section-Number-Klicks kurz pruefen.
 - Developer OS: `Ctrl+K`, `trace profile`, `Recruiter Mode`, Stack-Skill-Nodes und `play timeline` pruefen.
 - Kontextmenue: Dev Console, Copy Link, Vita drucken, Mail, GitHub und Avatar Hero pruefen.
 - Footer-Links: LinkedIn, GitHub, Impressum, Datenschutz und Cookie-Einstellungen pruefen.
