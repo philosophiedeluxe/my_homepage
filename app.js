@@ -546,7 +546,7 @@
       "privacy.contact": "Kontaktaufnahme",
       "privacy.contact.text": "Wenn Sie per E-Mail Kontakt aufnehmen, werden die von Ihnen übermittelten Angaben zur Bearbeitung der Anfrage verarbeitet. Dazu gehören insbesondere Ihre E-Mail-Adresse, der Inhalt Ihrer Nachricht und die dabei entstehenden Kommunikationsdaten. Die Daten werden nicht ohne Einwilligung weitergegeben.",
       "privacy.fonts": "Cookies und lokale Speicherung",
-      "privacy.fonts.text": "Diese Website verwendet Systemschriftarten und verzichtet auf Analytics, Marketing-Cookies und Tracking-Skripte. Zur Anzeige des Cookie-Hinweises wird die getroffene Auswahl lokal im Browser gespeichert. Diese Speicherung ist technisch notwendig, damit die Auswahl nicht bei jedem Seitenaufruf erneut abgefragt wird. Wenn Sie zustimmen, kann zusätzlich die gewählte Sprache lokal gespeichert werden. Sie können die Auswahl jederzeit über den Link „Cookie-Einstellungen“ im Footer ändern.",
+      "privacy.fonts.text": "Diese Website verwendet Systemschriftarten und verzichtet auf Analytics, Marketing-Cookies und Tracking-Skripte. Zur Anzeige des Cookie-Hinweises wird die getroffene Auswahl lokal im Browser gespeichert. Diese Speicherung ist technisch notwendig, damit die Auswahl nicht bei jedem Seitenaufruf erneut abgefragt wird. Wenn Sie zustimmen, kann zusätzlich die gewählte Sprache lokal gespeichert werden. Als installierbare Web-App kann die Seite statische Dateien wie HTML, CSS, JavaScript und Bilder in einem Service-Worker-Cache speichern, damit sie schneller startet und eine Offline-Grundansicht bereitstellen kann. Sie können die Auswahl jederzeit über den Link „Cookie-Einstellungen“ im Footer ändern.",
       "privacy.links": "Externe Links",
       "privacy.links.text": "Diese Website verlinkt auf externe Profile und Dienste, insbesondere LinkedIn, GitHub und Instagram. Erst beim Öffnen dieser Links verlassen Sie diese Website; anschließend gelten die Datenschutzbestimmungen der jeweiligen Anbieter.",
       "privacy.rights": "Ihre Rechte",
@@ -742,7 +742,7 @@
       "privacy.contact": "Contact",
       "privacy.contact.text": "If you contact me by email, the information you provide is processed to handle the request. This especially includes your email address, the content of your message and the resulting communication data. The data is not shared without consent.",
       "privacy.fonts": "Cookies and local storage",
-      "privacy.fonts.text": "This website uses system fonts and does not use analytics, marketing cookies or tracking scripts. To display the cookie notice, your selected choice is stored locally in the browser. This storage is technically necessary so the choice does not need to be requested again on every page view. If you consent, the selected language can also be stored locally. You can change the choice at any time through the “Cookie settings” link in the footer.",
+      "privacy.fonts.text": "This website uses system fonts and does not use analytics, marketing cookies or tracking scripts. To display the cookie notice, your selected choice is stored locally in the browser. This storage is technically necessary so the choice does not need to be requested again on every page view. If you consent, the selected language can also be stored locally. As an installable web app, the site can store static files such as HTML, CSS, JavaScript and images in a service worker cache so it starts faster and can provide a basic offline view. You can change the choice at any time through the “Cookie settings” link in the footer.",
       "privacy.links": "External links",
       "privacy.links.text": "This website links to external profiles and services, especially LinkedIn, GitHub and Instagram. Only when opening those links do you leave this website; the privacy policies of the respective providers then apply.",
       "privacy.rights": "Your rights",
@@ -937,7 +937,7 @@
       "privacy.contact": "Contacto",
       "privacy.contact.text": "Si contactas por correo electrónico, los datos enviados se procesan para responder la consulta. Esto incluye especialmente tu dirección de correo, el contenido del mensaje y los datos de comunicación resultantes. Los datos no se comparten sin consentimiento.",
       "privacy.fonts": "Cookies y almacenamiento local",
-      "privacy.fonts.text": "Este sitio web utiliza fuentes del sistema y no usa analytics, cookies de marketing ni scripts de tracking. Para mostrar el aviso de cookies, la elección realizada se guarda localmente en el navegador. Este almacenamiento es técnicamente necesario para no solicitar la misma elección en cada visita. Si das tu consentimiento, también puede guardarse el idioma seleccionado. Puedes cambiar la elección en cualquier momento desde el enlace “Configuración de cookies” del footer.",
+      "privacy.fonts.text": "Este sitio web utiliza fuentes del sistema y no usa analytics, cookies de marketing ni scripts de tracking. Para mostrar el aviso de cookies, la elección realizada se guarda localmente en el navegador. Este almacenamiento es técnicamente necesario para no solicitar la misma elección en cada visita. Si das tu consentimiento, también puede guardarse el idioma seleccionado. Como web app instalable, el sitio puede guardar archivos estáticos como HTML, CSS, JavaScript e imágenes en una caché de service worker para iniciar más rápido y ofrecer una vista offline básica. Puedes cambiar la elección en cualquier momento desde el enlace “Configuración de cookies” del footer.",
       "privacy.links": "Enlaces externos",
       "privacy.links.text": "Este sitio web enlaza perfiles y servicios externos, especialmente LinkedIn, GitHub e Instagram. Solo al abrir esos enlaces abandonas este sitio; entonces se aplican las políticas de privacidad de los respectivos proveedores.",
       "privacy.rights": "Tus derechos",
@@ -1123,7 +1123,7 @@
       "privacy.contact": "連絡",
       "privacy.contact.text": "メールで連絡する場合、送信された情報は問い合わせ対応のために処理されます。これには、メールアドレス、メッセージ内容、およびその後の通信データが含まれます。データは同意なく第三者へ提供されません。",
       "privacy.fonts": "Cookieとローカル保存",
-      "privacy.fonts.text": "このWebサイトはシステムフォントを使用し、Analytics、マーケティングCookie、トラッキングスクリプトは使用しません。Cookie通知の表示のため、選択内容はブラウザにローカル保存されます。これは毎回選択を求めないために技術的に必要です。同意した場合、選択した言語もローカル保存できます。フッターの「Cookie設定」リンクからいつでも変更できます。",
+      "privacy.fonts.text": "このWebサイトはシステムフォントを使用し、Analytics、マーケティングCookie、トラッキングスクリプトは使用しません。Cookie通知の表示のため、選択内容はブラウザにローカル保存されます。これは毎回選択を求めないために技術的に必要です。同意した場合、選択した言語もローカル保存できます。インストール可能なWeb Appとして、HTML、CSS、JavaScript、画像などの静的ファイルをService Worker Cacheに保存し、起動を速くし、基本的なOffline表示を提供できます。フッターの「Cookie設定」リンクからいつでも変更できます。",
       "privacy.links": "外部リンク",
       "privacy.links.text": "このWebサイトはLinkedIn、GitHub、Instagramなどの外部プロフィールやサービスへリンクしています。これらのリンクを開いた場合のみ、このWebサイトを離れ、各提供者のプライバシーポリシーが適用されます。",
       "privacy.rights": "あなたの権利",
@@ -1168,6 +1168,7 @@
   };
   const CONSENT_STORAGE_KEY = "pk-cookie-consent";
   const CONSENT_VERSION = 1;
+  const PWA_SERVICE_WORKER_URL = "./sw.js";
   const PORTFOLIO_BOOT_SESSION_KEY = "pk-portfolio-boot-seen";
   const FIRST_TIME_GUIDE_SESSION_KEY = "pk-first-time-guide-seen";
   const HERO_AVATAR_SESSION_KEY = "pk-iconic-avatar-hero";
@@ -1207,6 +1208,24 @@
     if (value.startsWith("de")) return "de";
     if (value.startsWith("ja") || value.startsWith("jp")) return "ja";
     return DEFAULT_LANG;
+  }
+
+  function setupProgressiveWebApp() {
+    if (!("serviceWorker" in navigator)) return;
+
+    const isLocalhost = ["localhost", "127.0.0.1", "[::1]"].includes(window.location.hostname);
+    if (window.location.protocol !== "https:" && !isLocalhost) return;
+
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register(PWA_SERVICE_WORKER_URL, { scope: "./" })
+        .then((registration) => {
+          if ("connection" in navigator && navigator.connection?.saveData) return;
+          registration.update();
+        })
+        .catch(() => {
+          // PWA support is progressive: the portfolio remains fully usable without it.
+        });
+    }, { once: true });
   }
 
   function getStoredLang() {
@@ -2703,8 +2722,8 @@
 
   function setupHeroAvatarEgg() {
     const avatarSources = {
-      src: "./image/iconic-avatar.jpg?v=20260703-iconicmode1",
-      srcset: "./image/iconic-avatar-720.jpg?v=20260703-iconicmode1 720w, ./image/iconic-avatar-960.jpg?v=20260703-iconicmode1 960w, ./image/iconic-avatar.jpg?v=20260703-iconicmode1 1122w",
+      src: "./image/iconic-avatar.jpg?v=20260703-pwa1",
+      srcset: "./image/iconic-avatar-720.jpg?v=20260703-pwa1 720w, ./image/iconic-avatar-960.jpg?v=20260703-pwa1 960w, ./image/iconic-avatar.jpg?v=20260703-pwa1 1122w",
       alt: "Stilisiertes Hero-Portrait mit Iconic Avatar"
     };
 
@@ -4534,6 +4553,7 @@ shortcut: ctrl + alt + d</pre>
   setupHeroCursor();
   setupPortfolioStartup(shouldRunPortfolioBoot);
   setupHeroAvatarEgg();
+  setupProgressiveWebApp();
   setupFirstTimeGuide(shouldRunPortfolioBoot);
   setupTiltCards();
   setupActiveNavigation();

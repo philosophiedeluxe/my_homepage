@@ -42,3 +42,12 @@ Hidden interface checks:
 16. Social preview: run `tools\render-social-card.ps1` after visual copy changes and inspect `image\social-card.jpg`.
 17. Press `Ctrl + Alt + I` and verify the Iconic Hero switches only for the current browser session.
 18. Print/PDF check: verify Command Palette, System Trace, Recruiter Mode, Skill Graph, First-Time Guide, Timeline Playback and expanded timeline logs do not appear in the PDF output.
+
+PWA checks:
+
+1. Run `powershell -ExecutionPolicy Bypass -File .\tools\check-site.ps1` and confirm manifest and service worker checks pass.
+2. Serve the repository through `python -m http.server 8000` or publish to GitHub Pages; service workers do not run from `file://`.
+3. In Chrome or Edge DevTools, open Application > Manifest and confirm name, icons, start URL, scope and installability.
+4. Install the app and verify it opens in standalone mode without browser chrome.
+5. After one successful online load, switch DevTools Network to Offline and reload `index.html`; the cached page or `offline.html` fallback should appear.
+6. After changing cached files, bump the cache version in HTML asset URLs, `manifest.webmanifest` and `sw.js`.

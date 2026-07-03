@@ -50,6 +50,7 @@ The site combines a clean dark visual style with a technical portfolio structure
 - Hidden Signal Index page as an internal Easter Egg manual
 - Developer Operating Layer with System Trace, Command Palette, Recruiter Mode, Live Skill Graph and Bootable Vita playback
 - Session-only Iconic Mode with avatar hero, hacker palette and terminal typography
+- Installable Progressive Web App with manifest, service worker, app icons and offline fallback
 - Lightweight QA script for local JS, HTML, `srcset`, certificate and CSS asset checks
 - GitHub Pages compatible without build process
 
@@ -61,6 +62,7 @@ The site combines a clean dark visual style with a technical portfolio structure
 | Styling | CSS3 |
 | Logic | Vanilla JavaScript |
 | Hosting | GitHub Pages |
+| PWA | Web App Manifest, Service Worker, offline fallback |
 | SEO | Meta tags, OpenGraph, Twitter Cards, JSON-LD, sitemap.xml, robots.txt |
 | PDF Export | Browser print dialog with dedicated print CSS |
 | QA | PowerShell check script |
@@ -75,6 +77,9 @@ The site combines a clean dark visual style with a technical portfolio structure
 ├── datenschutz.html        # Privacy policy
 ├── signals.html            # Hidden Signal Index / Easter Egg manual
 ├── 404.html                # Custom not-found page
+├── offline.html            # PWA offline fallback
+├── manifest.webmanifest    # Installable Web App metadata
+├── sw.js                   # Service Worker and static cache strategy
 ├── style.css               # Complete styling including responsive and print layouts
 ├── app.js                  # Language switch, navigation, consent logic, animations, PDF print logic
 ├── sitemap.xml             # Sitemap for search engines
@@ -94,8 +99,22 @@ The site combines a clean dark visual style with a technical portfolio structure
     ├── iconic-avatar-720.jpg
     ├── iconic-avatar-960.jpg
     ├── profile-avatar.jpg  # Header / graph avatar
+    ├── pwa/                # Generated install icons and maskable app icons
     └── Cert/               # Certificate images and badges
 ```
+
+## Progressive Web App
+
+The homepage is installable as a Progressive Web App on supported browsers and platforms. GitHub Pages provides the required HTTPS layer; the repository provides the app metadata and local caching layer.
+
+PWA files:
+
+- `manifest.webmanifest` defines app name, scope, start URL, display mode, theme colors, shortcuts and icons.
+- `sw.js` precaches the static portfolio shell and serves cached assets when available.
+- `offline.html` is a styled fallback for navigation requests while offline.
+- `image/pwa/` contains the generated PNG app icons, including maskable variants.
+
+Important deployment note: whenever `style.css`, `app.js`, core HTML or relevant assets change, bump the cache version in the HTML query strings, `manifest.webmanifest` and `sw.js`. This prevents installed instances from holding an old interface shell too long.
 
 ## Design Direction
 
@@ -213,6 +232,7 @@ The site avoids unnecessary external dependencies.
 - no marketing cookies
 - no external font loading
 - local storage only for consent and optional language preference
+- service worker cache only for static app shell and portfolio assets
 - transparent privacy and legal pages
 
 ## Local Usage
@@ -257,6 +277,8 @@ Manual checks before publishing:
 - verify LinkedIn and GitHub links
 - check cookie settings flow
 - test `Ctrl + K`, `Shift + right click`, `Ctrl + Alt + D`, `Ctrl + Alt + I`, `trace profile`, Recruiter Mode and `play timeline`
+- verify installability in Chrome or Edge via DevTools Application / Manifest
+- test PWA offline fallback after one successful online load
 - test Firefox, Chrome and Edge rendering
 
 ## Deployment

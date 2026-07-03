@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="de" data-lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Phil Kirchner - Offline</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#101114">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" type="image/png" sizes="192x192" href="./image/pwa/icon-192.png?v=20260703-pwa1">
+  <link rel="apple-touch-icon" href="./image/pwa/apple-touch-icon.png?v=20260703-pwa1">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #080d10;
+      --panel: rgba(14, 18, 24, 0.92);
+      --line: rgba(82, 242, 224, 0.38);
+      --accent: #52f2e0;
+      --violet: #8d3dff;
+      --text: #f6f1e8;
+      --muted: #b8b3aa;
+      --gold: #f7ad2d;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      display: grid;
+      place-items: center;
+      padding: 32px;
+      background:
+        linear-gradient(rgba(82, 242, 224, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(82, 242, 224, 0.035) 1px, transparent 1px),
+        radial-gradient(circle at 74% 18%, rgba(141, 61, 255, 0.22), transparent 34%),
+        radial-gradient(circle at 24% 78%, rgba(82, 242, 224, 0.16), transparent 30%),
+        var(--bg);
+      background-size: 48px 48px, 48px 48px, auto, auto, auto;
+      color: var(--text);
+      font-family: "Lucida Console", "Cascadia Mono", Consolas, monospace;
+    }
+
+    main {
+      width: min(760px, 100%);
+      border: 1px solid var(--line);
+      background: var(--panel);
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.42), 0 0 42px rgba(82, 242, 224, 0.08);
+      padding: clamp(28px, 7vw, 64px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    main::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(82, 242, 224, 0.22), rgba(141, 61, 255, 0.24), transparent);
+      height: 2px;
+      top: auto;
+      bottom: 0;
+      animation: signal 3.4s infinite ease-in-out;
+      transform-origin: left;
+    }
+
+    p:first-child {
+      color: var(--gold);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      margin: 0 0 22px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: clamp(2.6rem, 9vw, 5.8rem);
+      line-height: 0.92;
+      margin: 0;
+      letter-spacing: 0;
+    }
+
+    h1 span {
+      color: transparent;
+      background: linear-gradient(180deg, #b06cff, #8d3dff 46%, #52f2e0);
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+
+    .copy {
+      max-width: 56ch;
+      margin: 28px 0 0;
+      color: var(--muted);
+      font: 1.05rem/1.75 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    .status {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 34px;
+      color: var(--accent);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .status span {
+      border: 1px solid rgba(82, 242, 224, 0.26);
+      padding: 10px 12px;
+      background: rgba(82, 242, 224, 0.05);
+    }
+
+    a {
+      color: var(--text);
+      display: inline-flex;
+      margin-top: 34px;
+      min-height: 48px;
+      align-items: center;
+      padding: 0 18px;
+      border: 1px solid rgba(247, 173, 45, 0.72);
+      background: var(--gold);
+      color: #080d10;
+      font-weight: 900;
+      text-decoration: none;
+    }
+
+    @keyframes signal {
+      0%, 100% { transform: scaleX(0); transform-origin: left; }
+      32% { transform: scaleX(1); transform-origin: left; }
+      50% { transform: scaleX(0); transform-origin: right; }
+      82% { transform: scaleX(1); transform-origin: right; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <p>offline protocol</p>
+    <h1>Signal kurz <span>offline</span>.</h1>
+    <p class="copy">Die Portfolio-App ist installiert, aber die angeforderte Route ist gerade nicht im Cache oder die Verbindung fehlt. Startseite, Vita und Signal Index werden beim nächsten Online-Aufruf wieder synchronisiert.</p>
+    <div class="status" aria-label="Offline status">
+      <span>cache standby</span>
+      <span>network missing</span>
+      <span>profile local</span>
+    </div>
+    <a href="./index.html">Zur Startseite</a>
+  </main>
+</body>
+</html>

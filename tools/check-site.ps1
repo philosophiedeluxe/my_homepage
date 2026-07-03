@@ -59,6 +59,34 @@ foreach ($file in $cssFiles) {
   }
 }
 
+Write-Host "Checking PWA manifest..."
+$manifestPath = Join-Path $Root "manifest.webmanifest"
+if (-not (Test-Path -LiteralPath $manifestPath)) {
+  $missing.Add("manifest.webmanifest")
+} else {
+  $manifest = Get-Content -Raw -LiteralPath $manifestPath | ConvertFrom-Json
+  foreach ($icon in $manifest.icons) {
+    Add-LocalReference -BaseDirectory $Root -Owner "manifest.webmanifest" -Raw $icon.src
+  }
+  foreach ($shortcut in $manifest.shortcuts) {
+    Add-LocalReference -BaseDirectory $Root -Owner "manifest.webmanifest" -Raw $shortcut.url
+    foreach ($icon in $shortcut.icons) {
+      Add-LocalReference -BaseDirectory $Root -Owner "manifest.webmanifest" -Raw $icon.src
+    }
+  }
+}
+
+Write-Host "Checking service worker precache..."
+$serviceWorkerPath = Join-Path $Root "sw.js"
+if (-not (Test-Path -LiteralPath $serviceWorkerPath)) {
+  $missing.Add("sw.js")
+} else {
+  $serviceWorker = Get-Content -Raw -LiteralPath $serviceWorkerPath
+  foreach ($match in [regex]::Matches($serviceWorker, '["''](\./[^"'']+)["'']')) {
+    Add-LocalReference -BaseDirectory $Root -Owner "sw.js" -Raw $match.Groups[1].Value
+  }
+}
+
 if ($missing.Count -gt 0) {
   Write-Host "Missing references:"
   $missing | ForEach-Object { Write-Host "  $_" }

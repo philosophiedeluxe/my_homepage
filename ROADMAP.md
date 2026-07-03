@@ -34,6 +34,7 @@ Die Homepage ist jetzt eine moderne, statische Portfolio-Seite mit starkem Hero,
 - Cinematic Boot Sequence, Hero-Terminal-Unlock, gestaffelter Navigations-Boot und Cursor-Handshake ergaenzt.
 - Secret Dev Console, Shift-Rechtsklick-Kontextmenue und Signal Index als versteckte Entwickler-Schicht ergaenzt.
 - Developer Operating Layer ergaenzt: System Trace, Command Palette, Recruiter Mode, Live Skill Graph, Projekt-Mini-Simulationen, Iconic Hero und Bootable Vita mit aufklappbaren Experience Logs.
+- PWA-Grundlage ergaenzt: Manifest, Service Worker, App-Icons, Standalone-Start und Offline-Fallback fuer installierbare Nutzung.
 
 ## Erledigte Verbesserungen
 
@@ -78,7 +79,7 @@ Die Homepage ist jetzt eine moderne, statische Portfolio-Seite mit starkem Hero,
 - Skill Graph im Stack-Bereich und Timeline-Playback auf der Vita-Seite ergaenzt.
 - Timeline-Kacheln auf der Vita-Seite als klickbare Experience Logs erweitert.
 - Iconic Hero als sessionbasierter Avatar-Hero-Schalter ergaenzt.
-- QA-Skript erweitert: prueft lokale `href`/`src`, `srcset`, Zertifikatsdatenquellen, CSS-Asset-URLs, Sitemap und JavaScript-Syntax.
+- QA-Skript erweitert: prueft lokale `href`/`src`, `srcset`, Zertifikatsdatenquellen, CSS-Asset-URLs, PWA-Manifest, Service-Worker-Precache, Sitemap und JavaScript-Syntax.
 
 ## Offene sinnvolle naechste Schritte
 
@@ -111,6 +112,7 @@ Die Homepage ist jetzt eine moderne, statische Portfolio-Seite mit starkem Hero,
 - Footer-Links: LinkedIn, GitHub, Impressum, Datenschutz und Cookie-Einstellungen pruefen.
 - Externe Links: LinkedIn und GitHub in neuem Browserkontext pruefen.
 - SEO: Canonical URLs, OpenGraph-Bild, `sitemap.xml`, `robots.txt` und JSON-LD pruefen.
+- PWA: Manifest in Chrome/Edge DevTools pruefen, installierte App starten und Offline-Fallback nach einem Online-Ladevorgang testen.
 - Vita-PDF: Auf DE, EN, ES und JP jeweils `Vita als PDF erstellen` pruefen und im Druckdialog `Als PDF speichern` testen.
 
 ## Design-Leitplanken
