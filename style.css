@@ -2426,11 +2426,21 @@ html.iconic-avatar-active .hero-visual::after,
 }
 
 .portfolio-window i {
-  width: 72%;
-  height: 3px;
+  position: relative;
+  width: 100%;
+  height: 2px;
   display: block;
   margin-top: 0;
-  background: linear-gradient(90deg, var(--accent-2), var(--violet));
+  overflow: hidden;
+  background: rgba(244, 241, 234, 0.12);
+}
+
+.portfolio-window i::before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: linear-gradient(90deg, var(--violet), var(--accent-2));
   transform: scaleX(0);
   transform-origin: left center;
   animation: hero-signal-flow 4.4s ease-in-out infinite;
