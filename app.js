@@ -67,9 +67,9 @@
       "signals.card.theme.trigger": "<kbd>Shift</kbd> halten und auf das PK-Branding klicken",
       "signals.card.theme.effect": "Ein kurzer alternativer Chroma-Zustand verschiebt die Farbwelt der Seite.",
       "signals.card.avatarHero.kicker": "SESSION",
-      "signals.card.avatarHero.title": "Iconic Hero",
+      "signals.card.avatarHero.title": "Iconic Mode",
       "signals.card.avatarHero.trigger": "Command Palette: <code>Avatar Hero</code>, Cursor-Menü oder <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>I</kbd>",
-      "signals.card.avatarHero.effect": "Schaltet das Hero-Portrait für die laufende Browser-Session auf die Iconic-Avatar-Version um.",
+      "signals.card.avatarHero.effect": "Schaltet für die laufende Browser-Session den Iconic Mode frei: Hero-Avatar, Hacker-Farbschema, Terminal-Typografie und härtere Signalflächen.",
       "signals.card.dom.kicker": "SOURCE",
       "signals.card.dom.title": "DOM Signal",
       "signals.card.dom.trigger": "DevTools oder HTML-Quelltext öffnen",
@@ -159,9 +159,9 @@
       "signals.card.theme.trigger": "Hold <kbd>Shift</kbd> and click the PK branding",
       "signals.card.theme.effect": "A short alternate chroma state shifts the page color system.",
       "signals.card.avatarHero.kicker": "SESSION",
-      "signals.card.avatarHero.title": "Iconic Hero",
+      "signals.card.avatarHero.title": "Iconic Mode",
       "signals.card.avatarHero.trigger": "Command Palette: <code>Avatar Hero</code>, cursor menu or <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>I</kbd>",
-      "signals.card.avatarHero.effect": "Switches the hero portrait to the Iconic Avatar version for the current browser session.",
+      "signals.card.avatarHero.effect": "Unlocks Iconic Mode for the current browser session: hero avatar, hacker color scheme, terminal typography and sharper signal surfaces.",
       "signals.card.dom.kicker": "SOURCE",
       "signals.card.dom.title": "DOM Signal",
       "signals.card.dom.trigger": "Open DevTools or the HTML source",
@@ -251,9 +251,9 @@
       "signals.card.theme.trigger": "Mantener <kbd>Shift</kbd> y clicar el branding PK",
       "signals.card.theme.effect": "Un breve estado chroma alternativo desplaza la paleta de la página.",
       "signals.card.avatarHero.kicker": "SESSION",
-      "signals.card.avatarHero.title": "Iconic Hero",
+      "signals.card.avatarHero.title": "Iconic Mode",
       "signals.card.avatarHero.trigger": "Command Palette: <code>Avatar Hero</code>, menú del cursor o <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>I</kbd>",
-      "signals.card.avatarHero.effect": "Cambia el retrato del hero a la versión Iconic Avatar durante la sesión actual del navegador.",
+      "signals.card.avatarHero.effect": "Desbloquea Iconic Mode durante la sesión actual: avatar del hero, paleta hacker, tipografía terminal y superficies de señal más marcadas.",
       "signals.card.dom.kicker": "SOURCE",
       "signals.card.dom.title": "DOM Signal",
       "signals.card.dom.trigger": "Abrir DevTools o el código fuente HTML",
@@ -343,9 +343,9 @@
       "signals.card.theme.trigger": "<kbd>Shift</kbd>を押しながらPK Brandingをクリック",
       "signals.card.theme.effect": "短い代替Chroma状態でページの色調が切り替わります。",
       "signals.card.avatarHero.kicker": "SESSION",
-      "signals.card.avatarHero.title": "Iconic Hero",
+      "signals.card.avatarHero.title": "Iconic Mode",
       "signals.card.avatarHero.trigger": "Command Palette: <code>Avatar Hero</code>、Cursor Menu、または<kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>I</kbd>",
-      "signals.card.avatarHero.effect": "現在のBrowser SessionだけHero PortraitをIconic Avatar版に切り替えます。",
+      "signals.card.avatarHero.effect": "現在のBrowser SessionだけIconic Modeを有効化し、Hero Avatar、Hacker配色、Terminal Typography、強いSignal Surfaceへ切り替えます。",
       "signals.card.dom.kicker": "SOURCE",
       "signals.card.dom.title": "DOM Signal",
       "signals.card.dom.trigger": "DevToolsまたはHTML Sourceを開く",
@@ -2703,8 +2703,8 @@
 
   function setupHeroAvatarEgg() {
     const avatarSources = {
-      src: "./image/iconic-avatar.jpg?v=20260703-graphalign1",
-      srcset: "./image/iconic-avatar-720.jpg?v=20260703-graphalign1 720w, ./image/iconic-avatar-960.jpg?v=20260703-graphalign1 960w, ./image/iconic-avatar.jpg?v=20260703-graphalign1 1122w",
+      src: "./image/iconic-avatar.jpg?v=20260703-iconicmode1",
+      srcset: "./image/iconic-avatar-720.jpg?v=20260703-iconicmode1 720w, ./image/iconic-avatar-960.jpg?v=20260703-iconicmode1 960w, ./image/iconic-avatar.jpg?v=20260703-iconicmode1 1122w",
       alt: "Stilisiertes Hero-Portrait mit Iconic Avatar"
     };
 
@@ -2741,7 +2741,9 @@
 
       if (announce) {
         heroImage.classList.remove("is-hero-avatar-switching");
+        root.classList.remove("iconic-avatar-boot");
         window.requestAnimationFrame(() => heroImage.classList.add("is-hero-avatar-switching"));
+        window.requestAnimationFrame(() => root.classList.add("iconic-avatar-boot"));
       }
 
       if (active) {
@@ -2754,8 +2756,13 @@
         heroImage.setAttribute("alt", originalSources.alt);
       }
 
-      if (announce) window.setTimeout(() => heroImage.classList.remove("is-hero-avatar-switching"), 760);
-      if (announce) emitPortfolioCursorCode(active ? "AVATAR" : "HERO", 1500, "is-dev-signal");
+      if (announce) {
+        window.setTimeout(() => {
+          heroImage.classList.remove("is-hero-avatar-switching");
+          root.classList.remove("iconic-avatar-boot");
+        }, 1180);
+      }
+      if (announce) emitPortfolioCursorCode(active ? "ICONIC" : "HERO", 1500, "is-dev-signal");
     }
 
     document.addEventListener("pk:toggle-iconic-avatar", () => setHeroAvatar(!readState(), true));
@@ -3265,7 +3272,7 @@ shortcut: ctrl + alt + d</pre>
         print: "Vita drucken",
         printHint: "PDF/Print auslösen",
         avatar: "Avatar Hero",
-        avatarHint: "Iconic Hero für diese Session umschalten",
+        avatarHint: "Iconic Mode für diese Session umschalten",
         traceTitle: "PROFILE_TRACE",
         traceSubtitle: "Scanning profile graph",
         traceComplete: "trace complete",
@@ -3412,7 +3419,7 @@ shortcut: ctrl + alt + d</pre>
         print: "経歴を印刷",
         printHint: "PDF/Printを実行",
         avatar: "Avatar Hero",
-        avatarHint: "このSessionだけIconic Heroを切替",
+        avatarHint: "このSessionだけIconic Modeを切替",
         traceTitle: "PROFILE_TRACE",
         traceSubtitle: "profile graphをスキャン中",
         traceComplete: "trace complete",
@@ -4561,5 +4568,3 @@ shortcut: ctrl + alt + d</pre>
   setupScrollReveals();
   openCookieBanner();
 })();
-
-

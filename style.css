@@ -32,6 +32,24 @@ html.easter-theme-shift {
   --violet-rgb: 0, 179, 107;
 }
 
+html.iconic-avatar-active {
+  --bg: #030705;
+  --surface: #07100c;
+  --surface-2: #0b1711;
+  --band: #06110c;
+  --text: #eefcf3;
+  --muted: #9fc8ad;
+  --line: rgba(46, 255, 137, 0.18);
+  --accent: #39ff88;
+  --accent-2: #00ffc3;
+  --violet: #b000ff;
+  --violet-soft: rgba(176, 0, 255, 0.42);
+  --shadow: 0 28px 88px rgba(0, 0, 0, 0.58);
+  --cyan-rgb: 0, 255, 195;
+  --amber-rgb: 57, 255, 136;
+  --violet-rgb: 176, 0, 255;
+}
+
 *,
 *::before,
 *::after {
@@ -58,6 +76,21 @@ body {
 html[data-lang="ja"] body {
   font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Yu Gothic UI", Meiryo, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   line-height: 1.75;
+}
+
+html.iconic-avatar-active body,
+html.iconic-avatar-active button,
+html.iconic-avatar-active input,
+html.iconic-avatar-active textarea,
+html.iconic-avatar-active select {
+  font-family: "Cascadia Code", "Cascadia Mono", "JetBrains Mono", ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+}
+
+html.iconic-avatar-active body {
+  background:
+    radial-gradient(circle at 76% 18%, rgba(var(--violet-rgb), 0.16), transparent 32%),
+    radial-gradient(circle at 12% 8%, rgba(var(--cyan-rgb), 0.11), transparent 28%),
+    var(--bg);
 }
 
 html[data-lang="ja"] .hero-title,
@@ -88,6 +121,29 @@ body::before {
     linear-gradient(90deg, rgba(98, 214, 208, 0.025) 1px, transparent 1px);
   background-size: 56px 56px;
   pointer-events: none;
+}
+
+html.iconic-avatar-active body::before {
+  background-image:
+    linear-gradient(rgba(var(--cyan-rgb), 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(var(--cyan-rgb), 0.04) 1px, transparent 1px),
+    radial-gradient(circle at 50% 50%, rgba(var(--violet-rgb), 0.08), transparent 32%);
+  background-size: 38px 38px, 38px 38px, auto;
+}
+
+html.iconic-avatar-active body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.16;
+  mix-blend-mode: screen;
+  background:
+    repeating-linear-gradient(180deg, transparent 0 7px, rgba(255, 255, 255, 0.055) 7px 8px),
+    linear-gradient(90deg, transparent, rgba(var(--cyan-rgb), 0.08), transparent);
+  background-size: 100% 8px, 180% 100%;
+  animation: iconic-mode-scan 5.4s linear infinite;
 }
 
 body.nav-open {
@@ -2033,12 +2089,149 @@ h3 {
 
 html.iconic-avatar-active .hero-visual {
   background:
-    radial-gradient(circle at 72% 42%, rgba(var(--violet-rgb), 0.18), transparent 34%),
-    var(--surface);
+    radial-gradient(circle at 72% 42%, rgba(var(--violet-rgb), 0.34), transparent 34%),
+    radial-gradient(circle at 38% 58%, rgba(var(--cyan-rgb), 0.18), transparent 42%),
+    #020604;
+  border-color: rgba(var(--cyan-rgb), 0.42);
+  box-shadow:
+    inset 0 0 0 1px rgba(var(--cyan-rgb), 0.08),
+    0 0 70px rgba(var(--violet-rgb), 0.2),
+    0 0 44px rgba(var(--cyan-rgb), 0.12);
 }
 
 html.iconic-avatar-active .hero-visual img {
-  filter: saturate(1.08) contrast(1.05);
+  filter: saturate(1.2) contrast(1.12) hue-rotate(8deg);
+}
+
+html.iconic-avatar-active .site-shell {
+  border-bottom-color: rgba(var(--cyan-rgb), 0.2);
+  background:
+    linear-gradient(90deg, rgba(var(--cyan-rgb), 0.055), transparent 28%, rgba(var(--violet-rgb), 0.07)),
+    rgba(1, 6, 4, 0.84);
+  box-shadow: 0 0 34px rgba(var(--cyan-rgb), 0.08);
+}
+
+html.iconic-avatar-active .brand,
+html.iconic-avatar-active .nav-list a,
+html.iconic-avatar-active .language-toggle {
+  text-shadow: 0 0 14px rgba(var(--cyan-rgb), 0.2);
+}
+
+html.iconic-avatar-active .brand-mark {
+  border-color: rgba(var(--violet-rgb), 0.68);
+  box-shadow:
+    0 0 0 1px rgba(var(--cyan-rgb), 0.26),
+    0 0 24px rgba(var(--violet-rgb), 0.32);
+}
+
+html.iconic-avatar-active .hero-title,
+html.iconic-avatar-active .section-heading h2,
+html.iconic-avatar-active .page-hero h1,
+html.iconic-avatar-active .legal-hero h1 {
+  letter-spacing: 0;
+  text-transform: none;
+  text-shadow:
+    2px 0 rgba(var(--violet-rgb), 0.28),
+    -1px 0 rgba(var(--cyan-rgb), 0.22),
+    0 0 24px rgba(var(--cyan-rgb), 0.08);
+}
+
+html.iconic-avatar-active .accent-word {
+  background: linear-gradient(180deg, #d8fff1 0%, var(--accent) 36%, var(--accent-2) 74%, #00a86b 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  text-shadow:
+    0 0 18px rgba(var(--cyan-rgb), 0.24),
+    2px 0 rgba(var(--violet-rgb), 0.22);
+}
+
+html.iconic-avatar-active .button,
+html.iconic-avatar-active .project-card,
+html.iconic-avatar-active .stack-grid > article,
+html.iconic-avatar-active .profile-grid > article,
+html.iconic-avatar-active .timeline-item,
+html.iconic-avatar-active .credential-list > li,
+html.iconic-avatar-active .proof-card,
+html.iconic-avatar-active .system-profile-panel,
+html.iconic-avatar-active .stack-console,
+html.iconic-avatar-active .skill-graph {
+  border-color: rgba(var(--cyan-rgb), 0.34);
+  background:
+    linear-gradient(135deg, rgba(var(--cyan-rgb), 0.045), rgba(var(--violet-rgb), 0.035)),
+    rgba(3, 9, 7, 0.82);
+  box-shadow:
+    inset 0 0 0 1px rgba(var(--cyan-rgb), 0.035),
+    0 0 28px rgba(var(--cyan-rgb), 0.065),
+    0 0 42px rgba(var(--violet-rgb), 0.045);
+}
+
+html.iconic-avatar-active .button-primary {
+  color: #00150d;
+  background:
+    linear-gradient(90deg, var(--accent), var(--accent-2));
+  box-shadow:
+    inset 0 -2px 0 rgba(0, 0, 0, 0.24),
+    0 0 30px rgba(var(--cyan-rgb), 0.22);
+}
+
+html.iconic-avatar-active .button-secondary,
+html.iconic-avatar-active .button-ghost {
+  color: var(--text);
+  background:
+    linear-gradient(135deg, rgba(var(--cyan-rgb), 0.08), rgba(var(--violet-rgb), 0.07)),
+    rgba(4, 10, 8, 0.72);
+}
+
+html.iconic-avatar-active .hero-signal-line,
+html.iconic-avatar-active .system-profile-panel__meter,
+html.iconic-avatar-active .portfolio-window i,
+html.iconic-avatar-active .interior-page .page-actions::before {
+  box-shadow: 0 0 18px rgba(var(--cyan-rgb), 0.12);
+}
+
+html.iconic-avatar-active .hero-signal-line::before,
+html.iconic-avatar-active .system-profile-panel__meter i,
+html.iconic-avatar-active .portfolio-window i::before,
+html.iconic-avatar-active .interior-page .page-actions::before {
+  background: linear-gradient(90deg, var(--violet), var(--accent-2), var(--accent));
+}
+
+html.iconic-avatar-active .tech-stream {
+  background:
+    linear-gradient(90deg, rgba(var(--cyan-rgb), 0.065), rgba(var(--violet-rgb), 0.035), rgba(var(--cyan-rgb), 0.065)),
+    rgba(2, 8, 5, 0.92);
+  border-block-color: rgba(var(--cyan-rgb), 0.24);
+}
+
+html.iconic-avatar-active .tech-stream__group span,
+html.iconic-avatar-active .eyebrow,
+html.iconic-avatar-active .project-kicker,
+html.iconic-avatar-active .system-profile-panel__label,
+html.iconic-avatar-active .stack-console__body b {
+  color: var(--accent);
+  text-shadow: 0 0 14px rgba(var(--cyan-rgb), 0.24);
+}
+
+html.iconic-avatar-active .skill-graph__trace-path {
+  filter:
+    drop-shadow(0 0 8px rgba(var(--cyan-rgb), 0.22))
+    drop-shadow(0 0 13px rgba(var(--violet-rgb), 0.14));
+}
+
+html.iconic-avatar-active .skill-graph__trace-pulse {
+  filter:
+    drop-shadow(0 0 13px rgba(var(--cyan-rgb), 0.72))
+    drop-shadow(0 0 16px rgba(var(--violet-rgb), 0.28));
+}
+
+html.iconic-avatar-boot .hero-copy,
+html.iconic-avatar-boot .hero-actions,
+html.iconic-avatar-boot .quick-facts,
+html.iconic-avatar-boot .system-profile-panel,
+html.iconic-avatar-boot .project-card,
+html.iconic-avatar-boot .stack-console,
+html.iconic-avatar-boot .skill-graph {
+  animation: iconic-interface-snap 920ms steps(4, end) both;
 }
 
 html.iconic-avatar-active .hero-visual::after,
@@ -4938,6 +5131,38 @@ html.recruiter-mode-active .profile-grid article {
   }
 }
 
+@keyframes iconic-mode-scan {
+  0% {
+    background-position: 0 0, -80% 0;
+  }
+
+  100% {
+    background-position: 0 24px, 180% 0;
+  }
+}
+
+@keyframes iconic-interface-snap {
+  0%,
+  100% {
+    filter: none;
+    transform: translate3d(0, 0, 0);
+  }
+
+  18% {
+    filter: hue-rotate(22deg) saturate(1.45);
+    transform: translate3d(1px, 0, 0);
+  }
+
+  38% {
+    filter: contrast(1.2) saturate(1.2);
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  58% {
+    filter: hue-rotate(-16deg) saturate(1.35);
+  }
+}
+
 @media (max-width: 980px) {
   .nav-toggle {
     display: block;
@@ -5562,6 +5787,10 @@ html.recruiter-mode-active .profile-grid article {
     text-shadow: none !important;
     animation: none !important;
     transition: none !important;
+  }
+
+  html.iconic-avatar-active body::after {
+    content: none !important;
   }
 
   html,

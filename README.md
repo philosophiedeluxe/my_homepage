@@ -49,7 +49,7 @@ The site combines a clean dark visual style with a technical portfolio structure
 - Hidden Easter eggs for developer-oriented discovery interactions
 - Hidden Signal Index page as an internal Easter Egg manual
 - Developer Operating Layer with System Trace, Command Palette, Recruiter Mode, Live Skill Graph and Bootable Vita playback
-- Session-only Iconic Hero avatar mode
+- Session-only Iconic Mode with avatar hero, hacker palette and terminal typography
 - Lightweight QA script for local JS, HTML, `srcset`, certificate and CSS asset checks
 - GitHub Pages compatible without build process
 
@@ -90,7 +90,7 @@ The site combines a clean dark visual style with a technical portfolio structure
     ├── iconic.jpg          # Main visual asset
     ├── iconic-720.jpg      # Responsive image variant
     ├── iconic-960.jpg      # Responsive image variant
-    ├── iconic-avatar.jpg   # Session-only Iconic Hero source
+    ├── iconic-avatar.jpg   # Session-only Iconic Mode hero source
     ├── iconic-avatar-720.jpg
     ├── iconic-avatar-960.jpg
     ├── profile-avatar.jpg  # Header / graph avatar
@@ -170,7 +170,7 @@ The Easter eggs are intentionally subtle. They are implemented in `setupEasterEg
 | Signal Index | open the small footer signal or the Dev Console link | hidden `signals.html` page listing the known interaction signals; marked `noindex` and intentionally omitted from the main navigation |
 | System Trace | click `trace profile` in the hero or run it from `Ctrl + K` | scans profile areas as `PROFILE_NODE`, `DELIVERY_MODULES`, `CAPABILITY_GRAPH`, `EXPERIENCE_LOG` and `TRUST_CHAIN` with animated links, terminal output and clickable navigation nodes |
 | Command Palette | press `Ctrl + K` | command interface for profile trace, resume, stack focus, recruiter mode, mail, GitHub, Avatar Hero, Signal Index and Vita print |
-| Iconic Hero | `Ctrl + Alt + I`, Command Palette or Cursor Context Menu | switches the hero portrait to the Iconic Avatar version for the current browser session only |
+| Iconic Mode | `Ctrl + Alt + I`, Command Palette or Cursor Context Menu | switches the hero portrait and unlocks a session-only hacker interface theme with terminal typography, green signal colors and sharper panels |
 | Live Skill Graph | click nodes in the stack section | capability graph emits short readouts for APEX, PL/SQL, JavaScript, data models, processes and delivery |
 | Recruiter Mode | run `Recruiter Mode` from the command palette | decision panel with fit, differentiator, proof points, best-fit roles, skill matrix, PDF export and copy-mail |
 | Bootable Vita | click `play timeline` on the Vita page | plays the career timeline as an `EXPERIENCE_LOG`, opens the station logs and focuses entries one after another |
