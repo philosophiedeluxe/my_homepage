@@ -2398,6 +2398,9 @@ html.iconic-avatar-active .hero-visual::after,
 .portfolio-window {
   position: absolute;
   inset: 36px 34px 28px;
+  display: grid;
+  align-content: start;
+  gap: 12px;
   padding: 34px 18px 16px;
   border: 1px solid rgba(98, 214, 208, 0.28);
   background: rgba(10, 13, 18, 0.74);
@@ -2426,7 +2429,7 @@ html.iconic-avatar-active .hero-visual::after,
   width: 72%;
   height: 3px;
   display: block;
-  margin-top: 16px;
+  margin-top: 0;
   background: linear-gradient(90deg, var(--accent-2), var(--violet));
   transform: scaleX(0);
   transform-origin: left center;
