@@ -3700,24 +3700,25 @@ main > .section.interior-hero::before {
 }
 
 .skill-graph__trace-path {
-  stroke: rgba(98, 214, 208, 0.2);
+  stroke: rgba(98, 214, 208, 0.24);
   stroke-width: 1;
-  stroke-linecap: round;
-  stroke-dasharray: 14 10 2 10;
-  filter: drop-shadow(0 0 7px rgba(98, 214, 208, 0.16));
-  animation: skill-trace-flow 8200ms linear infinite;
+  stroke-dasharray: 3 7;
+  filter:
+    drop-shadow(0 0 7px rgba(98, 214, 208, 0.18))
+    drop-shadow(0 0 10px rgba(141, 61, 255, 0.08));
+  animation: skill-trace-flow 7600ms linear infinite;
 }
 
 .skill-graph__trace-pulse {
-  stroke: rgba(98, 214, 208, 0.96);
-  stroke-width: 1.6;
+  stroke: rgba(98, 214, 208, 0.9);
+  stroke-width: 1.35;
   stroke-linecap: round;
-  stroke-dasharray: 18 82;
-  stroke-dashoffset: 118;
+  stroke-dasharray: 8 92;
+  stroke-dashoffset: 108;
   filter:
-    drop-shadow(0 0 8px rgba(98, 214, 208, 0.78))
-    drop-shadow(0 0 14px rgba(141, 61, 255, 0.22));
-  animation: skill-trace-pulse 4400ms ease-in-out infinite;
+    drop-shadow(0 0 12px rgba(98, 214, 208, 0.58))
+    drop-shadow(0 0 14px rgba(141, 61, 255, 0.16));
+  animation: skill-trace-pulse 3800ms cubic-bezier(0.45, 0, 0.25, 1) infinite;
 }
 
 .skill-graph__core {
@@ -3776,15 +3777,13 @@ main > .section.interior-hero::before {
   position: absolute;
   top: 50%;
   right: 100%;
-  width: 86px;
-  height: 2px;
-  border-radius: 999px;
-  background: linear-gradient(90deg, transparent, rgba(141, 61, 255, 0.54), rgba(98, 214, 208, 0.82));
+  width: 74px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(141, 61, 255, 0.42), rgba(98, 214, 208, 0.58));
   transform: translateY(-50%);
-  transform-origin: right center;
-  opacity: 0.72;
-  filter: drop-shadow(0 0 10px rgba(98, 214, 208, 0.32));
-  animation: skill-link-signal 4400ms ease-in-out infinite;
+  opacity: 0.58;
+  filter: drop-shadow(0 0 8px rgba(98, 214, 208, 0.22));
+  animation: skill-link-scan 2800ms ease-in-out infinite;
   pointer-events: none;
 }
 
@@ -3801,8 +3800,7 @@ main > .section.interior-hero::before {
 .skill-graph button:nth-of-type(5)::before {
   right: auto;
   left: 100%;
-  background: linear-gradient(90deg, rgba(98, 214, 208, 0.82), rgba(141, 61, 255, 0.54), transparent);
-  transform-origin: left center;
+  background: linear-gradient(90deg, rgba(98, 214, 208, 0.58), rgba(141, 61, 255, 0.42), transparent);
 }
 
 .skill-graph button:hover,
@@ -3850,39 +3848,24 @@ main > .section.interior-hero::before {
 
 @keyframes skill-trace-flow {
   to {
-    stroke-dashoffset: -72;
+    stroke-dashoffset: -100;
   }
 }
 
 @keyframes skill-trace-pulse {
   0% {
     opacity: 0;
-    stroke-dashoffset: 118;
+    stroke-dashoffset: 108;
   }
 
-  12%,
-  42% {
-    opacity: 1;
-  }
-
-  50% {
-    opacity: 0;
-    stroke-dashoffset: 0;
-  }
-
-  52% {
-    opacity: 0;
-    stroke-dashoffset: -18;
-  }
-
-  64%,
-  92% {
+  10%,
+  74% {
     opacity: 1;
   }
 
   100% {
     opacity: 0;
-    stroke-dashoffset: -118;
+    stroke-dashoffset: 0;
   }
 }
 
@@ -3940,42 +3923,16 @@ main > .section.interior-hero::before {
   }
 }
 
-@keyframes skill-link-signal {
-  0% {
-    opacity: 0.42;
-    transform: translateY(-50%) scaleX(0);
-  }
-
-  22% {
-    opacity: 0.96;
-    transform: translateY(-50%) scaleX(1);
-  }
-
-  25% {
-    opacity: 0.96;
-    transform: translateY(-50%) scaleX(1);
-  }
-
-  47%,
-  50% {
-    opacity: 0.42;
-    transform: translateY(-50%) scaleX(0);
-  }
-
-  72% {
-    opacity: 0.96;
-    transform: translateY(-50%) scaleX(1);
-  }
-
-  75% {
-    opacity: 0.96;
-    transform: translateY(-50%) scaleX(1);
-  }
-
-  97%,
+@keyframes skill-link-scan {
+  0%,
   100% {
-    opacity: 0.42;
-    transform: translateY(-50%) scaleX(0);
+    opacity: 0.34;
+    width: 54px;
+  }
+
+  50% {
+    opacity: 0.78;
+    width: 86px;
   }
 }
 
