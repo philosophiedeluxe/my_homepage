@@ -1,5 +1,6 @@
 param(
-  [switch]$Screenshots
+  [switch]$Screenshots,
+  [switch]$Pwa
 )
 
 $ErrorActionPreference = "Stop"
@@ -35,6 +36,39 @@ function Add-LocalReference {
   }
 }
 
+function Assert-Check {
+  param(
+    [bool]$Condition,
+    [string]$Message
+  )
+
+  if (-not $Condition) {
+    throw $Message
+  }
+}
+
+function Test-JsonField {
+  param(
+    [object]$Object,
+    [string]$Name
+  )
+
+  if ($null -eq $Object) { return $false }
+  if (-not ($Object.PSObject.Properties.Name -contains $Name)) { return $false }
+  $value = $Object.$Name
+  if ($null -eq $value) { return $false }
+  if ($value -is [array]) { return $value.Count -gt 0 }
+  return -not [string]::IsNullOrWhiteSpace([string]$value)
+}
+
+function Resolve-SitePath {
+  param([string]$Raw)
+
+  $clean = ($Raw -split '[?#]')[0].Trim()
+  if ([string]::IsNullOrWhiteSpace($clean)) { return $null }
+  return Join-Path $Root $clean
+}
+
 foreach ($file in $htmlFiles) {
   $content = Get-Content -Raw -LiteralPath $file.FullName
   foreach ($match in [regex]::Matches($content, '(?:href|src|data-cert-src)=["'']([^"'']+)["'']')) {
@@ -46,6 +80,14 @@ foreach ($file in $htmlFiles) {
     foreach ($source in $sources) {
       $raw = ($source.Trim() -split '\s+')[0]
       Add-LocalReference -BaseDirectory $file.DirectoryName -Owner "$($file.Name) srcset" -Raw $raw
+    }
+  }
+
+  foreach ($match in [regex]::Matches($content, '<script[^>]+type=["'']application/ld\+json["''][^>]*>(.*?)</script>', [System.Text.RegularExpressions.RegexOptions]::Singleline)) {
+    try {
+      $null = $match.Groups[1].Value | ConvertFrom-Json
+    } catch {
+      throw "Invalid JSON-LD in $($file.Name): $($_.Exception.Message)"
     }
   }
 }
@@ -85,6 +127,52 @@ if (-not (Test-Path -LiteralPath $serviceWorkerPath)) {
   foreach ($match in [regex]::Matches($serviceWorker, '["''](\./[^"'']+)["'']')) {
     Add-LocalReference -BaseDirectory $Root -Owner "sw.js" -Raw $match.Groups[1].Value
   }
+}
+
+if ($Pwa) {
+  Write-Host "Running PWA installability audit..."
+  Assert-Check (Test-Path -LiteralPath $manifestPath) "PWA audit failed: manifest.webmanifest is missing."
+  Assert-Check (Test-Path -LiteralPath $serviceWorkerPath) "PWA audit failed: sw.js is missing."
+  Assert-Check (Test-Path -LiteralPath (Join-Path $Root "offline.html")) "PWA audit failed: offline.html is missing."
+
+  $manifest = Get-Content -Raw -LiteralPath $manifestPath | ConvertFrom-Json
+  foreach ($field in @("name", "short_name", "start_url", "scope", "display", "theme_color", "background_color", "icons")) {
+    Assert-Check (Test-JsonField -Object $manifest -Name $field) "PWA audit failed: manifest field '$field' is missing or empty."
+  }
+
+  Assert-Check ($manifest.display -in @("standalone", "fullscreen", "minimal-ui")) "PWA audit failed: manifest display should be standalone, fullscreen or minimal-ui."
+
+  $icons = @($manifest.icons)
+  Assert-Check ($icons.Count -gt 0) "PWA audit failed: manifest contains no icons."
+  Assert-Check (($icons | Where-Object { $_.sizes -match '192x192' }).Count -gt 0) "PWA audit failed: manifest needs a 192x192 icon."
+  Assert-Check (($icons | Where-Object { $_.sizes -match '512x512' }).Count -gt 0) "PWA audit failed: manifest needs a 512x512 icon."
+  Assert-Check (($icons | Where-Object { $_.purpose -match 'maskable' }).Count -gt 0) "PWA audit failed: manifest needs at least one maskable icon."
+
+  foreach ($icon in $icons) {
+    Assert-Check (Test-JsonField -Object $icon -Name "src") "PWA audit failed: an icon has no src."
+    Assert-Check (Test-Path -LiteralPath (Resolve-SitePath $icon.src)) "PWA audit failed: icon file missing: $($icon.src)"
+  }
+
+  $serviceWorker = Get-Content -Raw -LiteralPath $serviceWorkerPath
+  foreach ($needle in @("install", "activate", "fetch", "message", "SKIP_WAITING", "offline.html", "clients.claim")) {
+    Assert-Check ($serviceWorker -match [regex]::Escape($needle)) "PWA audit failed: service worker does not contain '$needle'."
+  }
+
+  foreach ($page in @("index.html", "vita.html", "signals.html", "impressum.html", "datenschutz.html", "offline.html")) {
+    $path = Join-Path $Root $page
+    Assert-Check (Test-Path -LiteralPath $path) "PWA audit failed: $page is missing."
+    $content = Get-Content -Raw -LiteralPath $path
+    Assert-Check ($content -match 'rel=["'']manifest["'']') "PWA audit failed: $page has no manifest link."
+    Assert-Check ($content -match 'name=["'']theme-color["'']') "PWA audit failed: $page has no theme-color meta tag."
+    Assert-Check ($content -match 'rel=["'']apple-touch-icon["'']') "PWA audit failed: $page has no apple-touch-icon."
+  }
+
+  foreach ($page in @("index.html", "vita.html")) {
+    $content = Get-Content -Raw -LiteralPath (Join-Path $Root $page)
+    Assert-Check ($content -match 'application/ld\+json') "PWA audit failed: $page should include JSON-LD structured data."
+  }
+
+  Write-Host "PWA audit passed."
 }
 
 if ($missing.Count -gt 0) {

@@ -1,4 +1,4 @@
-const PK_PORTFOLIO_CACHE = "pk-portfolio-cache-20260703-favicon1";
+const PK_PORTFOLIO_CACHE = "pk-portfolio-cache-20260703-pwaruntime1";
 const PK_PORTFOLIO_OFFLINE_URL = "./offline.html";
 
 const PRECACHE_ASSETS = [
@@ -10,25 +10,25 @@ const PRECACHE_ASSETS = [
   "./datenschutz.html",
   "./404.html",
   PK_PORTFOLIO_OFFLINE_URL,
-  "./style.css?v=20260703-favicon1",
-  "./app.js?v=20260703-favicon1",
+  "./style.css?v=20260703-pwaruntime1",
+  "./app.js?v=20260703-pwaruntime1",
   "./manifest.webmanifest",
-  "./image/pwa/favicon-32.png?v=20260703-favicon1",
-  "./image/pwa/favicon-48.png?v=20260703-favicon1",
-  "./image/profile-avatar.jpg?v=20260703-favicon1",
+  "./image/pwa/favicon-32.png?v=20260703-pwaruntime1",
+  "./image/pwa/favicon-48.png?v=20260703-pwaruntime1",
+  "./image/profile-avatar.jpg?v=20260703-pwaruntime1",
   "./image/iconic-720.jpg?v=20260616-1",
   "./image/iconic-960.jpg?v=20260616-1",
   "./image/iconic.jpg?v=20260616-1",
-  "./image/iconic-avatar-720.jpg?v=20260703-favicon1",
-  "./image/iconic-avatar-960.jpg?v=20260703-favicon1",
-  "./image/iconic-avatar.jpg?v=20260703-favicon1",
-  "./image/social-card.jpg?v=20260703-favicon1",
+  "./image/iconic-avatar-720.jpg?v=20260703-pwaruntime1",
+  "./image/iconic-avatar-960.jpg?v=20260703-pwaruntime1",
+  "./image/iconic-avatar.jpg?v=20260703-pwaruntime1",
+  "./image/social-card.jpg?v=20260703-pwaruntime1",
   "./image/no_signal.jpg?v=20260616-1",
-  "./image/pwa/icon-192.png?v=20260703-favicon1",
-  "./image/pwa/icon-512.png?v=20260703-favicon1",
-  "./image/pwa/maskable-192.png?v=20260703-favicon1",
-  "./image/pwa/maskable-512.png?v=20260703-favicon1",
-  "./image/pwa/apple-touch-icon.png?v=20260703-favicon1",
+  "./image/pwa/icon-192.png?v=20260703-pwaruntime1",
+  "./image/pwa/icon-512.png?v=20260703-pwaruntime1",
+  "./image/pwa/maskable-192.png?v=20260703-pwaruntime1",
+  "./image/pwa/maskable-512.png?v=20260703-pwaruntime1",
+  "./image/pwa/apple-touch-icon.png?v=20260703-pwaruntime1",
   "./image/Cert/1689164479048.jpg",
   "./image/Cert/1691131621481.jpg",
   "./image/Cert/1691131621482.jpg",
@@ -41,7 +41,6 @@ self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(PK_PORTFOLIO_CACHE)
       .then((cache) => cache.addAll(PRECACHE_ASSETS))
-      .then(() => self.skipWaiting())
   );
 });
 
@@ -93,4 +92,10 @@ self.addEventListener("fetch", (event) => {
       }))
       .catch(() => Response.error())
   );
+});
+
+self.addEventListener("message", (event) => {
+  if (event.data?.type === "SKIP_WAITING") {
+    self.skipWaiting();
+  }
 });

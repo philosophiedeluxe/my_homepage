@@ -50,8 +50,10 @@ The site combines a clean dark visual style with a technical portfolio structure
 - Hidden Signal Index page as an internal Easter Egg manual
 - Developer Operating Layer with System Trace, Command Palette, Recruiter Mode, Live Skill Graph and Bootable Vita playback
 - Session-only Iconic Mode with avatar hero, hacker palette and terminal typography
-- Installable Progressive Web App with manifest, service worker, app icons and offline fallback
-- Lightweight QA script for local JS, HTML, `srcset`, certificate and CSS asset checks
+- Installable Progressive Web App with manifest, service worker, app icons, offline fallback and runtime status panel
+- Service Worker update notification with `new build available` reload flow
+- Adaptive runtime labels for standalone mode, color scheme, cache state and Iconic Mode
+- Lightweight QA script for local JS, HTML, `srcset`, certificate, CSS asset and PWA installability checks
 - GitHub Pages compatible without build process
 
 ## Tech Stack
@@ -113,6 +115,8 @@ PWA files:
 - `sw.js` precaches the static portfolio shell and serves cached assets when available.
 - `offline.html` is a styled fallback for navigation requests while offline.
 - `image/pwa/` contains the generated PNG app icons, favicon sizes and maskable variants.
+- The Command Palette contains `PWA Runtime`, which opens a small technical status panel for installability, standalone mode, cache readiness, update state, color scheme and Iconic Mode.
+- When a new service worker build is waiting, the page shows a terminal-style update toast with a reload action.
 
 Important deployment note: whenever `style.css`, `app.js`, core HTML or relevant assets change, bump the cache version in the HTML query strings, `manifest.webmanifest` and `sw.js`. This prevents installed instances from holding an old interface shell too long.
 
@@ -189,6 +193,7 @@ The Easter eggs are intentionally subtle. They are implemented in `setupEasterEg
 | Signal Index | open the small footer signal or the Dev Console link | hidden `signals.html` page listing the known interaction signals; marked `noindex` and intentionally omitted from the main navigation |
 | System Trace | click `trace profile` in the hero or run it from `Ctrl + K` | scans profile areas as `PROFILE_NODE`, `DELIVERY_MODULES`, `CAPABILITY_GRAPH`, `EXPERIENCE_LOG` and `TRUST_CHAIN` with animated links, terminal output and clickable navigation nodes |
 | Command Palette | press `Ctrl + K` | command interface for profile trace, resume, stack focus, recruiter mode, mail, GitHub, Avatar Hero, Signal Index and Vita print |
+| PWA Runtime | run `PWA Runtime` from the command palette | opens install/update/cache/standalone status for the installable app shell |
 | Iconic Mode | `Ctrl + Alt + I`, Command Palette or Cursor Context Menu | switches the hero portrait and unlocks a session-only hacker interface theme with terminal typography, green signal colors and sharper panels |
 | Live Skill Graph | click nodes in the stack section | capability graph emits short readouts for APEX, PL/SQL, JavaScript, data models, processes and delivery |
 | Recruiter Mode | run `Recruiter Mode` from the command palette | decision panel with fit, differentiator, proof points, best-fit roles, skill matrix, PDF export and copy-mail |
@@ -258,6 +263,14 @@ A lightweight PowerShell check script is included:
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\tools\check-site.ps1
 ```
+
+For the deeper local PWA audit:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\tools\check-site.ps1 -Pwa
+```
+
+The `-Pwa` mode checks manifest installability fields, icon sizes, maskable icons, service-worker update/offline hooks, page-level PWA metadata and JSON-LD presence on the profile pages.
 
 Optional visual smoke screenshots:
 

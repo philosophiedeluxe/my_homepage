@@ -1211,21 +1211,275 @@
   }
 
   function setupProgressiveWebApp() {
-    if (!("serviceWorker" in navigator)) return;
-
     const isLocalhost = ["localhost", "127.0.0.1", "[::1]"].includes(window.location.hostname);
-    if (window.location.protocol !== "https:" && !isLocalhost) return;
+    const secureRuntime = window.location.protocol === "https:" || isLocalhost;
+    const displayStandalone = window.matchMedia("(display-mode: standalone)");
+    const displayFullscreen = window.matchMedia("(display-mode: fullscreen)");
+    const displayMinimalUi = window.matchMedia("(display-mode: minimal-ui)");
+    let deferredInstallPrompt = null;
+    let waitingWorker = null;
+    let reloadingForUpdate = false;
+    const status = {
+      supported: "serviceWorker" in navigator,
+      secure: secureRuntime,
+      installable: false,
+      installed: false,
+      standalone: Boolean(window.navigator.standalone) || displayStandalone.matches || displayFullscreen.matches || displayMinimalUi.matches,
+      controlled: Boolean(navigator.serviceWorker?.controller),
+      cacheReady: false,
+      updateReady: false,
+      colorScheme: window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark"
+    };
+    const labels = {
+      de: {
+        title: "PK_APP_RUNTIME",
+        install: "App installieren",
+        open: "Runtime anzeigen",
+        reload: "Neu laden",
+        ready: "offline cache ready",
+        standby: "pwa standby",
+        unsupported: "service worker offline",
+        installable: "install app",
+        installed: "standalone mode detected",
+        controlled: "service worker active",
+        update: "new build available",
+        updated: "build switch armed",
+        dark: "dark runtime",
+        light: "light runtime",
+        iconic: "iconic mode detected"
+      },
+      en: {
+        title: "PK_APP_RUNTIME",
+        install: "Install app",
+        open: "Show runtime",
+        reload: "Reload",
+        ready: "offline cache ready",
+        standby: "pwa standby",
+        unsupported: "service worker offline",
+        installable: "install app",
+        installed: "standalone mode detected",
+        controlled: "service worker active",
+        update: "new build available",
+        updated: "build switch armed",
+        dark: "dark runtime",
+        light: "light runtime",
+        iconic: "iconic mode detected"
+      },
+      es: {
+        title: "PK_APP_RUNTIME",
+        install: "Instalar app",
+        open: "Mostrar runtime",
+        reload: "Recargar",
+        ready: "offline cache ready",
+        standby: "pwa standby",
+        unsupported: "service worker offline",
+        installable: "install app",
+        installed: "standalone mode detected",
+        controlled: "service worker active",
+        update: "new build available",
+        updated: "build switch armed",
+        dark: "dark runtime",
+        light: "light runtime",
+        iconic: "iconic mode detected"
+      },
+      ja: {
+        title: "PK_APP_RUNTIME",
+        install: "App install",
+        open: "Runtime表示",
+        reload: "Reload",
+        ready: "offline cache ready",
+        standby: "pwa standby",
+        unsupported: "service worker offline",
+        installable: "install app",
+        installed: "standalone mode detected",
+        controlled: "service worker active",
+        update: "new build available",
+        updated: "build switch armed",
+        dark: "dark runtime",
+        light: "light runtime",
+        iconic: "iconic mode detected"
+      }
+    };
+
+    const runtime = document.createElement("aside");
+    runtime.className = "pwa-runtime-panel";
+    runtime.setAttribute("aria-live", "polite");
+    runtime.setAttribute("aria-label", "PWA runtime status");
+    runtime.innerHTML = `
+      <div class="pwa-runtime-panel__bar">
+        <span aria-hidden="true"><b></b><b></b><b></b></span>
+        <strong></strong>
+        <button type="button" data-pwa-runtime-dismiss aria-label="Runtime ausblenden">×</button>
+      </div>
+      <div class="pwa-runtime-panel__body">
+        <p data-pwa-runtime-line></p>
+        <div class="pwa-runtime-panel__chips" data-pwa-runtime-chips></div>
+      </div>
+      <div class="pwa-runtime-panel__actions">
+        <button type="button" data-pwa-install></button>
+        <button type="button" data-pwa-reload></button>
+      </div>
+    `;
+    document.body.appendChild(runtime);
+
+    function copy() {
+      return labels[document.documentElement.dataset.lang || DEFAULT_LANG] || labels[DEFAULT_LANG];
+    }
+
+    function updateRuntimeClasses() {
+      root.classList.toggle("runtime-pwa-supported", status.supported);
+      root.classList.toggle("runtime-pwa-secure", status.secure);
+      root.classList.toggle("runtime-pwa-installable", status.installable);
+      root.classList.toggle("runtime-pwa-installed", status.installed || status.standalone);
+      root.classList.toggle("runtime-pwa-standalone", status.standalone);
+      root.classList.toggle("runtime-pwa-controlled", status.controlled);
+      root.classList.toggle("runtime-pwa-cache-ready", status.cacheReady);
+      root.classList.toggle("runtime-pwa-update-ready", status.updateReady);
+      root.classList.toggle("runtime-color-light", status.colorScheme === "light");
+      root.classList.toggle("runtime-color-dark", status.colorScheme !== "light");
+    }
+
+    function statusLine() {
+      const text = copy();
+      if (!status.supported || !status.secure) return text.unsupported;
+      if (status.updateReady) return text.update;
+      if (status.standalone || status.installed) return text.installed;
+      if (status.installable) return text.installable;
+      if (status.cacheReady || status.controlled) return text.ready;
+      return text.standby;
+    }
+
+    function renderRuntimePanel(forceVisible = false) {
+      const text = copy();
+      runtime.querySelector(".pwa-runtime-panel__bar strong").textContent = text.title;
+      runtime.querySelector("[data-pwa-runtime-line]").textContent = statusLine();
+      const chips = [
+        status.cacheReady || status.controlled ? text.controlled : text.standby,
+        status.colorScheme === "light" ? text.light : text.dark,
+        root.classList.contains("iconic-avatar-active") ? text.iconic : null
+      ].filter(Boolean);
+      runtime.querySelector("[data-pwa-runtime-chips]").innerHTML = chips.map((chip) => `<span>${chip}</span>`).join("");
+      const installButton = runtime.querySelector("[data-pwa-install]");
+      const reloadButton = runtime.querySelector("[data-pwa-reload]");
+      installButton.textContent = text.install;
+      reloadButton.textContent = text.reload;
+      installButton.hidden = !status.installable || status.standalone || status.installed;
+      reloadButton.hidden = !status.updateReady;
+      runtime.classList.toggle("is-update-ready", status.updateReady);
+      runtime.classList.toggle("is-visible", forceVisible || status.updateReady);
+      updateRuntimeClasses();
+    }
+
+    async function installApp() {
+      if (!deferredInstallPrompt) {
+        runtime.classList.add("is-visible");
+        renderRuntimePanel(true);
+        return;
+      }
+      deferredInstallPrompt.prompt();
+      const choice = await deferredInstallPrompt.userChoice.catch(() => null);
+      if (choice?.outcome === "accepted") {
+        status.installed = true;
+        status.installable = false;
+        deferredInstallPrompt = null;
+      }
+      renderRuntimePanel(true);
+    }
+
+    function showUpdateAvailable(worker) {
+      waitingWorker = worker;
+      status.updateReady = true;
+      renderRuntimePanel(true);
+    }
+
+    function reloadToLatestBuild() {
+      if (!waitingWorker) {
+        window.location.reload();
+        return;
+      }
+      reloadingForUpdate = true;
+      waitingWorker.postMessage({ type: "SKIP_WAITING" });
+      runtime.querySelector("[data-pwa-runtime-line]").textContent = copy().updated;
+    }
+
+    runtime.querySelector("[data-pwa-runtime-dismiss]").addEventListener("click", () => {
+      if (!status.updateReady) runtime.classList.remove("is-visible");
+    });
+    runtime.querySelector("[data-pwa-install]").addEventListener("click", installApp);
+    runtime.querySelector("[data-pwa-reload]").addEventListener("click", reloadToLatestBuild);
+    document.addEventListener("pk:lang-change", () => renderRuntimePanel(runtime.classList.contains("is-visible")));
+    document.addEventListener("pk:pwa-runtime-open", () => renderRuntimePanel(true));
+    document.addEventListener("pk:pwa-install", installApp);
+    document.addEventListener("pk:toggle-iconic-avatar", () => window.setTimeout(() => renderRuntimePanel(runtime.classList.contains("is-visible")), 40));
+
+    window.addEventListener("beforeinstallprompt", (event) => {
+      event.preventDefault();
+      deferredInstallPrompt = event;
+      status.installable = true;
+      renderRuntimePanel(false);
+    });
+
+    window.addEventListener("appinstalled", () => {
+      status.installed = true;
+      status.installable = false;
+      deferredInstallPrompt = null;
+      renderRuntimePanel(true);
+    });
+
+    const updateDisplayMode = () => {
+      status.standalone = Boolean(window.navigator.standalone) || displayStandalone.matches || displayFullscreen.matches || displayMinimalUi.matches;
+      renderRuntimePanel(runtime.classList.contains("is-visible"));
+    };
+    [displayStandalone, displayFullscreen, displayMinimalUi].forEach((query) => query.addEventListener?.("change", updateDisplayMode));
+    window.matchMedia("(prefers-color-scheme: light)").addEventListener?.("change", (event) => {
+      status.colorScheme = event.matches ? "light" : "dark";
+      renderRuntimePanel(runtime.classList.contains("is-visible"));
+    });
+
+    window.pkPwaRuntime = {
+      getStatus: () => ({ ...status }),
+      open: () => renderRuntimePanel(true),
+      install: installApp
+    };
+
+    renderRuntimePanel(false);
+
+    if (!status.supported || !status.secure) return;
 
     window.addEventListener("load", () => {
       navigator.serviceWorker.register(PWA_SERVICE_WORKER_URL, { scope: "./" })
         .then((registration) => {
-          if ("connection" in navigator && navigator.connection?.saveData) return;
-          registration.update();
+          const inspectRegistration = () => {
+            status.controlled = Boolean(navigator.serviceWorker.controller);
+            status.cacheReady = Boolean(registration.active || navigator.serviceWorker.controller);
+            if (registration.waiting && navigator.serviceWorker.controller) showUpdateAvailable(registration.waiting);
+            renderRuntimePanel(runtime.classList.contains("is-visible"));
+          };
+
+          inspectRegistration();
+          navigator.serviceWorker.ready.then(() => {
+            status.cacheReady = true;
+            status.controlled = Boolean(navigator.serviceWorker.controller);
+            renderRuntimePanel(runtime.classList.contains("is-visible"));
+          });
+          registration.addEventListener("updatefound", () => {
+            const worker = registration.installing;
+            if (!worker) return;
+            worker.addEventListener("statechange", () => {
+              if (worker.state === "installed" && navigator.serviceWorker.controller) showUpdateAvailable(worker);
+            });
+          });
+          if (!("connection" in navigator && navigator.connection?.saveData)) registration.update();
         })
         .catch(() => {
           // PWA support is progressive: the portfolio remains fully usable without it.
         });
     }, { once: true });
+
+    navigator.serviceWorker.addEventListener("controllerchange", () => {
+      if (!reloadingForUpdate) return;
+      window.location.reload();
+    });
   }
 
   function getStoredLang() {
@@ -2722,8 +2976,8 @@
 
   function setupHeroAvatarEgg() {
     const avatarSources = {
-      src: "./image/iconic-avatar.jpg?v=20260703-favicon1",
-      srcset: "./image/iconic-avatar-720.jpg?v=20260703-favicon1 720w, ./image/iconic-avatar-960.jpg?v=20260703-favicon1 960w, ./image/iconic-avatar.jpg?v=20260703-favicon1 1122w",
+      src: "./image/iconic-avatar.jpg?v=20260703-pwaruntime1",
+      srcset: "./image/iconic-avatar-720.jpg?v=20260703-pwaruntime1 720w, ./image/iconic-avatar-960.jpg?v=20260703-pwaruntime1 960w, ./image/iconic-avatar.jpg?v=20260703-pwaruntime1 1122w",
       alt: "Stilisiertes Hero-Portrait mit Iconic Avatar"
     };
 
@@ -3309,6 +3563,8 @@ shortcut: ctrl + alt + d</pre>
         printHint: "PDF/Print auslösen",
         avatar: "Avatar Hero",
         avatarHint: "Iconic Mode für diese Session umschalten",
+        pwa: "PWA Runtime",
+        pwaHint: "Install-, Offline- und Update-Status anzeigen",
         traceTitle: "PROFILE_TRACE",
         traceSubtitle: "Scanning profile graph",
         traceComplete: "trace complete",
@@ -3358,6 +3614,8 @@ shortcut: ctrl + alt + d</pre>
         printHint: "Trigger PDF/print",
         avatar: "Avatar Hero",
         avatarHint: "Toggle the iconic hero for this session",
+        pwa: "PWA Runtime",
+        pwaHint: "Show install, offline and update status",
         traceTitle: "PROFILE_TRACE",
         traceSubtitle: "Scanning profile graph",
         traceComplete: "trace complete",
@@ -3407,6 +3665,8 @@ shortcut: ctrl + alt + d</pre>
         printHint: "Lanzar PDF/print",
         avatar: "Avatar Hero",
         avatarHint: "Alternar iconic hero para esta sesión",
+        pwa: "PWA Runtime",
+        pwaHint: "Mostrar estado de instalación, offline y updates",
         traceTitle: "PROFILE_TRACE",
         traceSubtitle: "Scanning profile graph",
         traceComplete: "trace complete",
@@ -3456,6 +3716,8 @@ shortcut: ctrl + alt + d</pre>
         printHint: "PDF/Printを実行",
         avatar: "Avatar Hero",
         avatarHint: "このSessionだけIconic Modeを切替",
+        pwa: "PWA Runtime",
+        pwaHint: "Install、Offline、Update状態を表示",
         traceTitle: "PROFILE_TRACE",
         traceSubtitle: "profile graphをスキャン中",
         traceComplete: "trace complete",
@@ -3558,7 +3820,8 @@ shortcut: ctrl + alt + d</pre>
         { id: "github", code: "06", action: () => window.open("https://github.com/philosophiedeluxe", "_blank", "noreferrer") },
         { id: "signals", code: "07", action: () => { window.location.href = localizedPageHref("./signals.html"); } },
         { id: "print", code: "08", action: () => printVita() },
-        { id: "avatar", code: "09", action: () => document.dispatchEvent(new CustomEvent("pk:toggle-iconic-avatar")) }
+        { id: "avatar", code: "09", action: () => document.dispatchEvent(new CustomEvent("pk:toggle-iconic-avatar")) },
+        { id: "pwa", code: "10", action: () => document.dispatchEvent(new CustomEvent("pk:pwa-runtime-open")) }
       ];
     }
 

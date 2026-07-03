@@ -14,6 +14,14 @@ powershell -ExecutionPolicy Bypass -File .\tools\check-site.ps1 -Screenshots
 
 The screenshot mode validates that Chrome actually writes `_qa_*.png` files. If it fails with `Screenshot was not created`, run it from a normal local PowerShell session where Chrome headless is allowed to create files in the repository root.
 
+For the Lighthouse-style local PWA audit:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\tools\check-site.ps1 -Pwa
+```
+
+This checks manifest installability fields, 192/512 and maskable icons, service-worker install/activate/fetch/update hooks, offline fallback, page-level PWA metadata and JSON-LD parsing. It intentionally stays dependency-free so it fits the static GitHub Pages setup.
+
 Firefox profiling pass:
 
 1. Open `index.html` in Firefox.
@@ -45,9 +53,11 @@ Hidden interface checks:
 
 PWA checks:
 
-1. Run `powershell -ExecutionPolicy Bypass -File .\tools\check-site.ps1` and confirm manifest and service worker checks pass.
+1. Run `powershell -ExecutionPolicy Bypass -File .\tools\check-site.ps1 -Pwa` and confirm the PWA audit passes.
 2. Serve the repository through `python -m http.server 8000` or publish to GitHub Pages; service workers do not run from `file://`.
-3. In Chrome or Edge DevTools, open Application > Manifest and confirm name, icons, start URL, scope and installability.
-4. Install the app and verify it opens in standalone mode without browser chrome.
-5. After one successful online load, switch DevTools Network to Offline and reload `index.html`; the cached page or `offline.html` fallback should appear.
-6. After changing cached files, bump the cache version in HTML asset URLs, `manifest.webmanifest` and `sw.js`.
+3. Open `Ctrl + K` > `PWA Runtime` and verify installability, cache state, standalone state, color scheme and Iconic Mode labels update.
+4. In Chrome or Edge DevTools, open Application > Manifest and confirm name, icons, start URL, scope and installability.
+5. Install the app and verify it opens in standalone mode without browser chrome.
+6. After one successful online load, switch DevTools Network to Offline and reload `index.html`; the cached page or `offline.html` fallback should appear.
+7. After deploying a changed service worker, verify the terminal-style `new build available` prompt appears and reloads into the new shell.
+8. After changing cached files, bump the cache version in HTML asset URLs, `manifest.webmanifest` and `sw.js`.

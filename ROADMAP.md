@@ -1,6 +1,6 @@
 # Homepage Roadmap
 
-Stand: 01.07.2026
+Stand: 03.07.2026
 
 ## Kurzfazit
 
@@ -34,7 +34,8 @@ Die Homepage ist jetzt eine moderne, statische Portfolio-Seite mit starkem Hero,
 - Cinematic Boot Sequence, Hero-Terminal-Unlock, gestaffelter Navigations-Boot und Cursor-Handshake ergaenzt.
 - Secret Dev Console, Ctrl-Rechtsklick-Kontextmenue und Signal Index als versteckte Entwickler-Schicht ergaenzt.
 - Developer Operating Layer ergaenzt: System Trace, Command Palette, Recruiter Mode, Live Skill Graph, Projekt-Mini-Simulationen, Iconic Hero und Bootable Vita mit aufklappbaren Experience Logs.
-- PWA-Grundlage ergaenzt: Manifest, Service Worker, App-Icons, Standalone-Start und Offline-Fallback fuer installierbare Nutzung.
+- PWA-Schicht ergaenzt: Manifest, Service Worker, App-Icons, Standalone-Start, Offline-Fallback, Runtime-Statuspanel, Update-Notification und lokaler PWA-Audit.
+- JSON-LD erweitert: Person, ProfilePage, Portfolio-Work, Skill-Liste und Zertifikatskontext strukturierter ausgezeichnet.
 
 ## Erledigte Verbesserungen
 
@@ -112,7 +113,7 @@ Die Homepage ist jetzt eine moderne, statische Portfolio-Seite mit starkem Hero,
 - Footer-Links: LinkedIn, GitHub, Impressum, Datenschutz und Cookie-Einstellungen pruefen.
 - Externe Links: LinkedIn und GitHub in neuem Browserkontext pruefen.
 - SEO: Canonical URLs, OpenGraph-Bild, `sitemap.xml`, `robots.txt` und JSON-LD pruefen.
-- PWA: Manifest in Chrome/Edge DevTools pruefen, installierte App starten und Offline-Fallback nach einem Online-Ladevorgang testen.
+- PWA: `tools\check-site.ps1 -Pwa` ausfuehren, Runtime-Statuspanel ueber `Ctrl+K` pruefen, Manifest in Chrome/Edge DevTools pruefen, installierte App starten, Offline-Fallback und Update-Notification testen.
 - Vita-PDF: Auf DE, EN, ES und JP jeweils `Vita als PDF erstellen` pruefen und im Druckdialog `Als PDF speichern` testen.
 
 ## Design-Leitplanken
