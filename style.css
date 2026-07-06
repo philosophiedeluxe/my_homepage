@@ -3945,7 +3945,7 @@ main > .section.interior-hero::before {
 }
 
 .vita-page .contact-section h2 {
-  max-width: 22ch;
+  max-width: min(18ch, calc(100% - 210px));
 }
 
 .vita-page .contact-section .contact-actions {
@@ -5960,6 +5960,10 @@ html.recruiter-mode-active .profile-grid article {
 
   .contact-actions {
     margin-top: 0;
+  }
+
+  .vita-page .contact-section h2 {
+    max-width: 100%;
   }
 
   .cookie-consent__card {
