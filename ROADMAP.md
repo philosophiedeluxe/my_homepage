@@ -65,7 +65,7 @@ Die Homepage ist jetzt eine moderne, statische Portfolio-Seite mit starkem Hero,
 - Navigationspunkte `Profil`, `Projekte`, `Stack`, `Vita`, `GitHub`, `Impressum` und `Datenschutz` auf den technischen Label-Stil vereinheitlicht.
 - Sprachumschalter `DE / EN` auf den Eyebrow-/Akzent-Stil gebracht und lesbar gehalten.
 - Brand-Mark `PK` an den Navigationsstil angepasst.
-- Brand-Text `Phil Kirchner` an den Sprachumschalter-Stil angepasst.
+- Brand-Text auf `phil.osophie.deluxe` umgestellt und damit an die angestrebte Domain sowie die PWA-Benennung angepasst.
 - Zertifikats-Ueberschrift auf der Vita-Seite sauber umbrochen, sodass `Projektverstaendnis` vollstaendig in der zweiten Zeile steht.
 - Timeline-Daten auf der Vita-Seite optisch an den Navigationsstil angepasst.
 - Scroll-Parallax schreibt keine CSS-Variablen mehr pro Frame, sondern bewegt Bild und Overlay direkt mit gecachter Hero-Hoehe.

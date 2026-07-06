@@ -1,4 +1,4 @@
-# Phil Kirchner Portfolio
+# phil.osophie.deluxe
 
 ![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-ready-6C00A1?style=for-the-badge)
 ![HTML](https://img.shields.io/badge/HTML-static-111111?style=for-the-badge&logo=html5)

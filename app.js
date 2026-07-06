@@ -375,15 +375,15 @@
 
   const translations = {
     de: {
-      "meta.home.title": "Phil Kirchner - Softwareentwickler",
-      "meta.home.description": "Portfolio von Phil Kirchner: Softwareentwicklung, Oracle APEX, PL/SQL, JavaScript, Java und strukturierte Produktarbeit.",
-      "meta.vita.title": "Phil Kirchner - Vita",
-      "meta.vita.description": "Vita von Phil Kirchner: Softwareentwicklung, Oracle APEX, PL/SQL, Java, Ausbildung, Zertifikate und berufliche Stationen.",
-      "meta.imprint.title": "Phil Kirchner - Impressum",
-      "meta.privacy.title": "Phil Kirchner - Datenschutz",
-      "meta.signals.title": "Phil Kirchner - Signal Index",
+      "meta.home.title": "phil.osophie.deluxe - Softwareentwickler",
+      "meta.home.description": "phil.osophie.deluxe: Portfolio von Phil Kirchner mit Softwareentwicklung, Oracle APEX, PL/SQL, JavaScript, Java und strukturierter Produktarbeit.",
+      "meta.vita.title": "phil.osophie.deluxe - Vita",
+      "meta.vita.description": "phil.osophie.deluxe Vita: Softwareentwicklung, Oracle APEX, PL/SQL, Java, Ausbildung, Zertifikate und berufliche Stationen von Phil Kirchner.",
+      "meta.imprint.title": "phil.osophie.deluxe - Impressum",
+      "meta.privacy.title": "phil.osophie.deluxe - Datenschutz",
+      "meta.signals.title": "phil.osophie.deluxe - Signal Index",
       "meta.signals.description": "Verstecktes Interface-Handbuch der Portfolio-Seite: Easter Eggs, Tastenkombinationen, Cursor-Signale und geheime UI-Protokolle.",
-      "meta.404.title": "Phil Kirchner - Seite nicht gefunden",
+      "meta.404.title": "phil.osophie.deluxe - Seite nicht gefunden",
       "meta.404.description": "Diese Portfolio-Seite wurde nicht gefunden.",
 
       "nav.profile": "Profil",
@@ -644,15 +644,15 @@
     },
 
     en: {
-      "meta.home.title": "Phil Kirchner - Software Developer",
-      "meta.home.description": "Portfolio of Phil Kirchner: software development, Oracle APEX, PL/SQL, JavaScript, Java and structured product thinking.",
-      "meta.vita.title": "Phil Kirchner - Resume",
-      "meta.vita.description": "Resume of Phil Kirchner: software development, Oracle APEX, PL/SQL, Java, education, certificates and professional experience.",
-      "meta.imprint.title": "Phil Kirchner - Legal Notice",
-      "meta.privacy.title": "Phil Kirchner - Privacy",
-      "meta.signals.title": "Phil Kirchner - Signal Index",
+      "meta.home.title": "phil.osophie.deluxe - Software Developer",
+      "meta.home.description": "phil.osophie.deluxe: portfolio of Phil Kirchner with software development, Oracle APEX, PL/SQL, JavaScript, Java and structured product thinking.",
+      "meta.vita.title": "phil.osophie.deluxe - Resume",
+      "meta.vita.description": "phil.osophie.deluxe resume: software development, Oracle APEX, PL/SQL, Java, education, certificates and professional experience of Phil Kirchner.",
+      "meta.imprint.title": "phil.osophie.deluxe - Legal Notice",
+      "meta.privacy.title": "phil.osophie.deluxe - Privacy",
+      "meta.signals.title": "phil.osophie.deluxe - Signal Index",
       "meta.signals.description": "Hidden interface manual of the portfolio site: Easter eggs, shortcuts, cursor signals and secret UI protocols.",
-      "meta.404.title": "Phil Kirchner - Page not found",
+      "meta.404.title": "phil.osophie.deluxe - Page not found",
       "meta.404.description": "This portfolio page was not found.",
 
       "nav.profile": "Profile",
@@ -912,15 +912,15 @@
       "cookie.optionsLabel": "Cookie categories"
     },
     es: {
-      "meta.home.title": "Phil Kirchner - Desarrollador de software",
-      "meta.home.description": "Portfolio de Phil Kirchner: desarrollo de software, Oracle APEX, PL/SQL, JavaScript, Java y trabajo de producto estructurado.",
-      "meta.vita.title": "Phil Kirchner - Vita",
-      "meta.vita.description": "Vita de Phil Kirchner: desarrollo de software, Oracle APEX, PL/SQL, Java, formación, certificados y experiencia profesional.",
-      "meta.imprint.title": "Phil Kirchner - Aviso legal",
-      "meta.privacy.title": "Phil Kirchner - Privacidad",
-      "meta.signals.title": "Phil Kirchner - Signal Index",
+      "meta.home.title": "phil.osophie.deluxe - Desarrollador de software",
+      "meta.home.description": "phil.osophie.deluxe: portfolio de Phil Kirchner con desarrollo de software, Oracle APEX, PL/SQL, JavaScript, Java y trabajo de producto estructurado.",
+      "meta.vita.title": "phil.osophie.deluxe - Vita",
+      "meta.vita.description": "phil.osophie.deluxe Vita: desarrollo de software, Oracle APEX, PL/SQL, Java, formación, certificados y experiencia profesional de Phil Kirchner.",
+      "meta.imprint.title": "phil.osophie.deluxe - Aviso legal",
+      "meta.privacy.title": "phil.osophie.deluxe - Privacidad",
+      "meta.signals.title": "phil.osophie.deluxe - Signal Index",
       "meta.signals.description": "Manual oculto de la interfaz del portfolio: easter eggs, atajos, señales del cursor y protocolos secretos de UI.",
-      "meta.404.title": "Phil Kirchner - Página no encontrada",
+      "meta.404.title": "phil.osophie.deluxe - Página no encontrada",
       "meta.404.description": "Esta página del portfolio no se ha encontrado.",
 
       "nav.profile": "Perfil",
@@ -1180,15 +1180,15 @@
       "cookie.optionsLabel": "Categorías de cookies"
     },
     ja: {
-      "meta.home.title": "Phil Kirchner - ソフトウェア開発者",
-      "meta.home.description": "Phil Kirchnerのポートフォリオ：ソフトウェア開発、Oracle APEX、PL/SQL、JavaScript、Java、構造化されたプロダクトワーク。",
-      "meta.vita.title": "Phil Kirchner - 経歴",
-      "meta.vita.description": "Phil Kirchnerの経歴：ソフトウェア開発、Oracle APEX、PL/SQL、Java、教育、認定資格、職務経験。",
-      "meta.imprint.title": "Phil Kirchner - 法的表示",
-      "meta.privacy.title": "Phil Kirchner - プライバシー",
-      "meta.signals.title": "Phil Kirchner - Signal Index",
+      "meta.home.title": "phil.osophie.deluxe - ソフトウェア開発者",
+      "meta.home.description": "phil.osophie.deluxe：Phil Kirchnerのポートフォリオ。ソフトウェア開発、Oracle APEX、PL/SQL、JavaScript、Java、構造化されたプロダクトワーク。",
+      "meta.vita.title": "phil.osophie.deluxe - 経歴",
+      "meta.vita.description": "phil.osophie.deluxe 経歴：Phil Kirchnerのソフトウェア開発、Oracle APEX、PL/SQL、Java、教育、認定資格、職務経験。",
+      "meta.imprint.title": "phil.osophie.deluxe - 法的表示",
+      "meta.privacy.title": "phil.osophie.deluxe - プライバシー",
+      "meta.signals.title": "phil.osophie.deluxe - Signal Index",
       "meta.signals.description": "ポートフォリオサイトの隠しインターフェース手帳：Easter Egg、ショートカット、カーソル信号、秘密のUIプロトコル。",
-      "meta.404.title": "Phil Kirchner - ページが見つかりません",
+      "meta.404.title": "phil.osophie.deluxe - ページが見つかりません",
       "meta.404.description": "このポートフォリオページは見つかりませんでした。",
       "nav.profile": "プロフィール",
       "nav.projects": "プロジェクト",
@@ -1525,7 +1525,7 @@
     };
     const labels = {
       de: {
-        title: "PK_APP_RUNTIME",
+        title: "POD_APP_RUNTIME",
         install: "App installieren",
         open: "Runtime anzeigen",
         reload: "Neu laden",
@@ -1542,7 +1542,7 @@
         iconic: "iconic mode detected"
       },
       en: {
-        title: "PK_APP_RUNTIME",
+        title: "POD_APP_RUNTIME",
         install: "Install app",
         open: "Show runtime",
         reload: "Reload",
@@ -1559,7 +1559,7 @@
         iconic: "iconic mode detected"
       },
       es: {
-        title: "PK_APP_RUNTIME",
+        title: "POD_APP_RUNTIME",
         install: "Instalar app",
         open: "Mostrar runtime",
         reload: "Recargar",
@@ -1576,7 +1576,7 @@
         iconic: "iconic mode detected"
       },
       ja: {
-        title: "PK_APP_RUNTIME",
+        title: "POD_APP_RUNTIME",
         install: "App install",
         open: "Runtime表示",
         reload: "Reload",
@@ -3276,8 +3276,8 @@
 
   function setupHeroAvatarEgg() {
     const avatarSources = {
-      src: "./image/iconic-avatar.jpg?v=20260706-vitarecruiter1",
-      srcset: "./image/iconic-avatar-720.jpg?v=20260706-vitarecruiter1 720w, ./image/iconic-avatar-960.jpg?v=20260706-vitarecruiter1 960w, ./image/iconic-avatar.jpg?v=20260706-vitarecruiter1 1122w",
+      src: "./image/iconic-avatar.jpg?v=20260706-brand1",
+      srcset: "./image/iconic-avatar-720.jpg?v=20260706-brand1 720w, ./image/iconic-avatar-960.jpg?v=20260706-brand1 960w, ./image/iconic-avatar.jpg?v=20260706-brand1 1122w",
       alt: "Stilisiertes Hero-Portrait mit Iconic Avatar"
     };
 
