@@ -81,6 +81,8 @@ Die Homepage ist jetzt eine moderne, statische Portfolio-Seite mit starkem Hero,
 - Skill Graph im Stack-Bereich und Timeline-Playback auf der Vita-Seite ergaenzt.
 - Timeline-Kacheln auf der Vita-Seite als klickbare Experience Logs erweitert.
 - Vita-Story geschaerft: operativer Hintergrund, Java/SQL-Fundament, Delivery-Zertifizierungen und aktueller Oracle-APEX-Fokus werden als nachvollziehbare Skill-Evolution verbunden.
+- Vita-Recruiter-Layer verdichtet: Decision Panel mit Ideal/Nicht ideal/Sofort einsetzbar, Profile-Fit-Matrix, Timeline-Skill-Tags und fuenfstufige Beweiskette aus Zertifikat, Ausbildung, Praxis, Methodik und operativer Verantwortung.
+- PWA-Runtime-Panel verfeinert: Update-Hinweis bleibt bewusst sichtbar, kann aber per Close-Button sauber ausgeblendet und ueber die Command Palette wieder geoeffnet werden.
 - Iconic Hero als sessionbasierter Avatar-Hero-Schalter ergaenzt.
 - QA-Skript erweitert: prueft lokale `href`/`src`, `srcset`, Zertifikatsdatenquellen, CSS-Asset-URLs, PWA-Manifest, Service-Worker-Precache, Sitemap und JavaScript-Syntax.
 

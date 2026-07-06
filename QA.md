@@ -45,8 +45,8 @@ Hidden interface checks:
 11. Click `trace profile` in the hero and verify trace nodes, terminal output, close behavior and node navigation.
 12. Run Recruiter Mode and verify best-fit roles, skill matrix, PDF export, copy-mail and GitHub action.
 13. Click Live Skill Graph nodes in the stack section and verify the readout updates.
-14. On `vita.html`, verify the recruiter signal console, skill evolution cards and trust-chain panel reveal smoothly and keep their signal animations aligned in desktop and mobile layouts.
-15. On `vita.html`, click each timeline entry and verify the station log expands/collapses. Then click `play timeline` and verify the entries open and highlight one after another.
+14. On `vita.html`, verify the recruiter signal console, decision panel, profile-fit matrix, skill evolution cards and trust-chain panel reveal smoothly and keep their signal animations aligned in desktop and mobile layouts.
+15. On `vita.html`, click each timeline entry and verify the station log expands/collapses while the skill tags remain readable. Then click `play timeline` and verify the entries open and highlight one after another.
 16. Mobile smoke: check nav, Command Palette, trace overlay, Recruiter Mode, certificate lightbox, Vita skill evolution/trust-chain sections and cookie panel at a narrow viewport.
 17. Social preview: run `tools\render-social-card.ps1` after visual copy changes and inspect `image\social-card.jpg`.
 17. Press `Ctrl + Alt + I` and verify the Iconic Hero switches only for the current browser session.
@@ -60,5 +60,5 @@ PWA checks:
 4. In Chrome or Edge DevTools, open Application > Manifest and confirm name, icons, start URL, scope and installability.
 5. Install the app and verify it opens in standalone mode without browser chrome.
 6. After one successful online load, switch DevTools Network to Offline and reload `index.html`; the cached page or `offline.html` fallback should appear.
-7. After deploying a changed service worker, verify the terminal-style `new build available` prompt appears and reloads into the new shell.
+7. After deploying a changed service worker, verify the terminal-style `new build available` prompt appears, can be closed with `x`, can be reopened from `Ctrl + K` > `PWA Runtime`, and reloads into the new shell.
 8. After changing cached files, bump the cache version in HTML asset URLs, `manifest.webmanifest` and `sw.js`.

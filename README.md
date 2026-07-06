@@ -213,7 +213,9 @@ The output is written to `image/social-card.jpg`.
 
 ## Vita and PDF Export
 
-The Vita page includes a dedicated print mode for generating complete PDF files directly through the browser. The visual web version intentionally has more character: a recruiter signal console, skill evolution cards, animated trust chain and clickable bootable timeline entries. These interface layers are excluded from the print document so the exported PDF stays compact and clean.
+The Vita page includes a dedicated print mode for generating complete PDF files directly through the browser. The visual web version intentionally has more character: a recruiter signal console, profile-fit matrix, skill evolution cards, animated trust chain and clickable bootable timeline entries with station-specific skill tags. These interface layers are excluded from the print document so the exported PDF stays compact and clean.
+
+The recruiter-facing layer is intentionally substance-first: it explains why the path from gastronomy, purchasing and process responsibility into software development matters, where the profile fits, where it does not fit, and which proof chain supports that claim.
 
 The print implementation uses:
 

@@ -548,9 +548,11 @@ html[data-lang="ja"] .language-toggle .is-ja::after {
 .reveal-ready .stack-grid article.is-visible,
 .reveal-ready .profile-grid article.is-visible,
 .reveal-ready .vita-decision-console.is-visible,
+.reveal-ready .profile-fit-row.is-visible,
 .reveal-ready .skill-evolution-node.is-visible,
 .reveal-ready .trust-chain-panel.is-visible,
 .reveal-ready .trust-chain-steps span.is-visible,
+.reveal-ready .timeline-skills li.is-visible,
 .reveal-ready .timeline-item.is-visible,
 .reveal-ready .credential-list li.is-visible,
 .reveal-ready .oracle-badge-card.is-visible,
@@ -1312,8 +1314,10 @@ html.runtime-color-dark {
 [data-section-index].easter-section-pulse .stack-grid > article,
 [data-section-index].easter-section-pulse .profile-grid > article,
 [data-section-index].easter-section-pulse .vita-decision-console,
+[data-section-index].easter-section-pulse .profile-fit-row,
 [data-section-index].easter-section-pulse .skill-evolution-node,
 [data-section-index].easter-section-pulse .trust-chain-panel,
+[data-section-index].easter-section-pulse .timeline-skills > li,
 [data-section-index].easter-section-pulse .timeline-item,
 [data-section-index].easter-section-pulse .credential-list > li,
 [data-section-index].easter-section-pulse .proof-card,
@@ -1611,6 +1615,7 @@ html.easter-dev-mode .project-card,
 html.easter-dev-mode .stack-grid > article,
 html.easter-dev-mode .profile-grid > article,
 html.easter-dev-mode .vita-decision-console,
+html.easter-dev-mode .profile-fit-matrix,
 html.easter-dev-mode .skill-evolution-node,
 html.easter-dev-mode .trust-chain-panel,
 html.easter-dev-mode .timeline-item,
@@ -1748,6 +1753,7 @@ html.easter-dev-language-mode .site-shell::after {
   [data-section-index].easter-section-pulse .stack-grid > article,
   [data-section-index].easter-section-pulse .profile-grid > article,
   [data-section-index].easter-section-pulse .vita-decision-console,
+  [data-section-index].easter-section-pulse .profile-fit-row,
   [data-section-index].easter-section-pulse .skill-evolution-node,
   [data-section-index].easter-section-pulse .trust-chain-panel,
   [data-section-index].easter-section-pulse .timeline-item,
@@ -2353,6 +2359,7 @@ html.iconic-avatar-active .project-card,
 html.iconic-avatar-active .stack-grid > article,
 html.iconic-avatar-active .profile-grid > article,
 html.iconic-avatar-active .vita-decision-console,
+html.iconic-avatar-active .profile-fit-matrix,
 html.iconic-avatar-active .skill-evolution-node,
 html.iconic-avatar-active .trust-chain-panel,
 html.iconic-avatar-active .timeline-item,
@@ -3128,6 +3135,79 @@ html.iconic-avatar-active .hero-visual::after,
   font-size: 0.96rem;
 }
 
+.profile-fit-matrix {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 12px;
+  margin: 0 clamp(22px, 4vw, 34px) clamp(22px, 4vw, 34px);
+  padding: 18px;
+  border: 1px solid rgba(98, 214, 208, 0.16);
+  border-radius: 8px;
+  background:
+    linear-gradient(90deg, rgba(98, 214, 208, 0.06), rgba(141, 61, 255, 0.04), transparent),
+    rgba(7, 9, 13, 0.42);
+}
+
+.profile-fit-matrix .project-kicker {
+  margin: 0 0 4px;
+}
+
+.profile-fit-row {
+  display: grid;
+  grid-template-columns: minmax(150px, 0.42fr) minmax(160px, 1fr) minmax(76px, auto);
+  align-items: center;
+  gap: 12px;
+  color: var(--muted);
+  font-family: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.profile-fit-row i {
+  position: relative;
+  height: 7px;
+  overflow: hidden;
+  border: 1px solid rgba(98, 214, 208, 0.12);
+  border-radius: 999px;
+  background: rgba(244, 241, 234, 0.08);
+}
+
+.profile-fit-row i::before,
+.profile-fit-row i::after {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: var(--fit);
+  border-radius: inherit;
+}
+
+.profile-fit-row i::before {
+  background: linear-gradient(90deg, var(--accent-2), var(--violet), var(--accent));
+  opacity: 0.78;
+}
+
+.profile-fit-row i::after {
+  width: min(80px, var(--fit));
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.75), transparent);
+  opacity: 0;
+  transform: translateX(-100%);
+  animation: profile-fit-scan 4.6s ease-in-out infinite;
+}
+
+.profile-fit-row:nth-child(3) i::after { animation-delay: -0.7s; }
+.profile-fit-row:nth-child(4) i::after { animation-delay: -1.4s; }
+.profile-fit-row:nth-child(5) i::after { animation-delay: -2.1s; }
+.profile-fit-row:nth-child(6) i::after { animation-delay: -2.8s; }
+
+.profile-fit-row strong {
+  color: var(--accent-2);
+  font-size: 0.7rem;
+  text-align: right;
+}
+
 .skill-evolution-section {
   border-bottom: 1px solid var(--line);
 }
@@ -3514,6 +3594,36 @@ main > .section.interior-hero::before {
   text-transform: uppercase;
 }
 
+.timeline-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.timeline-skills li {
+  border: 1px solid rgba(98, 214, 208, 0.18);
+  border-radius: 999px;
+  padding: 0.34rem 0.58rem;
+  color: rgba(244, 241, 234, 0.72);
+  background: rgba(9, 11, 15, 0.36);
+  font-family: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.timeline-item:hover .timeline-skills li,
+.timeline-item:focus-visible .timeline-skills li,
+.timeline-item.is-expanded .timeline-skills li,
+.timeline-item.is-playing .timeline-skills li {
+  border-color: rgba(98, 214, 208, 0.32);
+  color: var(--accent-2);
+  box-shadow: 0 0 18px rgba(98, 214, 208, 0.05);
+}
+
 .timeline-item__log {
   display: grid;
   gap: 5px;
@@ -3655,7 +3765,7 @@ main > .section.interior-hero::before {
 
 .trust-chain-steps {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 10px;
 }
 
@@ -3711,6 +3821,10 @@ main > .section.interior-hero::before {
 
 .trust-chain-steps span:nth-child(4)::after {
   animation-delay: -2.1s;
+}
+
+.trust-chain-steps span:nth-child(5)::after {
+  animation-delay: -2.8s;
 }
 
 .certificate-showcase {
@@ -5647,6 +5761,28 @@ html.recruiter-mode-active .profile-grid article {
   }
 }
 
+@keyframes profile-fit-scan {
+  0%,
+  100% {
+    opacity: 0;
+    transform: translateX(-110%);
+  }
+
+  18% {
+    opacity: 0.72;
+  }
+
+  54% {
+    opacity: 0.52;
+    transform: translateX(58%);
+  }
+
+  76% {
+    opacity: 0;
+    transform: translateX(112%);
+  }
+}
+
 @keyframes hero-signal-flow {
   0% {
     opacity: 0.72;
@@ -5863,7 +5999,11 @@ html.recruiter-mode-active .profile-grid article {
   }
 
   .vita-decision-list {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .profile-fit-row {
+    grid-template-columns: minmax(140px, 0.44fr) minmax(150px, 1fr) minmax(70px, auto);
   }
 
   .skill-evolution {
@@ -6135,9 +6275,24 @@ html.recruiter-mode-active .profile-grid article {
   }
 
   .vita-decision-list,
+  .profile-fit-matrix,
   .skill-evolution,
   .trust-chain-steps {
     grid-template-columns: 1fr;
+  }
+
+  .profile-fit-matrix {
+    margin-inline: 18px;
+    padding: 16px;
+  }
+
+  .profile-fit-row {
+    grid-template-columns: 1fr;
+    gap: 7px;
+  }
+
+  .profile-fit-row strong {
+    text-align: left;
   }
 
   .vita-decision-list li {
@@ -6515,6 +6670,7 @@ html.recruiter-mode-active .profile-grid article {
   .first-time-guide,
   .pwa-runtime-panel,
   .trace-entry,
+  .profile-fit-row i::after,
   .timeline-playback,
   .timeline-item__log,
   .skill-graph,
