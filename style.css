@@ -7050,6 +7050,97 @@ html.recruiter-mode-active .profile-grid article {
     margin: 0;
   }
 
+  .print-cv-snapshot-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.14fr) minmax(0, 0.86fr);
+    gap: 3.2mm;
+    break-inside: avoid;
+  }
+
+  .print-cv-decision,
+  .print-cv-fit {
+    padding: 2.8mm 3mm;
+    border: 1px solid #dadada;
+    background: #ffffff;
+    break-inside: avoid;
+  }
+
+  .print-cv-decision dl {
+    display: grid;
+    gap: 1.7mm;
+    margin: 0;
+  }
+
+  .print-cv-decision div {
+    display: grid;
+    grid-template-columns: 24mm minmax(0, 1fr);
+    gap: 3mm;
+    align-items: start;
+  }
+
+  .print-cv-decision dt,
+  .print-cv-fit-row strong {
+    color: #151515;
+    font-size: 7.4pt;
+    font-weight: 800;
+  }
+
+  .print-cv-decision dd {
+    margin: 0;
+    color: #333333;
+    font-size: 7.7pt;
+    line-height: 1.22;
+  }
+
+  .print-cv-fit-row {
+    display: grid;
+    grid-template-columns: 29mm minmax(0, 1fr) 16mm;
+    gap: 2.2mm;
+    align-items: center;
+    min-height: 5.2mm;
+    color: #333333;
+    font-size: 7.3pt;
+  }
+
+  .print-cv-fit-row i {
+    position: relative;
+    display: block;
+    height: 1.1mm;
+    overflow: hidden;
+    background: #e5e5e5;
+  }
+
+  .print-cv-fit-row i::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: var(--fit, 80%);
+    background: linear-gradient(90deg, #6c00a1, #5dd6d6);
+  }
+
+  .print-cv-trustline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.6mm;
+    margin: 2.4mm 0 0;
+    padding: 0;
+  }
+
+  .print-cv-trustline span,
+  .print-cv-job-skills li {
+    display: inline-flex;
+    align-items: center;
+    min-height: 4.3mm;
+    padding: 0.7mm 1.45mm;
+    border: 1px solid #d2d2d2;
+    color: #202020;
+    background: #ffffff;
+    font-family: Consolas, "Liberation Mono", monospace;
+    font-size: 6.75pt;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+  }
+
   .print-cv-timeline {
     display: block;
   }
@@ -7072,6 +7163,21 @@ html.recruiter-mode-active .profile-grid article {
     padding-top: 0.25mm;
     font-size: 7pt;
     line-height: 1.2;
+  }
+
+  .print-cv-job-skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.1mm;
+    margin: 1.35mm 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .print-cv-job-skills li {
+    min-height: 3.6mm;
+    padding: 0.45mm 1.2mm;
+    font-size: 6.35pt;
   }
 
   .print-cv-certificates {

@@ -596,6 +596,8 @@
       "vita.print.role": "Softwareentwickler · Oracle APEX · PL/SQL · JavaScript",
       "vita.print.summary": "Business-nahe Softwareentwicklung mit Fokus auf Oracle APEX, saubere Datenmodelle, praxistaugliche Oberflächen und Prozesse, die im operativen Alltag funktionieren.",
       "vita.print.location": "Freising, Deutschland",
+      "vita.print.snapshot.eyebrow": "Recruiter Snapshot",
+      "vita.print.snapshot.title": "Passung, Profil und Belege auf einen Blick.",
       "vita.job1.date": "Dez. 2023 - Heute",
       "vita.job2.date": "Sept. 2022 - Apr. 2023",
       "vita.job3.date": "Aug. 2021 - Juni 2023",
@@ -865,6 +867,8 @@
       "vita.print.role": "Software Developer · Oracle APEX · PL/SQL · JavaScript",
       "vita.print.summary": "Business-focused software development with a focus on Oracle APEX, clean data models, practical interfaces and processes that work in day-to-day operations.",
       "vita.print.location": "Freising, Germany",
+      "vita.print.snapshot.eyebrow": "Recruiter snapshot",
+      "vita.print.snapshot.title": "Fit, profile and evidence at a glance.",
       "vita.job1.date": "Dec 2023 - Present",
       "vita.job2.date": "Sep 2022 - Apr 2023",
       "vita.job3.date": "Aug 2021 - Jun 2023",
@@ -1133,6 +1137,8 @@
       "vita.print.role": "Desarrollador de software · Oracle APEX · PL/SQL · JavaScript",
       "vita.print.summary": "Desarrollo de software cercano al negocio con foco en Oracle APEX, modelos de datos limpios, interfaces prácticas y procesos que funcionan en el día a día operativo.",
       "vita.print.location": "Freising, Alemania",
+      "vita.print.snapshot.eyebrow": "Snapshot para recruiters",
+      "vita.print.snapshot.title": "Encaje, perfil y evidencias de un vistazo.",
       "vita.job1.date": "Dic. 2023 - hoy",
       "vita.job2.date": "Sept. 2022 - abr. 2023",
       "vita.job3.date": "Ago. 2021 - jun. 2023",
@@ -1394,6 +1400,8 @@
       "vita.print.role": "ソフトウェア開発者 · Oracle APEX · PL/SQL · JavaScript",
       "vita.print.summary": "Oracle APEX、クリーンなデータモデル、実用的なUI、現場で機能するプロセスに焦点を当てた業務寄りのソフトウェア開発。",
       "vita.print.location": "Freising, Germany",
+      "vita.print.snapshot.eyebrow": "Recruiter Snapshot",
+      "vita.print.snapshot.title": "適性、プロフィール、証拠を一目で。",
       "vita.job1.date": "2023年12月 - 現在",
       "vita.job2.date": "2022年9月 - 2023年4月",
       "vita.job3.date": "2021年8月 - 2023年6月",
@@ -3276,8 +3284,8 @@
 
   function setupHeroAvatarEgg() {
     const avatarSources = {
-      src: "./image/iconic-avatar.jpg?v=20260706-footer1",
-      srcset: "./image/iconic-avatar-720.jpg?v=20260706-footer1 720w, ./image/iconic-avatar-960.jpg?v=20260706-footer1 960w, ./image/iconic-avatar.jpg?v=20260706-footer1 1122w",
+      src: "./image/iconic-avatar.jpg?v=20260706-pdfvita1",
+      srcset: "./image/iconic-avatar-720.jpg?v=20260706-pdfvita1 720w, ./image/iconic-avatar-960.jpg?v=20260706-pdfvita1 960w, ./image/iconic-avatar.jpg?v=20260706-pdfvita1 1122w",
       alt: "Stilisiertes Hero-Portrait mit Iconic Avatar"
     };
 
