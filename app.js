@@ -450,6 +450,7 @@
       "stack.product.title": "Struktur für echte Abläufe",
       "stack.tools.kicker": "Tools",
       "stack.tools.title": "Werkzeuge für Lieferung",
+      "stack.graph.readout": "Skill-Knoten anklicken, um Capability-Signale zu verbinden.",
 
       "contact.eyebrow": "Nächster Schritt",
       "contact.title": "Lass uns über <span class=\"accent-word\">Software</span> sprechen, die im echten Betrieb trägt.",
@@ -721,6 +722,7 @@
       "stack.product.title": "Structure for real workflows",
       "stack.tools.kicker": "Tools",
       "stack.tools.title": "Tools for delivery",
+      "stack.graph.readout": "Click skill nodes to connect capability signals.",
 
       "contact.eyebrow": "Next step",
       "contact.title": "Let's talk about <span class=\"accent-word\">software</span> that holds up in real operations.",
@@ -991,6 +993,7 @@
       "stack.product.title": "Estructura para flujos reales",
       "stack.tools.kicker": "Herramientas",
       "stack.tools.title": "Herramientas para delivery",
+      "stack.graph.readout": "Haz clic en los nodos de skill para conectar señales de capability.",
 
       "contact.eyebrow": "Siguiente paso",
       "contact.title": "Hablemos de <span class=\"accent-word\">software</span> que aguanta la operación real.",
@@ -1256,6 +1259,7 @@
       "stack.product.title": "実際の業務フローのための構造",
       "stack.tools.kicker": "ツール",
       "stack.tools.title": "デリバリーを支えるツール",
+      "stack.graph.readout": "Skill NodeをクリックしてCapability Signalを接続します。",
       "contact.eyebrow": "次のステップ",
       "contact.title": "実運用で耐えられる<span class=\"accent-word\">ソフトウェア</span>について話しましょう。",
       "contact.mail": "メールを書く",
@@ -3284,8 +3288,8 @@
 
   function setupHeroAvatarEgg() {
     const avatarSources = {
-      src: "./image/iconic-avatar.jpg?v=20260706-pdfvita2",
-      srcset: "./image/iconic-avatar-720.jpg?v=20260706-pdfvita2 720w, ./image/iconic-avatar-960.jpg?v=20260706-pdfvita2 960w, ./image/iconic-avatar.jpg?v=20260706-pdfvita2 1122w",
+      src: "./image/iconic-avatar.jpg?v=20260706-pdffill1",
+      srcset: "./image/iconic-avatar-720.jpg?v=20260706-pdffill1 720w, ./image/iconic-avatar-960.jpg?v=20260706-pdffill1 960w, ./image/iconic-avatar.jpg?v=20260706-pdffill1 1122w",
       alt: "Stilisiertes Hero-Portrait mit Iconic Avatar"
     };
 
@@ -4409,13 +4413,35 @@ shortcut: ctrl + alt + d</pre>
       const graph = document.querySelector(".skill-graph");
       if (!graph) return;
       const readout = graph.querySelector("[data-skill-readout]");
+      let signalTimer = null;
+      let readoutTimer = null;
       graph.querySelectorAll("[data-skill-node]").forEach((node) => {
+        node.setAttribute("aria-pressed", "false");
         node.addEventListener("click", () => {
           const lang = document.documentElement.dataset.lang || DEFAULT_LANG;
-          graph.querySelectorAll(".is-active").forEach((item) => item.classList.remove("is-active"));
+          const skill = node.dataset.skillNode;
+          graph.querySelectorAll(".is-active").forEach((item) => {
+            item.classList.remove("is-active");
+            item.setAttribute("aria-pressed", "false");
+          });
           node.classList.add("is-active");
-          readout.textContent = (skillReadouts[lang] || skillReadouts[DEFAULT_LANG])[node.dataset.skillNode] || "capability graph online";
-          emitPortfolioCursorCode(node.dataset.skillNode, 1000, "is-signal-code");
+          node.setAttribute("aria-pressed", "true");
+          graph.dataset.activeSkill = skill;
+          graph.classList.remove("is-signal-active");
+          void graph.offsetWidth;
+          graph.classList.add("is-signal-active");
+          window.clearTimeout(signalTimer);
+          signalTimer = window.setTimeout(() => graph.classList.remove("is-signal-active"), 1800);
+
+          if (readout) {
+            readout.textContent = (skillReadouts[lang] || skillReadouts[DEFAULT_LANG])[skill] || "capability graph online";
+            readout.classList.remove("is-updated");
+            void readout.offsetWidth;
+            readout.classList.add("is-updated");
+            window.clearTimeout(readoutTimer);
+            readoutTimer = window.setTimeout(() => readout.classList.remove("is-updated"), 1500);
+          }
+          emitPortfolioCursorCode(skill, 1100, "is-signal-code");
         });
       });
     }

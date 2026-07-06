@@ -4707,6 +4707,49 @@ main > .section.interior-hero::before {
   box-shadow: 0 0 0 1px rgba(98, 214, 208, 0.2), 0 0 30px rgba(98, 214, 208, 0.13);
 }
 
+.skill-graph button.is-active {
+  border-color: rgba(240, 168, 58, 0.72);
+  background:
+    linear-gradient(90deg, rgba(141, 61, 255, 0.16), rgba(98, 214, 208, 0.12)),
+    rgba(16, 17, 20, 0.88);
+  box-shadow:
+    0 0 0 1px rgba(240, 168, 58, 0.18),
+    0 0 34px rgba(98, 214, 208, 0.18),
+    0 0 22px rgba(141, 61, 255, 0.14);
+}
+
+.skill-graph button.is-active::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  width: 6px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #62d6d0;
+  box-shadow: 0 0 14px rgba(98, 214, 208, 0.72);
+  transform: translateY(-50%);
+  animation: skill-node-active-dot 900ms ease-in-out infinite;
+}
+
+.skill-graph.is-signal-active {
+  box-shadow:
+    0 0 0 1px rgba(98, 214, 208, 0.32),
+    0 0 70px rgba(98, 214, 208, 0.12),
+    inset 0 0 34px rgba(141, 61, 255, 0.08);
+}
+
+.skill-graph.is-signal-active .skill-graph__trace-path {
+  stroke-dasharray: 5 5;
+  animation-duration: 1800ms;
+}
+
+.skill-graph.is-signal-active .skill-graph__trace-pulse {
+  stroke-width: 2;
+  stroke-dasharray: 18 82;
+  animation: skill-trace-activate 1800ms cubic-bezier(0.45, 0, 0.2, 1) both;
+}
+
 .skill-graph__readout {
   position: absolute;
   right: 18px;
@@ -4723,6 +4766,15 @@ main > .section.interior-hero::before {
   font-weight: 800;
   letter-spacing: 0.04em;
   text-transform: uppercase;
+}
+
+.skill-graph__readout.is-updated {
+  border-color: rgba(98, 214, 208, 0.44);
+  color: #62d6d0;
+  background:
+    linear-gradient(90deg, rgba(141, 61, 255, 0.12), rgba(98, 214, 208, 0.08)),
+    rgba(9, 11, 15, 0.72);
+  animation: skill-readout-scan 1500ms ease both;
 }
 
 .stack-section.skill-graph-focus .skill-graph {
@@ -4760,6 +4812,47 @@ main > .section.interior-hero::before {
   100% {
     opacity: 0;
     stroke-dashoffset: 0;
+  }
+}
+
+@keyframes skill-trace-activate {
+  0% {
+    opacity: 0;
+    stroke-dashoffset: 112;
+  }
+
+  18%,
+  78% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    stroke-dashoffset: -10;
+  }
+}
+
+@keyframes skill-readout-scan {
+  0% {
+    clip-path: inset(0 100% 0 0);
+  }
+
+  34%,
+  100% {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes skill-node-active-dot {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: translateY(-50%) scale(0.82);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translateY(-50%) scale(1.18);
   }
 }
 
@@ -6625,7 +6718,7 @@ html.recruiter-mode-active .profile-grid article {
 @media print {
   @page {
     size: A4;
-    margin: 9mm 11mm;
+    margin: 11mm 12mm;
   }
 
   :root {
@@ -6650,8 +6743,8 @@ html.recruiter-mode-active .profile-grid article {
     overflow: visible;
     color: #151515;
     background: #ffffff;
-    font-size: 9.2pt;
-    line-height: 1.2;
+    font-size: 9.8pt;
+    line-height: 1.28;
   }
 
   body {
@@ -6915,17 +7008,17 @@ html.recruiter-mode-active .profile-grid article {
     color: #151515;
     background: #ffffff;
     font-family: "Segoe UI", Arial, sans-serif;
-    line-height: 1.18;
+    line-height: 1.24;
     print-color-adjust: exact;
     -webkit-print-color-adjust: exact;
   }
 
   .print-cv-header {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 52mm;
-    gap: 5mm;
-    margin: 0 0 3mm;
-    padding: 0 0 2.5mm;
+    grid-template-columns: minmax(0, 1fr) 56mm;
+    gap: 7mm;
+    margin: 0 0 4.4mm;
+    padding: 0 0 3.5mm;
     border-bottom: 1px solid #d3d3d3;
     break-inside: avoid;
   }
@@ -6942,15 +7035,15 @@ html.recruiter-mode-active .profile-grid article {
   }
 
   .print-cv-name {
-    margin: 0 0 0.8mm;
-    font-size: 7.3pt;
+    margin: 0 0 1mm;
+    font-size: 7.8pt;
   }
 
   .print-cv-header h1 {
     max-width: none;
-    margin: 0 0 1.2mm;
+    margin: 0 0 1.8mm;
     color: #151515;
-    font-size: 13.2pt;
+    font-size: 15pt;
     line-height: 1.05;
   }
 
@@ -6958,24 +7051,24 @@ html.recruiter-mode-active .profile-grid article {
     max-width: 118mm;
     margin: 0;
     color: #333333;
-    font-size: 7.55pt;
+    font-size: 8.35pt;
   }
 
   .print-cv-contact {
     align-self: end;
     display: grid;
-    gap: 0.7mm;
+    gap: 1mm;
     margin: 0;
     padding: 0;
     color: #333333;
-    font-size: 6.9pt;
-    line-height: 1.12;
+    font-size: 7.35pt;
+    line-height: 1.18;
     list-style: none;
     overflow-wrap: anywhere;
   }
 
   .print-cv-section {
-    margin: 0 0 2.35mm;
+    margin: 0 0 3.65mm;
     padding: 0;
     break-inside: avoid;
   }
@@ -6990,51 +7083,51 @@ html.recruiter-mode-active .profile-grid article {
 
   .print-cv-section-head {
     display: grid;
-    grid-template-columns: 26mm minmax(0, 1fr);
-    gap: 4mm;
+    grid-template-columns: 29mm minmax(0, 1fr);
+    gap: 5mm;
     align-items: start;
-    margin: 0 0 1.35mm;
+    margin: 0 0 2mm;
     break-inside: avoid;
   }
 
   .print-cv-label {
-    margin: 0.55mm 0 0;
-    font-size: 6.45pt;
+    margin: 0.75mm 0 0;
+    font-size: 6.9pt;
   }
 
   .print-cv-section-head h2 {
     max-width: none;
     margin: 0;
     color: #151515;
-    font-size: 10.8pt;
+    font-size: 12.4pt;
     line-height: 1.1;
   }
 
   .print-cv-cards {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 2mm;
+    gap: 2.8mm;
   }
 
   .print-cv-cards article {
     min-height: 0;
-    padding: 1.9mm;
+    padding: 2.65mm;
     border: 1px solid #dadada;
     background: #ffffff;
     break-inside: avoid;
   }
 
   .print-cv-kicker {
-    margin: 0 0 1mm;
-    font-size: 5.95pt;
+    margin: 0 0 1.65mm;
+    font-size: 6.35pt;
   }
 
   .print-cv-cards h3,
   .print-cv-job h3 {
-    margin: 0 0 0.45mm;
+    margin: 0 0 0.7mm;
     color: #151515;
-    font-size: 8pt;
-    line-height: 1.08;
+    font-size: 8.85pt;
+    line-height: 1.12;
     break-after: avoid;
   }
 
@@ -7042,7 +7135,7 @@ html.recruiter-mode-active .profile-grid article {
   .print-cv-job p,
   .print-cv-certificates li {
     color: #333333;
-    font-size: 6.95pt;
+    font-size: 7.55pt;
   }
 
   .print-cv-cards p:not(.print-cv-kicker),
@@ -7052,14 +7145,14 @@ html.recruiter-mode-active .profile-grid article {
 
   .print-cv-snapshot-grid {
     display: grid;
-    grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
-    gap: 2mm;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: 2.8mm;
     break-inside: avoid;
   }
 
   .print-cv-decision,
   .print-cv-fit {
-    padding: 1.9mm 2mm;
+    padding: 2.65mm 2.8mm;
     border: 1px solid #dadada;
     background: #ffffff;
     break-inside: avoid;
@@ -7067,39 +7160,39 @@ html.recruiter-mode-active .profile-grid article {
 
   .print-cv-decision dl {
     display: grid;
-    gap: 0.9mm;
+    gap: 1.35mm;
     margin: 0;
   }
 
   .print-cv-decision div {
     display: grid;
-    grid-template-columns: 20mm minmax(0, 1fr);
-    gap: 2mm;
+    grid-template-columns: 22mm minmax(0, 1fr);
+    gap: 2.6mm;
     align-items: start;
   }
 
   .print-cv-decision dt,
   .print-cv-fit-row strong {
     color: #151515;
-    font-size: 6.45pt;
+    font-size: 6.9pt;
     font-weight: 800;
   }
 
   .print-cv-decision dd {
     margin: 0;
     color: #333333;
-    font-size: 6.65pt;
-    line-height: 1.14;
+    font-size: 7.1pt;
+    line-height: 1.18;
   }
 
   .print-cv-fit-row {
     display: grid;
-    grid-template-columns: 26mm minmax(0, 1fr) 13mm;
-    gap: 1.5mm;
+    grid-template-columns: 28mm minmax(0, 1fr) 15mm;
+    gap: 2mm;
     align-items: center;
-    min-height: 3.55mm;
+    min-height: 4.35mm;
     color: #333333;
-    font-size: 6.3pt;
+    font-size: 6.75pt;
   }
 
   .print-cv-fit-row i {
@@ -7121,8 +7214,8 @@ html.recruiter-mode-active .profile-grid article {
   .print-cv-trustline {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.9mm;
-    margin: 1.35mm 0 0;
+    gap: 1.25mm;
+    margin: 2.1mm 0 0;
     padding: 0;
   }
 
@@ -7130,13 +7223,13 @@ html.recruiter-mode-active .profile-grid article {
   .print-cv-job-skills li {
     display: inline-flex;
     align-items: center;
-    min-height: 3.15mm;
-    padding: 0.35mm 1mm;
+    min-height: 3.7mm;
+    padding: 0.55mm 1.2mm;
     border: 1px solid #d2d2d2;
     color: #202020;
     background: #ffffff;
     font-family: Consolas, "Liberation Mono", monospace;
-    font-size: 5.75pt;
+    font-size: 6.25pt;
     font-weight: 800;
     letter-spacing: 0.02em;
   }
@@ -7147,9 +7240,9 @@ html.recruiter-mode-active .profile-grid article {
 
   .print-cv-job {
     display: grid;
-    grid-template-columns: 26mm minmax(0, 1fr);
-    gap: 4mm;
-    padding: 1.05mm 0;
+    grid-template-columns: 29mm minmax(0, 1fr);
+    gap: 5mm;
+    padding: 1.7mm 0;
     border-top: 1px solid #d9d9d9;
     background: #ffffff;
     break-inside: avoid;
@@ -7160,30 +7253,30 @@ html.recruiter-mode-active .profile-grid article {
   }
 
   .print-cv-job time {
-    padding-top: 0.15mm;
-    font-size: 6.15pt;
-    line-height: 1.1;
+    padding-top: 0.25mm;
+    font-size: 6.65pt;
+    line-height: 1.16;
   }
 
   .print-cv-job-skills {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.65mm;
-    margin: 0.75mm 0 0;
+    gap: 0.95mm;
+    margin: 1.1mm 0 0;
     padding: 0;
     list-style: none;
   }
 
   .print-cv-job-skills li {
-    min-height: 2.75mm;
-    padding: 0.25mm 0.8mm;
-    font-size: 5.45pt;
+    min-height: 3.15mm;
+    padding: 0.35mm 1mm;
+    font-size: 5.85pt;
   }
 
   .print-cv-certificates {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    column-gap: 4mm;
+    column-gap: 5mm;
     row-gap: 0;
     margin: 0;
     padding: 0;
@@ -7192,7 +7285,7 @@ html.recruiter-mode-active .profile-grid article {
 
   .print-cv-certificates li {
     min-height: 0;
-    padding: 0.85mm 0;
+    padding: 1.35mm 0;
     border-top: 1px solid #d9d9d9;
     font-weight: 700;
     break-inside: avoid;
