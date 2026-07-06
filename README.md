@@ -33,7 +33,7 @@ The site combines a clean dark visual style with a technical portfolio structure
 - Global custom code cursor with dynamic text-cursor mode and keyword-aware labels
 - Animated technology stream and visual project modules
 - German, English, Spanish and Japanese language switch
-- Dedicated Vita / Resume page
+- Dedicated Vita / Resume page with recruiter signal console, skill evolution layer, trust chain and bootable experience logs
 - Browser-based PDF export for German, English, Spanish and Japanese profile versions
 - Print-optimized A4 layout for complete one-page PDF generation with language-aware document titles
 - Project spotlight section with optimized tilt cards, mini terminal simulations and restrained glow feedback
@@ -156,7 +156,7 @@ Technical keyword reactions are now range-based. The cursor checks the actual te
 
 ### Tilt Cards and Glow
 
-The tilt system is handled in `setupTiltCards()` and now covers project cards, stack cards, hero quick facts, Vita profile cards, timeline entries and credential rows. Existing project and stack cards still use `data-tilt-card`; the remaining supported cards are registered at runtime with `.tilt-card-effect`. The logic writes CSS variables to the hovered card:
+The tilt system is handled in `setupTiltCards()` and now covers project cards, stack cards, hero quick facts, Vita profile cards, the recruiter signal console, skill evolution cards, trust-chain panel, timeline entries and credential rows. Existing project and stack cards still use `data-tilt-card`; the remaining supported cards are registered at runtime with `.tilt-card-effect`. The logic writes CSS variables to the hovered card:
 
 ```text
 --tilt-x
@@ -213,7 +213,7 @@ The output is written to `image/social-card.jpg`.
 
 ## Vita and PDF Export
 
-The Vita page includes a dedicated print mode for generating complete PDF files directly through the browser.
+The Vita page includes a dedicated print mode for generating complete PDF files directly through the browser. The visual web version intentionally has more character: a recruiter signal console, skill evolution cards, animated trust chain and clickable bootable timeline entries. These interface layers are excluded from the print document so the exported PDF stays compact and clean.
 
 The print implementation uses:
 

@@ -45,9 +45,10 @@ Hidden interface checks:
 11. Click `trace profile` in the hero and verify trace nodes, terminal output, close behavior and node navigation.
 12. Run Recruiter Mode and verify best-fit roles, skill matrix, PDF export, copy-mail and GitHub action.
 13. Click Live Skill Graph nodes in the stack section and verify the readout updates.
-14. On `vita.html`, click each timeline entry and verify the station log expands/collapses. Then click `play timeline` and verify the entries open and highlight one after another.
-15. Mobile smoke: check nav, Command Palette, trace overlay, Recruiter Mode, certificate lightbox and cookie panel at a narrow viewport.
-16. Social preview: run `tools\render-social-card.ps1` after visual copy changes and inspect `image\social-card.jpg`.
+14. On `vita.html`, verify the recruiter signal console, skill evolution cards and trust-chain panel reveal smoothly and keep their signal animations aligned in desktop and mobile layouts.
+15. On `vita.html`, click each timeline entry and verify the station log expands/collapses. Then click `play timeline` and verify the entries open and highlight one after another.
+16. Mobile smoke: check nav, Command Palette, trace overlay, Recruiter Mode, certificate lightbox, Vita skill evolution/trust-chain sections and cookie panel at a narrow viewport.
+17. Social preview: run `tools\render-social-card.ps1` after visual copy changes and inspect `image\social-card.jpg`.
 17. Press `Ctrl + Alt + I` and verify the Iconic Hero switches only for the current browser session.
 18. Print/PDF check: verify Command Palette, System Trace, Recruiter Mode, Skill Graph, First-Time Guide, Timeline Playback and expanded timeline logs do not appear in the PDF output.
 

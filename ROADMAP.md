@@ -36,6 +36,7 @@ Die Homepage ist jetzt eine moderne, statische Portfolio-Seite mit starkem Hero,
 - Developer Operating Layer ergaenzt: System Trace, Command Palette, Recruiter Mode, Live Skill Graph, Projekt-Mini-Simulationen, Iconic Hero und Bootable Vita mit aufklappbaren Experience Logs.
 - PWA-Schicht ergaenzt: Manifest, Service Worker, App-Icons, Standalone-Start, Offline-Fallback, Runtime-Statuspanel, Update-Notification und lokaler PWA-Audit.
 - JSON-LD erweitert: Person, ProfilePage, Portfolio-Work, Skill-Liste und Zertifikatskontext strukturierter ausgezeichnet.
+- Vita-Seite als eigener Recruiter-Experience-Layer ausgebaut: Signal-Konsole, Skill Evolution, Trust Chain und animierte Nachweislogik ohne Auswirkung auf den PDF-Export.
 
 ## Erledigte Verbesserungen
 
@@ -79,6 +80,7 @@ Die Homepage ist jetzt eine moderne, statische Portfolio-Seite mit starkem Hero,
 - System Trace visualisiert die Profilpositionierung als technische Scan-Schicht mit Nodes, Linien und Terminal-Protokoll.
 - Skill Graph im Stack-Bereich und Timeline-Playback auf der Vita-Seite ergaenzt.
 - Timeline-Kacheln auf der Vita-Seite als klickbare Experience Logs erweitert.
+- Vita-Story geschaerft: operativer Hintergrund, Java/SQL-Fundament, Delivery-Zertifizierungen und aktueller Oracle-APEX-Fokus werden als nachvollziehbare Skill-Evolution verbunden.
 - Iconic Hero als sessionbasierter Avatar-Hero-Schalter ergaenzt.
 - QA-Skript erweitert: prueft lokale `href`/`src`, `srcset`, Zertifikatsdatenquellen, CSS-Asset-URLs, PWA-Manifest, Service-Worker-Precache, Sitemap und JavaScript-Syntax.
 

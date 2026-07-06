@@ -547,6 +547,10 @@ html[data-lang="ja"] .language-toggle .is-ja::after {
 .reveal-ready .project-card.is-visible,
 .reveal-ready .stack-grid article.is-visible,
 .reveal-ready .profile-grid article.is-visible,
+.reveal-ready .vita-decision-console.is-visible,
+.reveal-ready .skill-evolution-node.is-visible,
+.reveal-ready .trust-chain-panel.is-visible,
+.reveal-ready .trust-chain-steps span.is-visible,
 .reveal-ready .timeline-item.is-visible,
 .reveal-ready .credential-list li.is-visible,
 .reveal-ready .oracle-badge-card.is-visible,
@@ -1307,6 +1311,9 @@ html.runtime-color-dark {
 [data-section-index].easter-section-pulse .stack-console,
 [data-section-index].easter-section-pulse .stack-grid > article,
 [data-section-index].easter-section-pulse .profile-grid > article,
+[data-section-index].easter-section-pulse .vita-decision-console,
+[data-section-index].easter-section-pulse .skill-evolution-node,
+[data-section-index].easter-section-pulse .trust-chain-panel,
 [data-section-index].easter-section-pulse .timeline-item,
 [data-section-index].easter-section-pulse .credential-list > li,
 [data-section-index].easter-section-pulse .proof-card,
@@ -1603,6 +1610,9 @@ html.easter-dev-mode body::after {
 html.easter-dev-mode .project-card,
 html.easter-dev-mode .stack-grid > article,
 html.easter-dev-mode .profile-grid > article,
+html.easter-dev-mode .vita-decision-console,
+html.easter-dev-mode .skill-evolution-node,
+html.easter-dev-mode .trust-chain-panel,
 html.easter-dev-mode .timeline-item,
 html.easter-dev-mode .credential-list > li,
 html.easter-dev-mode .proof-card,
@@ -1737,6 +1747,9 @@ html.easter-dev-language-mode .site-shell::after {
   [data-section-index].easter-section-pulse .project-card,
   [data-section-index].easter-section-pulse .stack-grid > article,
   [data-section-index].easter-section-pulse .profile-grid > article,
+  [data-section-index].easter-section-pulse .vita-decision-console,
+  [data-section-index].easter-section-pulse .skill-evolution-node,
+  [data-section-index].easter-section-pulse .trust-chain-panel,
   [data-section-index].easter-section-pulse .timeline-item,
   [data-section-index].easter-section-pulse .credential-list > li,
   [data-section-index].easter-section-pulse .proof-card,
@@ -2339,6 +2352,9 @@ html.iconic-avatar-active .button,
 html.iconic-avatar-active .project-card,
 html.iconic-avatar-active .stack-grid > article,
 html.iconic-avatar-active .profile-grid > article,
+html.iconic-avatar-active .vita-decision-console,
+html.iconic-avatar-active .skill-evolution-node,
+html.iconic-avatar-active .trust-chain-panel,
 html.iconic-avatar-active .timeline-item,
 html.iconic-avatar-active .credential-list > li,
 html.iconic-avatar-active .proof-card,
@@ -2963,6 +2979,270 @@ html.iconic-avatar-active .hero-visual::after,
   background: rgba(25, 30, 38, 0.94);
 }
 
+.vita-decision-console {
+  position: relative;
+  margin-top: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(98, 214, 208, 0.28);
+  border-radius: var(--radius);
+  background:
+    linear-gradient(135deg, rgba(98, 214, 208, 0.08), rgba(141, 61, 255, 0.08) 44%, transparent 70%),
+    rgba(12, 15, 21, 0.84);
+  box-shadow: 0 22px 70px rgba(0, 0, 0, 0.2);
+  transition: transform 260ms var(--ease-out), border-color 220ms ease, background 220ms ease;
+}
+
+.vita-decision-console::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.52;
+  background:
+    linear-gradient(rgba(98, 214, 208, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(98, 214, 208, 0.04) 1px, transparent 1px);
+  background-size: 44px 44px;
+  pointer-events: none;
+}
+
+.vita-decision-console::after {
+  content: "";
+  position: absolute;
+  right: 22px;
+  bottom: 18px;
+  width: min(420px, 42%);
+  height: 2px;
+  background: linear-gradient(90deg, var(--violet), var(--accent-2), transparent);
+  transform-origin: left;
+  animation: hero-signal-flow 5.8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.vita-decision-console:hover {
+  transform: translateY(-4px);
+  border-color: rgba(98, 214, 208, 0.44);
+  background:
+    linear-gradient(135deg, rgba(98, 214, 208, 0.1), rgba(141, 61, 255, 0.1) 46%, transparent 72%),
+    rgba(15, 19, 27, 0.94);
+}
+
+.vita-decision-console__header {
+  position: relative;
+  z-index: 1;
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 18px;
+  border-bottom: 1px solid var(--line);
+  background: rgba(18, 21, 30, 0.86);
+}
+
+.vita-decision-console__header > span {
+  display: flex;
+  gap: 7px;
+}
+
+.vita-decision-console__header b {
+  width: 7px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.vita-decision-console__header b:nth-child(2) {
+  background: var(--accent-2);
+}
+
+.vita-decision-console__header b:nth-child(3) {
+  background: #8d3dff;
+}
+
+.vita-decision-console__header .project-kicker {
+  margin: 0;
+}
+
+.vita-decision-console__body {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(260px, 0.75fr);
+  gap: clamp(18px, 4vw, 42px);
+  padding: clamp(22px, 4vw, 34px);
+}
+
+.vita-decision-console h3 {
+  max-width: 18ch;
+  margin: 0 0 14px;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  line-height: 0.95;
+}
+
+.vita-decision-console p:not(.project-kicker) {
+  max-width: 68ch;
+  margin: 0;
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.vita-decision-list {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.vita-decision-list li {
+  position: relative;
+  padding: 16px 16px 16px 18px;
+  overflow: hidden;
+  border: 1px solid rgba(98, 214, 208, 0.18);
+  border-radius: 8px;
+  background: rgba(9, 11, 15, 0.5);
+}
+
+.vita-decision-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 14px;
+  bottom: 14px;
+  width: 2px;
+  background: linear-gradient(180deg, var(--accent-2), var(--violet));
+}
+
+.vita-decision-list span {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--accent-2);
+  font-family: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.vita-decision-list strong {
+  color: var(--text);
+  font-size: 0.96rem;
+}
+
+.skill-evolution-section {
+  border-bottom: 1px solid var(--line);
+}
+
+.skill-evolution {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.skill-evolution::before {
+  content: "";
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  top: 52px;
+  height: 1px;
+  background:
+    linear-gradient(90deg, transparent, rgba(98, 214, 208, 0.42), rgba(141, 61, 255, 0.36), transparent);
+  box-shadow: 0 0 22px rgba(98, 214, 208, 0.18);
+  pointer-events: none;
+}
+
+.skill-evolution-node {
+  position: relative;
+  min-height: 312px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  overflow: hidden;
+  padding: clamp(20px, 3vw, 26px);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background:
+    radial-gradient(circle at 50% 0%, rgba(98, 214, 208, 0.1), transparent 32%),
+    rgba(23, 26, 32, 0.76);
+  box-shadow: 0 18px 52px rgba(0, 0, 0, 0.18);
+  transition: transform 260ms var(--ease-out), border-color 220ms ease, background 220ms ease;
+}
+
+.skill-evolution-node::before {
+  content: "";
+  width: 12px;
+  aspect-ratio: 1;
+  margin-bottom: 8px;
+  border: 1px solid rgba(98, 214, 208, 0.8);
+  border-radius: 50%;
+  background: var(--bg);
+  box-shadow:
+    0 0 0 8px rgba(98, 214, 208, 0.06),
+    0 0 24px rgba(98, 214, 208, 0.45);
+  animation: status-pulse 2.7s ease-in-out infinite;
+}
+
+.skill-evolution-node:nth-child(2)::before {
+  animation-delay: 0.32s;
+}
+
+.skill-evolution-node:nth-child(3)::before {
+  animation-delay: 0.64s;
+}
+
+.skill-evolution-node:nth-child(4)::before {
+  animation-delay: 0.96s;
+}
+
+.skill-evolution-node::after {
+  content: "";
+  position: absolute;
+  left: 22px;
+  right: 22px;
+  bottom: 18px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--violet), var(--accent-2), transparent);
+  transform-origin: left;
+  animation: hero-signal-flow 6.2s ease-in-out infinite;
+  opacity: 0.72;
+}
+
+.skill-evolution-node:hover {
+  transform: translateY(-6px);
+  border-color: rgba(98, 214, 208, 0.44);
+  background:
+    radial-gradient(circle at var(--glow-x, 50%) var(--glow-y, 0%), rgba(98, 214, 208, 0.16), transparent 32%),
+    rgba(25, 30, 38, 0.94);
+}
+
+.skill-evolution-node .project-kicker {
+  margin: 0;
+}
+
+.skill-evolution-node h3 {
+  margin: 0;
+  font-size: clamp(1.35rem, 2vw, 1.8rem);
+  line-height: 1.05;
+}
+
+.skill-evolution-node p:not(.project-kicker) {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.skill-evolution-node > span {
+  margin-top: auto;
+  padding-top: 20px;
+  color: var(--accent-2);
+  font-family: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
 .profile-grid p:not(.project-kicker),
 .certificate-header p:not(.project-kicker),
 .oracle-badge-card figcaption {
@@ -3317,6 +3597,120 @@ main > .section.interior-hero::before {
   transform: translateX(5px);
   border-color: rgba(98, 214, 208, 0.42);
   color: var(--text);
+}
+
+.trust-chain-panel {
+  position: relative;
+  display: grid;
+  gap: 18px;
+  margin-bottom: 18px;
+  padding: clamp(20px, 3vw, 28px);
+  overflow: hidden;
+  border: 1px solid rgba(98, 214, 208, 0.26);
+  border-radius: var(--radius);
+  background:
+    linear-gradient(rgba(98, 214, 208, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(98, 214, 208, 0.035) 1px, transparent 1px),
+    rgba(12, 15, 21, 0.8);
+  background-size: 42px 42px, 42px 42px, auto;
+  box-shadow: 0 20px 62px rgba(0, 0, 0, 0.2);
+  transition: transform 260ms var(--ease-out), border-color 220ms ease, background 220ms ease;
+}
+
+.trust-chain-panel::before {
+  content: "";
+  position: absolute;
+  right: 22px;
+  top: 22px;
+  width: 9px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--accent-2);
+  box-shadow:
+    0 0 0 7px rgba(98, 214, 208, 0.08),
+    0 0 24px rgba(98, 214, 208, 0.68);
+  animation: status-pulse 2.4s ease-in-out infinite;
+}
+
+.trust-chain-panel:hover {
+  transform: translateY(-4px);
+  border-color: rgba(98, 214, 208, 0.44);
+}
+
+.trust-chain-panel__head {
+  max-width: 780px;
+}
+
+.trust-chain-panel__head .project-kicker {
+  margin-bottom: 12px;
+}
+
+.trust-chain-panel__head strong {
+  display: block;
+  max-width: 26ch;
+  color: var(--text);
+  font-size: clamp(1.4rem, 3vw, 2.4rem);
+  line-height: 1.05;
+}
+
+.trust-chain-steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.trust-chain-steps span {
+  position: relative;
+  min-height: 74px;
+  display: flex;
+  align-items: center;
+  padding: 15px 16px 15px 19px;
+  overflow: hidden;
+  border: 1px solid rgba(98, 214, 208, 0.18);
+  border-radius: 8px;
+  color: var(--text);
+  background: rgba(23, 26, 32, 0.74);
+  font-family: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  line-height: 1.45;
+  text-transform: uppercase;
+}
+
+.trust-chain-steps span::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 14px;
+  bottom: 14px;
+  width: 2px;
+  background: linear-gradient(180deg, var(--accent-2), var(--violet));
+  box-shadow: 0 0 18px rgba(98, 214, 208, 0.36);
+}
+
+.trust-chain-steps span::after {
+  content: "";
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  bottom: 10px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(98, 214, 208, 0.7), rgba(141, 61, 255, 0.58), transparent);
+  transform: translateX(-40%);
+  animation: trust-chain-scan 4.8s ease-in-out infinite;
+}
+
+.trust-chain-steps span:nth-child(2)::after {
+  animation-delay: -0.7s;
+}
+
+.trust-chain-steps span:nth-child(3)::after {
+  animation-delay: -1.4s;
+}
+
+.trust-chain-steps span:nth-child(4)::after {
+  animation-delay: -2.1s;
 }
 
 .certificate-showcase {
@@ -5217,6 +5611,29 @@ html.recruiter-mode-active .profile-grid article {
   }
 }
 
+@keyframes trust-chain-scan {
+  0%,
+  100% {
+    opacity: 0;
+    transform: translateX(-54%) scaleX(0.28);
+  }
+
+  18% {
+    opacity: 0.88;
+    transform: translateX(-18%) scaleX(0.82);
+  }
+
+  52% {
+    opacity: 0.72;
+    transform: translateX(34%) scaleX(1);
+  }
+
+  78% {
+    opacity: 0.3;
+    transform: translateX(74%) scaleX(0.34);
+  }
+}
+
 @keyframes hero-signal-flow {
   0% {
     opacity: 0.72;
@@ -5426,6 +5843,26 @@ html.recruiter-mode-active .profile-grid article {
   .profile-grid,
   .credential-list {
     grid-template-columns: 1fr;
+  }
+
+  .vita-decision-console__body {
+    grid-template-columns: 1fr;
+  }
+
+  .vita-decision-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .skill-evolution {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .skill-evolution::before {
+    display: none;
+  }
+
+  .trust-chain-steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .project-card {
@@ -5674,6 +6111,35 @@ html.recruiter-mode-active .profile-grid article {
   .timeline-item {
     grid-template-columns: 1fr;
     gap: 10px;
+  }
+
+  .vita-decision-console::after {
+    width: calc(100% - 44px);
+  }
+
+  .vita-decision-list,
+  .skill-evolution,
+  .trust-chain-steps {
+    grid-template-columns: 1fr;
+  }
+
+  .vita-decision-list li {
+    min-height: 0;
+  }
+
+  .skill-evolution-node {
+    min-height: 0;
+    padding-bottom: 42px;
+  }
+
+  .skill-evolution-node h3,
+  .trust-chain-panel__head strong {
+    max-width: 100%;
+  }
+
+  .trust-chain-panel::before {
+    right: 16px;
+    top: 16px;
   }
 
   .timeline-item__log span {
@@ -6533,6 +6999,9 @@ html.recruiter-mode-active .profile-grid article {
 
 .timeline-item.tilt-card-effect:hover,
 .profile-grid article.tilt-card-effect:hover,
+.vita-decision-console.tilt-card-effect:hover,
+.skill-evolution-node.tilt-card-effect:hover,
+.trust-chain-panel.tilt-card-effect:hover,
 .credential-list li.tilt-card-effect:hover,
 .quick-facts div.tilt-card-effect:hover,
 .stack-grid article.tilt-card-effect:hover,
