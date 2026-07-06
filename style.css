@@ -3940,6 +3940,19 @@ main > .section.interior-hero::before {
   margin-bottom: clamp(4px, 0.8vw, 10px);
 }
 
+.vita-page .contact-section {
+  display: block;
+}
+
+.vita-page .contact-section h2 {
+  max-width: 22ch;
+}
+
+.vita-page .contact-section .contact-actions {
+  margin-top: clamp(26px, 4vw, 44px);
+  margin-bottom: 0;
+}
+
 .contact-status {
   margin: 24px 0 0;
 }

@@ -3115,8 +3115,8 @@
 
   function setupHeroAvatarEgg() {
     const avatarSources = {
-      src: "./image/iconic-avatar.jpg?v=20260706-iconicfooter1",
-      srcset: "./image/iconic-avatar-720.jpg?v=20260706-iconicfooter1 720w, ./image/iconic-avatar-960.jpg?v=20260706-iconicfooter1 960w, ./image/iconic-avatar.jpg?v=20260706-iconicfooter1 1122w",
+      src: "./image/iconic-avatar.jpg?v=20260706-vitacontact1",
+      srcset: "./image/iconic-avatar-720.jpg?v=20260706-vitacontact1 720w, ./image/iconic-avatar-960.jpg?v=20260706-vitacontact1 960w, ./image/iconic-avatar.jpg?v=20260706-vitacontact1 1122w",
       alt: "Stilisiertes Hero-Portrait mit Iconic Avatar"
     };
 
