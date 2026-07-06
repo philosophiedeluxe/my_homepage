@@ -6382,12 +6382,13 @@ html.recruiter-mode-active .profile-grid article {
   .footer div {
     width: 100%;
     max-width: 100%;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     align-items: center;
-    gap: 8px clamp(10px, 3.4vw, 16px);
-    font-size: clamp(0.72rem, 3vw, 0.9rem);
-    line-height: 1.45;
-    white-space: normal;
+    gap: clamp(5px, 2vw, 12px);
+    min-width: 0;
+    font-size: clamp(0.58rem, 2.35vw, 0.82rem);
+    line-height: 1.2;
+    white-space: nowrap;
   }
 
   .footer div a,
@@ -6396,8 +6397,14 @@ html.recruiter-mode-active .profile-grid article {
   }
 
   .footer-signal-link {
-    flex: 0 0 16px;
-    max-width: 16px;
+    flex: 0 0 12px;
+    max-width: 12px;
+    min-height: 12px;
+  }
+
+  .footer-signal-link::before {
+    width: 6px;
+    margin-right: 0;
   }
 
   .signals-hero {
