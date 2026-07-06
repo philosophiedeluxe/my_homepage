@@ -118,6 +118,8 @@ PWA files:
 - The Command Palette contains `PWA Runtime`, which opens a small technical status panel for installability, standalone mode, cache readiness, update state, color scheme and Iconic Mode.
 - When a new service worker build is waiting, the page shows a terminal-style update toast with a reload action.
 
+Installed PWA name note: browsers read the app name from `manifest.webmanifest`, but an already installed Windows/Chrome/Edge app may keep the old shortcut name until the app is reinstalled or the browser refreshes its installed-web-app metadata. The manifest link is cache-busted so new installs pick up `phil.osophie.deluxe` immediately.
+
 Important deployment note: whenever `style.css`, `app.js`, core HTML or relevant assets change, bump the cache version in the HTML query strings, `manifest.webmanifest` and `sw.js`. This prevents installed instances from holding an old interface shell too long.
 
 ## Design Direction

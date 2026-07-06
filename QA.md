@@ -58,7 +58,7 @@ PWA checks:
 2. Serve the repository through `python -m http.server 8000` or publish to GitHub Pages; service workers do not run from `file://`.
 3. Open `Ctrl + K` > `PWA Runtime` and verify installability, cache state, standalone state, color scheme and Iconic Mode labels update.
 4. In Chrome or Edge DevTools, open Application > Manifest and confirm name, icons, start URL, scope and installability.
-5. Install the app and verify it opens in standalone mode without browser chrome.
+5. Install the app and verify it appears as `phil.osophie.deluxe` and opens in standalone mode without browser chrome.
 6. After one successful online load, switch DevTools Network to Offline and reload `index.html`; the cached page or `offline.html` fallback should appear.
 7. After deploying a changed service worker, verify the terminal-style `new build available` prompt appears, can be closed with `x`, can be reopened from `Ctrl + K` > `PWA Runtime`, and reloads into the new shell.
 8. After changing cached files, bump the cache version in HTML asset URLs, `manifest.webmanifest` and `sw.js`.
