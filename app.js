@@ -1560,7 +1560,7 @@
         cacheCheck: "Cache prüfen",
         snapshot: "Snapshot kopieren",
         diagnostic: "Offline Diagnose",
-        appNav: "App Nav",
+        appNav: "NAV",
         openProfile: "Profil",
         openVita: "Vita",
         openStack: "Stack",
@@ -1597,7 +1597,7 @@
         cacheCheck: "Check cache",
         snapshot: "Copy snapshot",
         diagnostic: "Offline diagnostic",
-        appNav: "App Nav",
+        appNav: "NAV",
         openProfile: "Profile",
         openVita: "Resume",
         openStack: "Stack",
@@ -1634,7 +1634,7 @@
         cacheCheck: "Comprobar cache",
         snapshot: "Copiar snapshot",
         diagnostic: "Diagnostico offline",
-        appNav: "App Nav",
+        appNav: "NAV",
         openProfile: "Perfil",
         openVita: "Vita",
         openStack: "Stack",
@@ -1671,7 +1671,7 @@
         cacheCheck: "Cache check",
         snapshot: "Snapshot copy",
         diagnostic: "Offline diagnostic",
-        appNav: "App Nav",
+        appNav: "NAV",
         openProfile: "Profile",
         openVita: "Vita",
         openStack: "Stack",
@@ -1978,6 +1978,12 @@
       if (!event.target.closest("[data-pwa-shell-toggle], [data-pwa-dashboard]")) return;
       setAppShellExpanded(!appShellExpanded);
     });
+    appShell.addEventListener("pointerenter", () => {
+      if (finePointer.matches) setAppShellExpanded(true);
+    });
+    appShell.addEventListener("pointerleave", () => {
+      if (finePointer.matches) setAppShellExpanded(false);
+    });
     appShell.addEventListener("pointerdown", (event) => {
       appShellPointerStart = event.clientX;
     }, { passive: true });
@@ -1995,6 +2001,12 @@
         return;
       }
       if (event.target.closest("[data-pwa-nav]")) setBottomNavExpanded(false);
+    });
+    bottomBar.addEventListener("pointerenter", () => {
+      if (finePointer.matches) setBottomNavExpanded(true);
+    });
+    bottomBar.addEventListener("pointerleave", () => {
+      if (finePointer.matches) setBottomNavExpanded(false);
     });
     bottomBar.addEventListener("pointerdown", (event) => {
       bottomNavPointerStart = event.clientY;
@@ -3624,8 +3636,8 @@
 
   function setupHeroAvatarEgg() {
     const avatarSources = {
-      src: "./image/iconic-avatar-960.jpg?v=20260707-pwaapp3",
-      srcset: "./image/iconic-avatar-720.jpg?v=20260707-pwaapp3 720w, ./image/iconic-avatar-960.jpg?v=20260707-pwaapp3 960w",
+      src: "./image/iconic-avatar-960.jpg?v=20260707-pwaapp4",
+      srcset: "./image/iconic-avatar-720.jpg?v=20260707-pwaapp4 720w, ./image/iconic-avatar-960.jpg?v=20260707-pwaapp4 960w",
       alt: "Stilisiertes Hero-Portrait mit Iconic Avatar"
     };
 
