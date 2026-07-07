@@ -1300,17 +1300,20 @@ html.runtime-pwa-update-ready .pwa-app-shell.is-expanded {
 
 .pwa-bottom-bar:not(.is-expanded) {
   left: auto;
-  right: 0;
-  bottom: calc(74px + max(8px, env(safe-area-inset-bottom)));
-  width: 32px;
-  min-height: 88px;
+  right: max(14px, env(safe-area-inset-right));
+  bottom: max(0px, env(safe-area-inset-bottom));
+  width: 76px;
+  min-height: 30px;
   padding: 0;
-  border-color: transparent;
-  border-radius: 12px 0 0 12px;
-  background: transparent;
-  box-shadow: none;
-  -webkit-backdrop-filter: none;
-  backdrop-filter: none;
+  border-color: rgba(var(--cyan-rgb), 0.24);
+  border-bottom: 0;
+  border-radius: 10px 10px 0 0;
+  background:
+    linear-gradient(135deg, rgba(var(--cyan-rgb), 0.08), rgba(var(--violet-rgb), 0.055)),
+    rgba(9, 11, 15, 0.88);
+  box-shadow: 0 10px 34px rgba(0, 0, 0, 0.32), inset 0 0 18px rgba(var(--cyan-rgb), 0.035);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
   transform: translateY(0);
 }
 
@@ -1347,12 +1350,10 @@ html.runtime-pwa-update-ready .pwa-app-shell.is-expanded {
   align-items: center;
   justify-content: center;
   gap: 6px;
-  border-color: rgba(var(--cyan-rgb), 0.2) !important;
-  border-radius: 9px !important;
+  border-color: rgba(var(--cyan-rgb), 0.16) !important;
+  border-radius: 8px !important;
   color: var(--accent-2) !important;
-  background:
-    linear-gradient(135deg, rgba(var(--cyan-rgb), 0.08), rgba(var(--violet-rgb), 0.055)),
-    rgba(9, 11, 15, 0.84) !important;
+  background: rgba(var(--cyan-rgb), 0.045) !important;
   pointer-events: auto;
 }
 
@@ -1360,9 +1361,9 @@ html.runtime-pwa-update-ready .pwa-app-shell.is-expanded {
   position: absolute;
   inset: 0;
   min-height: 0;
-  border-radius: 12px 0 0 12px !important;
-  border-right: 0 !important;
-  background: linear-gradient(180deg, rgba(var(--cyan-rgb), 0.11), rgba(var(--violet-rgb), 0.075)) !important;
+  border: 0 !important;
+  border-radius: 10px 10px 0 0 !important;
+  background: transparent !important;
 }
 
 .pwa-bottom-bar.is-expanded .pwa-bottom-bar__handle {
@@ -1371,14 +1372,6 @@ html.runtime-pwa-update-ready .pwa-app-shell.is-expanded {
 }
 
 .pwa-bottom-bar__handle > span {
-  width: 32px;
-  height: 2px;
-  border-radius: 999px;
-  background: linear-gradient(90deg, var(--accent-2), #8d3dff);
-  box-shadow: 0 0 16px rgba(var(--cyan-rgb), 0.42);
-}
-
-.pwa-bottom-bar:not(.is-expanded) .pwa-bottom-bar__handle > span {
   display: none;
 }
 
@@ -1392,7 +1385,7 @@ html.runtime-pwa-update-ready .pwa-app-shell.is-expanded {
   color: var(--accent-2);
   font: 900 0.58rem/1 ui-monospace, "SFMono-Regular", Consolas, monospace;
   letter-spacing: 0.16em;
-  writing-mode: vertical-rl;
+  writing-mode: horizontal-tb;
   text-orientation: mixed;
 }
 
@@ -6933,7 +6926,8 @@ html.recruiter-mode-active .profile-grid article {
   }
 
   html.runtime-pwa-standalone .footer {
-    padding-right: 48px;
+    padding-right: 104px;
+    padding-bottom: calc(50px + env(safe-area-inset-bottom));
   }
 
   .footer div {

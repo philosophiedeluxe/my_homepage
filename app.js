@@ -1978,7 +1978,14 @@
     runtime.querySelector("[data-pwa-snapshot]").addEventListener("click", copyProfileSnapshot);
     runtime.querySelector("[data-pwa-diagnostic]").addEventListener("click", () => checkCacheStatus(true));
     appShell.addEventListener("click", (event) => {
-      if (!event.target.closest("[data-pwa-shell-toggle], [data-pwa-dashboard]")) return;
+      const runtimeButton = event.target.closest("[data-pwa-dashboard]");
+      if (runtimeButton) {
+        appShellHoverSuppressed = true;
+        setAppShellExpanded(false);
+        renderRuntimePanel(true);
+        return;
+      }
+      if (!event.target.closest("[data-pwa-shell-toggle]")) return;
       const nextState = !appShellExpanded;
       appShellHoverSuppressed = !nextState;
       setAppShellExpanded(nextState);
@@ -3669,8 +3676,8 @@
 
   function setupHeroAvatarEgg() {
     const avatarSources = {
-      src: "./image/iconic-avatar-960.jpg?v=20260707-pwaapp5",
-      srcset: "./image/iconic-avatar-720.jpg?v=20260707-pwaapp5 720w, ./image/iconic-avatar-960.jpg?v=20260707-pwaapp5 960w",
+      src: "./image/iconic-avatar-960.jpg?v=20260707-pwaapp6",
+      srcset: "./image/iconic-avatar-720.jpg?v=20260707-pwaapp6 720w, ./image/iconic-avatar-960.jpg?v=20260707-pwaapp6 960w",
       alt: "Stilisiertes Hero-Portrait mit Iconic Avatar"
     };
 
