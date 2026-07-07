@@ -1146,8 +1146,8 @@ html.runtime-pwa-update-ready .site-shell {
   display: grid;
   grid-template-columns: 1fr;
   gap: 8px;
-  width: min(380px, calc(100vw - 16px));
-  padding: 7px 8px 7px 36px;
+  width: min(360px, calc(100vw - 26px));
+  padding: 8px 8px 8px 46px;
   border: 1px solid rgba(var(--cyan-rgb), 0.22);
   border-right: 0;
   border-radius: 12px 0 0 12px;
@@ -1162,7 +1162,7 @@ html.runtime-pwa-update-ready .site-shell {
   backdrop-filter: blur(12px);
   opacity: 0;
   pointer-events: none;
-  transform: translate(calc(100% - 32px), -50%);
+  transform: translate(calc(100% - 44px), -50%);
   transition: opacity 180ms ease, transform 220ms cubic-bezier(0.22, 1, 0.36, 1), border-color 180ms ease;
 }
 
@@ -1170,14 +1170,14 @@ html.runtime-pwa-update-ready .site-shell {
   content: "APP";
   position: absolute;
   inset: 0 auto 0 0;
-  width: 30px;
+  width: 42px;
   display: grid;
   place-items: center;
   border-right: 1px solid rgba(var(--cyan-rgb), 0.15);
   color: var(--accent-2);
   background: linear-gradient(180deg, rgba(var(--cyan-rgb), 0.11), rgba(var(--violet-rgb), 0.075));
-  font: 900 0.52rem/1 ui-monospace, "SFMono-Regular", Consolas, monospace;
-  letter-spacing: 0.14em;
+  font: 900 0.58rem/1 ui-monospace, "SFMono-Regular", Consolas, monospace;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   writing-mode: vertical-rl;
   text-orientation: mixed;
@@ -1188,11 +1188,13 @@ html.runtime-pwa-standalone .pwa-app-shell,
 html.runtime-pwa-update-ready .pwa-app-shell {
   opacity: 1;
   pointer-events: auto;
-  transform: translate(calc(100% - 32px), -50%);
+  transform: translate(calc(100% - 44px), -50%);
 }
 
-html.runtime-pwa-standalone .pwa-app-shell.is-expanded,
-html.runtime-pwa-update-ready .pwa-app-shell.is-expanded {
+html.runtime-pwa-standalone .pwa-app-shell:hover,
+html.runtime-pwa-standalone .pwa-app-shell:focus-within,
+html.runtime-pwa-update-ready .pwa-app-shell:hover,
+html.runtime-pwa-update-ready .pwa-app-shell:focus-within {
   transform: translate(0, -50%);
 }
 
@@ -1201,7 +1203,7 @@ html.runtime-pwa-update-ready .pwa-app-shell.is-expanded {
 }
 
 .pwa-app-shell__main {
-  min-height: 38px;
+  min-height: 42px;
   width: 100%;
   display: grid;
   grid-template-columns: auto auto;
@@ -1209,14 +1211,14 @@ html.runtime-pwa-update-ready .pwa-app-shell.is-expanded {
     "dot title"
     "dot state";
   align-items: center;
-  column-gap: 8px;
+  column-gap: 9px;
   border: 0;
   border-radius: 8px;
-  padding: 0 10px;
+  padding: 0 12px;
   color: inherit;
   background: rgba(var(--cyan-rgb), 0.055);
-  font: 900 0.64rem/1.12 ui-monospace, "SFMono-Regular", Consolas, monospace;
-  letter-spacing: 0.08em;
+  font: 900 0.68rem/1.15 ui-monospace, "SFMono-Regular", Consolas, monospace;
+  letter-spacing: 0.1em;
   text-align: left;
   text-transform: uppercase;
   cursor: pointer;
@@ -1224,7 +1226,7 @@ html.runtime-pwa-update-ready .pwa-app-shell.is-expanded {
 
 .pwa-app-shell__main > span {
   grid-area: dot;
-  width: 8px;
+  width: 10px;
   aspect-ratio: 1;
   border-radius: 50%;
   background: var(--accent-2);
@@ -1244,54 +1246,48 @@ html.runtime-pwa-update-ready .pwa-app-shell.is-expanded {
 }
 
 .pwa-app-shell__chips {
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: minmax(0, 1fr);
-  gap: 5px;
-  justify-content: stretch;
-  min-width: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: flex-start;
 }
 
 .pwa-app-shell__chips span {
   border: 1px solid rgba(var(--cyan-rgb), 0.18);
   border-radius: 999px;
-  min-width: 0;
-  overflow: hidden;
-  padding: 0.3rem 0.34rem;
+  padding: 0.36rem 0.52rem;
   color: var(--muted);
   background: rgba(244, 241, 234, 0.035);
-  font: 900 clamp(0.46rem, 1.45vw, 0.56rem)/1 ui-monospace, "SFMono-Regular", Consolas, monospace;
-  letter-spacing: 0.035em;
-  text-align: center;
-  text-overflow: ellipsis;
+  font: 900 0.58rem/1 ui-monospace, "SFMono-Regular", Consolas, monospace;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  white-space: nowrap;
 }
 
 .pwa-bottom-bar {
   position: fixed;
-  left: max(16px, env(safe-area-inset-left));
-  right: max(16px, env(safe-area-inset-right));
-  bottom: max(10px, env(safe-area-inset-bottom));
+  left: max(12px, env(safe-area-inset-left));
+  right: max(12px, env(safe-area-inset-right));
+  bottom: max(12px, env(safe-area-inset-bottom));
   z-index: 130;
   display: none;
   grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 5px;
-  padding: 5px;
+  gap: 6px;
+  padding: 7px;
   border: 1px solid rgba(var(--cyan-rgb), 0.24);
-  border-radius: 10px;
+  border-radius: 12px;
   background:
     linear-gradient(135deg, rgba(var(--cyan-rgb), 0.08), rgba(var(--violet-rgb), 0.055)),
     rgba(9, 11, 15, 0.86);
   box-shadow: 0 18px 70px rgba(0, 0, 0, 0.42);
   -webkit-backdrop-filter: blur(14px);
   backdrop-filter: blur(14px);
-  transform: translateY(calc(100% - 24px));
-  opacity: 0.86;
+  transform: translateY(calc(100% - 36px));
+  opacity: 0.9;
   transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1), opacity 180ms ease, border-color 180ms ease;
 }
 
-.pwa-bottom-bar.is-expanded {
+.pwa-bottom-bar.is-expanded,
+.pwa-bottom-bar:focus-within {
   transform: translateY(0);
   opacity: 1;
 }
@@ -1299,7 +1295,7 @@ html.runtime-pwa-update-ready .pwa-app-shell.is-expanded {
 .pwa-bottom-bar a,
 .pwa-bottom-bar button {
   min-width: 0;
-  min-height: 42px;
+  min-height: 48px;
   display: grid;
   place-items: center;
   gap: 3px;
@@ -1308,8 +1304,8 @@ html.runtime-pwa-update-ready .pwa-app-shell.is-expanded {
   color: var(--muted);
   background: transparent;
   text-decoration: none;
-  font: 900 0.58rem/1 ui-monospace, "SFMono-Regular", Consolas, monospace;
-  letter-spacing: 0.045em;
+  font: 900 0.62rem/1 ui-monospace, "SFMono-Regular", Consolas, monospace;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   cursor: pointer;
   transition: opacity 160ms ease, transform 180ms ease, border-color 180ms ease, color 180ms ease, background 180ms ease;
@@ -1317,19 +1313,19 @@ html.runtime-pwa-update-ready .pwa-app-shell.is-expanded {
 
 .pwa-bottom-bar__handle {
   grid-column: 1 / -1;
-  min-height: 18px;
+  min-height: 26px;
   display: flex !important;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: 8px;
   border-color: rgba(var(--cyan-rgb), 0.18) !important;
   color: var(--accent-2) !important;
   background: rgba(var(--cyan-rgb), 0.055) !important;
 }
 
 .pwa-bottom-bar__handle > span {
-  width: 28px;
-  height: 2px;
+  width: 34px;
+  height: 3px;
   border-radius: 999px;
   background: linear-gradient(90deg, var(--accent-2), #8d3dff);
   box-shadow: 0 0 16px rgba(var(--cyan-rgb), 0.42);
@@ -1337,12 +1333,12 @@ html.runtime-pwa-update-ready .pwa-app-shell.is-expanded {
 
 .pwa-bottom-bar__handle b {
   color: var(--muted);
-  font-size: 0.48rem;
-  letter-spacing: 0.12em;
+  font-size: 0.52rem;
+  letter-spacing: 0.14em;
 }
 
-.pwa-bottom-bar:not(.is-expanded) a,
-.pwa-bottom-bar:not(.is-expanded) button:not(.pwa-bottom-bar__handle) {
+.pwa-bottom-bar:not(.is-expanded):not(:focus-within) a,
+.pwa-bottom-bar:not(.is-expanded):not(:focus-within) button:not(.pwa-bottom-bar__handle) {
   opacity: 0;
   pointer-events: none;
   transform: translateY(8px);
@@ -1350,7 +1346,7 @@ html.runtime-pwa-update-ready .pwa-app-shell.is-expanded {
 
 .pwa-bottom-bar span {
   color: var(--accent-2);
-  font-size: 0.52rem;
+  font-size: 0.56rem;
 }
 
 .pwa-bottom-bar b {
@@ -5257,9 +5253,8 @@ main > .section.interior-hero::before {
 
 .first-time-guide {
   top: calc(var(--nav-h) + 16px);
-  right: max(22px, env(safe-area-inset-right));
+  right: 22px;
   width: min(390px, calc(100vw - 44px));
-  max-width: calc(100vw - 44px);
   overflow: hidden;
   border: 1px solid rgba(98, 214, 208, 0.32);
   border-radius: 8px;
@@ -6794,15 +6789,17 @@ html.recruiter-mode-active .profile-grid article {
     right: 0;
     bottom: auto;
     left: auto;
-    width: min(350px, calc(100vw - 12px));
+    width: min(330px, calc(100vw - 20px));
     grid-template-columns: 1fr;
-    gap: 7px;
-    padding: 7px 7px 7px 34px;
-    transform: translate(calc(100% - 30px), -50%);
+    gap: 8px;
+    padding: 8px 8px 8px 44px;
+    transform: translate(calc(100% - 42px), -50%);
   }
 
-  html.runtime-pwa-standalone .pwa-app-shell.is-expanded,
-  html.runtime-pwa-update-ready .pwa-app-shell.is-expanded {
+  html.runtime-pwa-standalone .pwa-app-shell:hover,
+  html.runtime-pwa-standalone .pwa-app-shell:focus-within,
+  html.runtime-pwa-update-ready .pwa-app-shell:hover,
+  html.runtime-pwa-update-ready .pwa-app-shell:focus-within {
     transform: translate(0, -50%);
   }
 
@@ -6812,15 +6809,13 @@ html.recruiter-mode-active .profile-grid article {
   }
 
   .pwa-app-shell__chips {
-    grid-auto-flow: column;
-    grid-auto-columns: minmax(0, 1fr);
+    justify-content: flex-start;
     overflow: hidden;
   }
 
   .pwa-app-shell__chips span {
     max-width: 100%;
     overflow: hidden;
-    padding-inline: 0.26rem;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
@@ -7011,11 +7006,10 @@ html.recruiter-mode-active .profile-grid article {
 
   .first-time-guide {
     top: calc(var(--nav-h) + 10px);
-    right: max(14px, env(safe-area-inset-right));
-    left: max(14px, env(safe-area-inset-left));
+    right: 14px;
+    left: auto;
     bottom: auto;
-    width: auto;
-    max-width: none;
+    width: calc(100vw - 28px);
   }
 
   .system-trace-terminal,

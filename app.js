@@ -1741,10 +1741,6 @@
     document.body.appendChild(bottomBar);
     let bottomNavExpanded = false;
     let bottomNavPointerStart = 0;
-    let bottomNavSwipeHandled = false;
-    let appShellExpanded = false;
-    let appShellPointerStart = 0;
-    let appShellSwipeHandled = false;
 
     const resumeToast = document.createElement("div");
     resumeToast.className = "pwa-resume-toast";
@@ -1802,13 +1798,13 @@
       const active = status.standalone || status.installed;
       appShell.setAttribute("aria-hidden", active ? "false" : "true");
       bottomBar.setAttribute("aria-hidden", active ? "false" : "true");
-      if (!active) collapsePwaSliders();
       appShell.querySelector("[data-pwa-app-title]").textContent = text.appShell;
       appShell.querySelector("[data-pwa-app-state]").textContent = statusLine();
       const chips = [
-        status.standalone || status.installed ? text.standalone : text.dashboard,
+        status.standalone ? text.standalone : null,
         navigator.onLine ? text.online : text.offline,
-        status.cacheReady || status.controlled ? text.ready : text.standby
+        status.cacheReady || status.controlled ? text.ready : text.standby,
+        root.classList.contains("iconic-avatar-active") ? text.iconic : null
       ].filter(Boolean);
       appShell.querySelector("[data-pwa-app-chips]").innerHTML = chips.map((chip) => `<span>${chip}</span>`).join("");
       bottomBar.querySelector("[data-pwa-nav='profile'] b").textContent = text.openProfile;
@@ -1826,22 +1822,6 @@
       bottomBar.classList.toggle("is-expanded", bottomNavExpanded);
       bottomBar.setAttribute("aria-expanded", String(bottomNavExpanded));
       bottomBar.querySelector("[data-pwa-nav-toggle]")?.setAttribute("aria-expanded", String(bottomNavExpanded));
-    }
-
-    function setAppShellExpanded(expanded) {
-      appShellExpanded = Boolean(expanded);
-      appShell.classList.toggle("is-expanded", appShellExpanded);
-      appShell.setAttribute("aria-expanded", String(appShellExpanded));
-      appShell.querySelector("[data-pwa-dashboard]")?.setAttribute("aria-expanded", String(appShellExpanded));
-    }
-
-    function collapsePwaSliders() {
-      if (appShellExpanded) setAppShellExpanded(false);
-      if (bottomNavExpanded) setBottomNavExpanded(false);
-    }
-
-    function isPwaSliderTarget(target) {
-      return Boolean(target?.closest?.(".pwa-app-shell, .pwa-bottom-bar"));
     }
 
     function showResumeToast(message) {
@@ -1979,29 +1959,8 @@
     runtime.querySelector("[data-pwa-cache-check]").addEventListener("click", () => checkCacheStatus(true));
     runtime.querySelector("[data-pwa-snapshot]").addEventListener("click", copyProfileSnapshot);
     runtime.querySelector("[data-pwa-diagnostic]").addEventListener("click", () => checkCacheStatus(true));
-    appShell.addEventListener("click", () => {
-      if (appShellSwipeHandled) {
-        appShellSwipeHandled = false;
-        return;
-      }
-      setAppShellExpanded(!appShellExpanded);
-    });
-    appShell.addEventListener("pointerdown", (event) => {
-      appShellPointerStart = event.clientX;
-    }, { passive: true });
-    appShell.addEventListener("pointerup", (event) => {
-      if (!appShellPointerStart) return;
-      const delta = event.clientX - appShellPointerStart;
-      if (Math.abs(delta) > 22) appShellSwipeHandled = true;
-      if (delta < -22) setAppShellExpanded(true);
-      if (delta > 22) setAppShellExpanded(false);
-      appShellPointerStart = 0;
-    }, { passive: true });
+    appShell.querySelector("[data-pwa-dashboard]").addEventListener("click", () => renderRuntimePanel(true));
     bottomBar.addEventListener("click", (event) => {
-      if (bottomNavSwipeHandled) {
-        bottomNavSwipeHandled = false;
-        return;
-      }
       const toggle = event.target.closest("[data-pwa-nav-toggle]");
       if (toggle) {
         setBottomNavExpanded(!bottomNavExpanded);
@@ -2015,16 +1974,10 @@
     bottomBar.addEventListener("pointerup", (event) => {
       if (!bottomNavPointerStart) return;
       const delta = event.clientY - bottomNavPointerStart;
-      if (Math.abs(delta) > 22) bottomNavSwipeHandled = true;
-      if (delta < -22) setBottomNavExpanded(true);
-      if (delta > 22) setBottomNavExpanded(false);
+      if (delta < -24) setBottomNavExpanded(true);
+      if (delta > 24) setBottomNavExpanded(false);
       bottomNavPointerStart = 0;
     }, { passive: true });
-    document.addEventListener("pointerdown", (event) => {
-      if (!isPwaSliderTarget(event.target)) collapsePwaSliders();
-    }, { passive: true });
-    window.addEventListener("scroll", collapsePwaSliders, { passive: true });
-    window.addEventListener("resize", collapsePwaSliders, { passive: true });
     bottomBar.querySelector("[data-pwa-nav='trace']").addEventListener("click", () => {
       document.dispatchEvent(new CustomEvent("pk:run-system-trace"));
     });
