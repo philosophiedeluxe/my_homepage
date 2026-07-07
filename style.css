@@ -1140,17 +1140,17 @@ html.runtime-pwa-update-ready .site-shell {
 
 .pwa-app-shell {
   position: fixed;
-  top: calc(var(--nav-height, 74px) + max(10px, env(safe-area-inset-top)));
-  right: max(18px, env(safe-area-inset-right));
+  top: 50%;
+  right: 0;
   z-index: 120;
   display: grid;
-  grid-template-columns: auto 1fr;
-  align-items: center;
-  gap: 10px;
-  width: min(620px, calc(100vw - 36px));
-  padding: 8px;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  width: min(360px, calc(100vw - 26px));
+  padding: 8px 8px 8px 46px;
   border: 1px solid rgba(var(--cyan-rgb), 0.22);
-  border-radius: 10px;
+  border-right: 0;
+  border-radius: 12px 0 0 12px;
   color: var(--muted);
   background:
     linear-gradient(135deg, rgba(var(--cyan-rgb), 0.08), rgba(var(--violet-rgb), 0.045)),
@@ -1162,15 +1162,40 @@ html.runtime-pwa-update-ready .site-shell {
   backdrop-filter: blur(12px);
   opacity: 0;
   pointer-events: none;
-  transform: translateY(-8px);
-  transition: opacity 180ms ease, transform 180ms ease, border-color 180ms ease;
+  transform: translate(calc(100% - 44px), -50%);
+  transition: opacity 180ms ease, transform 220ms cubic-bezier(0.22, 1, 0.36, 1), border-color 180ms ease;
+}
+
+.pwa-app-shell::before {
+  content: "APP";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 42px;
+  display: grid;
+  place-items: center;
+  border-right: 1px solid rgba(var(--cyan-rgb), 0.15);
+  color: var(--accent-2);
+  background: linear-gradient(180deg, rgba(var(--cyan-rgb), 0.11), rgba(var(--violet-rgb), 0.075));
+  font: 900 0.58rem/1 ui-monospace, "SFMono-Regular", Consolas, monospace;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  pointer-events: none;
 }
 
 html.runtime-pwa-standalone .pwa-app-shell,
 html.runtime-pwa-update-ready .pwa-app-shell {
   opacity: 1;
   pointer-events: auto;
-  transform: translateY(0);
+  transform: translate(calc(100% - 44px), -50%);
+}
+
+html.runtime-pwa-standalone .pwa-app-shell:hover,
+html.runtime-pwa-standalone .pwa-app-shell:focus-within,
+html.runtime-pwa-update-ready .pwa-app-shell:hover,
+html.runtime-pwa-update-ready .pwa-app-shell:focus-within {
+  transform: translate(0, -50%);
 }
 
 .pwa-app-shell.is-offline {
@@ -1179,6 +1204,7 @@ html.runtime-pwa-update-ready .pwa-app-shell {
 
 .pwa-app-shell__main {
   min-height: 42px;
+  width: 100%;
   display: grid;
   grid-template-columns: auto auto;
   grid-template-areas:
@@ -1223,7 +1249,7 @@ html.runtime-pwa-update-ready .pwa-app-shell {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  justify-content: flex-end;
+  justify-content: flex-start;
 }
 
 .pwa-app-shell__chips span {
@@ -1255,6 +1281,15 @@ html.runtime-pwa-update-ready .pwa-app-shell {
   box-shadow: 0 18px 70px rgba(0, 0, 0, 0.42);
   -webkit-backdrop-filter: blur(14px);
   backdrop-filter: blur(14px);
+  transform: translateY(calc(100% - 36px));
+  opacity: 0.9;
+  transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1), opacity 180ms ease, border-color 180ms ease;
+}
+
+.pwa-bottom-bar.is-expanded,
+.pwa-bottom-bar:focus-within {
+  transform: translateY(0);
+  opacity: 1;
 }
 
 .pwa-bottom-bar a,
@@ -1273,6 +1308,40 @@ html.runtime-pwa-update-ready .pwa-app-shell {
   letter-spacing: 0.06em;
   text-transform: uppercase;
   cursor: pointer;
+  transition: opacity 160ms ease, transform 180ms ease, border-color 180ms ease, color 180ms ease, background 180ms ease;
+}
+
+.pwa-bottom-bar__handle {
+  grid-column: 1 / -1;
+  min-height: 26px;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-color: rgba(var(--cyan-rgb), 0.18) !important;
+  color: var(--accent-2) !important;
+  background: rgba(var(--cyan-rgb), 0.055) !important;
+}
+
+.pwa-bottom-bar__handle > span {
+  width: 34px;
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--accent-2), #8d3dff);
+  box-shadow: 0 0 16px rgba(var(--cyan-rgb), 0.42);
+}
+
+.pwa-bottom-bar__handle b {
+  color: var(--muted);
+  font-size: 0.52rem;
+  letter-spacing: 0.14em;
+}
+
+.pwa-bottom-bar:not(.is-expanded):not(:focus-within) a,
+.pwa-bottom-bar:not(.is-expanded):not(:focus-within) button:not(.pwa-bottom-bar__handle) {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(8px);
 }
 
 .pwa-bottom-bar span {
@@ -1347,7 +1416,7 @@ html.runtime-pwa-standalone .site-shell {
 }
 
 html.runtime-pwa-standalone main {
-  scroll-padding-bottom: 92px;
+  scroll-padding-bottom: 52px;
 }
 
 html.runtime-color-light:not(.iconic-avatar-active) {
@@ -6711,19 +6780,27 @@ html.recruiter-mode-active .profile-grid article {
   }
 
   html.runtime-pwa-standalone body {
-    padding-bottom: calc(82px + env(safe-area-inset-bottom));
+    padding-bottom: calc(42px + env(safe-area-inset-bottom));
   }
 
   html.runtime-pwa-standalone .pwa-app-shell,
   html.runtime-pwa-update-ready .pwa-app-shell {
-    top: auto;
-    right: max(12px, env(safe-area-inset-right));
-    bottom: calc(86px + max(12px, env(safe-area-inset-bottom)));
-    left: max(12px, env(safe-area-inset-left));
-    width: auto;
+    top: 50%;
+    right: 0;
+    bottom: auto;
+    left: auto;
+    width: min(330px, calc(100vw - 20px));
     grid-template-columns: 1fr;
-    gap: 7px;
-    padding: 7px;
+    gap: 8px;
+    padding: 8px 8px 8px 44px;
+    transform: translate(calc(100% - 42px), -50%);
+  }
+
+  html.runtime-pwa-standalone .pwa-app-shell:hover,
+  html.runtime-pwa-standalone .pwa-app-shell:focus-within,
+  html.runtime-pwa-update-ready .pwa-app-shell:hover,
+  html.runtime-pwa-update-ready .pwa-app-shell:focus-within {
+    transform: translate(0, -50%);
   }
 
   .pwa-app-shell__main {
@@ -6749,7 +6826,7 @@ html.recruiter-mode-active .profile-grid article {
 
   .pwa-runtime-panel {
     right: max(12px, env(safe-area-inset-right));
-    bottom: calc(76px + max(12px, env(safe-area-inset-bottom)));
+    bottom: calc(48px + max(12px, env(safe-area-inset-bottom)));
     width: min(430px, calc(100vw - 24px));
   }
 
@@ -6760,7 +6837,7 @@ html.recruiter-mode-active .profile-grid article {
   .pwa-resume-toast {
     right: max(12px, env(safe-area-inset-right));
     left: max(12px, env(safe-area-inset-left));
-    bottom: calc(76px + max(12px, env(safe-area-inset-bottom)));
+    bottom: calc(48px + max(12px, env(safe-area-inset-bottom)));
     max-width: none;
   }
 
@@ -6912,14 +6989,14 @@ html.recruiter-mode-active .profile-grid article {
   }
 
   html.runtime-pwa-standalone .pwa-runtime-panel {
-    bottom: calc(76px + max(12px, env(safe-area-inset-bottom)));
+    bottom: calc(48px + max(12px, env(safe-area-inset-bottom)));
   }
 
   html.runtime-pwa-standalone .system-trace-terminal,
   html.runtime-pwa-standalone .recruiter-mode-panel,
   html.runtime-pwa-standalone .timeline-playback-console {
-    bottom: calc(86px + max(12px, env(safe-area-inset-bottom)));
-    max-height: calc(100svh - 172px);
+    bottom: calc(48px + max(12px, env(safe-area-inset-bottom)));
+    max-height: calc(100svh - 134px);
   }
 
   .pwa-runtime-panel__actions {

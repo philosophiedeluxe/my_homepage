@@ -1560,6 +1560,7 @@
         cacheCheck: "Cache prüfen",
         snapshot: "Snapshot kopieren",
         diagnostic: "Offline Diagnose",
+        appNav: "App Nav",
         openProfile: "Profil",
         openVita: "Vita",
         openStack: "Stack",
@@ -1596,6 +1597,7 @@
         cacheCheck: "Check cache",
         snapshot: "Copy snapshot",
         diagnostic: "Offline diagnostic",
+        appNav: "App Nav",
         openProfile: "Profile",
         openVita: "Resume",
         openStack: "Stack",
@@ -1632,6 +1634,7 @@
         cacheCheck: "Comprobar cache",
         snapshot: "Copiar snapshot",
         diagnostic: "Diagnostico offline",
+        appNav: "App Nav",
         openProfile: "Perfil",
         openVita: "Vita",
         openStack: "Stack",
@@ -1668,6 +1671,7 @@
         cacheCheck: "Cache check",
         snapshot: "Snapshot copy",
         diagnostic: "Offline diagnostic",
+        appNav: "App Nav",
         openProfile: "Profile",
         openVita: "Vita",
         openStack: "Stack",
@@ -1724,6 +1728,10 @@
     bottomBar.className = "pwa-bottom-bar";
     bottomBar.setAttribute("aria-label", "PWA Schnellnavigation");
     bottomBar.innerHTML = `
+      <button type="button" class="pwa-bottom-bar__handle" data-pwa-nav-toggle aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <b data-pwa-nav-title></b>
+      </button>
       <a href="./index.html#profil" data-pwa-nav="profile"><span>01</span><b></b></a>
       <a href="./vita.html" data-pwa-nav="vita"><span>02</span><b></b></a>
       <a href="./index.html#stack" data-pwa-nav="stack"><span>03</span><b></b></a>
@@ -1731,6 +1739,8 @@
       <button type="button" data-pwa-nav="command"><span>05</span><b></b></button>
     `;
     document.body.appendChild(bottomBar);
+    let bottomNavExpanded = false;
+    let bottomNavPointerStart = 0;
 
     const resumeToast = document.createElement("div");
     resumeToast.className = "pwa-resume-toast";
@@ -1802,8 +1812,16 @@
       bottomBar.querySelector("[data-pwa-nav='stack'] b").textContent = text.openStack;
       bottomBar.querySelector("[data-pwa-nav='trace'] b").textContent = text.openTrace;
       bottomBar.querySelector("[data-pwa-nav='command'] b").textContent = text.openCommand;
+      bottomBar.querySelector("[data-pwa-nav-title]").textContent = text.appNav;
       bottomBar.classList.toggle("is-offline", !navigator.onLine);
       appShell.classList.toggle("is-offline", !navigator.onLine);
+    }
+
+    function setBottomNavExpanded(expanded) {
+      bottomNavExpanded = Boolean(expanded);
+      bottomBar.classList.toggle("is-expanded", bottomNavExpanded);
+      bottomBar.setAttribute("aria-expanded", String(bottomNavExpanded));
+      bottomBar.querySelector("[data-pwa-nav-toggle]")?.setAttribute("aria-expanded", String(bottomNavExpanded));
     }
 
     function showResumeToast(message) {
@@ -1942,6 +1960,24 @@
     runtime.querySelector("[data-pwa-snapshot]").addEventListener("click", copyProfileSnapshot);
     runtime.querySelector("[data-pwa-diagnostic]").addEventListener("click", () => checkCacheStatus(true));
     appShell.querySelector("[data-pwa-dashboard]").addEventListener("click", () => renderRuntimePanel(true));
+    bottomBar.addEventListener("click", (event) => {
+      const toggle = event.target.closest("[data-pwa-nav-toggle]");
+      if (toggle) {
+        setBottomNavExpanded(!bottomNavExpanded);
+        return;
+      }
+      if (event.target.closest("[data-pwa-nav]")) setBottomNavExpanded(false);
+    });
+    bottomBar.addEventListener("pointerdown", (event) => {
+      bottomNavPointerStart = event.clientY;
+    }, { passive: true });
+    bottomBar.addEventListener("pointerup", (event) => {
+      if (!bottomNavPointerStart) return;
+      const delta = event.clientY - bottomNavPointerStart;
+      if (delta < -24) setBottomNavExpanded(true);
+      if (delta > 24) setBottomNavExpanded(false);
+      bottomNavPointerStart = 0;
+    }, { passive: true });
     bottomBar.querySelector("[data-pwa-nav='trace']").addEventListener("click", () => {
       document.dispatchEvent(new CustomEvent("pk:run-system-trace"));
     });
@@ -2008,6 +2044,7 @@
     };
 
     renderRuntimePanel(false);
+    setBottomNavExpanded(false);
 
     if (!status.supported || !status.secure) return;
 
@@ -3549,8 +3586,8 @@
 
   function setupHeroAvatarEgg() {
     const avatarSources = {
-      src: "./image/iconic-avatar-960.jpg?v=20260707-pwaapp1",
-      srcset: "./image/iconic-avatar-720.jpg?v=20260707-pwaapp1 720w, ./image/iconic-avatar-960.jpg?v=20260707-pwaapp1 960w",
+      src: "./image/iconic-avatar-960.jpg?v=20260707-pwaapp2",
+      srcset: "./image/iconic-avatar-720.jpg?v=20260707-pwaapp2 720w, ./image/iconic-avatar-960.jpg?v=20260707-pwaapp2 960w",
       alt: "Stilisiertes Hero-Portrait mit Iconic Avatar"
     };
 
