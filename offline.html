@@ -6,11 +6,11 @@
   <title>phil.osophie.deluxe - Offline</title>
   <meta name="robots" content="noindex">
   <meta name="theme-color" content="#101114">
-  <link rel="manifest" href="./manifest.webmanifest?v=20260706-pdffill1">
-  <link rel="icon" type="image/png" sizes="32x32" href="./image/pwa/favicon-32.png?v=20260706-pdffill1">
-  <link rel="icon" type="image/png" sizes="48x48" href="./image/pwa/favicon-48.png?v=20260706-pdffill1">
-  <link rel="icon" type="image/png" sizes="192x192" href="./image/pwa/icon-192.png?v=20260706-pdffill1">
-  <link rel="apple-touch-icon" href="./image/pwa/apple-touch-icon.png?v=20260706-pdffill1">
+  <link rel="manifest" href="./manifest.webmanifest?v=20260707-pwaapp1">
+  <link rel="icon" type="image/png" sizes="32x32" href="./image/pwa/favicon-32.png?v=20260707-pwaapp1">
+  <link rel="icon" type="image/png" sizes="48x48" href="./image/pwa/favicon-48.png?v=20260707-pwaapp1">
+  <link rel="icon" type="image/png" sizes="192x192" href="./image/pwa/icon-192.png?v=20260707-pwaapp1">
+  <link rel="apple-touch-icon" href="./image/pwa/apple-touch-icon.png?v=20260707-pwaapp1">
   <style>
     :root {
       color-scheme: dark;
@@ -46,6 +46,7 @@
     main {
       width: min(760px, 100%);
       border: 1px solid var(--line);
+      border-radius: 10px;
       background: var(--panel);
       box-shadow: 0 24px 80px rgba(0, 0, 0, 0.42), 0 0 42px rgba(82, 242, 224, 0.08);
       padding: clamp(28px, 7vw, 64px);
@@ -110,22 +111,82 @@
 
     .status span {
       border: 1px solid rgba(82, 242, 224, 0.26);
+      border-radius: 999px;
       padding: 10px 12px;
       background: rgba(82, 242, 224, 0.05);
     }
 
-    a {
-      color: var(--text);
-      display: inline-flex;
+    .cache-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .cache-grid span {
+      min-height: 76px;
+      display: grid;
+      align-content: center;
+      gap: 7px;
+      border: 1px solid rgba(82, 242, 224, 0.2);
+      border-radius: 8px;
+      padding: 12px;
+      background: rgba(8, 13, 16, 0.36);
+      color: var(--muted);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .cache-grid b {
+      color: var(--accent);
+      font-size: 0.62rem;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
       margin-top: 34px;
+    }
+
+    a,
+    button {
       min-height: 48px;
+      display: inline-flex;
       align-items: center;
       padding: 0 18px;
-      border: 1px solid rgba(247, 173, 45, 0.72);
-      background: var(--gold);
+      border: 1px solid rgba(82, 242, 224, 0.32);
+      border-radius: 8px;
+      background: rgba(246, 241, 232, 0.05);
       color: #080d10;
       font-weight: 900;
+      font-family: inherit;
       text-decoration: none;
+      cursor: pointer;
+    }
+
+    .actions a:first-child {
+      border-color: rgba(247, 173, 45, 0.72);
+      background: var(--gold);
+    }
+
+    .actions a:not(:first-child),
+    .actions button {
+      color: var(--text);
+    }
+
+    @media (max-width: 620px) {
+      body {
+        padding: 18px;
+      }
+
+      .cache-grid,
+      .actions {
+        grid-template-columns: 1fr;
+        display: grid;
+      }
     }
 
     @keyframes signal {
@@ -146,7 +207,17 @@
       <span>network missing</span>
       <span>profile local</span>
     </div>
-    <a href="./index.html">Zur Startseite</a>
+    <div class="cache-grid" aria-label="Lokal verfügbare Bereiche">
+      <span><b>PROFILE</b>cached profile available</span>
+      <span><b>VITA</b>experience log standby</span>
+      <span><b>STACK</b>capability graph local</span>
+    </div>
+    <div class="actions">
+      <a href="./index.html">Open Profile</a>
+      <a href="./vita.html">Open Vita</a>
+      <a href="./index.html#stack">Open Stack</a>
+      <button type="button" onclick="window.location.reload()">Retry Sync</button>
+    </div>
   </main>
 </body>
 </html>

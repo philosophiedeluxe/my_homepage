@@ -911,7 +911,7 @@ body.vita-print-mode .tech-stream {
   right: max(18px, env(safe-area-inset-right));
   bottom: max(18px, env(safe-area-inset-bottom));
   z-index: 178;
-  width: min(390px, calc(100vw - 36px));
+  width: min(460px, calc(100vw - 36px));
   border: 1px solid rgba(var(--cyan-rgb), 0.34);
   border-radius: 8px;
   overflow: hidden;
@@ -1035,8 +1035,55 @@ body.vita-print-mode .tech-stream {
   text-transform: uppercase;
 }
 
+.pwa-runtime-panel__cache {
+  display: grid;
+  gap: 6px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(var(--cyan-rgb), 0.14);
+}
+
+.pwa-runtime-panel__cache span {
+  display: grid;
+  grid-template-columns: 3.5rem 1fr;
+  align-items: center;
+  gap: 8px;
+  min-height: 28px;
+  color: var(--muted);
+  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+  font-size: 0.66rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.pwa-runtime-panel__cache b {
+  justify-self: start;
+  min-width: 2.8rem;
+  border: 1px solid rgba(var(--cyan-rgb), 0.2);
+  border-radius: 999px;
+  padding: 0.24rem 0.42rem;
+  color: var(--accent-2);
+  background: rgba(var(--cyan-rgb), 0.05);
+  font-size: 0.58rem;
+  text-align: center;
+}
+
+.pwa-runtime-panel__cache [data-cache-state="ok"] b {
+  color: #06110f;
+  background: var(--accent-2);
+  box-shadow: 0 0 16px rgba(var(--cyan-rgb), 0.22);
+}
+
+.pwa-runtime-panel__cache [data-cache-state="miss"] b {
+  border-color: rgba(247, 173, 45, 0.46);
+  color: var(--accent);
+  background: rgba(247, 173, 45, 0.08);
+}
+
 .pwa-runtime-panel__actions {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 8px;
   padding: 0 14px 14px;
 }
@@ -1058,6 +1105,10 @@ body.vita-print-mode .tech-stream {
 .pwa-runtime-panel__actions button:focus-visible {
   border-color: rgba(var(--cyan-rgb), 0.58);
   background: rgba(var(--cyan-rgb), 0.1);
+}
+
+.pwa-runtime-panel__actions [data-pwa-diagnostic] {
+  grid-column: 1 / -1;
 }
 
 .pwa-runtime-panel__actions [data-pwa-install] {
@@ -1085,6 +1136,218 @@ html.runtime-pwa-standalone .brand::after {
 
 html.runtime-pwa-update-ready .site-shell {
   box-shadow: inset 0 -1px rgba(247, 173, 45, 0.38), 0 0 34px rgba(247, 173, 45, 0.05);
+}
+
+.pwa-app-shell {
+  position: fixed;
+  top: calc(var(--nav-height, 74px) + max(10px, env(safe-area-inset-top)));
+  right: max(18px, env(safe-area-inset-right));
+  z-index: 120;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 10px;
+  width: min(620px, calc(100vw - 36px));
+  padding: 8px;
+  border: 1px solid rgba(var(--cyan-rgb), 0.22);
+  border-radius: 10px;
+  color: var(--muted);
+  background:
+    linear-gradient(135deg, rgba(var(--cyan-rgb), 0.08), rgba(var(--violet-rgb), 0.045)),
+    rgba(10, 13, 18, 0.76);
+  box-shadow:
+    0 18px 60px rgba(0, 0, 0, 0.26),
+    inset 0 0 20px rgba(var(--cyan-rgb), 0.035);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-8px);
+  transition: opacity 180ms ease, transform 180ms ease, border-color 180ms ease;
+}
+
+html.runtime-pwa-standalone .pwa-app-shell,
+html.runtime-pwa-update-ready .pwa-app-shell {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.pwa-app-shell.is-offline {
+  border-color: rgba(247, 173, 45, 0.56);
+}
+
+.pwa-app-shell__main {
+  min-height: 42px;
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-areas:
+    "dot title"
+    "dot state";
+  align-items: center;
+  column-gap: 9px;
+  border: 0;
+  border-radius: 8px;
+  padding: 0 12px;
+  color: inherit;
+  background: rgba(var(--cyan-rgb), 0.055);
+  font: 900 0.68rem/1.15 ui-monospace, "SFMono-Regular", Consolas, monospace;
+  letter-spacing: 0.1em;
+  text-align: left;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.pwa-app-shell__main > span {
+  grid-area: dot;
+  width: 10px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--accent-2);
+  box-shadow: 0 0 16px rgba(var(--cyan-rgb), 0.64);
+}
+
+.pwa-app-shell__main strong {
+  grid-area: title;
+  color: var(--accent-2);
+}
+
+.pwa-app-shell__main em {
+  grid-area: state;
+  color: var(--text);
+  font-style: normal;
+  opacity: 0.78;
+}
+
+.pwa-app-shell__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: flex-end;
+}
+
+.pwa-app-shell__chips span {
+  border: 1px solid rgba(var(--cyan-rgb), 0.18);
+  border-radius: 999px;
+  padding: 0.36rem 0.52rem;
+  color: var(--muted);
+  background: rgba(244, 241, 234, 0.035);
+  font: 900 0.58rem/1 ui-monospace, "SFMono-Regular", Consolas, monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.pwa-bottom-bar {
+  position: fixed;
+  left: max(12px, env(safe-area-inset-left));
+  right: max(12px, env(safe-area-inset-right));
+  bottom: max(12px, env(safe-area-inset-bottom));
+  z-index: 130;
+  display: none;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 6px;
+  padding: 7px;
+  border: 1px solid rgba(var(--cyan-rgb), 0.24);
+  border-radius: 12px;
+  background:
+    linear-gradient(135deg, rgba(var(--cyan-rgb), 0.08), rgba(var(--violet-rgb), 0.055)),
+    rgba(9, 11, 15, 0.86);
+  box-shadow: 0 18px 70px rgba(0, 0, 0, 0.42);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+}
+
+.pwa-bottom-bar a,
+.pwa-bottom-bar button {
+  min-width: 0;
+  min-height: 48px;
+  display: grid;
+  place-items: center;
+  gap: 3px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  color: var(--muted);
+  background: transparent;
+  text-decoration: none;
+  font: 900 0.62rem/1 ui-monospace, "SFMono-Regular", Consolas, monospace;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.pwa-bottom-bar span {
+  color: var(--accent-2);
+  font-size: 0.56rem;
+}
+
+.pwa-bottom-bar b {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pwa-bottom-bar a:focus-visible,
+.pwa-bottom-bar button:focus-visible,
+.pwa-bottom-bar a:hover,
+.pwa-bottom-bar button:hover {
+  border-color: rgba(var(--cyan-rgb), 0.3);
+  color: var(--text);
+  background: rgba(var(--cyan-rgb), 0.07);
+}
+
+.pwa-resume-toast {
+  position: fixed;
+  right: max(18px, env(safe-area-inset-right));
+  bottom: max(18px, env(safe-area-inset-bottom));
+  z-index: 176;
+  max-width: min(380px, calc(100vw - 36px));
+  border: 1px solid rgba(var(--cyan-rgb), 0.32);
+  border-radius: 8px;
+  padding: 0.72rem 0.9rem;
+  color: var(--accent-2);
+  background: rgba(9, 11, 15, 0.82);
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.38), 0 0 24px rgba(var(--cyan-rgb), 0.08);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  font: 900 0.7rem/1.35 ui-monospace, "SFMono-Regular", Consolas, monospace;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.pwa-resume-toast.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+html.iconic-avatar-active .pwa-app-shell,
+html.iconic-avatar-active .pwa-bottom-bar,
+html.iconic-avatar-active .pwa-runtime-panel,
+html.iconic-avatar-active .pwa-resume-toast {
+  border-color: rgba(36, 255, 166, 0.42);
+  color: rgba(224, 255, 235, 0.78);
+  background:
+    linear-gradient(135deg, rgba(36, 255, 166, 0.09), rgba(141, 61, 255, 0.06)),
+    rgba(4, 15, 11, 0.88);
+}
+
+html.iconic-avatar-active .pwa-app-shell__main > span {
+  background: #24ffa6;
+  box-shadow: 0 0 18px rgba(36, 255, 166, 0.72);
+}
+
+html.runtime-pwa-standalone .site-shell {
+  background:
+    linear-gradient(90deg, rgba(var(--cyan-rgb), 0.065), rgba(var(--violet-rgb), 0.035)),
+    rgba(10, 12, 17, 0.9);
+}
+
+html.runtime-pwa-standalone main {
+  scroll-padding-bottom: 92px;
 }
 
 html.runtime-color-light:not(.iconic-avatar-active) {
@@ -6447,6 +6710,60 @@ html.recruiter-mode-active .profile-grid article {
     text-align: center;
   }
 
+  html.runtime-pwa-standalone body {
+    padding-bottom: calc(82px + env(safe-area-inset-bottom));
+  }
+
+  html.runtime-pwa-standalone .pwa-app-shell,
+  html.runtime-pwa-update-ready .pwa-app-shell {
+    top: auto;
+    right: max(12px, env(safe-area-inset-right));
+    bottom: calc(86px + max(12px, env(safe-area-inset-bottom)));
+    left: max(12px, env(safe-area-inset-left));
+    width: auto;
+    grid-template-columns: 1fr;
+    gap: 7px;
+    padding: 7px;
+  }
+
+  .pwa-app-shell__main {
+    min-height: 40px;
+    width: 100%;
+  }
+
+  .pwa-app-shell__chips {
+    justify-content: flex-start;
+    overflow: hidden;
+  }
+
+  .pwa-app-shell__chips span {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  html.runtime-pwa-standalone .pwa-bottom-bar {
+    display: grid;
+  }
+
+  .pwa-runtime-panel {
+    right: max(12px, env(safe-area-inset-right));
+    bottom: calc(76px + max(12px, env(safe-area-inset-bottom)));
+    width: min(430px, calc(100vw - 24px));
+  }
+
+  .pwa-runtime-panel__actions {
+    grid-template-columns: 1fr;
+  }
+
+  .pwa-resume-toast {
+    right: max(12px, env(safe-area-inset-right));
+    left: max(12px, env(safe-area-inset-left));
+    bottom: calc(76px + max(12px, env(safe-area-inset-bottom)));
+    max-width: none;
+  }
+
   .easter-terminal {
     width: min(100%, 340px);
     max-width: calc(100vw - 28px);
@@ -6592,6 +6909,17 @@ html.recruiter-mode-active .profile-grid article {
     right: max(12px, env(safe-area-inset-right));
     bottom: max(12px, env(safe-area-inset-bottom));
     width: min(420px, calc(100vw - 24px));
+  }
+
+  html.runtime-pwa-standalone .pwa-runtime-panel {
+    bottom: calc(76px + max(12px, env(safe-area-inset-bottom)));
+  }
+
+  html.runtime-pwa-standalone .system-trace-terminal,
+  html.runtime-pwa-standalone .recruiter-mode-panel,
+  html.runtime-pwa-standalone .timeline-playback-console {
+    bottom: calc(86px + max(12px, env(safe-area-inset-bottom)));
+    max-height: calc(100svh - 172px);
   }
 
   .pwa-runtime-panel__actions {
@@ -6769,6 +7097,9 @@ html.recruiter-mode-active .profile-grid article {
   .timeline-playback-console,
   .first-time-guide,
   .pwa-runtime-panel,
+  .pwa-app-shell,
+  .pwa-bottom-bar,
+  .pwa-resume-toast,
   .trace-entry,
   .profile-fit-row i::after,
   .timeline-playback,

@@ -1551,7 +1551,26 @@
         updated: "build switch armed",
         dark: "dark runtime",
         light: "light runtime",
-        iconic: "iconic mode detected"
+        iconic: "iconic mode detected",
+        appShell: "App Runtime",
+        online: "online",
+        offline: "offline shell active",
+        standalone: "standalone",
+        dashboard: "App Dashboard",
+        cacheCheck: "Cache prüfen",
+        snapshot: "Snapshot kopieren",
+        diagnostic: "Offline Diagnose",
+        openProfile: "Profil",
+        openVita: "Vita",
+        openStack: "Stack",
+        openCommand: "Command",
+        openTrace: "Trace",
+        cachedProfile: "cached profile available",
+        cachedVita: "vita cached",
+        cachedSignals: "signals cached",
+        snapshotReady: "profile snapshot copied",
+        diagnosticReady: "offline diagnostic complete",
+        runtimeRestored: "runtime restored"
       },
       en: {
         title: "POD_APP_RUNTIME",
@@ -1568,7 +1587,26 @@
         updated: "build switch armed",
         dark: "dark runtime",
         light: "light runtime",
-        iconic: "iconic mode detected"
+        iconic: "iconic mode detected",
+        appShell: "App Runtime",
+        online: "online",
+        offline: "offline shell active",
+        standalone: "standalone",
+        dashboard: "App Dashboard",
+        cacheCheck: "Check cache",
+        snapshot: "Copy snapshot",
+        diagnostic: "Offline diagnostic",
+        openProfile: "Profile",
+        openVita: "Resume",
+        openStack: "Stack",
+        openCommand: "Command",
+        openTrace: "Trace",
+        cachedProfile: "cached profile available",
+        cachedVita: "resume cached",
+        cachedSignals: "signals cached",
+        snapshotReady: "profile snapshot copied",
+        diagnosticReady: "offline diagnostic complete",
+        runtimeRestored: "runtime restored"
       },
       es: {
         title: "POD_APP_RUNTIME",
@@ -1585,7 +1623,26 @@
         updated: "build switch armed",
         dark: "dark runtime",
         light: "light runtime",
-        iconic: "iconic mode detected"
+        iconic: "iconic mode detected",
+        appShell: "App Runtime",
+        online: "online",
+        offline: "offline shell active",
+        standalone: "standalone",
+        dashboard: "App Dashboard",
+        cacheCheck: "Comprobar cache",
+        snapshot: "Copiar snapshot",
+        diagnostic: "Diagnostico offline",
+        openProfile: "Perfil",
+        openVita: "Vita",
+        openStack: "Stack",
+        openCommand: "Command",
+        openTrace: "Trace",
+        cachedProfile: "cached profile available",
+        cachedVita: "vita cached",
+        cachedSignals: "signals cached",
+        snapshotReady: "profile snapshot copied",
+        diagnosticReady: "offline diagnostic complete",
+        runtimeRestored: "runtime restored"
       },
       ja: {
         title: "POD_APP_RUNTIME",
@@ -1602,7 +1659,26 @@
         updated: "build switch armed",
         dark: "dark runtime",
         light: "light runtime",
-        iconic: "iconic mode detected"
+        iconic: "iconic mode detected",
+        appShell: "App Runtime",
+        online: "online",
+        offline: "offline shell active",
+        standalone: "standalone",
+        dashboard: "App Dashboard",
+        cacheCheck: "Cache check",
+        snapshot: "Snapshot copy",
+        diagnostic: "Offline diagnostic",
+        openProfile: "Profile",
+        openVita: "Vita",
+        openStack: "Stack",
+        openCommand: "Command",
+        openTrace: "Trace",
+        cachedProfile: "cached profile available",
+        cachedVita: "vita cached",
+        cachedSignals: "signals cached",
+        snapshotReady: "profile snapshot copied",
+        diagnosticReady: "offline diagnostic complete",
+        runtimeRestored: "runtime restored"
       }
     };
 
@@ -1619,13 +1695,47 @@
       <div class="pwa-runtime-panel__body">
         <p data-pwa-runtime-line></p>
         <div class="pwa-runtime-panel__chips" data-pwa-runtime-chips></div>
+        <div class="pwa-runtime-panel__cache" data-pwa-cache-status></div>
       </div>
       <div class="pwa-runtime-panel__actions">
         <button type="button" data-pwa-install></button>
         <button type="button" data-pwa-reload></button>
+        <button type="button" data-pwa-cache-check></button>
+        <button type="button" data-pwa-snapshot></button>
+        <button type="button" data-pwa-diagnostic></button>
       </div>
     `;
     document.body.appendChild(runtime);
+
+    const appShell = document.createElement("aside");
+    appShell.className = "pwa-app-shell";
+    appShell.setAttribute("aria-hidden", "true");
+    appShell.innerHTML = `
+      <button type="button" class="pwa-app-shell__main" data-pwa-dashboard>
+        <span aria-hidden="true"></span>
+        <strong data-pwa-app-title></strong>
+        <em data-pwa-app-state></em>
+      </button>
+      <div class="pwa-app-shell__chips" data-pwa-app-chips></div>
+    `;
+    document.body.appendChild(appShell);
+
+    const bottomBar = document.createElement("nav");
+    bottomBar.className = "pwa-bottom-bar";
+    bottomBar.setAttribute("aria-label", "PWA Schnellnavigation");
+    bottomBar.innerHTML = `
+      <a href="./index.html#profil" data-pwa-nav="profile"><span>01</span><b></b></a>
+      <a href="./vita.html" data-pwa-nav="vita"><span>02</span><b></b></a>
+      <a href="./index.html#stack" data-pwa-nav="stack"><span>03</span><b></b></a>
+      <button type="button" data-pwa-nav="trace"><span>04</span><b></b></button>
+      <button type="button" data-pwa-nav="command"><span>05</span><b></b></button>
+    `;
+    document.body.appendChild(bottomBar);
+
+    const resumeToast = document.createElement("div");
+    resumeToast.className = "pwa-resume-toast";
+    resumeToast.setAttribute("aria-live", "polite");
+    document.body.appendChild(resumeToast);
 
     function copy() {
       return labels[document.documentElement.dataset.lang || DEFAULT_LANG] || labels[DEFAULT_LANG];
@@ -1648,10 +1758,114 @@
       const text = copy();
       if (!status.supported || !status.secure) return text.unsupported;
       if (status.updateReady) return text.update;
+      if (!navigator.onLine) return text.offline;
       if (status.standalone || status.installed) return text.installed;
       if (status.installable) return text.installable;
       if (status.cacheReady || status.controlled) return text.ready;
       return text.standby;
+    }
+
+    function cacheStatusItems() {
+      const text = copy();
+      return [
+        { key: "profile", label: text.cachedProfile, href: "./index.html" },
+        { key: "vita", label: text.cachedVita, href: "./vita.html" },
+        { key: "signals", label: text.cachedSignals, href: "./signals.html" }
+      ];
+    }
+
+    function renderCacheStatus(results = null) {
+      const holder = runtime.querySelector("[data-pwa-cache-status]");
+      if (!holder) return;
+      holder.innerHTML = cacheStatusItems().map((item) => {
+        const state = results ? (results[item.key] ? "ok" : "miss") : "idle";
+        return `<span data-cache-state="${state}"><b>${state}</b>${item.label}</span>`;
+      }).join("");
+    }
+
+    function renderAppShell() {
+      const text = copy();
+      const active = status.standalone || status.installed;
+      appShell.setAttribute("aria-hidden", active ? "false" : "true");
+      bottomBar.setAttribute("aria-hidden", active ? "false" : "true");
+      appShell.querySelector("[data-pwa-app-title]").textContent = text.appShell;
+      appShell.querySelector("[data-pwa-app-state]").textContent = statusLine();
+      const chips = [
+        status.standalone ? text.standalone : null,
+        navigator.onLine ? text.online : text.offline,
+        status.cacheReady || status.controlled ? text.ready : text.standby,
+        root.classList.contains("iconic-avatar-active") ? text.iconic : null
+      ].filter(Boolean);
+      appShell.querySelector("[data-pwa-app-chips]").innerHTML = chips.map((chip) => `<span>${chip}</span>`).join("");
+      bottomBar.querySelector("[data-pwa-nav='profile'] b").textContent = text.openProfile;
+      bottomBar.querySelector("[data-pwa-nav='vita'] b").textContent = text.openVita;
+      bottomBar.querySelector("[data-pwa-nav='stack'] b").textContent = text.openStack;
+      bottomBar.querySelector("[data-pwa-nav='trace'] b").textContent = text.openTrace;
+      bottomBar.querySelector("[data-pwa-nav='command'] b").textContent = text.openCommand;
+      bottomBar.classList.toggle("is-offline", !navigator.onLine);
+      appShell.classList.toggle("is-offline", !navigator.onLine);
+    }
+
+    function showResumeToast(message) {
+      if (!message || !(status.standalone || status.installed || !navigator.onLine)) return;
+      resumeToast.textContent = `> ${message}`;
+      resumeToast.classList.add("is-visible");
+      window.clearTimeout(showResumeToast.timer);
+      showResumeToast.timer = window.setTimeout(() => resumeToast.classList.remove("is-visible"), 3200);
+    }
+
+    async function inspectCache() {
+      const results = { profile: false, vita: false, signals: false };
+      if (!("caches" in window)) return results;
+      const items = cacheStatusItems();
+      await Promise.all(items.map(async (item) => {
+        try {
+          const request = new Request(item.href, { cache: "reload" });
+          results[item.key] = Boolean(await caches.match(request)) || Boolean(await caches.match(item.href));
+        } catch (error) {
+          results[item.key] = false;
+        }
+      }));
+      return results;
+    }
+
+    async function checkCacheStatus(announce = true) {
+      const results = await inspectCache();
+      renderCacheStatus(results);
+      if (announce) {
+        runtime.querySelector("[data-pwa-runtime-line]").textContent = copy().diagnosticReady;
+        showResumeToast(copy().diagnosticReady);
+      }
+      return results;
+    }
+
+    async function copyProfileSnapshot() {
+      const snapshot = [
+        "phil.osophie.deluxe",
+        "Business Software | Oracle APEX | PL/SQL | JavaScript | Java",
+        `route: ${window.location.pathname}${window.location.hash || ""}`,
+        `runtime: ${status.standalone ? "standalone" : "browser"} / ${navigator.onLine ? "online" : "offline"}`,
+        "fit: business apps, data quality, delivery, process-aware development"
+      ].join("\n");
+      try {
+        if (navigator.clipboard?.writeText && window.isSecureContext) {
+          await navigator.clipboard.writeText(snapshot);
+        } else {
+          const field = document.createElement("textarea");
+          field.value = snapshot;
+          field.setAttribute("readonly", "");
+          field.style.position = "fixed";
+          field.style.left = "-9999px";
+          document.body.appendChild(field);
+          field.select();
+          document.execCommand("copy");
+          field.remove();
+        }
+        showResumeToast(copy().snapshotReady);
+        runtime.querySelector("[data-pwa-runtime-line]").textContent = copy().snapshotReady;
+      } catch (error) {
+        window.location.href = `mailto:phil.kirchner.999@googlemail.com?subject=Portfolio%20Snapshot&body=${encodeURIComponent(snapshot)}`;
+      }
     }
 
     function renderRuntimePanel(forceVisible = false) {
@@ -1661,19 +1875,28 @@
       runtime.querySelector("[data-pwa-runtime-line]").textContent = statusLine();
       const chips = [
         status.cacheReady || status.controlled ? text.controlled : text.standby,
+        navigator.onLine ? text.online : text.offline,
         status.colorScheme === "light" ? text.light : text.dark,
         root.classList.contains("iconic-avatar-active") ? text.iconic : null
       ].filter(Boolean);
       runtime.querySelector("[data-pwa-runtime-chips]").innerHTML = chips.map((chip) => `<span>${chip}</span>`).join("");
+      renderCacheStatus();
       const installButton = runtime.querySelector("[data-pwa-install]");
       const reloadButton = runtime.querySelector("[data-pwa-reload]");
+      const cacheButton = runtime.querySelector("[data-pwa-cache-check]");
+      const snapshotButton = runtime.querySelector("[data-pwa-snapshot]");
+      const diagnosticButton = runtime.querySelector("[data-pwa-diagnostic]");
       installButton.textContent = text.install;
       reloadButton.textContent = text.reload;
+      cacheButton.textContent = text.cacheCheck;
+      snapshotButton.textContent = text.snapshot;
+      diagnosticButton.textContent = text.diagnostic;
       installButton.hidden = !status.installable || status.standalone || status.installed;
       reloadButton.hidden = !status.updateReady;
       runtime.classList.toggle("is-update-ready", status.updateReady);
       runtime.classList.toggle("is-visible", forceVisible || (status.updateReady && !runtimeDismissed));
       updateRuntimeClasses();
+      renderAppShell();
     }
 
     async function installApp() {
@@ -1715,10 +1938,39 @@
     });
     runtime.querySelector("[data-pwa-install]").addEventListener("click", installApp);
     runtime.querySelector("[data-pwa-reload]").addEventListener("click", reloadToLatestBuild);
+    runtime.querySelector("[data-pwa-cache-check]").addEventListener("click", () => checkCacheStatus(true));
+    runtime.querySelector("[data-pwa-snapshot]").addEventListener("click", copyProfileSnapshot);
+    runtime.querySelector("[data-pwa-diagnostic]").addEventListener("click", () => checkCacheStatus(true));
+    appShell.querySelector("[data-pwa-dashboard]").addEventListener("click", () => renderRuntimePanel(true));
+    bottomBar.querySelector("[data-pwa-nav='trace']").addEventListener("click", () => {
+      document.dispatchEvent(new CustomEvent("pk:run-system-trace"));
+    });
+    bottomBar.querySelector("[data-pwa-nav='command']").addEventListener("click", () => {
+      document.dispatchEvent(new CustomEvent("pk:open-command-palette"));
+    });
     document.addEventListener("pk:lang-change", () => renderRuntimePanel(runtime.classList.contains("is-visible")));
     document.addEventListener("pk:pwa-runtime-open", () => renderRuntimePanel(true));
+    document.addEventListener("pk:pwa-cache-check", () => {
+      renderRuntimePanel(true);
+      checkCacheStatus(true);
+    });
+    document.addEventListener("pk:pwa-copy-snapshot", copyProfileSnapshot);
+    document.addEventListener("pk:pwa-offline-diagnostic", () => {
+      renderRuntimePanel(true);
+      checkCacheStatus(true);
+    });
+    document.addEventListener("pk:pwa-reload-build", reloadToLatestBuild);
     document.addEventListener("pk:pwa-install", installApp);
     document.addEventListener("pk:toggle-iconic-avatar", () => window.setTimeout(() => renderRuntimePanel(runtime.classList.contains("is-visible")), 40));
+
+    window.addEventListener("online", () => {
+      renderRuntimePanel(runtime.classList.contains("is-visible"));
+      showResumeToast(copy().online);
+    });
+    window.addEventListener("offline", () => {
+      renderRuntimePanel(true);
+      showResumeToast(copy().offline);
+    });
 
     window.addEventListener("beforeinstallprompt", (event) => {
       event.preventDefault();
@@ -1732,11 +1984,13 @@
       status.installable = false;
       deferredInstallPrompt = null;
       renderRuntimePanel(true);
+      showResumeToast(copy().runtimeRestored);
     });
 
     const updateDisplayMode = () => {
       status.standalone = Boolean(window.navigator.standalone) || displayStandalone.matches || displayFullscreen.matches || displayMinimalUi.matches;
       renderRuntimePanel(runtime.classList.contains("is-visible"));
+      if (status.standalone) showResumeToast(copy().runtimeRestored);
     };
     [displayStandalone, displayFullscreen, displayMinimalUi].forEach((query) => query.addEventListener?.("change", updateDisplayMode));
     window.matchMedia("(prefers-color-scheme: light)").addEventListener?.("change", (event) => {
@@ -1747,7 +2001,10 @@
     window.pkPwaRuntime = {
       getStatus: () => ({ ...status }),
       open: () => renderRuntimePanel(true),
-      install: installApp
+      install: installApp,
+      checkCache: checkCacheStatus,
+      copySnapshot: copyProfileSnapshot,
+      reload: reloadToLatestBuild
     };
 
     renderRuntimePanel(false);
@@ -1769,6 +2026,10 @@
             status.cacheReady = true;
             status.controlled = Boolean(navigator.serviceWorker.controller);
             renderRuntimePanel(runtime.classList.contains("is-visible"));
+            if (status.standalone) {
+              showResumeToast(navigator.onLine ? copy().runtimeRestored : copy().offline);
+              checkCacheStatus(false);
+            }
           });
           registration.addEventListener("updatefound", () => {
             const worker = registration.installing;
@@ -3288,8 +3549,8 @@
 
   function setupHeroAvatarEgg() {
     const avatarSources = {
-      src: "./image/iconic-avatar-960.jpg?v=20260706-pdffill1",
-      srcset: "./image/iconic-avatar-720.jpg?v=20260706-pdffill1 720w, ./image/iconic-avatar-960.jpg?v=20260706-pdffill1 960w",
+      src: "./image/iconic-avatar-960.jpg?v=20260707-pwaapp1",
+      srcset: "./image/iconic-avatar-720.jpg?v=20260707-pwaapp1 720w, ./image/iconic-avatar-960.jpg?v=20260707-pwaapp1 960w",
       alt: "Stilisiertes Hero-Portrait mit Iconic Avatar"
     };
 
@@ -3558,7 +3819,8 @@
         print: ["Vita drucken", "PDF/Print"],
         mail: ["Mail schreiben", "Kontakt"],
         github: ["GitHub", "Repo öffnen"],
-        avatar: ["Avatar Hero", "Session-Toggle"]
+        avatar: ["Avatar Hero", "Session-Toggle"],
+        runtime: ["App Runtime", "PWA Dashboard"]
       },
       en: {
         title: "PK_CURSOR_MENU",
@@ -3567,7 +3829,8 @@
         print: ["Print Resume", "PDF/print"],
         mail: ["Mail Phil", "Contact"],
         github: ["GitHub", "Open repo"],
-        avatar: ["Avatar Hero", "Session toggle"]
+        avatar: ["Avatar Hero", "Session toggle"],
+        runtime: ["App Runtime", "PWA dashboard"]
       },
       es: {
         title: "PK_CURSOR_MENU",
@@ -3576,7 +3839,8 @@
         print: ["Imprimir Vita", "PDF/print"],
         mail: ["Mail a Phil", "Contacto"],
         github: ["GitHub", "Abrir repo"],
-        avatar: ["Avatar Hero", "Toggle sesión"]
+        avatar: ["Avatar Hero", "Toggle sesión"],
+        runtime: ["App Runtime", "PWA dashboard"]
       },
       ja: {
         title: "PK_CURSOR_MENU",
@@ -3585,7 +3849,8 @@
         print: ["経歴を印刷", "PDF/印刷"],
         mail: ["メール", "連絡"],
         github: ["GitHub", "リポジトリ"],
-        avatar: ["Avatar Hero", "Session切替"]
+        avatar: ["Avatar Hero", "Session切替"],
+        runtime: ["App Runtime", "PWA dashboard"]
       }
     };
 
@@ -3649,6 +3914,9 @@ shortcut: ctrl + alt + d</pre>
       </button>
       <button type="button" data-cursor-command="avatar">
         <span>06</span><b></b><em></em>
+      </button>
+      <button type="button" data-cursor-command="runtime">
+        <span>07</span><b></b><em></em>
       </button>
     `;
     document.body.appendChild(contextMenu);
@@ -3805,6 +4073,11 @@ shortcut: ctrl + alt + d</pre>
 
       if (command === "avatar") {
         document.dispatchEvent(new CustomEvent("pk:toggle-iconic-avatar"));
+        return;
+      }
+
+      if (command === "runtime") {
+        document.dispatchEvent(new CustomEvent("pk:pwa-runtime-open"));
       }
     });
 
@@ -3877,6 +4150,14 @@ shortcut: ctrl + alt + d</pre>
         avatarHint: "Iconic Mode für diese Session umschalten",
         pwa: "PWA Runtime",
         pwaHint: "Install-, Offline- und Update-Status anzeigen",
+        pwaCache: "Check Cache",
+        pwaCacheHint: "Offline-Shell und lokale Routen prüfen",
+        pwaReload: "Reload Build",
+        pwaReloadHint: "Aktuellen App-Build neu laden",
+        pwaSnapshot: "Copy Profile Snapshot",
+        pwaSnapshotHint: "Kompaktes Profil in die Zwischenablage",
+        pwaDiagnostic: "Run Offline Diagnostic",
+        pwaDiagnosticHint: "Cache-Status und Runtime-Modus prüfen",
         traceTitle: "PROFILE_TRACE",
         traceSubtitle: "Scanning profile graph",
         traceComplete: "trace complete",
@@ -3928,6 +4209,14 @@ shortcut: ctrl + alt + d</pre>
         avatarHint: "Toggle the iconic hero for this session",
         pwa: "PWA Runtime",
         pwaHint: "Show install, offline and update status",
+        pwaCache: "Check Cache",
+        pwaCacheHint: "Inspect offline shell and local routes",
+        pwaReload: "Reload Build",
+        pwaReloadHint: "Reload the current app build",
+        pwaSnapshot: "Copy Profile Snapshot",
+        pwaSnapshotHint: "Copy a compact profile summary",
+        pwaDiagnostic: "Run Offline Diagnostic",
+        pwaDiagnosticHint: "Check cache status and runtime mode",
         traceTitle: "PROFILE_TRACE",
         traceSubtitle: "Scanning profile graph",
         traceComplete: "trace complete",
@@ -3979,6 +4268,14 @@ shortcut: ctrl + alt + d</pre>
         avatarHint: "Alternar iconic hero para esta sesión",
         pwa: "PWA Runtime",
         pwaHint: "Mostrar estado de instalación, offline y updates",
+        pwaCache: "Check Cache",
+        pwaCacheHint: "Revisar offline shell y rutas locales",
+        pwaReload: "Reload Build",
+        pwaReloadHint: "Recargar build actual de la app",
+        pwaSnapshot: "Copy Profile Snapshot",
+        pwaSnapshotHint: "Copiar resumen compacto del perfil",
+        pwaDiagnostic: "Run Offline Diagnostic",
+        pwaDiagnosticHint: "Comprobar cache y modo runtime",
         traceTitle: "PROFILE_TRACE",
         traceSubtitle: "Scanning profile graph",
         traceComplete: "trace complete",
@@ -4030,6 +4327,14 @@ shortcut: ctrl + alt + d</pre>
         avatarHint: "このSessionだけIconic Modeを切替",
         pwa: "PWA Runtime",
         pwaHint: "Install、Offline、Update状態を表示",
+        pwaCache: "Check Cache",
+        pwaCacheHint: "Offline ShellとLocal Routeを確認",
+        pwaReload: "Reload Build",
+        pwaReloadHint: "現在のApp Buildを再読込",
+        pwaSnapshot: "Copy Profile Snapshot",
+        pwaSnapshotHint: "短いProfile Summaryをコピー",
+        pwaDiagnostic: "Run Offline Diagnostic",
+        pwaDiagnosticHint: "Cache StatusとRuntime Modeを確認",
         traceTitle: "PROFILE_TRACE",
         traceSubtitle: "profile graphをスキャン中",
         traceComplete: "trace complete",
@@ -4133,7 +4438,11 @@ shortcut: ctrl + alt + d</pre>
         { id: "signals", code: "07", action: () => { window.location.href = localizedPageHref("./signals.html"); } },
         { id: "print", code: "08", action: () => printVita() },
         { id: "avatar", code: "09", action: () => document.dispatchEvent(new CustomEvent("pk:toggle-iconic-avatar")) },
-        { id: "pwa", code: "10", action: () => document.dispatchEvent(new CustomEvent("pk:pwa-runtime-open")) }
+        { id: "pwa", code: "10", action: () => document.dispatchEvent(new CustomEvent("pk:pwa-runtime-open")) },
+        { id: "pwaCache", code: "11", action: () => document.dispatchEvent(new CustomEvent("pk:pwa-cache-check")) },
+        { id: "pwaReload", code: "12", action: () => document.dispatchEvent(new CustomEvent("pk:pwa-reload-build")) },
+        { id: "pwaSnapshot", code: "13", action: () => document.dispatchEvent(new CustomEvent("pk:pwa-copy-snapshot")) },
+        { id: "pwaDiagnostic", code: "14", action: () => document.dispatchEvent(new CustomEvent("pk:pwa-offline-diagnostic")) }
       ];
     }
 
@@ -4517,6 +4826,8 @@ shortcut: ctrl + alt + d</pre>
         closeSystemTrace();
       }
     });
+
+    document.addEventListener("pk:run-system-trace", runSystemTrace);
 
     document.addEventListener("keydown", (event) => {
       const key = event.key.toLowerCase();
