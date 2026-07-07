@@ -1271,15 +1271,16 @@ html.runtime-pwa-update-ready .pwa-app-shell.is-expanded {
 
 .pwa-bottom-bar {
   position: fixed;
-  left: max(12px, env(safe-area-inset-left));
-  right: max(12px, env(safe-area-inset-right));
-  bottom: max(8px, env(safe-area-inset-bottom));
+  left: auto;
+  right: max(14px, env(safe-area-inset-right));
+  bottom: max(0px, env(safe-area-inset-bottom));
   z-index: 130;
   display: none;
   grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 6px;
-  width: auto;
-  padding: 7px;
+  gap: 5px;
+  width: min(460px, calc(100vw - 28px));
+  min-height: 86px;
+  padding: 6px;
   border: 1px solid rgba(var(--cyan-rgb), 0.24);
   border-radius: 12px 12px 0 0;
   background:
@@ -1291,19 +1292,20 @@ html.runtime-pwa-update-ready .pwa-app-shell.is-expanded {
   transform: translateY(calc(100% - 88px));
   opacity: 0.9;
   transition:
-    transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    width 260ms cubic-bezier(0.22, 1, 0.36, 1),
+    min-height 260ms cubic-bezier(0.22, 1, 0.36, 1),
+    padding 240ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
     opacity 180ms ease,
     border-color 180ms ease,
+    border-radius 220ms ease,
     background-color 180ms ease,
     box-shadow 180ms ease;
 }
 
 .pwa-bottom-bar:not(.is-expanded) {
-  left: auto;
-  right: max(14px, env(safe-area-inset-right));
-  bottom: max(0px, env(safe-area-inset-bottom));
-  width: 76px;
-  min-height: 30px;
+  width: 72px;
+  min-height: 24px;
   padding: 0;
   border-color: rgba(var(--cyan-rgb), 0.24);
   border-bottom: 0;
@@ -1345,7 +1347,7 @@ html.runtime-pwa-update-ready .pwa-app-shell.is-expanded {
   grid-column: 1 / -1;
   justify-self: center;
   width: 100%;
-  min-height: 22px;
+  min-height: 18px;
   display: flex !important;
   align-items: center;
   justify-content: center;
@@ -1368,6 +1370,7 @@ html.runtime-pwa-update-ready .pwa-app-shell.is-expanded {
 
 .pwa-bottom-bar.is-expanded .pwa-bottom-bar__handle {
   width: 100%;
+  min-height: 18px;
   background: rgba(var(--cyan-rgb), 0.055) !important;
 }
 
@@ -1377,13 +1380,13 @@ html.runtime-pwa-update-ready .pwa-app-shell.is-expanded {
 
 .pwa-bottom-bar__handle b {
   color: var(--muted);
-  font-size: 0.46rem;
+  font-size: 0.5rem;
   letter-spacing: 0.12em;
 }
 
 .pwa-bottom-bar:not(.is-expanded) .pwa-bottom-bar__handle b {
   color: var(--accent-2);
-  font: 900 0.58rem/1 ui-monospace, "SFMono-Regular", Consolas, monospace;
+  font: 900 0.66rem/1 ui-monospace, "SFMono-Regular", Consolas, monospace;
   letter-spacing: 0.16em;
   writing-mode: horizontal-tb;
   text-orientation: mixed;
