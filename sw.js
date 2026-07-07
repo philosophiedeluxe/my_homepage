@@ -1,4 +1,4 @@
-const PK_PORTFOLIO_CACHE = "pk-portfolio-cache-20260706-pdffill1";
+const PK_PORTFOLIO_CACHE = "pk-portfolio-cache-20260707-finalaudit1";
 const PK_PORTFOLIO_OFFLINE_URL = "./offline.html";
 
 const PRECACHE_ASSETS = [
@@ -21,7 +21,6 @@ const PRECACHE_ASSETS = [
   "./image/iconic.jpg?v=20260616-1",
   "./image/iconic-avatar-720.jpg?v=20260706-pdffill1",
   "./image/iconic-avatar-960.jpg?v=20260706-pdffill1",
-  "./image/iconic-avatar.jpg?v=20260706-pdffill1",
   "./image/social-card.jpg?v=20260706-pdffill1",
   "./image/no_signal.jpg?v=20260616-1",
   "./image/pwa/icon-192.png?v=20260706-pdffill1",

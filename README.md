@@ -97,9 +97,9 @@ The site combines a clean dark visual style with a technical portfolio structure
     ├── iconic.jpg          # Main visual asset
     ├── iconic-720.jpg      # Responsive image variant
     ├── iconic-960.jpg      # Responsive image variant
-    ├── iconic-avatar.jpg   # Session-only Iconic Mode hero source
-    ├── iconic-avatar-720.jpg
-    ├── iconic-avatar-960.jpg
+    ├── iconic-avatar.jpg   # Fullsize Iconic Mode source asset, kept out of the PWA precache
+    ├── iconic-avatar-720.jpg # Session-only Iconic Mode hero source
+    ├── iconic-avatar-960.jpg # Session-only Iconic Mode hero source
     ├── profile-avatar.jpg  # Header / graph avatar
     ├── pwa/                # Generated install icons and maskable app icons
     └── Cert/               # Certificate images and badges
