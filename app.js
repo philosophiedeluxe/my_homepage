@@ -1715,7 +1715,10 @@
     appShell.className = "pwa-app-shell";
     appShell.setAttribute("aria-hidden", "true");
     appShell.innerHTML = `
-      <button type="button" class="pwa-app-shell__main" data-pwa-dashboard>
+      <button type="button" class="pwa-app-shell__tab" data-pwa-shell-toggle aria-expanded="false" aria-label="App Runtime">
+        <span>APP</span>
+      </button>
+      <button type="button" class="pwa-app-shell__main" data-pwa-dashboard aria-expanded="false">
         <span aria-hidden="true"></span>
         <strong data-pwa-app-title></strong>
         <em data-pwa-app-state></em>
@@ -1723,6 +1726,8 @@
       <div class="pwa-app-shell__chips" data-pwa-app-chips></div>
     `;
     document.body.appendChild(appShell);
+    let appShellExpanded = false;
+    let appShellPointerStart = 0;
 
     const bottomBar = document.createElement("nav");
     bottomBar.className = "pwa-bottom-bar";
@@ -1803,8 +1808,7 @@
       const chips = [
         status.standalone ? text.standalone : null,
         navigator.onLine ? text.online : text.offline,
-        status.cacheReady || status.controlled ? text.ready : text.standby,
-        root.classList.contains("iconic-avatar-active") ? text.iconic : null
+        status.cacheReady || status.controlled ? text.ready : text.standby
       ].filter(Boolean);
       appShell.querySelector("[data-pwa-app-chips]").innerHTML = chips.map((chip) => `<span>${chip}</span>`).join("");
       bottomBar.querySelector("[data-pwa-nav='profile'] b").textContent = text.openProfile;
@@ -1815,6 +1819,14 @@
       bottomBar.querySelector("[data-pwa-nav-title]").textContent = text.appNav;
       bottomBar.classList.toggle("is-offline", !navigator.onLine);
       appShell.classList.toggle("is-offline", !navigator.onLine);
+    }
+
+    function setAppShellExpanded(expanded) {
+      appShellExpanded = Boolean(expanded);
+      appShell.classList.toggle("is-expanded", appShellExpanded);
+      appShell.querySelectorAll("[data-pwa-shell-toggle], [data-pwa-dashboard]").forEach((button) => {
+        button.setAttribute("aria-expanded", String(appShellExpanded));
+      });
     }
 
     function setBottomNavExpanded(expanded) {
@@ -1888,7 +1900,10 @@
 
     function renderRuntimePanel(forceVisible = false) {
       const text = copy();
-      if (forceVisible) runtimeDismissed = false;
+      if (forceVisible) {
+        runtimeDismissed = false;
+        setAppShellExpanded(false);
+      }
       runtime.querySelector(".pwa-runtime-panel__bar strong").textContent = text.title;
       runtime.querySelector("[data-pwa-runtime-line]").textContent = statusLine();
       const chips = [
@@ -1959,7 +1974,20 @@
     runtime.querySelector("[data-pwa-cache-check]").addEventListener("click", () => checkCacheStatus(true));
     runtime.querySelector("[data-pwa-snapshot]").addEventListener("click", copyProfileSnapshot);
     runtime.querySelector("[data-pwa-diagnostic]").addEventListener("click", () => checkCacheStatus(true));
-    appShell.querySelector("[data-pwa-dashboard]").addEventListener("click", () => renderRuntimePanel(true));
+    appShell.addEventListener("click", (event) => {
+      if (!event.target.closest("[data-pwa-shell-toggle], [data-pwa-dashboard]")) return;
+      setAppShellExpanded(!appShellExpanded);
+    });
+    appShell.addEventListener("pointerdown", (event) => {
+      appShellPointerStart = event.clientX;
+    }, { passive: true });
+    appShell.addEventListener("pointerup", (event) => {
+      if (!appShellPointerStart) return;
+      const delta = event.clientX - appShellPointerStart;
+      if (delta < -18) setAppShellExpanded(true);
+      if (delta > 18) setAppShellExpanded(false);
+      appShellPointerStart = 0;
+    }, { passive: true });
     bottomBar.addEventListener("click", (event) => {
       const toggle = event.target.closest("[data-pwa-nav-toggle]");
       if (toggle) {
@@ -1998,6 +2026,11 @@
     document.addEventListener("pk:pwa-reload-build", reloadToLatestBuild);
     document.addEventListener("pk:pwa-install", installApp);
     document.addEventListener("pk:toggle-iconic-avatar", () => window.setTimeout(() => renderRuntimePanel(runtime.classList.contains("is-visible")), 40));
+    document.addEventListener("pointerdown", (event) => {
+      const target = event.target;
+      if (appShellExpanded && !appShell.contains(target)) setAppShellExpanded(false);
+      if (bottomNavExpanded && !bottomBar.contains(target)) setBottomNavExpanded(false);
+    }, { capture: true });
 
     window.addEventListener("online", () => {
       renderRuntimePanel(runtime.classList.contains("is-visible"));
@@ -2033,6 +2066,10 @@
       status.colorScheme = event.matches ? "light" : "dark";
       renderRuntimePanel(runtime.classList.contains("is-visible"));
     });
+    window.addEventListener("scroll", () => {
+      if (appShellExpanded) setAppShellExpanded(false);
+      if (bottomNavExpanded) setBottomNavExpanded(false);
+    }, { passive: true });
 
     window.pkPwaRuntime = {
       getStatus: () => ({ ...status }),
@@ -2044,6 +2081,7 @@
     };
 
     renderRuntimePanel(false);
+    setAppShellExpanded(false);
     setBottomNavExpanded(false);
 
     if (!status.supported || !status.secure) return;
@@ -3586,8 +3624,8 @@
 
   function setupHeroAvatarEgg() {
     const avatarSources = {
-      src: "./image/iconic-avatar-960.jpg?v=20260707-pwaapp2",
-      srcset: "./image/iconic-avatar-720.jpg?v=20260707-pwaapp2 720w, ./image/iconic-avatar-960.jpg?v=20260707-pwaapp2 960w",
+      src: "./image/iconic-avatar-960.jpg?v=20260707-pwaapp3",
+      srcset: "./image/iconic-avatar-720.jpg?v=20260707-pwaapp3 720w, ./image/iconic-avatar-960.jpg?v=20260707-pwaapp3 960w",
       alt: "Stilisiertes Hero-Portrait mit Iconic Avatar"
     };
 

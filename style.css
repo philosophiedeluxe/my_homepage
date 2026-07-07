@@ -1147,7 +1147,7 @@ html.runtime-pwa-update-ready .site-shell {
   grid-template-columns: 1fr;
   gap: 8px;
   width: min(360px, calc(100vw - 26px));
-  padding: 8px 8px 8px 46px;
+  padding: 8px 8px 8px 36px;
   border: 1px solid rgba(var(--cyan-rgb), 0.22);
   border-right: 0;
   border-radius: 12px 0 0 12px;
@@ -1162,39 +1162,41 @@ html.runtime-pwa-update-ready .site-shell {
   backdrop-filter: blur(12px);
   opacity: 0;
   pointer-events: none;
-  transform: translate(calc(100% - 44px), -50%);
+  transform: translate(calc(100% - 32px), -50%);
   transition: opacity 180ms ease, transform 220ms cubic-bezier(0.22, 1, 0.36, 1), border-color 180ms ease;
 }
 
-.pwa-app-shell::before {
-  content: "APP";
+.pwa-app-shell__tab {
   position: absolute;
   inset: 0 auto 0 0;
-  width: 42px;
+  width: 30px;
   display: grid;
   place-items: center;
+  border: 0;
   border-right: 1px solid rgba(var(--cyan-rgb), 0.15);
+  border-radius: 11px 0 0 11px;
   color: var(--accent-2);
   background: linear-gradient(180deg, rgba(var(--cyan-rgb), 0.11), rgba(var(--violet-rgb), 0.075));
   font: 900 0.58rem/1 ui-monospace, "SFMono-Regular", Consolas, monospace;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
+  cursor: pointer;
+}
+
+.pwa-app-shell__tab span {
   writing-mode: vertical-rl;
   text-orientation: mixed;
-  pointer-events: none;
 }
 
 html.runtime-pwa-standalone .pwa-app-shell,
 html.runtime-pwa-update-ready .pwa-app-shell {
   opacity: 1;
   pointer-events: auto;
-  transform: translate(calc(100% - 44px), -50%);
+  transform: translate(calc(100% - 32px), -50%);
 }
 
-html.runtime-pwa-standalone .pwa-app-shell:hover,
-html.runtime-pwa-standalone .pwa-app-shell:focus-within,
-html.runtime-pwa-update-ready .pwa-app-shell:hover,
-html.runtime-pwa-update-ready .pwa-app-shell:focus-within {
+html.runtime-pwa-standalone .pwa-app-shell.is-expanded,
+html.runtime-pwa-update-ready .pwa-app-shell.is-expanded {
   transform: translate(0, -50%);
 }
 
@@ -1246,48 +1248,64 @@ html.runtime-pwa-update-ready .pwa-app-shell:focus-within {
 }
 
 .pwa-app-shell__chips {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 6px;
-  justify-content: flex-start;
 }
 
 .pwa-app-shell__chips span {
+  min-width: 0;
   border: 1px solid rgba(var(--cyan-rgb), 0.18);
   border-radius: 999px;
-  padding: 0.36rem 0.52rem;
+  padding: 0.34rem 0.4rem;
   color: var(--muted);
   background: rgba(244, 241, 234, 0.035);
-  font: 900 0.58rem/1 ui-monospace, "SFMono-Regular", Consolas, monospace;
-  letter-spacing: 0.08em;
+  font: 900 0.5rem/1 ui-monospace, "SFMono-Regular", Consolas, monospace;
+  letter-spacing: 0.045em;
+  text-align: center;
   text-transform: uppercase;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .pwa-bottom-bar {
   position: fixed;
-  left: max(12px, env(safe-area-inset-left));
-  right: max(12px, env(safe-area-inset-right));
-  bottom: max(12px, env(safe-area-inset-bottom));
+  left: 50%;
+  right: auto;
+  bottom: max(4px, env(safe-area-inset-bottom));
   z-index: 130;
   display: none;
   grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 6px;
-  padding: 7px;
+  width: min(162px, calc(100vw - 28px));
+  padding: 4px;
   border: 1px solid rgba(var(--cyan-rgb), 0.24);
-  border-radius: 12px;
+  border-radius: 11px 11px 0 0;
   background:
     linear-gradient(135deg, rgba(var(--cyan-rgb), 0.08), rgba(var(--violet-rgb), 0.055)),
     rgba(9, 11, 15, 0.86);
   box-shadow: 0 18px 70px rgba(0, 0, 0, 0.42);
   -webkit-backdrop-filter: blur(14px);
   backdrop-filter: blur(14px);
-  transform: translateY(calc(100% - 36px));
+  transform: translate(-50%, calc(100% - 24px));
   opacity: 0.9;
-  transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1), opacity 180ms ease, border-color 180ms ease;
+  transition:
+    left 180ms ease,
+    right 180ms ease,
+    width 180ms ease,
+    padding 180ms ease,
+    transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 180ms ease,
+    border-color 180ms ease;
 }
 
-.pwa-bottom-bar.is-expanded,
-.pwa-bottom-bar:focus-within {
+.pwa-bottom-bar.is-expanded {
+  left: max(12px, env(safe-area-inset-left));
+  right: max(12px, env(safe-area-inset-right));
+  width: auto;
+  padding: 7px;
+  border-radius: 12px;
   transform: translateY(0);
   opacity: 1;
 }
@@ -1313,19 +1331,25 @@ html.runtime-pwa-update-ready .pwa-app-shell:focus-within {
 
 .pwa-bottom-bar__handle {
   grid-column: 1 / -1;
-  min-height: 26px;
+  min-height: 18px;
   display: flex !important;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  border-color: rgba(var(--cyan-rgb), 0.18) !important;
+  gap: 6px;
+  border-color: transparent !important;
   color: var(--accent-2) !important;
+  background: transparent !important;
+}
+
+.pwa-bottom-bar.is-expanded .pwa-bottom-bar__handle {
+  min-height: 22px;
+  border-color: rgba(var(--cyan-rgb), 0.18) !important;
   background: rgba(var(--cyan-rgb), 0.055) !important;
 }
 
 .pwa-bottom-bar__handle > span {
-  width: 34px;
-  height: 3px;
+  width: 32px;
+  height: 2px;
   border-radius: 999px;
   background: linear-gradient(90deg, var(--accent-2), #8d3dff);
   box-shadow: 0 0 16px rgba(var(--cyan-rgb), 0.42);
@@ -1333,12 +1357,12 @@ html.runtime-pwa-update-ready .pwa-app-shell:focus-within {
 
 .pwa-bottom-bar__handle b {
   color: var(--muted);
-  font-size: 0.52rem;
-  letter-spacing: 0.14em;
+  font-size: 0.46rem;
+  letter-spacing: 0.12em;
 }
 
-.pwa-bottom-bar:not(.is-expanded):not(:focus-within) a,
-.pwa-bottom-bar:not(.is-expanded):not(:focus-within) button:not(.pwa-bottom-bar__handle) {
+.pwa-bottom-bar:not(.is-expanded) a,
+.pwa-bottom-bar:not(.is-expanded) button:not(.pwa-bottom-bar__handle) {
   opacity: 0;
   pointer-events: none;
   transform: translateY(8px);
@@ -5255,6 +5279,7 @@ main > .section.interior-hero::before {
   top: calc(var(--nav-h) + 16px);
   right: 22px;
   width: min(390px, calc(100vw - 44px));
+  box-sizing: border-box;
   overflow: hidden;
   border: 1px solid rgba(98, 214, 208, 0.32);
   border-radius: 8px;
@@ -6789,18 +6814,20 @@ html.recruiter-mode-active .profile-grid article {
     right: 0;
     bottom: auto;
     left: auto;
-    width: min(330px, calc(100vw - 20px));
+    width: min(320px, calc(100vw - 10px));
     grid-template-columns: 1fr;
     gap: 8px;
-    padding: 8px 8px 8px 44px;
-    transform: translate(calc(100% - 42px), -50%);
+    padding: 8px 8px 8px 36px;
+    transform: translate(calc(100% - 32px), -50%);
   }
 
-  html.runtime-pwa-standalone .pwa-app-shell:hover,
-  html.runtime-pwa-standalone .pwa-app-shell:focus-within,
-  html.runtime-pwa-update-ready .pwa-app-shell:hover,
-  html.runtime-pwa-update-ready .pwa-app-shell:focus-within {
+  html.runtime-pwa-standalone .pwa-app-shell.is-expanded,
+  html.runtime-pwa-update-ready .pwa-app-shell.is-expanded {
     transform: translate(0, -50%);
+  }
+
+  .pwa-app-shell__tab {
+    width: 30px;
   }
 
   .pwa-app-shell__main {
@@ -7006,10 +7033,11 @@ html.recruiter-mode-active .profile-grid article {
 
   .first-time-guide {
     top: calc(var(--nav-h) + 10px);
-    right: 14px;
-    left: auto;
+    right: max(12px, env(safe-area-inset-right));
+    left: max(12px, env(safe-area-inset-left));
     bottom: auto;
-    width: calc(100vw - 28px);
+    width: auto;
+    max-width: none;
   }
 
   .system-trace-terminal,
