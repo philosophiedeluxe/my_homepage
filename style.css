@@ -1271,14 +1271,14 @@ html.runtime-pwa-update-ready .pwa-app-shell.is-expanded {
 
 .pwa-bottom-bar {
   position: fixed;
-  left: 50%;
-  right: auto;
-  bottom: max(4px, env(safe-area-inset-bottom));
+  left: max(12px, env(safe-area-inset-left));
+  right: max(12px, env(safe-area-inset-right));
+  bottom: max(8px, env(safe-area-inset-bottom));
   z-index: 130;
   display: none;
   grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 6px;
-  width: min(460px, calc(100vw - 24px));
+  width: auto;
   padding: 7px;
   border: 1px solid rgba(var(--cyan-rgb), 0.24);
   border-radius: 12px 12px 0 0;
@@ -1288,7 +1288,7 @@ html.runtime-pwa-update-ready .pwa-app-shell.is-expanded {
   box-shadow: 0 18px 70px rgba(0, 0, 0, 0.42);
   -webkit-backdrop-filter: blur(14px);
   backdrop-filter: blur(14px);
-  transform: translate(-50%, calc(100% - 24px));
+  transform: translateY(calc(100% - 88px));
   opacity: 0.9;
   transition:
     transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
@@ -1299,15 +1299,23 @@ html.runtime-pwa-update-ready .pwa-app-shell.is-expanded {
 }
 
 .pwa-bottom-bar:not(.is-expanded) {
+  left: auto;
+  right: 0;
+  bottom: calc(74px + max(8px, env(safe-area-inset-bottom)));
+  width: 32px;
+  min-height: 88px;
+  padding: 0;
   border-color: transparent;
+  border-radius: 12px 0 0 12px;
   background: transparent;
   box-shadow: none;
   -webkit-backdrop-filter: none;
   backdrop-filter: none;
+  transform: translateY(0);
 }
 
 .pwa-bottom-bar.is-expanded {
-  transform: translate(-50%, 0);
+  transform: translateY(0);
   opacity: 1;
 }
 
@@ -1333,7 +1341,7 @@ html.runtime-pwa-update-ready .pwa-app-shell.is-expanded {
 .pwa-bottom-bar__handle {
   grid-column: 1 / -1;
   justify-self: center;
-  width: 86px;
+  width: 100%;
   min-height: 22px;
   display: flex !important;
   align-items: center;
@@ -1346,6 +1354,15 @@ html.runtime-pwa-update-ready .pwa-app-shell.is-expanded {
     linear-gradient(135deg, rgba(var(--cyan-rgb), 0.08), rgba(var(--violet-rgb), 0.055)),
     rgba(9, 11, 15, 0.84) !important;
   pointer-events: auto;
+}
+
+.pwa-bottom-bar:not(.is-expanded) .pwa-bottom-bar__handle {
+  position: absolute;
+  inset: 0;
+  min-height: 0;
+  border-radius: 12px 0 0 12px !important;
+  border-right: 0 !important;
+  background: linear-gradient(180deg, rgba(var(--cyan-rgb), 0.11), rgba(var(--violet-rgb), 0.075)) !important;
 }
 
 .pwa-bottom-bar.is-expanded .pwa-bottom-bar__handle {
@@ -1361,10 +1378,22 @@ html.runtime-pwa-update-ready .pwa-app-shell.is-expanded {
   box-shadow: 0 0 16px rgba(var(--cyan-rgb), 0.42);
 }
 
+.pwa-bottom-bar:not(.is-expanded) .pwa-bottom-bar__handle > span {
+  display: none;
+}
+
 .pwa-bottom-bar__handle b {
   color: var(--muted);
   font-size: 0.46rem;
   letter-spacing: 0.12em;
+}
+
+.pwa-bottom-bar:not(.is-expanded) .pwa-bottom-bar__handle b {
+  color: var(--accent-2);
+  font: 900 0.58rem/1 ui-monospace, "SFMono-Regular", Consolas, monospace;
+  letter-spacing: 0.16em;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
 }
 
 .pwa-bottom-bar:not(.is-expanded) a,
@@ -6874,6 +6903,10 @@ html.recruiter-mode-active .profile-grid article {
     max-width: none;
   }
 
+  html.runtime-pwa-standalone .pwa-resume-toast {
+    display: none;
+  }
+
   .easter-terminal {
     width: min(100%, 340px);
     max-width: calc(100vw - 28px);
@@ -6897,6 +6930,10 @@ html.recruiter-mode-active .profile-grid article {
     flex-direction: column;
     justify-content: center;
     padding-block: 24px;
+  }
+
+  html.runtime-pwa-standalone .footer {
+    padding-right: 48px;
   }
 
   .footer div {

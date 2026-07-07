@@ -1728,6 +1728,7 @@
     document.body.appendChild(appShell);
     let appShellExpanded = false;
     let appShellPointerStart = 0;
+    let appShellHoverSuppressed = false;
 
     const bottomBar = document.createElement("nav");
     bottomBar.className = "pwa-bottom-bar";
@@ -1746,6 +1747,7 @@
     document.body.appendChild(bottomBar);
     let bottomNavExpanded = false;
     let bottomNavPointerStart = 0;
+    let bottomNavHoverSuppressed = false;
 
     const resumeToast = document.createElement("div");
     resumeToast.className = "pwa-resume-toast";
@@ -1838,6 +1840,7 @@
 
     function showResumeToast(message) {
       if (!message || !(status.standalone || status.installed || !navigator.onLine)) return;
+      if (status.standalone && !finePointer.matches) return;
       resumeToast.textContent = `> ${message}`;
       resumeToast.classList.add("is-visible");
       window.clearTimeout(showResumeToast.timer);
@@ -1976,12 +1979,15 @@
     runtime.querySelector("[data-pwa-diagnostic]").addEventListener("click", () => checkCacheStatus(true));
     appShell.addEventListener("click", (event) => {
       if (!event.target.closest("[data-pwa-shell-toggle], [data-pwa-dashboard]")) return;
-      setAppShellExpanded(!appShellExpanded);
+      const nextState = !appShellExpanded;
+      appShellHoverSuppressed = !nextState;
+      setAppShellExpanded(nextState);
     });
     appShell.addEventListener("pointerenter", () => {
-      if (finePointer.matches) setAppShellExpanded(true);
+      if (finePointer.matches && !appShellHoverSuppressed) setAppShellExpanded(true);
     });
     appShell.addEventListener("pointerleave", () => {
+      appShellHoverSuppressed = false;
       if (finePointer.matches) setAppShellExpanded(false);
     });
     appShell.addEventListener("pointerdown", (event) => {
@@ -1990,22 +1996,31 @@
     appShell.addEventListener("pointerup", (event) => {
       if (!appShellPointerStart) return;
       const delta = event.clientX - appShellPointerStart;
-      if (delta < -18) setAppShellExpanded(true);
-      if (delta > 18) setAppShellExpanded(false);
+      if (delta < -18) {
+        appShellHoverSuppressed = false;
+        setAppShellExpanded(true);
+      }
+      if (delta > 18) {
+        appShellHoverSuppressed = true;
+        setAppShellExpanded(false);
+      }
       appShellPointerStart = 0;
     }, { passive: true });
     bottomBar.addEventListener("click", (event) => {
       const toggle = event.target.closest("[data-pwa-nav-toggle]");
       if (toggle) {
-        setBottomNavExpanded(!bottomNavExpanded);
+        const nextState = !bottomNavExpanded;
+        bottomNavHoverSuppressed = !nextState;
+        setBottomNavExpanded(nextState);
         return;
       }
       if (event.target.closest("[data-pwa-nav]")) setBottomNavExpanded(false);
     });
     bottomBar.addEventListener("pointerenter", () => {
-      if (finePointer.matches) setBottomNavExpanded(true);
+      if (finePointer.matches && !bottomNavHoverSuppressed) setBottomNavExpanded(true);
     });
     bottomBar.addEventListener("pointerleave", () => {
+      bottomNavHoverSuppressed = false;
       if (finePointer.matches) setBottomNavExpanded(false);
     });
     bottomBar.addEventListener("pointerdown", (event) => {
@@ -2014,8 +2029,14 @@
     bottomBar.addEventListener("pointerup", (event) => {
       if (!bottomNavPointerStart) return;
       const delta = event.clientY - bottomNavPointerStart;
-      if (delta < -24) setBottomNavExpanded(true);
-      if (delta > 24) setBottomNavExpanded(false);
+      if (delta < -24) {
+        bottomNavHoverSuppressed = false;
+        setBottomNavExpanded(true);
+      }
+      if (delta > 24) {
+        bottomNavHoverSuppressed = true;
+        setBottomNavExpanded(false);
+      }
       bottomNavPointerStart = 0;
     }, { passive: true });
     bottomBar.querySelector("[data-pwa-nav='trace']").addEventListener("click", () => {
@@ -2040,8 +2061,14 @@
     document.addEventListener("pk:toggle-iconic-avatar", () => window.setTimeout(() => renderRuntimePanel(runtime.classList.contains("is-visible")), 40));
     document.addEventListener("pointerdown", (event) => {
       const target = event.target;
-      if (appShellExpanded && !appShell.contains(target)) setAppShellExpanded(false);
-      if (bottomNavExpanded && !bottomBar.contains(target)) setBottomNavExpanded(false);
+      if (appShellExpanded && !appShell.contains(target)) {
+        appShellHoverSuppressed = false;
+        setAppShellExpanded(false);
+      }
+      if (bottomNavExpanded && !bottomBar.contains(target)) {
+        bottomNavHoverSuppressed = false;
+        setBottomNavExpanded(false);
+      }
     }, { capture: true });
 
     window.addEventListener("online", () => {
@@ -2079,8 +2106,14 @@
       renderRuntimePanel(runtime.classList.contains("is-visible"));
     });
     window.addEventListener("scroll", () => {
-      if (appShellExpanded) setAppShellExpanded(false);
-      if (bottomNavExpanded) setBottomNavExpanded(false);
+      if (appShellExpanded) {
+        appShellHoverSuppressed = false;
+        setAppShellExpanded(false);
+      }
+      if (bottomNavExpanded) {
+        bottomNavHoverSuppressed = false;
+        setBottomNavExpanded(false);
+      }
     }, { passive: true });
 
     window.pkPwaRuntime = {
@@ -3636,8 +3669,8 @@
 
   function setupHeroAvatarEgg() {
     const avatarSources = {
-      src: "./image/iconic-avatar-960.jpg?v=20260707-pwaapp4",
-      srcset: "./image/iconic-avatar-720.jpg?v=20260707-pwaapp4 720w, ./image/iconic-avatar-960.jpg?v=20260707-pwaapp4 960w",
+      src: "./image/iconic-avatar-960.jpg?v=20260707-pwaapp5",
+      srcset: "./image/iconic-avatar-720.jpg?v=20260707-pwaapp5 720w, ./image/iconic-avatar-960.jpg?v=20260707-pwaapp5 960w",
       alt: "Stilisiertes Hero-Portrait mit Iconic Avatar"
     };
 
