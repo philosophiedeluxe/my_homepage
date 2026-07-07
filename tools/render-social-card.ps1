@@ -14,7 +14,16 @@ if (-not (Test-Path -LiteralPath $ChromePath)) {
   throw "Chrome not found at $ChromePath"
 }
 
-& $ChromePath --headless=new --disable-gpu --hide-scrollbars --window-size=1200,630 --screenshot="$png" "$url" | Out-Null
+& $ChromePath `
+  --headless=new `
+  --disable-gpu `
+  --disable-gpu-compositing `
+  --disable-software-rasterizer `
+  --disable-dev-shm-usage `
+  --hide-scrollbars `
+  --window-size=1200,630 `
+  --screenshot="$png" `
+  "$url" | Out-Null
 
 Add-Type -AssemblyName System.Drawing
 
