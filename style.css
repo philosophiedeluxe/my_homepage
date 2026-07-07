@@ -6752,6 +6752,16 @@ html.recruiter-mode-active .profile-grid article {
     min-height: 0;
   }
 
+  .project-sim {
+    margin-top: 18px;
+    transform: none;
+  }
+
+  .project-card:hover .project-sim,
+  .project-card.is-tilting .project-sim {
+    transform: none;
+  }
+
   .project-card__visual {
     height: 150px;
   }
