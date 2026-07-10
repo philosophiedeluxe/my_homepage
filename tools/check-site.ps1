@@ -9,9 +9,12 @@ if (-not (Test-Path -LiteralPath (Join-Path $Root "app.js"))) {
   throw "Run this script from the repository root."
 }
 
-Write-Host "Checking JavaScript syntax..."
-node -e "new Function(require('fs').readFileSync('app.js','utf8'));"
-if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+Write-Host "Checking JavaScript module syntax..."
+$jsFiles = Get-ChildItem -LiteralPath $Root -Recurse -Filter "*.js" -File
+foreach ($file in $jsFiles) {
+  Get-Content -Raw -LiteralPath $file.FullName | node --input-type=module --check
+  if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+}
 
 Write-Host "Checking local HTML references..."
 $htmlFiles = Get-ChildItem -LiteralPath $Root -Filter "*.html" -File
@@ -69,6 +72,21 @@ function Resolve-SitePath {
   return Join-Path $Root $clean
 }
 
+Write-Host "Checking locale modules..."
+foreach ($lang in @("de", "en", "es", "ja")) {
+  $localePath = Join-Path $Root "js\locales\$lang.js"
+  Assert-Check (Test-Path -LiteralPath $localePath) "Locale module missing: $localePath"
+  Assert-Check ((Get-Item -LiteralPath $localePath).Length -gt 64) "Locale module is unexpectedly empty: $localePath"
+}
+
+Write-Host "Checking JavaScript module references..."
+foreach ($file in $jsFiles) {
+  $content = Get-Content -Raw -LiteralPath $file.FullName
+  foreach ($match in [regex]::Matches($content, 'from\s+["'']([^"'']+)')) {
+    Add-LocalReference -BaseDirectory $file.DirectoryName -Owner $file.Name -Raw $match.Groups[1].Value
+  }
+}
+
 foreach ($file in $htmlFiles) {
   $content = Get-Content -Raw -LiteralPath $file.FullName
   foreach ($match in [regex]::Matches($content, '(?:href|src|data-cert-src)=["'']([^"'']+)["'']')) {
@@ -93,9 +111,12 @@ foreach ($file in $htmlFiles) {
 }
 
 Write-Host "Checking CSS asset references..."
-$cssFiles = Get-ChildItem -LiteralPath $Root -Filter "*.css" -File
+$cssFiles = Get-ChildItem -LiteralPath $Root -Recurse -Filter "*.css" -File
 foreach ($file in $cssFiles) {
   $content = Get-Content -Raw -LiteralPath $file.FullName
+  foreach ($match in [regex]::Matches($content, '@import\s+(?:url\()?(["''])([^"'']+)\1\)?')) {
+    Add-LocalReference -BaseDirectory $file.DirectoryName -Owner $file.Name -Raw $match.Groups[2].Value
+  }
   foreach ($match in [regex]::Matches($content, 'url\((["'']?)([^)"'']+)\1\)')) {
     Add-LocalReference -BaseDirectory $file.DirectoryName -Owner $file.Name -Raw $match.Groups[2].Value
   }

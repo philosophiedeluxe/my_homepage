@@ -1,0 +1,39 @@
+name: Site quality
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  static-checks:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Validate static site and PWA contract
+        shell: pwsh
+        run: ./tools/check-site.ps1 -Pwa
+
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Serve the static site
+        run: npx --yes http-server . -p 4173 > /tmp/http-server.log 2>&1 &
+      - name: Capture Lighthouse baseline
+        uses: treosh/lighthouse-ci-action@v12
+        with:
+          urls: |
+            http://127.0.0.1:4173/index.html
+            http://127.0.0.1:4173/vita.html
+          configPath: ./lighthouserc.json
+          uploadArtifacts: true
+          temporaryPublicStorage: true

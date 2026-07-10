@@ -58,6 +58,19 @@ The site combines a clean dark visual style with a technical portfolio structure
 
 ## Tech Stack
 
+### Modular Frontend Structure
+
+The site stays build-free and GitHub Pages compatible. Native browser modules keep responsibilities explicit:
+
+- `app.js`: runtime entry point and shared page logic
+- `js/i18n.js` and `js/locales/*.js`: language catalogues per locale
+- `js/pwa.js`: install, offline and update runtime
+- `js/recruiter-mode.js`: command palette, system trace, skill graph and recruiter mode
+- `js/accessibility.js`: skip link, modal focus handling and input modality
+- `js/performance.js`: motion/visibility safeguards and deferred non-critical effects
+
+`style.css` imports `styles/base.css`, `styles/components.css`, `styles/features.css` and `styles/responsive-print.css` in source order. This order is part of the CSS contract and should only be changed deliberately.
+
 | Area | Technology |
 | --- | --- |
 | Markup | HTML5 |
@@ -246,18 +259,18 @@ The site avoids unnecessary external dependencies.
 
 ## Local Usage
 
-The project can be opened directly in the browser because it is a static website.
+The project is static, but native ES modules require an HTTP server for the full runtime.
 
 Recommended local test server:
 
 ```bash
-python -m http.server 8000
+node tools/serve-site.cjs
 ```
 
 Then open:
 
 ```text
-http://localhost:8000
+http://127.0.0.1:4173
 ```
 
 ## QA Checks
