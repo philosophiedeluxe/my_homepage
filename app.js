@@ -3676,8 +3676,8 @@
 
   function setupHeroAvatarEgg() {
     const avatarSources = {
-      src: "./image/iconic-avatar-960.jpg?v=20260707-pwaapp13",
-      srcset: "./image/iconic-avatar-720.jpg?v=20260707-pwaapp13 720w, ./image/iconic-avatar-960.jpg?v=20260707-pwaapp13 960w",
+      src: "./image/iconic-avatar-960.jpg?v=20260710-pwaapp14",
+      srcset: "./image/iconic-avatar-720.jpg?v=20260710-pwaapp14 720w, ./image/iconic-avatar-960.jpg?v=20260710-pwaapp14 960w",
       alt: "Stilisiertes Hero-Portrait mit Iconic Avatar"
     };
 
