@@ -1,5 +1,5 @@
 /* Entry stylesheet. Source order is intentionally explicit for static hosting. */
-@import url("./styles/base.css?v=20260713-quality5");
-@import url("./styles/components.css?v=20260713-quality5");
-@import url("./styles/features.css?v=20260713-quality5");
-@import url("./styles/responsive-print.css?v=20260713-quality5");
+@import url("./styles/base.css?v=20260713-quality6");
+@import url("./styles/components.css?v=20260713-quality6");
+@import url("./styles/features.css?v=20260713-quality6");
+@import url("./styles/responsive-print.css?v=20260713-quality6");

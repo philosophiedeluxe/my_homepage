@@ -48,10 +48,10 @@ export function setupProgressiveWebApp({ root, finePointer, defaultLang, localiz
         diagnostic: "Offline Diagnose",
         appNav: "NAV",
         openProfile: "Profil",
-        openProjects: "Projekte",
         openVita: "Vita",
         openStack: "Stack",
-        openContact: "Kontakt",
+        openTrace: "Trace",
+        openCommand: "Command",
         cachedProfile: "cached profile available",
         cachedVita: "vita cached",
         cachedSignals: "signals cached",
@@ -85,10 +85,10 @@ export function setupProgressiveWebApp({ root, finePointer, defaultLang, localiz
         diagnostic: "Offline diagnostic",
         appNav: "NAV",
         openProfile: "Profile",
-        openProjects: "Projects",
         openVita: "Resume",
         openStack: "Stack",
-        openContact: "Contact",
+        openTrace: "Trace",
+        openCommand: "Command",
         cachedProfile: "cached profile available",
         cachedVita: "resume cached",
         cachedSignals: "signals cached",
@@ -122,10 +122,10 @@ export function setupProgressiveWebApp({ root, finePointer, defaultLang, localiz
         diagnostic: "Diagnostico offline",
         appNav: "NAV",
         openProfile: "Perfil",
-        openProjects: "Proyectos",
         openVita: "Vita",
         openStack: "Stack",
-        openContact: "Contacto",
+        openTrace: "Trace",
+        openCommand: "Command",
         cachedProfile: "cached profile available",
         cachedVita: "vita cached",
         cachedSignals: "signals cached",
@@ -159,10 +159,10 @@ export function setupProgressiveWebApp({ root, finePointer, defaultLang, localiz
         diagnostic: "Offline diagnostic",
         appNav: "NAV",
         openProfile: "Profile",
-        openProjects: "プロジェクト",
         openVita: "Vita",
         openStack: "Stack",
-        openContact: "連絡",
+        openTrace: "Trace",
+        openCommand: "Command",
         cachedProfile: "cached profile available",
         cachedVita: "vita cached",
         cachedSignals: "signals cached",
@@ -225,10 +225,10 @@ export function setupProgressiveWebApp({ root, finePointer, defaultLang, localiz
         <b data-pwa-nav-title></b>
       </button>
       <a href="./index.html#profil" data-pwa-nav="profile"><span>01</span><b></b></a>
-      <a href="./index.html#projekte" data-pwa-nav="projects"><span>02</span><b></b></a>
-      <a href="./vita.html" data-pwa-nav="vita"><span>03</span><b></b></a>
-      <a href="./index.html#stack" data-pwa-nav="stack"><span>04</span><b></b></a>
-      <a href="./index.html#kontakt" data-pwa-nav="contact"><span>05</span><b></b></a>
+      <a href="./vita.html" data-pwa-nav="vita"><span>02</span><b></b></a>
+      <a href="./index.html#stack" data-pwa-nav="stack"><span>03</span><b></b></a>
+      <button type="button" data-pwa-nav="trace"><span>04</span><b></b></button>
+      <button type="button" data-pwa-nav="command"><span>05</span><b></b></button>
     `;
     document.body.appendChild(bottomBar);
     let bottomNavExpanded = false;
@@ -300,10 +300,10 @@ export function setupProgressiveWebApp({ root, finePointer, defaultLang, localiz
       ].filter(Boolean);
       appShell.querySelector("[data-pwa-app-chips]").innerHTML = chips.map((chip) => `<span>${chip}</span>`).join("");
       bottomBar.querySelector("[data-pwa-nav='profile'] b").textContent = text.openProfile;
-      bottomBar.querySelector("[data-pwa-nav='projects'] b").textContent = text.openProjects;
       bottomBar.querySelector("[data-pwa-nav='vita'] b").textContent = text.openVita;
       bottomBar.querySelector("[data-pwa-nav='stack'] b").textContent = text.openStack;
-      bottomBar.querySelector("[data-pwa-nav='contact'] b").textContent = text.openContact;
+      bottomBar.querySelector("[data-pwa-nav='trace'] b").textContent = text.openTrace;
+      bottomBar.querySelector("[data-pwa-nav='command'] b").textContent = text.openCommand;
       bottomBar.querySelector("[data-pwa-nav-title]").textContent = text.appNav;
       bottomBar.classList.toggle("is-offline", !navigator.onLine);
       appShell.classList.toggle("is-offline", !navigator.onLine);
@@ -523,6 +523,12 @@ export function setupProgressiveWebApp({ root, finePointer, defaultLang, localiz
         bottomNavHoverSuppressed = !nextState;
         setBottomNavExpanded(nextState);
         return;
+      }
+      if (event.target.closest("[data-pwa-nav='trace']")) {
+        document.dispatchEvent(new CustomEvent("pk:run-system-trace"));
+      }
+      if (event.target.closest("[data-pwa-nav='command']")) {
+        document.dispatchEvent(new CustomEvent("pk:open-command-palette"));
       }
       if (event.target.closest("[data-pwa-nav]")) setBottomNavExpanded(false);
     });

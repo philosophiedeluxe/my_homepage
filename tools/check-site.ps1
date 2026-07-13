@@ -213,6 +213,13 @@ if ($Pwa) {
   }
 
   Write-Host "Checking PWA navigation targets..."
+  foreach ($action in @(
+    @{ Navigation = "trace"; Event = "pk:run-system-trace" },
+    @{ Navigation = "command"; Event = "pk:open-command-palette" }
+  )) {
+    Assert-Check ($pwaSource -match [regex]::Escape([string]::Concat('data-pwa-nav="', $action.Navigation, '"'))) "PWA audit failed: $($action.Navigation) navigation control is missing."
+    Assert-Check ($pwaSource -match [regex]::Escape([string]::Concat('CustomEvent("', $action.Event, '"'))) "PWA audit failed: $($action.Navigation) navigation control must dispatch $($action.Event)."
+  }
   foreach ($href in [regex]::Matches($pwaSource, 'data-pwa-nav[^>]+href="([^"]+)"')) {
     $target = $href.Groups[1].Value
     $parts = $target -split '#', 2
