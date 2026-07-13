@@ -1,4 +1,4 @@
-const PK_PORTFOLIO_CACHE = "pk-portfolio-cache-20260713-quality8";
+const PK_PORTFOLIO_CACHE = "pk-portfolio-cache-20260713-quality9";
 const PK_PORTFOLIO_OFFLINE_URL = "./offline.html";
 
 const PRECACHE_ASSETS = [
@@ -10,18 +10,18 @@ const PRECACHE_ASSETS = [
   "./datenschutz.html",
   "./404.html",
   PK_PORTFOLIO_OFFLINE_URL,
-  "./style.css?v=20260713-quality8",
-  "./styles/base.css?v=20260713-quality8",
-  "./styles/components.css?v=20260713-quality8",
-  "./styles/features.css?v=20260713-quality8",
-  "./styles/responsive-print.css?v=20260713-quality8",
-  "./app.js?v=20260713-quality8",
-  "./js/i18n.js?v=20260713-quality8",
-  "./js/pwa.js?v=20260713-quality8",
-  "./js/recruiter-mode.js?v=20260713-quality8",
-  "./js/accessibility.js?v=20260713-quality8",
-  "./js/performance.js?v=20260713-quality8",
-  "./js/locales/de.js?v=20260713-quality8",
+  "./style.css?v=20260713-quality9",
+  "./styles/base.css?v=20260713-quality9",
+  "./styles/components.css?v=20260713-quality9",
+  "./styles/features.css?v=20260713-quality9",
+  "./styles/responsive-print.css?v=20260713-quality9",
+  "./app.js?v=20260713-quality9",
+  "./js/i18n.js?v=20260713-quality9",
+  "./js/pwa.js?v=20260713-quality9",
+  "./js/recruiter-mode.js?v=20260713-quality9",
+  "./js/accessibility.js?v=20260713-quality9",
+  "./js/performance.js?v=20260713-quality9",
+  "./js/locales/de.js?v=20260713-quality9",
   "./manifest.webmanifest?v=20260710-pwaapp14",
   "./image/pwa/favicon-32.png?v=20260710-pwaapp14",
   "./image/pwa/favicon-48.png?v=20260710-pwaapp14",

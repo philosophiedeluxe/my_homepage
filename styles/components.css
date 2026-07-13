@@ -334,6 +334,10 @@ body.vita-print-mode .tech-stream {
     inset 0 0 30px rgba(247, 173, 45, 0.08);
 }
 
+.pwa-runtime-panel.is-update-applying {
+  border-color: rgba(247, 173, 45, 0.9);
+}
+
 .pwa-runtime-panel__bar {
   min-height: 42px;
   display: flex;
@@ -403,6 +407,48 @@ body.vita-print-mode .tech-stream {
 .pwa-runtime-panel__body p::before {
   content: "> ";
   color: var(--accent-2);
+}
+
+.pwa-runtime-panel__progress {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 11px;
+  color: var(--accent);
+  font: 900 0.58rem/1 ui-monospace, "SFMono-Regular", Consolas, monospace;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.pwa-runtime-panel__progress::after {
+  content: "Synchronisiere Build";
+}
+
+.pwa-runtime-panel__progress i {
+  width: 6px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 14px rgba(var(--gold-rgb), 0.72);
+  animation: pwa-update-pulse 820ms ease-in-out infinite;
+}
+
+.pwa-runtime-panel__progress span {
+  height: 2px;
+  flex: 1;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(247, 173, 45, 0.16);
+}
+
+.pwa-runtime-panel__progress span::after {
+  content: "";
+  display: block;
+  width: 42%;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  animation: pwa-update-scan 880ms linear infinite;
 }
 
 .pwa-runtime-panel__chips {
@@ -511,6 +557,20 @@ body.vita-print-mode .tech-stream {
   border-color: rgba(247, 173, 45, 0.72);
   color: #080d10;
   background: var(--accent);
+}
+
+.pwa-runtime-panel__actions [data-pwa-reload]:disabled {
+  cursor: wait;
+  opacity: 0.82;
+}
+
+@keyframes pwa-update-pulse {
+  50% { transform: scale(1.6); opacity: 0.45; }
+}
+
+@keyframes pwa-update-scan {
+  from { transform: translateX(-150%); }
+  to { transform: translateX(350%); }
 }
 
 html.runtime-pwa-standalone .brand::after {

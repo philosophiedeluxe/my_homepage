@@ -201,6 +201,9 @@ if ($Pwa) {
   $pwaSource = Get-Content -Raw -LiteralPath (Join-Path $Root "js\pwa.js")
   Assert-Check ($appSource -match 'setupProgressiveWebApp\([^\)]*serviceWorkerUrl:\s*PWA_SERVICE_WORKER_URL') "PWA audit failed: app.js must pass the service worker URL to the PWA runtime."
   Assert-Check ($pwaSource -match 'serviceWorkerUrl\s*=\s*"\./sw\.js"') "PWA audit failed: PWA runtime must define a service worker URL fallback."
+  foreach ($updateNeedle in @("updateApplying", "data-pwa-update-progress", "SKIP_WAITING", "updateFallbackTimer", "controllerchange")) {
+    Assert-Check ($pwaSource -match [regex]::Escape($updateNeedle)) "PWA audit failed: update feedback is missing '$updateNeedle'."
+  }
   foreach ($moduleName in @("i18n.js", "pwa.js", "recruiter-mode.js", "accessibility.js", "performance.js")) {
     $moduleVersion = [string]::Concat($moduleName, "?v=", $appVersion)
     Assert-Check ($appSource -match [regex]::Escape($moduleVersion)) "PWA audit failed: app.js import for $moduleName must use the current version."

@@ -9,6 +9,7 @@ export function setupProgressiveWebApp({ root, finePointer, defaultLang, localiz
     let deferredInstallPrompt = null;
     let waitingWorker = null;
     let reloadingForUpdate = false;
+    let updateFallbackTimer = 0;
     let runtimeDismissed = false;
     const status = {
       supported: "serviceWorker" in navigator,
@@ -19,6 +20,8 @@ export function setupProgressiveWebApp({ root, finePointer, defaultLang, localiz
       controlled: Boolean(navigator.serviceWorker?.controller),
       cacheReady: false,
       updateReady: false,
+      updateApplying: false,
+      updateComplete: false,
       colorScheme: window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark"
     };
     const labels = {
@@ -33,8 +36,10 @@ export function setupProgressiveWebApp({ root, finePointer, defaultLang, localiz
         installable: "install app",
         installed: "standalone mode detected",
         controlled: "service worker active",
-        update: "new build available",
-        updated: "build switch armed",
+        update: "neue Version verfügbar",
+        applying: "Update wird aktiviert",
+        applyingButton: "Wird geladen",
+        updated: "Neue Version aktiv - Seite wird neu geladen",
         dark: "dark runtime",
         light: "light runtime",
         iconic: "iconic mode detected",
@@ -71,7 +76,9 @@ export function setupProgressiveWebApp({ root, finePointer, defaultLang, localiz
         installed: "standalone mode detected",
         controlled: "service worker active",
         update: "new build available",
-        updated: "build switch armed",
+        applying: "activating update",
+        applyingButton: "Loading update",
+        updated: "new build active - reloading page",
         dark: "dark runtime",
         light: "light runtime",
         iconic: "iconic mode detected",
@@ -107,8 +114,10 @@ export function setupProgressiveWebApp({ root, finePointer, defaultLang, localiz
         installable: "install app",
         installed: "standalone mode detected",
         controlled: "service worker active",
-        update: "new build available",
-        updated: "build switch armed",
+        update: "nueva versión disponible",
+        applying: "activando actualización",
+        applyingButton: "cargando actualización",
+        updated: "nueva versión activa - recargando página",
         dark: "dark runtime",
         light: "light runtime",
         iconic: "iconic mode detected",
@@ -145,7 +154,9 @@ export function setupProgressiveWebApp({ root, finePointer, defaultLang, localiz
         installed: "standalone mode detected",
         controlled: "service worker active",
         update: "new build available",
-        updated: "build switch armed",
+        applying: "update is activating",
+        applyingButton: "loading update",
+        updated: "new build active - reloading page",
         dark: "dark runtime",
         light: "light runtime",
         iconic: "iconic mode detected",
@@ -184,6 +195,7 @@ export function setupProgressiveWebApp({ root, finePointer, defaultLang, localiz
       </div>
       <div class="pwa-runtime-panel__body">
         <p data-pwa-runtime-line></p>
+        <div class="pwa-runtime-panel__progress" data-pwa-update-progress hidden><i aria-hidden="true"></i><span></span></div>
         <div class="pwa-runtime-panel__chips" data-pwa-runtime-chips></div>
         <div class="pwa-runtime-panel__cache" data-pwa-cache-status></div>
       </div>
@@ -260,6 +272,8 @@ export function setupProgressiveWebApp({ root, finePointer, defaultLang, localiz
     function statusLine() {
       const text = copy();
       if (!status.supported || !status.secure) return text.unsupported;
+      if (status.updateComplete) return text.updated;
+      if (status.updateApplying) return text.applying;
       if (status.updateReady) return text.update;
       if (!navigator.onLine) return text.offline;
       if (status.standalone || status.installed) return text.installed;
@@ -425,14 +439,20 @@ export function setupProgressiveWebApp({ root, finePointer, defaultLang, localiz
       const cacheButton = runtime.querySelector("[data-pwa-cache-check]");
       const snapshotButton = runtime.querySelector("[data-pwa-snapshot]");
       const diagnosticButton = runtime.querySelector("[data-pwa-diagnostic]");
+      const updateProgress = runtime.querySelector("[data-pwa-update-progress]");
       installButton.textContent = text.install;
-      reloadButton.textContent = text.reload;
+      reloadButton.textContent = status.updateApplying ? text.applyingButton : text.reload;
+      reloadButton.disabled = status.updateApplying;
+      reloadButton.setAttribute("aria-busy", String(status.updateApplying));
+      updateProgress.hidden = !status.updateApplying;
       cacheButton.textContent = text.cacheCheck;
       snapshotButton.textContent = text.snapshot;
       diagnosticButton.textContent = text.diagnostic;
       installButton.hidden = !status.installable || status.standalone || status.installed;
       reloadButton.hidden = !status.updateReady;
       runtime.classList.toggle("is-update-ready", status.updateReady);
+      runtime.classList.toggle("is-update-applying", status.updateApplying);
+      runtime.classList.toggle("is-update-complete", status.updateComplete);
       runtime.classList.toggle("is-visible", forceVisible || (status.updateReady && !runtimeDismissed));
       updateRuntimeClasses();
       renderAppShell();
@@ -457,18 +477,27 @@ export function setupProgressiveWebApp({ root, finePointer, defaultLang, localiz
     function showUpdateAvailable(worker) {
       waitingWorker = worker;
       status.updateReady = true;
+      status.updateApplying = false;
+      status.updateComplete = false;
       runtimeDismissed = false;
       renderRuntimePanel(true);
     }
 
     function reloadToLatestBuild() {
+      if (reloadingForUpdate) return;
       if (!waitingWorker) {
         window.location.reload();
         return;
       }
       reloadingForUpdate = true;
+      status.updateApplying = true;
+      status.updateComplete = false;
+      runtimeDismissed = false;
+      renderRuntimePanel(true);
       waitingWorker.postMessage({ type: "SKIP_WAITING" });
-      runtime.querySelector("[data-pwa-runtime-line]").textContent = copy().updated;
+      updateFallbackTimer = window.setTimeout(() => {
+        if (reloadingForUpdate) window.location.reload();
+      }, 3500);
     }
 
     runtime.querySelector("[data-pwa-runtime-dismiss]").addEventListener("click", () => {
@@ -689,7 +718,16 @@ export function setupProgressiveWebApp({ root, finePointer, defaultLang, localiz
 
     navigator.serviceWorker.addEventListener("controllerchange", () => {
       if (!reloadingForUpdate) return;
-      window.location.reload();
+      if (updateFallbackTimer) window.clearTimeout(updateFallbackTimer);
+      status.updateReady = false;
+      status.updateApplying = false;
+      status.updateComplete = true;
+      waitingWorker = null;
+      renderRuntimePanel(true);
+      window.setTimeout(() => {
+        runtime.classList.remove("is-visible");
+        window.location.reload();
+      }, 720);
     });
   
 }
