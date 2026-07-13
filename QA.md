@@ -12,7 +12,7 @@ For visual smoke screenshots:
 powershell -ExecutionPolicy Bypass -File .\tools\check-site.ps1 -Screenshots
 ```
 
-The screenshot mode validates that Chrome actually writes `_qa_*.png` files. If it fails with `Screenshot was not created`, run it from a normal local PowerShell session where Chrome headless is allowed to create files in the repository root.
+The screenshot mode starts the local HTTP server and validates that Chrome writes `_qa_*.png` files. If it fails, run it from a normal local PowerShell session where Node and Chrome headless may open localhost and create files in the repository root.
 
 For the Lighthouse-style local PWA audit:
 
@@ -55,7 +55,7 @@ Hidden interface checks:
 PWA checks:
 
 1. Run `powershell -ExecutionPolicy Bypass -File .\tools\check-site.ps1 -Pwa` and confirm the PWA audit passes.
-2. Serve the repository through `python -m http.server 8000` or publish to GitHub Pages; service workers do not run from `file://`.
+2. Serve the repository through `node tools/serve-site.cjs` or publish to GitHub Pages; service workers do not run from `file://`.
 3. Open `Ctrl + K` > `PWA Runtime` and verify installability, cache state, standalone state, color scheme and Iconic Mode labels update.
 4. In Chrome or Edge DevTools, open Application > Manifest and confirm name, icons, start URL, scope and installability.
 5. Install the app and verify it appears as `phil.osophie.deluxe` and opens in standalone mode without browser chrome.

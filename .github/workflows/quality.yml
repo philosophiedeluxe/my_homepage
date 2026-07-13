@@ -27,7 +27,7 @@ jobs:
         with:
           node-version: 22
       - name: Serve the static site
-        run: npx --yes http-server . -p 4173 > /tmp/http-server.log 2>&1 &
+        run: node tools/serve-site.cjs --port=4173 > /tmp/http-server.log 2>&1 &
       - name: Capture Lighthouse baseline
         uses: treosh/lighthouse-ci-action@v12
         with:

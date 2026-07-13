@@ -9,7 +9,7 @@ const FOCUSABLE_SELECTOR = [
 
 function getActiveModal() {
   return document.querySelector(
-    ".command-palette.is-visible [role='dialog'], .certificate-lightbox.is-open [role='dialog'], [role='dialog'][aria-modal='true']:not([aria-hidden='true'])"
+    ".command-palette.is-visible [role='dialog'], .cert-lightbox[data-open='true'], [role='dialog'][aria-modal='true']:not([aria-hidden='true'])"
   );
 }
 

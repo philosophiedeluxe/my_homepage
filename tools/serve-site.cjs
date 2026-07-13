@@ -3,7 +3,8 @@ const fs = require("fs");
 const path = require("path");
 
 const root = path.resolve(__dirname, "..");
-const port = Number(process.env.PORT || 4173);
+const portArgument = process.argv.find((argument) => argument.startsWith("--port="));
+const port = Number(portArgument?.slice("--port=".length) || process.env.PORT || 4173);
 const contentTypes = {
   ".css": "text/css; charset=utf-8",
   ".html": "text/html; charset=utf-8",

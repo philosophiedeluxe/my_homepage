@@ -344,7 +344,25 @@ const de = {
   "cookie.necessaryOnly": "Nur notwendige",
   "cookie.privacy": "Datenschutz ansehen",
   "cookie.settings": "Cookie-Einstellungen",
-  "cookie.optionsLabel": "Cookie-Kategorien"
+  "cookie.optionsLabel": "Cookie-Kategorien",
+  "project.home.case.context.label": "Ausgangslage",
+  "project.home.case.context.value": "Ein Portfolio sollte Positionierung, Vita und Arbeitsweise ohne Framework und ohne externe Abhängigkeiten verbinden.",
+  "project.home.case.decision.label": "Entscheidung",
+  "project.home.case.decision.value": "Statisches HTML, native Browser-Module, strukturierte Metadaten und ein offlinefähiger App-Shell-Ansatz.",
+  "project.home.case.proof.label": "Nachweis",
+  "project.home.case.proof.value": "Mehrsprachigkeit, PWA, Druck-Vita, SEO und Qualitätsprüfungen sind im Quellcode nachvollziehbar.",
+  "project.apex.case.context.label": "Arbeitsfokus",
+  "project.apex.case.context.value": "Business-nahe Oberflächen, saubere Datenmodelle und nachvollziehbare Prozessschritte.",
+  "project.apex.case.decision.label": "Vorgehen",
+  "project.apex.case.decision.value": "UI, Validierung, PL/SQL-Logik und REST-Anbindung als zusammenhängenden Ablauf modellieren.",
+  "project.apex.case.proof.label": "Rahmen",
+  "project.apex.case.proof.value": "Produktive Details bleiben vertraulich; die dargestellten Prinzipien bilden den fachlichen Anteil ab.",
+  "project.java.case.context.label": "Fundament",
+  "project.java.case.context.value": "Ausbildung und Praxis mit objektorientierter Modellierung, relationalen Daten und teamfähigen Lieferprozessen.",
+  "project.java.case.decision.label": "Prinzip",
+  "project.java.case.decision.value": "Domänenlogik, Datenzugriff und Oberflächen bewusst trennen und über Git sowie Tickets nachvollziehbar liefern.",
+  "project.java.case.proof.label": "Transfer",
+  "project.java.case.proof.value": "Dieses Fundament trägt heutige Oracle- und JavaScript-Arbeit auch außerhalb klassischer Java-Projekte."
 };
 
 export default de;

@@ -1,6 +1,6 @@
 # Homepage Roadmap
 
-Stand: 03.07.2026
+Stand: 13.07.2026
 
 ## Kurzfazit
 
@@ -90,19 +90,18 @@ Die Homepage ist jetzt eine moderne, statische Portfolio-Seite mit starkem Hero,
 
 ### Prio A
 
-- Echte Projektkarten mit Links, Screenshots und GitHub-Repositories fuellen.
-- Projektkarten mit konkreten Case-Study-Details und sichtbaren Ergebnissen fuellen.
+- Reale, freigegebene Projektartefakte als separate Case Studies ergaenzen: Kontext, eigener Anteil, Screenshots, Repository oder Demo-Link und nachvollziehbares Ergebnis.
+- Dynamische Dialoge auf Browsern und Screenreadern manuell gegen Tastatur- und Fokuscheck pruefen.
 
 ### Prio B
 
-- I18N-Texte aus `app.js` in eigene JSON-Dateien auslagern.
-- Wiederverwendbare HTML-Teile ueber Astro, Eleventy oder einen kleinen Build-Step einfuehren.
-- Kleine GitHub Action fuer Linkcheck und HTML/CSS/JS-Syntaxchecks ergaenzen.
+- CSS-Segmente schrittweise in fachliche Dateien fuer Navigation, Karten, Vita, PWA, Recruiter Layer, Motion, Responsive und Print ueberfuehren.
+- Verbleibenden Runtime-Kern in Navigation, Sprache, Consent, Hero, Interaktionen und Easter Eggs aufteilen.
 
 ### Prio C
 
-- Projektsektion um Case Studies erweitern.
-- Medien in WebP/AVIF Varianten optimieren.
+- Lighthouse-Grenzwerte nach den ersten CI-Ergebnissen gegen reale Baselines nachschaerfen.
+- Zusätzliche responsive Bildvarianten nur fuer tatsächlich ausgelieferte Medien erzeugen.
 
 ## QA-Checkliste nach Aenderungen
 

@@ -1,10 +1,11 @@
-import { DEFAULT_LANG, SUPPORTED_LANGS, translations } from "./js/i18n.js";
+import { DEFAULT_LANG, SUPPORTED_LANGS, getLocale } from "./js/i18n.js";
 import { setupProgressiveWebApp } from "./js/pwa.js";
 import { setupDeveloperOperatingLayer } from "./js/recruiter-mode.js";
 import { setupAccessibility } from "./js/accessibility.js";
 import { scheduleNonCriticalWork, setupPerformanceGuards } from "./js/performance.js";
 
-(function () {
+(async function () {
+  const translations = {};
   const navToggle = document.querySelector(".nav-toggle");
   const navList = document.getElementById("primary-nav");
   const langToggle = document.getElementById("lang-toggle");
@@ -205,6 +206,12 @@ import { scheduleNonCriticalWork, setupPerformanceGuards } from "./js/performanc
     if (navToggle) {
       navToggle.setAttribute("aria-label", getMenuLabel(navToggle.getAttribute("aria-expanded") === "true"));
     }
+  }
+
+  async function ensureTranslations(lang) {
+    const cleanLang = sanitizeLang(lang);
+    if (!translations[cleanLang]) translations[cleanLang] = await getLocale(cleanLang);
+    return translations[cleanLang];
   }
 
   function stripLanguageMarkup(value) {
@@ -427,10 +434,13 @@ import { scheduleNonCriticalWork, setupPerformanceGuards } from "./js/performanc
     });
   }
 
-  function setLang(lang, updateUrl = false) {
+  async function setLang(lang, updateUrl = false) {
     const nextLang = sanitizeLang(lang);
     const previousLang = sanitizeLang(document.documentElement.dataset.lang || DEFAULT_LANG);
     const shouldAnimateLanguage = languageTransformReady && nextLang !== previousLang;
+
+    await ensureTranslations(nextLang);
+    await ensureTranslations(previousLang);
 
     const finishLanguageChange = (finishedLang) => {
       const cleanFinishedLang = sanitizeLang(finishedLang);
@@ -1342,12 +1352,12 @@ import { scheduleNonCriticalWork, setupPerformanceGuards } from "./js/performanc
     langToggle.addEventListener("focusin", keepLanguageMenuOpen);
     langToggle.addEventListener("focusout", releaseLanguageMenuOpen);
 
-    langToggle.addEventListener("click", (event) => {
+    langToggle.addEventListener("click", async (event) => {
       const option = event.target.closest("[data-lang-option]");
       if (!option || !langToggle.contains(option)) return;
       const selectedLang = sanitizeLang(option.dataset.langOption);
       if (selectedLang === (document.documentElement.dataset.lang || DEFAULT_LANG)) return;
-      setLang(selectedLang, true);
+      await setLang(selectedLang, true);
       langToggle.classList.remove("is-pointer-open");
       langToggle.blur();
       setNavOpen(false);
@@ -2745,7 +2755,7 @@ shortcut: ctrl + alt + d</pre>
   setupCertificateLightbox();
   setupAccessibility();
   setupPerformanceGuards();
-  setLang(getInitialLang());
+  await setLang(getInitialLang());
   setupHeroCursor();
   setupPortfolioStartup(shouldRunPortfolioBoot);
   setupHeroAvatarEgg();

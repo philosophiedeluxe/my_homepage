@@ -295,8 +295,11 @@ export function setupDeveloperOperatingLayer({ root, defaultLang, translations, 
 
     const mailAddress = "phil.kirchner.999@googlemail.com";
     let palette = null;
+    let paletteTrigger = null;
     let recruiterPanel = null;
+    let recruiterTrigger = null;
     let traceOverlay = null;
+    let traceTrigger = null;
     let traceTimers = [];
     let timelinePanel = null;
 
@@ -377,6 +380,7 @@ export function setupDeveloperOperatingLayer({ root, defaultLang, translations, 
     }
 
     function openPalette() {
+      paletteTrigger = document.activeElement instanceof HTMLElement ? document.activeElement : null;
       renderPalette();
       palette.classList.add("is-visible");
       palette.setAttribute("aria-hidden", "false");
@@ -392,6 +396,8 @@ export function setupDeveloperOperatingLayer({ root, defaultLang, translations, 
       palette.setAttribute("aria-hidden", "true");
       palette.inert = true;
       root.classList.remove("command-palette-open");
+      paletteTrigger?.focus({ preventScroll: true });
+      paletteTrigger = null;
     }
 
     async function copyMailAddress() {
@@ -435,6 +441,9 @@ export function setupDeveloperOperatingLayer({ root, defaultLang, translations, 
       const overlay = document.createElement("aside");
       overlay.className = "system-trace-overlay";
       overlay.setAttribute("aria-hidden", "true");
+      overlay.setAttribute("role", "dialog");
+      overlay.setAttribute("aria-modal", "true");
+      overlay.setAttribute("aria-label", copy.traceTitle);
       overlay.innerHTML = `
         <svg class="system-trace-overlay__paths" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
           <polyline points="${points}" />
@@ -461,6 +470,7 @@ export function setupDeveloperOperatingLayer({ root, defaultLang, translations, 
     }
 
     function runSystemTrace() {
+      traceTrigger = document.activeElement instanceof HTMLElement ? document.activeElement : null;
       clearTraceTimers();
       traceOverlay?.remove();
       traceOverlay = buildTraceOverlay();
@@ -468,8 +478,10 @@ export function setupDeveloperOperatingLayer({ root, defaultLang, translations, 
       const activeOverlay = traceOverlay;
       root.classList.add("system-trace-active");
       traceOverlay.classList.add("is-visible");
+      traceOverlay.setAttribute("aria-hidden", "false");
       emitPortfolioCursorCode("TRACE", 1500, "is-dev-signal");
       const log = activeOverlay.querySelector("[data-trace-log]");
+      window.setTimeout(() => activeOverlay.querySelector("[data-trace-close]")?.focus({ preventScroll: true }), 0);
       traceLogs.forEach((line, index) => {
         traceTimers.push(window.setTimeout(() => {
           if (traceOverlay !== activeOverlay || !log.isConnected) return;
@@ -494,7 +506,11 @@ export function setupDeveloperOperatingLayer({ root, defaultLang, translations, 
       root.classList.remove("system-trace-active");
       const overlay = traceOverlay;
       traceOverlay = null;
-      window.setTimeout(() => overlay?.remove(), 240);
+      window.setTimeout(() => {
+        overlay?.remove();
+        traceTrigger?.focus({ preventScroll: true });
+        traceTrigger = null;
+      }, 240);
     }
 
     function navigateTraceNode(trigger) {
@@ -566,6 +582,8 @@ export function setupDeveloperOperatingLayer({ root, defaultLang, translations, 
       if (!recruiterPanel) {
         recruiterPanel = document.createElement("aside");
         recruiterPanel.className = "recruiter-mode-panel";
+        recruiterPanel.setAttribute("role", "dialog");
+        recruiterPanel.setAttribute("aria-modal", "true");
         recruiterPanel.setAttribute("aria-hidden", "true");
         recruiterPanel.inert = true;
         document.body.appendChild(recruiterPanel);
@@ -575,12 +593,19 @@ export function setupDeveloperOperatingLayer({ root, defaultLang, translations, 
           if (event.target.closest("[data-recruiter-mail]")) copyMailAddress();
         });
       }
+      if (visible) recruiterTrigger = document.activeElement instanceof HTMLElement ? document.activeElement : recruiterTrigger;
       renderRecruiterPanel();
       root.classList.toggle("recruiter-mode-active", visible);
       recruiterPanel.classList.toggle("is-visible", visible);
       recruiterPanel.setAttribute("aria-hidden", visible ? "false" : "true");
       recruiterPanel.inert = !visible;
-      if (visible) emitPortfolioCursorCode("FIT", 1400, "is-dev-signal");
+      if (visible) {
+        window.setTimeout(() => recruiterPanel.querySelector("[data-recruiter-close]")?.focus({ preventScroll: true }), 0);
+        emitPortfolioCursorCode("FIT", 1400, "is-dev-signal");
+      } else {
+        recruiterTrigger?.focus({ preventScroll: true });
+        recruiterTrigger = null;
+      }
     }
 
     function focusStackGraph() {

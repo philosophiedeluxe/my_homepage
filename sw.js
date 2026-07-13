@@ -1,4 +1,4 @@
-const PK_PORTFOLIO_CACHE = "pk-portfolio-cache-20260710-modular1";
+const PK_PORTFOLIO_CACHE = "pk-portfolio-cache-20260713-quality2";
 const PK_PORTFOLIO_OFFLINE_URL = "./offline.html";
 
 const PRECACHE_ASSETS = [
@@ -10,21 +10,18 @@ const PRECACHE_ASSETS = [
   "./datenschutz.html",
   "./404.html",
   PK_PORTFOLIO_OFFLINE_URL,
-  "./style.css?v=20260710-modular1",
+  "./style.css?v=20260713-quality2",
   "./styles/base.css",
   "./styles/components.css",
   "./styles/features.css",
   "./styles/responsive-print.css",
-  "./app.js?v=20260710-modular1",
+  "./app.js?v=20260713-quality2",
   "./js/i18n.js",
   "./js/pwa.js",
   "./js/recruiter-mode.js",
   "./js/accessibility.js",
   "./js/performance.js",
   "./js/locales/de.js",
-  "./js/locales/en.js",
-  "./js/locales/es.js",
-  "./js/locales/ja.js",
   "./manifest.webmanifest?v=20260710-pwaapp14",
   "./image/pwa/favicon-32.png?v=20260710-pwaapp14",
   "./image/pwa/favicon-48.png?v=20260710-pwaapp14",

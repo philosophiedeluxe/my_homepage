@@ -344,7 +344,25 @@ const en = {
   "cookie.necessaryOnly": "Necessary only",
   "cookie.privacy": "View privacy policy",
   "cookie.settings": "Cookie settings",
-  "cookie.optionsLabel": "Cookie categories"
+  "cookie.optionsLabel": "Cookie categories",
+  "project.home.case.context.label": "Context",
+  "project.home.case.context.value": "The portfolio needed to connect positioning, resume and working style without a framework or external dependencies.",
+  "project.home.case.decision.label": "Decision",
+  "project.home.case.decision.value": "Static HTML, native browser modules, structured metadata and an offline-capable app shell.",
+  "project.home.case.proof.label": "Evidence",
+  "project.home.case.proof.value": "Languages, PWA, print resume, SEO and quality checks are traceable in the source code.",
+  "project.apex.case.context.label": "Focus",
+  "project.apex.case.context.value": "Business-facing interfaces, clean data models and traceable process steps.",
+  "project.apex.case.decision.label": "Approach",
+  "project.apex.case.decision.value": "Model UI, validation, PL/SQL logic and REST integration as one connected flow.",
+  "project.apex.case.proof.label": "Scope",
+  "project.apex.case.proof.value": "Production details remain confidential; the shown principles represent the professional contribution.",
+  "project.java.case.context.label": "Foundation",
+  "project.java.case.context.value": "Training and practice in object-oriented modelling, relational data and team-ready delivery processes.",
+  "project.java.case.decision.label": "Principle",
+  "project.java.case.decision.value": "Separate domain logic, data access and interfaces, then deliver traceably through Git and tickets.",
+  "project.java.case.proof.label": "Transfer",
+  "project.java.case.proof.value": "This foundation supports current Oracle and JavaScript work beyond conventional Java projects."
 };
 
 export default en;

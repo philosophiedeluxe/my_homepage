@@ -212,32 +212,51 @@ if ($Screenshots) {
   $chrome = "C:\Program Files\Google\Chrome\Application\chrome.exe"
   if (Test-Path -LiteralPath $chrome) {
     Write-Host "Rendering smoke screenshots..."
-    $rootUrl = $Root.Replace('\','/')
     $profileDir = Join-Path $Root "_chrome_tmp_profile"
+    $qaPort = 41731
+    $server = Start-Process -FilePath "node" -ArgumentList @("tools/serve-site.cjs", "--port=$qaPort") -WorkingDirectory $Root -WindowStyle Hidden -PassThru
+    $serverReady = $false
+    for ($attempt = 0; $attempt -lt 20; $attempt++) {
+      try {
+        Invoke-WebRequest -UseBasicParsing "http://127.0.0.1:$qaPort/index.html" | Out-Null
+        $serverReady = $true
+        break
+      } catch {
+        Start-Sleep -Milliseconds 150
+      }
+    }
+    if (-not $serverReady) {
+      if (-not $server.HasExited) { Stop-Process -Id $server.Id -Force }
+      throw "Local screenshot server did not start."
+    }
     $screenshotsToRender = @(
-      @{ Path = "$Root\_qa_home_desktop.png"; Size = "1440,1200"; Url = "file:///$rootUrl/index.html" },
-      @{ Path = "$Root\_qa_home_mobile.png"; Size = "390,900"; Url = "file:///$rootUrl/index.html" },
-      @{ Path = "$Root\_qa_vita.png"; Size = "970,700"; Url = "file:///$rootUrl/vita.html" }
+      @{ Path = "$Root\_qa_home_desktop.png"; Size = "1440,1200"; Url = "http://127.0.0.1:$qaPort/index.html" },
+      @{ Path = "$Root\_qa_home_mobile.png"; Size = "390,900"; Url = "http://127.0.0.1:$qaPort/index.html" },
+      @{ Path = "$Root\_qa_vita.png"; Size = "970,700"; Url = "http://127.0.0.1:$qaPort/vita.html" }
     )
 
     if (Test-Path -LiteralPath $profileDir) {
       Remove-Item -LiteralPath $profileDir -Recurse -Force
     }
 
-    foreach ($shot in $screenshotsToRender) {
-      if (Test-Path -LiteralPath $shot.Path) {
-        Remove-Item -LiteralPath $shot.Path -Force
-      }
+    try {
+      foreach ($shot in $screenshotsToRender) {
+        if (Test-Path -LiteralPath $shot.Path) {
+          Remove-Item -LiteralPath $shot.Path -Force
+        }
 
-      & $chrome --headless=new --disable-gpu --hide-scrollbars "--user-data-dir=$profileDir" "--window-size=$($shot.Size)" "--screenshot=$($shot.Path)" $shot.Url
-      if (-not (Test-Path -LiteralPath $shot.Path)) {
-        throw "Screenshot was not created: $($shot.Path)"
-      }
+        & $chrome --headless=new --disable-gpu --hide-scrollbars "--user-data-dir=$profileDir" "--window-size=$($shot.Size)" "--screenshot=$($shot.Path)" $shot.Url
+        if (-not (Test-Path -LiteralPath $shot.Path)) {
+          throw "Screenshot was not created: $($shot.Path)"
+        }
 
-      $created = Get-Item -LiteralPath $shot.Path
-      if ($created.Length -le 0) {
-        throw "Screenshot is empty: $($shot.Path)"
+        $created = Get-Item -LiteralPath $shot.Path
+        if ($created.Length -le 0) {
+          throw "Screenshot is empty: $($shot.Path)"
+        }
       }
+    } finally {
+      if (-not $server.HasExited) { Stop-Process -Id $server.Id -Force }
     }
   } else {
     Write-Host "Chrome not found, skipping screenshots."

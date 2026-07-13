@@ -344,7 +344,25 @@ const ja = {
   "cookie.necessaryOnly": "必要なものだけ",
   "cookie.privacy": "プライバシーを見る",
   "cookie.settings": "Cookie設定",
-  "cookie.optionsLabel": "Cookieカテゴリ"
+  "cookie.optionsLabel": "Cookieカテゴリ",
+  "project.home.case.context.label": "背景",
+  "project.home.case.context.value": "フレームワークや外部依存なしで、ポジショニング、経歴、仕事の進め方を結ぶポートフォリオが必要でした。",
+  "project.home.case.decision.label": "判断",
+  "project.home.case.decision.value": "静的HTML、ネイティブブラウザモジュール、構造化メタデータ、オフライン対応App Shellを採用しました。",
+  "project.home.case.proof.label": "根拠",
+  "project.home.case.proof.value": "多言語化、PWA、印刷用Vita、SEO、品質チェックはソースコードで確認できます。",
+  "project.apex.case.context.label": "焦点",
+  "project.apex.case.context.value": "業務に近い画面、整ったデータモデル、追跡できるプロセスステップ。",
+  "project.apex.case.decision.label": "進め方",
+  "project.apex.case.decision.value": "UI、バリデーション、PL/SQLロジック、REST連携を一つの流れとしてモデル化します。",
+  "project.apex.case.proof.label": "範囲",
+  "project.apex.case.proof.value": "本番詳細は機密です。表示する原則は専門的な貢献を示しています。",
+  "project.java.case.context.label": "基盤",
+  "project.java.case.context.value": "オブジェクト指向モデリング、リレーショナルデータ、チームでのデリバリーに関する教育と実務経験。",
+  "project.java.case.decision.label": "原則",
+  "project.java.case.decision.value": "ドメインロジック、データアクセス、UIを分離し、Gitとチケットで追跡可能に届けます。",
+  "project.java.case.proof.label": "転用",
+  "project.java.case.proof.value": "この基盤は従来のJavaプロジェクトを超えて現在のOracleとJavaScriptの仕事を支えています。"
 };
 
 export default ja;

@@ -358,6 +358,23 @@ export function setupProgressiveWebApp({ root, finePointer, defaultLang, localiz
       return results;
     }
 
+    async function runOfflineDiagnostic() {
+      const results = await inspectCache();
+      renderCacheStatus(results);
+      const routeState = Object.entries(results)
+        .map(([route, cached]) => `${route}:${cached ? "cached" : "missing"}`)
+        .join(" | ");
+      const runtimeState = [
+        status.secure ? "secure" : "insecure",
+        status.supported ? "sw-supported" : "sw-unsupported",
+        status.controlled ? "sw-controlled" : "sw-uncontrolled",
+        navigator.onLine ? "online" : "offline"
+      ].join(" | ");
+      runtime.querySelector("[data-pwa-runtime-line]").textContent = `diagnostic :: ${runtimeState} :: ${routeState}`;
+      showResumeToast(copy().diagnosticReady);
+      return { ...results, runtimeState };
+    }
+
     async function copyProfileSnapshot() {
       const snapshot = [
         "phil.osophie.deluxe",
@@ -462,7 +479,7 @@ export function setupProgressiveWebApp({ root, finePointer, defaultLang, localiz
     runtime.querySelector("[data-pwa-reload]").addEventListener("click", reloadToLatestBuild);
     runtime.querySelector("[data-pwa-cache-check]").addEventListener("click", () => checkCacheStatus(true));
     runtime.querySelector("[data-pwa-snapshot]").addEventListener("click", copyProfileSnapshot);
-    runtime.querySelector("[data-pwa-diagnostic]").addEventListener("click", () => checkCacheStatus(true));
+    runtime.querySelector("[data-pwa-diagnostic]").addEventListener("click", runOfflineDiagnostic);
     appShell.addEventListener("click", (event) => {
       const runtimeButton = event.target.closest("[data-pwa-dashboard]");
       if (runtimeButton) {
@@ -547,7 +564,7 @@ export function setupProgressiveWebApp({ root, finePointer, defaultLang, localiz
     document.addEventListener("pk:pwa-copy-snapshot", copyProfileSnapshot);
     document.addEventListener("pk:pwa-offline-diagnostic", () => {
       renderRuntimePanel(true);
-      checkCacheStatus(true);
+      runOfflineDiagnostic();
     });
     document.addEventListener("pk:pwa-reload-build", reloadToLatestBuild);
     document.addEventListener("pk:pwa-install", installApp);
@@ -614,6 +631,7 @@ export function setupProgressiveWebApp({ root, finePointer, defaultLang, localiz
       open: () => renderRuntimePanel(true),
       install: installApp,
       checkCache: checkCacheStatus,
+      diagnose: runOfflineDiagnostic,
       copySnapshot: copyProfileSnapshot,
       reload: reloadToLatestBuild
     };
@@ -639,9 +657,9 @@ export function setupProgressiveWebApp({ root, finePointer, defaultLang, localiz
             status.cacheReady = true;
             status.controlled = Boolean(navigator.serviceWorker.controller);
             renderRuntimePanel(runtime.classList.contains("is-visible"));
+            checkCacheStatus(false);
             if (status.standalone) {
               showResumeToast(navigator.onLine ? copy().runtimeRestored : copy().offline);
-              checkCacheStatus(false);
             }
           });
           registration.addEventListener("updatefound", () => {

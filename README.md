@@ -110,7 +110,6 @@ The site stays build-free and GitHub Pages compatible. Native browser modules ke
     ├── iconic.jpg          # Main visual asset
     ├── iconic-720.jpg      # Responsive image variant
     ├── iconic-960.jpg      # Responsive image variant
-    ├── iconic-avatar.jpg   # Fullsize Iconic Mode source asset, kept out of the PWA precache
     ├── iconic-avatar-720.jpg # Session-only Iconic Mode hero source
     ├── iconic-avatar-960.jpg # Session-only Iconic Mode hero source
     ├── profile-avatar.jpg  # Header / graph avatar
@@ -295,7 +294,7 @@ Optional visual smoke screenshots:
 powershell -ExecutionPolicy Bypass -File .\tools\check-site.ps1 -Screenshots
 ```
 
-Screenshot mode requires local Chrome headless file output. It fails deliberately if the `_qa_*.png` files are not created.
+Screenshot mode starts the local HTTP server automatically and requires Chrome headless. It fails deliberately if the server or `_qa_*.png` files are not created.
 
 Manual checks before publishing:
 

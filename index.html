@@ -38,8 +38,8 @@
   <link rel="icon" type="image/png" sizes="48x48" href="./image/pwa/favicon-48.png?v=20260710-pwaapp14">
   <link rel="icon" type="image/png" sizes="192x192" href="./image/pwa/icon-192.png?v=20260710-pwaapp14">
   <link rel="apple-touch-icon" href="./image/pwa/apple-touch-icon.png?v=20260710-pwaapp14">
-  <link rel="stylesheet" href="./style.css?v=20260710-modular1">
-  <script type="module" src="./app.js?v=20260710-modular1"></script>
+  <link rel="stylesheet" href="./style.css?v=20260713-quality2">
+  <script type="module" src="./app.js?v=20260713-quality2"></script>
 </head>
 <body>
   <header class="site-shell">
@@ -88,12 +88,11 @@
         <p class="hero-text" data-i18n="hero.text">Ich komme aus operativer Verantwortung: Einkauf, Prozesse und Teams kenne ich aus der Praxis. Heute entwickle ich Anwendungen mit Oracle APEX, PL/SQL, JavaScript und Java. Diese Mischung ist mein Vorteil: Technik, die nicht nur läuft, sondern im Alltag Wirkung zeigt.</p>
         <div class="hero-actions" aria-label="Kontakt und Profil">
           <a class="button button-primary" href="mailto:phil.kirchner.999@googlemail.com" data-i18n="hero.mail">Kontakt aufnehmen</a>
+          <a class="button button-secondary" href="#projekte" data-i18n="nav.projects">Projekte</a>
           <a class="button button-secondary" href="./vita.html" data-i18n="hero.vita">Vita ansehen</a>
-          <a class="button button-secondary" href="https://www.linkedin.com/in/phil-kirchner/" rel="noopener noreferrer" data-i18n="contact.linkedin">LinkedIn öffnen</a>
           <a class="button button-ghost" href="https://github.com/philosophiedeluxe" rel="noopener noreferrer">GitHub</a>
         </div>
         <div class="hero-signal-line" aria-hidden="true"></div>
-        <button class="trace-entry" type="button" data-system-trace-trigger data-i18n="trace.entry">trace profile</button>
         <dl class="quick-facts" aria-label="Kurzprofil">
           <div>
             <dt data-i18n="facts.focus.label">Fokus</dt>
@@ -168,7 +167,14 @@
           <p class="project-kicker">Portfolio</p>
           <h3 data-i18n="project.home.title">Modernisierte persönliche Homepage</h3>
           <p data-i18n="project.home.text">Eine statische, schnelle Portfolio-Seite mit klarer Positionierung, responsivem Layout, DE/EN/ES/JP-Umschaltung und verbessertem SEO-Fundament.</p>
-          <p class="project-result" data-i18n="project.home.result">Statisch · mehrsprachig · ohne Build-Schritt</p>
+          <div class="case-study" data-case-study>
+            <p class="project-result" data-i18n="project.home.result">Statisch · mehrsprachig · ohne Build-Schritt</p>
+            <dl>
+              <div><dt data-i18n="project.home.case.context.label">Ausgangslage</dt><dd data-i18n="project.home.case.context.value">Ein Portfolio sollte Positionierung, Vita und Arbeitsweise ohne Framework und ohne externe Abhängigkeiten verbinden.</dd></div>
+              <div><dt data-i18n="project.home.case.decision.label">Entscheidung</dt><dd data-i18n="project.home.case.decision.value">Statisches HTML, native Browser-Module, strukturierte Metadaten und ein offlinefähiger App-Shell-Ansatz.</dd></div>
+              <div><dt data-i18n="project.home.case.proof.label">Nachweis</dt><dd data-i18n="project.home.case.proof.value">Mehrsprachigkeit, PWA, Druck-Vita, SEO und Qualitätsprüfungen sind im Quellcode nachvollziehbar.</dd></div>
+            </dl>
+          </div>
           <ul class="tag-list" aria-label="Technologien">
             <li>HTML</li>
             <li>CSS</li>
@@ -191,7 +197,14 @@
           <p class="project-kicker">Business Apps</p>
           <h3 data-i18n="project.apex.title">Oracle-nahe Anwendungsentwicklung</h3>
           <p data-i18n="project.apex.text">Fokus auf Oberflächen, Datenmodelle und Abläufe rund um Oracle APEX, PL/SQL, REST Data Sources und strukturierte Datenhaltung.</p>
-          <p class="project-result" data-i18n="project.apex.result">Datengetrieben · workfloworientiert · robust</p>
+          <div class="case-study" data-case-study>
+            <p class="project-result" data-i18n="project.apex.result">Datengetrieben · workfloworientiert · robust</p>
+            <dl>
+              <div><dt data-i18n="project.apex.case.context.label">Arbeitsfokus</dt><dd data-i18n="project.apex.case.context.value">Business-nahe Oberflächen, saubere Datenmodelle und nachvollziehbare Prozessschritte.</dd></div>
+              <div><dt data-i18n="project.apex.case.decision.label">Vorgehen</dt><dd data-i18n="project.apex.case.decision.value">UI, Validierung, PL/SQL-Logik und REST-Anbindung als zusammenhängenden Ablauf modellieren.</dd></div>
+              <div><dt data-i18n="project.apex.case.proof.label">Rahmen</dt><dd data-i18n="project.apex.case.proof.value">Produktive Details bleiben vertraulich; die dargestellten Prinzipien bilden den fachlichen Anteil ab.</dd></div>
+            </dl>
+          </div>
           <ul class="tag-list" aria-label="Technologien">
             <li>Oracle APEX</li>
             <li>PL/SQL</li>
@@ -214,7 +227,14 @@
           <p class="project-kicker">Backend</p>
           <h3 data-i18n="project.java.title">Java, SQL und saubere Grundarchitektur</h3>
           <p data-i18n="project.java.text">Ausbildung und Praxis mit Java, SQL, Spring Boot, MVC, Vaadin, Git, Jira, Confluence und modellgetriebener Softwareentwicklung.</p>
-          <p class="project-result" data-i18n="project.java.result">Modular · nachvollziehbar · teamfähig</p>
+          <div class="case-study" data-case-study>
+            <p class="project-result" data-i18n="project.java.result">Modular · nachvollziehbar · teamfähig</p>
+            <dl>
+              <div><dt data-i18n="project.java.case.context.label">Fundament</dt><dd data-i18n="project.java.case.context.value">Ausbildung und Praxis mit objektorientierter Modellierung, relationalen Daten und teamfähigen Lieferprozessen.</dd></div>
+              <div><dt data-i18n="project.java.case.decision.label">Prinzip</dt><dd data-i18n="project.java.case.decision.value">Domänenlogik, Datenzugriff und Oberflächen bewusst trennen und über Git sowie Tickets nachvollziehbar liefern.</dd></div>
+              <div><dt data-i18n="project.java.case.proof.label">Transfer</dt><dd data-i18n="project.java.case.proof.value">Dieses Fundament trägt heutige Oracle- und JavaScript-Arbeit auch außerhalb klassischer Java-Projekte.</dd></div>
+            </dl>
+          </div>
           <ul class="tag-list" aria-label="Technologien">
             <li>Java</li>
             <li>Spring</li>

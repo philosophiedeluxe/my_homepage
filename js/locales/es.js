@@ -344,7 +344,25 @@ const es = {
   "cookie.necessaryOnly": "Solo necesarias",
   "cookie.privacy": "Ver privacidad",
   "cookie.settings": "Configuración de cookies",
-  "cookie.optionsLabel": "Categorías de cookies"
+  "cookie.optionsLabel": "Categorías de cookies",
+  "project.home.case.context.label": "Contexto",
+  "project.home.case.context.value": "El portfolio debía conectar posicionamiento, currículum y forma de trabajo sin framework ni dependencias externas.",
+  "project.home.case.decision.label": "Decisión",
+  "project.home.case.decision.value": "HTML estático, módulos nativos del navegador, metadatos estructurados y una app shell con capacidad offline.",
+  "project.home.case.proof.label": "Evidencia",
+  "project.home.case.proof.value": "Idiomas, PWA, currículum imprimible, SEO y controles de calidad son trazables en el código fuente.",
+  "project.apex.case.context.label": "Foco",
+  "project.apex.case.context.value": "Interfaces cercanas al negocio, modelos de datos limpios y pasos de proceso trazables.",
+  "project.apex.case.decision.label": "Enfoque",
+  "project.apex.case.decision.value": "Modelar UI, validación, lógica PL/SQL e integración REST como un flujo conectado.",
+  "project.apex.case.proof.label": "Alcance",
+  "project.apex.case.proof.value": "Los detalles productivos son confidenciales; los principios mostrados representan la contribución profesional.",
+  "project.java.case.context.label": "Base",
+  "project.java.case.context.value": "Formación y práctica en modelado orientado a objetos, datos relacionales y procesos de entrega en equipo.",
+  "project.java.case.decision.label": "Principio",
+  "project.java.case.decision.value": "Separar lógica de dominio, acceso a datos e interfaces y entregar de forma trazable mediante Git y tickets.",
+  "project.java.case.proof.label": "Transferencia",
+  "project.java.case.proof.value": "Esta base sostiene el trabajo actual con Oracle y JavaScript más allá de proyectos Java convencionales."
 };
 
 export default es;
