@@ -642,7 +642,7 @@ export function setupProgressiveWebApp({ root, finePointer, defaultLang, localiz
 
     if (!status.supported || !status.secure) return;
 
-    window.addEventListener("load", () => {
+    function registerServiceWorker() {
       navigator.serviceWorker.register(PWA_SERVICE_WORKER_URL, { scope: "./" })
         .then((registration) => {
           const inspectRegistration = () => {
@@ -674,7 +674,13 @@ export function setupProgressiveWebApp({ root, finePointer, defaultLang, localiz
         .catch(() => {
           // PWA support is progressive: the portfolio remains fully usable without it.
         });
-    }, { once: true });
+    }
+
+    if (document.readyState === "complete") {
+      registerServiceWorker();
+    } else {
+      window.addEventListener("load", registerServiceWorker, { once: true });
+    }
 
     navigator.serviceWorker.addEventListener("controllerchange", () => {
       if (!reloadingForUpdate) return;

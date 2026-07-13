@@ -1,8 +1,8 @@
-import { DEFAULT_LANG, SUPPORTED_LANGS, getLocale } from "./js/i18n.js";
-import { setupProgressiveWebApp } from "./js/pwa.js";
-import { setupDeveloperOperatingLayer } from "./js/recruiter-mode.js";
-import { setupAccessibility } from "./js/accessibility.js";
-import { scheduleNonCriticalWork, setupPerformanceGuards } from "./js/performance.js";
+import { DEFAULT_LANG, SUPPORTED_LANGS, getLocale } from "./js/i18n.js?v=20260713-quality3";
+import { setupProgressiveWebApp } from "./js/pwa.js?v=20260713-quality3";
+import { setupDeveloperOperatingLayer } from "./js/recruiter-mode.js?v=20260713-quality3";
+import { setupAccessibility } from "./js/accessibility.js?v=20260713-quality3";
+import { scheduleNonCriticalWork, setupPerformanceGuards } from "./js/performance.js?v=20260713-quality3";
 
 (async function () {
   const translations = {};
