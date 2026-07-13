@@ -213,6 +213,7 @@ if ($Pwa) {
   }
 
   Write-Host "Checking PWA navigation targets..."
+  Assert-Check ($indexContent -match 'class=["'']trace-entry["''][^>]*data-system-trace-trigger') "PWA audit failed: the desktop trace trigger is missing from the hero."
   foreach ($action in @(
     @{ Navigation = "trace"; Event = "pk:run-system-trace" },
     @{ Navigation = "command"; Event = "pk:open-command-palette" }
