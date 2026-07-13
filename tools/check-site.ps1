@@ -179,6 +179,53 @@ if ($Pwa) {
     Assert-Check ($serviceWorker -match [regex]::Escape($needle)) "PWA audit failed: service worker does not contain '$needle'."
   }
 
+  Write-Host "Checking PWA update version chain..."
+  $indexContent = Get-Content -Raw -LiteralPath (Join-Path $Root "index.html")
+  $appVersionMatch = [regex]::Match($indexContent, 'app\.js\?v=([^"''\s]+)')
+  Assert-Check $appVersionMatch.Success "PWA audit failed: index.html must version app.js."
+  $appVersion = $appVersionMatch.Groups[1].Value
+
+  $appEntry = [string]::Concat("./app.js?v=", $appVersion)
+  Assert-Check ($serviceWorker -match [regex]::Escape($appEntry)) "PWA audit failed: service worker precache must use the current app.js version."
+
+  $styleEntry = [string]::Concat("./style.css?v=", $appVersion)
+  Assert-Check ($serviceWorker -match [regex]::Escape($styleEntry)) "PWA audit failed: service worker precache must use the current stylesheet version."
+  $styleSource = Get-Content -Raw -LiteralPath (Join-Path $Root "style.css")
+  foreach ($stylesheet in @("base.css", "components.css", "features.css", "responsive-print.css")) {
+    $styleVersion = [string]::Concat($stylesheet, "?v=", $appVersion)
+    Assert-Check ($styleSource -match [regex]::Escape($styleVersion)) "PWA audit failed: style.css import for $stylesheet must use the current version."
+    Assert-Check ($serviceWorker -match [regex]::Escape([string]::Concat("./styles/", $styleVersion))) "PWA audit failed: service worker precache must use the current version of $stylesheet."
+  }
+
+  $appSource = Get-Content -Raw -LiteralPath (Join-Path $Root "app.js")
+  $pwaSource = Get-Content -Raw -LiteralPath (Join-Path $Root "js\pwa.js")
+  Assert-Check ($appSource -match 'setupProgressiveWebApp\([^\)]*serviceWorkerUrl:\s*PWA_SERVICE_WORKER_URL') "PWA audit failed: app.js must pass the service worker URL to the PWA runtime."
+  Assert-Check ($pwaSource -match 'serviceWorkerUrl\s*=\s*"\./sw\.js"') "PWA audit failed: PWA runtime must define a service worker URL fallback."
+  foreach ($moduleName in @("i18n.js", "pwa.js", "recruiter-mode.js", "accessibility.js", "performance.js")) {
+    $moduleVersion = [string]::Concat($moduleName, "?v=", $appVersion)
+    Assert-Check ($appSource -match [regex]::Escape($moduleVersion)) "PWA audit failed: app.js import for $moduleName must use the current version."
+  }
+
+  $i18nSource = Get-Content -Raw -LiteralPath (Join-Path $Root "js\i18n.js")
+  foreach ($lang in @("de", "en", "es", "ja")) {
+    $localeVersion = [string]::Concat("locales/", $lang, ".js?v=", $appVersion)
+    Assert-Check ($i18nSource -match [regex]::Escape($localeVersion)) "PWA audit failed: locale $lang must use the current version."
+  }
+
+  Write-Host "Checking PWA navigation targets..."
+  foreach ($href in [regex]::Matches($pwaSource, 'data-pwa-nav[^>]+href="([^"]+)"')) {
+    $target = $href.Groups[1].Value
+    $parts = $target -split '#', 2
+    $page = if ([string]::IsNullOrWhiteSpace($parts[0])) { "index.html" } else { $parts[0] }
+    Assert-Check (Test-Path -LiteralPath (Join-Path $Root $page)) "PWA audit failed: navigation target is missing: $target"
+
+    if ($parts.Count -eq 2 -and -not [string]::IsNullOrWhiteSpace($parts[1])) {
+      $pageContent = Get-Content -Raw -LiteralPath (Join-Path $Root $page)
+      $idPattern = [string]::Concat('id=["'']', [regex]::Escape($parts[1]), '["'']')
+      Assert-Check ($pageContent -match $idPattern) "PWA audit failed: navigation anchor is missing: $target"
+    }
+  }
+
   foreach ($page in @("index.html", "vita.html", "signals.html", "impressum.html", "datenschutz.html", "offline.html")) {
     $path = Join-Path $Root $page
     Assert-Check (Test-Path -LiteralPath $path) "PWA audit failed: $page is missing."

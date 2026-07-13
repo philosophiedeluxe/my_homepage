@@ -1,8 +1,8 @@
-import { DEFAULT_LANG, SUPPORTED_LANGS, getLocale } from "./js/i18n.js?v=20260713-quality3";
-import { setupProgressiveWebApp } from "./js/pwa.js?v=20260713-quality3";
-import { setupDeveloperOperatingLayer } from "./js/recruiter-mode.js?v=20260713-quality3";
-import { setupAccessibility } from "./js/accessibility.js?v=20260713-quality3";
-import { scheduleNonCriticalWork, setupPerformanceGuards } from "./js/performance.js?v=20260713-quality3";
+import { DEFAULT_LANG, SUPPORTED_LANGS, getLocale } from "./js/i18n.js?v=20260713-quality5";
+import { setupProgressiveWebApp } from "./js/pwa.js?v=20260713-quality5";
+import { setupDeveloperOperatingLayer } from "./js/recruiter-mode.js?v=20260713-quality5";
+import { setupAccessibility } from "./js/accessibility.js?v=20260713-quality5";
+import { scheduleNonCriticalWork, setupPerformanceGuards } from "./js/performance.js?v=20260713-quality5";
 
 (async function () {
   const translations = {};
@@ -210,7 +210,14 @@ import { scheduleNonCriticalWork, setupPerformanceGuards } from "./js/performanc
 
   async function ensureTranslations(lang) {
     const cleanLang = sanitizeLang(lang);
-    if (!translations[cleanLang]) translations[cleanLang] = await getLocale(cleanLang);
+    if (!translations[cleanLang]) {
+      try {
+        translations[cleanLang] = await getLocale(cleanLang);
+      } catch (error) {
+        // Navigation and local HTML must remain usable when an optional locale is unavailable offline.
+        translations[cleanLang] = translations[DEFAULT_LANG] || {};
+      }
+    }
     return translations[cleanLang];
   }
 
@@ -2759,7 +2766,7 @@ shortcut: ctrl + alt + d</pre>
   setupHeroCursor();
   setupPortfolioStartup(shouldRunPortfolioBoot);
   setupHeroAvatarEgg();
-  setupProgressiveWebApp({ root, finePointer, defaultLang: DEFAULT_LANG, localizedPageHref });
+  setupProgressiveWebApp({ root, finePointer, defaultLang: DEFAULT_LANG, localizedPageHref, serviceWorkerUrl: PWA_SERVICE_WORKER_URL });
   setupFirstTimeGuide(shouldRunPortfolioBoot);
   setupTiltCards();
   setupActiveNavigation();

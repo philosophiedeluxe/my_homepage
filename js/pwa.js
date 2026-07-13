@@ -1,5 +1,5 @@
 /** Progressive Web App runtime and install/update controls. */
-export function setupProgressiveWebApp({ root, finePointer, defaultLang, localizedPageHref }) {
+export function setupProgressiveWebApp({ root, finePointer, defaultLang, localizedPageHref, serviceWorkerUrl = "./sw.js" }) {
   const DEFAULT_LANG = defaultLang;
     const isLocalhost = ["localhost", "127.0.0.1", "[::1]"].includes(window.location.hostname);
     const secureRuntime = window.location.protocol === "https:" || isLocalhost;
@@ -48,10 +48,10 @@ export function setupProgressiveWebApp({ root, finePointer, defaultLang, localiz
         diagnostic: "Offline Diagnose",
         appNav: "NAV",
         openProfile: "Profil",
+        openProjects: "Projekte",
         openVita: "Vita",
         openStack: "Stack",
-        openCommand: "Command",
-        openTrace: "Trace",
+        openContact: "Kontakt",
         cachedProfile: "cached profile available",
         cachedVita: "vita cached",
         cachedSignals: "signals cached",
@@ -85,10 +85,10 @@ export function setupProgressiveWebApp({ root, finePointer, defaultLang, localiz
         diagnostic: "Offline diagnostic",
         appNav: "NAV",
         openProfile: "Profile",
+        openProjects: "Projects",
         openVita: "Resume",
         openStack: "Stack",
-        openCommand: "Command",
-        openTrace: "Trace",
+        openContact: "Contact",
         cachedProfile: "cached profile available",
         cachedVita: "resume cached",
         cachedSignals: "signals cached",
@@ -122,10 +122,10 @@ export function setupProgressiveWebApp({ root, finePointer, defaultLang, localiz
         diagnostic: "Diagnostico offline",
         appNav: "NAV",
         openProfile: "Perfil",
+        openProjects: "Proyectos",
         openVita: "Vita",
         openStack: "Stack",
-        openCommand: "Command",
-        openTrace: "Trace",
+        openContact: "Contacto",
         cachedProfile: "cached profile available",
         cachedVita: "vita cached",
         cachedSignals: "signals cached",
@@ -159,10 +159,10 @@ export function setupProgressiveWebApp({ root, finePointer, defaultLang, localiz
         diagnostic: "Offline diagnostic",
         appNav: "NAV",
         openProfile: "Profile",
+        openProjects: "プロジェクト",
         openVita: "Vita",
         openStack: "Stack",
-        openCommand: "Command",
-        openTrace: "Trace",
+        openContact: "連絡",
         cachedProfile: "cached profile available",
         cachedVita: "vita cached",
         cachedSignals: "signals cached",
@@ -225,10 +225,10 @@ export function setupProgressiveWebApp({ root, finePointer, defaultLang, localiz
         <b data-pwa-nav-title></b>
       </button>
       <a href="./index.html#profil" data-pwa-nav="profile"><span>01</span><b></b></a>
-      <a href="./vita.html" data-pwa-nav="vita"><span>02</span><b></b></a>
-      <a href="./index.html#stack" data-pwa-nav="stack"><span>03</span><b></b></a>
-      <button type="button" data-pwa-nav="trace"><span>04</span><b></b></button>
-      <button type="button" data-pwa-nav="command"><span>05</span><b></b></button>
+      <a href="./index.html#projekte" data-pwa-nav="projects"><span>02</span><b></b></a>
+      <a href="./vita.html" data-pwa-nav="vita"><span>03</span><b></b></a>
+      <a href="./index.html#stack" data-pwa-nav="stack"><span>04</span><b></b></a>
+      <a href="./index.html#kontakt" data-pwa-nav="contact"><span>05</span><b></b></a>
     `;
     document.body.appendChild(bottomBar);
     let bottomNavExpanded = false;
@@ -300,10 +300,10 @@ export function setupProgressiveWebApp({ root, finePointer, defaultLang, localiz
       ].filter(Boolean);
       appShell.querySelector("[data-pwa-app-chips]").innerHTML = chips.map((chip) => `<span>${chip}</span>`).join("");
       bottomBar.querySelector("[data-pwa-nav='profile'] b").textContent = text.openProfile;
+      bottomBar.querySelector("[data-pwa-nav='projects'] b").textContent = text.openProjects;
       bottomBar.querySelector("[data-pwa-nav='vita'] b").textContent = text.openVita;
       bottomBar.querySelector("[data-pwa-nav='stack'] b").textContent = text.openStack;
-      bottomBar.querySelector("[data-pwa-nav='trace'] b").textContent = text.openTrace;
-      bottomBar.querySelector("[data-pwa-nav='command'] b").textContent = text.openCommand;
+      bottomBar.querySelector("[data-pwa-nav='contact'] b").textContent = text.openContact;
       bottomBar.querySelector("[data-pwa-nav-title]").textContent = text.appNav;
       bottomBar.classList.toggle("is-offline", !navigator.onLine);
       appShell.classList.toggle("is-offline", !navigator.onLine);
@@ -549,12 +549,6 @@ export function setupProgressiveWebApp({ root, finePointer, defaultLang, localiz
       }
       bottomNavPointerStart = 0;
     }, { passive: true });
-    bottomBar.querySelector("[data-pwa-nav='trace']").addEventListener("click", () => {
-      document.dispatchEvent(new CustomEvent("pk:run-system-trace"));
-    });
-    bottomBar.querySelector("[data-pwa-nav='command']").addEventListener("click", () => {
-      document.dispatchEvent(new CustomEvent("pk:open-command-palette"));
-    });
     document.addEventListener("pk:lang-change", () => renderRuntimePanel(runtime.classList.contains("is-visible")));
     document.addEventListener("pk:pwa-runtime-open", () => renderRuntimePanel(true));
     document.addEventListener("pk:pwa-cache-check", () => {
@@ -643,7 +637,7 @@ export function setupProgressiveWebApp({ root, finePointer, defaultLang, localiz
     if (!status.supported || !status.secure) return;
 
     function registerServiceWorker() {
-      navigator.serviceWorker.register(PWA_SERVICE_WORKER_URL, { scope: "./" })
+      navigator.serviceWorker.register(serviceWorkerUrl, { scope: "./" })
         .then((registration) => {
           const inspectRegistration = () => {
             status.controlled = Boolean(navigator.serviceWorker.controller);
@@ -669,7 +663,12 @@ export function setupProgressiveWebApp({ root, finePointer, defaultLang, localiz
               if (worker.state === "installed" && navigator.serviceWorker.controller) showUpdateAvailable(worker);
             });
           });
-          if (!("connection" in navigator && navigator.connection?.saveData)) registration.update();
+          const requestUpdate = () => registration.update().catch(() => null);
+          requestUpdate();
+          window.setInterval(requestUpdate, 30 * 60 * 1000);
+          document.addEventListener("visibilitychange", () => {
+            if (!document.hidden) requestUpdate();
+          }, { passive: true });
         })
         .catch(() => {
           // PWA support is progressive: the portfolio remains fully usable without it.
