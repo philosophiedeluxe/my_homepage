@@ -1,8 +1,8 @@
-import { DEFAULT_LANG, SUPPORTED_LANGS, getLocale } from "./js/i18n.js?v=20260713-quality9";
-import { setupProgressiveWebApp } from "./js/pwa.js?v=20260713-quality9";
-import { setupDeveloperOperatingLayer } from "./js/recruiter-mode.js?v=20260713-quality9";
-import { setupAccessibility } from "./js/accessibility.js?v=20260713-quality9";
-import { scheduleNonCriticalWork, setupPerformanceGuards } from "./js/performance.js?v=20260713-quality9";
+import { DEFAULT_LANG, SUPPORTED_LANGS, getLocale } from "./js/i18n.js?v=20260713-quality10";
+import { setupProgressiveWebApp } from "./js/pwa.js?v=20260713-quality10";
+import { setupDeveloperOperatingLayer } from "./js/recruiter-mode.js?v=20260713-quality10";
+import { setupAccessibility } from "./js/accessibility.js?v=20260713-quality10";
+import { scheduleNonCriticalWork, setupPerformanceGuards } from "./js/performance.js?v=20260713-quality10";
 
 (async function () {
   const translations = {};
@@ -765,8 +765,12 @@ import { scheduleNonCriticalWork, setupPerformanceGuards } from "./js/performanc
     root.classList.add("has-hero-cursor");
 
     let frame = 0;
+    let contextFrame = 0;
     let nextX = -80;
     let nextY = -80;
+    let pointerX = -80;
+    let pointerY = -80;
+    let pointerTarget = null;
     let idleTimer = 0;
     let forcedCodeTimer = 0;
     let lastForcedClass = "";
@@ -979,8 +983,38 @@ import { scheduleNonCriticalWork, setupPerformanceGuards } from "./js/performanc
       cursor.classList.remove("is-visible", "is-action", "is-text", "is-clicking", "is-idle", "is-keyword");
       currentKeyword = "";
       currentKeywordClass = "";
+      pointerTarget = null;
+      if (contextFrame) window.cancelAnimationFrame(contextFrame);
+      contextFrame = 0;
       window.clearTimeout(idleTimer);
       if (!forcedCodeTimer) setCursorCode("</>");
+    }
+
+    function updateCursorContext() {
+      contextFrame = 0;
+      if (!pointerTarget) return;
+      const targetElement = elementFromEventTarget(pointerTarget);
+      const textControl = targetElement?.closest(textControlSelector);
+      const actionElement = textControl ? null : targetElement?.closest(actionSelector);
+      const detectedTextInfo = textControl
+        ? { isText: true, keyword: "", keywordClass: "" }
+        : textInfoAtPoint(pointerX, pointerY, pointerTarget);
+      const textInfo = actionElement
+        ? { ...detectedTextInfo, isText: false }
+        : detectedTextInfo;
+
+      currentKeyword = textInfo.keyword;
+      currentKeywordClass = textInfo.keywordClass || "";
+      nextX = pointerX - (textInfo.isText ? 7 : 3);
+      nextY = pointerY - (textInfo.isText ? 15 : 2);
+      cursor.classList.toggle("is-action", Boolean(actionElement));
+      cursor.classList.toggle("is-text", Boolean(textInfo.isText));
+      cursor.classList.toggle("is-keyword", Boolean(currentKeyword) && !forcedCodeTimer && !cursor.classList.contains("is-idle"));
+      if (!forcedCodeTimer && !cursor.classList.contains("is-idle")) {
+        setCursorCode(currentKeyword || "</>", currentKeyword ? currentKeywordClass || "is-keyword" : "");
+      }
+      resetIdleTimer();
+      if (!frame) frame = window.requestAnimationFrame(renderCursor);
     }
 
     document.addEventListener("pk:cursor-code", (event) => {
@@ -999,30 +1033,14 @@ import { scheduleNonCriticalWork, setupPerformanceGuards } from "./js/performanc
     document.addEventListener("pointermove", (event) => {
       if (event.pointerType === "touch") return;
 
-      const targetElement = elementFromEventTarget(event.target);
-      const textControl = targetElement?.closest(textControlSelector);
-      const actionElement = textControl ? null : targetElement?.closest(actionSelector);
-      const detectedTextInfo = textControl
-        ? { isText: true, keyword: "", keywordClass: "" }
-        : textInfoAtPoint(event.clientX, event.clientY, event.target);
-      const textInfo = actionElement
-        ? { ...detectedTextInfo, isText: false }
-        : detectedTextInfo;
-      const isTextCursor = Boolean(textInfo.isText);
-      currentKeyword = textInfo.keyword;
-      currentKeywordClass = textInfo.keywordClass || "";
-
-      nextX = event.clientX - (isTextCursor ? 7 : 3);
-      nextY = event.clientY - (isTextCursor ? 15 : 2);
+      pointerX = event.clientX;
+      pointerY = event.clientY;
+      pointerTarget = event.target;
+      nextX = pointerX - 3;
+      nextY = pointerY - 2;
       cursor.classList.add("is-visible");
-      cursor.classList.toggle("is-action", Boolean(actionElement));
-      cursor.classList.toggle("is-text", isTextCursor);
-      cursor.classList.toggle("is-keyword", Boolean(currentKeyword) && !forcedCodeTimer && !cursor.classList.contains("is-idle"));
-      if (!forcedCodeTimer && !cursor.classList.contains("is-idle")) {
-        setCursorCode(currentKeyword || "</>", currentKeyword ? currentKeywordClass || "is-keyword" : "");
-      }
-      resetIdleTimer();
       if (!frame) frame = window.requestAnimationFrame(renderCursor);
+      if (!contextFrame) contextFrame = window.requestAnimationFrame(updateCursorContext);
     }, { passive: true });
 
     document.addEventListener("pointerleave", hideCursor);
