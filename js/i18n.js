@@ -2,10 +2,10 @@ export const SUPPORTED_LANGS = ["de", "en", "es", "ja"];
 export const DEFAULT_LANG = "de";
 
 const localeLoaders = {
-  de: () => import("./locales/de.js?v=20260713-quality13"),
-  en: () => import("./locales/en.js?v=20260713-quality13"),
-  es: () => import("./locales/es.js?v=20260713-quality13"),
-  ja: () => import("./locales/ja.js?v=20260713-quality13")
+  de: () => import("./locales/de.js?v=20260713-quality14"),
+  en: () => import("./locales/en.js?v=20260713-quality14"),
+  es: () => import("./locales/es.js?v=20260713-quality14"),
+  ja: () => import("./locales/ja.js?v=20260713-quality14")
 };
 
 const localeCache = new Map();
