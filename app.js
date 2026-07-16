@@ -1,8 +1,8 @@
-import { DEFAULT_LANG, SUPPORTED_LANGS, getLocale } from "./js/i18n.js?v=20260713-quality12";
-import { setupProgressiveWebApp } from "./js/pwa.js?v=20260713-quality12";
-import { setupDeveloperOperatingLayer } from "./js/recruiter-mode.js?v=20260713-quality12";
-import { setupAccessibility } from "./js/accessibility.js?v=20260713-quality12";
-import { scheduleNonCriticalWork, setupPerformanceGuards } from "./js/performance.js?v=20260713-quality12";
+import { DEFAULT_LANG, SUPPORTED_LANGS, getLocale } from "./js/i18n.js?v=20260713-quality13";
+import { setupProgressiveWebApp } from "./js/pwa.js?v=20260713-quality13";
+import { setupDeveloperOperatingLayer } from "./js/recruiter-mode.js?v=20260713-quality13";
+import { setupAccessibility } from "./js/accessibility.js?v=20260713-quality13";
+import { scheduleNonCriticalWork, setupPerformanceGuards } from "./js/performance.js?v=20260713-quality13";
 
 (async function () {
   const translations = {};
@@ -1013,8 +1013,9 @@ import { scheduleNonCriticalWork, setupPerformanceGuards } from "./js/performanc
 
       currentKeyword = textInfo.keyword;
       currentKeywordClass = textInfo.keywordClass || "";
-      nextX = pointerX - (textInfo.isText ? 7 : 3);
-      nextY = pointerY - (textInfo.isText ? 15 : 2);
+      // Keep Firefox anchored while text detection changes at glyph boundaries.
+      nextX = pointerX - (isFirefox ? 3 : (textInfo.isText ? 7 : 3));
+      nextY = pointerY - (isFirefox ? 2 : (textInfo.isText ? 15 : 2));
       cursor.classList.toggle("is-action", Boolean(actionElement));
       cursor.classList.toggle("is-text", Boolean(textInfo.isText));
       cursor.classList.toggle("is-keyword", Boolean(currentKeyword) && !forcedCodeTimer && !cursor.classList.contains("is-idle"));
