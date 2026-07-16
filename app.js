@@ -1,8 +1,8 @@
-import { DEFAULT_LANG, SUPPORTED_LANGS, getLocale } from "./js/i18n.js?v=20260713-quality10";
-import { setupProgressiveWebApp } from "./js/pwa.js?v=20260713-quality10";
-import { setupDeveloperOperatingLayer } from "./js/recruiter-mode.js?v=20260713-quality10";
-import { setupAccessibility } from "./js/accessibility.js?v=20260713-quality10";
-import { scheduleNonCriticalWork, setupPerformanceGuards } from "./js/performance.js?v=20260713-quality10";
+import { DEFAULT_LANG, SUPPORTED_LANGS, getLocale } from "./js/i18n.js?v=20260713-quality11";
+import { setupProgressiveWebApp } from "./js/pwa.js?v=20260713-quality11";
+import { setupDeveloperOperatingLayer } from "./js/recruiter-mode.js?v=20260713-quality11";
+import { setupAccessibility } from "./js/accessibility.js?v=20260713-quality11";
+import { scheduleNonCriticalWork, setupPerformanceGuards } from "./js/performance.js?v=20260713-quality11";
 
 (async function () {
   const translations = {};
@@ -998,7 +998,10 @@ import { scheduleNonCriticalWork, setupPerformanceGuards } from "./js/performanc
       const actionElement = textControl ? null : targetElement?.closest(actionSelector);
       const detectedTextInfo = textControl
         ? { isText: true, keyword: "", keywordClass: "" }
-        : textInfoAtPoint(pointerX, pointerY, pointerTarget);
+        // Firefox caret ranges fluctuate at text boundaries and make the cursor jump between modes.
+        : isFirefox
+          ? { isText: false, keyword: "", keywordClass: "" }
+          : textInfoAtPoint(pointerX, pointerY, pointerTarget);
       const textInfo = actionElement
         ? { ...detectedTextInfo, isText: false }
         : detectedTextInfo;
