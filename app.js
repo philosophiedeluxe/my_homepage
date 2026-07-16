@@ -1,8 +1,8 @@
-import { DEFAULT_LANG, SUPPORTED_LANGS, getLocale } from "./js/i18n.js?v=20260713-quality11";
-import { setupProgressiveWebApp } from "./js/pwa.js?v=20260713-quality11";
-import { setupDeveloperOperatingLayer } from "./js/recruiter-mode.js?v=20260713-quality11";
-import { setupAccessibility } from "./js/accessibility.js?v=20260713-quality11";
-import { scheduleNonCriticalWork, setupPerformanceGuards } from "./js/performance.js?v=20260713-quality11";
+import { DEFAULT_LANG, SUPPORTED_LANGS, getLocale } from "./js/i18n.js?v=20260713-quality12";
+import { setupProgressiveWebApp } from "./js/pwa.js?v=20260713-quality12";
+import { setupDeveloperOperatingLayer } from "./js/recruiter-mode.js?v=20260713-quality12";
+import { setupAccessibility } from "./js/accessibility.js?v=20260713-quality12";
+import { scheduleNonCriticalWork, setupPerformanceGuards } from "./js/performance.js?v=20260713-quality12";
 
 (async function () {
   const translations = {};
@@ -771,6 +771,7 @@ import { scheduleNonCriticalWork, setupPerformanceGuards } from "./js/performanc
     let pointerX = -80;
     let pointerY = -80;
     let pointerTarget = null;
+    let firefoxTextModeUntil = 0;
     let idleTimer = 0;
     let forcedCodeTimer = 0;
     let lastForcedClass = "";
@@ -984,6 +985,7 @@ import { scheduleNonCriticalWork, setupPerformanceGuards } from "./js/performanc
       currentKeyword = "";
       currentKeywordClass = "";
       pointerTarget = null;
+      firefoxTextModeUntil = 0;
       if (contextFrame) window.cancelAnimationFrame(contextFrame);
       contextFrame = 0;
       window.clearTimeout(idleTimer);
@@ -996,12 +998,15 @@ import { scheduleNonCriticalWork, setupPerformanceGuards } from "./js/performanc
       const targetElement = elementFromEventTarget(pointerTarget);
       const textControl = targetElement?.closest(textControlSelector);
       const actionElement = textControl ? null : targetElement?.closest(actionSelector);
-      const detectedTextInfo = textControl
+      let detectedTextInfo = textControl
         ? { isText: true, keyword: "", keywordClass: "" }
-        // Firefox caret ranges fluctuate at text boundaries and make the cursor jump between modes.
-        : isFirefox
-          ? { isText: false, keyword: "", keywordClass: "" }
-          : textInfoAtPoint(pointerX, pointerY, pointerTarget);
+        : textInfoAtPoint(pointerX, pointerY, pointerTarget);
+      const now = performance.now();
+      if (isFirefox && detectedTextInfo.isText) {
+        firefoxTextModeUntil = now + 96;
+      } else if (isFirefox && !actionElement && now < firefoxTextModeUntil) {
+        detectedTextInfo = { ...detectedTextInfo, isText: true };
+      }
       const textInfo = actionElement
         ? { ...detectedTextInfo, isText: false }
         : detectedTextInfo;

@@ -89,7 +89,7 @@ foreach ($file in $jsFiles) {
 
 Write-Host "Checking custom cursor scheduling..."
 $appSourceForCursor = Get-Content -Raw -LiteralPath (Join-Path $Root "app.js")
-foreach ($cursorNeedle in @("contextFrame", "updateCursorContext", "requestAnimationFrame(updateCursorContext)", "isFirefox")) {
+foreach ($cursorNeedle in @("contextFrame", "updateCursorContext", "requestAnimationFrame(updateCursorContext)", "isFirefox", "firefoxTextModeUntil")) {
   Assert-Check ($appSourceForCursor -match [regex]::Escape($cursorNeedle)) "Custom cursor audit failed: missing '$cursorNeedle'."
 }
 
