@@ -2,14 +2,14 @@
 
 Dieses Repository enthält die Custom-CSS-Dateien für die optische Anpassung der Jellyfin-Oberfläche.
 
-Aktueller stabiler Stand: **v16**
+Aktueller stabiler Stand: **v17**
 
 ## Aktueller Jellyfin-Aufruf
 
 In Jellyfin wird nur noch eine zentrale CSS-Datei geladen:
 
 ```css
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/jellyfin_custom.css?v=16');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/jellyfin_custom.css?v=17');
 ```
 
 Die Datei `jellyfin_custom.css` ist der zentrale Einstiegspunkt. Alle weiteren CSS-Dateien werden dort in der kontrollierten Reihenfolge eingebunden.
@@ -126,6 +126,23 @@ Grund:
 `fixes.css` sollte nicht erneut eingebunden werden.
 
 ## Entwicklungshistorie
+
+### v17 – Modern Refinement
+
+Basis: v16
+
+- neue finale Schicht `modern_refinement.css`
+- ruhigeres, kontrastreicheres Oberflächensystem für Header, Drawer, Dialoge und Listen
+- klar abgegrenzte Eingabefelder mit fokussiertem Akzentzustand
+- einheitlichere Buttons und Bibliothekskacheln ohne Neon-Glow
+- Cards erhalten eine zurückhaltende Tiefenstaffelung; Poster, Grid und responsive Maße bleiben unverändert
+- Cache-Busting aller Imports auf `v=17`
+
+Jellyfin-Aufruf:
+
+```css
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/jellyfin_custom.css?v=17');
+```
 
 ### v9 – Clean ohne `fixes.css`
 
@@ -336,6 +353,7 @@ Server_CSS/
 ├── effects_cinematic.css
 ├── hover_clean.css
 ├── home_spacing.css
+├── modern_refinement.css
 └── README.md
 ```
 
