@@ -2,14 +2,14 @@
 
 Dieses Repository enthält die Custom-CSS-Dateien für die optische Anpassung der Jellyfin-Oberfläche.
 
-Aktueller stabiler Stand: **v28**
+Aktueller stabiler Stand: **v30**
 
 ## Aktueller Jellyfin-Aufruf
 
 In Jellyfin wird nur noch eine zentrale CSS-Datei geladen:
 
 ```css
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/jellyfin_custom.css?v=28');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/jellyfin_custom.css?v=30');
 ```
 
 Die Datei `jellyfin_custom.css` ist der zentrale Einstiegspunkt. Alle weiteren CSS-Dateien werden dort in der kontrollierten Reihenfolge eingebunden.
@@ -126,6 +126,33 @@ Grund:
 `fixes.css` sollte nicht erneut eingebunden werden.
 
 ## Entwicklungshistorie
+
+### v30 – Chapter Footer Correction
+
+Basis: v29
+
+- sichtbares Kapitel-Label korrekt über `.chapterThumb .innerCardFooter` adressiert
+- Rundung dieses tatsächlichen Beschriftungselements auf 7 px reduziert
+
+Jellyfin-Aufruf:
+
+```css
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/jellyfin_custom.css?v=30');
+```
+
+### v29 – Cast Radius and Chapter Correction
+
+Basis: v28
+
+- Personenbilder behalten wieder ihre vollständige, gleichmäßige Rundung
+- Breitenangleichung von Bild und Text bleibt erhalten
+- Kapitel-Schaltfläche und sichtbare Textflächen mit hoher Spezifität auf 7 px Rundung gesetzt
+
+Jellyfin-Aufruf:
+
+```css
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/jellyfin_custom.css?v=29');
+```
 
 ### v28 – Cast and Chapter Alignment
 

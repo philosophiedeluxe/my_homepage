@@ -6,9 +6,17 @@
 }
 
 /* Chapters: labels are information tags, not oversized pills. */
-.chapterThumbTextContainer,
-.chapterThumbText {
-  border-radius: 6px !important;
+html body #itemDetailPage .chapterThumb .chapterThumbTextContainer,
+html body #itemDetailPage .chapterThumb .chapterThumbText,
+html body #itemDetailPage .chapterThumb .chapterThumbTextContainer::before,
+html body #itemDetailPage .chapterThumb .chapterThumbText::before {
+  border-radius: 7px !important;
+  overflow: hidden !important;
+}
+
+/* Jellyfin's visible chapter label is rendered by .innerCardFooter. */
+html body #itemDetailPage .chapterThumb .innerCardFooter {
+  border-radius: 7px !important;
   overflow: hidden !important;
 }
 
@@ -64,15 +72,15 @@
 }
 
 #itemDetailPage .personCard > .cardBox {
-  overflow: hidden !important;
+  overflow: visible !important;
 }
 
 #itemDetailPage .personCard .cardImageContainer {
-  border-radius: var(--pkdetail-radius) var(--pkdetail-radius) 0 0 !important;
+  border-radius: var(--rounding, 12px) !important;
 }
 
 #itemDetailPage .personCard .cardContent {
-  border-radius: 0 0 var(--pkdetail-radius) var(--pkdetail-radius) !important;
+  border-radius: var(--rounding, 12px) !important;
 }
 
 @media all and (max-width: 50em) {

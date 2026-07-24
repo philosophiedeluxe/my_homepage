@@ -1,6 +1,6 @@
 /*
   Jellyfin Custom CSS - zentraler Einstieg
-  Stand: v28 cast and chapter alignment
+  Stand: v30 chapter footer correction
   Zweck: Ein einziger Jellyfin-Aufruf, ohne fixes.css, ohne zusätzliche Layoutkorrekturen und mit reduzierten Hover-Effekten und leicht erhöhtem Abstand über Abschnittstiteln.
   Regel: spezialisierte optische Schichten werden am Ende importiert.
 */
@@ -29,7 +29,7 @@
 @import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/system_refinement.css?v=19');
 @import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/form_refinement.css?v=24');
 @import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/media_refinement.css?v=25');
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/precision_refinement.css?v=28');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/precision_refinement.css?v=30');
 
 
 /*Style backdrop*/
