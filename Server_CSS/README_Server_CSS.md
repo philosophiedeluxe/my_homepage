@@ -2,14 +2,14 @@
 
 Dieses Repository enthält die Custom-CSS-Dateien für die optische Anpassung der Jellyfin-Oberfläche.
 
-Aktueller stabiler Stand: **v18**
+Aktueller stabiler Stand: **v19**
 
 ## Aktueller Jellyfin-Aufruf
 
 In Jellyfin wird nur noch eine zentrale CSS-Datei geladen:
 
 ```css
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/jellyfin_custom.css?v=18');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/jellyfin_custom.css?v=19');
 ```
 
 Die Datei `jellyfin_custom.css` ist der zentrale Einstiegspunkt. Alle weiteren CSS-Dateien werden dort in der kontrollierten Reihenfolge eingebunden.
@@ -126,6 +126,25 @@ Grund:
 `fixes.css` sollte nicht erneut eingebunden werden.
 
 ## Entwicklungshistorie
+
+### v19 – System Refinement
+
+Basis: v18
+
+- neue finale Schicht `system_refinement.css`
+- Metadaten auf Detailseiten als scanbare Chips
+- kuratiertere Startseiten-Abschnitte mit klarerer Hierarchie
+- einheitliche Flächen für Suche, Filter und Auswahlbefehle
+- konsistente Status-Badges für gesehen, fehlend, Quelle und Zähler
+- zurückgenommener Header in Detailansichten für einen Cinema-Focus
+- Dashboard, Geräte- und Verwaltungslisten im selben Oberflächensystem
+- keine Änderung an Medienraster, Posterformaten oder Player-Steuerung
+
+Jellyfin-Aufruf:
+
+```css
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/jellyfin_custom.css?v=19');
+```
 
 ### v18 – Detail Refinement
 
@@ -373,6 +392,7 @@ Server_CSS/
 ├── home_spacing.css
 ├── modern_refinement.css
 ├── detail_refinement.css
+├── system_refinement.css
 └── README.md
 ```
 

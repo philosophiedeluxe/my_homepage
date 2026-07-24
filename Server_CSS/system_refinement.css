@@ -1,0 +1,220 @@
+/*
+  Jellyfin System Refinement Layer — v19
+  Metadata, discovery controls, status language, cinema focus and administration.
+  No changes to poster ratios, media grids or playback controls.
+*/
+
+:root {
+  --pksystem-accent: var(--accent, 98, 121, 205);
+  --pksystem-surface: rgba(13, 17, 27, 0.68);
+  --pksystem-surface-strong: rgba(20, 25, 38, 0.88);
+  --pksystem-border: rgba(255, 255, 255, 0.085);
+  --pksystem-muted: rgba(203, 213, 225, 0.68);
+  --pksystem-radius: 12px;
+  --pksystem-pill: 999px;
+  --pksystem-ease: 180ms cubic-bezier(.2, .7, .2, 1);
+}
+
+/* 1. Metadata chips: facts are quickly scannable without competing with titles. */
+#itemDetailPage .itemMiscInfo > span,
+#itemDetailPage .itemMiscInfo > div,
+#itemDetailPage .mediaInfoItem,
+#itemDetailPage .itemGenres a,
+#itemDetailPage .itemTags a,
+#itemDetailPage .itemRating,
+#itemDetailPage .itemCommunityRating {
+  display: inline-flex !important;
+  align-items: center !important;
+  min-height: 1.75em;
+  margin: .16em .22em .16em 0 !important;
+  padding: .08em .58em !important;
+  color: rgba(241, 245, 249, 0.88) !important;
+  background: rgba(255, 255, 255, 0.055) !important;
+  border: 1px solid rgba(255, 255, 255, 0.075) !important;
+  border-radius: var(--pksystem-pill) !important;
+  box-sizing: border-box;
+}
+
+#itemDetailPage .itemGenres a:hover,
+#itemDetailPage .itemTags a:hover {
+  color: rgba(255, 255, 255, 0.98) !important;
+  background: rgba(var(--pksystem-accent), 0.15) !important;
+  border-color: rgba(var(--pksystem-accent), 0.28) !important;
+}
+
+/* 2. Home curation: hierarchy around shelves, without touching card geometry. */
+#homeTab .verticalSection {
+  position: relative;
+}
+
+#homeTab .sectionTitle {
+  display: flex !important;
+  align-items: baseline !important;
+  gap: .65em;
+  letter-spacing: .008em;
+}
+
+#homeTab .sectionTitle::after {
+  content: "KURATIERT";
+  font-size: .38em;
+  font-weight: 650;
+  letter-spacing: .15em;
+  color: rgba(var(--pksystem-accent), 0.78);
+}
+
+#homeTab .verticalSection:first-child .sectionTitle::after {
+  content: "BIBLIOTHEK";
+}
+
+#homeTab .verticalSection {
+  padding-bottom: .5em;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.035);
+}
+
+#homeTab .verticalSection:last-child {
+  border-bottom: 0;
+}
+
+/* 3. Search and filters: one compact visual grammar for discovery controls. */
+.searchFields,
+.filterOptions,
+.itemSelectionPanel,
+.selectionCommandsPanel {
+  background: var(--pksystem-surface) !important;
+  border: 1px solid var(--pksystem-border) !important;
+  border-radius: var(--pksystem-radius) !important;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22) !important;
+}
+
+.searchFields .emby-input,
+.filterOptions .emby-input,
+.searchFields .emby-select-withcolor,
+.filterOptions .emby-select-withcolor {
+  border-radius: var(--pksystem-pill) !important;
+}
+
+.checkboxOutline,
+.multiSelectCheckboxOutline {
+  border-color: rgba(255, 255, 255, 0.18) !important;
+  border-radius: 6px !important;
+}
+
+.emby-checkbox:checked + span + .checkboxOutline,
+.itemSelectionPanel {
+  border-color: rgba(var(--pksystem-accent), 0.62) !important;
+  background-color: rgba(var(--pksystem-accent), 0.14) !important;
+}
+
+/* 4. Status language: all compact indicators share shape, contrast and depth. */
+.countIndicator,
+.playedIndicator,
+.missingIndicator,
+.unairedIndicator,
+.mediaSourceIndicator,
+.indicator,
+.cardIndicators > div,
+.listItemIndicators > div {
+  min-width: 1.65em;
+  min-height: 1.65em;
+  padding-inline: .34em;
+  color: rgba(255, 255, 255, 0.92) !important;
+  background: rgba(7, 10, 17, 0.82) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: var(--pksystem-pill) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.30) !important;
+}
+
+.playedIndicator,
+.cardIndicators .playedIndicator {
+  color: rgba(221, 232, 255, 0.96) !important;
+  background: rgba(var(--pksystem-accent), 0.22) !important;
+  border-color: rgba(var(--pksystem-accent), 0.42) !important;
+}
+
+.missingIndicator,
+.unairedIndicator {
+  color: rgba(254, 226, 226, 0.92) !important;
+  background: rgba(127, 29, 29, 0.46) !important;
+  border-color: rgba(252, 165, 165, 0.30) !important;
+}
+
+/* 5. Cinema focus: detail navigation recedes until the pointer returns to it. */
+body:has(#itemDetailPage) .skinHeader-withBackground {
+  background-color: rgba(7, 9, 15, 0.52) !important;
+  border-bottom-color: rgba(255, 255, 255, 0.045) !important;
+  transition: background-color var(--pksystem-ease), border-color var(--pksystem-ease), box-shadow var(--pksystem-ease) !important;
+}
+
+body:has(#itemDetailPage) .skinHeader-withBackground:hover,
+body:has(#itemDetailPage) .skinHeader-withBackground:focus-within {
+  background-color: rgba(12, 16, 25, 0.90) !important;
+  border-bottom-color: rgba(255, 255, 255, 0.10) !important;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.34) !important;
+}
+
+body:has(#itemDetailPage) .detailPagePrimaryContainer {
+  padding-top: .5em;
+}
+
+/* 6. Administration: dashboard sections, lists and storage panels share the media UI language. */
+#dashboardPage .dashboardSection,
+#dashboardPage .paperList,
+#dashboardPage .detailTable,
+#dashboardPage .sessionCard,
+#dashboardPage .listItem {
+  background: var(--pksystem-surface) !important;
+  border: 1px solid var(--pksystem-border) !important;
+  border-radius: var(--pksystem-radius) !important;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.20) !important;
+}
+
+#dashboardPage .dashboardSection {
+  padding: .75em !important;
+}
+
+#dashboardPage .dashboardSection h2,
+#dashboardPage .dashboardSection h3,
+#dashboardPage .sectionTitle {
+  color: rgba(248, 250, 252, 0.96) !important;
+  letter-spacing: .01em;
+}
+
+#dashboardPage .listItem {
+  margin: .32em 0 !important;
+}
+
+#dashboardPage .listItem:hover {
+  background: var(--pksystem-surface-strong) !important;
+  border-color: rgba(var(--pksystem-accent), 0.28) !important;
+}
+
+#dashboardPage progress,
+#dashboardPage .taskProgressOuter {
+  height: 6px;
+  background: rgba(255, 255, 255, 0.12) !important;
+  border: 0 !important;
+  border-radius: var(--pksystem-pill) !important;
+  overflow: hidden;
+}
+
+#dashboardPage progress::-webkit-progress-value,
+#dashboardPage .taskProgressInner {
+  background: rgba(var(--pksystem-accent), 0.88) !important;
+  border-radius: inherit !important;
+}
+
+@media all and (max-width: 50em) {
+  #homeTab .sectionTitle::after {
+    font-size: .34em;
+  }
+
+  #dashboardPage .dashboardSection {
+    padding: .55em !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body:has(#itemDetailPage) .skinHeader-withBackground {
+    transition: none !important;
+  }
+}
