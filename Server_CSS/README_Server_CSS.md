@@ -2,14 +2,14 @@
 
 Dieses Repository enthält die Custom-CSS-Dateien für die optische Anpassung der Jellyfin-Oberfläche.
 
-Aktueller stabiler Stand: **v26**
+Aktueller stabiler Stand: **v28**
 
 ## Aktueller Jellyfin-Aufruf
 
 In Jellyfin wird nur noch eine zentrale CSS-Datei geladen:
 
 ```css
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/jellyfin_custom.css?v=26');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/jellyfin_custom.css?v=28');
 ```
 
 Die Datei `jellyfin_custom.css` ist der zentrale Einstiegspunkt. Alle weiteren CSS-Dateien werden dort in der kontrollierten Reihenfolge eingebunden.
@@ -126,6 +126,34 @@ Grund:
 `fixes.css` sollte nicht erneut eingebunden werden.
 
 ## Entwicklungshistorie
+
+### v28 – Cast and Chapter Alignment
+
+Basis: v27
+
+- Bild- und Textflächen der Personen-Karten auf exakt gleiche Breite festgelegt
+- Personen-Karten als geschlossene Einheit gerendert
+- Kapitel-Label direkt auf 6 px Rundung überschrieben
+
+Jellyfin-Aufruf:
+
+```css
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/jellyfin_custom.css?v=28');
+```
+
+### v27 – Episode Alignment
+
+Basis: v26
+
+- Bild- und Textbereiche folgen jetzt der erweiterten Episodenzeilenhöhe
+- Textkörper vertikal zentriert
+- Zusammenfassungen erhalten eine definierte zweizeilige Lesezone
+
+Jellyfin-Aufruf:
+
+```css
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/jellyfin_custom.css?v=27');
+```
 
 ### v26 – Precision Adjustments
 

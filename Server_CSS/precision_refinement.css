@@ -6,17 +6,81 @@
 }
 
 /* Chapters: labels are information tags, not oversized pills. */
-.chapterThumbTextContainer {
-  border-radius: 8px !important;
+.chapterThumbTextContainer,
+.chapterThumbText {
+  border-radius: 6px !important;
+  overflow: hidden !important;
 }
 
 /* Episode lists: more reading room for summaries and metadata. */
 #itemDetailPage .listItem.listItem-largeImage.listItem-withContentWrapper {
   min-height: 7.25em !important;
+  align-items: stretch !important;
+}
+
+#itemDetailPage .listItem.listItem-largeImage .listItemImageButton,
+#itemDetailPage .listItem.listItem-largeImage .listItemImage,
+#itemDetailPage .listItem.listItem-largeImage .listItem-content {
+  align-self: stretch !important;
+  height: auto !important;
+}
+
+#itemDetailPage .listItem.listItem-largeImage .listItemImage {
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+#itemDetailPage .listItem.listItem-largeImage .listItemBody,
+#itemDetailPage .listItem.listItem-largeImage .listItemBodyText {
+  min-height: 100% !important;
+  box-sizing: border-box !important;
+}
+
+#itemDetailPage .listItem.listItem-largeImage .listItemBodyText {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  padding-block: .22em !important;
+}
+
+#itemDetailPage .listItem.listItem-largeImage .listItemBodyText > p {
+  display: -webkit-box !important;
+  max-height: 2.7em !important;
+  margin-block: .22em 0 !important;
+  overflow: hidden !important;
+  -webkit-box-orient: vertical !important;
+  -webkit-line-clamp: 2 !important;
+}
+
+/* Cast: image and caption form one card with exactly the same available width. */
+#itemDetailPage .personCard,
+#itemDetailPage .personCard > .cardBox,
+#itemDetailPage .personCard .cardImageContainer,
+#itemDetailPage .personCard .cardContent,
+#itemDetailPage .personCard .cardText {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+#itemDetailPage .personCard > .cardBox {
+  overflow: hidden !important;
+}
+
+#itemDetailPage .personCard .cardImageContainer {
+  border-radius: var(--pkdetail-radius) var(--pkdetail-radius) 0 0 !important;
+}
+
+#itemDetailPage .personCard .cardContent {
+  border-radius: 0 0 var(--pkdetail-radius) var(--pkdetail-radius) !important;
 }
 
 @media all and (max-width: 50em) {
   #itemDetailPage .listItem.listItem-largeImage.listItem-withContentWrapper {
     min-height: 6.8em !important;
+  }
+
+  #itemDetailPage .listItem.listItem-largeImage .listItemBodyText > p {
+    max-height: 2.55em !important;
   }
 }
