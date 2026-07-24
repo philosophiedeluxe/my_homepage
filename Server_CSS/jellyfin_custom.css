@@ -1,6 +1,6 @@
 /*
   Jellyfin Custom CSS - zentraler Einstieg
-  Stand: v23 compact forms - thinner search and integrated login preference
+  Stand: v24 search simplification - fixed 48px search control
   Zweck: Ein einziger Jellyfin-Aufruf, ohne fixes.css, ohne zusätzliche Layoutkorrekturen und mit reduzierten Hover-Effekten und leicht erhöhtem Abstand über Abschnittstiteln.
   Regel: spezialisierte optische Schichten werden am Ende importiert.
 */
@@ -27,7 +27,7 @@
 @import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/modern_refinement.css?v=19');
 @import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/detail_refinement.css?v=19');
 @import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/system_refinement.css?v=19');
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/form_refinement.css?v=23');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/form_refinement.css?v=24');
 
 
 /*Style backdrop*/

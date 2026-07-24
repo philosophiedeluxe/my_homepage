@@ -96,6 +96,40 @@
   padding-left: 2.82em !important;
 }
 
+/* Fixed control geometry: avoid Jellyfin's floating-label offset in the search page. */
+#searchPage .searchFieldsInner {
+  width: min(100%, 50rem) !important;
+}
+
+#searchPage .searchFieldsInner .inputContainer.flex-grow {
+  display: flex !important;
+  align-items: center !important;
+  height: 48px !important;
+  min-height: 48px !important;
+  box-sizing: border-box !important;
+}
+
+#searchPage .searchFields .inputLabel {
+  position: absolute !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+}
+
+#searchPage .searchFields .emby-input {
+  width: 100% !important;
+  height: 46px !important;
+  min-height: 46px !important;
+  margin: 0 !important;
+  padding: 0 .95em 0 3.05em !important;
+  line-height: 46px !important;
+  box-sizing: border-box !important;
+}
+
+#searchPage .searchfields-icon.material-icons.search {
+  left: 1em !important;
+}
+
 /* Login: opaque enough for reliable reading while preserving the backdrop. */
 #loginPage .emby-input {
   min-height: 2.9em !important;
