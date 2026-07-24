@@ -63,6 +63,38 @@
   color: rgba(var(--accent), 0.82) !important;
 }
 
+/* The search icon is placed inside the field, so the visible input itself is exactly centred. */
+#searchPage .padded-left.padded-right.searchFields {
+  width: 100% !important;
+  max-width: none !important;
+  box-sizing: border-box !important;
+}
+
+#searchPage .searchFieldsInner {
+  position: relative !important;
+  display: block !important;
+  width: min(100%, 54rem) !important;
+  margin-inline: auto !important;
+}
+
+#searchPage .searchFieldsInner .inputContainer.flex-grow {
+  width: 100% !important;
+  flex: none !important;
+}
+
+#searchPage .searchfields-icon.material-icons.search {
+  position: absolute !important;
+  z-index: 2 !important;
+  left: 1.1em !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  pointer-events: none !important;
+}
+
+#searchPage .searchFields .emby-input {
+  padding-left: 3.05em !important;
+}
+
 /* Login: opaque enough for reliable reading while preserving the backdrop. */
 #loginPage .emby-input {
   min-height: 2.9em !important;
@@ -118,6 +150,49 @@
 
 #loginPage .emby-checkbox:checked + span {
   color: #ffffff !important;
+}
+
+/* Jellyfin positions its outline absolutely by default; make it a real inline control. */
+#loginPage .checkboxContainer.emby-checkbox-label {
+  display: inline-flex !important;
+  align-items: center !important;
+  width: auto !important;
+  min-height: 2.55em !important;
+  margin: .32em 0 .62em !important;
+  padding: .34em .76em .34em .52em !important;
+  gap: .66em !important;
+  color: rgba(248, 250, 252, 0.94) !important;
+  background: rgba(5, 8, 14, 0.66) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  border-radius: var(--pkform-radius) !important;
+  box-shadow: 0 7px 18px rgba(0, 0, 0, 0.20) !important;
+  box-sizing: border-box !important;
+}
+
+#loginPage .checkboxContainer.emby-checkbox-label .checkboxLabel {
+  display: inline-block !important;
+  order: 2 !important;
+  line-height: 1.2 !important;
+}
+
+#loginPage .checkboxContainer.emby-checkbox-label .checkboxOutline {
+  position: static !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex: 0 0 1.22em !important;
+  order: 1 !important;
+  margin: 0 !important;
+}
+
+#loginPage .emby-checkbox:checked ~ .checkboxOutline .checkboxIcon-checked {
+  display: block !important;
+  color: #ffffff !important;
+  font-size: 1.02em !important;
+}
+
+#loginPage .emby-checkbox:checked ~ .checkboxOutline .checkboxIcon-unchecked {
+  display: none !important;
 }
 
 #loginPage .raised,
