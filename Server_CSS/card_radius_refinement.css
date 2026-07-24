@@ -1,0 +1,27 @@
+/* Jellyfin Card Radius Refinement Layer — v32 */
+
+/* Actual Jellyfin chapter card: the visible label is its inner footer. */
+html body #itemDetailPage .chapterCard .innerCardFooter {
+  border-radius: 7px !important;
+  overflow: hidden !important;
+}
+
+/* Person cards: one outer radius, image clipped only at the upper edge. */
+#itemDetailPage .personCard > .cardBox {
+  border-radius: 12px !important;
+  overflow: hidden !important;
+}
+
+#itemDetailPage .personCard .cardScalable {
+  border-radius: 12px 12px 0 0 !important;
+  overflow: hidden !important;
+}
+
+#itemDetailPage .personCard .cardImageContainer {
+  border-radius: 0 !important;
+}
+
+#itemDetailPage .personCard .cardText {
+  width: 100% !important;
+  box-sizing: border-box !important;
+}

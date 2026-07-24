@@ -2,14 +2,14 @@
 
 Dieses Repository enthält die Custom-CSS-Dateien für die optische Anpassung der Jellyfin-Oberfläche.
 
-Aktueller stabiler Stand: **v30**
+Aktueller stabiler Stand: **v32**
 
 ## Aktueller Jellyfin-Aufruf
 
 In Jellyfin wird nur noch eine zentrale CSS-Datei geladen:
 
 ```css
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/jellyfin_custom.css?v=30');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/jellyfin_custom.css?v=32');
 ```
 
 Die Datei `jellyfin_custom.css` ist der zentrale Einstiegspunkt. Alle weiteren CSS-Dateien werden dort in der kontrollierten Reihenfolge eingebunden.
@@ -126,6 +126,35 @@ Grund:
 `fixes.css` sollte nicht erneut eingebunden werden.
 
 ## Entwicklungshistorie
+
+### v32 – Exact Card Radius Correction
+
+Basis: v31
+
+- Kapitel-Fußfläche über die tatsächliche Klasse `.chapterCard .innerCardFooter` auf 7 px gesetzt
+- Personen-Karten als einheitlich geclipte Einheit aufgebaut
+- Bild nur an den oberen Kartenrändern gerundet; Unterseite durch denselben äußeren Kartenradius geschlossen
+
+Jellyfin-Aufruf:
+
+```css
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/jellyfin_custom.css?v=32');
+```
+
+### v31 – Typography Refinement
+
+Basis: v30
+
+- Kachelbeschriftungen leichter und ruhiger abgestimmt
+- sekundäre Kachelmetadaten typografisch klarer abgesetzt
+- klickbare Abschnittstitel mit 14 px statt Pillen-Rundung
+- Hover-Fläche der Abschnittstitel links und rechts jeweils um 6 px erweitert
+
+Jellyfin-Aufruf:
+
+```css
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/jellyfin_custom.css?v=31');
+```
 
 ### v30 – Chapter Footer Correction
 
