@@ -1,6 +1,6 @@
 /*
   Jellyfin Custom CSS - zentraler Einstieg
-  Stand: v33 episode layout reset
+  Stand: v34 episode proportions
   Zweck: Ein einziger Jellyfin-Aufruf, ohne fixes.css, ohne zusätzliche Layoutkorrekturen und mit reduzierten Hover-Effekten und leicht erhöhtem Abstand über Abschnittstiteln.
   Regel: spezialisierte optische Schichten werden am Ende importiert.
 */
@@ -33,6 +33,7 @@
 @import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/typography_refinement.css?v=31');
 @import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/card_radius_refinement.css?v=32');
 @import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/episode_layout_reset.css?v=33');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/episode_proportions.css?v=34');
 
 
 /*Style backdrop*/
