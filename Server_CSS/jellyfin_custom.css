@@ -1,6 +1,6 @@
 /*
   Jellyfin Custom CSS - zentraler Einstieg
-  Stand: v25 media refinement - player, cards, states and settings
+  Stand: v26 precision adjustments - search, chapters and episode rows
   Zweck: Ein einziger Jellyfin-Aufruf, ohne fixes.css, ohne zusätzliche Layoutkorrekturen und mit reduzierten Hover-Effekten und leicht erhöhtem Abstand über Abschnittstiteln.
   Regel: spezialisierte optische Schichten werden am Ende importiert.
 */
@@ -29,6 +29,7 @@
 @import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/system_refinement.css?v=19');
 @import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/form_refinement.css?v=24');
 @import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/media_refinement.css?v=25');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/precision_refinement.css?v=26');
 
 
 /*Style backdrop*/

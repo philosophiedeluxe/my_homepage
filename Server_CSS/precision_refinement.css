@@ -1,0 +1,22 @@
+/* Jellyfin Precision Refinement Layer — v26 */
+
+/* Search: reserve a real gap after the magnifier instead of letting text begin below it. */
+#searchPage .searchFields .emby-input {
+  padding-left: 4.25em !important;
+}
+
+/* Chapters: labels are information tags, not oversized pills. */
+.chapterThumbTextContainer {
+  border-radius: 8px !important;
+}
+
+/* Episode lists: more reading room for summaries and metadata. */
+#itemDetailPage .listItem.listItem-largeImage.listItem-withContentWrapper {
+  min-height: 7.25em !important;
+}
+
+@media all and (max-width: 50em) {
+  #itemDetailPage .listItem.listItem-largeImage.listItem-withContentWrapper {
+    min-height: 6.8em !important;
+  }
+}
