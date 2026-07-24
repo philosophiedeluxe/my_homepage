@@ -2,14 +2,14 @@
 
 Dieses Repository enthält die Custom-CSS-Dateien für die optische Anpassung der Jellyfin-Oberfläche.
 
-Aktueller stabiler Stand: **v19**
+Aktueller stabiler Stand: **v20**
 
 ## Aktueller Jellyfin-Aufruf
 
 In Jellyfin wird nur noch eine zentrale CSS-Datei geladen:
 
 ```css
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/jellyfin_custom.css?v=19');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/jellyfin_custom.css?v=20');
 ```
 
 Die Datei `jellyfin_custom.css` ist der zentrale Einstiegspunkt. Alle weiteren CSS-Dateien werden dort in der kontrollierten Reihenfolge eingebunden.
@@ -126,6 +126,22 @@ Grund:
 `fixes.css` sollte nicht erneut eingebunden werden.
 
 ## Entwicklungshistorie
+
+### v20 – Form Refinement
+
+Basis: v19
+
+- neue finale Schicht `form_refinement.css`
+- Suchansicht ohne übergroßen Container, mit klar fokussiertem Eingabefeld
+- Login-Felder mit verlässlichem Kontrast und sichtbarem Fokuszustand
+- korrigierte Browser-Autofill-Fläche für Passwortfelder
+- deutlich sichtbare Checkbox mit eindeutigem aktivem Zustand
+
+Jellyfin-Aufruf:
+
+```css
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/jellyfin_custom.css?v=20');
+```
 
 ### v19 – System Refinement
 
@@ -393,6 +409,7 @@ Server_CSS/
 ├── modern_refinement.css
 ├── detail_refinement.css
 ├── system_refinement.css
+├── form_refinement.css
 └── README.md
 ```
 

@@ -1,0 +1,140 @@
+/*
+  Jellyfin Form Refinement Layer — v20
+  Focused treatment for search and login controls.
+*/
+
+:root {
+  --pkform-surface: rgba(7, 10, 17, 0.74);
+  --pkform-surface-focus: rgba(11, 15, 25, 0.92);
+  --pkform-border: rgba(255, 255, 255, 0.13);
+  --pkform-border-focus: rgba(var(--accent), 0.68);
+  --pkform-text: rgba(248, 250, 252, 0.96);
+  --pkform-muted: rgba(203, 213, 225, 0.64);
+  --pkform-radius: 12px;
+  --pkform-ease: 180ms cubic-bezier(.2, .7, .2, 1);
+}
+
+/* Search: remove the oversized frame and make the actual search field the focal element. */
+#searchPage .searchFields {
+  width: min(100% - 2em, 58rem) !important;
+  margin: 1.15em auto .45em !important;
+  padding: .24em .34em !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: var(--pkform-radius) !important;
+  box-shadow: none !important;
+}
+
+#searchPage .searchFields .inputContainer,
+#searchPage .searchFields .emby-input {
+  border-radius: var(--pkform-radius) !important;
+}
+
+#searchPage .searchFields .inputContainer {
+  background: var(--pkform-surface) !important;
+  border: 1px solid var(--pkform-border) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035), 0 8px 22px rgba(0, 0, 0, 0.20) !important;
+  transition: background-color var(--pkform-ease), border-color var(--pkform-ease), box-shadow var(--pkform-ease) !important;
+}
+
+#searchPage .searchFields .inputContainer:focus-within {
+  background: var(--pkform-surface-focus) !important;
+  border-color: var(--pkform-border-focus) !important;
+  box-shadow: 0 0 0 3px rgba(var(--accent), 0.14), 0 12px 28px rgba(0, 0, 0, 0.28) !important;
+}
+
+#searchPage .searchFields .emby-input {
+  min-height: 2.8em !important;
+  padding: .55em .9em !important;
+  color: var(--pkform-text) !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  font-size: 1.03em !important;
+}
+
+#searchPage .searchFields .emby-input::placeholder {
+  color: var(--pkform-muted) !important;
+  opacity: 1;
+}
+
+#searchPage .searchFields .material-icons,
+#searchPage .searchFields .inputLabel {
+  color: rgba(var(--accent), 0.82) !important;
+}
+
+/* Login: opaque enough for reliable reading while preserving the backdrop. */
+#loginPage .emby-input {
+  min-height: 2.9em !important;
+  padding: .62em .82em !important;
+  color: var(--pkform-text) !important;
+  -webkit-text-fill-color: var(--pkform-text) !important;
+  background: var(--pkform-surface) !important;
+  border: 1px solid var(--pkform-border) !important;
+  border-radius: var(--pkform-radius) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 8px 20px rgba(0, 0, 0, 0.22) !important;
+  transition: background-color var(--pkform-ease), border-color var(--pkform-ease), box-shadow var(--pkform-ease) !important;
+}
+
+#loginPage .emby-input:focus {
+  background: var(--pkform-surface-focus) !important;
+  border-color: var(--pkform-border-focus) !important;
+  box-shadow: 0 0 0 3px rgba(var(--accent), 0.16), 0 10px 26px rgba(0, 0, 0, 0.26) !important;
+}
+
+#loginPage .emby-input:-webkit-autofill,
+#loginPage .emby-input:-webkit-autofill:hover,
+#loginPage .emby-input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--pkform-text) !important;
+  -webkit-box-shadow: 0 0 0 1000px rgba(7, 10, 17, 0.88) inset, 0 8px 20px rgba(0, 0, 0, 0.22) !important;
+  caret-color: var(--pkform-text) !important;
+}
+
+#loginPage .inputLabel,
+#loginPage .checkboxLabel {
+  color: rgba(248, 250, 252, 0.88) !important;
+}
+
+/* The checkbox gets its own opaque control surface and an unambiguous checked state. */
+#loginPage .checkboxOutline {
+  width: 1.22em !important;
+  height: 1.22em !important;
+  background: rgba(4, 6, 11, 0.88) !important;
+  border: 1px solid rgba(255, 255, 255, 0.34) !important;
+  border-radius: 5px !important;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.28) !important;
+}
+
+#loginPage .emby-checkbox:focus-visible + span + .checkboxOutline {
+  outline: 3px solid rgba(var(--accent), 0.28) !important;
+  outline-offset: 2px !important;
+}
+
+#loginPage .emby-checkbox:checked + span + .checkboxOutline {
+  background: rgb(var(--accent)) !important;
+  border-color: rgba(255, 255, 255, 0.80) !important;
+  box-shadow: 0 0 0 3px rgba(var(--accent), 0.18), 0 4px 12px rgba(0, 0, 0, 0.30) !important;
+}
+
+#loginPage .emby-checkbox:checked + span {
+  color: #ffffff !important;
+}
+
+#loginPage .raised,
+#loginPage a[data-role="button"] {
+  border-radius: var(--pkform-radius) !important;
+}
+
+@media all and (max-width: 50em) {
+  #searchPage .searchFields {
+    width: calc(100% - 1.15em) !important;
+    margin-top: .72em !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #searchPage .searchFields .inputContainer,
+  #loginPage .emby-input {
+    transition: none !important;
+  }
+}

@@ -1,6 +1,6 @@
 /*
   Jellyfin Custom CSS - zentraler Einstieg
-  Stand: v19 system refinement - metadata, discovery, focus mode and administration
+  Stand: v20 form refinement - search and login controls
   Zweck: Ein einziger Jellyfin-Aufruf, ohne fixes.css, ohne zusätzliche Layoutkorrekturen und mit reduzierten Hover-Effekten und leicht erhöhtem Abstand über Abschnittstiteln.
   Regel: spezialisierte optische Schichten werden am Ende importiert.
 */
@@ -27,6 +27,7 @@
 @import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/modern_refinement.css?v=19');
 @import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/detail_refinement.css?v=19');
 @import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/system_refinement.css?v=19');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/form_refinement.css?v=20');
 
 
 /*Style backdrop*/
