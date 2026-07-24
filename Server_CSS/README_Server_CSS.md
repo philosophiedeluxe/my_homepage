@@ -2,14 +2,14 @@
 
 Dieses Repository enthält die Custom-CSS-Dateien für die optische Anpassung der Jellyfin-Oberfläche.
 
-Aktueller stabiler Stand: **v24**
+Aktueller stabiler Stand: **v25**
 
 ## Aktueller Jellyfin-Aufruf
 
 In Jellyfin wird nur noch eine zentrale CSS-Datei geladen:
 
 ```css
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/jellyfin_custom.css?v=24');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/jellyfin_custom.css?v=25');
 ```
 
 Die Datei `jellyfin_custom.css` ist der zentrale Einstiegspunkt. Alle weiteren CSS-Dateien werden dort in der kontrollierten Reihenfolge eingebunden.
@@ -126,6 +126,24 @@ Grund:
 `fixes.css` sollte nicht erneut eingebunden werden.
 
 ## Entwicklungshistorie
+
+### v25 – Media Refinement
+
+Basis: v24
+
+- neue finale Schicht `media_refinement.css`
+- reduzierte Glas-Kontrollen, Kapitelmarken und kompakte „Als Nächstes“-Karte
+- einheitliche Karten-Typografie und Status-Badges
+- veredelte Bibliothekskacheln ohne Änderung von Postern oder Grids
+- moderne Leer-, Lade- und Fehlerzustände
+- Profil- und Einstellungsflächen dem Dashboard-System angeglichen
+- mobile Regeln für die neuen Medien- und Playerflächen
+
+Jellyfin-Aufruf:
+
+```css
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/jellyfin_custom.css?v=25');
+```
 
 ### v24 – Search Simplification
 
@@ -466,6 +484,7 @@ Server_CSS/
 ├── detail_refinement.css
 ├── system_refinement.css
 ├── form_refinement.css
+├── media_refinement.css
 └── README.md
 ```
 
