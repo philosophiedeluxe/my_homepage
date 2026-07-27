@@ -33,11 +33,17 @@ video.htmlvideoplayer,
   visibility: visible !important;
 }
 
-/* Restore the compact neutral player chrome from Theme 1. */
+/* Restore compact neutral player chrome without a large dark video overlay. */
 .osdHeader,
-.osdFooter,
-.osdControls,
-.videoOsdBottom {
+.osdFooter {
   background: linear-gradient(180deg, rgba(4, 6, 11, 0.72), rgba(4, 6, 11, 0.38)) !important;
   border-color: rgba(255, 255, 255, 0.06) !important;
+}
+
+/* Jellyfin stretches these containers far above the controls. They must stay clear. */
+.videoOsdBottom,
+.videoOsdBottom .osdControls,
+.osdControls {
+  background: transparent !important;
+  box-shadow: none !important;
 }
