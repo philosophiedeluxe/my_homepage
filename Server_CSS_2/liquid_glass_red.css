@@ -475,7 +475,17 @@ a[data-role="button"]:hover,
 .userSettingsContainer .listItem,
 #userPreferencesMenu .listItem,
 .userMenu .listItem {
-  padding-left: 1.15em !important;
+  padding-left: 1.55em !important;
+  border-radius: 14px !important;
+}
+
+.userSettingsContainer .listItem:hover,
+.userSettingsContainer .listItem:focus-visible,
+#userPreferencesMenu .listItem:hover,
+#userPreferencesMenu .listItem:focus-visible,
+.userMenu .listItem:hover,
+.userMenu .listItem:focus-visible {
+  border-radius: 14px !important;
 }
 
 .userSettingsContainer .listItemIcon,
