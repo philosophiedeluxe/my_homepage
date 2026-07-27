@@ -1,45 +1,45 @@
 /*
   Jellyfin Custom CSS - zentraler Einstieg
-  Stand: v40 shelf title vertical balance
+  Stand: V1 final release
   Zweck: Ein einziger Jellyfin-Aufruf, ohne fixes.css, ohne zusätzliche Layoutkorrekturen und mit reduzierten Hover-Effekten und leicht erhöhtem Abstand über Abschnittstiteln.
   Regel: spezialisierte optische Schichten werden am Ende importiert.
 */
 
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/jf_font.css?v=19');
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/base.css?v=19');
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/accentlist.css?v=19');
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/rounding_circlehover.css?v=19');
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/smallercast.css?v=19');
-/*@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/episodes_grid.css?v=19');*/
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/episodes_compactlist.css?v=19');
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/header_transparent.css?v=19');
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/login_frame.css?v=19');
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/fields_noborder.css?v=19');
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/indicator_floating.css?v=19');
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/dark.css?v=19');
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/title_banner-logo.css?v=19');
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/floating.css?v=19');
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/hoverglow.css?v=19');
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/glassy.css?v=19');
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/effects_cinematic.css?v=19');
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/hover_clean.css?v=19');
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/home_spacing.css?v=19');
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/modern_refinement.css?v=19');
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/detail_refinement.css?v=19');
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/system_refinement.css?v=19');
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/form_refinement.css?v=24');
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/media_refinement.css?v=25');
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/precision_refinement.css?v=30');
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/typography_refinement.css?v=31');
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/card_radius_refinement.css?v=32');
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/episode_layout_reset.css?v=33');
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/episode_proportions.css?v=34');
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/cast_card_spacing.css?v=35');
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/person_card_sizing.css?v=36');
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/final_interface_polish.css?v=37');
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/select_menu_spacing.css?v=38');
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/home_shelf_cleanup.css?v=39');
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/shelf_title_vertical_balance.css?v=40');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/jf_font.css?v=1');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/base.css?v=1');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/accentlist.css?v=1');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/rounding_circlehover.css?v=1');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/smallercast.css?v=1');
+/*@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/episodes_grid.css?v=1');*/
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/episodes_compactlist.css?v=1');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/header_transparent.css?v=1');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/login_frame.css?v=1');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/fields_noborder.css?v=1');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/indicator_floating.css?v=1');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/dark.css?v=1');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/title_banner-logo.css?v=1');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/floating.css?v=1');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/hoverglow.css?v=1');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/glassy.css?v=1');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/effects_cinematic.css?v=1');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/hover_clean.css?v=1');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/home_spacing.css?v=1');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/modern_refinement.css?v=1');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/detail_refinement.css?v=1');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/system_refinement.css?v=1');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/form_refinement.css?v=1');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/media_refinement.css?v=1');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/precision_refinement.css?v=1');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/typography_refinement.css?v=1');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/card_radius_refinement.css?v=1');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/episode_layout_reset.css?v=1');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/episode_proportions.css?v=1');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/cast_card_spacing.css?v=1');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/person_card_sizing.css?v=1');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/final_interface_polish.css?v=1');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/select_menu_spacing.css?v=1');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/home_shelf_cleanup.css?v=1');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/shelf_title_vertical_balance.css?v=1');
 
 
 /*Style backdrop*/

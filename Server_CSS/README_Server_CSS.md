@@ -2,14 +2,14 @@
 
 Dieses Repository enthält die Custom-CSS-Dateien für die optische Anpassung der Jellyfin-Oberfläche.
 
-Aktueller stabiler Stand: **v40**
+Aktueller stabiler Stand: **V1**
 
 ## Aktueller Jellyfin-Aufruf
 
 In Jellyfin wird nur noch eine zentrale CSS-Datei geladen:
 
 ```css
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/jellyfin_custom.css?v=40');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/jellyfin_custom.css?v=1');
 ```
 
 Die Datei `jellyfin_custom.css` ist der zentrale Einstiegspunkt. Alle weiteren CSS-Dateien werden dort in der kontrollierten Reihenfolge eingebunden.
@@ -19,7 +19,7 @@ Die Datei `jellyfin_custom.css` ist der zentrale Einstiegspunkt. Alle weiteren C
 Der stabile Stand basiert auf folgender Kombination:
 
 ```text
-v16 = v13 Clean-Hover-Design + home_spacing.css + kein fixes.css
+V1 = zusammengeführter finaler Gesamtstand aller gestalterischen Schichten
 ```
 
 Enthalten:
@@ -126,6 +126,20 @@ Grund:
 `fixes.css` sollte nicht erneut eingebunden werden.
 
 ## Entwicklungshistorie
+
+### V1 – Erste finale Veröffentlichung
+
+Basis: v40
+
+- zusammengeführter stabiler Gesamtstand aller Layout-, Detail-, Player-, Formular-, Dashboard- und Startseitenkorrekturen
+- zentrale öffentliche Versionskennung auf `v=1` gesetzt
+- öffentliche und interne Imports einheitlich auf `v=1` gesetzt
+
+Jellyfin-Aufruf:
+
+```css
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/jellyfin_custom.css?v=1');
+```
 
 ### v40 – Shelf Title Vertical Balance
 
@@ -477,7 +491,7 @@ Basis: v16
 Jellyfin-Aufruf:
 
 ```css
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/jellyfin_custom.css?v=17');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/jellyfin_custom.css?v=2');
 ```
 
 ### v9 – Clean ohne `fixes.css`
@@ -781,7 +795,7 @@ Zusätzlich sollten die internen Imports in `jellyfin_custom.css` auf dieselbe V
 
 ## Aktueller Status
 
-`v16` ist der aktuelle stabile Stand.
+`V1` ist der aktuelle stabile Stand.
 
 Dieser Stand wurde erfolgreich getestet:
 
