@@ -1,6 +1,6 @@
 /*
   Jellyfin Custom CSS - zentraler Einstieg
-  Stand: Liquid Glass Red V2
+  Stand: Liquid Glass Red V3
   Zweck: Ein einziger Jellyfin-Aufruf, ohne fixes.css, ohne zusätzliche Layoutkorrekturen und mit reduzierten Hover-Effekten und leicht erhöhtem Abstand über Abschnittstiteln.
   Regel: spezialisierte optische Schichten werden am Ende importiert.
 */
@@ -40,7 +40,7 @@
 @import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/select_menu_spacing.css?v=1');
 @import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/home_shelf_cleanup.css?v=1');
 @import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/shelf_title_vertical_balance.css?v=1');
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/liquid_glass_red.css?v=2');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/liquid_glass_red.css?v=3');
 
 
 /*Style backdrop*/

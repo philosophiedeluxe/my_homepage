@@ -2,14 +2,14 @@
 
 Dieses Repository enthält die Custom-CSS-Dateien für die optische Anpassung der Jellyfin-Oberfläche.
 
-Aktueller stabiler Stand: **Liquid Glass Red V2**
+Aktueller stabiler Stand: **Liquid Glass Red V3**
 
 ## Aktueller Jellyfin-Aufruf
 
 In Jellyfin wird nur noch eine zentrale CSS-Datei geladen:
 
 ```css
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/jellyfin_custom.css?v=2');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/jellyfin_custom.css?v=3');
 ```
 
 Die Datei `jellyfin_custom.css` ist der zentrale Einstiegspunkt. Alle weiteren CSS-Dateien werden dort in der kontrollierten Reihenfolge eingebunden.
@@ -127,6 +127,17 @@ Grund:
 
 ## Entwicklungshistorie
 
+### Liquid Glass Red V3
+
+- Header-Reflexionsschicht entfernt, damit das Hauptmenü nicht durch einen Stapelkontext blockiert wird
+- Header-Überlauf wieder sichtbar; das ausklappende Menü bleibt vollständig bedienbar
+
+Jellyfin-Aufruf:
+
+```css
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/jellyfin_custom.css?v=3');
+```
+
 ### Liquid Glass Red V2
 
 - zentraler Akzentwert durchgehend auf Rot gesetzt
@@ -136,7 +147,7 @@ Grund:
 Jellyfin-Aufruf:
 
 ```css
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/jellyfin_custom.css?v=2');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/jellyfin_custom.css?v=3');
 ```
 
 ### Liquid Glass Red V1

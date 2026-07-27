@@ -84,6 +84,15 @@ body,
   overflow: hidden;
 }
 
+/* The header contains Jellyfin's expanding main menu: never clip or cover it. */
+.skinHeader-withBackground {
+  overflow: visible !important;
+}
+
+.skinHeader-withBackground::before {
+  display: none !important;
+}
+
 .skinHeader-withBackground::before,
 .mainDrawer::before,
 .dialog::before,
