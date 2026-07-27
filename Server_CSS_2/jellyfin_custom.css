@@ -1,6 +1,6 @@
 /*
   Jellyfin Custom CSS - zentraler Einstieg
-  Stand: Liquid Glass Red V20
+  Stand: Liquid Glass Red V21
   Zweck: Ein einziger Jellyfin-Aufruf, ohne fixes.css, ohne zusätzliche Layoutkorrekturen und mit reduzierten Hover-Effekten und leicht erhöhtem Abstand über Abschnittstiteln.
   Regel: spezialisierte optische Schichten werden am Ende importiert.
 */
@@ -66,11 +66,11 @@
 /* Ersetze das Standard-Logo durch ein eigenes von einer URL */
 .pageTitleWithDefaultLogo,
 .pageTitleWithLogo {
-  background-image: url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/ServerLogo_long2x_noBG.png');
-  background-size: contain;
+  background-image: url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/ServerLogo_long_noBG.png?v=21');
+  background-size: 124% auto;
   background-repeat: no-repeat;
   background-position: center;
   display: block;  /* Sicherstellen, dass es sichtbar ist */
-  width: 250px;    /* Breite nach Wunsch anpassen */
+  width: 280px;    /* Breite nach Wunsch anpassen */
   height: 60px;    /* Höhe nach Wunsch anpassen */
 }

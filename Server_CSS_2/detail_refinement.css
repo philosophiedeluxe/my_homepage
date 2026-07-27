@@ -154,7 +154,7 @@
 @media all and (max-width: 70em) {
   .pageTitleWithDefaultLogo,
   .pageTitleWithLogo {
-    width: 172px !important;
+    width: 190px !important;
     height: 44px !important;
   }
 
