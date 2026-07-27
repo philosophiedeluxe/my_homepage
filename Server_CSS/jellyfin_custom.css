@@ -1,6 +1,6 @@
 /*
   Jellyfin Custom CSS - zentraler Einstieg
-  Stand: v38 select menu spacing
+  Stand: v39 home shelf cleanup
   Zweck: Ein einziger Jellyfin-Aufruf, ohne fixes.css, ohne zusätzliche Layoutkorrekturen und mit reduzierten Hover-Effekten und leicht erhöhtem Abstand über Abschnittstiteln.
   Regel: spezialisierte optische Schichten werden am Ende importiert.
 */
@@ -38,6 +38,7 @@
 @import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/person_card_sizing.css?v=36');
 @import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/final_interface_polish.css?v=37');
 @import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/select_menu_spacing.css?v=38');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/home_shelf_cleanup.css?v=39');
 
 
 /*Style backdrop*/
