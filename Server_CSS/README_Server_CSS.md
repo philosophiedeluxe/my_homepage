@@ -2,14 +2,14 @@
 
 Dieses Repository enthält die Custom-CSS-Dateien für die optische Anpassung der Jellyfin-Oberfläche.
 
-Aktueller stabiler Stand: **v37**
+Aktueller stabiler Stand: **v38**
 
 ## Aktueller Jellyfin-Aufruf
 
 In Jellyfin wird nur noch eine zentrale CSS-Datei geladen:
 
 ```css
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/jellyfin_custom.css?v=37');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/jellyfin_custom.css?v=38');
 ```
 
 Die Datei `jellyfin_custom.css` ist der zentrale Einstiegspunkt. Alle weiteren CSS-Dateien werden dort in der kontrollierten Reihenfolge eingebunden.
@@ -126,6 +126,19 @@ Grund:
 `fixes.css` sollte nicht erneut eingebunden werden.
 
 ## Entwicklungshistorie
+
+### v38 – Select Menu Spacing
+
+Basis: v37
+
+- zusätzlicher linker Innenabstand für Auswahlfelder und deren Optionen
+- keine Änderung an Höhe, Breite oder Menülogik
+
+Jellyfin-Aufruf:
+
+```css
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/jellyfin_custom.css?v=38');
+```
 
 ### v37 – Final Interface Polish
 
