@@ -471,27 +471,30 @@ a[data-role="button"]:hover,
   box-shadow: 0 15px 30px rgba(167, 8, 35, 0.44) !important;
 }
 
-/* Preference menu: provide a calmer left inset for icons and labels. */
-.userSettingsContainer .listItem,
-#userPreferencesMenu .listItem,
-.userMenu .listItem {
-  padding-left: 1.55em !important;
+/* Preferences route: the actual Jellyfin container is #myPreferencesMenuPage. */
+html:has(#myPreferencesMenuPage),
+body:has(#myPreferencesMenuPage),
+#myPreferencesMenuPage {
+  background: #0a090d !important;
+}
+
+#myPreferencesMenuPage {
+  min-height: 100vh !important;
+}
+
+#myPreferencesMenuPage a.listItem-border,
+#myPreferencesMenuPage .listItem,
+#myPreferencesMenuPage a.listItem-border:hover .listItem,
+#myPreferencesMenuPage a.listItem-border:focus-visible .listItem {
   border-radius: 14px !important;
 }
 
-.userSettingsContainer .listItem:hover,
-.userSettingsContainer .listItem:focus-visible,
-#userPreferencesMenu .listItem:hover,
-#userPreferencesMenu .listItem:focus-visible,
-.userMenu .listItem:hover,
-.userMenu .listItem:focus-visible {
-  border-radius: 14px !important;
+#myPreferencesMenuPage .listItem {
+  padding-left: 1.4em !important;
 }
 
-.userSettingsContainer .listItemIcon,
-#userPreferencesMenu .listItemIcon,
-.userMenu .listItemIcon {
-  margin-right: .8em !important;
+#myPreferencesMenuPage .listItemIcon {
+  margin-right: .9em !important;
 }
 
 /* Liquid red scrollbar, only visible through interaction. */
