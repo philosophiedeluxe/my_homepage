@@ -40,10 +40,26 @@ video.htmlvideoplayer,
   border-color: rgba(255, 255, 255, 0.06) !important;
 }
 
+/* Keep the top OSD present but 25% more compact. */
+.osdHeader {
+  box-sizing: border-box !important;
+  height: 5.25rem !important;
+  min-height: 5.25rem !important;
+}
+
 /* Jellyfin stretches these containers far above the controls. They must stay clear. */
 .videoOsdBottom,
 .videoOsdBottom .osdControls,
 .osdControls {
   background: transparent !important;
   box-shadow: none !important;
+}
+
+/* The actual lower control panel receives the same restrained glass treatment. */
+.videoOsdBottom.videoOsdBottom-maincontrols {
+  background: linear-gradient(180deg, rgba(7, 9, 15, 0.42), rgba(4, 6, 11, 0.76)) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 -10px 24px rgba(0, 0, 0, 0.20) !important;
+  -webkit-backdrop-filter: blur(14px) saturate(118%) !important;
+  backdrop-filter: blur(14px) saturate(118%) !important;
 }
