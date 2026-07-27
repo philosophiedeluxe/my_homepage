@@ -1,5 +1,35 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap'); body, h1, h2, h3, h4 {
-  font-family: 'Plus Jakarta Sans', sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --pkred-font: 'Manrope', 'Segoe UI', Arial, sans-serif;
+}
+
+body,
+button,
+input,
+select,
+textarea,
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--pkred-font) !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+.itemName,
+.sectionTitle {
+  font-weight: 700 !important;
+  letter-spacing: -0.022em !important;
+}
+
+.cardText,
+.navMenuOption,
+.emby-button {
+  font-weight: 600;
 }
 
 .emby-textarea {

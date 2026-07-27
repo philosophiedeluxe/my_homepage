@@ -332,6 +332,7 @@ a[data-role="button"]:hover,
 .btnSettings {
   background: rgba(32, 10, 17, 0.66) !important;
   border-color: rgba(255, 255, 255, 0.13) !important;
+  border-radius: 10px !important;
 }
 
 .osdControls .paper-icon-button-light:hover,
@@ -341,6 +342,84 @@ a[data-role="button"]:hover,
 .btnSettings:hover {
   background: rgba(var(--pkred), 0.32) !important;
   border-color: rgba(var(--pkred-bright), 0.64) !important;
+}
+
+/* Login: dark burgundy glass with a single decisive red action. */
+#loginPage {
+  position: relative;
+  isolation: isolate;
+  background:
+    linear-gradient(120deg, rgba(38, 5, 12, 0.84), rgba(12, 6, 11, 0.76)),
+    url(https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/loginBG.jpg) center / cover !important;
+}
+
+#loginPage::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(208, 33, 58, 0.24), transparent 35%),
+    linear-gradient(180deg, rgba(39, 8, 16, 0.32), rgba(3, 4, 8, 0.64));
+}
+
+#loginPage .padded-left.padded-right.padded-bottom-page {
+  width: min(24em, calc(100% - 2.4em)) !important;
+  margin-top: clamp(3.5em, 12vh, 8em) !important;
+  padding: 2.1em !important;
+  background: linear-gradient(135deg, rgba(67, 20, 32, 0.76), rgba(17, 13, 23, 0.84)) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  border-radius: 16px !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.48), 0 0 34px rgba(154, 12, 35, 0.18) !important;
+  box-sizing: border-box !important;
+}
+
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  #loginPage .padded-left.padded-right.padded-bottom-page {
+    -webkit-backdrop-filter: blur(24px) saturate(138%) !important;
+    backdrop-filter: blur(24px) saturate(138%) !important;
+  }
+}
+
+#loginPage form {
+  padding-top: 1.25em !important;
+}
+
+#loginPage .sectionTitle {
+  margin-inline: 0 !important;
+  margin-bottom: .85em !important;
+  text-align: left !important;
+  font-size: 1.65em !important;
+  line-height: 1.18 !important;
+}
+
+#loginPage .inputLabel,
+#loginPage .fieldDescription {
+  color: rgba(255, 226, 232, 0.80) !important;
+}
+
+#loginPage .emby-input {
+  min-height: 3.15em !important;
+  background: rgba(22, 17, 28, 0.78) !important;
+  border-color: rgba(255, 255, 255, 0.22) !important;
+  border-radius: 7px !important;
+}
+
+#loginPage .raised.submit,
+#loginPage .btnLogin {
+  min-height: 3em !important;
+  color: #fff !important;
+  background: linear-gradient(135deg, #e0213d, #c8102e) !important;
+  border-color: rgba(255, 134, 150, 0.46) !important;
+  border-radius: 7px !important;
+  box-shadow: 0 12px 24px rgba(137, 7, 29, 0.36) !important;
+}
+
+#loginPage .raised.submit:hover,
+#loginPage .btnLogin:hover {
+  background: linear-gradient(135deg, #f13752, #d91436) !important;
+  box-shadow: 0 15px 30px rgba(167, 8, 35, 0.44) !important;
 }
 
 /* Liquid red scrollbar, only visible through interaction. */
