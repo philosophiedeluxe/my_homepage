@@ -38,6 +38,13 @@ body,
     linear-gradient(150deg, rgba(30, 4, 12, 0.10), rgba(4, 6, 10, 0.24)) !important;
 }
 
+/* Small section labels carry the vivid red accent without tinting their surface. */
+#homeTab .sectionTitle::after,
+.sectionTitle::after {
+  color: #ff5872 !important;
+  text-shadow: 0 0 10px rgba(242, 34, 66, 0.26) !important;
+}
+
 /* Primary surfaces receive a thin light edge and a red-black glass reflection. */
 .skinHeader-withBackground,
 .mainDrawer,
@@ -115,7 +122,6 @@ body,
 .emby-input,
 .emby-textarea,
 .selectContainer select,
-.itemMiscInfo,
 .itemCommunityRating,
 .mediaSourceIndicator,
 .resolutionIndicator,
@@ -126,6 +132,24 @@ body,
 .btnSettings {
   background: rgba(61, 10, 26, 0.50) !important;
   border-color: rgba(255, 196, 205, 0.17) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.09) !important;
+}
+
+/* Jellyfin uses .itemMiscInfo as a full-width layout container on detail pages. */
+#itemDetailPage .itemMiscInfo {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+#itemDetailPage .itemMiscInfo > * {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.75em;
+  padding: .08em .52em;
+  background: rgba(82, 10, 31, 0.50) !important;
+  border: 1px solid rgba(255, 196, 205, 0.17) !important;
+  border-radius: 999px !important;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.09) !important;
 }
 
