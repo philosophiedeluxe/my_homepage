@@ -93,6 +93,18 @@ body,
   display: none !important;
 }
 
+/* Jellyfin's drawer is a fixed overlay, not a normal glass panel. */
+.mainDrawer {
+  position: fixed !important;
+  z-index: 1000 !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+}
+
+.mainDrawer::before {
+  display: none !important;
+}
+
 .skinHeader-withBackground::before,
 .mainDrawer::before,
 .dialog::before,
