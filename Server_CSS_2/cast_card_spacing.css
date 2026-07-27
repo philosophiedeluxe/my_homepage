@@ -1,0 +1,6 @@
+/* Jellyfin Cast Card Spacing — v35 */
+
+/* Jellyfin gives this inner container twice the outer left spacing. */
+#itemDetailPage .personCard > .cardBox.cardBox-bottompadded {
+  margin-right: 0.5em !important;
+}

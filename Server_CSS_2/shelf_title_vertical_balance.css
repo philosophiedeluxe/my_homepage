@@ -1,0 +1,7 @@
+/* Jellyfin Shelf Title Vertical Balance — v40 */
+
+/* Preserve the heading height while allocating about 20% more air above its text. */
+html body #homeTab .sectionTitleTextButton {
+  padding-top: 0.60em !important;
+  padding-bottom: 0.40em !important;
+}

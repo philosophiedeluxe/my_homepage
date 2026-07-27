@@ -1,0 +1,819 @@
+# Server_CSS_2 – Jellyfin Liquid Glass Red
+
+Dieses Repository enthält die Custom-CSS-Dateien für die optische Anpassung der Jellyfin-Oberfläche.
+
+Aktueller stabiler Stand: **Liquid Glass Red V1**
+
+## Aktueller Jellyfin-Aufruf
+
+In Jellyfin wird nur noch eine zentrale CSS-Datei geladen:
+
+```css
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/jellyfin_custom.css?v=1');
+```
+
+Die Datei `jellyfin_custom.css` ist der zentrale Einstiegspunkt. Alle weiteren CSS-Dateien werden dort in der kontrollierten Reihenfolge eingebunden.
+
+## Aktueller Zielzustand
+
+Der stabile Stand basiert auf folgender Kombination:
+
+```text
+V1 = zusammengeführter finaler Gesamtstand aller gestalterischen Schichten
+```
+
+Enthalten:
+
+- zentrale Lade-Datei `jellyfin_custom.css`
+- `fixes.css` vollständig entfernt
+- cleane Hover-/Aktivzustände über `hover_clean.css`
+- funktionierende Abstandskorrektur auf der Startseite über `home_spacing.css`
+- optische Effekte über `effects_cinematic.css`
+- keine riskanten Detailseiten-Layoutkorrekturen
+- keine Änderungen an Card-Grids, Posterbildern oder dynamischer Card-Skalierung
+
+## Wichtige Dateien
+
+### `jellyfin_custom.css`
+
+Zentraler Einstiegspunkt für Jellyfin.
+
+Diese Datei lädt alle benötigten CSS-Dateien in der richtigen Reihenfolge. Dadurch muss in Jellyfin selbst nur eine einzige `@import`-Zeile gepflegt werden.
+
+### `hover_clean.css`
+
+Finale optische Korrekturschicht für Hover- und Aktivzustände.
+
+Ziel:
+
+- cleanere Tab-Hover
+- weniger Neon-Glow
+- keine massiven blauen Blockflächen
+- dezente aktive Zustände
+- flachere Buttons und Menüs
+- Card-Hover bleibt sichtbar, aber ruhiger
+
+Diese Datei muss nach den optischen Grunddateien geladen werden, damit sie vorherige Hover-Regeln zuverlässig überschreibt.
+
+### `home_spacing.css`
+
+Finale Abstandskorrektur für die Startseite.
+
+Diese Datei korrigiert den Abstand zwischen oberer Header-Leiste und dem ersten Startseiten-Abschnitt `Meine Medien`.
+
+Die Korrektur erfolgt bewusst nicht über `#indexPage` und nicht über `h2.sectionTitle`, sondern über den tatsächlichen Parent-Container:
+
+```css
+#homeTab > .sections.homeSectionsContainer > .verticalSection.section0
+```
+
+Grund:
+
+- `Meine Medien` liegt direkt im ersten `.verticalSection.section0`.
+- `margin-top` auf dem `h2` kann kollabieren oder von Jellyfin überschrieben werden.
+- `padding-top` auf dem Parent ist stabiler und sichtbar.
+
+### `effects_cinematic.css`
+
+Optische Effekt-Schicht für Glow, Blur, Schatten und Glassmorphism.
+
+Wichtig:
+
+- keine Layoutkorrekturen
+- keine Detailseiten-Positionierung
+- keine Grid-Regeln
+- keine Card-Breiten
+- keine Posterbild-Filter
+
+Diese Datei darf nur visuelle Eigenschaften enthalten, zum Beispiel:
+
+```text
+box-shadow
+text-shadow
+background
+border
+border-radius
+filter
+backdrop-filter
+transition
+```
+
+Nicht enthalten sein sollten:
+
+```text
+padding
+margin
+left
+right
+top
+bottom
+width
+height
+position
+transform für Layoutkorrekturen
+```
+
+### `fixes.css`
+
+Diese Datei wurde ab v9 vollständig entfernt und wird nicht mehr geladen.
+
+Grund:
+
+- sie enthielt fehlerhafte Layoutkorrekturen
+- sie beeinflusste Detailseiten und responsive Abstände zu stark
+- spätere Korrekturen wurden bewusst ohne `fixes.css` umgesetzt
+
+`fixes.css` sollte nicht erneut eingebunden werden.
+
+## Entwicklungshistorie
+
+### Liquid Glass Red V1
+
+- eigenständige rote Akzentpalette
+- klare, geschichtete Glasflächen mit kontrollierter Transparenz
+- ruhige Kontraste statt Neon- oder Farbverläufen auf Postern
+- roter Fokus für Navigation, Aktionen, Fortschritt und Player
+
+Jellyfin-Aufruf:
+
+```css
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/jellyfin_custom.css?v=1');
+```
+
+### V1 – Erste finale Veröffentlichung
+
+Basis: v40
+
+- zusammengeführter stabiler Gesamtstand aller Layout-, Detail-, Player-, Formular-, Dashboard- und Startseitenkorrekturen
+- zentrale öffentliche Versionskennung auf `v=1` gesetzt
+- öffentliche und interne Imports einheitlich auf `v=1` gesetzt
+
+Jellyfin-Aufruf:
+
+```css
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/jellyfin_custom.css?v=1');
+```
+
+### v40 – Shelf Title Vertical Balance
+
+Basis: v39
+
+- obere Innenfläche klickbarer Rubriküberschriften um rund 20 % erhöht
+- untere Innenfläche entsprechend reduziert, damit der Text optisch mittig sitzt
+
+Jellyfin-Aufruf:
+
+```css
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/jellyfin_custom.css?v=40');
+```
+
+### v39 – Home Shelf Cleanup
+
+Basis: v38
+
+- sichtbare Rest-Rahmen unter Startseiten-Rubriken entfernt
+- Hover-Fläche klickbarer Rubriküberschriften horizontal erweitert
+- Rundung des Hover-Elements von 14 px auf 7 px reduziert
+
+Jellyfin-Aufruf:
+
+```css
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/jellyfin_custom.css?v=39');
+```
+
+### v38 – Select Menu Spacing
+
+Basis: v37
+
+- zusätzlicher linker Innenabstand für Auswahlfelder und deren Optionen
+- keine Änderung an Höhe, Breite oder Menülogik
+
+Jellyfin-Aufruf:
+
+```css
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/jellyfin_custom.css?v=38');
+```
+
+### v37 – Final Interface Polish
+
+Basis: v36
+
+- kompakter Detailseiten-Header mit klarer Aktionsgruppe
+- einheitliche Glas-Buttons für Carousel- und Abschnittsnavigation
+- konsolidierte Medien-, Status- und Fortschrittsanzeige
+- überarbeitete Dialoge, Scrollleisten, Leerzustände und Dashboard-Flächen
+- gezielte Verdichtung für mobile Details, Episodenlisten und Player-Steuerung
+
+Jellyfin-Aufruf:
+
+```css
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/jellyfin_custom.css?v=37');
+```
+
+### v36 – Person Card Sizing
+
+Basis: v35
+
+- einheitliche responsive Größe für alle Personen-Karten auf Detailseiten
+- „Gast Stars“ erhält dieselben quadratischen Bildmaße wie „Besetzung & Mitwirkende“
+- bestehende Besetzungs-Karten behalten ihre bisherigen Maße
+
+Jellyfin-Aufruf:
+
+```css
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/jellyfin_custom.css?v=36');
+```
+
+### v35 – Cast Card Spacing
+
+Basis: v34
+
+- asymmetrische rechte Außenmarge der Besetzungs-Karten auf die linke 0.5em-Marge abgestimmt
+- Karten überlappen nicht mehr optisch; die gleichmäßige Lücke zwischen den Karten bleibt erhalten
+
+Jellyfin-Aufruf:
+
+```css
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/jellyfin_custom.css?v=35');
+```
+
+### v34 – Episode Proportions
+
+Basis: v33
+
+- Vorschaubild auf die höhere Episodenzeile abgestimmt und vertikal zentriert
+- Abstand zwischen Episodentitel und Metadaten gezielt vergrößert
+- Beschreibungen auf zwei lesbare Zeilen begrenzt, damit die Zeilen kompakt bleiben
+
+Jellyfin-Aufruf:
+
+```css
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/jellyfin_custom.css?v=34');
+```
+
+### v33 – Episode Layout Reset
+
+Basis: v32
+
+- innere Flex- und Höhenüberschreibungen aus v27 zurückgesetzt
+- Jellyfins native Anordnung von Vorschau, Metadaten, Beschreibung und Aktionsicons wiederhergestellt
+- moderate zusätzliche Episodenzeilenhöhe aus v26 bleibt bestehen
+
+Jellyfin-Aufruf:
+
+```css
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/jellyfin_custom.css?v=33');
+```
+
+### v32 – Exact Card Radius Correction
+
+Basis: v31
+
+- Kapitel-Fußfläche über die tatsächliche Klasse `.chapterCard .innerCardFooter` auf 7 px gesetzt
+- Personen-Karten als einheitlich geclipte Einheit aufgebaut
+- Bild nur an den oberen Kartenrändern gerundet; Unterseite durch denselben äußeren Kartenradius geschlossen
+
+Jellyfin-Aufruf:
+
+```css
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/jellyfin_custom.css?v=32');
+```
+
+### v31 – Typography Refinement
+
+Basis: v30
+
+- Kachelbeschriftungen leichter und ruhiger abgestimmt
+- sekundäre Kachelmetadaten typografisch klarer abgesetzt
+- klickbare Abschnittstitel mit 14 px statt Pillen-Rundung
+- Hover-Fläche der Abschnittstitel links und rechts jeweils um 6 px erweitert
+
+Jellyfin-Aufruf:
+
+```css
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/jellyfin_custom.css?v=31');
+```
+
+### v30 – Chapter Footer Correction
+
+Basis: v29
+
+- sichtbares Kapitel-Label korrekt über `.chapterThumb .innerCardFooter` adressiert
+- Rundung dieses tatsächlichen Beschriftungselements auf 7 px reduziert
+
+Jellyfin-Aufruf:
+
+```css
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/jellyfin_custom.css?v=30');
+```
+
+### v29 – Cast Radius and Chapter Correction
+
+Basis: v28
+
+- Personenbilder behalten wieder ihre vollständige, gleichmäßige Rundung
+- Breitenangleichung von Bild und Text bleibt erhalten
+- Kapitel-Schaltfläche und sichtbare Textflächen mit hoher Spezifität auf 7 px Rundung gesetzt
+
+Jellyfin-Aufruf:
+
+```css
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/jellyfin_custom.css?v=29');
+```
+
+### v28 – Cast and Chapter Alignment
+
+Basis: v27
+
+- Bild- und Textflächen der Personen-Karten auf exakt gleiche Breite festgelegt
+- Personen-Karten als geschlossene Einheit gerendert
+- Kapitel-Label direkt auf 6 px Rundung überschrieben
+
+Jellyfin-Aufruf:
+
+```css
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/jellyfin_custom.css?v=28');
+```
+
+### v27 – Episode Alignment
+
+Basis: v26
+
+- Bild- und Textbereiche folgen jetzt der erweiterten Episodenzeilenhöhe
+- Textkörper vertikal zentriert
+- Zusammenfassungen erhalten eine definierte zweizeilige Lesezone
+
+Jellyfin-Aufruf:
+
+```css
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/jellyfin_custom.css?v=27');
+```
+
+### v26 – Precision Adjustments
+
+Basis: v25
+
+- vergrößerter Abstand zwischen Suchsymbol und Eingabetext
+- Kapitel-Labels mit deutlich reduzierter Rundung
+- erhöhte Episodenzeilen für lesbarere Zusammenfassungen
+
+Jellyfin-Aufruf:
+
+```css
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/jellyfin_custom.css?v=26');
+```
+
+### v25 – Media Refinement
+
+Basis: v24
+
+- neue finale Schicht `media_refinement.css`
+- reduzierte Glas-Kontrollen, Kapitelmarken und kompakte „Als Nächstes“-Karte
+- einheitliche Karten-Typografie und Status-Badges
+- veredelte Bibliothekskacheln ohne Änderung von Postern oder Grids
+- moderne Leer-, Lade- und Fehlerzustände
+- Profil- und Einstellungsflächen dem Dashboard-System angeglichen
+- mobile Regeln für die neuen Medien- und Playerflächen
+
+Jellyfin-Aufruf:
+
+```css
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/jellyfin_custom.css?v=25');
+```
+
+### v24 – Search Simplification
+
+Basis: v23
+
+- feste, kompakte Suchzeilenhöhe von 48 px
+- Jellyfin-spezifischen Floating-Label-Versatz entfernt
+- Lupe und Suchtext vertikal sauber ausgerichtet
+
+Jellyfin-Aufruf:
+
+```css
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/jellyfin_custom.css?v=24');
+```
+
+### v23 – Compact Forms
+
+Basis: v22
+
+- Suchzeile sichtbar kompakter
+- linkes Text-Inset proportional reduziert
+- „Angemeldet bleiben“ als akzentuierte Glas-Kachel mit aktivem Rahmen
+
+Jellyfin-Aufruf:
+
+```css
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/jellyfin_custom.css?v=23');
+```
+
+### v22 – Login Checkbox
+
+Basis: v21
+
+- Checkbox aus der absoluten Positionierung gelöst und als sichtbares Inline-Element gesetzt
+- eigener kontrastreicher Hintergrund für „Angemeldet bleiben“
+- klar sichtbares Häkchen im aktiven Zustand
+
+Jellyfin-Aufruf:
+
+```css
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/jellyfin_custom.css?v=22');
+```
+
+### v21 – Search Alignment
+
+Basis: v20
+
+- Suchfeld selbst horizontal zentriert, unabhängig vom Suchsymbol
+- Suchsymbol innerhalb des Felds positioniert
+- vergrößerter linker Innenabstand für den Suchtext
+
+Jellyfin-Aufruf:
+
+```css
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/jellyfin_custom.css?v=21');
+```
+
+### v20 – Form Refinement
+
+Basis: v19
+
+- neue finale Schicht `form_refinement.css`
+- Suchansicht ohne übergroßen Container, mit klar fokussiertem Eingabefeld
+- Login-Felder mit verlässlichem Kontrast und sichtbarem Fokuszustand
+- korrigierte Browser-Autofill-Fläche für Passwortfelder
+- deutlich sichtbare Checkbox mit eindeutigem aktivem Zustand
+
+Jellyfin-Aufruf:
+
+```css
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/jellyfin_custom.css?v=20');
+```
+
+### v19 – System Refinement
+
+Basis: v18
+
+- neue finale Schicht `system_refinement.css`
+- Metadaten auf Detailseiten als scanbare Chips
+- kuratiertere Startseiten-Abschnitte mit klarerer Hierarchie
+- einheitliche Flächen für Suche, Filter und Auswahlbefehle
+- konsistente Status-Badges für gesehen, fehlend, Quelle und Zähler
+- zurückgenommener Header in Detailansichten für einen Cinema-Focus
+- Dashboard, Geräte- und Verwaltungslisten im selben Oberflächensystem
+- keine Änderung an Medienraster, Posterformaten oder Player-Steuerung
+
+Jellyfin-Aufruf:
+
+```css
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/jellyfin_custom.css?v=19');
+```
+
+### v18 – Detail Refinement
+
+Basis: v17
+
+- neue finale Schicht `detail_refinement.css`
+- Episodenlisten als klar abgegrenzte, ruhige Informationseinheiten
+- modernisierte Detailflächen, Metadatenfelder und Cast-Karten
+- sichtbare, zurückhaltende Carousel- und Alphabetnavigation
+- neutralerer Drawer mit eindeutiger aktiver Bibliothek
+- kompaktere Logo- und Tab-Leiste bei kleineren Breiten
+- keine Änderungen an Posterformaten, Bibliotheksgrids oder Player-Steuerung
+
+Jellyfin-Aufruf:
+
+```css
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/jellyfin_custom.css?v=18');
+```
+
+### v17 – Modern Refinement
+
+Basis: v16
+
+- neue finale Schicht `modern_refinement.css`
+- ruhigeres, kontrastreicheres Oberflächensystem für Header, Drawer, Dialoge und Listen
+- klar abgegrenzte Eingabefelder mit fokussiertem Akzentzustand
+- einheitlichere Buttons und Bibliothekskacheln ohne Neon-Glow
+- Cards erhalten eine zurückhaltende Tiefenstaffelung; Poster, Grid und responsive Maße bleiben unverändert
+- Cache-Busting aller Imports auf `v=17`
+
+Jellyfin-Aufruf:
+
+```css
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/jellyfin_custom.css?v=2');
+```
+
+### v9 – Clean ohne `fixes.css`
+
+- `fixes.css` vollständig entfernt
+- zentraler Single-Aufruf bleibt erhalten
+- keine neuen Detailseiten-Layoutkorrekturen
+- `effects_cinematic.css` bleibt als letzte optische Schicht aktiv
+
+Jellyfin-Aufruf:
+
+```css
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/jellyfin_custom.css?v=9');
+```
+
+### v10 – Clean Hover
+
+Basis: v9
+
+- neue Datei `hover_clean.css`
+- `hover_clean.css` wird nach `effects_cinematic.css` geladen
+- alte starke Glow-Regeln in `hoverglow.css` entschärft
+- keine Änderungen an Grid, Card-Breiten, Card-Abständen oder Posterbildern
+
+Ziel:
+
+- weniger Neon-Glow
+- keine starken blauen Blockflächen in Tabs
+- dezente aktive Fläche mit feiner Akzentlinie
+- Cards behalten Tiefe, aber weniger Leuchten
+- Buttons und Menüs wirken flacher und cleaner
+
+Jellyfin-Aufruf:
+
+```css
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/jellyfin_custom.css?v=10');
+```
+
+### v11 – Hover niedriger und erster Spacing-Versuch
+
+Basis: v10
+
+- Hover-/Aktiv-Flächen der Tabs optisch ca. 10% niedriger
+- Touch-/Klick-Ziel der Tabs bleibt unverändert
+- Abstand über Abschnittstiteln wie `Meine Medien` leicht erhöht
+- keine Änderungen an Card-Grids, Posterbildern oder Detailseiten-Positionierung
+
+Jellyfin-Aufruf:
+
+```css
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/jellyfin_custom.css?v=11');
+```
+
+### v12 – stärker sichtbarer Hover-/Spacing-Versuch
+
+Basis: aktueller Nutzerstand `Server_CSS(2).zip`
+
+- `hover_clean.css` gezielter angepasst
+- aktive/Hover-Tabs stärker überschrieben
+- überschrieben wurden unter anderem:
+  - `background`
+  - `background-image`
+  - `border`
+  - `outline`
+  - `box-shadow`
+- sichtbare Tab-Fläche über `::before` mit stärkerem vertikalem Inset gezeichnet
+- Abschnittstitel wie `Meine Medien` zusätzlich mit `padding-top` versehen
+
+Jellyfin-Aufruf:
+
+```css
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/jellyfin_custom.css?v=12');
+```
+
+### v13 – final brauchbares Clean-Hover-Design
+
+Basis: aktueller Nutzerstand `Server_CSS(2).zip`
+
+- `hover_clean.css` deutlich stärker überschrieben
+- Tab-/Hover-Hintergrund wird nicht mehr auf dem gesamten Button gezeichnet
+- sichtbare Aktiv-/Hover-Fläche wird über einen flacheren Pseudo-Layer erzeugt
+- vollflächige Hintergründe aus `effects_cinematic.css` werden für Tabs konsequent neutralisiert
+- keine Änderungen an Card-Grids, Posterbildern, Detailseiten-Positionierung oder `fixes.css`
+
+Dieser Stand wurde als deutlich besser bewertet und ist die Basis für den finalen Hover-Zustand.
+
+Jellyfin-Aufruf:
+
+```css
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/jellyfin_custom.css?v=13');
+```
+
+### v14 – erster Header-Abstandsversuch
+
+Basis: v13
+
+- Clean-Hover-Design aus v13 bleibt erhalten
+- Abstand zwischen oberer Header-Leiste und erstem Abschnittstitel wie `Meine Medien` sollte erhöht werden
+- für breite Desktop-Fenster wurde der Startseiten-Offset von 68px auf 88px angehoben
+- zusätzlich bekam der erste Abschnittstitel einen robusteren `margin-top`
+
+Ergebnis:
+
+- nicht ausreichend wirksam
+- Ursache lag tiefer in der Startseitenstruktur
+
+Jellyfin-Aufruf:
+
+```css
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/jellyfin_custom.css?v=14');
+```
+
+### v15 – Header-Abstand direkt in `header_transparent.css`
+
+Basis: v14
+
+- Abstand wurde direkt in `header_transparent.css` korrigiert
+- betroffen waren:
+  - `#indexPage`
+  - `#moviesPage`
+  - `#tvRecommendedPage`
+  - `#musicRecommendedPage`
+
+Werte:
+
+```css
+/* breite Desktop-Ansicht */
+margin-top: 92px;
+
+/* kompaktere Breiten */
+margin-top: 154px;
+```
+
+Vorher:
+
+```css
+/* breite Desktop-Ansicht */
+margin-top: 68px;
+
+/* kompaktere Breiten */
+margin-top: 130px;
+```
+
+Ergebnis:
+
+- weiterhin nicht zuverlässig sichtbar
+- `Meine Medien` wurde nicht an der tatsächlichen wirksamen Stelle verschoben
+
+### v16 – finaler Home-Spacing-Fix
+
+Basis: v13 Clean-Hover-Design
+
+- neue Datei `home_spacing.css`
+- `home_spacing.css` wird als letzte CSS-Schicht nach `hover_clean.css` geladen
+- Abstand wird nicht mehr über `#indexPage margin-top` korrigiert
+- Abstand wird nicht mehr über `h2.sectionTitle margin-top` korrigiert
+- stattdessen wird der tatsächliche Startseiten-Abschnitt adressiert:
+
+```css
+#homeTab > .sections.homeSectionsContainer > .verticalSection.section0
+```
+
+Kernlogik:
+
+```css
+html body #homeTab > .sections.homeSectionsContainer > .verticalSection.section0,
+html body .pageTabContent#homeTab > .sections.homeSectionsContainer > .verticalSection.section0,
+html body .homeSectionsContainer > .verticalSection.section0:first-child {
+  padding-top: 26px !important;
+  box-sizing: border-box !important;
+}
+```
+
+Ergebnis:
+
+- Abstand zwischen Header und `Meine Medien` greift sichtbar
+- Hover-Design bleibt unverändert
+- `fixes.css` bleibt entfernt
+- keine negativen Auswirkungen auf Card-Grids, Posterbilder oder Detailseiten
+
+Jellyfin-Aufruf:
+
+```css
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/jellyfin_custom.css?v=16');
+```
+
+## Finale Struktur
+
+Empfohlene Struktur im Repository:
+
+```text
+Server_CSS/
+├── jellyfin_custom.css
+├── jf_font.css
+├── base.css
+├── accentlist.css
+├── rounding_circlehover.css
+├── smallercast.css
+├── episodes_compactlist.css
+├── header_transparent.css
+├── login_frame.css
+├── fields_noborder.css
+├── indicator_floating.css
+├── dark.css
+├── title_banner-logo.css
+├── floating.css
+├── hoverglow.css
+├── glassy.css
+├── effects_cinematic.css
+├── hover_clean.css
+├── home_spacing.css
+├── modern_refinement.css
+├── detail_refinement.css
+├── system_refinement.css
+├── form_refinement.css
+├── media_refinement.css
+├── precision_refinement.css
+└── README.md
+```
+
+Optional vorhandene, aber aktuell nicht aktive Datei:
+
+```text
+episodes_grid.css
+```
+
+Nicht mehr verwenden:
+
+```text
+fixes.css
+```
+
+## Import-Reihenfolge
+
+`jellyfin_custom.css` sollte die Dateien in stabiler Reihenfolge laden:
+
+```css
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/jf_font.css?v=16');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/base.css?v=16');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/accentlist.css?v=16');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/rounding_circlehover.css?v=16');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/smallercast.css?v=16');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/episodes_compactlist.css?v=16');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/header_transparent.css?v=16');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/login_frame.css?v=16');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/fields_noborder.css?v=16');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/indicator_floating.css?v=16');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/dark.css?v=16');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/title_banner-logo.css?v=16');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/floating.css?v=16');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/hoverglow.css?v=16');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/glassy.css?v=16');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/effects_cinematic.css?v=16');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/hover_clean.css?v=16');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/home_spacing.css?v=16');
+```
+
+Wichtig:
+
+- `effects_cinematic.css` bleibt optische Effekt-Schicht.
+- `hover_clean.css` überschreibt Hover-/Aktivzustände.
+- `home_spacing.css` kommt ganz am Ende, damit der Abstand sicher greift.
+- `fixes.css` wird nicht geladen.
+
+## Wartungsregeln
+
+### Layout und Effekte trennen
+
+Optische Dateien dürfen keine grundlegenden Layoutkorrekturen enthalten.
+
+`effects_cinematic.css` und `hover_clean.css` sollten keine Regeln enthalten für:
+
+```text
+Detailseiten-Positionierung
+Grid-Breiten
+Card-Skalierung
+große margin-/padding-Korrekturen
+absolute/fixed Layoutverschiebungen
+```
+
+### Änderungen klein halten
+
+Neue Anpassungen sollten jeweils nur eine Schicht betreffen:
+
+```text
+Hover → hover_clean.css
+Startseiten-Abstand → home_spacing.css
+Header-Verhalten → header_transparent.css
+Effekte → effects_cinematic.css
+```
+
+### Cache-Busting
+
+Bei jeder produktiven Änderung die Versionsnummer im Jellyfin-Aufruf erhöhen:
+
+```css
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/jellyfin_custom.css?v=17');
+```
+
+Zusätzlich sollten die internen Imports in `jellyfin_custom.css` auf dieselbe Version gesetzt werden.
+
+## Aktueller Status
+
+`V1` ist der aktuelle stabile Stand.
+
+Dieser Stand wurde erfolgreich getestet:
+
+- Header-Abstand auf der Startseite greift sauber
+- Hover-Design ist cleaner
+- Cards und Posterbilder bleiben intakt
+- dynamische Card-Skalierung bleibt erhalten
+- `fixes.css` bleibt vollständig entfernt

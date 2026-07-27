@@ -1,0 +1,32 @@
+/*
+  Jellyfin Episode Proportions — v34
+  Restores a compact row while matching the preview to its increased height.
+*/
+
+/* The preview is deliberately sized independently from the text column. */
+#itemDetailPage .listItem.listItem-largeImage .listItem-content > .listItemImage {
+  align-self: center !important;
+  height: 6.25em !important;
+  flex: 0 0 auto !important;
+}
+
+/* Keep the title separate from its metadata without changing metadata flow. */
+#itemDetailPage .listItem.listItem-largeImage .listItemBody > .listItemBodyText:not(.secondary) {
+  margin-bottom: 0.38em !important;
+}
+
+/* Two overview lines preserve context without turning each episode into a panel. */
+#itemDetailPage .listItem.listItem-largeImage .listItem-overview {
+  display: -webkit-box !important;
+  -webkit-box-orient: vertical !important;
+  -webkit-line-clamp: 2 !important;
+  overflow: hidden !important;
+  line-height: 1.28em !important;
+  max-height: 2.56em !important;
+  margin-top: 0.28em !important;
+}
+
+#itemDetailPage .listItem.listItem-largeImage .listItem-overview p {
+  display: block !important;
+  margin: 0 !important;
+}

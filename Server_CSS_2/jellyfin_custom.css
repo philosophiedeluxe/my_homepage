@@ -1,0 +1,71 @@
+/*
+  Jellyfin Custom CSS - zentraler Einstieg
+  Stand: Liquid Glass Red V1
+  Zweck: Ein einziger Jellyfin-Aufruf, ohne fixes.css, ohne zusätzliche Layoutkorrekturen und mit reduzierten Hover-Effekten und leicht erhöhtem Abstand über Abschnittstiteln.
+  Regel: spezialisierte optische Schichten werden am Ende importiert.
+*/
+
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/jf_font.css?v=1');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/base.css?v=1');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/accentlist.css?v=1');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/rounding_circlehover.css?v=1');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/smallercast.css?v=1');
+/*@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/episodes_grid.css?v=1');*/
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/episodes_compactlist.css?v=1');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/header_transparent.css?v=1');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/login_frame.css?v=1');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/fields_noborder.css?v=1');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/indicator_floating.css?v=1');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/dark.css?v=1');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/title_banner-logo.css?v=1');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/floating.css?v=1');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/hoverglow.css?v=1');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/glassy.css?v=1');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/effects_cinematic.css?v=1');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/hover_clean.css?v=1');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/home_spacing.css?v=1');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/modern_refinement.css?v=1');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/detail_refinement.css?v=1');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/system_refinement.css?v=1');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/form_refinement.css?v=1');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/media_refinement.css?v=1');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/precision_refinement.css?v=1');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/typography_refinement.css?v=1');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/card_radius_refinement.css?v=1');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/episode_layout_reset.css?v=1');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/episode_proportions.css?v=1');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/cast_card_spacing.css?v=1');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/person_card_sizing.css?v=1');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/final_interface_polish.css?v=1');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/select_menu_spacing.css?v=1');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/home_shelf_cleanup.css?v=1');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/shelf_title_vertical_balance.css?v=1');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/liquid_glass_red.css?v=1');
+
+
+/*Style backdrop*/
+.backdropImage {filter: blur(0px) saturate(100%) contrast(100%) brightness(100%);}
+
+/*Style PageSecondaryContainer*/
+.detailPageSecondaryContainer.padded-bottom-page {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+/*Login background*/
+#loginPage {background: url(https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/loginBG.jpg) !important;}
+
+/*Accent and roundingd*/
+:root {--accent: 98, 121, 205;}
+:root {--rounding: 12px;}
+
+/* Ersetze das Standard-Logo durch ein eigenes von einer URL */
+.pageTitleWithDefaultLogo,
+.pageTitleWithLogo {
+  background-image: url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/ServerLogo_long2x_noBG.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: block;  /* Sicherstellen, dass es sichtbar ist */
+  width: 250px;    /* Breite nach Wunsch anpassen */
+  height: 60px;    /* Höhe nach Wunsch anpassen */
+}

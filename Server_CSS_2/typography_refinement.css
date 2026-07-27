@@ -1,0 +1,39 @@
+/* Jellyfin Typography Refinement Layer — v31 */
+
+/* Card captions: quieter and more legible beneath artwork. */
+.cardText {
+  font-weight: 450 !important;
+  line-height: 1.28 !important;
+  letter-spacing: .004em !important;
+}
+
+.cardText-first {
+  font-weight: 520 !important;
+  font-size: .96em !important;
+}
+
+.cardText-secondary,
+.cardText.cardText-secondary,
+.card .secondary {
+  font-weight: 400 !important;
+  font-size: .84em !important;
+  letter-spacing: .01em !important;
+}
+
+/* Clickable shelf headings: flatter corners, six pixels more hover area on each side. */
+html body .sectionTitleTextButton {
+  margin-inline: -6px !important;
+  padding-inline: 6px !important;
+  border-radius: 14px !important;
+}
+
+html body .sectionTitleTextButton:hover,
+html body .sectionTitleTextButton:focus-visible {
+  border-radius: 14px !important;
+}
+
+@media all and (max-width: 50em) {
+  .cardText-first {
+    font-size: .93em !important;
+  }
+}
