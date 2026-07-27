@@ -383,30 +383,35 @@ a[data-role="button"]:hover,
   border-color: rgba(var(--pkred-bright), 0.64) !important;
 }
 
-/* Login: dark burgundy glass with a single decisive red action. */
+/* Login: full-bleed wallpaper behind a wide burgundy glass panel. */
 #loginPage {
   position: relative;
+  min-height: 100vh;
   isolation: isolate;
-  background:
-    linear-gradient(120deg, rgba(38, 5, 12, 0.46), rgba(12, 6, 11, 0.30)),
-    url(https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/loginBG.jpg) center / cover !important;
+  overflow: hidden;
+  background: #08080c !important;
 }
 
 #loginPage::before {
   content: "";
   position: fixed;
   inset: 0;
-  z-index: -1;
+  z-index: 0;
   pointer-events: none;
   background:
-    radial-gradient(circle at 15% 20%, rgba(208, 33, 58, 0.24), transparent 35%),
-    linear-gradient(180deg, rgba(39, 8, 16, 0.32), rgba(3, 4, 8, 0.64));
+    linear-gradient(120deg, rgba(53, 6, 18, 0.22), rgba(4, 5, 10, 0.14)),
+    url(https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/loginBG.jpg) center center / cover no-repeat;
+}
+
+#loginPage > * {
+  position: relative;
+  z-index: 1;
 }
 
 #loginPage .padded-left.padded-right.padded-bottom-page {
-  width: min(24em, calc(100% - 2.4em)) !important;
+  width: min(36em, calc(100% - 2.4em)) !important;
   margin-top: clamp(3.5em, 12vh, 8em) !important;
-  padding: 2.1em !important;
+  padding: 2.4em !important;
   background: linear-gradient(135deg, rgba(67, 20, 32, 0.76), rgba(17, 13, 23, 0.84)) !important;
   border: 1px solid rgba(255, 255, 255, 0.16) !important;
   border-radius: 16px !important;
@@ -422,7 +427,12 @@ a[data-role="button"]:hover,
 }
 
 #loginPage form {
+  max-width: none !important;
   padding-top: 1.25em !important;
+}
+
+#loginPage .readOnlyContent {
+  max-width: none !important;
 }
 
 #loginPage .sectionTitle {
@@ -459,6 +469,19 @@ a[data-role="button"]:hover,
 #loginPage .btnLogin:hover {
   background: linear-gradient(135deg, #f13752, #d91436) !important;
   box-shadow: 0 15px 30px rgba(167, 8, 35, 0.44) !important;
+}
+
+/* Preference menu: provide a calmer left inset for icons and labels. */
+.userSettingsContainer .listItem,
+#userPreferencesMenu .listItem,
+.userMenu .listItem {
+  padding-left: 1.15em !important;
+}
+
+.userSettingsContainer .listItemIcon,
+#userPreferencesMenu .listItemIcon,
+.userMenu .listItemIcon {
+  margin-right: .8em !important;
 }
 
 /* Liquid red scrollbar, only visible through interaction. */

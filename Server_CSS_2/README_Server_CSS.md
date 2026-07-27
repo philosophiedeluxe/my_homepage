@@ -2,14 +2,14 @@
 
 Dieses Repository enthält die Custom-CSS-Dateien für die optische Anpassung der Jellyfin-Oberfläche.
 
-Aktueller stabiler Stand: **Liquid Glass Red V12**
+Aktueller stabiler Stand: **Liquid Glass Red V14**
 
 ## Aktueller Jellyfin-Aufruf
 
 In Jellyfin wird nur noch eine zentrale CSS-Datei geladen:
 
 ```css
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/jellyfin_custom.css?v=12');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/jellyfin_custom.css?v=14');
 ```
 
 Die Datei `jellyfin_custom.css` ist der zentrale Einstiegspunkt. Alle weiteren CSS-Dateien werden dort in der kontrollierten Reihenfolge eingebunden.
@@ -127,6 +127,17 @@ Grund:
 
 ## Entwicklungshistorie
 
+### Liquid Glass Red V13
+
+- kleine Gesehen-Markierung auf Episoden-Vorschaubildern als roten Kreis mit weißem Haken umgesetzt
+- separate, hochspezifische Regel für Jellyfins `.playedIndicator.indicator`
+
+Jellyfin-Aufruf:
+
+```css
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/jellyfin_custom.css?v=13');
+```
+
 ### Liquid Glass Red V12
 
 - sämtliche Oberflächenvariablen der Teilthemen auf eine einheitliche Burgunder-Schwarz-Palette abgebildet
@@ -136,7 +147,7 @@ Grund:
 Jellyfin-Aufruf:
 
 ```css
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/jellyfin_custom.css?v=12');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/jellyfin_custom.css?v=13');
 ```
 
 ### Liquid Glass Red V11

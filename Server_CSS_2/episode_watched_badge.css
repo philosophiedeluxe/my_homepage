@@ -1,0 +1,23 @@
+/* Liquid Glass Red Episode Watched Badge — V13 */
+
+/* The preview badge is distinct from the card overlay playstate button. */
+#itemDetailPage .playedIndicator.indicator {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 1.78em !important;
+  min-width: 1.78em !important;
+  height: 1.78em !important;
+  min-height: 1.78em !important;
+  padding: 0 !important;
+  color: #fff !important;
+  background: linear-gradient(135deg, #ef4160, #c81335) !important;
+  border: 1px solid rgba(255, 175, 186, 0.72) !important;
+  border-radius: 50% !important;
+  box-shadow: 0 5px 14px rgba(173, 10, 37, 0.42) !important;
+}
+
+#itemDetailPage .playedIndicator.indicator .indicatorIcon {
+  color: #fff !important;
+  font-size: 1.05em !important;
+}
