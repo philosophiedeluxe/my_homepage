@@ -16,6 +16,16 @@
   --pkred-shadow: 0 18px 46px rgba(0, 0, 0, 0.36), 0 0 32px rgba(118, 10, 27, 0.10);
 }
 
+/* Force every legacy accent consumer into the red palette. */
+:root,
+html,
+body {
+  --accent: 210, 54, 72 !important;
+  --pkmodern-accent: 210, 54, 72 !important;
+  --pksystem-accent: 210, 54, 72 !important;
+  --pkmedia-accent: 210, 54, 72 !important;
+}
+
 /* The base remains black; color only appears as a reflected layer. */
 body,
 .backgroundContainer,
@@ -34,6 +44,19 @@ body,
     radial-gradient(ellipse at 90% 84%, rgba(121, 11, 31, 0.11), transparent 32%);
 }
 
+/* Red type accents replace all residual blue navigation language. */
+#homeTab .sectionTitle::after,
+.sectionTitle::after,
+.headerTabs .emby-tab-button-active,
+.emby-tab-button-active,
+.alphaPickerButton-selected,
+.fieldDescription a,
+.itemGenres a:hover,
+.itemTags a:hover,
+.textActionButton:hover {
+  color: rgba(var(--pkred-bright), 0.96) !important;
+}
+
 /* Glass planes: transparent enough to feel layered, dark enough to stay readable. */
 .skinHeader-withBackground,
 .mainDrawer,
@@ -49,6 +72,31 @@ body,
   background: linear-gradient(135deg, rgba(34, 16, 23, 0.76), rgba(9, 11, 17, 0.70)) !important;
   border-color: var(--pkred-border) !important;
   box-shadow: var(--pkred-shadow) !important;
+}
+
+.skinHeader-withBackground,
+.mainDrawer,
+.dialog,
+.actionSheet,
+.paperList,
+.detailTable {
+  position: relative;
+  overflow: hidden;
+}
+
+.skinHeader-withBackground::before,
+.mainDrawer::before,
+.dialog::before,
+.actionSheet::before,
+.paperList::before,
+.detailTable::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border: 1px solid rgba(255, 255, 255, 0.075);
+  border-radius: inherit;
+  background: linear-gradient(125deg, rgba(255, 255, 255, 0.055), transparent 30%, rgba(204, 24, 51, 0.055));
 }
 
 @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
@@ -136,6 +184,17 @@ a[data-role="button"]:hover,
   box-shadow: 0 10px 28px rgba(0, 0, 0, 0.26) !important;
 }
 
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .card > .cardBox,
+  #itemDetailPage .listItem,
+  #dashboardPage .dashboardSection,
+  #dashboardPage .paperList,
+  #dashboardPage .detailTable {
+    -webkit-backdrop-filter: blur(16px) saturate(128%) !important;
+    backdrop-filter: blur(16px) saturate(128%) !important;
+  }
+}
+
 .card:hover > .cardBox,
 .card:focus-within > .cardBox,
 #itemDetailPage .listItem:hover,
@@ -158,11 +217,31 @@ a[data-role="button"]:hover,
 .playedIndicator,
 .cardIndicators .playedIndicator,
 .itemProgressBarForeground,
+.card .itemProgressBarForeground,
+.listItem .itemProgressBarForeground,
+.backgroundProgress > div,
 .taskProgressInner,
 #dashboardPage progress::-webkit-progress-value {
   background: linear-gradient(90deg, rgba(177, 25, 49, 0.92), rgba(255, 92, 111, 0.98)) !important;
   border-color: rgba(var(--pkred-bright), 0.54) !important;
   box-shadow: 0 0 12px rgba(206, 22, 49, 0.36) !important;
+}
+
+.itemProgressBar,
+.backgroundProgress {
+  background: rgba(255, 255, 255, 0.15) !important;
+}
+
+.sliderContainer,
+.sliderContainer .sliderTrack,
+.iconOsdProgressOuter {
+  background: rgba(255, 255, 255, 0.16) !important;
+}
+
+.sliderContainer .sliderBubble,
+.iconOsdProgress {
+  background: rgba(var(--pkred-bright), 0.98) !important;
+  box-shadow: 0 0 12px rgba(210, 22, 49, 0.48) !important;
 }
 
 .sliderMarker.watched,
