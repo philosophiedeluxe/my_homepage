@@ -96,7 +96,7 @@ body,
 /* Jellyfin's drawer is a fixed overlay, not a normal glass panel. */
 .mainDrawer {
   position: fixed !important;
-  z-index: 1000 !important;
+  z-index: 1100 !important;
   overflow-x: hidden !important;
   overflow-y: hidden !important;
 }
@@ -108,8 +108,10 @@ body,
 /* Jellyfin scrolls the drawer through this inner container. */
 .mainDrawer .mainDrawer-scrollContainer,
 .mainDrawer .scrollbarContainer {
-  height: 100% !important;
-  max-height: 100vh !important;
+  position: absolute !important;
+  inset: 0 !important;
+  height: auto !important;
+  max-height: none !important;
   overflow-x: hidden !important;
   overflow-y: auto !important;
   overscroll-behavior: contain;

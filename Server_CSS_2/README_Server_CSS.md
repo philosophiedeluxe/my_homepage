@@ -2,14 +2,14 @@
 
 Dieses Repository enthält die Custom-CSS-Dateien für die optische Anpassung der Jellyfin-Oberfläche.
 
-Aktueller stabiler Stand: **Liquid Glass Red V6**
+Aktueller stabiler Stand: **Liquid Glass Red V7**
 
 ## Aktueller Jellyfin-Aufruf
 
 In Jellyfin wird nur noch eine zentrale CSS-Datei geladen:
 
 ```css
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/jellyfin_custom.css?v=6');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/jellyfin_custom.css?v=7');
 ```
 
 Die Datei `jellyfin_custom.css` ist der zentrale Einstiegspunkt. Alle weiteren CSS-Dateien werden dort in der kontrollierten Reihenfolge eingebunden.
@@ -127,6 +127,18 @@ Grund:
 
 ## Entwicklungshistorie
 
+### Liquid Glass Red V7
+
+- Drawer über Jellyfins Backdrop-Ebene gesetzt, damit Menüeinträge wieder Pointer-Ereignisse erhalten
+- inneren Scrollcontainer exakt an den Drawer gebunden
+- Menü-Links und Scrolling dadurch wieder vollständig bedienbar
+
+Jellyfin-Aufruf:
+
+```css
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/jellyfin_custom.css?v=7');
+```
+
 ### Liquid Glass Red V6
 
 - unterer Innenabstand der Kartenbeschriftungen auf der Startseite vergrößert
@@ -135,7 +147,7 @@ Grund:
 Jellyfin-Aufruf:
 
 ```css
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/jellyfin_custom.css?v=6');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/jellyfin_custom.css?v=7');
 ```
 
 ### Liquid Glass Red V5
