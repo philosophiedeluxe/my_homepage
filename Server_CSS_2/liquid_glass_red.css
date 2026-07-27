@@ -98,11 +98,47 @@ body,
   position: fixed !important;
   z-index: 1000 !important;
   overflow-x: hidden !important;
-  overflow-y: auto !important;
+  overflow-y: hidden !important;
 }
 
 .mainDrawer::before {
   display: none !important;
+}
+
+/* Jellyfin scrolls the drawer through this inner container. */
+.mainDrawer .mainDrawer-scrollContainer,
+.mainDrawer .scrollbarContainer {
+  height: 100% !important;
+  max-height: 100vh !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Links use color and surface changes only, never an underline. */
+a,
+a:hover,
+a:focus,
+a:focus-visible,
+.textActionButton:hover,
+.button-link:hover {
+  text-decoration: none !important;
+}
+
+/* Drawer navigation stays readable against the liquid-glass surface. */
+.mainDrawer .navMenuOption {
+  margin-inline: .40em !important;
+  border: 1px solid transparent !important;
+  border-radius: 8px !important;
+  transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease !important;
+}
+
+.mainDrawer .navMenuOption:hover,
+.mainDrawer .navMenuOption:focus-visible {
+  color: rgba(255, 245, 247, 0.98) !important;
+  background: linear-gradient(90deg, rgba(var(--pkred), 0.26), rgba(var(--pkred), 0.08)) !important;
+  border-color: rgba(var(--pkred-bright), 0.34) !important;
 }
 
 .skinHeader-withBackground::before,
@@ -222,6 +258,11 @@ a[data-role="button"]:hover,
 #dashboardPage .listItem:hover {
   border-color: rgba(var(--pkred-bright), 0.42) !important;
   box-shadow: 0 16px 36px rgba(0, 0, 0, 0.36), 0 0 24px rgba(139, 12, 33, 0.17) !important;
+}
+
+/* Give the final caption line room to breathe at the bottom of home cards. */
+#homeTab .cardText:last-child {
+  padding-bottom: 0.46em !important;
 }
 
 /* Metadata, status and progress use a single warm-red hierarchy. */
