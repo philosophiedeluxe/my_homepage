@@ -291,6 +291,45 @@ a[data-role="button"]:hover,
   box-shadow: 0 0 12px rgba(206, 22, 49, 0.36) !important;
 }
 
+/* The same watched language applies to season badges and episode actions. */
+.playstatebutton-played,
+.btnPlaystate.playstatebutton-played,
+.cardOverlayButton.playstatebutton-played {
+  color: rgba(255, 238, 242, 0.98) !important;
+  background: linear-gradient(135deg, rgba(215, 33, 61, 0.94), rgba(170, 15, 39, 0.94)) !important;
+  border-color: rgba(255, 151, 165, 0.68) !important;
+  box-shadow: 0 6px 16px rgba(179, 14, 40, 0.34) !important;
+}
+
+.playstatebutton-played .playstatebutton-icon-played,
+.playstatebutton-icon-played {
+  color: #fff !important;
+}
+
+/* Episode rows receive their own burgundy glass plane instead of blue-black. */
+#itemDetailPage .listItem.listItem-largeImage.listItem-withContentWrapper {
+  background: linear-gradient(135deg, rgba(50, 15, 25, 0.78), rgba(17, 11, 18, 0.88)) !important;
+  border-color: rgba(255, 255, 255, 0.105) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035), 0 10px 26px rgba(0, 0, 0, 0.26) !important;
+}
+
+#itemDetailPage .listItem.listItem-largeImage.listItem-withContentWrapper:hover {
+  background: linear-gradient(135deg, rgba(79, 19, 34, 0.82), rgba(28, 12, 20, 0.90)) !important;
+  border-color: rgba(var(--pkred-bright), 0.42) !important;
+}
+
+/* The entire secondary detail plane carries the same burgundy depth. */
+#itemDetailPage .detailPageSecondaryContainer.padded-bottom-page {
+  background:
+    radial-gradient(ellipse at 14% 0%, rgba(135, 15, 37, 0.20), transparent 38%),
+    linear-gradient(180deg, rgba(35, 10, 19, 0.94), rgba(8, 8, 13, 0.98)) !important;
+  border-top-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+#itemDetailPage .detailPageSecondaryContainer .verticalSection {
+  background: transparent !important;
+}
+
 .itemProgressBar,
 .backgroundProgress {
   background: rgba(255, 255, 255, 0.15) !important;
@@ -349,7 +388,7 @@ a[data-role="button"]:hover,
   position: relative;
   isolation: isolate;
   background:
-    linear-gradient(120deg, rgba(38, 5, 12, 0.84), rgba(12, 6, 11, 0.76)),
+    linear-gradient(120deg, rgba(38, 5, 12, 0.46), rgba(12, 6, 11, 0.30)),
     url(https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/loginBG.jpg) center / cover !important;
 }
 

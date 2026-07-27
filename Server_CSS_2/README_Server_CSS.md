@@ -2,14 +2,14 @@
 
 Dieses Repository enthält die Custom-CSS-Dateien für die optische Anpassung der Jellyfin-Oberfläche.
 
-Aktueller stabiler Stand: **Liquid Glass Red V8**
+Aktueller stabiler Stand: **Liquid Glass Red V12**
 
 ## Aktueller Jellyfin-Aufruf
 
 In Jellyfin wird nur noch eine zentrale CSS-Datei geladen:
 
 ```css
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/jellyfin_custom.css?v=8');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/jellyfin_custom.css?v=12');
 ```
 
 Die Datei `jellyfin_custom.css` ist der zentrale Einstiegspunkt. Alle weiteren CSS-Dateien werden dort in der kontrollierten Reihenfolge eingebunden.
@@ -127,6 +127,51 @@ Grund:
 
 ## Entwicklungshistorie
 
+### Liquid Glass Red V12
+
+- sämtliche Oberflächenvariablen der Teilthemen auf eine einheitliche Burgunder-Schwarz-Palette abgebildet
+- Header, Drawer, Dialoge, Filter, Detailseiten, Episoden, Cast-Karten, Dashboard und Player farblich geschlossen
+- blaue Resttöne durch warme Neutral- und Rottöne ersetzt
+
+Jellyfin-Aufruf:
+
+```css
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/jellyfin_custom.css?v=12');
+```
+
+### Liquid Glass Red V11
+
+- sekundäre Detailfläche hinter Episoden-, Besetzungs- und Gast-Star-Rubriken von Blau auf Burgunderrot umgestellt
+- Hintergrund bleibt dunkel und ruhig, übernimmt aber die rote Liquid-Glass-Tonalität
+
+Jellyfin-Aufruf:
+
+```css
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/jellyfin_custom.css?v=12');
+```
+
+### Liquid Glass Red V10
+
+- alle Gesehen-Markierungen über `playstatebutton-played` rot vereinheitlicht
+- Episodenzeilen von blauem Schwarz auf dunkles Burgunder-Glas umgestellt
+
+Jellyfin-Aufruf:
+
+```css
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/jellyfin_custom.css?v=11');
+```
+
+### Liquid Glass Red V9
+
+- Login-Hintergrundtönung deutlich reduziert
+- Wallpaper bleibt sichtbar und das Login-Panel unverändert lesbar
+
+Jellyfin-Aufruf:
+
+```css
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/jellyfin_custom.css?v=10');
+```
+
 ### Liquid Glass Red V8
 
 - Typografie auf Manrope als moderne, neutrale UI-Schrift umgestellt
@@ -136,7 +181,7 @@ Grund:
 Jellyfin-Aufruf:
 
 ```css
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/jellyfin_custom.css?v=8');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_2/jellyfin_custom.css?v=9');
 ```
 
 ### Liquid Glass Red V7

@@ -1,0 +1,113 @@
+/*
+  Liquid Glass Red Palette Completion — V12
+  Maps every previously independent surface system to one warm red palette.
+*/
+
+:root,
+html,
+body {
+  --accent: 210, 54, 72 !important;
+  --pkmodern-accent: 210, 54, 72 !important;
+  --pksystem-accent: 210, 54, 72 !important;
+  --pkmodern-surface: rgba(25, 11, 18, 0.74) !important;
+  --pkmodern-surface-raised: rgba(43, 15, 25, 0.84) !important;
+  --pkmodern-surface-hover: rgba(73, 19, 33, 0.88) !important;
+  --pkmodern-border: rgba(255, 255, 255, 0.11) !important;
+  --pkmodern-border-subtle: rgba(255, 221, 226, 0.075) !important;
+  --pkmodern-text: rgba(255, 247, 248, 0.96) !important;
+  --pkmodern-text-muted: rgba(233, 210, 214, 0.70) !important;
+  --pksystem-surface: rgba(31, 12, 20, 0.68) !important;
+  --pksystem-surface-strong: rgba(54, 17, 28, 0.88) !important;
+  --pksystem-border: rgba(255, 227, 232, 0.10) !important;
+  --pksystem-muted: rgba(232, 207, 213, 0.68) !important;
+  --pkmedia-surface: rgba(24, 11, 18, 0.76) !important;
+  --pkmedia-surface-strong: rgba(44, 15, 26, 0.90) !important;
+  --pkmedia-border: rgba(255, 227, 232, 0.11) !important;
+  --pkmedia-muted: rgba(234, 211, 216, 0.70) !important;
+  --pkdetail-surface: rgba(30, 12, 21, 0.75) !important;
+  --pkdetail-surface-strong: rgba(54, 17, 30, 0.90) !important;
+  --pkdetail-border: rgba(255, 226, 232, 0.11) !important;
+  --pkdetail-muted: rgba(235, 211, 217, 0.70) !important;
+}
+
+/* Main planes and standard pages never fall back to navy. */
+.mainAnimatedPage,
+.page,
+.pageContainer,
+.libraryPage,
+.itemDetailPage,
+#itemDetailPage,
+#dashboardPage,
+#settingsPage {
+  background-color: #0a090d !important;
+}
+
+/* Detail title area, carousel shelves and person cards share red-black depth. */
+#itemDetailPage .detailPagePrimaryContainer,
+#itemDetailPage .detailPageContent,
+#itemDetailPage .detailRibbon,
+#itemDetailPage .verticalSection,
+#itemDetailPage .personCard > .cardBox {
+  background-color: transparent !important;
+}
+
+#itemDetailPage .personCard > .cardBox {
+  background: linear-gradient(145deg, rgba(45, 14, 25, 0.84), rgba(15, 10, 16, 0.88)) !important;
+}
+
+/* Lists, commands and filters retain hierarchy without blue slate surfaces. */
+.paperList .listItem,
+.selectionCommandsPanel,
+.itemSelectionPanel,
+.filterOptions,
+.searchFields,
+.actionSheetMenuItem,
+.listItem {
+  background-color: rgba(31, 12, 20, 0.64) !important;
+  border-color: rgba(255, 225, 231, 0.09) !important;
+}
+
+.paperList .listItem:hover,
+.actionSheetMenuItem:hover,
+.listItem:hover {
+  background-color: rgba(73, 19, 33, 0.70) !important;
+  border-color: rgba(255, 101, 120, 0.36) !important;
+}
+
+/* Red is reserved for focus, current state and progress. */
+.emby-checkbox:checked + span + .checkboxOutline,
+.itemSelectionPanel,
+.navMenuOption-selected,
+.selectionCommandsPanel,
+.playstatebutton-played,
+.playedIndicator {
+  border-color: rgba(255, 105, 124, 0.62) !important;
+  background-color: rgba(202, 26, 53, 0.22) !important;
+}
+
+.navMenuOption-selected {
+  box-shadow: inset 3px 0 0 rgba(255, 79, 102, 0.92) !important;
+}
+
+/* Player and dashboard surfaces finish in the same deep wine tone. */
+.osdHeader,
+.osdFooter,
+.videoOsdBottom,
+.osdControls,
+#dashboardPage .dashboardSection,
+#dashboardPage .paperList,
+#dashboardPage .detailTable,
+#dashboardPage .sessionCard {
+  background: linear-gradient(145deg, rgba(43, 12, 23, 0.80), rgba(11, 9, 14, 0.90)) !important;
+  border-color: rgba(255, 224, 230, 0.105) !important;
+}
+
+.secondary,
+.itemMiscInfo,
+.itemCommunityRating,
+.fieldDescription,
+.inputLabel,
+.textareaLabel,
+.cardText-secondary {
+  color: rgba(232, 208, 214, 0.72) !important;
+}
