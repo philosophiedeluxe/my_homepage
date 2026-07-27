@@ -2,14 +2,14 @@
 
 Dieses Repository enthält die Custom-CSS-Dateien für die optische Anpassung der Jellyfin-Oberfläche.
 
-Aktueller stabiler Stand: **v36**
+Aktueller stabiler Stand: **v37**
 
 ## Aktueller Jellyfin-Aufruf
 
 In Jellyfin wird nur noch eine zentrale CSS-Datei geladen:
 
 ```css
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/jellyfin_custom.css?v=36');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/jellyfin_custom.css?v=37');
 ```
 
 Die Datei `jellyfin_custom.css` ist der zentrale Einstiegspunkt. Alle weiteren CSS-Dateien werden dort in der kontrollierten Reihenfolge eingebunden.
@@ -126,6 +126,22 @@ Grund:
 `fixes.css` sollte nicht erneut eingebunden werden.
 
 ## Entwicklungshistorie
+
+### v37 – Final Interface Polish
+
+Basis: v36
+
+- kompakter Detailseiten-Header mit klarer Aktionsgruppe
+- einheitliche Glas-Buttons für Carousel- und Abschnittsnavigation
+- konsolidierte Medien-, Status- und Fortschrittsanzeige
+- überarbeitete Dialoge, Scrollleisten, Leerzustände und Dashboard-Flächen
+- gezielte Verdichtung für mobile Details, Episodenlisten und Player-Steuerung
+
+Jellyfin-Aufruf:
+
+```css
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/jellyfin_custom.css?v=37');
+```
 
 ### v36 – Person Card Sizing
 

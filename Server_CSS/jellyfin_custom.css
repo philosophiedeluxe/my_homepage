@@ -1,6 +1,6 @@
 /*
   Jellyfin Custom CSS - zentraler Einstieg
-  Stand: v36 person card sizing
+  Stand: v37 final interface polish
   Zweck: Ein einziger Jellyfin-Aufruf, ohne fixes.css, ohne zusätzliche Layoutkorrekturen und mit reduzierten Hover-Effekten und leicht erhöhtem Abstand über Abschnittstiteln.
   Regel: spezialisierte optische Schichten werden am Ende importiert.
 */
@@ -36,6 +36,7 @@
 @import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/episode_proportions.css?v=34');
 @import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/cast_card_spacing.css?v=35');
 @import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/person_card_sizing.css?v=36');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS/final_interface_polish.css?v=37');
 
 
 /*Style backdrop*/
