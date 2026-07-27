@@ -1,31 +1,27 @@
 /*
-  Player video safety layer
-  Never paint a theme background or pseudo layer over the decoded video frame.
+  Player restoration layer
+  #videoOsdPage is an OSD overlay, not a visual page. The global liquid-glass
+  page rule must never paint over the decoded video frame.
 */
 
-#videoOsdPage .backgroundContainer,
-#videoOsdPage .backgroundContainer.withBackdrop,
-.videoOsdPage .backgroundContainer,
-.videoOsdPage .backgroundContainer.withBackdrop,
-body:has(.videoPlayerContainer) .backgroundContainer,
-body:has(.videoPlayerContainer) .backgroundContainer.withBackdrop,
-body:has(video) .backgroundContainer,
-body:has(video) .backgroundContainer.withBackdrop {
+#videoOsdPage,
+#videoOsdPage.page,
+#videoOsdPage.libraryPage,
+#videoOsdPage.mainAnimatedPage {
   background: transparent !important;
+  background-color: transparent !important;
 }
 
-#videoOsdPage .backgroundContainer::after,
-#videoOsdPage .backgroundContainer.withBackdrop::after,
-.videoOsdPage .backgroundContainer::after,
-.videoOsdPage .backgroundContainer.withBackdrop::after,
-body:has(.videoPlayerContainer) .backgroundContainer::after,
-body:has(.videoPlayerContainer) .backgroundContainer.withBackdrop::after,
-body:has(video) .backgroundContainer::after,
-body:has(video) .backgroundContainer.withBackdrop::after {
+#videoOsdPage::before,
+#videoOsdPage::after {
   display: none !important;
 }
 
-.videoPlayerContainer,
+/* The fixed player surface covers the previous Jellyfin page while a stream loads. */
+.videoPlayerContainer {
+  background: #000 !important;
+}
+
 .videoPlayerContainer video,
 .htmlvideoplayer,
 .htmlvideoplayer video,
@@ -35,4 +31,13 @@ video.htmlvideoplayer,
   filter: none !important;
   opacity: 1 !important;
   visibility: visible !important;
+}
+
+/* Restore the compact neutral player chrome from Theme 1. */
+.osdHeader,
+.osdFooter,
+.osdControls,
+.videoOsdBottom {
+  background: linear-gradient(180deg, rgba(4, 6, 11, 0.72), rgba(4, 6, 11, 0.38)) !important;
+  border-color: rgba(255, 255, 255, 0.06) !important;
 }
