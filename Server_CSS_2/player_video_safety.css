@@ -8,7 +8,9 @@
 .videoOsdPage .backgroundContainer,
 .videoOsdPage .backgroundContainer.withBackdrop,
 body:has(.videoPlayerContainer) .backgroundContainer,
-body:has(.videoPlayerContainer) .backgroundContainer.withBackdrop {
+body:has(.videoPlayerContainer) .backgroundContainer.withBackdrop,
+body:has(video) .backgroundContainer,
+body:has(video) .backgroundContainer.withBackdrop {
   background: transparent !important;
 }
 
@@ -17,7 +19,9 @@ body:has(.videoPlayerContainer) .backgroundContainer.withBackdrop {
 .videoOsdPage .backgroundContainer::after,
 .videoOsdPage .backgroundContainer.withBackdrop::after,
 body:has(.videoPlayerContainer) .backgroundContainer::after,
-body:has(.videoPlayerContainer) .backgroundContainer.withBackdrop::after {
+body:has(.videoPlayerContainer) .backgroundContainer.withBackdrop::after,
+body:has(video) .backgroundContainer::after,
+body:has(video) .backgroundContainer.withBackdrop::after {
   display: none !important;
 }
 
