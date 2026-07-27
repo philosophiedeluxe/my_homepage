@@ -1,0 +1,180 @@
+/*
+  Liquid Glass Red — Final visual layer
+  More crimson light, stronger translucency and visible glass depth.
+  Deliberately visual only: no grid, sizing or interaction changes.
+*/
+
+:root,
+html,
+body {
+  --accent: 226, 35, 59 !important;
+  --pkred: 226, 35, 59 !important;
+  --pkred-bright: 255, 104, 122 !important;
+  --pkmodern-accent: 226, 35, 59 !important;
+  --pksystem-accent: 226, 35, 59 !important;
+  --pkmedia-accent: 226, 35, 59 !important;
+  --pkmodern-surface: rgba(42, 8, 18, 0.58) !important;
+  --pkmodern-surface-raised: rgba(67, 10, 25, 0.72) !important;
+  --pkmodern-surface-hover: rgba(112, 16, 39, 0.72) !important;
+  --pkmedia-surface: rgba(38, 8, 17, 0.58) !important;
+  --pkmedia-surface-strong: rgba(67, 11, 25, 0.74) !important;
+  --pkdetail-surface: rgba(39, 8, 18, 0.58) !important;
+  --pkdetail-surface-strong: rgba(67, 11, 26, 0.76) !important;
+}
+
+body,
+.backgroundContainer,
+.backgroundContainer.withBackdrop,
+.mainAnimatedPage,
+.page,
+.pageContainer {
+  background-color: #0c080d !important;
+}
+
+.backgroundContainer.withBackdrop::after {
+  background:
+    radial-gradient(ellipse at 8% 4%, rgba(240, 27, 61, 0.24), transparent 35%),
+    radial-gradient(ellipse at 92% 84%, rgba(177, 13, 43, 0.18), transparent 38%),
+    linear-gradient(150deg, rgba(30, 4, 12, 0.10), rgba(4, 6, 10, 0.24)) !important;
+}
+
+/* Primary surfaces receive a thin light edge and a red-black glass reflection. */
+.skinHeader-withBackground,
+.mainDrawer,
+.dialog,
+.actionSheet,
+.toast,
+.paperList,
+.detailTable,
+.upNextContainer,
+.infoBanner,
+.searchFields,
+.filterOptions,
+.selectionCommandsPanel,
+.itemSelectionPanel,
+#dashboardPage .dashboardSection,
+#dashboardPage .sessionCard {
+  background:
+    linear-gradient(135deg, rgba(86, 13, 32, 0.64) 0%, rgba(35, 7, 17, 0.52) 47%, rgba(9, 9, 14, 0.58) 100%) !important;
+  border-color: rgba(255, 191, 201, 0.16) !important;
+  box-shadow:
+    0 18px 48px rgba(0, 0, 0, 0.34),
+    inset 0 1px 0 rgba(255, 255, 255, 0.10),
+    inset 0 -1px 0 rgba(121, 11, 34, 0.22) !important;
+}
+
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .skinHeader-withBackground,
+  .mainDrawer,
+  .dialog,
+  .actionSheet,
+  .toast,
+  .paperList,
+  .detailTable,
+  .upNextContainer,
+  .infoBanner,
+  .searchFields,
+  .filterOptions,
+  .selectionCommandsPanel,
+  .itemSelectionPanel,
+  #dashboardPage .dashboardSection,
+  #dashboardPage .sessionCard {
+    -webkit-backdrop-filter: blur(28px) saturate(155%) !important;
+    backdrop-filter: blur(28px) saturate(155%) !important;
+  }
+}
+
+/* Poster and episode cards retain their artwork while gaining a glass frame. */
+.card > .cardBox,
+.cardBox,
+#itemDetailPage .listItem,
+#dashboardPage .listItem,
+.userSettingsContainer .listItem,
+#myPreferencesMenuPage .listItem {
+  border-color: rgba(255, 187, 198, 0.13) !important;
+  box-shadow:
+    0 10px 26px rgba(0, 0, 0, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07) !important;
+}
+
+.card > .cardBox:hover,
+.cardBox:hover,
+#itemDetailPage .listItem:hover,
+#dashboardPage .listItem:hover,
+.userSettingsContainer .listItem:hover,
+#myPreferencesMenuPage .listItem:hover {
+  background-color: rgba(111, 16, 39, 0.56) !important;
+  border-color: rgba(255, 113, 133, 0.48) !important;
+  box-shadow:
+    0 14px 32px rgba(0, 0, 0, 0.30),
+    0 0 22px rgba(220, 23, 57, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
+}
+
+/* Inputs, chips and controls become compact liquid-glass elements. */
+.emby-input,
+.emby-textarea,
+.selectContainer select,
+.itemMiscInfo,
+.itemCommunityRating,
+.mediaSourceIndicator,
+.resolutionIndicator,
+.indicator,
+.actionSheetMenuItem,
+.btnAudio,
+.btnSubtitles,
+.btnSettings {
+  background: rgba(61, 10, 26, 0.50) !important;
+  border-color: rgba(255, 196, 205, 0.17) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.09) !important;
+}
+
+.emby-input:focus,
+.emby-textarea:focus,
+.selectContainer select:focus {
+  border-color: rgba(255, 103, 125, 0.88) !important;
+  box-shadow: 0 0 0 2px rgba(226, 35, 59, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.10) !important;
+}
+
+.navMenuOption-selected,
+.headerTabs .emby-tab-button-active,
+.emby-tab-button-active,
+.alphaPickerButton-selected,
+.playstatebutton-played,
+.playedIndicator,
+.itemProgressBarForeground,
+.itemProgressBar::-webkit-progress-value,
+progress::-webkit-progress-value {
+  background: linear-gradient(90deg, #c81335, #f13c58 52%, #ff7084) !important;
+  border-color: rgba(255, 167, 179, 0.74) !important;
+  box-shadow: 0 0 14px rgba(237, 36, 68, 0.34) !important;
+}
+
+.itemProgressBar,
+.itemProgressBarBackground,
+progress::-webkit-progress-bar {
+  background: rgba(14, 7, 12, 0.62) !important;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.42) !important;
+}
+
+/* The player keeps its compact form but shares the same brighter glass hierarchy. */
+.osdHeader,
+.osdFooter,
+.videoOsdBottom,
+.osdControls {
+  background: linear-gradient(180deg, rgba(69, 10, 27, 0.68), rgba(7, 8, 13, 0.56)) !important;
+  border-color: rgba(255, 182, 193, 0.13) !important;
+}
+
+.osdControls .paper-icon-button-light,
+.osdFooter .paper-icon-button-light {
+  background: rgba(70, 10, 28, 0.58) !important;
+  border-color: rgba(255, 192, 201, 0.18) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.10) !important;
+}
+
+.osdControls .paper-icon-button-light:hover,
+.osdFooter .paper-icon-button-light:hover {
+  background: rgba(182, 18, 49, 0.56) !important;
+  border-color: rgba(255, 130, 147, 0.70) !important;
+}
