@@ -1,0 +1,34 @@
+/*
+  Player video safety layer
+  Never paint a theme background or pseudo layer over the decoded video frame.
+*/
+
+#videoOsdPage .backgroundContainer,
+#videoOsdPage .backgroundContainer.withBackdrop,
+.videoOsdPage .backgroundContainer,
+.videoOsdPage .backgroundContainer.withBackdrop,
+body:has(.videoPlayerContainer) .backgroundContainer,
+body:has(.videoPlayerContainer) .backgroundContainer.withBackdrop {
+  background: transparent !important;
+}
+
+#videoOsdPage .backgroundContainer::after,
+#videoOsdPage .backgroundContainer.withBackdrop::after,
+.videoOsdPage .backgroundContainer::after,
+.videoOsdPage .backgroundContainer.withBackdrop::after,
+body:has(.videoPlayerContainer) .backgroundContainer::after,
+body:has(.videoPlayerContainer) .backgroundContainer.withBackdrop::after {
+  display: none !important;
+}
+
+.videoPlayerContainer,
+.videoPlayerContainer video,
+.htmlvideoplayer,
+.htmlvideoplayer video,
+video.htmlvideoplayer,
+#videoPlayer {
+  background: transparent !important;
+  filter: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
