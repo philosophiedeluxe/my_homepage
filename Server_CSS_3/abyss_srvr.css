@@ -1,0 +1,63 @@
+/*
+  SRVR profile for Abyss.
+  The upstream theme owns layout and component behavior. This layer only
+  supplies the local palette, branding and a few restrained visual refinements.
+*/
+
+:root {
+  --abyss-accent: 124, 224, 246;
+  --abyss-indicator: 42, 56, 72;
+  --abyss-glass-tint: 15, 22, 31;
+  --abyss-radius: 14px;
+  --accent: 124, 224, 246;
+}
+
+/* SRVR branding remains independent from the upstream logo treatment. */
+.pageTitleWithDefaultLogo,
+.pageTitleWithLogo {
+  background-image: url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_3/ServerLogo_long_noBG.png?v=1') !important;
+  background-size: 124% auto !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  display: block !important;
+  width: 280px !important;
+  height: 60px !important;
+}
+
+/* Preserve the upstream glass language while giving its pale accent a cool SRVR tint. */
+.skinHeader,
+.mainDrawer,
+.actionSheet,
+.dialog {
+  border-color: rgba(174, 236, 255, 0.13) !important;
+}
+
+.emby-tab-button-active,
+.headerTabs .emby-tab-button-active,
+.itemProgressBarForeground,
+.playedIndicator,
+.countIndicator {
+  box-shadow: 0 0 18px rgba(124, 224, 246, 0.15) !important;
+}
+
+/* Keep actionable text clean; only explicit focus retains an outline. */
+a,
+a:hover,
+a:focus {
+  text-decoration: none !important;
+}
+
+a:focus-visible,
+button:focus-visible,
+.emby-button:focus-visible,
+.paper-icon-button-light:focus-visible {
+  outline: 2px solid rgba(var(--abyss-accent), 0.78) !important;
+  outline-offset: 3px !important;
+}
+
+/* No custom page paint is allowed on the player overlay. */
+#videoOsdPage,
+#videoOsdPage::before,
+#videoOsdPage::after {
+  background: transparent !important;
+}
