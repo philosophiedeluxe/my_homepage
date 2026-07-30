@@ -1,6 +1,71 @@
 /* SRVR branding, deliberately separate from the ElegantFin base. */
 :root {
     --srvr-logo-url: url("https://philosophiedeluxe.github.io/my_homepage/Server_CSS_Final/ServerLogo_long_noBG.png?v=1");
+    --srvr-red: rgb(224 38 69);
+    --srvr-red-deep: rgb(151 18 46);
+    --srvr-red-glass: rgb(224 38 69 / 82%);
+    --elegantFinFooterText: "";
+    --osdSeekBarPlayedColor: var(--srvr-red);
+    --osdSeekBarBufferedColorAlpha: rgb(125 20 43 / 42%);
+    --osdSeekBarThumbColor: var(--srvr-red);
+    --btnMiniPlayColor: var(--srvr-red-glass);
+    --btnMiniPlayBorderColor: rgb(255 182 196 / 72%);
+}
+
+/* Remove ElegantFin version output without affecting footer geometry. */
+#myPreferencesMenuPage > div::after,
+.dashboardFooter::after {
+    content: none !important;
+    display: none !important;
+}
+
+/* Red liquid-glass play controls; dimensions and placement stay ElegantFin-native. */
+.cardOverlayContainer > .cardOverlayFab-primary,
+.listItemImageButton,
+.layout-mobile .cardOverlayButton-br:not([data-action="menu"]) > .cardOverlayButtonIcon {
+    background: linear-gradient(135deg, rgb(244 57 87 / 92%), rgb(160 18 48 / 86%)) !important;
+    border-color: var(--btnMiniPlayBorderColor) !important;
+    box-shadow: 0 0.35rem 1rem rgb(105 8 30 / 36%), inset 0 1px 0 rgb(255 255 255 / 26%);
+}
+
+.btnPlay.detailButton,
+.layout-desktop .btnPlay.detailButton:hover {
+    background: linear-gradient(135deg, rgb(244 57 87 / 94%), rgb(151 18 46 / 88%)) !important;
+    border-color: rgb(255 186 199 / 64%) !important;
+    color: #fff !important;
+    box-shadow: 0 0.4rem 1.2rem rgb(105 8 30 / 30%), inset 0 1px 0 rgb(255 255 255 / 24%);
+}
+
+/* All playback and task-progress foregrounds use the SRVR red accent. */
+.itemProgressBarForeground,
+.playbackProgress > div,
+::-moz-progress-bar,
+::-webkit-progress-value,
+.mdl-slider-background-lower,
+.sliderMarker.watched,
+.iconOsdProgressInner {
+    background: var(--srvr-red) !important;
+    background-color: var(--srvr-red) !important;
+}
+
+.itemProgressBar:not(.backgroundProgress):not(.playbackProgress):not(.transcodingProgress),
+.mdl-slider-background-flex,
+.mdl-slider-background-upper {
+    background: var(--osdSeekBarBufferedColorAlpha) !important;
+    background-color: var(--osdSeekBarBufferedColorAlpha) !important;
+}
+
+progress,
+::-webkit-progress-bar,
+.backgroundProgress,
+.backgroundProgress > div {
+    background: rgb(104 16 38 / 74%) !important;
+    background-color: rgb(104 16 38 / 74%) !important;
+    border-color: rgb(244 57 87 / 30%) !important;
+}
+
+progress + span {
+    color: var(--srvr-red) !important;
 }
 
 /* Main-app header: replace Jellyfin's default wordmark with the local SRVR asset. */

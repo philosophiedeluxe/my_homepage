@@ -107,8 +107,7 @@
        use --headerColorGradientAlt otherwise */
     --headerBackground: var(--headerColorGradient);
 
-    /* fill out YOUR-JELLYFIN-SERVER-ADDRESS with a relevant host address;
-       url("<YOUR-JELLYFIN-SERVER-ADDRESS>/Branding/Splashscreen?format=webp&foregroundLayer=1&quality=33&width=3840&height=2160&blur=2"); */
+    /* Login wallpaper stays disabled; Jellyfin's native login background is used. */
     --loginPageBgUrl: url("");
     --loginPageText: "Sign in to continue";
 
