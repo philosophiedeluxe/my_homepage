@@ -103,7 +103,7 @@ progress + span {
     opacity: 0;
     pointer-events: none;
     transform: none !important;
-    transition: none !important;
+    transition: opacity 0.24s ease-out !important;
 }
 
 .card-hoverable:hover .cardOverlayContainer::after,
@@ -118,11 +118,13 @@ progress + span {
         opacity: 0;
         rotate: 0deg;
     }
-    8% {
+    16% {
         opacity: 0.9;
+        rotate: 48deg;
     }
-    82% {
-        opacity: 0.72;
+    72% {
+        opacity: 0.78;
+        rotate: 292deg;
     }
     100% {
         opacity: 0;
