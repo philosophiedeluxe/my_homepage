@@ -1,0 +1,26 @@
+/* Aurora Obsidian – player accents. Video stacking remains exclusively in player_video_safety.css. */
+
+.osdHeader {
+  background: linear-gradient(120deg, rgba(7, 13, 21, 0.82), rgba(10, 17, 29, 0.58)) !important;
+  border-bottom-color: rgba(154, 124, 255, 0.22) !important;
+}
+
+.osdControls .paper-icon-button-light,
+.videoOsdBottom .paper-icon-button-light {
+  background: rgba(13, 25, 37, 0.72) !important;
+  border-color: rgba(177, 228, 249, 0.16) !important;
+}
+
+.osdControls .paper-icon-button-light:hover,
+.videoOsdBottom .paper-icon-button-light:hover {
+  background: rgba(74, 230, 208, 0.18) !important;
+  border-color: rgba(74, 230, 208, 0.42) !important;
+}
+
+.osdPositionSlider::-webkit-slider-thumb,
+.osdVolumeSlider::-webkit-slider-thumb,
+.osdPositionSlider::-moz-range-thumb,
+.osdVolumeSlider::-moz-range-thumb {
+  background: var(--aurora-aqua) !important;
+  color: var(--aurora-aqua) !important;
+}

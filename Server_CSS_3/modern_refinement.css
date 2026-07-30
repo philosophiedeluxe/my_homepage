@@ -1,0 +1,230 @@
+/*
+  Jellyfin Modern Refinement Layer — v17
+  Final visual layer. It deliberately does not set dimensions, grids, poster
+  filters or detail-page positioning, so Jellyfin's responsive layouts remain intact.
+*/
+
+:root {
+  --pkmodern-accent: var(--accent, 98, 121, 205);
+  --pkmodern-radius: 14px;
+  --pkmodern-radius-small: 10px;
+  --pkmodern-surface: rgba(13, 16, 25, 0.72);
+  --pkmodern-surface-raised: rgba(20, 24, 36, 0.82);
+  --pkmodern-surface-hover: rgba(31, 36, 52, 0.88);
+  --pkmodern-border: rgba(255, 255, 255, 0.085);
+  --pkmodern-border-subtle: rgba(255, 255, 255, 0.055);
+  --pkmodern-text: rgba(248, 250, 252, 0.96);
+  --pkmodern-text-muted: rgba(203, 213, 225, 0.70);
+  --pkmodern-shadow: 0 18px 48px rgba(0, 0, 0, 0.34);
+  --pkmodern-transition: 180ms cubic-bezier(.2, .7, .2, 1);
+}
+
+/* Quiet base palette: the backdrop remains visible but UI surfaces stay legible. */
+body,
+.backgroundContainer,
+.backgroundContainer.withBackdrop {
+  color: var(--pkmodern-text);
+}
+
+.skinHeader-withBackground,
+.mainDrawer,
+.appfooter,
+.dialog,
+.toast,
+.actionSheet,
+.paperList,
+.detailTable,
+.sessionNowPlayingInnerContent,
+.upNextContainer,
+.infoBanner {
+  background-color: var(--pkmodern-surface) !important;
+  border-color: var(--pkmodern-border-subtle) !important;
+}
+
+.mainDrawer,
+.dialog,
+.toast,
+.actionSheet,
+.paperList,
+.detailTable,
+.sessionNowPlayingInnerContent,
+.upNextContainer {
+  border-radius: var(--pkmodern-radius) !important;
+  box-shadow: var(--pkmodern-shadow) !important;
+}
+
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .skinHeader-withBackground,
+  .mainDrawer,
+  .appfooter,
+  .dialog,
+  .toast,
+  .actionSheet,
+  .paperList,
+  .detailTable,
+  .sessionNowPlayingInnerContent,
+  .upNextContainer,
+  .infoBanner {
+    -webkit-backdrop-filter: blur(20px) saturate(125%) !important;
+    backdrop-filter: blur(20px) saturate(125%) !important;
+  }
+}
+
+/* Inputs are intentionally more defined than the surrounding glass panels. */
+.emby-input,
+.emby-textarea,
+.emby-select-withcolor {
+  background-color: rgba(4, 6, 12, 0.42) !important;
+  border: 1px solid var(--pkmodern-border) !important;
+  border-radius: var(--pkmodern-radius-small) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.025) !important;
+  color: var(--pkmodern-text) !important;
+  transition: border-color var(--pkmodern-transition), box-shadow var(--pkmodern-transition), background-color var(--pkmodern-transition) !important;
+}
+
+.emby-input:focus,
+.emby-textarea:focus,
+.emby-select-withcolor:focus {
+  background-color: rgba(7, 10, 18, 0.68) !important;
+  border-color: rgba(var(--pkmodern-accent), 0.62) !important;
+  box-shadow: 0 0 0 3px rgba(var(--pkmodern-accent), 0.14) !important;
+}
+
+/* Buttons and library tiles gain hierarchy without bright, full-width hover blocks. */
+.raised,
+.fab,
+a[data-role="button"],
+.raised.homeLibraryButton {
+  background-color: var(--pkmodern-surface-raised) !important;
+  border: 1px solid var(--pkmodern-border) !important;
+  border-radius: var(--pkmodern-radius-small) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035), 0 6px 18px rgba(0, 0, 0, 0.18) !important;
+}
+
+.raised:hover,
+.fab:hover,
+a[data-role="button"]:hover,
+.raised.homeLibraryButton:hover {
+  background-color: var(--pkmodern-surface-hover) !important;
+  border-color: rgba(var(--pkmodern-accent), 0.30) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 10px 26px rgba(0, 0, 0, 0.28) !important;
+}
+
+/* Keep cards tactile, but remove the residual neon feel. */
+.card > .cardBox {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.30), 0 0 0 1px rgba(255, 255, 255, 0.045) !important;
+}
+
+.card:hover > .cardBox,
+.card:focus-within > .cardBox {
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.46), 0 0 0 1px rgba(var(--pkmodern-accent), 0.26) !important;
+}
+
+.listItem:hover,
+.navMenuOption:hover,
+.actionSheetMenuItem:hover {
+  background-color: rgba(255, 255, 255, 0.052) !important;
+}
+
+.navMenuOption-selected,
+.selectionCommandsPanel {
+  background-color: rgba(var(--pkmodern-accent), 0.12) !important;
+  border-color: rgba(var(--pkmodern-accent), 0.22) !important;
+}
+
+/* Typography and compact status elements. */
+.sectionTitle,
+.itemName,
+.detailPageContent .itemName {
+  letter-spacing: 0.01em;
+}
+
+.sectionTitle {
+  color: var(--pkmodern-text) !important;
+}
+
+.secondary,
+.itemMiscInfo,
+.itemCommunityRating,
+.fieldDescription,
+.inputLabel,
+.textareaLabel {
+  color: var(--pkmodern-text-muted) !important;
+}
+
+.countIndicator,
+.playedIndicator,
+.missingIndicator,
+.unairedIndicator,
+.mediaSourceIndicator,
+.indicator {
+  background-color: rgba(8, 11, 19, 0.76) !important;
+  border-color: rgba(255, 255, 255, 0.11) !important;
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.30) !important;
+}
+
+/* Progress remains immediately readable, but no longer competes with artwork. */
+#indexPage .itemProgressBar,
+.libraryPage .itemProgressBar,
+#itemDetailPage .itemProgressBar {
+  height: 4px !important;
+  margin: .42em .72em !important;
+  background: rgba(255, 255, 255, 0.14) !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+#indexPage .itemProgressBarForeground,
+.libraryPage .itemProgressBarForeground,
+#itemDetailPage .itemProgressBarForeground {
+  background: rgba(var(--pkmodern-accent), 0.92) !important;
+  box-shadow: 0 0 10px rgba(var(--pkmodern-accent), 0.30) !important;
+}
+
+/* Detail pages: distinguish the readable content plane from the backdrop. */
+.detailPageSecondaryContainer.padded-bottom-page {
+  background:
+    linear-gradient(180deg, rgba(11, 14, 22, 0.84), rgba(5, 7, 12, 0.94)) !important;
+  border-top: 1px solid var(--pkmodern-border-subtle) !important;
+}
+
+.detailPagePrimaryContainer {
+  box-shadow: inset 0 -1px 0 var(--pkmodern-border-subtle) !important;
+}
+
+/* The alphabet and carousel affordances become visible without adding visual noise. */
+.alphaPicker,
+.emby-scroller-button {
+  color: var(--pkmodern-text-muted) !important;
+}
+
+.emby-scroller-button:hover,
+.alphaPickerButton-selected {
+  color: var(--pkmodern-text) !important;
+  background-color: rgba(var(--pkmodern-accent), 0.13) !important;
+}
+
+@media all and (max-width: 50em) {
+  :root {
+    --pkmodern-radius: 12px;
+  }
+
+  .mainDrawer,
+  .dialog,
+  .toast,
+  .actionSheet,
+  .paperList,
+  .detailTable,
+  .sessionNowPlayingInnerContent,
+  .upNextContainer {
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.34) !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .emby-input,
+  .emby-textarea,
+  .emby-select-withcolor {
+    transition: none !important;
+  }
+}

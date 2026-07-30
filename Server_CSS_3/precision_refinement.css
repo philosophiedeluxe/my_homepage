@@ -1,0 +1,94 @@
+/* Jellyfin Precision Refinement Layer — v26 */
+
+/* Search: reserve a real gap after the magnifier instead of letting text begin below it. */
+#searchPage .searchFields .emby-input {
+  padding-left: 4.25em !important;
+}
+
+/* Chapters: labels are information tags, not oversized pills. */
+html body #itemDetailPage .chapterThumb .chapterThumbTextContainer,
+html body #itemDetailPage .chapterThumb .chapterThumbText,
+html body #itemDetailPage .chapterThumb .chapterThumbTextContainer::before,
+html body #itemDetailPage .chapterThumb .chapterThumbText::before {
+  border-radius: 7px !important;
+  overflow: hidden !important;
+}
+
+/* Jellyfin's visible chapter label is rendered by .innerCardFooter. */
+html body #itemDetailPage .chapterThumb .innerCardFooter {
+  border-radius: 7px !important;
+  overflow: hidden !important;
+}
+
+/* Episode lists: more reading room for summaries and metadata. */
+#itemDetailPage .listItem.listItem-largeImage.listItem-withContentWrapper {
+  min-height: 7.25em !important;
+  align-items: stretch !important;
+}
+
+#itemDetailPage .listItem.listItem-largeImage .listItemImageButton,
+#itemDetailPage .listItem.listItem-largeImage .listItemImage,
+#itemDetailPage .listItem.listItem-largeImage .listItem-content {
+  align-self: stretch !important;
+  height: auto !important;
+}
+
+#itemDetailPage .listItem.listItem-largeImage .listItemImage {
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+#itemDetailPage .listItem.listItem-largeImage .listItemBody,
+#itemDetailPage .listItem.listItem-largeImage .listItemBodyText {
+  min-height: 100% !important;
+  box-sizing: border-box !important;
+}
+
+#itemDetailPage .listItem.listItem-largeImage .listItemBodyText {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  padding-block: .22em !important;
+}
+
+#itemDetailPage .listItem.listItem-largeImage .listItemBodyText > p {
+  display: -webkit-box !important;
+  max-height: 2.7em !important;
+  margin-block: .22em 0 !important;
+  overflow: hidden !important;
+  -webkit-box-orient: vertical !important;
+  -webkit-line-clamp: 2 !important;
+}
+
+/* Cast: image and caption form one card with exactly the same available width. */
+#itemDetailPage .personCard,
+#itemDetailPage .personCard > .cardBox,
+#itemDetailPage .personCard .cardImageContainer,
+#itemDetailPage .personCard .cardContent,
+#itemDetailPage .personCard .cardText {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+#itemDetailPage .personCard > .cardBox {
+  overflow: visible !important;
+}
+
+#itemDetailPage .personCard .cardImageContainer {
+  border-radius: var(--rounding, 12px) !important;
+}
+
+#itemDetailPage .personCard .cardContent {
+  border-radius: var(--rounding, 12px) !important;
+}
+
+@media all and (max-width: 50em) {
+  #itemDetailPage .listItem.listItem-largeImage.listItem-withContentWrapper {
+    min-height: 6.8em !important;
+  }
+
+  #itemDetailPage .listItem.listItem-largeImage .listItemBodyText > p {
+    max-height: 2.55em !important;
+  }
+}

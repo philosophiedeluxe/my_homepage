@@ -1,0 +1,16 @@
+/* Jellyfin Select Menu Spacing — v38 */
+
+/* Closed controls and browser-rendered options share the same left breathing room. */
+.emby-select,
+.emby-select-withcolor,
+select.emby-select,
+select.emby-select-withcolor {
+  padding-left: 0.82em !important;
+}
+
+.emby-select option,
+.emby-select-withcolor option,
+select.emby-select option,
+select.emby-select-withcolor option {
+  padding-left: 0.82em !important;
+}

@@ -1,0 +1,38 @@
+/*
+  Jellyfin Episode Layout Reset — v33
+  Keep the slightly taller row while restoring Jellyfin's native internal flow.
+*/
+
+#itemDetailPage .listItem.listItem-largeImage.listItem-withContentWrapper {
+  align-items: center !important;
+}
+
+#itemDetailPage .listItem.listItem-largeImage .listItemImageButton,
+#itemDetailPage .listItem.listItem-largeImage .listItemImage,
+#itemDetailPage .listItem.listItem-largeImage .listItem-content {
+  align-self: auto !important;
+  height: auto !important;
+}
+
+#itemDetailPage .listItem.listItem-largeImage .listItemImage {
+  object-fit: initial !important;
+}
+
+#itemDetailPage .listItem.listItem-largeImage .listItemBody,
+#itemDetailPage .listItem.listItem-largeImage .listItemBodyText {
+  min-height: auto !important;
+  height: auto !important;
+  padding-block: 0 !important;
+}
+
+#itemDetailPage .listItem.listItem-largeImage .listItemBodyText {
+  display: block !important;
+}
+
+#itemDetailPage .listItem.listItem-largeImage .listItemBodyText > p {
+  display: block !important;
+  max-height: none !important;
+  margin-block: initial !important;
+  overflow: visible !important;
+  -webkit-line-clamp: unset !important;
+}
