@@ -80,37 +80,39 @@ progress + span {
     color: var(--srvr-red) !important;
 }
 
-/* Replace ElegantFin's moving reflection with one restrained clockwise edge glow. */
+/* Disable ElegantFin's reflection. The glow belongs to cardScalable, the exact clipped card edge. */
 .cardOverlayContainer::after,
 .backdropCard.card-hoverable .cardOverlayContainer::after,
 .overflowBackdropCard.card-hoverable .cardOverlayContainer::after {
-    content: "" !important;
-    inset: 0;
-    padding: 1px;
-    border-radius: inherit;
-    background: conic-gradient(
-        from -45deg,
-        transparent 0deg 252deg,
-        rgb(255 124 146 / 0%) 268deg,
-        rgb(255 133 154 / 82%) 288deg,
-        rgb(255 197 206 / 96%) 301deg,
-        rgb(255 124 146 / 0%) 321deg,
-        transparent 336deg 360deg
-    ) !important;
-    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    opacity: 0;
-    pointer-events: none;
-    transform: none !important;
-    transition: opacity 0.24s ease-out !important;
+    content: none !important;
 }
 
-.card-hoverable:hover .cardOverlayContainer::after,
-.backdropCard.card-hoverable:hover .cardOverlayContainer::after,
-.overflowBackdropCard.card-hoverable:hover .cardOverlayContainer::after {
-    transform: none !important;
-    animation: srvr-card-edge-glow 1.15s linear 1;
+.card-hoverable .cardScalable::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    box-sizing: border-box;
+    border: 1.5px solid transparent;
+    border-radius: inherit;
+    background:
+        linear-gradient(transparent, transparent) padding-box,
+        conic-gradient(
+            from -45deg,
+            transparent 0deg 246deg,
+            rgb(255 93 121 / 0%) 262deg,
+            rgb(255 101 130 / 92%) 282deg,
+            rgb(255 215 222 / 100%) 302deg,
+            rgb(255 93 121 / 0%) 322deg,
+            transparent 338deg 360deg
+        ) border-box;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 4;
+    transition: opacity 0.24s ease-out;
+}
+
+.card-hoverable:hover .cardScalable::after {
+    animation: srvr-card-edge-glow 1.2s linear 1;
 }
 
 @keyframes srvr-card-edge-glow {
@@ -133,9 +135,7 @@ progress + span {
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .card-hoverable:hover .cardOverlayContainer::after,
-    .backdropCard.card-hoverable:hover .cardOverlayContainer::after,
-    .overflowBackdropCard.card-hoverable:hover .cardOverlayContainer::after {
+    .card-hoverable:hover .cardScalable::after {
         animation: none;
         opacity: 0.55;
     }
