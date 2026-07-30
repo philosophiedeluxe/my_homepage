@@ -1,0 +1,49 @@
+/* SRVR branding, deliberately separate from the ElegantFin base. */
+:root {
+    --srvr-logo-url: url("https://philosophiedeluxe.github.io/my_homepage/Server_CSS_Final/ServerLogo_long_noBG.png?v=1");
+}
+
+/* Main-app header: replace Jellyfin's default wordmark with the local SRVR asset. */
+.pageTitleWithDefaultLogo,
+.pageTitleWithLogo {
+    display: block !important;
+    width: clamp(8.8rem, 15vw, 13.5rem) !important;
+    height: clamp(2rem, 4vw, 3.15rem) !important;
+    margin: 0 0.5rem 0 0 !important;
+    background: var(--srvr-logo-url) center / contain no-repeat !important;
+    color: transparent !important;
+    text-indent: -9999px;
+    overflow: hidden;
+}
+
+.pageTitleWithDefaultLogo::before,
+.pageTitleWithLogo::before {
+    display: none !important;
+}
+
+@media (max-width: 48em) {
+    .pageTitleWithDefaultLogo,
+    .pageTitleWithLogo {
+        width: 8.5rem !important;
+        height: 2.35rem !important;
+        margin-right: 0.25rem !important;
+    }
+}
+
+/* Keep player video layers native and independent of page-surface styling. */
+#videoOsdPage,
+#videoOsdPage.page,
+#videoOsdPage.libraryPage,
+#videoOsdPage.mainAnimatedPage {
+    background: transparent !important;
+    background-color: transparent !important;
+}
+
+#videoOsdPage::before,
+#videoOsdPage::after {
+    display: none !important;
+}
+
+.videoPlayerContainer {
+    background: #000 !important;
+}
