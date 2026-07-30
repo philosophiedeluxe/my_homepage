@@ -4,6 +4,18 @@
     --srvr-red: rgb(224 38 69);
     --srvr-red-deep: rgb(151 18 46);
     --srvr-red-glass: rgb(224 38 69 / 82%);
+    --darkerGradientPoint: #0c080b;
+    --darkerGradientPointAlpha: rgb(12 8 11 / 88%);
+    --lighterGradientPoint: #181016;
+    --lighterGradientPointAlpha: rgb(24 16 22 / 88%);
+    --gradientPointAlpha: rgb(108 18 41 / 20%);
+    --headerColor: rgb(24 14 20 / 88%);
+    --drawerColor: rgb(20 11 17 / 94%);
+    --selectorBackgroundColor: #302029;
+    --selectorBackgroundColorAlpha: rgb(70 20 37 / 46%);
+    --tableBodyColor: #171016;
+    --borderColor: hsl(342 20% 28%);
+    --darkerBorderColor: hsl(342 18% 18%);
     --elegantFinFooterText: "";
     --osdSeekBarPlayedColor: var(--srvr-red);
     --osdSeekBarBufferedColorAlpha: rgb(125 20 43 / 42%);
