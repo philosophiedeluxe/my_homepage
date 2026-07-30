@@ -1,9 +1,9 @@
 # Server_CSS_3 – SRVR Abyss
 
-Aktueller Stand: **SRVR Abyss V2**
+Aktueller Stand: **SRVR Abyss V3**
 
 ```css
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_3/jellyfin_custom.css?v=2');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_3/jellyfin_custom.css?v=3');
 ```
 
 ## Basis
