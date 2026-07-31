@@ -137,73 +137,77 @@ progress + span {
     padding-bottom: 0.3125em !important;
 }
 
-/* Replace ElegantFin's broad reflection with a short clockwise perimeter stroke. */
+/* Replace ElegantFin's broad reflection with one precise clockwise perimeter stroke. */
 .cardOverlayContainer::after,
 .backdropCard.card-hoverable .cardOverlayContainer::after,
 .overflowBackdropCard.card-hoverable .cardOverlayContainer::after {
     content: none !important;
 }
 
+@property --srvr-card-stroke-angle {
+    syntax: "<angle>";
+    inherits: false;
+    initial-value: -90deg;
+}
+
 .card-hoverable .cardScalable::after {
     content: "";
     position: absolute;
-    inset: 0;
-    z-index: 4;
+    inset: 1px;
+    z-index: 8;
     border-radius: inherit;
     pointer-events: none;
     opacity: 0;
-    background:
-        linear-gradient(90deg, transparent 0%, rgb(239 48 80 / 68%) 28%, rgb(255 225 231 / 98%) 50%, rgb(239 48 80 / 68%) 72%, transparent 100%) top left / 24% 1.5px no-repeat,
-        linear-gradient(180deg, transparent 0%, rgb(239 48 80 / 68%) 28%, rgb(255 225 231 / 98%) 50%, rgb(239 48 80 / 68%) 72%, transparent 100%) top right / 1.5px 24% no-repeat,
-        linear-gradient(270deg, transparent 0%, rgb(239 48 80 / 68%) 28%, rgb(255 225 231 / 98%) 50%, rgb(239 48 80 / 68%) 72%, transparent 100%) bottom right / 24% 1.5px no-repeat,
-        linear-gradient(0deg, transparent 0%, rgb(239 48 80 / 68%) 28%, rgb(255 225 231 / 98%) 50%, rgb(239 48 80 / 68%) 72%, transparent 100%) bottom left / 1.5px 24% no-repeat;
-    filter: drop-shadow(0 0 2px rgb(224 38 69 / 72%));
-    transition: opacity 0.18s ease-out;
+    padding: 2.25px;
+    background: conic-gradient(
+        from var(--srvr-card-stroke-angle),
+        transparent 0deg 282deg,
+        rgb(224 38 69 / 0%) 282deg,
+        rgb(224 38 69 / 82%) 300deg,
+        rgb(255 64 99 / 100%) 319deg,
+        rgb(255 242 245 / 100%) 334deg,
+        rgb(255 64 99 / 100%) 347deg,
+        rgb(224 38 69 / 0%) 360deg
+    );
+    -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+    mask-composite: exclude;
+    filter:
+        drop-shadow(0 0 2px rgb(255 213 222 / 90%))
+        drop-shadow(0 0 5px rgb(224 38 69 / 90%));
+    will-change: opacity, --srvr-card-stroke-angle;
 }
 
 .card-hoverable:hover .cardScalable::after {
-    animation: srvr-card-stroke 1.1s linear 1;
+    animation: srvr-card-stroke 1.35s cubic-bezier(0.4, 0, 0.2, 1) 1 both;
 }
 
 @keyframes srvr-card-stroke {
     0% {
+        --srvr-card-stroke-angle: -90deg;
         opacity: 0;
-        background-position: -32% 0, 100% -32%, 132% 100%, 0 132%;
     }
-    6% {
-        opacity: 0.9;
+    12% {
+        opacity: 1;
     }
-    24% {
-        background-position: 132% 0, 100% -32%, 132% 100%, 0 132%;
-    }
-    25% {
-        background-position: 132% 0, 100% -32%, 132% 100%, 0 132%;
-    }
-    49% {
-        background-position: 132% 0, 100% 132%, 132% 100%, 0 132%;
-    }
-    50% {
-        background-position: 132% 0, 100% 132%, 132% 100%, 0 132%;
-    }
-    74% {
-        background-position: 132% 0, 100% 132%, -32% 100%, 0 132%;
-    }
-    75% {
-        background-position: 132% 0, 100% 132%, -32% 100%, 0 132%;
-    }
-    94% {
-        opacity: 0.9;
+    82% {
+        opacity: 1;
     }
     100% {
+        --srvr-card-stroke-angle: 270deg;
         opacity: 0;
-        background-position: 132% 0, 100% 132%, -32% 100%, 0 -32%;
     }
 }
 
 @media (prefers-reduced-motion: reduce) {
     .card-hoverable:hover .cardScalable::after {
         animation: none;
-        opacity: 0.55;
+        opacity: 0.8;
     }
 }
 
