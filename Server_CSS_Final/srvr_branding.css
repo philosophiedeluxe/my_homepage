@@ -80,6 +80,15 @@ progress + span {
     color: var(--srvr-red) !important;
 }
 
+/* Continue-progress bars sit 50% closer to the lower image edge. */
+.listItemImage .itemProgressBar {
+    margin-bottom: 4% !important;
+}
+
+.layout-mobile .listItemImage .itemProgressBar {
+    margin-bottom: 2.5% !important;
+}
+
 /* Main-app header: replace Jellyfin's default wordmark with the local SRVR asset. */
 .pageTitleWithDefaultLogo,
 .pageTitleWithLogo {
