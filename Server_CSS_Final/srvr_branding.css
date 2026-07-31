@@ -4,6 +4,12 @@
     --srvr-red: rgb(224 38 69);
     --srvr-red-deep: rgb(151 18 46);
     --srvr-red-glass: rgb(224 38 69 / 82%);
+    --activeColor: rgb(224 38 69);
+    --activeColorAlpha: rgb(224 38 69 / 90%);
+    --btnSubmitColor: rgb(190 22 52);
+    --btnSubmitBorderColor: rgb(255 182 196 / 72%);
+    --checkboxCheckedBgColor: rgb(224 38 69);
+    --highlightOutlineColor: rgb(239 48 80);
     --darkerGradientPoint: #0c080b;
     --darkerGradientPointAlpha: rgb(12 8 11 / 88%);
     --lighterGradientPoint: #181016;
@@ -22,6 +28,33 @@
     --osdSeekBarThumbColor: var(--srvr-red);
     --btnMiniPlayColor: var(--srvr-red-glass);
     --btnMiniPlayBorderColor: rgb(255 182 196 / 72%);
+}
+
+/* Login wallpaper: keep the native image, but reduce ElegantFin's dark overlay. */
+#loginPage {
+    --darkerGradientPointAlpha: rgb(12 8 11 / 38%);
+    --lighterGradientPoint: rgb(24 16 22 / 56%);
+}
+
+/* Selected navigation and primary submit actions follow the red glass play controls. */
+.navMenuOption-selected,
+.button-submit {
+    background: linear-gradient(135deg, rgb(244 57 87 / 92%), rgb(160 18 48 / 86%)) !important;
+    border-color: rgb(255 182 196 / 72%) !important;
+    color: #fff !important;
+    box-shadow: 0 0.35rem 1rem rgb(105 8 30 / 36%), inset 0 1px 0 rgb(255 255 255 / 26%) !important;
+}
+
+.navMenuOption-selected:hover,
+.navMenuOption-selected:focus-visible,
+.button-submit:hover,
+.button-submit:focus-visible {
+    background: linear-gradient(135deg, rgb(255 67 98 / 96%), rgb(174 20 52 / 90%)) !important;
+}
+
+.checkboxOutline.is-checked,
+.checkboxContainer:hover .checkboxOutline:not(.multiSelectCheckboxOutline) {
+    border-color: rgb(255 182 196 / 78%) !important;
 }
 
 /* Remove ElegantFin version output without affecting footer geometry. */
