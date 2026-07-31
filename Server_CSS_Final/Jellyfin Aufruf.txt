@@ -1,1 +1,1 @@
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_Final/jellyfin_custom.css?v=6');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_Final/jellyfin_custom.css?v=7');
