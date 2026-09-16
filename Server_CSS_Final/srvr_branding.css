@@ -245,9 +245,10 @@ a.MuiButton-root[href="#/"]:has(> .MuiButton-icon > img[src*="icon-transparent"]
     min-width: 0 !important;
     height: clamp(2rem, 4vw, 3.15rem) !important;
     margin: 0 0.5rem 0 0 !important;
-    padding: 8px 11px !important;
+    padding: 4px 6px !important;
     font-size: 0 !important;
     line-height: 0 !important;
+    overflow: visible !important;
 }
 
 a.MuiButton-root[href="#/"]:has(> .MuiButton-icon > img[src*="icon-transparent"]) > .MuiButton-icon {
@@ -256,6 +257,7 @@ a.MuiButton-root[href="#/"]:has(> .MuiButton-icon > img[src*="icon-transparent"]
     width: 100% !important;
     height: 100% !important;
     margin: 0 !important;
+    overflow: visible !important;
 }
 
 a.MuiButton-root[href="#/"]:has(> .MuiButton-icon > img[src*="icon-transparent"]) > .MuiButton-icon > img {
@@ -267,6 +269,8 @@ a.MuiButton-root[href="#/"]:has(> .MuiButton-icon > img[src*="icon-transparent"]
     object-fit: contain !important;
     object-position: center !important;
     content: var(--srvr-logo-url) !important;
+    transform: scale(1.25) !important;
+    transform-origin: center !important;
 }
 
 @media (max-width: 48em) {
