@@ -294,3 +294,163 @@ a.MuiButton-root[href="#/"]:has(> .MuiButton-icon > img[src*="icon-transparent"]
 .videoPlayerContainer {
     background: #000 !important;
 }
+
+/* Jellyfin 12 MUI compatibility layer. The visible library controls now use
+   Mui* components instead of the legacy emby/navMenu selectors above. */
+:root,
+[data-theme="dark"] {
+    --jf-palette-primary-main: var(--srvr-red);
+    --jf-palette-primary-mainChannel: 224 38 69;
+    --jf-palette-primary-light: rgb(244 57 87);
+    --jf-palette-primary-lightChannel: 244 57 87;
+    --jf-palette-primary-dark: var(--srvr-red-deep);
+    --jf-palette-primary-darkChannel: 151 18 46;
+    --jf-palette-primary-contrastText: #fff;
+    --jf-palette-primary-contrastTextChannel: 255 255 255;
+    --jf-palette-secondary-main: var(--srvr-red);
+    --jf-palette-secondary-mainChannel: 224 38 69;
+    --jf-palette-secondary-contrastText: #fff;
+    --jf-palette-secondary-contrastTextChannel: 255 255 255;
+    --jf-palette-info-main: var(--srvr-red);
+    --jf-palette-info-mainChannel: 224 38 69;
+    --jf-palette-info-contrastText: #fff;
+    --jf-palette-info-contrastTextChannel: 255 255 255;
+    --jf-palette-background-paper: var(--drawerColor);
+    --jf-palette-divider: var(--borderColor);
+    --jf-palette-action-hover: var(--selectorBackgroundColorAlpha);
+    --jf-palette-action-selected: rgb(70 20 37 / 68%);
+}
+
+/* Primary MUI actions use the same red glass treatment as the existing
+   legacy play and submit controls. */
+.MuiButtonGroup-containedPrimary {
+    box-shadow: 0 0.35rem 1rem rgb(105 8 30 / 36%), inset 0 1px 0 rgb(255 255 255 / 26%) !important;
+}
+
+.MuiButton-containedPrimary,
+.MuiButtonGroup-containedPrimary > .MuiButton-containedPrimary {
+    background: linear-gradient(135deg, rgb(244 57 87 / 92%), rgb(160 18 48 / 86%)) !important;
+    border-color: var(--btnSubmitBorderColor) !important;
+    color: #fff !important;
+}
+
+.MuiButton-containedPrimary:hover,
+.MuiButton-containedPrimary:focus-visible,
+.MuiButtonGroup-containedPrimary > .MuiButton-containedPrimary:hover,
+.MuiButtonGroup-containedPrimary > .MuiButton-containedPrimary:focus-visible {
+    background: linear-gradient(135deg, rgb(255 67 98 / 96%), rgb(174 20 52 / 90%)) !important;
+}
+
+.MuiButton-containedPrimary.Mui-disabled,
+.MuiButtonGroup-containedPrimary > .MuiButton-containedPrimary.Mui-disabled {
+    background: rgb(151 18 46 / 35%) !important;
+    border-color: rgb(255 182 196 / 28%) !important;
+    box-shadow: none !important;
+    color: rgb(255 255 255 / 48%) !important;
+}
+
+/* The active header link is now a MUI text-primary button. */
+header .MuiButton-root.MuiButton-textPrimary {
+    color: var(--srvr-red) !important;
+}
+
+header .MuiButton-root.MuiButton-textPrimary:hover,
+header .MuiButton-root.MuiButton-textPrimary:focus-visible {
+    background: var(--selectorBackgroundColorAlpha) !important;
+    color: #fff !important;
+}
+
+/* Filter, sort, view and pager controls retain the native white icon colour;
+   their interaction surface follows the SRVR selector colour. */
+.MuiButtonGroup-text .MuiButtonBase-root:hover,
+.MuiButtonGroup-text .MuiButtonBase-root:focus-visible,
+.MuiButtonGroup-text .MuiButtonBase-root.Mui-focusVisible {
+    background: var(--selectorBackgroundColorAlpha) !important;
+    color: #fff !important;
+}
+
+.MuiButtonGroup-text .MuiButtonBase-root.Mui-disabled {
+    color: rgb(255 255 255 / 32%) !important;
+}
+
+/* Alphabet and other outlined MUI groups use the SRVR border instead of the
+   default light MUI outline. */
+.MuiButtonGroup-outlined .MuiButton-outlinedPrimary {
+    border-color: var(--borderColor) !important;
+    color: rgb(255 255 255 / 72%) !important;
+}
+
+.MuiButtonGroup-outlined .MuiButton-outlinedPrimary:hover,
+.MuiButtonGroup-outlined .MuiButton-outlinedPrimary:focus-visible {
+    background: var(--selectorBackgroundColorAlpha) !important;
+    border-color: var(--btnSubmitBorderColor) !important;
+    color: #fff !important;
+}
+
+/* Library count chip. */
+.MuiChip-filledDefault {
+    background: var(--selectorBackgroundColor) !important;
+    border: var(--defaultBorder) !important;
+    color: #fff !important;
+}
+
+/* Normalize all MUI popovers and menus, including the filter popover and the
+   library-view menu. Generated css-* class names are intentionally avoided. */
+.MuiPopover-paper,
+.MuiMenu-paper {
+    background: var(--drawerColor) !important;
+    background-image: none !important;
+    border: var(--defaultBorder) !important;
+    border-radius: var(--largeRadius) !important;
+    box-shadow: 0 0.35rem 1.2rem rgb(0 0 0 / 52%), inset 0 1px 0 rgb(255 255 255 / 10%) !important;
+}
+
+.MuiMenu-paper .MuiMenuItem-root:hover,
+.MuiMenu-paper .MuiMenuItem-root:focus-visible,
+.MuiMenu-paper .MuiMenuItem-root.Mui-focusVisible {
+    background: var(--selectorBackgroundColorAlpha) !important;
+    color: #fff !important;
+}
+
+.MuiMenu-paper .MuiMenuItem-root.Mui-selected,
+.MuiMenu-paper .MuiMenuItem-root.Mui-selected:hover {
+    background: linear-gradient(135deg, rgb(244 57 87 / 92%), rgb(160 18 48 / 86%)) !important;
+    color: #fff !important;
+}
+
+/* Filter accordion rows. */
+#filter-popover .MuiAccordion-root {
+    background: transparent !important;
+    border-bottom: var(--defaultBorder) !important;
+}
+
+#filter-popover .MuiAccordion-root::before {
+    display: none !important;
+}
+
+#filter-popover .MuiAccordionSummary-root:hover,
+#filter-popover .MuiAccordionSummary-root:focus-visible,
+#filter-popover .MuiAccordionSummary-root.Mui-focusVisible {
+    background: var(--selectorBackgroundColorAlpha) !important;
+}
+
+#filter-popover .MuiAccordionSummary-expandIconWrapper {
+    color: var(--srvr-red) !important;
+}
+
+/* Legacy card indicators are still present inside the new MUI library page. */
+.countIndicator,
+.fullSyncIndicator,
+.mediaSourceIndicator {
+    background: linear-gradient(135deg, rgb(244 57 87 / 92%), rgb(160 18 48 / 86%)) !important;
+    border: var(--btnMiniPlayBorderColor) !important;
+    color: #fff !important;
+    box-shadow: 0 0.2rem 0.55rem rgb(105 8 30 / 36%) !important;
+}
+
+/* MUI info badges are accent indicators; semantic success badges remain
+   green so playback and completion states retain their meaning. */
+.MuiBadge-colorInfo {
+    background-color: var(--srvr-red) !important;
+    color: #fff !important;
+}
