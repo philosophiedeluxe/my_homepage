@@ -10,35 +10,61 @@
 :root {
     color-scheme: dark;
 
-    --sa-canvas: #090e15;
-    --sa-surface: #111a25;
-    --sa-surface-raised: #192535;
-    --sa-text: #f3f6fb;
-    --sa-text-secondary: #c2ccda;
-    --sa-text-muted: #94a2b4;
-    --sa-accent: #a9d4ff;
-    --sa-accent-strong: #d5eaff;
-    --sa-accent-ink: #0a1b2d;
-    --sa-success: #86d7b2;
-    --sa-warning: #f0c481;
-    --sa-danger: #d9828a;
+    --sa-canvas: #0b0d12;
+    --sa-surface: #141820;
+    --sa-surface-raised: #1b2028;
+    --sa-text: #f5f5f7;
+    --sa-text-secondary: #c5c9d1;
+    --sa-text-muted: #a0a6b0;
+    --sa-accent: #0a84ff;
+    --sa-accent-strong: #91c6ff;
+    --sa-accent-hover: #2f95ff;
+    --sa-accent-ink: #07121f;
+    --sa-success: #30d158;
+    --sa-warning: #ffd60a;
+    --sa-danger: #ff453a;
 
-    --sa-glass-fallback: #151e2a;
-    --sa-glass-regular: rgb(18 26 38 / 78%);
-    --sa-glass-clear: rgb(12 19 29 / 70%);
-    --sa-glass-dense: rgb(17 25 37 / 88%);
-    --sa-glass-rim: rgb(222 237 255 / 16%);
-    --sa-glass-highlight: rgb(255 255 255 / 7%);
+    --sa-font-display:
+        -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI Variable",
+        "Segoe UI", Roboto, "Noto Sans", Arial, sans-serif;
+    --sa-font-body:
+        -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI Variable Text",
+        "Segoe UI", Roboto, "Noto Sans", Arial, sans-serif;
+    --sa-line-body: 1.5;
+
+    --sa-glass-fallback: #171b22;
+    --sa-glass-regular: rgb(20 24 32 / 72%);
+    --sa-glass-clear: rgb(9 12 18 / 38%);
+    --sa-glass-dense: rgb(24 28 36 / 80%);
+    --sa-glass-rim: rgb(245 247 250 / 15%);
+    --sa-glass-highlight: rgb(255 255 255 / 9%);
+    --sa-control-fill: rgb(255 255 255 / 5%);
+    --sa-control-fill-hover: rgb(255 255 255 / 9%);
+    --sa-control-border: rgb(255 255 255 / 13%);
+    --sa-divider: rgb(255 255 255 / 8%);
+    --sa-tooltip: rgb(25 30 40 / 96%);
+    --sa-action-gradient: linear-gradient(180deg, #49a2ff, #0a84ff);
+    --sa-delete-gradient: linear-gradient(180deg, #ca4148, #a92b36);
     --sa-brand-mark:
-        url("https://philosophiedeluxe.github.io/my_homepage/Server_CSS_Apple/ServerLogo_long_noBG.png?v=1");
+        url("https://philosophiedeluxe.github.io/my_homepage/Server_CSS_Apple/ServerLogo_long_noBG.png?v=2");
 
-    --sa-shadow-soft: 0 0.75rem 2rem rgb(0 0 0 / 20%);
-    --sa-shadow-floating: 0 1rem 2.75rem rgb(0 0 0 / 38%);
-    --sa-focus-ring: 0 0 0 3px rgb(169 212 255 / 48%);
+    --sa-shadow-soft: 0 0.6rem 1.6rem rgb(0 0 0 / 22%);
+    --sa-shadow-floating: 0 1rem 2.5rem rgb(0 0 0 / 38%);
+    --sa-focus-ring: 0 0 0 3px rgb(10 132 255 / 42%);
+
+    --sa-space-1: 0.25rem;
+    --sa-space-2: 0.5rem;
+    --sa-space-3: 0.75rem;
+    --sa-space-4: 1rem;
+    --sa-space-5: 1.5rem;
+    --sa-space-6: 2rem;
+    --sa-content-inset: clamp(1rem, 3.3vw, 2.75rem);
+    --sa-detail-label-width: 8.25rem;
 
     --sa-radius-control: 0.8rem;
     --sa-radius-panel: 1.1rem;
-    --sa-radius-card: 1rem;
+    --sa-radius-card: 0.9rem;
+    --sa-radius-chip: 0.7rem;
     --sa-radius-pill: 999px;
     --sa-episode-gap: 1rem;
     --sa-min-episode-width: 26rem;
@@ -49,16 +75,16 @@
 
     /* Jellyfin theme variables retained from the previous custom theme. */
     --activeColor: var(--sa-accent);
-    --activeColorAlpha: rgb(169 212 255 / 92%);
-    --btnSubmitColor: #9bcaff;
-    --btnSubmitBorderColor: rgb(231 244 255 / 56%);
-    --checkboxCheckedBgColor: #9bcaff;
+    --activeColorAlpha: rgb(10 132 255 / 90%);
+    --btnSubmitColor: var(--sa-accent);
+    --btnSubmitBorderColor: rgb(255 255 255 / 54%);
+    --checkboxCheckedBgColor: var(--sa-accent);
     --highlightOutlineColor: var(--sa-accent);
-    --osdSeekBarPlayedColor: #b9dcff;
-    --osdSeekBarThumbColor: #e4f2ff;
-    --osdSeekBarBufferedColorAlpha: rgb(209 230 255 / 34%);
-    --btnMiniPlayColor: rgb(15 25 38 / 88%);
-    --btnMiniPlayBorderColor: rgb(233 244 255 / 36%);
+    --osdSeekBarPlayedColor: var(--sa-accent);
+    --osdSeekBarThumbColor: #f5f5f7;
+    --osdSeekBarBufferedColorAlpha: rgb(255 255 255 / 30%);
+    --btnMiniPlayColor: var(--sa-glass-dense);
+    --btnMiniPlayBorderColor: var(--sa-control-border);
 
     --jf-palette-AppBar-transparentBg: var(--sa-glass-regular);
     --jf-palette-AppBar-gradient:
@@ -70,20 +96,17 @@
 html {
     background: var(--sa-canvas);
     scroll-behavior: smooth;
-    scrollbar-color: rgb(169 212 255 / 34%) transparent;
+    scrollbar-color: rgb(255 255 255 / 22%) transparent;
 }
 
 body {
     background:
-        radial-gradient(ellipse at 12% -18%, rgb(69 106 151 / 18%), transparent 45rem),
-        radial-gradient(ellipse at 94% 8%, rgb(56 80 119 / 12%), transparent 38rem),
+        radial-gradient(ellipse at 50% -28rem, rgb(92 117 151 / 12%), transparent 54rem),
         var(--sa-canvas);
     color: var(--sa-text);
-    font-family:
-        -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display",
-        "Segoe UI", Roboto, "Noto Sans", Arial, sans-serif;
-    font-size: 0.95rem;
-    line-height: 1.5;
+    font-family: var(--sa-font-body);
+    font-size: 1rem;
+    line-height: var(--sa-line-body);
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
 }
@@ -95,9 +118,21 @@ textarea {
     font: inherit;
 }
 
+h1,
+h2,
+h3,
+.MuiTypography-h1,
+.MuiTypography-h2,
+.MuiTypography-h3 {
+    font-family: var(--sa-font-display);
+    letter-spacing: -0.025em;
+    line-height: 1.16;
+    text-wrap: balance;
+}
+
 a {
-    color: var(--sa-accent);
-    text-decoration-color: rgb(169 212 255 / 38%);
+    color: var(--sa-text-secondary);
+    text-decoration-color: rgb(245 247 250 / 28%);
     text-underline-offset: 0.18em;
     transition:
         color var(--sa-duration-quick) var(--sa-ease-standard),
@@ -125,15 +160,73 @@ a:hover {
 .MuiAppBar-root {
     color: var(--sa-text);
     background-color: var(--sa-glass-fallback);
-    background-image: none;
+    background-image:
+        linear-gradient(180deg, rgb(255 255 255 / 8%), rgb(255 255 255 / 2%) 42%, transparent 82%);
     border-bottom: 1px solid var(--sa-glass-rim);
-    box-shadow: 0 0.45rem 1.5rem rgb(0 0 0 / 20%);
+    box-shadow:
+        0 0.75rem 2rem rgb(0 0 0 / 23%),
+        inset 0 1px 0 rgb(255 255 255 / 9%);
 }
 
 .skinHeader {
+    border-radius: 0 0 1.1rem 1.1rem;
     transition:
         background-color var(--sa-duration-standard) var(--sa-ease-standard),
         box-shadow var(--sa-duration-standard) var(--sa-ease-standard);
+}
+
+.headerTop {
+    min-height: var(--appBarHeight, 3.5rem);
+    align-items: center;
+    gap: var(--sa-space-2);
+    padding: 0.25rem clamp(0.75rem, 1.8vw, 1.5rem);
+}
+
+.headerLeft {
+    min-width: 0;
+    gap: var(--sa-space-2);
+}
+
+.headerRight {
+    gap: 0.25rem;
+}
+
+.headerButton,
+.paper-icon-button-light,
+.MuiIconButton-root {
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+}
+
+.skinHeader .headerButton,
+.skinHeader .paper-icon-button-light,
+.MuiIconButton-root {
+    color: var(--sa-text-secondary);
+    border-radius: var(--sa-radius-pill);
+    transition:
+        color var(--sa-duration-quick) var(--sa-ease-standard),
+        background-color var(--sa-duration-quick) var(--sa-ease-standard);
+}
+
+.pageTitleWithDefaultLogo,
+.pageTitleWithLogo {
+    display: block;
+    flex: 0 0 clamp(9rem, 13vw, 12rem);
+    width: clamp(9rem, 13vw, 12rem);
+    min-width: 0;
+    height: 2.8rem;
+    margin: 0 0.7rem 0 0.25rem;
+    padding: 0.16rem 0.25rem;
+    box-sizing: border-box;
+    overflow: hidden;
+    color: transparent;
+    text-indent: -9999px;
+    background: var(--sa-brand-mark) center / contain no-repeat;
+}
+
+.pageTitleWithDefaultLogo::before,
+.pageTitleWithLogo::before {
+    display: none;
 }
 
 .MuiToolbar-root {
@@ -173,7 +266,7 @@ a:hover {
 .navMenuOption-selected {
     color: var(--sa-text);
     background:
-        linear-gradient(105deg, rgb(169 212 255 / 19%), rgb(169 212 255 / 8%));
+        linear-gradient(105deg, rgb(10 132 255 / 15%), rgb(10 132 255 / 6%));
     box-shadow: inset 2px 0 0 var(--sa-accent);
 }
 
@@ -181,21 +274,71 @@ a:hover {
     outline-color: var(--sa-accent);
 }
 
-.pageTitleWithDefaultLogo,
-.pageTitleWithLogo {
-    display: block;
-    width: clamp(8.75rem, 15vw, 12.75rem);
-    height: clamp(2rem, 4vw, 3rem);
-    margin-inline-end: 0.5rem;
+.sectionTabs {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    max-width: 100%;
     overflow: hidden;
-    color: transparent;
-    text-indent: -9999px;
-    background: var(--sa-brand-mark) center / contain no-repeat;
 }
 
-.pageTitleWithDefaultLogo::before,
-.pageTitleWithLogo::before {
+.sectionTabs .emby-tabs.smoothScrollX {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    gap: 0.25rem;
+    padding-inline: 0.25rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+    overscroll-behavior-inline: contain;
+    scroll-padding-inline: 0.75rem;
+}
+
+.sectionTabs .emby-tabs.smoothScrollX::-webkit-scrollbar {
     display: none;
+}
+
+.sectionTabs .emby-tab-button {
+    flex: 0 0 auto;
+    min-height: 2.75rem;
+    height: 2.75rem;
+    margin: 0;
+    padding-inline: 0.8rem;
+    color: var(--sa-text-secondary);
+    border: 1px solid transparent;
+    border-radius: var(--sa-radius-pill);
+    background: transparent;
+    font-weight: 450;
+    letter-spacing: -0.01em;
+    transition:
+        color var(--sa-duration-quick) var(--sa-ease-standard),
+        background-color var(--sa-duration-quick) var(--sa-ease-standard),
+        border-color var(--sa-duration-quick) var(--sa-ease-standard);
+}
+
+.sectionTabs .emby-tab-button-active,
+.sectionTabs .emby-tab-button[aria-selected="true"] {
+    color: var(--sa-text);
+    border-color: rgb(255 255 255 / 16%);
+    background:
+        linear-gradient(180deg, rgb(255 255 255 / 12%), rgb(255 255 255 / 6%));
+    box-shadow:
+        inset 0 1px 0 rgb(255 255 255 / 12%),
+        0 2px 8px rgb(0 0 0 / 12%);
+}
+
+.sectionTabs .emby-tab-button.show-focus:focus,
+.sectionTabs .emby-tab-button:focus-visible {
+    outline: 2px solid var(--sa-accent-strong);
+    outline-offset: 2px;
+}
+
+.sectionTitle {
+    margin-block: var(--sa-space-1) var(--sa-space-3);
+    font-family: var(--sa-font-display);
+    font-size: clamp(1.15rem, 1.5vw, 1.4rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
 }
 
 /* 04. Library cards and artwork */
@@ -207,7 +350,6 @@ a:hover {
 .cardScalable {
     border-radius: var(--sa-radius-card);
     transition:
-        transform var(--sa-duration-standard) var(--sa-ease-standard),
         box-shadow var(--sa-duration-standard) var(--sa-ease-standard);
 }
 
@@ -246,23 +388,25 @@ a:hover {
 }
 
 .cardOverlayButton {
-    border: 1px solid rgb(238 246 255 / 25%);
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    border: 1px solid var(--sa-control-border);
     border-radius: var(--sa-radius-pill);
-    background-color: rgb(11 18 27 / 76%);
+    background-color: rgb(8 11 16 / 78%);
 }
 
 .cardOverlayFab-primary,
 .cardOverlayContainer > .cardOverlayFab-primary {
     color: var(--sa-accent-ink);
-    border: 1px solid rgb(235 245 255 / 52%);
-    background: linear-gradient(145deg, #d4eaff, #8fbeee);
+    border: 1px solid rgb(255 255 255 / 38%);
+    background: var(--sa-action-gradient);
     box-shadow:
         0 0.35rem 0.9rem rgb(0 0 0 / 28%),
-        inset 0 1px 0 rgb(255 255 255 / 68%);
+        inset 0 1px 0 rgb(255 255 255 / 28%);
 }
 
 .itemProgressBar {
-    background-color: rgb(207 226 248 / 22%);
+    background-color: rgb(255 255 255 / 22%);
 }
 
 .itemProgressBarForeground {
@@ -283,20 +427,20 @@ a:hover {
 .paperList {
     color: var(--sa-text);
     background-color: var(--sa-surface-raised);
-    border: 1px solid rgb(222 237 255 / 8%);
+    border: 1px solid var(--sa-divider);
     border-radius: var(--sa-radius-panel);
 }
 
 .listItem {
     color: var(--sa-text);
-    border-color: rgb(222 237 255 / 10%);
+    border-color: var(--sa-divider);
     transition:
         background-color var(--sa-duration-quick) var(--sa-ease-standard),
         border-color var(--sa-duration-quick) var(--sa-ease-standard);
 }
 
 .listItemImage {
-    border-radius: 0.65rem;
+    border-radius: var(--sa-radius-chip);
 }
 
 .listItemBody {
@@ -304,7 +448,7 @@ a:hover {
 }
 
 .listItemProgressBar {
-    background-color: rgb(207 226 248 / 22%);
+    background-color: rgb(255 255 255 / 20%);
 }
 
 .listItemProgressBar .itemProgressBarForeground {
@@ -313,8 +457,8 @@ a:hover {
 
 .listItemImageButton {
     color: var(--sa-accent-ink);
-    border: 1px solid rgb(235 245 255 / 52%);
-    background: linear-gradient(145deg, #d4eaff, #8fbeee);
+    border: 1px solid rgb(255 255 255 / 38%);
+    background: var(--sa-action-gradient);
 }
 
 @supports (display: grid) and selector(.vertical-list:has(.listItem-largeImage)) {
@@ -370,7 +514,7 @@ a:hover {
 .card.show-focus .cardScalable {
     box-shadow:
         0 0 0 2px var(--sa-accent),
-        0 0 0 5px rgb(169 212 255 / 34%);
+        0 0 0 5px rgb(10 132 255 / 28%);
 }
 
 .listItem-border.show-focus:focus,
@@ -378,7 +522,7 @@ a:hover {
     border-radius: 0.7rem;
     box-shadow:
         0 0 0 2px var(--sa-accent),
-        0 0 0 5px rgb(169 212 255 / 34%);
+        0 0 0 5px rgb(10 132 255 / 28%);
 }
 
 /* 06. Detail pages */
@@ -394,24 +538,180 @@ a:hover {
 
 .detailPagePrimaryContainer {
     color: var(--sa-text);
-    text-shadow: 0 1px 1.2rem rgb(0 0 0 / 46%);
+}
+
+.detailPagePrimaryContainer .nameContainer,
+.detailPagePrimaryContainer .itemMiscInfo {
+    text-shadow: 0 1px 1rem rgb(0 0 0 / 42%);
 }
 
 .detailPageWrapperContainer {
     color: var(--sa-text);
 }
 
+/* Restore the detail layout's normal inset instead of its 32vw poster offset. */
+.detailPagePrimaryContainer > .detailPagePrimaryContent,
+.detailPagePrimaryContainer > .detailRibbon,
+.detailPagePrimaryContainer.detailRibbon {
+    padding-inline-start: var(--sa-content-inset);
+}
+
+.layout-mobile .detailPagePrimaryContainer > .detailPagePrimaryContent {
+    padding-inline-start: max(var(--sa-content-inset), env(safe-area-inset-left, 0px)) !important;
+    padding-inline-end: max(var(--sa-content-inset), env(safe-area-inset-right, 0px)) !important;
+}
+
+html[dir="rtl"] .layout-mobile .detailPagePrimaryContainer > .detailPagePrimaryContent {
+    padding-inline-start: max(var(--sa-content-inset), env(safe-area-inset-right, 0px)) !important;
+    padding-inline-end: max(var(--sa-content-inset), env(safe-area-inset-left, 0px)) !important;
+}
+
+.nameContainer {
+    margin-block-end: 0.55rem;
+}
+
+.nameContainer h1 {
+    max-width: 24ch;
+    margin: 0.1rem 0 0.45rem;
+    font-size: clamp(2rem, 4vw, 3.7rem);
+    font-weight: 650;
+    line-height: 1.05;
+}
+
+.itemMiscInfo {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.25rem 0.75rem;
+    color: var(--sa-text-secondary);
+    font-size: 0.9rem;
+}
+
 .detailImageContainer {
     border-radius: var(--sa-radius-panel);
 }
 
+.itemDetailsGroup {
+    display: grid;
+    gap: 0;
+    margin-block: var(--sa-space-5) var(--sa-space-6);
+    padding: var(--sa-space-1) var(--sa-space-3);
+}
+
+.detailsGroupItem {
+    display: grid;
+    grid-template-columns: minmax(6rem, var(--sa-detail-label-width)) minmax(0, 1fr);
+    align-items: start;
+    gap: var(--sa-space-1) var(--sa-space-4);
+    min-width: 0;
+    margin: 0;
+    padding-block: 0.45rem;
+    border-bottom: 1px solid var(--sa-divider);
+}
+
+.detailsGroupItem > .label {
+    align-self: start;
+    margin: 0;
+    padding-top: 0.55rem;
+    color: var(--sa-text-secondary);
+    font-size: 0.875rem;
+    font-weight: 550;
+    line-height: 1.35;
+}
+
+.detailsGroupItem > .focuscontainer-x {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--sa-space-1);
+    min-width: 0;
+}
+
+.detailsGroupItem > .focuscontainer-x > span {
+    display: inline-flex;
+    align-items: center;
+    flex: 0 1 auto;
+    gap: 0;
+    max-width: 100%;
+    min-width: 0;
+    color: var(--sa-text-secondary);
+    font-size: 0;
+    line-height: 1.35;
+}
+
+.itemTags,
+.itemExternalLinks {
+    display: block;
+    line-height: 2.8;
+}
+
+.itemGenres {
+    color: var(--sa-text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.8;
+}
+
+.detailsGroupItem .button-link,
+.itemTags .button-link,
+.itemExternalLinks .button-link,
+.itemGenres .button-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.4rem;
+    max-width: 100%;
+    margin: 0.12rem 0.2rem;
+    padding: 0.42rem var(--sa-space-3);
+    box-sizing: border-box;
+    color: var(--sa-text-secondary);
+    border: 1px solid var(--sa-control-border);
+    border-radius: var(--sa-radius-chip);
+    background: var(--sa-control-fill);
+    font-size: 0.9rem;
+    font-weight: 500;
+    line-height: 1.3;
+    text-decoration: none;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    transition:
+        color var(--sa-duration-quick) var(--sa-ease-standard),
+        background-color var(--sa-duration-quick) var(--sa-ease-standard),
+        border-color var(--sa-duration-quick) var(--sa-ease-standard),
+        box-shadow var(--sa-duration-quick) var(--sa-ease-standard);
+}
+
+.itemTags .button-link,
+.itemExternalLinks .button-link,
+.itemGenres .button-link {
+    vertical-align: middle;
+    min-height: 2.35rem;
+}
+
+.detailsGroupItem .button-link {
+    min-height: 2.5rem;
+}
+
+.detailsGroupItem .button-link:focus-visible,
+.itemTags .button-link:focus-visible,
+.itemExternalLinks .button-link:focus-visible,
+.itemGenres .button-link:focus-visible {
+    outline: 2px solid var(--sa-accent-strong);
+    outline-offset: 2px;
+    box-shadow: var(--sa-focus-ring);
+}
+
 .btnPlay.detailButton {
     color: var(--sa-accent-ink);
-    border: 1px solid rgb(235 245 255 / 58%);
-    background: linear-gradient(145deg, #d4eaff, #8fbeee);
+    border: 1px solid rgb(255 255 255 / 44%);
+    background: var(--sa-action-gradient);
     box-shadow:
         0 0.45rem 1.2rem rgb(0 0 0 / 28%),
-        inset 0 1px 0 rgb(255 255 255 / 64%);
+        inset 0 1px 0 rgb(255 255 255 / 30%);
+}
+
+.mainDetailButtons .detailButton {
+    min-width: 2.75rem;
+    min-height: 2.75rem;
 }
 
 /* 07. Buttons, tabs, and form controls */
@@ -419,15 +719,14 @@ a:hover {
 .MuiButton-root {
     min-height: 2.75rem;
     color: var(--sa-text);
-    border: 1px solid rgb(222 237 255 / 16%);
+    border: 1px solid var(--sa-control-border);
     border-radius: var(--sa-radius-control);
-    background-color: rgb(230 240 252 / 7%);
-    box-shadow: inset 0 1px 0 rgb(255 255 255 / 4%);
+    background-color: var(--sa-control-fill);
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 6%);
     transition:
         color var(--sa-duration-quick) var(--sa-ease-standard),
         background-color var(--sa-duration-quick) var(--sa-ease-standard),
         border-color var(--sa-duration-quick) var(--sa-ease-standard),
-        transform var(--sa-duration-quick) var(--sa-ease-standard),
         box-shadow var(--sa-duration-quick) var(--sa-ease-standard);
 }
 
@@ -447,31 +746,30 @@ a:hover {
     border-radius: var(--sa-radius-pill);
     transition:
         color var(--sa-duration-quick) var(--sa-ease-standard),
-        background-color var(--sa-duration-quick) var(--sa-ease-standard),
-        transform var(--sa-duration-quick) var(--sa-ease-standard);
+        background-color var(--sa-duration-quick) var(--sa-ease-standard);
 }
 
 .button-submit,
 .emby-button.button-submit,
 .MuiButton-containedPrimary {
     color: var(--sa-accent-ink);
-    border: 1px solid rgb(235 245 255 / 58%);
-    background: linear-gradient(145deg, #d4eaff, #8fbeee);
+    border: 1px solid rgb(255 255 255 / 42%);
+    background: var(--sa-action-gradient);
     box-shadow:
         0 0.35rem 1rem rgb(0 0 0 / 23%),
-        inset 0 1px 0 rgb(255 255 255 / 66%);
+        inset 0 1px 0 rgb(255 255 255 / 28%);
 }
 
 .button-delete {
     color: #fff;
-    border: 1px solid var(--sa-danger);
-    background: linear-gradient(145deg, #ad3a47, #7f2634);
+    border: 1px solid rgb(255 255 255 / 24%);
+    background: var(--sa-delete-gradient);
 }
 
 .button-delete:hover {
     color: #fff;
-    border-color: rgb(255 221 224 / 68%);
-    background: linear-gradient(145deg, #c34c59, #963543);
+    border-color: rgb(255 255 255 / 45%);
+    background: linear-gradient(180deg, #d84b50, #b8343d);
 }
 
 .emby-tab-button {
@@ -485,8 +783,8 @@ a:hover {
 .emby-tab-button-active,
 .emby-tab-button[aria-selected="true"] {
     color: var(--sa-accent-strong);
-    background-color: rgb(169 212 255 / 9%);
-    box-shadow: inset 0 -2px 0 var(--sa-accent);
+    background-color: rgb(10 132 255 / 12%);
+    box-shadow: inset 0 0 0 1px rgb(10 132 255 / 16%);
 }
 
 .MuiTab-root {
@@ -507,9 +805,9 @@ a:hover {
 .emby-select-withcolor,
 .MuiOutlinedInput-root {
     color: var(--sa-text);
-    border-color: rgb(222 237 255 / 24%);
+    border-color: var(--sa-control-border);
     border-radius: var(--sa-radius-control);
-    background-color: rgb(5 10 17 / 44%);
+    background-color: rgb(8 11 16 / 58%);
 }
 
 .emby-input,
@@ -544,11 +842,11 @@ a:hover {
 }
 
 .MuiOutlinedInput-notchedOutline {
-    border-color: rgb(222 237 255 / 24%);
+    border-color: var(--sa-control-border);
 }
 
 .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
-    border-color: rgb(222 237 255 / 42%);
+    border-color: rgb(255 255 255 / 26%);
 }
 
 .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
@@ -560,7 +858,7 @@ a:hover {
 }
 
 .checkboxOutline {
-    border-color: rgb(222 237 255 / 55%);
+    border-color: rgb(245 247 250 / 56%);
     border-radius: 0.35rem;
 }
 
@@ -595,7 +893,7 @@ a:hover {
 }
 
 .mdl-switch__input:focus + .mdl-switch__label + .mdl-switch__trackContainer .mdl-switch__focus-helper {
-    background-color: rgb(169 212 255 / 18%);
+    background-color: rgb(10 132 255 / 18%);
     box-shadow: var(--sa-focus-ring);
 }
 
@@ -608,7 +906,8 @@ a:hover {
 .MuiAlert-root {
     color: var(--sa-text);
     background-color: var(--sa-glass-dense);
-    background-image: none;
+    background-image:
+        linear-gradient(145deg, rgb(255 255 255 / 5%), transparent 48%);
     border: 1px solid var(--sa-glass-rim);
     border-radius: var(--sa-radius-panel);
     box-shadow:
@@ -631,12 +930,12 @@ a:hover {
 
 .MuiMenuItem-root.Mui-selected {
     color: var(--sa-accent-strong);
-    background-color: rgb(169 212 255 / 10%);
+    background-color: rgb(10 132 255 / 13%);
 }
 
 .actionsheetDivider,
 .MuiDivider-root {
-    border-color: rgb(222 237 255 / 14%);
+    border-color: var(--sa-divider);
 }
 
 .MuiDialogTitle-root,
@@ -645,9 +944,16 @@ a:hover {
     color: var(--sa-text);
 }
 
+.MuiDialog-paper .MuiAlert-root {
+    background: transparent;
+    box-shadow: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+}
+
 .MuiTooltip-tooltip {
     color: var(--sa-text);
-    background-color: #1b2736;
+    background-color: var(--sa-tooltip);
     border: 1px solid var(--sa-glass-rim);
     border-radius: 0.55rem;
     box-shadow: var(--sa-shadow-soft);
@@ -671,8 +977,19 @@ a:hover {
 
 /* 09. Video OSD and audio playback controls */
 #videoOsdPage,
+#videoOsdPage.page,
+#videoOsdPage.libraryPage,
+#videoOsdPage.mainAnimatedPage {
+    background: transparent !important;
+}
+
+#videoOsdPage::before,
+#videoOsdPage::after {
+    display: none !important;
+}
+
 .videoPlayerContainer {
-    background-color: #000;
+    background: #000 !important;
 }
 
 .videoOsd-appBar,
@@ -703,7 +1020,7 @@ a:hover {
 }
 
 .mdl-slider-background-upper {
-    background-color: rgb(207 226 248 / 34%);
+    background-color: rgb(255 255 255 / 34%);
 }
 
 .playbackProgress > div {
@@ -711,11 +1028,11 @@ a:hover {
 }
 
 .transcodingProgress > div {
-    background-color: #f3a577;
+    background-color: #ff9f0a;
 }
 
 .backgroundProgress > div {
-    background-color: rgb(207 226 248 / 28%);
+    background-color: rgb(255 255 255 / 28%);
 }
 
 /* 10. Login */
@@ -744,8 +1061,8 @@ a:hover {
     .emby-button:hover,
     .MuiButton-root:hover {
         color: var(--sa-text);
-        border-color: rgb(222 237 255 / 32%);
-        background-color: rgb(230 240 252 / 12%);
+        border-color: rgb(255 255 255 / 22%);
+        background-color: var(--sa-control-fill-hover);
         box-shadow:
             0 0.35rem 1rem rgb(0 0 0 / 17%),
             inset 0 1px 0 rgb(255 255 255 / 7%);
@@ -753,8 +1070,8 @@ a:hover {
 
     .paper-icon-button-light:hover,
     .MuiIconButton-root:hover {
-        color: var(--sa-accent-strong);
-        background-color: rgb(169 212 255 / 12%);
+        color: var(--sa-text);
+        background-color: var(--sa-control-fill-hover);
     }
 
     .button-submit:hover,
@@ -762,36 +1079,56 @@ a:hover {
     .MuiButton-containedPrimary:hover,
     .btnPlay.detailButton:hover {
         color: var(--sa-accent-ink);
-        background: linear-gradient(145deg, #e4f2ff, #a9d4ff);
+        background: linear-gradient(180deg, #67b1ff, var(--sa-accent-hover));
         box-shadow:
             0 0.5rem 1.2rem rgb(0 0 0 / 28%),
-            inset 0 1px 0 rgb(255 255 255 / 78%);
-        transform: translateY(-1px);
+            inset 0 1px 0 rgb(255 255 255 / 35%);
     }
 
     .navMenuOption-selected:hover {
         background:
-            linear-gradient(105deg, rgb(169 212 255 / 24%), rgb(169 212 255 / 11%));
+            linear-gradient(105deg, rgb(10 132 255 / 20%), rgb(10 132 255 / 8%));
     }
 
     .navMenuOption:hover {
         color: var(--sa-text);
-        background-color: rgb(169 212 255 / 9%);
+        background-color: rgb(255 255 255 / 6%);
     }
 
     .listItem:hover {
-        background-color: rgb(221 236 255 / 6%);
-        border-color: rgb(222 237 255 / 15%);
+        background-color: rgb(255 255 255 / 4%);
+        border-color: rgb(255 255 255 / 11%);
     }
 
     .card-hoverable:hover .cardScalable {
         box-shadow: 0 0.65rem 1.5rem rgb(0 0 0 / 24%);
-        transform: translateY(-2px);
     }
 
     .cardOverlayButton:hover {
         color: var(--sa-accent-strong);
-        background-color: rgb(11 18 27 / 90%);
+        background-color: rgb(8 11 16 / 92%);
+    }
+
+    .detailsGroupItem .button-link:hover,
+    .itemTags .button-link:hover,
+    .itemExternalLinks .button-link:hover,
+    .itemGenres .button-link:hover {
+        border-color: rgb(255 255 255 / 28%);
+        background-color: var(--sa-control-fill-hover);
+        box-shadow: inset 0 1px 0 rgb(255 255 255 / 7%);
+    }
+
+    .MuiMenuItem-root:hover,
+    .actionSheetMenuItem:hover {
+        color: var(--sa-text);
+        background-color: rgb(255 255 255 / 7%);
+    }
+
+    .emby-button:active,
+    .MuiButton-root:active,
+    .paper-icon-button-light:active,
+    .MuiIconButton-root:active {
+        background-color: rgb(255 255 255 / 12%);
     }
 }
 
@@ -800,15 +1137,22 @@ a:hover {
     .skinHeader,
     .MuiAppBar-root {
         background-color: var(--sa-glass-regular);
-        -webkit-backdrop-filter: blur(26px) saturate(1.35);
-        backdrop-filter: blur(26px) saturate(1.35);
+        -webkit-backdrop-filter: blur(28px) saturate(1.35);
+        backdrop-filter: blur(28px) saturate(1.35);
+    }
+
+    .skinHeader.semiTransparent {
+        background-image:
+            linear-gradient(180deg, rgb(255 255 255 / 8%), rgb(255 255 255 / 2%) 42%, transparent 82%);
+        -webkit-backdrop-filter: blur(28px) saturate(1.35) !important;
+        backdrop-filter: blur(28px) saturate(1.35) !important;
     }
 
     .mainDrawer,
     .MuiDrawer-paper {
         background-color: var(--sa-glass-regular);
-        -webkit-backdrop-filter: blur(30px) saturate(1.3);
-        backdrop-filter: blur(30px) saturate(1.3);
+        -webkit-backdrop-filter: blur(28px) saturate(1.3);
+        backdrop-filter: blur(28px) saturate(1.3);
     }
 
     .actionSheet,
@@ -826,34 +1170,49 @@ a:hover {
     .videoOsdBottom,
     .nowPlayingBar {
         background-color: var(--sa-glass-clear);
-        -webkit-backdrop-filter: blur(20px) saturate(1.35);
-        backdrop-filter: blur(20px) saturate(1.35);
-    }
-
-    .MuiSnackbarContent-root,
-    .MuiAlert-root {
-        background-color: var(--sa-glass-dense);
-        -webkit-backdrop-filter: blur(20px) saturate(1.25);
-        backdrop-filter: blur(20px) saturate(1.25);
+        -webkit-backdrop-filter: blur(12px) saturate(1.35);
+        backdrop-filter: blur(12px) saturate(1.35);
     }
 }
 
 /* 13. Responsive layouts */
+@media (min-width: 75em) {
+    .sectionTabs {
+        align-self: center;
+        justify-content: center;
+        width: max-content;
+        max-width: calc(100vw - 26rem);
+        margin-top: calc(0rem - var(--appBarHeight, 3rem));
+        position: relative;
+    }
+
+    .sectionTabs .emby-tabs.smoothScrollX {
+        width: max-content;
+        max-width: 100%;
+    }
+
+    .libraryPage:not(.noSecondaryNavPage) {
+        padding-top: calc(var(--appBarHeight, 3rem) + 0.5rem) !important;
+    }
+
+    .headroom--unpinned {
+        transform: translateY(0);
+    }
+}
+
 @media (max-width: 48rem) {
     :root {
         --sa-radius-panel: 0.95rem;
         --sa-radius-card: 0.8rem;
     }
 
-    body {
-        font-size: 0.94rem;
+    .headerTop {
+        gap: 0.15rem;
+        padding-inline: 0.45rem;
     }
 
-    .pageTitleWithDefaultLogo,
-    .pageTitleWithLogo {
-        width: 8.4rem;
-        height: 2.35rem;
-        margin-inline-end: 0.25rem;
+    .sectionTabs .emby-tab-button {
+        padding-inline: 0.72rem;
     }
 
     .MuiDialog-paper {
@@ -874,12 +1233,32 @@ a:hover {
         min-height: 2.75rem;
     }
 
+    .pageTitleWithDefaultLogo,
+    .pageTitleWithLogo {
+        flex-basis: 7.75rem;
+        width: 7.75rem;
+        height: 2.55rem;
+        margin-inline: 0.15rem 0.4rem;
+        padding-inline: 0.1rem;
+    }
+
     .emby-button,
     .MuiButton-root,
     .emby-tab-button,
     .actionSheetMenuItem,
     .MuiMenuItem-root {
         min-height: 2.75rem;
+    }
+
+    .detailsGroupItem .button-link,
+    .itemTags .button-link,
+    .itemExternalLinks .button-link,
+    .itemGenres .button-link {
+        min-height: 2.75rem;
+    }
+
+    .detailsGroupItem {
+        gap: 0.25rem 0.75rem;
     }
 
     @supports selector(.cardImageContainer:has(> .innerCardFooter)) {
@@ -890,9 +1269,36 @@ a:hover {
 }
 
 @media (max-width: 32rem) {
+    .headerTop {
+        gap: 0;
+        padding-inline: 0.25rem;
+    }
+
+    .headerLeft {
+        gap: 0.2rem;
+    }
+
+    .headerRight {
+        gap: 0;
+    }
+
     .pageTitleWithDefaultLogo,
     .pageTitleWithLogo {
-        width: 7.4rem;
+        flex-basis: 6.75rem;
+        width: 6.75rem;
+        height: 2.4rem;
+        margin-inline: 0.1rem 0.2rem;
+    }
+
+    .detailsGroupItem {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 0.25rem;
+        padding-block: 0.65rem;
+    }
+
+    .detailsGroupItem > .label {
+        padding-top: 0;
+        font-size: 0.95rem;
     }
 
     .paperList {
@@ -921,6 +1327,7 @@ a:hover {
 
     a,
     .skinHeader,
+    .headerButton,
     .cardScalable,
     .listItem,
     .emby-button,
@@ -928,9 +1335,10 @@ a:hover {
     .paper-icon-button-light,
     .MuiIconButton-root,
     .emby-tab-button,
+    .MuiTab-root,
+    .button-link,
     .actionSheetMenuItem,
     .MuiMenuItem-root {
-        scroll-behavior: auto;
         animation: none;
         transition: none;
     }
@@ -960,10 +1368,25 @@ a:hover {
     .MuiAlert-root,
     .videoOsd-appBar,
     .videoOsdBottom,
-    .nowPlayingBar {
-        background-color: #121b27;
+    .nowPlayingBar,
+    .sectionTabs .emby-tab-button-active,
+    .sectionTabs .emby-tab-button[aria-selected="true"] {
+        background-color: var(--sa-surface);
+        background-image: none;
         -webkit-backdrop-filter: none;
         backdrop-filter: none;
+    }
+
+    .sectionTabs .emby-tab-button-active,
+    .sectionTabs .emby-tab-button[aria-selected="true"] {
+        border-color: var(--sa-control-border);
+    }
+
+    .skinHeader.semiTransparent {
+        background-color: var(--sa-surface);
+        background-image: none;
+        -webkit-backdrop-filter: none !important;
+        backdrop-filter: none !important;
     }
 }
 
@@ -977,6 +1400,11 @@ a:hover {
     .paperList,
     .emby-button,
     .MuiButton-root,
+    .sectionTabs .emby-tab-button,
+    .detailsGroupItem .button-link,
+    .itemTags .button-link,
+    .itemExternalLinks .button-link,
+    .itemGenres .button-link,
     .emby-input,
     .emby-textarea,
     .emby-select-withcolor,
@@ -1000,7 +1428,19 @@ a:hover {
         background: Highlight;
     }
 
+    .detailsGroupItem .button-link,
+    .itemTags .button-link,
+    .itemExternalLinks .button-link,
+    .itemGenres .button-link {
+        color: LinkText;
+        outline: none;
+        border: 1px solid LinkText;
+        background: Canvas;
+        text-decoration: underline;
+    }
+
     .skinHeader,
+    .MuiAppBar-root,
     .mainDrawer,
     .MuiDrawer-paper,
     .MuiDialog-paper,
