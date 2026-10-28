@@ -1,3 +1,1621 @@
-/* SRVR ElegantFin — local entry point */
-@import url("https://philosophiedeluxe.github.io/my_homepage/Server_CSS_Final/Theme/ElegantFin-theme-v26.06.06.css?v=11");
-@import url("https://philosophiedeluxe.github.io/my_homepage/Server_CSS_Final/srvr_branding.css?v=11");
+/*
+ * Server_CSS_Apple
+ * Selectors checked against Jellyfin Web v12.3 and v12.4; see README.md.
+ *
+ * Design rule: glass is reserved for floating controls. Poster, backdrop,
+ * video, and music artwork are content and receive no global filter or blur.
+ */
+
+/* 01. Design tokens */
+:root {
+    color-scheme: dark;
+
+    --sa-canvas: #0b0d12;
+    --sa-surface: #141820;
+    --sa-surface-raised: #1b2028;
+    --sa-text: #f5f5f7;
+    --sa-text-secondary: #c5c9d1;
+    --sa-text-muted: #a0a6b0;
+    --sa-accent: #0a84ff;
+    --sa-accent-strong: #91c6ff;
+    --sa-accent-hover: #2f95ff;
+    --sa-accent-ink: #07121f;
+    --sa-success: #30d158;
+    --sa-warning: #ffd60a;
+    --sa-danger: #ff453a;
+
+    --sa-font-display:
+        -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI Variable",
+        "Segoe UI", Roboto, "Noto Sans", Arial, sans-serif;
+    --sa-font-body:
+        -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI Variable Text",
+        "Segoe UI", Roboto, "Noto Sans", Arial, sans-serif;
+    --sa-line-body: 1.5;
+
+    --sa-glass-fallback: #171b22;
+    --sa-glass-regular: rgb(20 24 32 / 72%);
+    --sa-glass-clear: rgb(9 12 18 / 38%);
+    --sa-glass-dense: rgb(24 28 36 / 80%);
+    --sa-glass-rim: rgb(245 247 250 / 15%);
+    --sa-glass-highlight: rgb(255 255 255 / 9%);
+    --sa-control-fill: rgb(255 255 255 / 5%);
+    --sa-control-fill-hover: rgb(255 255 255 / 9%);
+    --sa-control-border: rgb(255 255 255 / 13%);
+    --sa-divider: rgb(255 255 255 / 8%);
+    --sa-tooltip: rgb(25 30 40 / 96%);
+    --sa-action-gradient: linear-gradient(180deg, #49a2ff, #0a84ff);
+    --sa-delete-gradient: linear-gradient(180deg, #ca4148, #a92b36);
+    --sa-brand-mark:
+        url("https://philosophiedeluxe.github.io/my_homepage/Server_CSS_Apple/ServerLogo_long_noBG.png?v=3");
+
+    --sa-shadow-soft: 0 0.6rem 1.6rem rgb(0 0 0 / 22%);
+    --sa-shadow-floating: 0 1rem 2.5rem rgb(0 0 0 / 38%);
+    --sa-focus-ring: 0 0 0 3px rgb(10 132 255 / 42%);
+
+    --sa-space-1: 0.25rem;
+    --sa-space-2: 0.5rem;
+    --sa-space-3: 0.75rem;
+    --sa-space-4: 1rem;
+    --sa-space-5: 1.5rem;
+    --sa-space-6: 2rem;
+    --sa-detail-label-width: 8.25rem;
+
+    --sa-radius-control: 0.8rem;
+    --sa-radius-panel: 1.1rem;
+    --sa-radius-card: 0.9rem;
+    --sa-radius-chip: 0.7rem;
+    --sa-radius-pill: 999px;
+    --sa-episode-gap: 1rem;
+    --sa-min-episode-width: 26rem;
+
+    --sa-duration-quick: 140ms;
+    --sa-duration-standard: 220ms;
+    --sa-ease-standard: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+    /* Jellyfin theme variables retained from the previous custom theme. */
+    --activeColor: var(--sa-accent);
+    --activeColorAlpha: rgb(10 132 255 / 90%);
+    --btnSubmitColor: var(--sa-accent);
+    --btnSubmitBorderColor: rgb(255 255 255 / 54%);
+    --checkboxCheckedBgColor: var(--sa-accent);
+    --highlightOutlineColor: var(--sa-accent);
+    --osdSeekBarPlayedColor: var(--sa-accent);
+    --osdSeekBarThumbColor: #f5f5f7;
+    --osdSeekBarBufferedColorAlpha: rgb(255 255 255 / 30%);
+    --btnMiniPlayColor: var(--sa-glass-dense);
+    --btnMiniPlayBorderColor: var(--sa-control-border);
+
+    --jf-palette-AppBar-transparentBg: var(--sa-glass-regular);
+    --jf-palette-AppBar-gradient:
+        linear-gradient(180deg, rgb(8 13 20 / 64%), rgb(8 13 20 / 0%));
+    --jf-card-borderRadius: var(--sa-radius-card);
+}
+
+/* 02. Page canvas and type */
+html {
+    background: var(--sa-canvas);
+    scroll-behavior: smooth;
+    scrollbar-color: rgb(255 255 255 / 22%) transparent;
+}
+
+body {
+    background:
+        radial-gradient(ellipse at 50% -28rem, rgb(92 117 151 / 12%), transparent 54rem),
+        var(--sa-canvas);
+    color: var(--sa-text);
+    font-family: var(--sa-font-body);
+    font-size: 1rem;
+    line-height: var(--sa-line-body);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+}
+
+h1,
+h2,
+h3,
+.MuiTypography-h1,
+.MuiTypography-h2,
+.MuiTypography-h3 {
+    font-family: var(--sa-font-display);
+    letter-spacing: -0.025em;
+    line-height: 1.16;
+    text-wrap: balance;
+}
+
+a {
+    color: var(--sa-text-secondary);
+    text-decoration: none;
+    transition: color var(--sa-duration-quick) var(--sa-ease-standard);
+}
+
+a:hover {
+    color: var(--sa-accent-strong);
+    text-decoration: none;
+}
+
+::selection {
+    color: var(--sa-accent-ink);
+    background: var(--sa-accent);
+}
+
+:focus-visible {
+    outline: 2px solid var(--sa-accent);
+    outline-offset: 3px;
+    box-shadow: var(--sa-focus-ring);
+}
+
+/* 03. Navigation and toolbar */
+.skinHeader,
+.MuiAppBar-root {
+    color: var(--sa-text);
+    background-color: var(--sa-glass-fallback);
+    background-image:
+        linear-gradient(180deg, rgb(255 255 255 / 8%), rgb(255 255 255 / 2%) 42%, transparent 82%);
+    border-bottom: 1px solid var(--sa-glass-rim);
+    box-shadow:
+        0 0.75rem 2rem rgb(0 0 0 / 23%),
+        inset 0 1px 0 rgb(255 255 255 / 9%);
+}
+
+.skinHeader {
+    border-radius: 0 0 1.1rem 1.1rem;
+    transition:
+        background-color var(--sa-duration-standard) var(--sa-ease-standard),
+        box-shadow var(--sa-duration-standard) var(--sa-ease-standard);
+}
+
+.headerTop {
+    min-height: var(--appBarHeight, 3.5rem);
+    align-items: center;
+    gap: var(--sa-space-2);
+    padding: 0.25rem clamp(0.75rem, 1.8vw, 1.5rem);
+}
+
+.headerLeft {
+    min-width: 0;
+    gap: var(--sa-space-2);
+}
+
+.headerRight {
+    gap: 0.25rem;
+}
+
+.headerButton,
+.paper-icon-button-light,
+.MuiIconButton-root {
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+}
+
+.skinHeader .headerButton,
+.skinHeader .paper-icon-button-light,
+.MuiIconButton-root {
+    color: var(--sa-text-secondary);
+    border-radius: var(--sa-radius-pill);
+    transition:
+        color var(--sa-duration-quick) var(--sa-ease-standard),
+        background-color var(--sa-duration-quick) var(--sa-ease-standard);
+}
+
+.pageTitleWithDefaultLogo,
+.pageTitleWithLogo {
+    display: block !important;
+    flex: 0 0 clamp(8.8rem, 15vw, 13.5rem) !important;
+    width: clamp(8.8rem, 15vw, 13.5rem) !important;
+    min-width: 0;
+    height: clamp(2rem, 4vw, 3.15rem) !important;
+    margin: 0 0.5rem 0 0 !important;
+    padding: 0.16rem 0.25rem;
+    box-sizing: border-box;
+    overflow: hidden;
+    color: transparent !important;
+    text-indent: -9999px;
+    background: var(--sa-brand-mark) center / contain no-repeat !important;
+}
+
+.pageTitleWithDefaultLogo::before,
+.pageTitleWithLogo::before {
+    display: none !important;
+}
+
+.MuiToolbar-root {
+    color: inherit;
+}
+
+.MuiToolbar-root > .MuiStack-root {
+    min-width: 0;
+    max-width: 100%;
+}
+
+.MuiToolbar-root .MuiButton-root {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.75rem;
+    padding: 0.5rem 0.65rem;
+    color: var(--sa-text-secondary);
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    font-weight: 500;
+    text-decoration: none;
+    white-space: nowrap;
+    transition:
+        color var(--sa-duration-quick) var(--sa-ease-standard),
+        background-color var(--sa-duration-quick) var(--sa-ease-standard);
+}
+
+.MuiToolbar-root a.MuiButton-root[href="#/"] {
+    flex: 0 0 7.75rem;
+    width: 7.75rem;
+    min-width: 7.75rem;
+    max-width: 7.75rem;
+    height: 2.75rem;
+    padding: 0;
+    color: transparent;
+    border: 0;
+    border-radius: 0.45rem;
+    background: var(--sa-brand-mark) center / 7.4rem auto no-repeat;
+    box-shadow: none;
+    font-size: 0;
+    line-height: 0;
+}
+
+.MuiToolbar-root a.MuiButton-root[href="#/"] > .MuiButton-icon {
+    display: none;
+}
+
+.MuiTypography-root {
+    font-family: inherit;
+    letter-spacing: normal;
+}
+
+.mainDrawer,
+.MuiDrawer-paper {
+    color: var(--sa-text);
+    background-color: var(--sa-glass-fallback);
+    background-image: none;
+    border-color: var(--sa-glass-rim);
+    box-shadow: var(--sa-shadow-floating);
+}
+
+.mainDrawer-scrollContainer {
+    background: transparent;
+}
+
+.mainDrawerHandle {
+    border-color: var(--sa-glass-rim);
+}
+
+.sectionTabs {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.sectionTabs .emby-tabs.smoothScrollX {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    gap: 0.25rem;
+    padding-inline: 0.25rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+    overscroll-behavior-inline: contain;
+    scroll-padding-inline: 0.75rem;
+}
+
+.sectionTabs .emby-tabs.smoothScrollX::-webkit-scrollbar {
+    display: none;
+}
+
+.sectionTabs .emby-tab-button {
+    flex: 0 0 auto;
+    min-height: 2.75rem;
+    height: 2.75rem;
+    margin: 0;
+    padding-inline: 0.8rem;
+    color: var(--sa-text-secondary);
+    border: 0;
+    border-bottom: 2px solid transparent;
+    border-radius: 0;
+    background: transparent;
+    font-weight: 450;
+    letter-spacing: -0.01em;
+    transition:
+        color var(--sa-duration-quick) var(--sa-ease-standard),
+        background-color var(--sa-duration-quick) var(--sa-ease-standard),
+        border-color var(--sa-duration-quick) var(--sa-ease-standard);
+}
+
+.sectionTabs .emby-tab-button-active,
+.sectionTabs .emby-tab-button[aria-selected="true"] {
+    color: var(--sa-text);
+    border-bottom-color: var(--sa-accent);
+    background: transparent;
+    box-shadow: none;
+}
+
+.sectionTabs .emby-tab-button.show-focus:focus,
+.sectionTabs .emby-tab-button:focus-visible {
+    outline: 2px solid var(--sa-accent-strong);
+    outline-offset: 2px;
+}
+
+.sectionTitle {
+    margin-block: var(--sa-space-1) var(--sa-space-3);
+    font-family: var(--sa-font-display);
+    font-size: clamp(1.15rem, 1.5vw, 1.4rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+}
+
+/* 04. Library cards and artwork */
+.card,
+.cardBox {
+    color: var(--sa-text);
+}
+
+.cardScalable {
+    border-radius: var(--sa-radius-card);
+    transition:
+        box-shadow var(--sa-duration-standard) var(--sa-ease-standard);
+}
+
+.cardImageContainer,
+.cardImage {
+    border-radius: var(--sa-radius-card);
+}
+
+.cardImage {
+    backface-visibility: hidden;
+}
+
+.cardPadder {
+    background-color: var(--sa-surface);
+}
+
+.cardImageIcon {
+    color: var(--sa-text-muted);
+}
+
+.cardFooter,
+.innerCardFooter {
+    color: var(--sa-text);
+}
+
+.cardText {
+    color: var(--sa-text);
+    font-weight: 540;
+    line-height: 1.35;
+    text-wrap: pretty;
+}
+
+.cardOverlayButton,
+.cardOverlayButtonIcon {
+    color: var(--sa-text);
+}
+
+.cardOverlayButton {
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    border: 1px solid var(--sa-control-border);
+    border-radius: var(--sa-radius-pill);
+    background-color: rgb(8 11 16 / 78%);
+}
+
+.cardOverlayFab-primary,
+.cardOverlayContainer > .cardOverlayFab-primary {
+    color: var(--sa-accent-ink);
+    border: 1px solid rgb(255 255 255 / 38%);
+    background: var(--sa-action-gradient);
+    box-shadow:
+        0 0.35rem 0.9rem rgb(0 0 0 / 28%),
+        inset 0 1px 0 rgb(255 255 255 / 28%);
+}
+
+.itemProgressBar {
+    background-color: rgb(255 255 255 / 22%);
+}
+
+.itemProgressBarForeground {
+    background-color: var(--sa-accent);
+}
+
+@supports selector(.cardImageContainer:has(> .innerCardFooter)) {
+    .cardImageContainer .innerCardFooter:has(> .itemProgressBar) {
+        padding-bottom: 0.5em;
+    }
+}
+
+.sliderMarker.watched {
+    background-color: var(--sa-accent);
+}
+
+/* 05. Lists and collections */
+.paperList {
+    color: var(--sa-text);
+    background-color: var(--sa-surface-raised);
+    border: 1px solid var(--sa-divider);
+    border-radius: var(--sa-radius-panel);
+}
+
+.listItem {
+    color: var(--sa-text);
+    border-color: var(--sa-divider);
+    transition:
+        background-color var(--sa-duration-quick) var(--sa-ease-standard),
+        border-color var(--sa-duration-quick) var(--sa-ease-standard);
+}
+
+.listItemImage {
+    border-radius: var(--sa-radius-chip);
+}
+
+.listItemBody {
+    color: var(--sa-text);
+}
+
+.listItemProgressBar {
+    background-color: rgb(255 255 255 / 20%);
+}
+
+.listItemProgressBar .itemProgressBarForeground {
+    background-color: var(--sa-accent);
+}
+
+.listItemImageButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    min-width: 2.75rem;
+    max-width: 2.75rem;
+    height: 2.75rem;
+    min-height: 2.75rem;
+    max-height: 2.75rem;
+    padding: 0;
+    color: var(--sa-accent-ink);
+    border: 1px solid rgb(255 255 255 / 38%);
+    background: var(--sa-action-gradient);
+    font-size: 1rem;
+}
+
+@supports (display: grid) and selector(.vertical-list:has(.listItem-largeImage)) {
+    .layout-desktop .vertical-list:has(.listItem-largeImage) {
+        display: grid;
+        grid-template-columns:
+            repeat(auto-fill, minmax(min(var(--sa-min-episode-width), 100%), 1fr));
+        gap: var(--sa-episode-gap);
+    }
+
+    .layout-desktop .listItem-largeImage {
+        display: grid;
+        margin-bottom: 0;
+    }
+
+    .layout-desktop .listItem-largeImage > .listItem-content {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 2.55rem;
+        column-gap: 0.35rem;
+        order: 1;
+        height: 100%;
+        padding-inline-end: 0.35rem;
+        box-sizing: border-box;
+        align-items: start;
+    }
+
+    .layout-desktop .listItem-largeImage > .listItem-bottomoverview {
+        order: 2;
+        grid-column: 1 / -1;
+    }
+
+    .layout-desktop .listItem-largeImage .listItemImage-large {
+        order: 1;
+        grid-column: 1 / -1;
+        width: 100%;
+        min-height: 15rem;
+        height: auto;
+        aspect-ratio: 16 / 9;
+    }
+
+    .layout-desktop .listItem-largeImage .listItemBody {
+        order: 2;
+        grid-column: 1 / 3;
+        padding: 1rem 0.125rem;
+    }
+
+    .layout-desktop .listItem-largeImage .listViewUserDataButtons {
+        display: flex;
+        flex-direction: column;
+        order: 2;
+        grid-column: 3;
+        align-self: center;
+        align-items: center;
+        gap: 0.35rem;
+        width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+    }
+
+    .layout-desktop .listItem-largeImage .listViewUserDataButtons .listItemButton {
+        width: 2.35rem;
+        min-width: 2.35rem;
+        max-width: 2.35rem;
+        height: 2.35rem;
+        min-height: 2.35rem;
+        max-height: 2.35rem;
+        padding: 0;
+        box-sizing: border-box;
+    }
+}
+
+.card.show-focus .cardBox,
+.card.show-focus .cardScalable {
+    box-shadow:
+        0 0 0 2px var(--sa-accent),
+        0 0 0 5px rgb(10 132 255 / 28%);
+}
+
+.listItem-border.show-focus:focus,
+.listItem-focusscale:focus {
+    border-radius: 0.7rem;
+    box-shadow:
+        0 0 0 2px var(--sa-accent),
+        0 0 0 5px rgb(10 132 255 / 28%);
+}
+
+/* 06. Detail pages */
+.itemDetailPage {
+    color: var(--sa-text);
+}
+
+.detailRibbon {
+    color: var(--sa-text);
+    background:
+        linear-gradient(90deg, rgb(9 14 21 / 74%), rgb(9 14 21 / 18%) 72%, transparent);
+}
+
+.detailPagePrimaryContainer {
+    color: var(--sa-text);
+}
+
+.detailPagePrimaryContainer .nameContainer,
+.detailPagePrimaryContainer .itemMiscInfo {
+    text-shadow: 0 1px 1rem rgb(0 0 0 / 42%);
+}
+
+.detailPageWrapperContainer {
+    color: var(--sa-text);
+}
+
+.layout-mobile .detailPagePrimaryContainer > .detailPagePrimaryContent {
+    padding-inline-start: max(5%, env(safe-area-inset-left, 0px)) !important;
+    padding-inline-end: max(5%, env(safe-area-inset-right, 0px)) !important;
+}
+
+html[dir="rtl"] .layout-mobile .detailPagePrimaryContainer > .detailPagePrimaryContent {
+    padding-inline-start: max(5%, env(safe-area-inset-right, 0px)) !important;
+    padding-inline-end: max(5%, env(safe-area-inset-left, 0px)) !important;
+}
+
+.nameContainer {
+    margin-block-end: 0.55rem;
+}
+
+.nameContainer h1 {
+    max-width: 24ch;
+    margin: 0.1rem 0 0.45rem;
+    font-size: clamp(2rem, 4vw, 3.7rem);
+    font-weight: 650;
+    line-height: 1.05;
+}
+
+.itemMiscInfo {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.25rem 0.75rem;
+    color: var(--sa-text-secondary);
+    font-size: 0.9rem;
+}
+
+.detailImageContainer {
+    border-radius: var(--sa-radius-panel);
+}
+
+.itemDetailsGroup {
+    display: grid;
+    gap: 0;
+    margin-block: var(--sa-space-5) var(--sa-space-6);
+    padding: var(--sa-space-1) var(--sa-space-3);
+}
+
+.detailsGroupItem {
+    display: grid;
+    grid-template-columns: minmax(6rem, var(--sa-detail-label-width)) minmax(0, 1fr);
+    align-items: start;
+    gap: var(--sa-space-1) var(--sa-space-4);
+    min-width: 0;
+    margin: 0;
+    padding-block: 0.45rem;
+    border-bottom: 1px solid var(--sa-divider);
+}
+
+.detailsGroupItem > .label {
+    align-self: start;
+    margin: 0;
+    padding-top: 0.55rem;
+    color: var(--sa-text-secondary);
+    font-size: 0.875rem;
+    font-weight: 550;
+    line-height: 1.35;
+}
+
+.detailsGroupItem > .focuscontainer-x {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--sa-space-1);
+    min-width: 0;
+}
+
+.detailsGroupItem > .focuscontainer-x > span {
+    display: inline-flex;
+    align-items: center;
+    flex: 0 1 auto;
+    gap: 0;
+    max-width: 100%;
+    min-width: 0;
+    color: var(--sa-text-secondary);
+    font-size: 0;
+    line-height: 1.35;
+}
+
+.itemTags,
+.itemExternalLinks {
+    display: block;
+    line-height: 2.8;
+}
+
+.itemGenres {
+    color: var(--sa-text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.8;
+}
+
+.detailsGroupItem .button-link,
+.itemTags .button-link,
+.itemExternalLinks .button-link,
+.itemGenres .button-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.4rem;
+    max-width: 100%;
+    margin: 0.12rem 0.2rem;
+    padding: 0.42rem var(--sa-space-3);
+    box-sizing: border-box;
+    color: var(--sa-text-secondary);
+    border: 1px solid var(--sa-control-border);
+    border-radius: var(--sa-radius-chip);
+    background: var(--sa-control-fill);
+    font-size: 0.9rem;
+    font-weight: 500;
+    line-height: 1.3;
+    text-decoration: none;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    transition:
+        color var(--sa-duration-quick) var(--sa-ease-standard),
+        background-color var(--sa-duration-quick) var(--sa-ease-standard),
+        border-color var(--sa-duration-quick) var(--sa-ease-standard),
+        box-shadow var(--sa-duration-quick) var(--sa-ease-standard);
+}
+
+.itemTags .button-link,
+.itemExternalLinks .button-link,
+.itemGenres .button-link {
+    vertical-align: middle;
+    min-height: 2.35rem;
+}
+
+.detailsGroupItem .button-link {
+    min-height: 2.5rem;
+}
+
+.detailsGroupItem .button-link:focus-visible,
+.itemTags .button-link:focus-visible,
+.itemExternalLinks .button-link:focus-visible,
+.itemGenres .button-link:focus-visible {
+    outline: 2px solid var(--sa-accent-strong);
+    outline-offset: 2px;
+    box-shadow: var(--sa-focus-ring);
+}
+
+.btnPlay.detailButton {
+    color: var(--sa-accent-ink);
+    border: 1px solid rgb(255 255 255 / 44%);
+    background: var(--sa-action-gradient);
+    box-shadow:
+        0 0.45rem 1.2rem rgb(0 0 0 / 28%),
+        inset 0 1px 0 rgb(255 255 255 / 30%);
+}
+
+.mainDetailButtons .detailButton {
+    min-width: 2.5rem;
+    min-height: 2.5rem;
+}
+
+/* 07. Buttons, tabs, and form controls */
+.emby-button,
+.MuiButton-root {
+    min-height: 2.75rem;
+    color: var(--sa-text);
+    border: 1px solid var(--sa-control-border);
+    border-radius: var(--sa-radius-control);
+    background-color: var(--sa-control-fill);
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 6%);
+    transition:
+        color var(--sa-duration-quick) var(--sa-ease-standard),
+        background-color var(--sa-duration-quick) var(--sa-ease-standard),
+        border-color var(--sa-duration-quick) var(--sa-ease-standard),
+        box-shadow var(--sa-duration-quick) var(--sa-ease-standard);
+}
+
+.navMenuOption {
+    display: flex;
+    align-items: center;
+    min-height: 3rem;
+    padding: 0.65rem 0.9rem;
+    border: 0;
+    border-bottom: 1px solid var(--sa-divider);
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    color: var(--sa-text-secondary);
+    transition:
+        color var(--sa-duration-quick) var(--sa-ease-standard),
+        background-color var(--sa-duration-quick) var(--sa-ease-standard);
+}
+
+.navMenuOption-selected {
+    color: var(--sa-text);
+    border-bottom-color: var(--sa-divider);
+    background: rgb(10 132 255 / 10%);
+    box-shadow: inset 2px 0 0 var(--sa-accent);
+}
+
+.navMenuOption-selected:focus-visible {
+    outline-color: var(--sa-accent);
+}
+
+.emby-button.show-focus:focus,
+.paper-icon-button-light.show-focus:focus,
+.emby-tab-button.show-focus:focus,
+.MuiButton-root:focus-visible,
+.MuiIconButton-root:focus-visible {
+    outline: 2px solid var(--sa-accent);
+    outline-offset: 2px;
+    box-shadow: var(--sa-focus-ring);
+}
+
+.paper-icon-button-light,
+.MuiIconButton-root {
+    color: var(--sa-text-secondary);
+    border-radius: var(--sa-radius-pill);
+    transition:
+        color var(--sa-duration-quick) var(--sa-ease-standard),
+        background-color var(--sa-duration-quick) var(--sa-ease-standard);
+}
+
+.button-submit,
+.emby-button.button-submit,
+.MuiButton-containedPrimary {
+    color: var(--sa-accent-ink);
+    border: 1px solid rgb(255 255 255 / 42%);
+    background: var(--sa-action-gradient);
+    box-shadow:
+        0 0.35rem 1rem rgb(0 0 0 / 23%),
+        inset 0 1px 0 rgb(255 255 255 / 28%);
+}
+
+.button-delete {
+    color: #fff;
+    border: 1px solid rgb(255 255 255 / 24%);
+    background: var(--sa-delete-gradient);
+}
+
+.button-delete:hover {
+    color: #fff;
+    border-color: rgb(255 255 255 / 45%);
+    background: linear-gradient(180deg, #d84b50, #b8343d);
+}
+
+.emby-tab-button {
+    color: var(--sa-text-secondary);
+    border-radius: 0.7rem 0.7rem 0 0;
+    transition:
+        color var(--sa-duration-quick) var(--sa-ease-standard),
+        background-color var(--sa-duration-quick) var(--sa-ease-standard);
+}
+
+.emby-tab-button-active,
+.emby-tab-button[aria-selected="true"] {
+    color: var(--sa-accent-strong);
+    background-color: rgb(10 132 255 / 12%);
+    box-shadow: inset 0 0 0 1px rgb(10 132 255 / 16%);
+}
+
+.MuiTab-root {
+    color: var(--sa-text-secondary);
+    min-height: 2.75rem;
+}
+
+.MuiTab-root.Mui-selected {
+    color: var(--sa-accent-strong);
+}
+
+.MuiTabs-indicator {
+    background-color: var(--sa-accent);
+}
+
+.emby-input,
+.emby-textarea,
+.emby-select-withcolor,
+.MuiOutlinedInput-root {
+    color: var(--sa-text);
+    border-color: var(--sa-control-border);
+    border-radius: var(--sa-radius-control);
+    background-color: rgb(8 11 16 / 58%);
+}
+
+.emby-input,
+.emby-textarea,
+.emby-select-withcolor {
+    min-height: 2.75rem;
+}
+
+.emby-input::placeholder,
+.emby-textarea::placeholder,
+.MuiInputBase-input::placeholder {
+    color: var(--sa-text-muted);
+    opacity: 1;
+}
+
+.emby-input:focus,
+.emby-textarea:focus,
+.emby-select-withcolor:focus,
+.MuiOutlinedInput-root.Mui-focused {
+    border-color: var(--sa-accent);
+    outline: none;
+    box-shadow: var(--sa-focus-ring);
+}
+
+.MuiInputBase-input,
+.MuiInputLabel-root {
+    color: var(--sa-text-secondary);
+}
+
+.MuiInputLabel-root.Mui-focused {
+    color: var(--sa-accent);
+}
+
+.MuiOutlinedInput-notchedOutline {
+    border-color: var(--sa-control-border);
+}
+
+.MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+    border-color: rgb(255 255 255 / 26%);
+}
+
+.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border-color: var(--sa-accent);
+}
+
+.MuiSelect-icon {
+    color: var(--sa-text-muted);
+}
+
+.checkboxOutline {
+    border-color: rgb(245 247 250 / 56%);
+    border-radius: 0.35rem;
+}
+
+.emby-checkbox:checked + span + .checkboxOutline {
+    border-color: var(--sa-accent);
+    background-color: var(--sa-accent);
+}
+
+.emby-checkbox:focus + span + .checkboxOutline {
+    outline: 2px solid var(--sa-accent);
+    outline-offset: 2px;
+    box-shadow: var(--sa-focus-ring);
+}
+
+.mdl-radio__button:checked + .mdl-radio__circles .mdl-radio__inner-circle,
+.mdl-radio.show-focus .mdl-radio__button:focus + .mdl-radio__circles .mdl-radio__outer-circle,
+.mdl-radio.show-focus .mdl-radio__button:focus + .mdl-radio__circles .mdl-radio__inner-circle {
+    color: var(--sa-accent);
+}
+
+.mdl-radio__focus-circle {
+    background-color: var(--sa-accent);
+}
+
+.mdl-switch__input:checked + .mdl-switch__label + .mdl-switch__trackContainer > .mdl-switch__track {
+    background-color: var(--sa-accent);
+    opacity: 0.6;
+}
+
+.mdl-switch__input:checked + .mdl-switch__label + .mdl-switch__trackContainer > .mdl-switch__thumb {
+    background-color: var(--sa-accent);
+}
+
+.mdl-switch__input:focus + .mdl-switch__label + .mdl-switch__trackContainer .mdl-switch__focus-helper {
+    background-color: rgb(10 132 255 / 18%);
+    box-shadow: var(--sa-focus-ring);
+}
+
+/* 08. Menus, dialogs, and notices */
+.actionSheet,
+.MuiMenu-paper,
+.MuiPopover-paper,
+.MuiDialog-paper,
+.MuiSnackbarContent-root,
+.MuiAlert-root {
+    color: var(--sa-text);
+    background-color: var(--sa-glass-dense);
+    background-image:
+        linear-gradient(145deg, rgb(255 255 255 / 5%), transparent 48%);
+    border: 1px solid var(--sa-glass-rim);
+    border-radius: var(--sa-radius-panel);
+    box-shadow:
+        var(--sa-shadow-floating),
+        inset 0 1px 0 var(--sa-glass-highlight);
+}
+
+.actionSheetContent {
+    color: inherit;
+}
+
+.actionSheetMenuItem,
+.MuiMenuItem-root {
+    color: var(--sa-text-secondary);
+    min-height: 2.75rem;
+    transition:
+        color var(--sa-duration-quick) var(--sa-ease-standard),
+        background-color var(--sa-duration-quick) var(--sa-ease-standard);
+}
+
+.MuiMenuItem-root.Mui-selected {
+    color: var(--sa-accent-strong);
+    background-color: rgb(10 132 255 / 13%);
+}
+
+.actionsheetDivider,
+.MuiDivider-root {
+    border-color: var(--sa-divider);
+}
+
+.MuiDialogTitle-root,
+.MuiDialogContent-root,
+.MuiDialogActions-root {
+    color: var(--sa-text);
+}
+
+.MuiDialog-paper .MuiAlert-root {
+    background: transparent;
+    box-shadow: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+}
+
+.MuiTooltip-tooltip {
+    color: var(--sa-text);
+    background-color: var(--sa-tooltip);
+    border: 1px solid var(--sa-glass-rim);
+    border-radius: 0.55rem;
+    box-shadow: var(--sa-shadow-soft);
+}
+
+.MuiAlert-standardSuccess {
+    border-inline-start: 3px solid var(--sa-success);
+}
+
+.MuiAlert-standardWarning {
+    border-inline-start: 3px solid var(--sa-warning);
+}
+
+.MuiAlert-standardError {
+    border-inline-start: 3px solid var(--sa-danger);
+}
+
+.MuiAlert-standardInfo {
+    border-inline-start: 3px solid var(--sa-accent);
+}
+
+/* 09. Video OSD and audio playback controls */
+#videoOsdPage,
+#videoOsdPage.page,
+#videoOsdPage.libraryPage,
+#videoOsdPage.mainAnimatedPage {
+    background: transparent !important;
+}
+
+#videoOsdPage::before,
+#videoOsdPage::after {
+    display: none !important;
+}
+
+.videoPlayerContainer {
+    background: #000 !important;
+}
+
+.videoOsd-appBar,
+.videoOsdBottom {
+    color: var(--sa-text);
+    background-color: var(--sa-glass-fallback);
+    border-color: var(--sa-glass-rim);
+}
+
+.osdControls,
+.osdHeader {
+    color: var(--sa-text);
+}
+
+.nowPlayingBar {
+    color: var(--sa-text);
+    background-color: var(--sa-glass-fallback);
+    border-top: 1px solid var(--sa-glass-rim);
+    box-shadow: 0 -0.5rem 1.8rem rgb(0 0 0 / 20%);
+}
+
+.nowPlayingBarPositionSlider {
+    accent-color: var(--sa-accent);
+}
+
+.mdl-slider-background-lower {
+    background-color: var(--sa-accent);
+}
+
+.mdl-slider-background-upper {
+    background-color: rgb(255 255 255 / 34%);
+}
+
+.playbackProgress > div {
+    background-color: var(--sa-accent);
+}
+
+.transcodingProgress > div {
+    background-color: #ff9f0a;
+}
+
+.backgroundProgress > div {
+    background-color: rgb(255 255 255 / 28%);
+}
+
+/* 10. Login */
+#loginPage {
+    color: var(--sa-text);
+}
+
+#loginPage > .padded-left.padded-right.padded-bottom-page.margin-auto-y {
+    width: min(27rem, calc(100vw - 2rem));
+    max-width: 100%;
+    margin-inline: auto;
+    padding-inline: 0;
+    box-sizing: border-box;
+}
+
+#loginPage .manualLoginForm,
+#loginPage .visualLoginForm,
+#loginPage .readOnlyContent {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+#loginPage .manualLoginForm,
+#loginPage .visualLoginForm {
+    color: var(--sa-text);
+    text-shadow: 0 1px 1rem rgb(0 0 0 / 55%);
+}
+
+#loginPage .manualLoginForm::before,
+#loginPage .visualLoginForm::before {
+    content: "";
+    display: block;
+    width: min(80vw, 18rem);
+    height: 5.5rem;
+    margin: 0 auto 1rem;
+    background: var(--sa-brand-mark) center / contain no-repeat;
+}
+
+/* 11. Hover behavior is limited to pointer devices */
+@media (hover: hover) and (pointer: fine) {
+    .emby-button:hover,
+    .MuiButton-root:hover {
+        color: var(--sa-text);
+        border-color: rgb(255 255 255 / 22%);
+        background-color: var(--sa-control-fill-hover);
+        box-shadow:
+            0 0.35rem 1rem rgb(0 0 0 / 17%),
+            inset 0 1px 0 rgb(255 255 255 / 7%);
+    }
+
+    .paper-icon-button-light:hover,
+    .MuiIconButton-root:hover {
+        color: var(--sa-text);
+        background-color: var(--sa-control-fill-hover);
+    }
+
+    .button-submit:hover,
+    .emby-button.button-submit:hover,
+    .MuiButton-containedPrimary:hover,
+    .btnPlay.detailButton:hover {
+        color: var(--sa-accent-ink);
+        background: linear-gradient(180deg, #67b1ff, var(--sa-accent-hover));
+        box-shadow:
+            0 0.5rem 1.2rem rgb(0 0 0 / 28%),
+            inset 0 1px 0 rgb(255 255 255 / 35%);
+    }
+
+    .navMenuOption:hover {
+        color: var(--sa-text);
+        border-color: transparent;
+        border-bottom-color: var(--sa-divider);
+        border-radius: 0;
+        background-color: rgb(255 255 255 / 5%);
+        box-shadow: none;
+    }
+
+    .navMenuOption-selected:hover {
+        color: var(--sa-text);
+        background-color: rgb(10 132 255 / 15%);
+        box-shadow: inset 2px 0 0 var(--sa-accent);
+    }
+
+    .mainDrawer .navMenuOption:hover {
+        border-color: transparent;
+        border-bottom-color: var(--sa-divider);
+        border-radius: 0;
+        background-color: rgb(255 255 255 / 5%);
+        box-shadow: none;
+    }
+
+    .mainDrawer .navMenuOption-selected:hover {
+        color: var(--sa-text);
+        border-bottom-color: var(--sa-divider);
+        background-color: rgb(10 132 255 / 15%);
+        box-shadow: inset 2px 0 0 var(--sa-accent);
+    }
+
+    .listItem:hover {
+        background-color: rgb(255 255 255 / 4%);
+        border-color: rgb(255 255 255 / 11%);
+    }
+
+    .card-hoverable:hover .cardScalable {
+        box-shadow: 0 0.65rem 1.5rem rgb(0 0 0 / 24%);
+    }
+
+    .cardOverlayButton:hover {
+        color: var(--sa-accent-strong);
+        background-color: rgb(8 11 16 / 92%);
+    }
+
+    .detailsGroupItem .button-link:hover,
+    .itemTags .button-link:hover,
+    .itemExternalLinks .button-link:hover,
+    .itemGenres .button-link:hover {
+        border-color: rgb(255 255 255 / 28%);
+        background-color: var(--sa-control-fill-hover);
+        box-shadow: inset 0 1px 0 rgb(255 255 255 / 7%);
+    }
+
+    .MuiMenuItem-root:hover,
+    .actionSheetMenuItem:hover {
+        color: var(--sa-text);
+        background-color: rgb(255 255 255 / 7%);
+    }
+
+    .emby-button:active,
+    .MuiButton-root:active,
+    .paper-icon-button-light:active,
+    .MuiIconButton-root:active {
+        background-color: rgb(255 255 255 / 12%);
+    }
+
+    .MuiToolbar-root .MuiButton-root:hover {
+        color: var(--sa-text);
+        border-color: transparent;
+        border-radius: 0;
+        background: rgb(255 255 255 / 5%);
+        box-shadow: none;
+    }
+
+    .MuiToolbar-root a.MuiButton-root[href="#/"]:hover {
+        color: transparent;
+        background-color: transparent;
+        background-image: var(--sa-brand-mark);
+        box-shadow: none;
+    }
+}
+
+/* 12. Glass material enhancement with a solid-color fallback above */
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .skinHeader,
+    .MuiAppBar-root {
+        background-color: var(--sa-glass-regular);
+        -webkit-backdrop-filter: blur(28px) saturate(1.35);
+        backdrop-filter: blur(28px) saturate(1.35);
+    }
+
+    .skinHeader.semiTransparent {
+        background-image:
+            linear-gradient(180deg, rgb(255 255 255 / 8%), rgb(255 255 255 / 2%) 42%, transparent 82%);
+        -webkit-backdrop-filter: blur(28px) saturate(1.35) !important;
+        backdrop-filter: blur(28px) saturate(1.35) !important;
+    }
+
+    .mainDrawer,
+    .MuiDrawer-paper {
+        background-color: var(--sa-glass-regular);
+        -webkit-backdrop-filter: blur(28px) saturate(1.3);
+        backdrop-filter: blur(28px) saturate(1.3);
+    }
+
+    .actionSheet,
+    .MuiMenu-paper,
+    .MuiPopover-paper,
+    .MuiDialog-paper,
+    .MuiSnackbarContent-root,
+    .MuiAlert-root {
+        background-color: var(--sa-glass-dense);
+        -webkit-backdrop-filter: blur(22px) saturate(1.25);
+        backdrop-filter: blur(22px) saturate(1.25);
+    }
+
+    .videoOsd-appBar,
+    .videoOsdBottom,
+    .nowPlayingBar {
+        background-color: var(--sa-glass-clear);
+        -webkit-backdrop-filter: blur(12px) saturate(1.35);
+        backdrop-filter: blur(12px) saturate(1.35);
+    }
+}
+
+/* 13. Responsive layouts */
+@media (min-width: 75em) {
+    .sectionTabs {
+        align-self: center;
+        justify-content: center;
+        width: max-content;
+        max-width: calc(100vw - 26rem);
+        margin-top: calc(0rem - var(--appBarHeight, 3rem));
+        position: relative;
+    }
+
+    .sectionTabs .emby-tabs.smoothScrollX {
+        width: max-content;
+        max-width: 100%;
+    }
+
+    .libraryPage:not(.noSecondaryNavPage) {
+        padding-top: calc(var(--appBarHeight, 3rem) + 0.5rem) !important;
+    }
+
+    .headroom--unpinned {
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 48rem) {
+    :root {
+        --sa-radius-panel: 0.95rem;
+        --sa-radius-card: 0.8rem;
+    }
+
+    .headerTop {
+        gap: 0.15rem;
+        padding-inline: 0.45rem;
+    }
+
+    .MuiToolbar-root > .MuiStack-root {
+        flex: 1 1 auto;
+        overflow-x: auto;
+        overscroll-behavior-inline: contain;
+        scrollbar-width: none;
+    }
+
+    .MuiToolbar-root > .MuiStack-root::-webkit-scrollbar {
+        display: none;
+    }
+
+    .MuiToolbar-root .MuiButton-root {
+        padding-inline: 0.5rem;
+        font-size: 0.86rem;
+    }
+
+    .MuiToolbar-root a.MuiButton-root[href="#/"] {
+        flex-basis: 7rem;
+        width: 7rem;
+        min-width: 7rem;
+        max-width: 7rem;
+        background-size: 6.7rem auto;
+    }
+
+    .sectionTabs .emby-tab-button {
+        padding-inline: 0.72rem;
+    }
+
+    .MuiDialog-paper {
+        width: calc(100vw - 1.25rem);
+        max-width: calc(100vw - 1.25rem);
+        margin: 0.625rem;
+    }
+
+    .actionSheet,
+    .MuiMenu-paper,
+    .MuiPopover-paper {
+        max-width: calc(100vw - 1rem);
+    }
+
+    .paper-icon-button-light,
+    .MuiIconButton-root {
+        min-width: 2.75rem;
+        min-height: 2.75rem;
+    }
+
+    .pageTitleWithDefaultLogo,
+    .pageTitleWithLogo {
+        flex-basis: 8.5rem !important;
+        width: 8.5rem !important;
+        height: 2.35rem !important;
+        margin-inline: 0.15rem 0.4rem !important;
+        padding-inline: 0.1rem;
+    }
+
+    .emby-button,
+    .MuiButton-root,
+    .emby-tab-button,
+    .actionSheetMenuItem,
+    .MuiMenuItem-root {
+        min-height: 2.75rem;
+    }
+
+    .detailsGroupItem .button-link,
+    .itemTags .button-link,
+    .itemExternalLinks .button-link,
+    .itemGenres .button-link {
+        min-height: 2.75rem;
+    }
+
+    .detailsGroupItem {
+        gap: 0.25rem 0.75rem;
+    }
+
+    @supports selector(.cardImageContainer:has(> .innerCardFooter)) {
+        .cardImageContainer .innerCardFooter:has(> .itemProgressBar) {
+            padding-bottom: 0.3125em;
+        }
+    }
+}
+
+@media (max-width: 32rem) {
+    .headerTop {
+        gap: 0;
+        padding-inline: 0.25rem;
+    }
+
+    .headerLeft {
+        gap: 0.2rem;
+    }
+
+    .headerRight {
+        gap: 0;
+    }
+
+    .pageTitleWithDefaultLogo,
+    .pageTitleWithLogo {
+        flex-basis: 7.25rem !important;
+        width: 7.25rem !important;
+        height: 2.2rem !important;
+        margin-inline: 0.1rem 0.2rem !important;
+    }
+
+    .MuiToolbar-root a.MuiButton-root[href="#/"] {
+        flex-basis: 6.5rem;
+        width: 6.5rem;
+        min-width: 6.5rem;
+        max-width: 6.5rem;
+        background-size: 6.2rem auto;
+    }
+
+    .detailsGroupItem {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 0.25rem;
+        padding-block: 0.65rem;
+    }
+
+    .detailsGroupItem > .label {
+        padding-top: 0;
+        font-size: 0.95rem;
+    }
+
+    .paperList {
+        border-radius: 0.8rem;
+    }
+
+    .layout-mobile .listItem-largeImage .listViewUserDataButtons .listItemButton {
+        width: 2.75rem;
+        min-width: 2.75rem;
+        max-width: 2.75rem;
+        height: 2.75rem;
+        min-height: 2.75rem;
+        max-height: 2.75rem;
+    }
+
+    .detailRibbon {
+        background:
+            linear-gradient(90deg, rgb(9 14 21 / 84%), rgb(9 14 21 / 36%));
+    }
+}
+
+@media (orientation: landscape) and (max-height: 32rem) {
+    .MuiDialog-paper {
+        max-height: calc(100vh - 1rem);
+        max-height: calc(100dvh - 1rem);
+        overflow-y: auto;
+    }
+}
+
+/* 14. User preferences and platform accessibility */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    a,
+    .skinHeader,
+    .headerButton,
+    .cardScalable,
+    .listItem,
+    .emby-button,
+    .MuiButton-root,
+    .paper-icon-button-light,
+    .MuiIconButton-root,
+    .emby-tab-button,
+    .MuiTab-root,
+    .button-link,
+    .actionSheetMenuItem,
+    .MuiMenuItem-root {
+        animation: none;
+        transition: none;
+    }
+
+    .mdl-radio__inner-circle,
+    .mdl-radio__focus-circle {
+        transition: none;
+    }
+
+    .emby-button:hover,
+    .MuiButton-root:hover,
+    .card-hoverable:hover .cardScalable {
+        transform: none;
+    }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+    .skinHeader,
+    .MuiAppBar-root,
+    .mainDrawer,
+    .MuiDrawer-paper,
+    .actionSheet,
+    .MuiMenu-paper,
+    .MuiPopover-paper,
+    .MuiDialog-paper,
+    .MuiSnackbarContent-root,
+    .MuiAlert-root,
+    .videoOsd-appBar,
+    .videoOsdBottom,
+    .nowPlayingBar,
+    .sectionTabs .emby-tab-button-active,
+    .sectionTabs .emby-tab-button[aria-selected="true"] {
+        background-color: var(--sa-surface);
+        background-image: none;
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+    }
+
+    .sectionTabs .emby-tab-button-active,
+    .sectionTabs .emby-tab-button[aria-selected="true"] {
+        border-color: var(--sa-control-border);
+    }
+
+    .skinHeader.semiTransparent {
+        background-color: var(--sa-surface);
+        background-image: none;
+        -webkit-backdrop-filter: none !important;
+        backdrop-filter: none !important;
+    }
+}
+
+@media (prefers-contrast: more) {
+    :root {
+        --sa-text-secondary: #e0e8f2;
+        --sa-text-muted: #becadb;
+        --sa-glass-rim: rgb(244 248 255 / 38%);
+    }
+
+    .paperList,
+    .emby-button,
+    .MuiButton-root,
+    .sectionTabs .emby-tab-button,
+    .detailsGroupItem .button-link,
+    .itemTags .button-link,
+    .itemExternalLinks .button-link,
+    .itemGenres .button-link,
+    .emby-input,
+    .emby-textarea,
+    .emby-select-withcolor,
+    .MuiOutlinedInput-root {
+        border-color: rgb(244 248 255 / 48%);
+    }
+}
+
+@media (forced-colors: active) {
+    :focus-visible {
+        outline: 2px solid Highlight;
+        box-shadow: none;
+    }
+
+    .navMenuOption-selected,
+    .emby-tab-button-active,
+    .emby-tab-button[aria-selected="true"],
+    .MuiTab-root.Mui-selected {
+        color: HighlightText;
+        outline: 1px solid Highlight;
+        background: Highlight;
+    }
+
+    .detailsGroupItem .button-link,
+    .itemTags .button-link,
+    .itemExternalLinks .button-link,
+    .itemGenres .button-link {
+        color: LinkText;
+        outline: none;
+        border: 1px solid LinkText;
+        background: Canvas;
+        text-decoration: underline;
+    }
+
+    .skinHeader,
+    .MuiAppBar-root,
+    .mainDrawer,
+    .MuiDrawer-paper,
+    .MuiDialog-paper,
+    .actionSheet,
+    .MuiMenu-paper,
+    .MuiPopover-paper,
+    .MuiSnackbarContent-root,
+    .MuiAlert-root,
+    .videoOsd-appBar,
+    .videoOsdBottom,
+    .nowPlayingBar {
+        border: 1px solid CanvasText;
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+    }
+}
