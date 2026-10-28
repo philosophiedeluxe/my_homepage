@@ -2,36 +2,37 @@
 
 ## Designkonzept
 
-Dunkles Graphit, Systemschrift und Apple-Blau. Liquid Glass bleibt auf Navigation, Drawer, Menüs, Dialogen und Player-Steuerungen. Poster, Listen und Metadaten bleiben scharf; Metadatenlinks verwenden matte, umbrechende Chips. Das SRVR-Logo bildet den farbigen Markenakzent.
+Ein dunkles Jellyfin-Theme mit Graphitflächen, Systemschrift und Apple-Blau. Eine durchgängige Liquid-Glass-Navigationsleiste trägt die Bedienung; die MUI-Hauptlinks bleiben flach, Menüs nutzen dezente Trennlinien. Poster und Videos bleiben scharf und unverändert. Das SRVR-Wortlogo sitzt auf dem geprüften Startseiten-Link und auf der Anmeldung.
 
-## Version und Quellen
+## Jellyfin-Version
 
-- Der öffentliche Info-Endpunkt des Live-Servers meldet Jellyfin Server 12.3.0.
-- Der lokale Server-Quellcode `jellyfin-12.4` meldet `AssemblyVersion("12.4.0")`, enthält aber keinen Git-Verlauf und keinen Jellyfin-Web-Quellcode.
-- Selektoren wurden gegen die Jellyfin-Web-Tags [v12.3](https://github.com/jellyfin/jellyfin-web/tree/v12.3) und [v12.4](https://github.com/jellyfin/jellyfin-web/tree/v12.4) geprüft. Der installierte Web-Build des Live-Servers ist nicht genau feststellbar.
+- Der öffentliche Server-Info-Endpunkt meldete bei der letzten Prüfung Jellyfin Server 12.3.0.
+- Der lokale Server-Quellcode jellyfin-12.4 meldet AssemblyVersion 12.4.0.
+- CSS-Selektoren wurden gegen Jellyfin-Web v12.3 und v12.4 geprüft. Der genaue Web-Build des laufenden Servers ist nicht bestätigt.
 
 ## Installation
 
-Lade diesen vollständigen Ordner als Geschwister von `Server_CSS_Final` in das Stammverzeichnis des Repositories `my_homepage` hoch. Füge dann in Jellyfin Dashboard → Branding → Custom CSS diese Zeile ein:
+Lade diesen gesamten Ordner als Geschwister von Server_CSS_Final in das Stammverzeichnis deines my_homepage-Repositories. Füge in Jellyfin unter Dashboard → Branding → Benutzerdefinierter CSS-Code ein:
 
 ```css
-@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_Apple/jellyfin_custom.css?v=2');
+@import url('https://philosophiedeluxe.github.io/my_homepage/Server_CSS_Apple/jellyfin_custom.css?v=3');
 ```
 
-Die Datei `jellyfin_custom.css` ist das vollständige Theme. `ServerLogo_long_noBG.png` liefert das Header- und Loginlogo. Das Logo kann erst geladen werden, nachdem dieser Ordner auf GitHub Pages veröffentlicht wurde.
+Speichern und Jellyfin Web neu laden. jellyfin_custom.css ist der vollständige CSS-Einstieg. ServerLogo_long_noBG.png muss daneben im selben Ordner liegen.
 
 ## Technische Besonderheiten
 
-- CSS-only, ohne externe Schriftdateien oder weitere Stylesheet-Imports.
-- Responsive Abstände und Dialoggrößen; horizontale Navigation scrollt bei schmalen Ansichten.
-- `backdrop-filter` ist auf die funktionale Ebene beschränkt und hat einen deckenden Fallback. Poster und Videos werden nicht global gefiltert.
-- Safe-Area-Abstände, Tastaturfokus, erhöhte Kontraste sowie reduzierte Bewegung und Transparenz werden berücksichtigt.
-- Die Detailseitenkorrektur ersetzt Jellyfins übergroßen 32vw-Posterabstand. Metadaten-Chips berücksichtigen die von Jellyfin erzeugten Komma-Textknoten und erhalten das lokalisierte Tags-Label.
+- CSS-only, ohne JavaScript, zusätzliche Stylesheet-Imports oder externe Schriftdateien.
+- Jellyfin behält Layout, Navigation, Player und Eventbehandlung.
+- Native Cover-Einrückung auf Detailseiten bleibt erhalten; mobile Detailinhalte berücksichtigen Safe-Area-Abstände.
+- Loginformular ist auf 27rem begrenzt. Episoden-Play- und Aktionsknöpfe sind kompakter; die Aktionsspalte erhält eigenen Platz.
+- Glasunschärfe gilt nur für Navigation, Menüs, Dialoge und Player-Steuerflächen. Medien erhalten keine globalen Filter.
+- Reduced Motion, Reduced Transparency, erhöhte Kontraste, Forced Colors und Tastaturfokus werden berücksichtigt.
 
-## Bekannte Einschränkungen
+## Prüfung und bekannte Einschränkungen
 
-Der genaue Jellyfin-Web-Build des Live-Servers ist unbekannt. Das neue Theme wurde nicht auf dem Server installiert; Desktop-, Tablet-, Mobil-, Dialog- und Playeransichten brauchen nach dem Upload eine Sichtprüfung im Ziel-Webclient. Ein Jellyfin-Update kann verwendete DOM-Klassen ändern.
+Die Selektoren wurden mit Jellyfin-Web v12.3/v12.4-Quellcode und dem sichtbaren Toolbar-DOM des Servers abgeglichen. Der lexikalische Struktur-Scan des v3-Stands fand 227 Regel- und At-Rule-Blöcke mit ausgeglichener Syntax; 50 Tokens sind definiert und verwendet, externe Stylesheet- und Schriftimporte gibt es nicht. Der Scan ist kein Browser-CSSOM-Parser. Eine visuelle Prüfung von v3 im laufenden Server ist noch nicht erfolgt; die Screenshots zeigen den vorherigen veröffentlichten Stand. Der exakte Web-Build des Servers ist unbekannt und Jellyfin-Updates können DOM-Klassen ändern.
 
 ## Wartung
 
-`Server_CSS_Apple.css` im Projektstamm ist die Autorenversion; diese `jellyfin_custom.css` muss bytegenau damit übereinstimmen. Nach CSS-Änderungen die Importversion `v=2` in Jellyfin und den Logo-URL-Parameter gemeinsam erhöhen. `Server_CSS_Final` bleibt unverändert.
+Server_CSS_Apple.css im Projektstamm ist die Autorenversion; jellyfin_custom.css muss bytegenau damit übereinstimmen. Nach Änderungen beide Dateien abgleichen und den Parameter v=3 in Jellyfin-Aufruf und Logo-URL gemeinsam erhöhen. Server_CSS_Final und die Jellyfin-Quellen bleiben unverändert.
