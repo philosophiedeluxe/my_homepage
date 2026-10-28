@@ -47,7 +47,7 @@
     --sa-action-gradient: linear-gradient(180deg, #49a2ff, #0a84ff);
     --sa-delete-gradient: linear-gradient(180deg, #ca4148, #a92b36);
     --sa-brand-mark:
-        url("https://philosophiedeluxe.github.io/my_homepage/Server_CSS_Apple/ServerLogo_long_noBG.png?v=4");
+        url("https://philosophiedeluxe.github.io/my_homepage/Server_CSS_Apple/ServerLogo_long_noBG.png?v=5");
 
     --sa-shadow-soft: 0 0.6rem 1.6rem rgb(0 0 0 / 22%);
     --sa-shadow-floating: 0 1rem 2.5rem rgb(0 0 0 / 38%);
@@ -139,6 +139,23 @@ a {
 
 a:hover {
     color: var(--sa-accent-strong);
+    text-decoration: none;
+}
+
+a.itemAction[data-type="Series"],
+a.itemAction[data-type="Series"]:link,
+a.itemAction[data-type="Series"]:visited,
+a.itemAction[data-type="Series"]:hover,
+a.itemAction[data-type="Series"]:focus,
+a.itemAction[data-type="Series"]:focus-visible,
+a.itemAction[data-type="Series"]:active,
+#itemDetailPage a[data-type="Series"],
+#itemDetailPage a[data-type="Series"]:link,
+#itemDetailPage a[data-type="Series"]:visited,
+#itemDetailPage a[data-type="Series"]:hover,
+#itemDetailPage a[data-type="Series"]:focus,
+#itemDetailPage a[data-type="Series"]:focus-visible,
+#itemDetailPage a[data-type="Series"]:active {
     text-decoration: none;
 }
 
@@ -379,6 +396,29 @@ a:hover {
     font-size: clamp(1.15rem, 1.5vw, 1.4rem);
     font-weight: 600;
     letter-spacing: -0.02em;
+}
+
+a.more.button-flat.button-flat-mini.sectionTitleTextButton.emby-button {
+    align-items: center;
+    box-sizing: border-box;
+    gap: var(--sa-space-1);
+    max-width: 100%;
+    min-height: 2.75rem;
+    margin-block-end: var(--sa-space-2);
+    padding: var(--sa-space-1) var(--sa-space-3);
+    text-decoration: none;
+}
+
+a.more.button-flat.button-flat-mini.sectionTitleTextButton.emby-button .sectionTitle {
+    flex: 0 1 auto;
+    min-width: 0;
+    margin: 0;
+    line-height: 1.25;
+    text-wrap: balance;
+}
+
+a.more.button-flat.button-flat-mini.sectionTitleTextButton.emby-button .chevron_right {
+    flex: 0 0 auto;
 }
 
 /* 04. Library cards and artwork */
@@ -700,6 +740,11 @@ html[dir="rtl"] .layout-mobile .detailPagePrimaryContainer > .detailPagePrimaryC
     text-decoration: none;
 }
 
+#itemDetailPage .itemName.subtitle a[data-type="Season"] {
+    padding: 0.25em 0.65em;
+    text-decoration: none;
+}
+
 .itemMiscInfo {
     display: flex;
     flex-wrap: wrap;
@@ -990,7 +1035,8 @@ html[dir="rtl"] .layout-mobile .detailPagePrimaryContainer > .detailPagePrimaryC
     margin-block: 0.35rem 0.6rem;
 }
 
-.trackSelectionFieldContainer .detailTrackSelect {
+.trackSelectionFieldContainer .detailTrackSelect,
+.trackSelections .selectContainer .detailTrackSelect.emby-select {
     display: block;
     width: 100%;
     min-width: 0;
@@ -1009,6 +1055,7 @@ html[dir="rtl"] .layout-mobile .detailPagePrimaryContainer > .detailPagePrimaryC
 }
 
 .trackSelectionFieldContainer .detailTrackSelect option {
+    padding: 0.25rem 0.6rem;
     color: var(--sa-text);
     background: var(--sa-surface-raised);
 }
